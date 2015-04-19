@@ -75,6 +75,11 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new LoginRequest(loginInfo), baseEvent);
 	}
 
+	public static void GetScheduleAll(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetScheduleAllRequest (), baseEvent);
+	}
+
 	public static void GetScheduleMore(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetScheduleMoreRequest(), baseEvent);

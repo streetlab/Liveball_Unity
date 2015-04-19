@@ -2,14 +2,12 @@
 using System.Collections;
 using System.Text;
 
-public class GetScheduleMoreRequest : BaseRequest {
+public class GetScheduleAllRequest : BaseRequest {
 
-	public GetScheduleMoreRequest()
+	public GetScheduleAllRequest()
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("date", UtilMgr.GetDateTime ("yyyyMMdd"));
-		Add ("teamCode", UserMgr.UserInfo.teamCode);
-		Add ("teamSeq", UserMgr.UserInfo.teamSeq);
 
 		mParams = JsonFx.Json.JsonWriter.Serialize (this);
 
@@ -22,7 +20,7 @@ public class GetScheduleMoreRequest : BaseRequest {
 
 	public override string GetQueryId()
 	{
-		return "bcastGetScheduleMore";
+		return "bcastGetScheduleAll";
 	}
 
 }

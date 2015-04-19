@@ -7,7 +7,7 @@ public class ScriptMatch : MonoBehaviour {
 	public List<ScriptMatchItem> mListScriptMatchItem;
 
 	public GameObject mListMatch;
-	GetScheduleMoreEvent mScheduleEvent;
+	GetScheduleEvent mScheduleEvent;
 	List<ScheduleInfo> mScheduleList;
 	public GameObject mListMatchItem;
 
@@ -24,7 +24,7 @@ public class ScriptMatch : MonoBehaviour {
 
 	void InitMatchList()
 	{
-		mScheduleEvent = new GetScheduleMoreEvent (new EventDelegate (this, "GotSchedule"));
+		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "GotSchedule"));
 		NetMgr.GetScheduleMore (mScheduleEvent);
 //		UtilMgr.ShowLoading (true);
 	}

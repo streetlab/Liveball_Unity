@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GetScheduleMoreResponse : BaseResponse {
+public class GetScheduleResponse : BaseResponse {
 	List<ScheduleInfo> _data;
 
 	public List<ScheduleInfo> data
