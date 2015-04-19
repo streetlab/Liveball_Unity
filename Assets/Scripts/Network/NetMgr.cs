@@ -54,6 +54,7 @@ public class NetMgr : MonoBehaviour{
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent)
 	{
+
 		string reqParam = "";
 		string httpUrl = "";
 		if (request != null) {

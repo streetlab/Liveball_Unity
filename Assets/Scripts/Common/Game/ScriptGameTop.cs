@@ -13,6 +13,8 @@ public class ScriptGameTop : MonoBehaviour {
 	public GameObject mBtnLeague;
 	public GameObject mBtnStatistics;
 
+	GetScheduleEvent mScheduleEvent;
+
 	// Use this for initialization
 	void Start () {
 //		mSchedule.SetActive (true);
@@ -20,8 +22,10 @@ public class ScriptGameTop : MonoBehaviour {
 //		mRanking.SetActive (false);
 //		mLeague.SetActive (false);
 //		mStatistics.SetActive (false);
-		GameObject ddd = new GameObject ();
-		OpenSchedule ();
+		//mScheduleEvent = new GetScheduleEvent (new EventDelegate ("OpenSchedule"));
+		//NetMgr.GetScheduleAll (mScheduleEvent);
+
+//		OpenSchedule ();
 	}
 
 	public void BtnClicked(string name){
@@ -53,6 +57,8 @@ public class ScriptGameTop : MonoBehaviour {
 		mRanking.SetActive (false);
 		mLeague.SetActive (false);
 		mStatistics.SetActive (false);
+
+		//mScheduleEvent.Response.data[0].
 	}
 
 	void OpenRanking(){
