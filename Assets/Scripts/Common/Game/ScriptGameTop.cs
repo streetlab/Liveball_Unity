@@ -20,6 +20,7 @@ public class ScriptGameTop : MonoBehaviour {
 //		mRanking.SetActive (false);
 //		mLeague.SetActive (false);
 //		mStatistics.SetActive (false);
+		GameObject ddd = new GameObject ();
 		OpenSchedule ();
 	}
 
