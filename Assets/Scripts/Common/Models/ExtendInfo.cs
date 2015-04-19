@@ -155,4 +155,15 @@ public class ExtendInfo {
 			_imageWidth = value;
 		}
 	}
+
+	public string _teamCode;
+
+	public string teamCode {
+		get {
+			return _teamCode;
+		}
+		set {
+			_teamCode = value;
+		}
+	}
 }

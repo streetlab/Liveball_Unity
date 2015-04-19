@@ -34,6 +34,9 @@ public class Jiver : MonoBehaviour {
 
 	public GameObject responderGameObject;
 
+	public static string mChannelUrl1;
+	public static string mChannelUrl2;
+
 	#region JIVER Native Callback 
 	void _OnConnect(string arg) {
 		Debug.Log ("OnConnect: " + arg);
@@ -41,6 +44,7 @@ public class Jiver : MonoBehaviour {
 			Channel channel = new Channel(arg);
 			jiverResponder.OnConnect(channel);
 		}
+
 	}
 	
 	void _OnError(string arg) {
@@ -99,6 +103,21 @@ public class Jiver : MonoBehaviour {
 
 			jiverResponder.OnQueryChannelList(channelList);
 		}
+
+		string channelUrl = "";
+		foreach (Channel channel in cachedChannelList) {
+			if(channel.GetUrl().Equals(mChannelUrl1)){
+				channelUrl = mChannelUrl1;
+				break;
+			} else if(channel.GetUrl().Equals(mChannelUrl2)){
+				channelUrl = mChannelUrl2;
+				break;
+			}
+		}
+
+		GetInstance ().Join (channelUrl);
+		GetInstance ().Connect ();
+
 	}
 	#endregion
 		
@@ -208,9 +227,19 @@ public class Jiver : MonoBehaviour {
 		GetInstance().Login (uuid, nickname);
 	}
 
-	public static void Join(string channelUrl) {
-		GetInstance().Join (channelUrl);
+	public static void Join(string channelUrl1, string channelUrl2){
+		mChannelUrl1 = channelUrl1;
+		mChannelUrl2 = channelUrl2;
+//		GetInstance().Join (channelUrl);
 	}
+
+//	public static void Join(string channelUrl) {
+//		Join (channelUrl, "", "");
+//	}
+
+//	public static string GetChannelUrl(){
+//		return channelUrl;
+//	}
 
 	private static char[] CHARS_TO_TRIM = {'\n', '\r', };
 	public static new void SendMessage(string message) {

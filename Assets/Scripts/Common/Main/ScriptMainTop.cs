@@ -286,7 +286,7 @@ public class ScriptMainTop : MonoBehaviour {
 	public void SetBoardInfo()
 	{
 //		Debug.Log("SetBoardInfo");
-		mHighlight.transform.FindChild ("MatchInfoTop").GetComponent<ScriptMatchInfo> ().SetBoard ();
+		transform.FindChild ("MatchInfoTop").GetComponent<ScriptMatchInfo> ().SetBoard ();
 		if(mBoardEvent != null
 			&& mBoardEvent.Response.data.awayScore != null
 		   && mBoardEvent.Response.data.awayScore.Count > 0){

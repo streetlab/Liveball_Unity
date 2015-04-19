@@ -21,6 +21,9 @@ public class JiverUI : JiverResponder {
 	Vector2 channelScrollViewVector;
 
 	string inputString = "";
+	public string mSend;
+
+
 
 
 	int TOP;
@@ -92,6 +95,17 @@ public class JiverUI : JiverResponder {
 	{
 		this.channels = channels;
 	}
+
+//	public static List<string> GetChannelUrls(){
+//		if (JiverUI.channels == null)
+//			return null;
+//
+//		List<string> channelUrls = new List<string> ();
+//		foreach(Channel channel in this.channels)
+//			channelUrls.Add (channel.GetUrl ());
+//
+//		return channelUrls;
+//	}
 	
 	#endregion
 
@@ -106,6 +120,10 @@ public class JiverUI : JiverResponder {
 
 	void InitStyle ()
 	{
+//		Debug.Log ("GUI.depth : " + GUI.depth);
+		GUI.depth = 1000;
+		
+
 		if (messageLabelStyle == null) {
 			messageLabelStyle = new GUIStyle (GUI.skin.label);
 		}
@@ -136,28 +154,28 @@ public class JiverUI : JiverResponder {
 		GUI.skin.verticalScrollbar.fixedWidth = scrollBarWidth;
 		GUI.skin.verticalScrollbarThumb.fixedWidth = scrollBarWidth;
 
-		TOP = (int)(Screen.height * scale.y);
-		LEFT = (int)(Screen.width * scale.x);
-		WIDTH = (int)(Screen.width * scale.width);
-		HEIGHT = (int)(Screen.height * scale.height); 
+		TOP = (int)(scale.y);
+		LEFT = (int)(scale.x);
+		WIDTH = (int)(scale.width);
+		HEIGHT = (int)(scale.height); 
 
 		LINE_HEIGHT = inputTextFieldStyle.CalcHeight (new GUIContent ("W"), WIDTH);
 	}
 
 	void DrawTabs(float width, float height)
 	{
-		if (GUI.Button (new Rect (0, 0, width * 0.5f, height), channelName)) {
-			tabMode = TAB_MODE.CHAT;
-		}
-	
-		if(GUI.Button(new Rect(width * 0.5f, 0, width * 0.5f, height), "Channels")) {
-			if(tabMode == TAB_MODE.CHAT) {
-				tabMode = TAB_MODE.CHANNEL;
-				Jiver.QueryChannelList();
-			} else {
-				tabMode = TAB_MODE.CHAT;
-			}
-		}
+//		if (GUI.Button (new Rect (0, 0, width * 0.5f, height), channelName)) {
+//			tabMode = TAB_MODE.CHAT;
+//		}
+//	
+//		if(GUI.Button(new Rect(width * 0.5f, 0, width * 0.5f, height), "Channels")) {
+//			if(tabMode == TAB_MODE.CHAT) {
+//				tabMode = TAB_MODE.CHANNEL;
+//				Jiver.QueryChannelList();
+//			} else {
+//				tabMode = TAB_MODE.CHAT;
+//			}
+//		}
 	}
 
 
@@ -267,13 +285,13 @@ public class JiverUI : JiverResponder {
 				}
 				GUI.backgroundColor = c;
 			} else {
-				if(GUI.Button(new Rect(buttonLeft, buttonTop, buttonWidth, buttonHeight), "#" + channel.GetUrlWithoutAppPrefix())) {
-					Jiver.Join(channel.GetUrl());
-					Jiver.Connect();
-					messages.Clear();
-					tabMode = TAB_MODE.CHAT;
-					channelName = "Connecting...";
-				}
+//				if(GUI.Button(new Rect(buttonLeft, buttonTop, buttonWidth, buttonHeight), "#" + channel.GetUrlWithoutAppPrefix())) {
+//					Jiver.Join(channel.GetUrl(), "");
+//					Jiver.Connect();
+//					messages.Clear();
+//					tabMode = TAB_MODE.CHAT;
+//					channelName = "Connecting...";
+//				}
 			}
 		}
 		GUI.EndScrollView();
@@ -286,7 +304,7 @@ public class JiverUI : JiverResponder {
 
 		inputString = GUI.TextField (new Rect(0, 0, width - buttonWidth, height), inputString, inputTextFieldStyle);
 
-		if (GUI.Button(new Rect(width - buttonWidth, 0, buttonWidth, height), "Send", sendButtonStyle)) {
+		if (GUI.Button(new Rect(width - buttonWidth, 0, buttonWidth, height), mSend, sendButtonStyle)) {
 			return true;
 		}
 
@@ -316,7 +334,8 @@ public class JiverUI : JiverResponder {
 	void OnGUI () {
 		InitStyle();
 
-		int tabHeight = (int)Mathf.Min (HEIGHT * 0.1f, 48);
+//		int tabHeight = (int)Mathf.Min (HEIGHT * 0.1f, 48);
+		int tabHeight = 0;
 		INPUT_HEIGHT_WEIGHT = LINE_HEIGHT / HEIGHT * 1.2f;
 
 		bool submit = false;
