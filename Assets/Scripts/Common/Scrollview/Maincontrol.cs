@@ -6,7 +6,7 @@ public class Maincontrol : MonoBehaviour {
 	public GameObject bgs;
 	public float gap = 682;
 	public float bargap = 100f;
-
+	public string yui;
 	List<GameObject> bg_g = new List<GameObject>();
 	List<string> teamname = new List<string>();
 	List<string> teamimagename = new List<string>();
@@ -19,8 +19,9 @@ public class Maincontrol : MonoBehaviour {
 	List<string> ch = new List<string>();
 	Vector3 position,positions;
 	float ChuldNum;
-
+	string aa ;
 	string districtAtime;
+	string todays;
 	char [] array;
 	string joint;
 	int a;
@@ -29,6 +30,7 @@ public class Maincontrol : MonoBehaviour {
 
 
 	GetScheduleEvent mScheduleEvent;
+
 	public void editng(){
 		positionset ();
 		teamname.Clear ();
@@ -43,7 +45,7 @@ public class Maincontrol : MonoBehaviour {
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			bg_g.Add(bgs.transform.GetChild(i).gameObject);
 		}
-		Debug.Log (bg_g.Count);
+		//Debug.Log (bg_g.Count);
 		position = bg_g[0].transform.localPosition;
 		for (int i =0; i<bg_g.Count; i++) {
 			bg_g[i].transform.localPosition = new Vector3(position.x,position.y-(gap*i),position.z);
@@ -54,7 +56,10 @@ public class Maincontrol : MonoBehaviour {
 	}
 	void Start(){
 	
+		bgs.SetActive (false);
 
+
+		//Debug.Log (todays);
 		//Debug.Log (bgs.transform.childCount);
 		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "setarrray"));
 		NetMgr.GetScheduleAll (mScheduleEvent);
@@ -64,7 +69,29 @@ public class Maincontrol : MonoBehaviour {
 
 	}
 
-	// Use this for initialization
+	void whattoday(){
+		for (int s = 0; s<4; s++) {
+			for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=5) {
+				array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+				for (int z = 6; z<array.Length; z++) {
+		
+					ch.Add (array [z].ToString ());
+			
+				}
+				aa = string.Join ("", ch.ToArray ());
+				todays=System.DateTime.Now.Day.ToString();
+				todays = (int.Parse(todays)+s).ToString();
+				Debug.Log(aa +" : "+ todays);
+				if (aa == todays) {
+					bgs.transform.localPosition += new Vector3 (0, 730 * ((float)i / 5), 0);
+					ch.Clear ();
+					return;
+				}
+		
+				ch.Clear ();
+			}
+		}
+	}
 	void setarrray(){
 
 		teamname.Clear ();
@@ -73,12 +100,26 @@ public class Maincontrol : MonoBehaviour {
 		district.Clear ();
 		date.Clear ();
 		day.Clear ();
-		Debug.Log (mScheduleEvent.Response.data [0].extend [0].teamName);
+		//Debug.Log (mScheduleEvent.Response.data [0].extend [0].teamName);
+		whattoday();
+		for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=5) {
+			day.Add (mScheduleEvent.Response.data [i].onairDay+yui);
+			array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+			for(int z = 0; z<array.Length;z++){
+				ch.Add (array[z].ToString());
+				if(z==3||z==5){
+					ch.Add (".");
+				}
 
+
+			}
+			aa = string.Join("", ch.ToArray());
+			date.Add (aa);
+			ch.Clear();
+		}
 
 		for(int i = 0;i<mScheduleEvent.Response.data.Count;i++){
-			day.Add(mScheduleEvent.Response.data [i].onairDay);
-			date.Add (mScheduleEvent.Response.data [i].startDate);
+
 			teamname.Add (mScheduleEvent.Response.data [i].extend [0].teamName);
 			hometeamname.Add (mScheduleEvent.Response.data [i].extend [1].teamName);
 			string imgName = UtilMgr.GetTeamEmblem(mScheduleEvent.Response.data [i].extend [0].imageName);
@@ -102,26 +143,29 @@ public class Maincontrol : MonoBehaviour {
 
 			}
 			num=0;
-			string aa = string.Join("", ch.ToArray());
-			Debug.Log(aa);
+			aa = string.Join("", ch.ToArray());
+			//Debug.Log(aa);
 			district.Add(aa);
 			ch.Clear();
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			for(int z = 8; z<12;z++){
 			
-				Debug.Log(array[z]);
+				//Debug.Log(array[z]);
 				ch.Add (array[z].ToString());
+				if(z==9){
+					ch.Add (":");
+				}
 
 			}
 			aa = string.Join("", ch.ToArray());
-			Debug.Log(aa);
+			//Debug.Log(aa);
 			time.Add(aa);
 			ch.Clear();
 			
 		}
 		//setting/parser
 		//List<use>;
-		Debug.Log (date);
+		//Debug.Log (date);
 		positionset ();
 		
 
@@ -132,7 +176,7 @@ public class Maincontrol : MonoBehaviour {
 		a = aa;
 
 		if (teamname.Count > 0) {
-			Debug.Log ("g : " + g.transform.parent);
+			//Debug.Log ("g : " + g.transform.parent);
 			g.transform.GetChild (0).GetComponent<UILabel> ().text = day [a];
 			g.transform.GetChild (0).GetChild (0).GetComponent<UILabel> ().text = date [a];
 		}
@@ -160,22 +204,28 @@ public class Maincontrol : MonoBehaviour {
 			
 			
 		}
-
+		bgs.SetActive (true);
 	}
 	void setbars(int i,GameObject g){
 
 			g.transform.GetChild (1).GetChild (i).transform.localPosition = new Vector3 (positions.x, positions.y - (bargap * i), positions.z);
 		if (teamname.Count > 0) {
-			g.transform.GetChild (1).GetChild (i).GetChild (0).GetComponent<UISprite> ().spriteName = teamimagename [i + (a * i)];
-			g.transform.GetChild (1).GetChild (i).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = hometeamimagename [i + (a * i)];
+			g.transform.GetChild (1).GetChild (i).GetChild (0).GetComponent<UISprite> ().spriteName = teamimagename [i + (a * 5)];
+			g.transform.GetChild (1).GetChild (i).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = hometeamimagename [i + (a * 5)];
 		
-			g.transform.GetChild (1).GetChild (i).GetChild (1).GetComponent<UILabel> ().text = teamname [i + (a * i)];
-			g.transform.GetChild (1).GetChild (i).GetChild (1).GetChild (0).GetComponent<UILabel> ().text = hometeamname [i + (a * i)];
+			g.transform.GetChild (1).GetChild (i).GetChild (1).GetComponent<UILabel> ().text = teamname [i + (a * 5)];
+			g.transform.GetChild (1).GetChild (i).GetChild (1).GetChild (0).GetComponent<UILabel> ().text = hometeamname [i + (a * 5)];
 
-			g.transform.GetChild (1).GetChild (i).GetChild (2).GetComponent<UILabel> ().text = district [i + (a * i)];
-			g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text = time [i + (a * i)];
+			g.transform.GetChild (1).GetChild (i).GetChild (2).GetComponent<UILabel> ().text = district [i + (a * 5)];
+			g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text = time [i + (a * 5)];
 		}
 	}
+	public void buttening(int i){
 
+		Debug.Log (i);
+		//UserMgr.Schedule = mScheduleEvent.Response.data [i];
+		//AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
+		
+	}
 
 }
