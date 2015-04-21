@@ -225,6 +225,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 	void SetBases()
 	{
 		PlayInfo playInfo = ScriptMainTop.DetailBoard.play;
+		if (playInfo == null)
+			return;
+
 		Transform tfStatus = mSprComb.transform.FindChild("SprPitcher").FindChild ("StatusInfo");
 		tfStatus.FindChild ("LblNum").GetComponent<UILabel> ().text = string.Format("{0}",playInfo.playRound);
 		tfStatus.FindChild ("LblRound").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (playInfo.playRound);

@@ -57,7 +57,7 @@ public class ScriptNanoo : MonoBehaviour {
 
 
 //			mWebView.SetTransparentBackground(true);
-//			mWebView.toolBarShow = true;
+			mWebView.toolBarShow = true;
 
 		}
 
@@ -95,11 +95,12 @@ public class ScriptNanoo : MonoBehaviour {
 
 	UniWebViewEdgeInsets InsetsForScreenOreitation(UniWebView webView, UniWebViewOrientation orientation) {
 		Debug.Log ("InsetsForScreenOreitation");
-		
+
+		float myRatio = Screen.width / 720f;
 		if (orientation == UniWebViewOrientation.Portrait) {
-			return new UniWebViewEdgeInsets(320,0,0,0);
+			return new UniWebViewEdgeInsets((int)(320*myRatio),0,0,0);
 		} else {
-			return new UniWebViewEdgeInsets(320,0,0,0);
+			return new UniWebViewEdgeInsets((int)(320*myRatio),0,0,0);
 		}
 	}
 	

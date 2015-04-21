@@ -22,9 +22,8 @@ public class JiverUI : JiverResponder {
 
 	string inputString = "";
 	public string mSend;
-
-
-
+	public static float mScreenRatio;
+//	public static float mFontRatio;
 
 	int TOP;
 	int LEFT;
@@ -110,6 +109,11 @@ public class JiverUI : JiverResponder {
 	#endregion
 
 	void Awake() {
+		mScreenRatio = Screen.width / 720f;
+//		mFontRatio = mScreenRatio * 0.75f;
+//		mFontRatio = mFontRatio < 1f ? 1f : mFontRatio;
+		scrollBarWidth = (int)(10 * mScreenRatio);
+		messageFontSize = (int)(30 * mScreenRatio);
 	}
 
 	string MessageRichText(Message message)
@@ -154,10 +158,11 @@ public class JiverUI : JiverResponder {
 		GUI.skin.verticalScrollbar.fixedWidth = scrollBarWidth;
 		GUI.skin.verticalScrollbarThumb.fixedWidth = scrollBarWidth;
 
-		TOP = (int)(scale.y);
-		LEFT = (int)(scale.x);
-		WIDTH = (int)(scale.width);
-		HEIGHT = (int)(scale.height); 
+
+		TOP = (int)(scale.y * mScreenRatio);
+		LEFT = 0;//(int)(scale.x);
+		WIDTH = Screen.width;//(int)(scale.width);
+		HEIGHT = Screen.height - TOP;//(int)(scale.height); 
 
 		LINE_HEIGHT = inputTextFieldStyle.CalcHeight (new GUIContent ("W"), WIDTH);
 	}
@@ -301,10 +306,11 @@ public class JiverUI : JiverResponder {
 	bool DrawInput(float width, float height)
 	{
 		float buttonWidth = width * 0.2f;
+		float buttonHeight = height * 1f;
 
-		inputString = GUI.TextField (new Rect(0, 0, width - buttonWidth, height), inputString, inputTextFieldStyle);
+		inputString = GUI.TextField (new Rect(0, 0, width - buttonWidth, buttonHeight), inputString, inputTextFieldStyle);
 
-		if (GUI.Button(new Rect(width - buttonWidth, 0, buttonWidth, height), mSend, sendButtonStyle)) {
+		if (GUI.Button(new Rect(width - buttonWidth, 0, buttonWidth, buttonHeight), mSend, sendButtonStyle)) {
 			return true;
 		}
 

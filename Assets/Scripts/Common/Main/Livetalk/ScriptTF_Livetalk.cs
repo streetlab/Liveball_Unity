@@ -15,8 +15,7 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 		string userName = UserMgr.UserInfo.memberName;
 		string userId = userName;
 //		string channelUrl = DEFAULT_CHANNEL;
-
-		
+				
 		Jiver.Init (appId);
 		Jiver.Login (userId, userName);
 		Jiver.QueryChannelList (false);
@@ -31,7 +30,7 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 
 	void Update(){
 		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
-		Debug.Log ("menuStatus : " + menuStatus);
+//		Debug.Log ("menuStatus : " + menuStatus);
 		if (menuStatus.Equals ("Closed")) {
 			transform.FindChild ("Panel").gameObject.SetActive (true);
 		} else {
