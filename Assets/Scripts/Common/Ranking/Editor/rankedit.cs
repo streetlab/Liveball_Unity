@@ -8,32 +8,32 @@ using System;
 /// Creates a prefab from a selected game object.
 
 /// </summary>
-[CustomEditor(typeof(Maincontrol))]
-public class edits : Editor
-
-
+[CustomEditor(typeof(Rankcontrol))]
+public class rankedit : Editor
+	
+	
 	
 {
-
-	Maincontrol _this;
+	
+	Rankcontrol _this;
 	void OnEnable(){
-	
-		_this = target as Maincontrol;
+		
+		_this = target as Rankcontrol;
 	}
-
-
 	
-
+	
+	
+	
 	public override void OnInspectorGUI(){
 		base.DrawDefaultInspector ();
 		if (GUILayout.Button ("setPosition")) {
-
+			
 		
 			_this.editng();
 		};
-
+		
 	}
 	
-
+	
 	
 }

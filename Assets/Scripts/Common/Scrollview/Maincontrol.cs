@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class Maincontrol : MonoBehaviour {
 	public GameObject bgs;
-	public float gap = 682;
-	public float bargap = 100f;
+	public float gap = 720;
+	public float bargap = 122;
 	public string yui;
 	List<GameObject> bg_g = new List<GameObject>();
 	List<string> teamname = new List<string>();
@@ -16,7 +16,12 @@ public class Maincontrol : MonoBehaviour {
 	List<string> time = new List<string>();
 	List<string> day = new List<string>();
 	List<string> date = new List<string>();
+	List<int> dayandday = new List<int>();
 	List<string> ch = new List<string>();
+	List<int>  daycount = new List<int>();
+	List<int>  wheresumint = new List<int>();
+
+
 	Vector3 position,positions;
 	float ChuldNum;
 	string aa ;
@@ -24,7 +29,10 @@ public class Maincontrol : MonoBehaviour {
 	string todays;
 	char [] array;
 	string joint;
-	int a;
+	int a,b;
+
+	int sumint=0;
+	float sum;
 
 	float num =0;
 
@@ -42,6 +50,7 @@ public class Maincontrol : MonoBehaviour {
 		bg_g.Clear();
 	}
 	void positionset(){
+
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			bg_g.Add(bgs.transform.GetChild(i).gameObject);
 		}
@@ -56,6 +65,8 @@ public class Maincontrol : MonoBehaviour {
 	}
 	void Start(){
 	
+		wheresumint.Clear ();
+		sumint = 0;
 		bgs.SetActive (false);
 
 
@@ -68,10 +79,53 @@ public class Maincontrol : MonoBehaviour {
 		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 
 	}
+	void chacktoday(){
+		dayandday.Clear ();
+		for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=1) {
+			array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+			for (int z = 6; z<array.Length; z++) {
+				
+				ch.Add (array [z].ToString ());
+				
+			}
+			aa = string.Join ("", ch.ToArray ());
+			dayandday.Add(int.Parse(aa));
+			ch.Clear ();
+		}
+		daycount.Clear ();
+		for (int i =0; i<7; i++) {
+			daycount.Add(0);
+		}
+		for (int i =0; i<dayandday.Count; i++) {
+		
+			if(dayandday[i]==dayandday[0]){
+				daycount[0]+=1;
+			}else if(dayandday[i]==dayandday[0]+1){
+				daycount[1]+=1;
+			}else if(dayandday[i]==dayandday[0]+2){
+				daycount[2]+=1;
+			}else if(dayandday[i]==dayandday[0]+3){
+				daycount[3]+=1;
+			}else if(dayandday[i]==dayandday[0]+4){
+				daycount[4]+=1;
+			}else if(dayandday[i]==dayandday[0]+5){
+				daycount[5]+=1;
+			}else if(dayandday[i]==dayandday[0]+6){
+				daycount[6]+=1;
+			}
+		
+
+
+
+
+		}
+	
+	}
 
 	void whattoday(){
+		chacktoday ();
 		for (int s = 0; s<4; s++) {
-			for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=5) {
+			for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=1) {
 				array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
 				for (int z = 6; z<array.Length; z++) {
 		
@@ -80,10 +134,14 @@ public class Maincontrol : MonoBehaviour {
 				}
 				aa = string.Join ("", ch.ToArray ());
 				todays=System.DateTime.Now.Day.ToString();
+
+			
 				todays = (int.Parse(todays)+s).ToString();
-				Debug.Log(aa +" : "+ todays);
+				//Debug.Log(aa +" : "+ todays);
 				if (aa == todays) {
-					bgs.transform.localPosition += new Vector3 (0, 730 * ((float)i / 5), 0);
+					sum = int.Parse(aa)-(float)dayandday[0];
+					Debug.Log(sum);
+					bgs.transform.localPosition += new Vector3 (0, gap * sum, 0);
 					ch.Clear ();
 					return;
 				}
@@ -167,13 +225,14 @@ public class Maincontrol : MonoBehaviour {
 		//List<use>;
 		//Debug.Log (date);
 		positionset ();
-		
 
 		bg_g.Clear ();
+		bgs.SetActive (true);
+	
 	}
 
-	public void Cdata(GameObject g,int aa){
-		a = aa;
+	public void Cdata(GameObject g,int aaa){
+		a = aaa;
 
 		if (teamname.Count > 0) {
 			//Debug.Log ("g : " + g.transform.parent);
@@ -201,29 +260,53 @@ public class Maincontrol : MonoBehaviour {
 				break;
 			}
 
-			
+
 			
 		}
-		bgs.SetActive (true);
+
 	}
 	void setbars(int i,GameObject g){
 
 			g.transform.GetChild (1).GetChild (i).transform.localPosition = new Vector3 (positions.x, positions.y - (bargap * i), positions.z);
 		if (teamname.Count > 0) {
-			g.transform.GetChild (1).GetChild (i).GetChild (0).GetComponent<UISprite> ().spriteName = teamimagename [i + (a * 5)];
-			g.transform.GetChild (1).GetChild (i).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = hometeamimagename [i + (a * 5)];
+			g.transform.GetChild (1).GetChild (i).gameObject.SetActive(true);
+			if(daycount[a]<=i){
+				g.transform.GetChild (1).GetChild (i).gameObject.SetActive(false);
+				sumint+=1;
+				wheresumint.Add(i + (a * 5));
+			}else{
+				g.transform.GetChild (1).GetChild (i).GetChild (0).GetComponent<UISprite> ().spriteName = teamimagename [i + (a * 5)-sumint];
+				g.transform.GetChild (1).GetChild (i).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = hometeamimagename [i + (a * 5)-sumint];
 		
-			g.transform.GetChild (1).GetChild (i).GetChild (1).GetComponent<UILabel> ().text = teamname [i + (a * 5)];
-			g.transform.GetChild (1).GetChild (i).GetChild (1).GetChild (0).GetComponent<UILabel> ().text = hometeamname [i + (a * 5)];
+				g.transform.GetChild (1).GetChild (i).GetChild (1).GetComponent<UILabel> ().text = teamname [i + (a * 5)-sumint];
+				g.transform.GetChild (1).GetChild (i).GetChild (1).GetChild (0).GetComponent<UILabel> ().text = hometeamname [i + (a * 5)-sumint];
 
-			g.transform.GetChild (1).GetChild (i).GetChild (2).GetComponent<UILabel> ().text = district [i + (a * 5)];
-			g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text = time [i + (a * 5)];
+				g.transform.GetChild (1).GetChild (i).GetChild (2).GetComponent<UILabel> ().text = district [i + (a * 5)-sumint];
+				g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text = time [i + (a * 5)-sumint];
+			}
 		}
 	}
 	public void buttening(int i){
-
-		Debug.Log (i);
-		UserMgr.Schedule = mScheduleEvent.Response.data [i];
+		a = i;
+		//for (int w = 0; w<wheresumint.Count; w++) {
+			//Debug.Log(i+" : "+wheresumint[w]);
+			if(i>=16){
+				a-=1;
+			}
+		if(i>=17){
+			a-=1;
+		}
+		if(i>=18){
+			a-=1;
+		}
+		if(i>=19){
+			a-=1;
+		}
+		
+		//}
+		//}
+		Debug.Log (i+" and "+a);
+		UserMgr.Schedule = mScheduleEvent.Response.data [a];
 		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
 		
 	}
