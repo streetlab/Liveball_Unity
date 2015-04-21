@@ -298,7 +298,7 @@ public class Maincontrol : MonoBehaviour {
 		}
 		//}
 		Debug.Log (i+" and "+a);
-		UserMgr.Schedule = mScheduleEvent.Response.data [a];
+		UserMgr.Schedule = mScheduleEvent.Response.data [a-1];
 		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
 		
 	}
