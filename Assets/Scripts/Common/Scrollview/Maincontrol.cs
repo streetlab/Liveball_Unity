@@ -288,22 +288,14 @@ public class Maincontrol : MonoBehaviour {
 	}
 	public void buttening(int i){
 		a = i;
-		//for (int w = 0; w<wheresumint.Count; w++) {
+		for (int w = 0; w<wheresumint.Count; w++) {
 			//Debug.Log(i+" : "+wheresumint[w]);
-			if(i>=16){
+			if(i>=wheresumint[w]+1){
 				a-=1;
 			}
-		if(i>=17){
-			a-=1;
-		}
-		if(i>=18){
-			a-=1;
-		}
-		if(i>=19){
-			a-=1;
-		}
+	
 		
-		//}
+		}
 		//}
 		Debug.Log (i+" and "+a);
 		UserMgr.Schedule = mScheduleEvent.Response.data [a];
