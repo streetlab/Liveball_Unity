@@ -30,6 +30,9 @@ public class ScriptMatchInfo : MonoBehaviour {
 	public void SetBoard()
 	{
 		PlayInfo play = ScriptMainTop.DetailBoard.play;
+		if (play == null)
+			return;
+
 		SetStrike (play.strikeCount);
 		SetBall (play.ballCount);
 		SetOut (play.outCount);

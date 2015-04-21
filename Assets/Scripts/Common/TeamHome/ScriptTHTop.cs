@@ -8,6 +8,8 @@ public class ScriptTHTop : MonoBehaviour {
 	public GameObject mSeason;
 	public GameObject mSquad;
 
+	public GameObject mNanoo;
+
 	public GameObject mBtnTimeline;
 	public GameObject mBtnAlbum;
 	public GameObject mBtnSeason;
@@ -19,7 +21,8 @@ public class ScriptTHTop : MonoBehaviour {
 //		mAlbum.SetActive (false);
 //		mSeason.SetActive (false);
 //		mSquad.SetActive (false);
-		OpenTimeline ();
+//		OpenTimeline ();
+		OpenNanoo ();
 	}
 
 	public void BtnClicked(string name){
@@ -37,6 +40,15 @@ public class ScriptTHTop : MonoBehaviour {
 			OpenSquad();
 			break;
 		}
+	}
+
+	void OpenNanoo(){
+		mNanoo.SetActive (true);
+
+		mTimeline.SetActive (false);		
+		mAlbum.SetActive (false);
+		mSeason.SetActive (false);
+		mSquad.SetActive (false);
 	}
 
 	void OpenTimeline(){

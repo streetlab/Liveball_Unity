@@ -121,7 +121,7 @@ public class JiverUI : JiverResponder {
 	void InitStyle ()
 	{
 //		Debug.Log ("GUI.depth : " + GUI.depth);
-		GUI.depth = 1000;
+//		GUI.depth = 1000;
 		
 
 		if (messageLabelStyle == null) {

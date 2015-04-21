@@ -13,6 +13,8 @@ public class ScriptMainTop : MonoBehaviour {
 	public GameObject mLivetalk;
 	public GameObject mBetting;
 
+	public GameObject mMatchInfoTop;
+
 	public GameObject mBtnHighlight;
 	public GameObject mBtnLineup;
 	public GameObject mBtnBingo;
@@ -125,43 +127,55 @@ public class ScriptMainTop : MonoBehaviour {
 
 	void OpenHighlight()
 	{
-		Debug.Log("OpenHighlight");
 		mHighlight.SetActive (true);
+		mMatchInfoTop.SetActive (true);
+
 		mLineup.SetActive (false);
 		mBingo.SetActive (false);
 		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
+
 		mState = STATE.Highlight;
+
 		SetBoardInfo ();
 	}
 
 	void OpenLineup()
 	{
-		mHighlight.SetActive (false);
 		mLineup.SetActive (true);
+		mMatchInfoTop.SetActive (false);
+
+		mHighlight.SetActive (false);
 		mBingo.SetActive (false);
 		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
+
 		mState = STATE.Lineup;
 	}
 
 	void OpenBingo()
 	{
+		mBingo.SetActive (true);
+		mMatchInfoTop.SetActive (false);
+
 		mHighlight.SetActive (false);
 		mLineup.SetActive (false);
-		mBingo.SetActive (true);
 		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
+
 		mState = STATE.Bingo;
 	}
 
 	void OpenLivetalk()
 	{
+		mLivetalk.SetActive (true);
+		mMatchInfoTop.SetActive (true);
+
 		mHighlight.SetActive (false);
 		mLineup.SetActive (false);
 		mBingo.SetActive (false);
-		mLivetalk.SetActive (true);
 		mBetting.SetActive (false);
+
 		mState = STATE.Livetalk;
 
 	}
@@ -286,7 +300,7 @@ public class ScriptMainTop : MonoBehaviour {
 	public void SetBoardInfo()
 	{
 //		Debug.Log("SetBoardInfo");
-		transform.FindChild ("MatchInfoTop").GetComponent<ScriptMatchInfo> ().SetBoard ();
+		mMatchInfoTop.GetComponent<ScriptMatchInfo> ().SetBoard ();
 		if(mBoardEvent != null
 			&& mBoardEvent.Response.data.awayScore != null
 		   && mBoardEvent.Response.data.awayScore.Count > 0){

@@ -223,8 +223,8 @@ public class Maincontrol : MonoBehaviour {
 	public void buttening(int i){
 
 		Debug.Log (i);
-		//UserMgr.Schedule = mScheduleEvent.Response.data [i];
-		//AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
+		UserMgr.Schedule = mScheduleEvent.Response.data [i];
+		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
 		
 	}
 

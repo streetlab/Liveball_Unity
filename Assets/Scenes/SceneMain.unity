@@ -21091,6 +21091,7 @@ MonoBehaviour:
   mBingo: {fileID: 136364832}
   mLivetalk: {fileID: 906411671}
   mBetting: {fileID: 1532797254}
+  mMatchInfoTop: {fileID: 1728443458}
   mBtnHighlight: {fileID: 1454316256}
   mBtnLineup: {fileID: 1640669485}
   mBtnBingo: {fileID: 970219315}
@@ -55276,6 +55277,50 @@ Prefab:
     - target: {fileID: 11400070, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
       propertyPath: startingRenderQueue
       value: 3019
+      objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400066, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 400066, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 400022, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400098, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 400098, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400024, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -140
+      objectReference: {fileID: 0}
+    - target: {fileID: 400024, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -240
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}

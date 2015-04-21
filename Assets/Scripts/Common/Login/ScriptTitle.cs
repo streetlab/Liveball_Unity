@@ -9,8 +9,6 @@ public class ScriptTitle : MonoBehaviour {
 	GetCardInvenEvent mCardEvent;
 	public LoginInfo mLoginInfo;
 
-	public WebViewObject webViewObject;
-
 	bool mFBInitialized;
 
 	void Start()
