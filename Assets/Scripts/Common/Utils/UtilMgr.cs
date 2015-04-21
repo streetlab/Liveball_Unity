@@ -113,6 +113,10 @@ public class UtilMgr : MonoBehaviour {
 		return 360f * diff;
 	}
 
+	public static string RemoveThousandSeperator(string number){
+		return number.Replace (",", "");
+	}
+
 	public static string AddsThousandsSeparator(string number)
 	{
 		return AddsThousandsSeparator (double.Parse (number));

@@ -24,9 +24,9 @@ public class NetMgr : MonoBehaviour{
 		}
 	}
 
-	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent)
+	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading)
 	{
-		UtilMgr.ShowLoading (true);
+		UtilMgr.ShowLoading (showLoading);
 
 		yield return www;
 		
@@ -49,10 +49,14 @@ public class NetMgr : MonoBehaviour{
 		WWWForm form = request.GetRequestWWWForm ();
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , form);
 
-		StartCoroutine (webAPIProcess(www, baseEvent));
+		StartCoroutine (webAPIProcess(www, baseEvent, true));
 	}
 
-	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent)
+	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent){
+		webAPIProcessEvent (request, baseEvent, true);
+	}
+
+	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
 	{
 
 		string reqParam = "";
@@ -68,7 +72,7 @@ public class NetMgr : MonoBehaviour{
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 
 		Debug.Log (reqParam);
-		StartCoroutine (webAPIProcess(www, baseEvent));
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
 	}
 
 	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent)
@@ -93,7 +97,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetGameSposPlayBoard(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetGameSposPlayBoardRequest (), baseEvent);
+		Instance.webAPIProcessEvent (new GetGameSposPlayBoardRequest (), baseEvent, false);
 	}
 
 	public static void GetCardInven(BaseEvent baseEvent)
@@ -128,7 +132,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetQuizResult(int quizListSeq, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetQuizResultRequest (quizListSeq), baseEvent);
+		Instance.webAPIProcessEvent (new GetQuizResultRequest (quizListSeq), baseEvent, false);
 	}
 
 	public static void GetSimpleResult(int quizListSeq, BaseEvent baseEvent)

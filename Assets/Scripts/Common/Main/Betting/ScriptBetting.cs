@@ -106,7 +106,7 @@ public class ScriptBetting : MonoBehaviour {
 		joinInfo.QuizListSeq = QuizMgr.QuizInfo.quizListSeq;
 		joinInfo.QzType = GetQzType ();
 		joinInfo.UseCardNo = 0;
-		joinInfo.BetPoint = mLblUse.text;
+		joinInfo.BetPoint = UtilMgr.RemoveThousandSeperator(mLblUse.text);
 		joinInfo.Item = 1000;
 		joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
 		joinInfo.ExtendValue = "0";

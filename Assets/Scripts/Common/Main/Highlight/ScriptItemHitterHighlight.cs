@@ -103,9 +103,9 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 			if(isCorrect){
 				mLblReward.SetActive(true);
 				mLblReward.GetComponent<UILabel>().text = UtilMgr.AddsThousandsSeparator(resp.expectRewardPoint);
-
+				return;
 			}
-			return;
+
 		} else if(quizInfo.resultMsg.Length > 0){
 			//need modify
 			mLblResult.GetComponent<UILabel>().text = quizInfo.resultMsg;
