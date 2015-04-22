@@ -6,6 +6,7 @@ public class AndroidMgr : MonoBehaviour
 	EventDelegate mEventDelegate;
 	static AndroidMgr _instance;
 	string mMsg;
+
 	#if(UNITY_EDITOR)
 	public static void CallJavaFunc( string strFuncName, string str){}
 	#elif(UNITY_ANDROID)
@@ -126,8 +127,12 @@ public class AndroidMgr : MonoBehaviour
 		AndroidMgr.CallJavaFunc("OpenFB", "");
 	}
 
-	public static void GetHeightStatusBar(EventDelegate eventDelegate){
-		Instance.mEventDelegate = eventDelegate;
+	public static void GetHeightStatusBar(){
 		AndroidMgr.CallJavaFunc("GetHeightStatusBar", "");
 	}
+	public void GotHeightStatusBar(string height){
+		Constants.HEIGHT_STATUS_BAR = int.Parse(height);
+	}
+
+
 }

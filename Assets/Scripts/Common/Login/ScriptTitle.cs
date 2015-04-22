@@ -21,14 +21,10 @@ public class ScriptTitle : MonoBehaviour {
 
 	void InitConstants(){
 		#if(UNITY_ANDROID)
-		AndroidMgr.GetHeightStatusBar(new EventDelegate(this, "GotHeight"));
+		AndroidMgr.GetHeightStatusBar();
 		#elif(UNITY_EDITOR)
 		#else
 		#endif
-	}
-
-	public void GotHeight(){
-		Constants.HEIGHT_STATUS_BAR = int.Parse(AndroidMgr.GetMsg());
 	}
 
 	public void Init()
