@@ -30,16 +30,16 @@ public class Maincontrol : MonoBehaviour {
 	char [] array;
 	string joint;
 	int a,b;
-
 	int sumint=0;
 	float sum;
-
 	float num =0;
+	bool editbll = false;
 
 
 	GetScheduleEvent mScheduleEvent;
 
 	public void editng(){
+		editbll = true;
 		positionset ();
 		teamname.Clear ();
 		teamimagename.Clear ();
@@ -57,9 +57,17 @@ public class Maincontrol : MonoBehaviour {
 		//Debug.Log (bg_g.Count);
 		position = bg_g[0].transform.localPosition;
 		for (int i =0; i<bg_g.Count; i++) {
-			bg_g[i].transform.localPosition = new Vector3(position.x,position.y-(gap*i),position.z);
+			bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)),position.z);
 
 			Cdata (bg_g[i].transform.GetChild(0).gameObject,i);
+			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().localSize);
+			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().transform.position);
+			if(!editbll){
+				bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().SetRect(-338,-353-(((float)daycount[i]-5)*bargap),676,706+(((float)daycount[i]-5)*bargap));
+				bg_g[i].transform.GetChild(0).transform.parent.GetChild(2).GetComponent<UISprite>().SetRect(-340,-355-(((float)daycount[i]-5)*bargap),680,710+(((float)daycount[i]-5)*bargap));
+			}
+				editbll = false;
+			//bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().SetRect(-338,-353,676,706);
 		}
 	
 	}
@@ -121,9 +129,17 @@ public class Maincontrol : MonoBehaviour {
 		}
 	
 	}
+	void nongame(){
+		for (int i =daycount.Count-1; i>0; i--) {
+			bg_g[i].SetActive(true);
+			if(daycount[i]==0){
+				bg_g[i].SetActive(false);
+			}
+		}
+	}
 
 	void whattoday(){
-		chacktoday ();
+
 		for (int s = 0; s<4; s++) {
 			for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=1) {
 				array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
@@ -140,8 +156,8 @@ public class Maincontrol : MonoBehaviour {
 				//Debug.Log(aa +" : "+ todays);
 				if (aa == todays) {
 					sum = int.Parse(aa)-(float)dayandday[0];
-					Debug.Log(sum);
-					bgs.transform.localPosition += new Vector3 (0, gap * sum, 0);
+					Debug.Log(sumint*bargap);
+					bgs.transform.localPosition += new Vector3 (0, (gap * sum)-(sumint*bargap), 0);
 					ch.Clear ();
 					return;
 				}
@@ -159,7 +175,8 @@ public class Maincontrol : MonoBehaviour {
 		date.Clear ();
 		day.Clear ();
 		//Debug.Log (mScheduleEvent.Response.data [0].extend [0].teamName);
-		whattoday();
+		chacktoday ();
+
 		for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=5) {
 			day.Add (mScheduleEvent.Response.data [i].onairDay+yui);
 			array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
@@ -225,7 +242,9 @@ public class Maincontrol : MonoBehaviour {
 		//List<use>;
 		//Debug.Log (date);
 		positionset ();
+		whattoday();
 
+		nongame ();
 		bg_g.Clear ();
 		bgs.SetActive (true);
 	
@@ -259,7 +278,7 @@ public class Maincontrol : MonoBehaviour {
 				setbars(i,g);
 				break;
 			}
-
+		
 
 			
 		}

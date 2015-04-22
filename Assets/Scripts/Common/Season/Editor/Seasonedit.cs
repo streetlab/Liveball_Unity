@@ -8,32 +8,32 @@ using System;
 /// Creates a prefab from a selected game object.
 
 /// </summary>
-[CustomEditor(typeof(Maincontrol))]
-public class edits : Editor
+[CustomEditor(typeof(SeasonControl))]
+public class Seasonedit : Editor
 	
-
+	
 	
 {
-
-	Maincontrol _this;
+	
+	SeasonControl _this;
 	void OnEnable(){
-	
-		_this = target as Maincontrol;
+		
+		_this = target as SeasonControl;
 	}
-
-
 	
-
+	
+	
+	
 	public override void OnInspectorGUI(){
 		base.DrawDefaultInspector ();
 		if (GUILayout.Button ("setPosition")) {
-
-		
+			
+			
 			_this.editng();
 		};
-
+		
 	}
 	
-
+	
 	
 }
