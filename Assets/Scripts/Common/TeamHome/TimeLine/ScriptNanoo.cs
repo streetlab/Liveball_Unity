@@ -98,9 +98,9 @@ public class ScriptNanoo : MonoBehaviour {
 
 		float myRatio = Screen.width / 720f;
 		if (orientation == UniWebViewOrientation.Portrait) {
-			return new UniWebViewEdgeInsets((int)(320*myRatio),0,0,0);
+			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
 		} else {
-			return new UniWebViewEdgeInsets((int)(320*myRatio),0,0,0);
+			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
 		}
 	}
 	

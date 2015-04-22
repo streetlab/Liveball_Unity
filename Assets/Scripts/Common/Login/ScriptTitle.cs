@@ -16,9 +16,19 @@ public class ScriptTitle : MonoBehaviour {
 //		PlayerPrefs.SetString (Constants.PrefEmail, "");
 //		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
-//		transform.FindChild ("Fire Spray").GetComponent<ParticleSystem> ().renderer.material.renderQueue = 3001;
-//		transform.FindChild ("Fire Spray").FindChild("Smoke").GetComponent<ParticleSystem> ().renderer.material.renderQueue = 3002;
-//		transform.FindChild ("Fire Spray").FindChild("Sparkles").GetComponent<ParticleSystem> ().renderer.material.renderQueue = 3001;
+		InitConstants();
+	}
+
+	void InitConstants(){
+		#if(UNITY_ANDROID)
+		AndroidMgr.GetHeightStatusBar(new EventDelegate(this, "GotHeight"));
+		#elif(UNITY_EDITOR)
+		#else
+		#endif
+	}
+
+	public void GotHeight(){
+		Constants.HEIGHT_STATUS_BAR = int.Parse(AndroidMgr.GetMsg());
 	}
 
 	public void Init()
