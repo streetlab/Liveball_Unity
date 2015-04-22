@@ -3,9 +3,7 @@ using System.Collections;
 
 public class Constants {	
 	public const float DEFAULT_SCR_RATIO = 505f / 296f;
-
-	public const string APPTAG = "StreetLab_Tuby";
-	
+	public const string APPTAG = "StreetLab_Tuby";	
 	public const bool IS_DEBUGGABLE = false;
 	
 	public const bool	IS_TSTORE = false;
@@ -22,6 +20,9 @@ public class Constants {
 	public const string DF_SPORTS_BASEBALL = "DF_SPORTS_BASEBALL";
 	public const string DF_SPORTS_VOLLEYBALL = "DF_SPORTS_VOLLEYBALL";
 	public const string DF_SPORTS_BASKETBALL = "DF_SPORTS_BASKETBALL";
+
+	public static int SCREEN_HEIGHT_ORIGINAL = 0;
+	public static int HEIGHT_STATUS_BAR = 0;
 	
 	/*/
 	// Real
