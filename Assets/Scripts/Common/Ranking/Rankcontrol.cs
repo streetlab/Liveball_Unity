@@ -27,6 +27,7 @@ public class Rankcontrol : MonoBehaviour {
 			bars.transform.GetChild(i).GetChild(4).GetComponent<UILabel>().text = "5";
 			bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = vgap(i).ToString();
 			bars.transform.GetChild(i).GetChild(6).GetComponent<UISprite>().spriteName = "ic_doosan";
+			rankswitch(i);
 		}
 
 	}
@@ -38,4 +39,22 @@ public class Rankcontrol : MonoBehaviour {
 		//Debug.Log (vgaps);
 		return vgaps;
 	}
+	void rankswitch(int i){
+		//	Debug.Log (scv.transform.GetChild(0).GetChild(i).GetChild(1));
+		switch("up"){
+		case "non":
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.855f,0.86f,0.888f,1);
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "bg_circle";
+			break;
+		case "up":
+			Debug.Log("upupup");
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "ic_arrow";
+			break;
+		case "down":
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.88f,0.23f,0.255f,1);
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "ic_arrow";
+			break;
+		}
+}
 }

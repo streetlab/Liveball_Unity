@@ -76,7 +76,7 @@ public class allrank_control : MonoBehaviour {
 	
 	}
 	void rankswitch(int i){
-		Debug.Log (scv.transform.GetChild(0).GetChild(i).GetChild(1));
+	//	Debug.Log (scv.transform.GetChild(0).GetChild(i).GetChild(1));
 		switch("non"){
 		case "non":
 			scv.transform.GetChild(0).GetChild(i).GetChild(2).GetComponent<UISprite>().color = new Color(0.855f,0.86f,0.888f,1);
