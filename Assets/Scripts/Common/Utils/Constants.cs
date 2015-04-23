@@ -23,6 +23,8 @@ public class Constants {
 
 	public static int SCREEN_HEIGHT_ORIGINAL = 0;
 	public static int HEIGHT_STATUS_BAR = 0;
+
+	public const string URL_CERT = "http://auth.friize.com/m/user_auth.php";
 	
 	/*/
 	// Real

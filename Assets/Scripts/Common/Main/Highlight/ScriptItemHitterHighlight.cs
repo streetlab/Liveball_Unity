@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -80,9 +80,6 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 		mQuizInfo = quizInfo;
 
 		mLblReward.SetActive (false);
-		mLblSelect1.SetActive (false);
-		mLblSelect2_1.SetActive (false);
-		mLblSelect2_2.SetActive (false);
 
 		if(quizInfo.quizValue.Length > 0){
 			int idx = int.Parse(quizInfo.quizValue) -1;
@@ -103,9 +100,8 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 			if(isCorrect){
 				mLblReward.SetActive(true);
 				mLblReward.GetComponent<UILabel>().text = UtilMgr.AddsThousandsSeparator(resp.expectRewardPoint);
-				return;
 			}
-
+			return;
 		} else if(quizInfo.resultMsg.Length > 0){
 			//need modify
 			mLblResult.GetComponent<UILabel>().text = quizInfo.resultMsg;
@@ -113,13 +109,22 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 			mLblSelect1.GetComponent<UILabel> ().text = "X";
 		}
 
-		if (quizInfo.resp == null) {
-		
+		if (quizInfo.resp == null
+		    || quizInfo.resp.Count == 0) {		
+			mLblSelect1.SetActive (false);
+			mLblSelect2_1.SetActive (false);
+			mLblSelect2_2.SetActive (false);
 		} else if(quizInfo.resp.Count == 1){
 			mLblSelect1.SetActive (true);
+
+			mLblSelect2_1.SetActive (false);
+			mLblSelect2_2.SetActive (false);
+
 			int respValue = int.Parse(quizInfo.resp[0].respValue) -1;
 			mLblSelect1.GetComponent<UILabel>().text = quizInfo.order[respValue].description;
 		} else if(quizInfo.resp.Count == 2){
+			mLblSelect1.SetActive (false);
+
 			mLblSelect2_1.SetActive (true);
 			int respValue = int.Parse(quizInfo.resp[0].respValue) -1;
 			mLblSelect2_1.GetComponent<UILabel>().text = quizInfo.order[respValue].description;
@@ -193,7 +198,7 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 			transform.parent.localPosition = mLocalPosList;
 			NGUITools.FindInParents<UIPanel> (gameObject).clipOffset = mClipOffsetPanel;
 		} else{
-			UtilMgr.SetBackEvent(new EventDelegate(this, "OnClicked"));
+			UtilMgr.AddBackEvent(new EventDelegate(this, "OnClicked"));
 			mEvent = new GetQuizResultEvent (new EventDelegate (this, "GotResult"));
 			NetMgr.GetQuizResult (mQuizInfo.quizListSeq, mEvent);
 			transform.GetComponent<UIDragScrollView>().enabled = false;

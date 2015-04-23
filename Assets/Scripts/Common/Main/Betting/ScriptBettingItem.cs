@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ScriptBettingItem : MonoBehaviour {
@@ -103,7 +103,7 @@ public class ScriptBettingItem : MonoBehaviour {
 		mSprBetting.SetActive (true);
 		mSprBetting.GetComponent<ScriptBetting> ().Init (name);
 
-		UtilMgr.SetBackEvent(
+		UtilMgr.AddBackEvent(
 			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),
 		                   "CloseWindow"));
 	}

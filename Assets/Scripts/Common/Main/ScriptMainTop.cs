@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 //using System.Net;
@@ -228,7 +228,7 @@ public class ScriptMainTop : MonoBehaviour {
 		QuizMgr.IsBettingOpended = true;
 		QuizMgr.JoinCount = 0;
 
-		UtilMgr.SetBackEvent(new EventDelegate(this, "AnimateClosing"));
+		UtilMgr.AddBackEvent(new EventDelegate(this, "AnimateClosing"));
 
 		mBetting.SetActive (true);
 		mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);

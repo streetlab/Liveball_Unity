@@ -66,4 +66,9 @@ public class ScriptSelectTeam : MonoBehaviour {
 		
 		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent);
 	}
+
+	public void BackClicked()
+	{
+		UtilMgr.OnBackPressed ();
+	}
 }

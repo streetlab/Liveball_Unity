@@ -8,6 +8,8 @@ public class ScriptJoinForm : MonoBehaviour {
 	JoinMemberInfo mMemInfo;
 	string mImgPath;
 
+	public string mJoinError;
+
 	public void Init(string eMail, string pwd, bool pwdEnable)
 	{
 		transform.FindChild ("InputEmail").GetComponent<UIInput> ().value = eMail;
@@ -51,7 +53,7 @@ public class ScriptJoinForm : MonoBehaviour {
 			mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
 		} else
 		{
-			DialogueMgr.ShowDialogue("join error", value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null);
+			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null);
 		}
 	}
 

@@ -39,7 +39,7 @@ public class UtilMgr : MonoBehaviour {
 		DontDestroyOnLoad (this);
 	}
 
-	public static void SetBackEvent(EventDelegate eventDel)
+	public static void AddBackEvent(EventDelegate eventDel)
 	{
 		mListBackEvent.Add (eventDel);
 	}

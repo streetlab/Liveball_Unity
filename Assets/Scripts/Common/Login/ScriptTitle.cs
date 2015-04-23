@@ -11,6 +11,8 @@ public class ScriptTitle : MonoBehaviour {
 
 	bool mFBInitialized;
 
+	public string mJoinError;
+
 	void Start()
 	{
 		PlayerPrefs.SetString (Constants.PrefEmail, "");
@@ -25,6 +27,8 @@ public class ScriptTitle : MonoBehaviour {
 		#elif(UNITY_EDITOR)
 		#else
 		#endif
+
+		Constants.SCREEN_HEIGHT_ORIGINAL = Screen.height;
 	}
 
 	public void Init()
@@ -34,8 +38,8 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
 		transform.FindChild ("FormJoin").gameObject.SetActive (false);
-		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
+		transform.FindChild ("Certification").gameObject.SetActive (false);
 
 		transform.FindChild ("SprLogo").gameObject.SetActive (true);
 		
@@ -177,6 +181,10 @@ public class ScriptTitle : MonoBehaviour {
 	public void OpenEmail()
 	{
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
+		transform.FindChild ("SprLogo").gameObject.SetActive (false);	
+		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
+		transform.FindChild ("Certification").gameObject.SetActive (false);		
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);
 
 		transform.FindChild ("WindowEmail").gameObject.SetActive (true);
@@ -201,6 +209,7 @@ public class ScriptTitle : MonoBehaviour {
 			return;
 		}
 		mLoginInfo = mLoginEvent.Response.data;
+
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
 
 		NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
@@ -216,16 +225,36 @@ public class ScriptTitle : MonoBehaviour {
 		string body = gameObject.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("loginFailedBody").Value;
 		DialogueMgr.ShowDialogue(
 		                         title, body, DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "");
-		UtilMgr.SetBackEvent (new EventDelegate (transform.root.GetComponent<ScriptLoginRoot>(), "DismissDialogue"));
+		UtilMgr.AddBackEvent (new EventDelegate (transform.root.GetComponent<ScriptLoginRoot>(), "DismissDialogue"));
 	}
 
 	public void GotProfile()
 	{
 		UserMgr.UserInfo = mProfileEvent.Response.data;
+
+		if(mProfileEvent.Response.message != null
+		   && mProfileEvent.Response.message.Length > 0){
+//			UtilMgr.OnBackPressed();
+
+			DialogueMgr.ShowDialogue(mJoinError, mProfileEvent.Response.message,
+			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "");
+
+			return;
+		}
+
+		Debug.Log("UserMgr.UserInfo.activeAuth is "+UserMgr.UserInfo.activeAuth);
+		//Check Auth
+		if(UserMgr.UserInfo.activeAuth < 1){
+			OpenCert();
+			return;
+		}
+
+
 		if (mLoginInfo != null) {
 			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
 			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
 		}
+
 		Debug.Log ("GotProfile");
 		mCardEvent = new GetCardInvenEvent (new EventDelegate (this, "GotCardInven"));
 		NetMgr.GetCardInven (mCardEvent);
@@ -239,10 +268,20 @@ public class ScriptTitle : MonoBehaviour {
 		AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
 	}
 
+	public void OpenCert(){
+		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
+		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
+		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
+		transform.FindChild ("SprLogo").gameObject.SetActive (false);
+
+		transform.FindChild ("Certification").gameObject.SetActive (true);
+	}
+
 
 	public void BtnClicked(string name)
 	{
-		UtilMgr.SetBackEvent (new EventDelegate (this, "Init"));
+		UtilMgr.AddBackEvent (new EventDelegate (this, "Init"));
 		switch(name)
 		{
 		case "BtnFacebook":
