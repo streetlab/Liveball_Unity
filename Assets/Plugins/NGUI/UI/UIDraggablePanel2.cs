@@ -11,7 +11,7 @@ public class UIDraggablePanel2 : UIScrollView
     //=====================================================================
 
     /// <summary>
-    /// UIGrid - 아이템 부모
+	/// UIGrid - 아이템 부모 
     /// </summary>
 //    public UIGrid Grid;
 	public enum EArrangement
@@ -189,8 +189,10 @@ public class UIDraggablePanel2 : UIScrollView
 
         GameObject obj = null;
         UIListItem prevItem = null;
+		Debug.Log ("makecout : " + makeCount);
         for (int i = 0; i < makeCount; i++)
         {
+			Debug.Log(gameObject+ " :  " + TemplatePrefab );
             obj = NGUITools.AddChild(gameObject, TemplatePrefab);
 
             if( obj.GetComponent<UIDragScrollView>() == null )
@@ -198,6 +200,7 @@ public class UIDraggablePanel2 : UIScrollView
 
             UIListItem item = new UIListItem();
             item.Target = obj;
+			//item.Target.AddComponent<cUIScrollListBase>();
             item.SetIndex(i);
             mList.Add(item);
 
@@ -496,9 +499,11 @@ public class UIDraggablePanel2 : UIScrollView
 
 		if( Arrangement == EArrangement.Vertical )
 		{
+			//Debug.Log("ononon");
 			int col = maxCol;
 	        for (int i = 0; i < mList.Count; i++)
 	        {
+
 	            Transform t = mList[i].Target.transform;
 
 	            Vector3 position = Vector3.zero;
@@ -506,7 +511,7 @@ public class UIDraggablePanel2 : UIScrollView
 	        	//index를 기준으로 위치를 다시 잡는다. ( % 연산은 쓰지 않고 계산.)
 				int div = mList[i].Index / col;
 				int remain = mList[i].Index - ( col * div );
-
+				//Debug.Log(firstY + " : " +div+" : "+CellHeight+ " : " +mList[i].Index+ " : " +col);
 				position.x += firstX + (remain * CellWidth);
 				position.y -= -firstY + (div * CellHeight);
 

@@ -41,6 +41,12 @@ public class UIListItem : ListItemBase {
 			Index = index;
 			if( Target != null )
 			{
+				//Debug.Log("target : " + Target );
+				
+				if( Target.GetComponent< cUIScrollListBase >() == null ){
+					Target.AddComponent<cUIScrollListBase>();
+				}
+
 				cUIScrollListBase scr = Target.GetComponent< cUIScrollListBase >();
 				scr.ListItem = this;
 			}

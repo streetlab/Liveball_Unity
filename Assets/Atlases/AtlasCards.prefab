@@ -42,7 +42,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 3ad9e2ce6f297433cb22e059d88c65bc, type: 2}
   mSprites:
   - name: bg_card_list_off
-    x: 0
+    x: 681
     y: 1778
     width: 680
     height: 270
@@ -56,7 +56,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: bg_card_list_on
     x: 0
-    y: 1507
+    y: 1778
     width: 680
     height: 270
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_card_up
-    x: 0
-    y: 772
+    x: 681
+    y: 1565
     width: 720
     height: 212
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: card_off
-    x: 681
-    y: 1944
+    x: 749
+    y: 1544
     width: 20
     height: 20
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: card_on
-    x: 681
-    y: 1965
+    x: 722
+    y: 1523
     width: 20
     height: 20
     borderLeft: 0
@@ -106,9 +106,217 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: cd_bg01_normal
+    x: 219
+    y: 346
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg02_special
+    x: 207
+    y: 47
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg03_rare
+    x: 392
+    y: 140
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg04_platinum
+    x: 219
+    y: 944
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg05_elite
+    x: 611
+    y: 1203
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg06_legend
+    x: 219
+    y: 645
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_btn_arrow
+    x: 611
+    y: 1051
+    width: 96
+    height: 151
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_game_bg01_normal
+    x: 0
+    y: 527
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg02_special
+    x: 0
+    y: 826
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg03_rare
+    x: 0
+    y: 228
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg04_platinum
+    x: 392
+    y: 321
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg05_elite
+    x: 392
+    y: 620
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg06_legend
+    x: 392
+    y: 1218
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg07_plan
+    x: 392
+    y: 919
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_item_bg
+    x: 0
+    y: 1125
+    width: 391
+    height: 391
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 1
+    paddingTop: 15
+    paddingBottom: 12
+  - name: cd_no_bg
+    x: 611
+    y: 1384
+    width: 221
+    height: 132
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 4
+    paddingTop: 0
+    paddingBottom: 4
   - name: gauge_bg
     x: 681
-    y: 2028
+    y: 1544
     width: 40
     height: 20
     borderLeft: 8
@@ -120,8 +328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: gauge_ex
-    x: 681
-    y: 2007
+    x: 722
+    y: 1544
     width: 26
     height: 20
     borderLeft: 0
@@ -134,7 +342,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: gauge_hp
     x: 681
-    y: 1986
+    y: 1523
     width: 26
     height: 20
     borderLeft: 0
@@ -146,8 +354,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: image_power_up
-    x: 0
-    y: 985
+    x: 1362
+    y: 1788
     width: 680
     height: 260
     borderLeft: 0
@@ -160,9 +368,61 @@ MonoBehaviour:
     paddingBottom: 0
   - name: image_up_grade
     x: 0
-    y: 1246
+    y: 1517
     width: 680
     height: 260
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_2x
+    x: 0
+    y: 21
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_3x
+    x: 1402
+    y: 1571
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_5x
+    x: 1816
+    y: 1571
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_bs
+    x: 1609
+    y: 1571
+    width: 206
+    height: 206
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -186,4 +446,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
