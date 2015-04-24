@@ -29,6 +29,9 @@ public class ScriptTitle : MonoBehaviour {
 		#endif
 
 		Constants.SCREEN_HEIGHT_ORIGINAL = Screen.height;
+		Debug.Log("height : "+Screen.height+", width : "+Screen.width);
+		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
+
 	}
 
 	public void Init()

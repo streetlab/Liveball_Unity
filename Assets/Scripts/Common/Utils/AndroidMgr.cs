@@ -132,6 +132,7 @@ public class AndroidMgr : MonoBehaviour
 	}
 	public void GotHeightStatusBar(string height){
 		Constants.HEIGHT_STATUS_BAR = int.Parse(height);
+		Debug.Log("Size of StatusBar is "+Constants.HEIGHT_STATUS_BAR);
 	}
 
 

@@ -37,11 +37,12 @@ public class ScriptTF_Betting : MonoBehaviour {
 	{
 //		transform.FindChild ("Lightning Spark").GetComponent<ScriptParticleResizer> ().ResizeRatio (0.5f);
 
-		transform.FindChild ("Lightning Spark").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-		transform.FindChild ("Lightning Spark").FindChild("Lightning").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-		transform.FindChild ("Lightning Spark").FindChild("Spakles").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-		transform.FindChild ("Lightning Spark").FindChild("Ring").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-		transform.FindChild ("Lightning Spark").FindChild("Ray").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+		transform.FindChild ("Sparks1").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+		transform.FindChild ("Sparks2").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+//		transform.FindChild ("Lightning Spark").FindChild("Lightning").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+//		transform.FindChild ("Lightning Spark").FindChild("Spakles").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+//		transform.FindChild ("Lightning Spark").FindChild("Ring").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+//		transform.FindChild ("Lightning Spark").FindChild("Ray").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 	}
 
 	void Update()
@@ -136,7 +137,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 		TweenAlpha.Begin (mSprComb, 0f, 0f);
 		TweenAlpha.Begin (mSprComb, 1f, 1.0f);
 
-		transform.FindChild ("Lightning Spark").gameObject.SetActive (false);
+		transform.FindChild ("Sparks1").gameObject.SetActive (false);
+		transform.FindChild ("Sparks2").gameObject.SetActive (false);
 		mSprBetting.SetActive (false);
 	}
 
@@ -326,11 +328,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 	}
 
 	IEnumerator VSAnimation(){
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (1.1f);
 
-		transform.FindChild ("Lightning Spark").gameObject.SetActive (true);
-		transform.FindChild ("Lightning Spark").GetComponent<ParticleSystem> ().Play ();
-		transform.root.GetComponent<AudioSource>().PlayOneShot (mBoom);
+		transform.FindChild ("Sparks1").gameObject.SetActive (true);
+		transform.FindChild ("Sparks2").gameObject.SetActive (true);
+		transform.FindChild ("Sparks1").GetComponent<ParticleSystem> ().Play ();
+		transform.FindChild ("Sparks2").GetComponent<ParticleSystem> ().Play ();
+//		transform.root.GetComponent<AudioSource>().PlayOneShot (mBoom);
 
 		GameObject go = transform.FindChild("SprComb").FindChild("Panel").FindChild("SprVS").gameObject;
 		TweenAlpha.Begin (go, 0f, 0f);
