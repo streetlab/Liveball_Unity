@@ -53,7 +53,7 @@ public class ScriptJoinForm : MonoBehaviour {
 			mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
 		} else
 		{
-			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null);
+			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
 		}
 	}
 

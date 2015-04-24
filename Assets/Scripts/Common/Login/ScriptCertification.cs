@@ -3,15 +3,22 @@ using System.Collections;
 
 public class ScriptCertification : MonoBehaviour {
 
+	public GameObject UniWebViewObject;
 	UniWebView mWebView;
 
+	public string mSucceedTitle;
+	public string mSucceedBody;
+	public string mFailedTitle;
+	public string mFailedBody;
+
 	public void BtnClicked(){
+		UniWebViewObject.SetActive(true);
 		string url = Constants.URL_CERT + "?mem=" + UserMgr.UserInfo.memSeq;
 		
-		mWebView = GetComponent<UniWebView>();
+		mWebView = UniWebViewObject.GetComponent<UniWebView>();
 		if (mWebView == null) {
-			mWebView = gameObject.AddComponent<UniWebView>();
-			mWebView.SetShowSpinnerWhenLoading(true);
+			mWebView = UniWebViewObject.AddComponent<UniWebView>();
+			mWebView.SetShowSpinnerWhenLoading(false);
 			mWebView.autoShowWhenLoadComplete = true;
 			mWebView.OnLoadBegin += OnLoadBegin;
 //			mWebView.OnReceivedMessage += OnReceivedMessage;
@@ -32,6 +39,18 @@ public class ScriptCertification : MonoBehaviour {
 
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
 		Debug.Log("OnLoadBegin to "+loadingUrl);
+		if(loadingUrl.Contains("user_auth_success")){
+			Debug.Log("Succeed");
+			CompleteCert();
+		} else if(loadingUrl.Contains("user_auth_fail")){
+			Debug.Log("Failed");
+			FailedCert();
+		} 
+//		else if(loadingUrl.Equals("http://auth.friize.com/m/user_auth_success.php")){
+//			Debug.Log("Equals");
+//		} else {
+//			Debug.Log("Shit");
+//		}
 	}
 
 	void OnLoadComplete(UniWebView webView, bool success, string errorMessage) {
@@ -51,6 +70,27 @@ public class ScriptCertification : MonoBehaviour {
 	}
 
 	public void CompleteCert(){
+		mWebView.Stop();
+		mWebView.Hide();
+		mWebView = null;
+		UniWebViewObject.SetActive(false);
+		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
 
+	}
+
+	public void FailedCert(){
+		mWebView.Stop ();
+		mWebView.Hide();
+		mWebView = null;
+		UniWebViewObject.SetActive(false);
+		DialogueMgr.ShowDialogue(mFailedTitle, mFailedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
+
+//		DialogueMgr.SetEvent(OnClicked);
+	}
+
+	public void OnDialogClicked(DialogueMgr.BTNS type){
+		string email = PlayerPrefs.GetString (Constants.PrefEmail);
+		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
+		transform.parent.GetComponent<ScriptTitle>().DoLogin(email, pwd);
 	}
 }

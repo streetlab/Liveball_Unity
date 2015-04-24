@@ -12,14 +12,27 @@ public class DialogueMgr : MonoBehaviour {
 		Choose
 	}
 
+	public enum BTNS
+	{
+		Btn1,
+		Btn2,
+		Cancel
+	}
+
 	bool mIsExit;
 	static DialogueMgr _instance;
 	GameObject mDialogueBox;
-	EventDelegate mEvent;
+//	EventDelegate mEvent;
+	public delegate void DialogClickHandler(BTNS BtnType);
+	public event DialogClickHandler OnClickHandler;
+
+	public void SetHandler(DialogClickHandler handler){
+		Instance.OnClickHandler = handler;// as OnClicked;
+	}
 
 	public static bool IsShown;
 
-	static DialogueMgr Instance
+	public static DialogueMgr Instance
 	{
 		get
 		{
@@ -35,6 +48,7 @@ public class DialogueMgr : MonoBehaviour {
 					Debug.Log("and makes new one");
 					
 				}
+
 			}
 			
 			return _instance;
@@ -46,7 +60,8 @@ public class DialogueMgr : MonoBehaviour {
 		DontDestroyOnLoad (this);
 	}
 
-	public static void ShowExitDialogue(){
+	public static void ShowExitDialogue(DialogClickHandler handler){
+//		Debug.Log("ShowExitDialogue");
 		if (Instance.mDialogueBox == null) {
 			GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
 			Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
@@ -55,13 +70,22 @@ public class DialogueMgr : MonoBehaviour {
 		string strTitle = Instance.mDialogueBox.GetComponent<PlayMakerFSM> ().FsmVariables.FindFsmString ("exitTitle").Value;
 		string strBody = Instance.mDialogueBox.GetComponent<PlayMakerFSM> ().FsmVariables.FindFsmString ("exitBody").Value;
 
-		ShowDialogue (strTitle, strBody, DIALOGUE_TYPE.YesNo, null, null, null);
+		ShowDialogue (strTitle, strBody, DIALOGUE_TYPE.YesNo, null, null, null, handler);
+
 //		Instance.mIsExit = true;
 	}
 
-	public static void ShowDialogue(string strTitle, string strBody, DIALOGUE_TYPE type, string strBtn1, string strBtn2, string strCancel)
-	{
+	public static void ShowDialogue(string strTitle, string strBody, DIALOGUE_TYPE type,
+	                                DialogClickHandler handler){
+//		Debug.Log("ShowDialogue1");
+		ShowDialogue(strTitle, strBody, type, null, null, null, handler);
+	}
 
+	public static void ShowDialogue(string strTitle, string strBody, DIALOGUE_TYPE type,
+	                                string strBtn1, string strBtn2, string strCancel, DialogClickHandler handler)
+	{
+		Instance.SetHandler(handler);
+//		Debug.Log("ShowDialogue2");
 		if (Instance.mDialogueBox == null) {
 			GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
 			Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
@@ -142,39 +166,29 @@ public class DialogueMgr : MonoBehaviour {
 
 	public static void DismissDialogue()
 	{
-		if(Instance.mEvent != null)
-			Instance.mEvent.Clear ();
-
-		Instance.mEvent = null;
 		Instance.mDialogueBox.SetActive (false);
 		IsShown = false;
 	}
 
 	public void Btn1Clicked()
 	{
-		if (mEvent == null) {
-			Application.Quit();
-			return;
-		}
+		DialogueMgr.DismissDialogue ();
+		if(Instance.OnClickHandler != null)
+			Instance.OnClickHandler(BTNS.Btn1);
 	}
 
 	public void Btn2Clicked()
 	{
-
+		DialogueMgr.DismissDialogue ();
+		if(Instance.OnClickHandler != null)
+			Instance.OnClickHandler(BTNS.Btn2);
 	}
 
 	public void BtnCancelClicked()
 	{
-//		Debug.Log("CancelClicked");
-//		Debug.Log("Is Exit? "+Instance.mIsExit);
-//		if (mEvent == null) {
-//			UtilMgr.OnBackPressed();
-//			return;
-//		}
 		DialogueMgr.DismissDialogue ();
-//		UtilMgr.RemoveBackEvent ();
-//		if (Instance.mIsExit)
-//				UtilMgr.RemoveAllBackEvents ();
+		if(Instance.OnClickHandler != null)
+			Instance.OnClickHandler(BTNS.Cancel);
 	}
 
 }

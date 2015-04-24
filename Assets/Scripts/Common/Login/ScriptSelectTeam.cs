@@ -7,6 +7,9 @@ public class ScriptSelectTeam : MonoBehaviour {
 	bool mSelected;
 	string mTeamCode;
 
+	public string mErrorTitle;
+	public string mErrorBody;
+
 	JoinMemberInfo mMemInfo;
 
 	static Color SELECTED = new Color (67f / 255f, 169f / 255f, 230f / 255f);
@@ -45,8 +48,8 @@ public class ScriptSelectTeam : MonoBehaviour {
 			#endif
 		} else if(!mSelected) {
 			DialogueMgr.ShowDialogue (
-				"Select Team", "You must choose a team!", DialogueMgr.DIALOGUE_TYPE.Alert,
-			                          null, null, null);
+				mErrorTitle, mErrorBody, DialogueMgr.DIALOGUE_TYPE.Alert,
+			                          null, null, null, null);
 		}
 	}
 

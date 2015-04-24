@@ -26,7 +26,8 @@ public class NetMgr : MonoBehaviour{
 
 	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading)
 	{
-		UtilMgr.ShowLoading (showLoading);
+		if(showLoading)
+			UtilMgr.ShowLoading (showLoading);
 
 		yield return www;
 		

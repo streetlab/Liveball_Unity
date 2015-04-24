@@ -87,8 +87,19 @@ public class UtilMgr : MonoBehaviour {
 		}
 		else
 		{
-			DialogueMgr.ShowExitDialogue();
+			Instance.ShowExitDialog();
 			return false;
+		}
+	}
+
+	public void ShowExitDialog(){
+		DialogueMgr.ShowExitDialogue(DialogClickHandler);
+	}
+
+	public void DialogClickHandler(DialogueMgr.BTNS btn){
+//		Debug.Log("Clicked : "+btn);
+		if(btn == DialogueMgr.BTNS.Btn1){
+			Application.Quit();
 		}
 	}
 
