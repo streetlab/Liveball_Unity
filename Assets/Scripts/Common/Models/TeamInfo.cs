@@ -166,4 +166,70 @@ public class TeamInfo {
 			_startTime = value;
 		}
 	}
+
+	int _countWin;
+
+	public int countWin {
+		get {
+			return _countWin;
+		}
+		set {
+			_countWin = value;
+		}
+	}
+
+	int _countLose;
+
+	public int countLose {
+		get {
+			return _countLose;
+		}
+		set {
+			_countLose = value;
+		}
+	}
+
+	int _countDraw;
+
+	public int countDraw {
+		get {
+			return _countDraw;
+		}
+		set {
+			_countDraw = value;
+		}
+	}
+
+	int _ranking;
+
+	public int ranking {
+		get {
+			return _ranking;
+		}
+		set {
+			_ranking = value;
+		}
+	}
+
+	string _winRate;
+
+	public string winRate {
+		get {
+			return _winRate;
+		}
+		set {
+			_winRate = value;
+		}
+	}
+
+	int _behind;
+
+	public int behind {
+		get {
+			return _behind;
+		}
+		set {
+			_behind = value;
+		}
+	}
 }

@@ -13,6 +13,7 @@ public class BaseEvent {
 	{
 		if (response.code > 0) {
 			Debug.Log("Response Error : " + response.message);
+			DialogueMgr.ShowDialogue("Error", response.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			return true;
 		}
 		return false;

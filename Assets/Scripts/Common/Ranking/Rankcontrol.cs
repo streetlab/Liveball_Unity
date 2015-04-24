@@ -7,15 +7,28 @@ public class Rankcontrol : MonoBehaviour {
 	Vector3 posisions;
 	float vgaps;
 
+	GetTeamRankingEvent mRankingEvent;
+
 	// Use this for initialization
 	void Start () {
+		Init();
 		setposition ();
 		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
+	}
+
+	void Init(){
+		mRankingEvent = new GetTeamRankingEvent(new EventDelegate(this, "GotRanking"));
+		NetMgr.GetTeamRanking(mRankingEvent);
+	}
+
+	public void GotRanking(){
+		Debug.Log (mRankingEvent.Response.data[0].teamName +"'s Ranking is "+mRankingEvent.Response.data[0].ranking);
 	}
 
 	public void editng(){
 		setposition ();
 	}
+
 	void setposition(){
 		posisions = bars.transform.GetChild (0).transform.localPosition;
 		for (int i =0; i<bars.transform.childCount; i++) {
