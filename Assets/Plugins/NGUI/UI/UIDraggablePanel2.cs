@@ -189,10 +189,10 @@ public class UIDraggablePanel2 : UIScrollView
 
         GameObject obj = null;
         UIListItem prevItem = null;
-		Debug.Log ("makecout : " + makeCount);
+		//Debug.Log ("makecout : " + makeCount);
         for (int i = 0; i < makeCount; i++)
         {
-			Debug.Log(gameObject+ " :  " + TemplatePrefab );
+//			Debug.Log(gameObject+ " :  " + TemplatePrefab );
             obj = NGUITools.AddChild(gameObject, TemplatePrefab);
 
             if( obj.GetComponent<UIDragScrollView>() == null )
