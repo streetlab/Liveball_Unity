@@ -3,11 +3,15 @@ using System.Collections;
 
 public class ScriptCardsMiddle : MonoBehaviour {
 	public string grade,maxlv,posi,team,num,name,nowlv,add;
-	
+	string lod;
 	public float hp,exp;
 	GetCardInvenEvent mEvent;
 
+	void getdata (){
+		lod =Constants.IMAGE_SERVER_HOST;//card/player/name
+	}
 	void Start () {
+
 		mEvent = new GetCardInvenEvent(new EventDelegate(this, "GotCardsInven"));
 		NetMgr.GetCardInven (mEvent);
 
