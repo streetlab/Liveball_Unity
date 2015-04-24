@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class StatisControl : MonoBehaviour {
 
 	public GameObject bgs;
 	public float gap = 536;
 	public float bargap = 122;
+	public List<string> labals = new List<string>();
 	Vector3 positions;
 	Vector3 barposition;
+	List<List<List<string>>> ALL = new List<List<List<string>>> ();
+	List<List<string>> AVG = new List<List<string>>();
+	List<List<string>> ERA = new List<List<string>>();
+	List<List<string>> HR = new List<List<string>>();
+	List<List<string>> WIN = new List<List<string>>();
+
+
 	GetPlayerStatisticsEvent mStatisticsEvent;
+
 
 	public void editng(){
 		setposition ();
 	}
 	void Start(){
 		Init();
-		setposition ();
+
 		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 	}
 
@@ -25,9 +34,53 @@ public class StatisControl : MonoBehaviour {
 	}
 
 	public void GotStatistics(){
+		for (int i = 0; i<ALL.Count; i++) {
+			ALL[i].Clear();
+		}
+		ALL.Clear ();
+		for (int i = 0; i<5; i++) {
+			AVG.Add (new List<string>());
+			ERA.Add (new List<string>());
+			HR.Add (new List<string>());
+			WIN.Add (new List<string>());
+		};
+		ALL.Add (AVG);
+		ALL.Add (ERA);
+		ALL.Add (HR);
+		ALL.Add (WIN);
+		for (int i =0; i<mStatisticsEvent.Response.data.AVG.Count; i++) {
+			AVG[0].Add(mStatisticsEvent.Response.data.AVG[i].ranking.ToString());
+			ERA[0].Add(mStatisticsEvent.Response.data.ERA[i].ranking.ToString());
+			HR[0].Add(mStatisticsEvent.Response.data.HR[i].ranking.ToString());
+			WIN[0].Add(mStatisticsEvent.Response.data.WIN[i].ranking.ToString());
+
+			AVG[1].Add(mStatisticsEvent.Response.data.AVG[i].playerName);
+			ERA[1].Add(mStatisticsEvent.Response.data.ERA[i].playerName);
+			HR[1].Add(mStatisticsEvent.Response.data.HR[i].playerName);
+			WIN[1].Add(mStatisticsEvent.Response.data.WIN[i].playerName);
+
+			AVG[2].Add(mStatisticsEvent.Response.data.AVG[i].teamName);
+			ERA[2].Add(mStatisticsEvent.Response.data.ERA[i].teamName);
+			HR[2].Add(mStatisticsEvent.Response.data.HR[i].teamName);
+			WIN[2].Add(mStatisticsEvent.Response.data.WIN[i].teamName);
+
+			AVG[3].Add(mStatisticsEvent.Response.data.AVG[i].record);
+			ERA[3].Add(mStatisticsEvent.Response.data.ERA[i].record);
+			HR[3].Add(mStatisticsEvent.Response.data.HR[i].record);
+			WIN[3].Add(mStatisticsEvent.Response.data.WIN[i].record);
+
+			AVG[4].Add(mStatisticsEvent.Response.data.AVG[i].teamCode);
+			ERA[4].Add(mStatisticsEvent.Response.data.ERA[i].teamCode);
+			HR[4].Add(mStatisticsEvent.Response.data.HR[i].teamCode);
+			WIN[4].Add(mStatisticsEvent.Response.data.WIN[i].teamCode);
+		}
+
+
 		Debug.Log(mStatisticsEvent.Response.data.AVG[0].playerName
 		          +"'s AVG ranking is "+mStatisticsEvent.Response.data.AVG[0].ranking);
+		setposition ();
 	}
+
 
 	void setposition(){
 		positions = bgs.transform.GetChild(0).transform.localPosition;
@@ -35,23 +88,51 @@ public class StatisControl : MonoBehaviour {
 
 			bgs.transform.GetChild(i).transform.localPosition = new Vector3(positions.x,positions.y-(gap*i),positions.z);
 
-			bgs.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<UILabel>().text = "set";
+			bgs.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<UILabel>().text = labals[i];
 			barposition = bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(0).transform.localPosition;
 			for(int a = 0; a<bgs.transform.GetChild(i).GetChild(0).GetChild(0).childCount-1;a++){
 
 				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).transform.localPosition = new Vector3(
 					barposition.x,barposition.y-(a*bargap),barposition.z);
+			
 				//bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(0).
 				//	GetComponent<UISprite>().spriteName = "";
 			
 			//	Debug.Log(bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).gameObject);
-				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).GetComponent<UILabel>().text = "name";
-				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(2).GetComponent<UILabel>().text = "team name";
-				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(3).GetComponent<UILabel>().text = "0.000";
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).GetComponent<UILabel>().text = ALL[i][1][a];;
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(2).GetComponent<UILabel>().text = ALL[i][2][a];
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(3).GetComponent<UILabel>().text = ALL[i][3][a];
 					
 			}
 		}
 
 
+
+	}
+	void setpositionold(){
+		positions = bgs.transform.GetChild(0).transform.localPosition;
+		for(int i = 0;i<bgs.transform.childCount;i++){
+			
+			bgs.transform.GetChild(i).transform.localPosition = new Vector3(positions.x,positions.y-(gap*i),positions.z);
+			
+			bgs.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<UILabel>().text = "set";
+			barposition = bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(0).transform.localPosition;
+			for(int a = 0; a<bgs.transform.GetChild(i).GetChild(0).GetChild(0).childCount-1;a++){
+				
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).transform.localPosition = new Vector3(
+					barposition.x,barposition.y-(a*bargap),barposition.z);
+				bgs.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<UILabel>().text = labals[i];
+				//bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(0).
+				//	GetComponent<UISprite>().spriteName = "";
+				
+				//	Debug.Log(bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).gameObject);
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).GetComponent<UILabel>().text = "name";
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(2).GetComponent<UILabel>().text = "team name";
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(3).GetComponent<UILabel>().text = "0.000";
+				
+			}
+		}
+		
+		
 	}
 }

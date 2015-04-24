@@ -25,21 +25,38 @@ public class ScriptCardsMiddle : MonoBehaviour {
 	GetCardInvenEvent mEvent;
 
 	void GotCardsInven(){
+		grade.Clear ();
+		maxlv.Clear ();
+		posi.Clear ();
+		team.Clear ();
+		//num.Clear ();
+		name.Clear ();
+		nowlv.Clear ();
+		add.Clear ();
+		hp.Clear ();
+		maxhp.Clear ();
+		exp.Clear ();
+		maxexp.Clear ();
+		cardgrade.Clear ();
+		teamimage.Clear ();
+		image.Clear ();
+		number.Clear ();
 		for (int i = 0; i<mEvent.Response.data.hitter.Count; i++) {
-			grade.Add(mEvent.Response.data.hitter [i].className.ToString());
+			grade.Add(mEvent.Response.data.hitter [i].className);
 			maxlv.Add(mEvent.Response.data.hitter [i].maxLevel.ToString());
 			posi.Add(mEvent.Response.data.hitter [i].className.ToString());
-			team.Add(mEvent.Response.data.hitter [i].teamName.ToString());
-			num.Add(mEvent.Response.data.hitter [i].cardNo.ToString());
-			name.Add(mEvent.Response.data.hitter [i].cardName.ToString());
+			team.Add(mEvent.Response.data.hitter [i].teamName);
+			//num.Add(mEvent.Response.data.hitter [i].cardNo.ToString());
+			name.Add(mEvent.Response.data.hitter [i].cardName);
 			nowlv.Add(mEvent.Response.data.hitter [i].cardLevel.ToString());
 			add.Add(mEvent.Response.data.hitter [i].rewardRate.ToString());
 
 			hp.Add(nowhp(mEvent.Response.data.hitter [i].classNo,i));
 			maxhp.Add(maxhps(mEvent.Response.data.hitter [i].classNo));
 
-			exp.Add(int.Parse(mEvent.Response.data.hitter [i].cardXp.ToString()));
-			maxexp.Add(int.Parse(mEvent.Response.data.hitter [i].maxCardXp.ToString()));
+			exp.Add(mEvent.Response.data.hitter [i].cardXp);
+			maxexp.Add(mEvent.Response.data.hitter [i].maxCardXp);
+			//Debug.Log(mEvent.Response.data.hitter [i].cardXp +" : " + mEvent.Response.data.hitter [i].maxCardXp);
 			cardgrade.Add(mEvent.Response.data.hitter [i].classNo);
 			teamimage.Add(mEvent.Response.data.hitter [i].teamImageName.ToString());
 			image.Add(mEvent.Response.data.hitter [i].cardImageName.ToString());
