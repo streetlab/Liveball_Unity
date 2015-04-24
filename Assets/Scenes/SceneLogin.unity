@@ -5834,7 +5834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &460173589
 Transform:
   m_ObjectHideFlags: 0
@@ -5842,7 +5842,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 460173588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 173, z: 0}
+  m_LocalPosition: {x: 0, y: 210, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1066159568}
@@ -5878,13 +5878,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 490
-  mHeight: 154
+  mWidth: 576
+  mHeight: 216
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.18181825
+  aspectRatio: 2.66666675
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -5896,7 +5896,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: ic_tb_login02
+  mSpriteName: ic_liveball_logo
   mFillCenter: 1
 --- !u!1 &463452403
 GameObject:
@@ -18351,7 +18351,7 @@ Transform:
   m_GameObject: {fileID: 1923999746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00162866444, y: .00162866444, z: .00162866444}
+  m_LocalScale: {x: .00162601622, y: .00162601622, z: .00162601622}
   m_Children:
   - {fileID: 1807303497}
   - {fileID: 2143914080}
@@ -18909,7 +18909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2010813458
 Transform:
   m_ObjectHideFlags: 0

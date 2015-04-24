@@ -91,8 +91,10 @@ public class ScriptQuizResult : MonoBehaviour {
 
 //			firework.GetComponent<ScriptParticleResizer> ().ResizeRatio (0.5f);
 			firework.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-//			firework.transform.FindChild("Ring").GetComponent<ParticleSystem>()
-//				.GetComponent<Renderer>().material.renderQueue = 3100;
+			firework.transform.FindChild("CoinShine").GetComponent<ParticleSystem>()
+				.GetComponent<Renderer>().material.renderQueue = 3100;
+			firework.transform.FindChild("CoinTrailSparkly").GetComponent<ParticleSystem>()
+				.GetComponent<Renderer>().material.renderQueue = 3100;
 			mListParticles.Add (firework);
 
 			firework.GetComponent<ParticleSystem> ().Play();

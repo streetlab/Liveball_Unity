@@ -232,4 +232,15 @@ public class TeamInfo {
 			_behind = value;
 		}
 	}
+
+	int _previousRanking;
+
+	public int previousRanking {
+		get {
+			return _previousRanking;
+		}
+		set {
+			_previousRanking = value;
+		}
+	}
 }
