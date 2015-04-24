@@ -8,13 +8,27 @@ public class StatisControl : MonoBehaviour {
 	public float bargap = 122;
 	Vector3 positions;
 	Vector3 barposition;
+	GetPlayerStatisticsEvent mStatisticsEvent;
+
 	public void editng(){
 		setposition ();
 	}
 	void Start(){
+		Init();
 		setposition ();
 		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 	}
+
+	void Init(){
+		mStatisticsEvent = new GetPlayerStatisticsEvent(new EventDelegate(this, "GotStatistics"));
+		NetMgr.GetPlayerStatistics(mStatisticsEvent);
+	}
+
+	public void GotStatistics(){
+		Debug.Log(mStatisticsEvent.Response.data.AVG[0].playerName
+		          +"'s AVG ranking is "+mStatisticsEvent.Response.data.AVG[0].ranking);
+	}
+
 	void setposition(){
 		positions = bgs.transform.GetChild(0).transform.localPosition;
 		for(int i = 0;i<bgs.transform.childCount;i++){

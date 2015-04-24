@@ -150,4 +150,9 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent (new GetTeamRankingRequest (), baseEvent);
 	}
+
+	public static void GetPlayerStatistics(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetPlayerStatisticsRequest (), baseEvent);
+	}
 }
