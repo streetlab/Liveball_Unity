@@ -113,9 +113,9 @@ public class StatisControl : MonoBehaviour {
 				transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(1).GetComponent<UILabel>().text = ALL[i][1][a];
 				transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(2).GetComponent<UILabel>().text = ALL[i][2][a];
 				transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(3).GetComponent<UILabel>().text = ALL[i][3][a];
-				Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(1));
-				Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(2));
-				Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(3));
+			//	Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(1));
+			//	Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(2));
+			//	Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(3));
 			}
 		}
 
