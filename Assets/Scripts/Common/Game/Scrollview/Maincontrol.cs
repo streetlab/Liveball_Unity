@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Maincontrol : MonoBehaviour {
 	public GameObject bgs;
 	public float gap = 720;
+	float addsum,addsumint;
 	public float bargap = 122;
 	public string yui;
 	List<GameObject> bg_g = new List<GameObject>();
@@ -139,6 +140,14 @@ public class Maincontrol : MonoBehaviour {
 	}
 
 	void whattoday(){
+		addsum = 0;
+		addsumint = 0;
+		for (int i = 0; i<daycount.Count; i++) {
+			if(daycount[i] == 0){
+				//addsum+=1;
+				addsumint-=5;
+			}
+		}
 
 		for (int s = 0; s<4; s++) {
 			for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=1) {
@@ -155,9 +164,10 @@ public class Maincontrol : MonoBehaviour {
 				todays = (int.Parse(todays)+s).ToString();
 				//Debug.Log(aa +" : "+ todays);
 				if (aa == todays) {
-					sum = int.Parse(aa)-(float)dayandday[0];
-					Debug.Log(sumint*bargap);
-					bgs.transform.localPosition += new Vector3 (0, (gap * sum)-(sumint*bargap), 0);
+					sum = (float)int.Parse(aa)-(float)dayandday[0];
+					Debug.Log(gap+ "  :  "+ sum);
+					Debug.Log(sumint+ "  :  "+bargap);
+					bgs.transform.localPosition += new Vector3 (0, (gap * (sum+addsum))-(((float)sumint+addsumint)*bargap), 0);
 					ch.Clear ();
 					return;
 				}

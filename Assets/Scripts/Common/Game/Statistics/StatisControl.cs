@@ -99,13 +99,25 @@ public class StatisControl : MonoBehaviour {
 				//	GetComponent<UISprite>().spriteName = "";
 			
 			//	Debug.Log(bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).gameObject);
-				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).GetComponent<UILabel>().text = ALL[i][1][a];;
+				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(1).GetComponent<UILabel>().text = ALL[i][1][a];
 				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(2).GetComponent<UILabel>().text = ALL[i][2][a];
 				bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(3).GetComponent<UILabel>().text = ALL[i][3][a];
 					
 			}
 		}
-
+		for (int i = 0; i <ALL.Count; i++) {
+			transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<UILabel>().text = labals[i];
+		
+			for(int a = 0; a<transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).childCount;a++){
+				//transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(0).GetComponent<UISprite>().spriteName = "";
+				transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(1).GetComponent<UILabel>().text = ALL[i][1][a];
+				transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(2).GetComponent<UILabel>().text = ALL[i][2][a];
+				transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(3).GetComponent<UILabel>().text = ALL[i][3][a];
+				Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(1));
+				Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(2));
+				Debug.Log(transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(3));
+			}
+		}
 
 
 	}
@@ -134,5 +146,17 @@ public class StatisControl : MonoBehaviour {
 		}
 		
 		
+	}
+
+	public void Allveiw(int i){
+		Debug.Log (i);
+		transform.GetChild (i + 2).gameObject.SetActive (true);
+		transform.GetChild (0).gameObject.SetActive (false);
+	
+		transform.parent.GetChild (1).GetChild (1).gameObject.SetActive (false);
+		transform.parent.GetChild (1).GetChild (0).GetChild(1).gameObject.SetActive (false);
+		transform.parent.GetChild (1).GetChild (0).GetChild(2).gameObject.SetActive (false);
+		transform.parent.GetChild (1).GetChild (0).GetChild(4).gameObject.SetActive (true);
+		transform.parent.GetChild (1).GetChild (0).GetChild(5).gameObject.SetActive (true);
 	}
 }
