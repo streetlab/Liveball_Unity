@@ -233,14 +233,14 @@ public class TeamInfo {
 		}
 	}
 
-	int _previousRanking;
+	int _prevRanking;
 
-	public int previousRanking {
+	public int prevRanking {
 		get {
-			return _previousRanking;
+			return _prevRanking;
 		}
 		set {
-			_previousRanking = value;
+			_prevRanking = value;
 		}
 	}
 }

@@ -89,4 +89,26 @@ public class PlayerStatisticsInfo {
 			_record = value;
 		}
 	}
+
+	string _imageName;
+
+	public string imageName {
+		get {
+			return _imageName;
+		}
+		set {
+			_imageName = value;
+		}
+	}
+
+	string _imagePath;
+
+	public string imagePath {
+		get {
+			return _imagePath;
+		}
+		set {
+			_imagePath = value;
+		}
+	}
 }
