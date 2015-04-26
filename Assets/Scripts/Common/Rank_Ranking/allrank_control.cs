@@ -22,7 +22,7 @@ public class allrank_control : MonoBehaviour {
 		scv.transform.GetChild (3).transform.localPosition = new Vector2 (0,7-(bargap*allp/2));
 
 
-
+		///////////////////
 
 		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 		scv.transform.GetChild (2).GetChild (0).GetComponent<UILabel>().text = "768";

@@ -58,12 +58,22 @@ public class Maincontrol : MonoBehaviour {
 		//Debug.Log (bg_g.Count);
 		position = bg_g[0].transform.localPosition;
 		for (int i =0; i<bg_g.Count; i++) {
-			bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)),position.z);
+			if(i>0){
+				if(daycount[i-1]==0){
+					bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)-(gap-(bargap*5))),position.z);
+
+				}else{
+					bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)),position.z);
+				}
+			}else {
+				bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)),position.z);
+			}
 
 			Cdata (bg_g[i].transform.GetChild(0).gameObject,i);
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().localSize);
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().transform.position);
 			if(!editbll){
+
 				bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().SetRect(-338,-353-(((float)daycount[i]-5)*bargap),676,706+(((float)daycount[i]-5)*bargap));
 				bg_g[i].transform.GetChild(0).transform.parent.GetChild(2).GetComponent<UISprite>().SetRect(-340,-355-(((float)daycount[i]-5)*bargap),680,710+(((float)daycount[i]-5)*bargap));
 			}
@@ -144,7 +154,7 @@ public class Maincontrol : MonoBehaviour {
 		addsumint = 0;
 		for (int i = 0; i<daycount.Count; i++) {
 			if(daycount[i] == 0){
-				//addsum+=1;
+				addsum+=1;
 				addsumint-=5;
 			}
 		}
@@ -167,7 +177,7 @@ public class Maincontrol : MonoBehaviour {
 					sum = (float)int.Parse(aa)-(float)dayandday[0];
 					Debug.Log(gap+ "  :  "+ sum);
 					Debug.Log(sumint+ "  :  "+bargap);
-					bgs.transform.localPosition += new Vector3 (0, (gap * (sum+addsum))-(((float)sumint+addsumint)*bargap), 0);
+					bgs.transform.localPosition += new Vector3 (0, (gap * (sum))-(((float)sumint+addsumint)*bargap), 0);
 					ch.Clear ();
 					return;
 				}
@@ -296,8 +306,8 @@ public class Maincontrol : MonoBehaviour {
 	}
 	void setbars(int i,GameObject g){
 
-			g.transform.GetChild (1).GetChild (i).transform.localPosition = new Vector3 (positions.x, positions.y - (bargap * i), positions.z);
-		if (teamname.Count > 0) {
+		g.transform.GetChild (1).GetChild (i).transform.localPosition = new Vector3 (positions.x, positions.y - (bargap * i), positions.z);
+			if (teamname.Count > 0) {
 			g.transform.GetChild (1).GetChild (i).gameObject.SetActive(true);
 			if(daycount[a]<=i){
 				g.transform.GetChild (1).GetChild (i).gameObject.SetActive(false);

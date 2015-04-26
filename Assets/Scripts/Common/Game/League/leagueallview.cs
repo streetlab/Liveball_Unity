@@ -19,6 +19,7 @@ public class leagueallview : MonoBehaviour {
 		//			break;
 		//		
 		//		}
-		gameObject.transform.parent.parent.parent.parent.parent.parent.GetComponent<fanleaguecontrol> ().allview (int.Parse (strings [5].ToString()));
+	//	Debug.Log (gameObject.transform.parent.parent.parent.parent.parent.parent);
+		gameObject.transform.parent.parent.parent.parent.parent.parent.parent.GetComponent<fanleaguecontrol> ().allview (int.Parse (strings [5].ToString()));
 	}
 }
