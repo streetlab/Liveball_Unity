@@ -77,7 +77,7 @@ public class ScriptMainTop : MonoBehaviour {
 	{
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
 		transform.GetComponent<PlayMakerFSM> ().SendEvent ("CloseBetting");
-		TweenAlpha.Begin (mBetting.transform.FindChild("SprComb").gameObject, 1f, 0f);
+		TweenAlpha.Begin (mBetting.GetComponent<ScriptTF_Betting>().mSprComb, 1f, 0f);
 
 		CheckAndJoinQuiz();
 	}
@@ -207,7 +207,7 @@ public class ScriptMainTop : MonoBehaviour {
 		simpleEvent.Response.data.Add(new SimpleResultInfoSample (QuizMgr.SequenceQuiz));
 
 		QuizMgr.InitSimpleResult (simpleEvent,
-		                          mBetting.transform.FindChild("SprBetting").GetComponent<ScriptBetting>(),
+		                          mBetting.GetComponent<ScriptTF_Betting>().mSprBetting.GetComponent<ScriptBetting>(),
 		                          transform.FindChild("QuizResultPopup").GetComponent<ScriptQuizResult>());
 	}
 

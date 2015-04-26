@@ -6,6 +6,8 @@ public class ScriptBetting : MonoBehaviour {
 
 	string mNameSelectedBtn;
 	ScriptBettingItem mSbi;
+
+	public GameObject mTFBetting;
 	
 	public GameObject mBtnHit1;
 	public GameObject mBtnHit2;
@@ -112,7 +114,7 @@ public class ScriptBetting : MonoBehaviour {
 		joinInfo.ExtendValue = "0";
 //		mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteSending"));
 //		NetMgr.JoinQuiz (joinInfo, mJoinQuizEvent);
-		transform.parent.GetComponent<ScriptTF_Betting> ().mListJoin.Add (joinInfo);
+		mTFBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Add (joinInfo);
 		double userGoldenBall = double.Parse (UserMgr.UserInfo.userGoldenBall)
 						- double.Parse (joinInfo.BetPoint);
 		UserMgr.UserInfo.userGoldenBall = "" + userGoldenBall;

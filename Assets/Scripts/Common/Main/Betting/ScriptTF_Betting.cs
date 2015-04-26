@@ -11,6 +11,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 	public GameObject mSprCard;
 	public GameObject mSprBetting;
 	public GameObject mSprLoaded;
+	public GameObject mScrollView;
+
+	public GameObject mSpark1;
+	public GameObject mSpark2;
 
 	public AudioClip mBoom;
 
@@ -33,20 +37,44 @@ public class ScriptTF_Betting : MonoBehaviour {
 	const float MAX_TIME = 1600f;
 	const float BAR_WIDTH = 132f;
 
+	bool isDragging;
+
 	void Start()
 	{
 //		transform.FindChild ("Lightning Spark").GetComponent<ScriptParticleResizer> ().ResizeRatio (0.5f);
 
-		transform.FindChild ("Sparks1").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-		transform.FindChild ("Sparks2").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+		mSpark1.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+		mSpark2.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Lightning").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Spakles").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Ring").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Ray").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+
+//		mScrollView.GetComponent<UIScrollView>().onDragStarted += OnDragStarted;
+//		mScrollView.GetComponent<UIScrollView>().onDragFinished += OnDragFinished;
 	}
+
+//	void OnDragStarted(){
+//		isDragging = true;
+//	}
+//
+//	void OnDragFinished(){
+//		isDragging = false;
+//	}
 
 	void Update()
 	{
+//		if(isDragging){
+			Debug.Log("y is "+mScrollView.transform.localPosition.y);
+			if(mScrollView.transform.localPosition.y > UtilMgr.GetScaledPositionY() * 2f){
+				Vector3 pos = new Vector3(0 ,UtilMgr.GetScaledPositionY() * 2f, 0);
+				mScrollView.transform.localPosition = pos;
+
+				Vector2 offset = new Vector2(0, -UtilMgr.GetScaledPositionY());
+				mScrollView.GetComponent<UIPanel>().clipOffset = offset;
+			}
+//		}
+
 		if (mTimeOut) {
 //			if(UtilMgr.HasBackEvent)
 //				UtilMgr.OnBackPressed ();
@@ -137,8 +165,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 		TweenAlpha.Begin (mSprComb, 0f, 0f);
 		TweenAlpha.Begin (mSprComb, 1f, 1.0f);
 
-		transform.FindChild ("Sparks1").gameObject.SetActive (false);
-		transform.FindChild ("Sparks2").gameObject.SetActive (false);
+		mSpark1.SetActive (false);
+		mSpark2.SetActive (false);
 		mSprBetting.SetActive (false);
 	}
 
@@ -330,13 +358,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 	IEnumerator VSAnimation(){
 		yield return new WaitForSeconds (1.1f);
 
-		transform.FindChild ("Sparks1").gameObject.SetActive (true);
-		transform.FindChild ("Sparks2").gameObject.SetActive (true);
-		transform.FindChild ("Sparks1").GetComponent<ParticleSystem> ().Play ();
-		transform.FindChild ("Sparks2").GetComponent<ParticleSystem> ().Play ();
+		mSpark1.SetActive (true);
+		mSpark2.SetActive (true);
+		mSpark1.GetComponent<ParticleSystem> ().Play ();
+		mSpark2.GetComponent<ParticleSystem> ().Play ();
 //		transform.root.GetComponent<AudioSource>().PlayOneShot (mBoom);
 
-		GameObject go = transform.FindChild("SprComb").FindChild("Panel").FindChild("SprVS").gameObject;
+		GameObject go = mSprComb.transform.FindChild("Panel").FindChild("SprVS").gameObject;
 		TweenAlpha.Begin (go, 0f, 0f);
 		TweenScale.Begin (go, 0f, new Vector3(1f, 1f, 1f));
 		TweenAlpha.Begin (go, 0.5f, 1f);
