@@ -8987,6 +8987,7 @@ GameObject:
   - 4: {fileID: 1189858162}
   - 114: {fileID: 1189858164}
   - 114: {fileID: 1189858163}
+  - 114: {fileID: 1189858165}
   m_Layer: 0
   m_Name: Scroll View
   m_TagString: Untagged
@@ -9084,6 +9085,17 @@ MonoBehaviour:
   mDepth: 1
   mSortingOrder: 0
   mClipOffset: {x: 0, y: -155}
+--- !u!114 &1189858165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1189858161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37cd523196e7415abe2fa1efb952870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209465543
 GameObject:
   m_ObjectHideFlags: 0
@@ -10601,7 +10613,7 @@ Transform:
   m_GameObject: {fileID: 1542475183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00162601622, y: .00162601622, z: .00162601622}
+  m_LocalScale: {x: .00229357788, y: .00229357788, z: .00229357788}
   m_Children:
   - {fileID: 1701965749}
   - {fileID: 372226281}
@@ -13158,6 +13170,7 @@ GameObject:
   - 4: {fileID: 1850269871}
   - 114: {fileID: 1850269873}
   - 114: {fileID: 1850269872}
+  - 114: {fileID: 1850269874}
   m_Layer: 0
   m_Name: Scroll View
   m_TagString: Untagged
@@ -13252,6 +13265,17 @@ MonoBehaviour:
   mDepth: 1
   mSortingOrder: 0
   mClipOffset: {x: 0, y: -155}
+--- !u!114 &1850269874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1850269870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37cd523196e7415abe2fa1efb952870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1881117239
 GameObject:
   m_ObjectHideFlags: 0
