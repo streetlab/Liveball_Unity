@@ -8,6 +8,7 @@ public class AdjustListSize : MonoBehaviour {
 		UIScrollView scrollView = GetComponent<UIScrollView>();
 		if(scrollView != null){
 			UtilMgr.ResizeList(gameObject);
+			scrollView.ResetPosition();
 		}
 	}
 }

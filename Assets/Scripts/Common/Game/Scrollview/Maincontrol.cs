@@ -177,7 +177,9 @@ public class Maincontrol : MonoBehaviour {
 					sum = (float)int.Parse(aa)-(float)dayandday[0];
 					Debug.Log(gap+ "  :  "+ sum);
 					Debug.Log(sumint+ "  :  "+bargap);
-					bgs.transform.localPosition += new Vector3 (0, (gap * (sum))-(((float)sumint+addsumint)*bargap), 0);
+					float y = (gap * (sum))-(((float)sumint+addsumint)*bargap);
+					y -= UtilMgr.GetScaledPositionY();
+					bgs.transform.localPosition += new Vector3 (0, y, 0);
 					ch.Clear ();
 					return;
 				}
