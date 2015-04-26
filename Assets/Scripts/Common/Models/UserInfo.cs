@@ -192,9 +192,6 @@ public class UserInfo {
 	string _teamCode;
 
 	public string teamCode {
-		get {
-			return _teamCode;
-		}
 		set {
 			_teamCode = value;
 		}
@@ -303,5 +300,62 @@ public class UserInfo {
 		set {
 			_phoneNum = value;
 		}
+	}
+
+	public string _teamFullName;
+
+	public string teamFullName {
+		set {
+			_teamFullName = value;
+		}
+	}
+
+	public string _teamName;
+	
+	public string teamName {
+		set {
+			_teamName = value;
+		}
+	}
+
+	public FavoBB _favoBB;
+
+	public FavoBB favoBB {
+		get {
+			return _favoBB;
+		}
+		set {
+			_favoBB = value;
+		}
+	}
+
+	public string GetTeamName(){
+		if(_teamName == null || _teamName.Length < 1){
+			if(favoBB == null)
+				return null;
+			else
+				return favoBB.teamName;
+		}
+		return null;
+	}
+
+	public string GetTeamCode(){
+		if(_teamCode == null || _teamCode.Length < 1){
+			if(favoBB == null)
+				return null;
+			else
+				return favoBB.teamCode;
+		}
+		return null;
+	}
+
+	public string GetTeamFullName(){
+		if(_teamFullName == null || _teamFullName.Length < 1){
+			if(favoBB == null)
+				return null;
+			else
+				return favoBB.teamFullName;
+		}
+		return null;
 	}
 }

@@ -8,7 +8,7 @@ public class GetScheduleMoreRequest : BaseRequest {
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("date", UtilMgr.GetDateTime ("yyyyMMdd"));
-		Add ("teamCode", UserMgr.UserInfo.teamCode);
+		Add ("teamCode", UserMgr.UserInfo.GetTeamCode());
 		Add ("teamSeq", UserMgr.UserInfo.teamSeq);
 
 		mParams = JsonFx.Json.JsonWriter.Serialize (this);

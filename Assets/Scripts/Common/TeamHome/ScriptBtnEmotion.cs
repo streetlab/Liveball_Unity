@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScriptBtnImotion : MonoBehaviour {
+public class ScriptBtnEmotion : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -44,16 +44,16 @@ public class ScriptBtnImotion : MonoBehaviour {
 			break;
 		}
 		CloseMenu ();
-		ActiveSprImotion ();
+		ActiveSprEmotion ();
 	}
 
-	public void ActiveSprImotion()
+	public void ActiveSprEmotion()
 	{
-		UISprite spr = transform.FindChild ("SprImotion").gameObject.GetComponent<UISprite> ();
+		UISprite spr = transform.FindChild ("SprEmotion").gameObject.GetComponent<UISprite> ();
 		spr.spriteName = "ic_face_color";
 	}
 
-	public void DeactiveSprImotion()
+	public void DeactiveSprEmotion()
 	{
 
 	}

@@ -31,7 +31,7 @@ public class ScriptTitle : MonoBehaviour {
 		Constants.SCREEN_HEIGHT_ORIGINAL = Screen.height;
 		Debug.Log("height : "+Screen.height+", width : "+Screen.width);
 		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
-
+		Debug.Log(SystemInfo.deviceModel);
 	}
 
 	public void Init()
@@ -252,11 +252,14 @@ public class ScriptTitle : MonoBehaviour {
 			return;
 		}
 
+		Debug.Log("UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
 
-		if (mLoginInfo != null) {
-			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
-			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
-		}
+//		if (mLoginInfo != null) {
+//			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
+//			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
+//
+//			Debug.Log("2 UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
+//		}
 
 		Debug.Log ("GotProfile");
 		mCardEvent = new GetCardInvenEvent (new EventDelegate (this, "GotCardInven"));

@@ -9,7 +9,7 @@ public class Constants {
 	public const bool	IS_TSTORE = false;
 	public const string	MARKET_URI_TSTORE = "PRODUCT_VIEW/0000308300/0";
 	
-	public const string HOST					= 	"appif.friize.com";
+	public const string HOST					= 	"appif.liveball.kr";
 	public const string TEST_HOST					= 	"192.168.0.5";
 	
 	public const string COMMUNITY_URL = "http://cafe.naver.com/tuby";
@@ -31,14 +31,14 @@ public class Constants {
 	public static string QUERY_SERVER_HOST 	= 	"http://" + HOST + ":5002/webTuby/query.frz";
 	public static string IMAGE_SERVER_HOST 	= 	"http://" + HOST + ":5002/tuby_file/";
 	
-	public static string WITHDRAW_URL 				= 	"http://auth.friize.com/m/withdraw.php";
-	public static string EVENT_URL 					= 	"http://tuby10.friize.com/events";
-	public static string EVENT_ATTENDANCE_URL 		= 	"http://tuby10.friize.com/events/attendance/";
-	public static string EVENT_ATTENDANCE_CONFIRM_URL = 	"http://tuby10.friize.com/events/attendance_confirm/";
-	public static string EVENT_NOTI_URL 				= 	"http://tuby10.friize.com/events/T";
-	public static string EVENT_NOTI_CONFIRM_URL 		= 	"http://tuby10.friize.com/events/noti";
-	public static string MAIL_BOX_URL 				= 	"http://auth.friize.com/mailbox/";
-	public static string MAIL_BOX_RECEIVE_REWARD_URL 	= 	"http://auth.friize.com/mailbox/receive.php";
+	public static string WITHDRAW_URL 				= 	"http://auth.liveball.kr/m/withdraw.php";
+	public static string EVENT_URL 					= 	"http://tuby10.liveball.kr/events";
+	public static string EVENT_ATTENDANCE_URL 		= 	"http://tuby10.liveball.kr/events/attendance/";
+	public static string EVENT_ATTENDANCE_CONFIRM_URL = 	"http://tuby10.liveball.kr/events/attendance_confirm/";
+	public static string EVENT_NOTI_URL 				= 	"http://tuby10.liveball.kr/events/T";
+	public static string EVENT_NOTI_CONFIRM_URL 		= 	"http://tuby10.liveball.kr/events/noti";
+	public static string MAIL_BOX_URL 				= 	"http://auth.liveball.kr/mailbox/";
+	public static string MAIL_BOX_RECEIVE_REWARD_URL 	= 	"http://auth.liveball.kr/mailbox/receive.php";
 	/*/
 	
 //	public const string QUERY_SERVER_HOST 				= 	"http://" + TEST_HOST + ":5002/gameServer/query.frz";
@@ -46,39 +46,39 @@ public class Constants {
 	public static string QUERY_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
 	public static string IMAGE_SERVER_HOST 				= 	"http://" + HOST + ":6002/tuby_file/";
 
-	public static string WITHDRAW_URL 				= 	"http://auth.friize.com/m/withdraw.php";
+	public static string WITHDRAW_URL 				= 	"http://auth.liveball.kr/m/withdraw.php";
 	public static string EVENT_URL 						= 	"http://test.streetlab.co.kr/events";
 	public static string EVENT_ATTENDANCE_URL 			= 	"http://test.streetlab.co.kr/events/attendance/";
 	public static string EVENT_ATTENDANCE_CONFIRM_URL 	= 	"http://test.streetlab.co.kr/events/attendance_confirm/";
 	public static string EVENT_NOTI_URL 					= 	"http://test.streetlab.co.kr/events/t/";
 	public static string EVENT_NOTI_CONFIRM_URL 			= 	"http://test.streetlab.co.kr/events/noti";
-	public static string MAIL_BOX_URL 					= 	"http://auth.friize.com/mailbox/";
-	public static string MAIL_BOX_RECEIVE_REWARD_URL 		= 	"http://auth.friize.com/mailbox/receive.php";
+	public static string MAIL_BOX_URL 					= 	"http://auth.liveball.kr/mailbox/";
+	public static string MAIL_BOX_RECEIVE_REWARD_URL 		= 	"http://auth.liveball.kr/mailbox/receive.php";
 	//*/
 	
 	//	static string QUERY_SERVER_HOST_R 	= 	"http://" + HOST + ":5002/gameServer/query.frz";
 	//	static string IMAGE_SERVER_HOST_R 	= 	"http://" + HOST + ":5002/tubyfiles/";
 	//
-	//	static string WITHDRAW_URL_R 				= 	"http://auth.friize.com/m/withdraw.php";
-	//	static string EVENT_URL_R 					= 	"http://tuby10.friize.com/events";
-	//	static string EVENT_ATTENDANCE_URL_R 		= 	"http://tuby10.friize.com/events/attendance/";
-	//	static string EVENT_ATTENDANCE_CONFIRM_URL_R = 	"http://tuby10.friize.com/events/attendance_confirm/";
-	//	static string EVENT_NOTI_URL_R 				= 	"http://tuby10.friize.com/events/T";
-	//	static string EVENT_NOTI_CONFIRM_URL_R 		= 	"http://tuby10.friize.com/events/noti";
-	//	static string MAIL_BOX_URL_R 				= 	"http://auth.friize.com/mailbox/";
-	//	static string MAIL_BOX_RECEIVE_REWARD_URL_R 	= 	"http://auth.friize.com/mailbox/receive.php";
+	//	static string WITHDRAW_URL_R 				= 	"http://auth.liveball.kr/m/withdraw.php";
+	//	static string EVENT_URL_R 					= 	"http://tuby10.liveball.kr/events";
+	//	static string EVENT_ATTENDANCE_URL_R 		= 	"http://tuby10.liveball.kr/events/attendance/";
+	//	static string EVENT_ATTENDANCE_CONFIRM_URL_R = 	"http://tuby10.liveball.kr/events/attendance_confirm/";
+	//	static string EVENT_NOTI_URL_R 				= 	"http://tuby10.liveball.kr/events/T";
+	//	static string EVENT_NOTI_CONFIRM_URL_R 		= 	"http://tuby10.liveball.kr/events/noti";
+	//	static string MAIL_BOX_URL_R 				= 	"http://auth.liveball.kr/mailbox/";
+	//	static string MAIL_BOX_RECEIVE_REWARD_URL_R 	= 	"http://auth.liveball.kr/mailbox/receive.php";
 	
 	static string QUERY_SERVER_HOST_T 				= 	"http://" + HOST + ":6002/gameServer/query.frz";
 	static string IMAGE_SERVER_HOST_T 				= 	"http://" + HOST + ":6002/tubyfiles/";
 	
-	static string WITHDRAW_URL_T 				= 	"http://auth.friize.com/m/withdraw.php";
+	static string WITHDRAW_URL_T 				= 	"http://auth.liveball.kr/m/withdraw.php";
 	static string EVENT_URL_T 						= 	"http://test.streetlab.co.kr/events";
 	static string EVENT_ATTENDANCE_URL_T 			= 	"http://test.streetlab.co.kr/events/attendance/";
 	static string EVENT_ATTENDANCE_CONFIRM_URL_T 	= 	"http://test.streetlab.co.kr/events/attendance_confirm/";
 	static string EVENT_NOTI_URL_T 					= 	"http://test.streetlab.co.kr/events/t/";
 	static string EVENT_NOTI_CONFIRM_URL_T 			= 	"http://test.streetlab.co.kr/events/noti";
-	static string MAIL_BOX_URL_T 					= 	"http://auth.friize.com/mailbox/";
-	static string MAIL_BOX_RECEIVE_REWARD_URL_T 		= 	"http://auth.friize.com/mailbox/receive.php";
+	static string MAIL_BOX_URL_T 					= 	"http://auth.liveball.kr/mailbox/";
+	static string MAIL_BOX_RECEIVE_REWARD_URL_T 		= 	"http://auth.liveball.kr/mailbox/receive.php";
 	
 	public const string IMAGE_HTTP_PREFIX 		= 	"http://";
 	public const string IMAGE_ICON_URL_PREFIX 	= 	"icon_";

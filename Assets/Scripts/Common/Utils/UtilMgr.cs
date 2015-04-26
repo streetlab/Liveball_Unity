@@ -180,27 +180,37 @@ public class UtilMgr : MonoBehaviour {
 		switch(imgName)
 		{
 		case "sports_team_baseball_lg.png":
+		case "LG":
 			return "ic_lg";
 		case "sports_team_baseball_lt.png":
+		case "LT":
 			return "ic_lotte";
 		case "sports_team_baseball_hh.png":
+		case "HH":
 			return "ic_hanwha";
 		case "sports_team_baseball_ob.png":
+		case "OB":
 			return "ic_doosan";
 		case "sports_team_baseball_ht.png":
+		case "HT":
 			return "ic_kia";
 		case "sports_team_baseball_ss.png":
+		case "SS":
 			return "ic_samsung";
 		case "sports_team_baseball_wo.png":
+		case "WO":
 			return "ic_nexen";
 		case "sports_team_baseball_sk.png":
+		case "SK":
 			return "ic_sk";
 		case "sports_team_baseball_nc.png":
+		case "NC":
 			return "ic_nc";
 		case "sports_team_baseball_kt.png":
+		case "KT":
 			return "ic_kt";
 		}
-		return null;
+		return "ic_liveball";
 	}
 
 //	public static string GetTeamEmblem(string teamCode)

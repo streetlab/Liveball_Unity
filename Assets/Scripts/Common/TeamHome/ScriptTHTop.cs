@@ -15,6 +15,8 @@ public class ScriptTHTop : MonoBehaviour {
 	public GameObject mBtnSeason;
 	public GameObject mBtnSquad;
 
+	GetScheduleEvent mScheduleEvent;
+
 	void Start(){
 //		mTimeline.SetActive (true);
 //
@@ -22,7 +24,27 @@ public class ScriptTHTop : MonoBehaviour {
 //		mSeason.SetActive (false);
 //		mSquad.SetActive (false);
 //		OpenTimeline ();
+		InitTopInfo();
 		OpenNanoo ();
+	}
+
+	void InitTopInfo(){
+		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetGroupInfo();
+		mScheduleEvent = new GetScheduleEvent(new EventDelegate(this, "GotSchedule"));
+		NetMgr.GetScheduleMore(mScheduleEvent);
+	}
+
+	public void GotSchedule(){
+		ScheduleInfo schedule = null;
+		foreach(ScheduleInfo info in mScheduleEvent.Response.data){
+			if(info.gameStatus == ScheduleInfo.GAME_PLAYING){
+				schedule = info;
+				break;
+			}
+		}
+
+		if(schedule != null)
+			transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(schedule);
 	}
 
 	public void BtnClicked(string name){

@@ -145,7 +145,7 @@ public class ScriptNanoo : MonoBehaviour {
 	}
 
 	string GetTeamURL(){
-		switch (UserMgr.UserInfo.teamCode) {
+		switch (UserMgr.UserInfo.GetTeamCode()) {
 		case "LG":
 			return LG_URL;
 		case "LT":

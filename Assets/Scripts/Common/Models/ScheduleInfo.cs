@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ScheduleInfo {
+	public const int GAME_READY = 0;
+	public const int GAME_PLAYING = 1;
+	public const int GAME_ENDED = 2;
+
 	private int _contentsSeq;
 	public int contentsSeq {
 		get {
