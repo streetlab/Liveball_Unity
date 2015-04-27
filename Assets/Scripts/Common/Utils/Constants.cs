@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Constants {	
-	public const float DEFAULT_SCR_RATIO = 505f / 296f;
+	public const float DEFAULT_SCR_RATIO = 1280f / 720f;
 	public const string APPTAG = "StreetLab_Tuby";	
 	public const bool IS_DEBUGGABLE = false;
 	

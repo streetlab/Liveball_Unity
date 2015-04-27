@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UserInfo {
 	int _memSeq;
@@ -241,58 +242,7 @@ public class UserInfo {
 	}
 
 // 1,
-	string _phoneNum;// "01011112341",
-	//item;// [
-//	       {
-//	comboShieldYn;// 0,
-//	itemName;// "베팅쉴드",
-//	itemCountUse;// 1,
-//	multipleRatio;// 1,
-//	betShieldYn;// 1,
-//	itemCount;// 4,
-//	itemId;// 1020,
-//	itemCode;// "ITEM_BET_SHIELD"
-//	       },
-//	       {
-//	comboShieldYn;// 1,
-//	itemName;// "콤보쉴드",
-//	itemCountUse;// 2,
-//	multipleRatio;// 1,
-//	betShieldYn;// 0,
-//	itemCount;// 3,
-//	itemId;// 1010,
-//	itemCode;// "ITEM_COMBO_SHIELD"
-//	       },
-//	       {
-//	comboShieldYn;// 0,
-//	itemName;// "배당금2배",
-//	itemCountUse;// 4,
-//	multipleRatio;// 2,
-//	betShieldYn;// 0,
-//	itemCount;// 6,
-//	itemId;// 1200,
-//	itemCode;// "ITEM_MULTIPLE_200X"
-//	       },
-//	       {
-//	comboShieldYn;// 0,
-//	itemName;// "배당금3배",
-//	itemCountUse;// 1,
-//	multipleRatio;// 3,
-//	betShieldYn;// 0,
-//	itemCount;// 9,
-//	itemId;// 1300,
-//	itemCode;// "ITEM_MULTIPLE_300X"
-//	       }
-//	       ],
-//social;// [
-//	         {
-//	rowNum;// 1,
-//	title;// "뚜비 출시이벤트 보상 (골든볼 1000개)이 지급되었습니다."
-//	         }
-//	         ]
-
-
-
+	string _phoneNum;
 	public string phoneNum {
 		get {
 			return _phoneNum;
@@ -357,5 +307,16 @@ public class UserInfo {
 				return favoBB.teamFullName;
 		}
 		return null;
+	}
+
+	List<ItemStrategyInfo> _item;
+
+	public List<ItemStrategyInfo> item {
+		get {
+			return _item;
+		}
+		set {
+			_item = value;
+		}
 	}
 }

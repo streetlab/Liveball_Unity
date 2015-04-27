@@ -62,11 +62,16 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		isDragging = false;
 //	}
 
+	void Awake(){
+//		mScrollView.transform.localPosition = new Vector3(0, 0, 0);
+		Debug.Log("Awake y is "+mScrollView.transform.localPosition.y);
+	}
+
 	void Update()
 	{
 //		if(isDragging){
 			Debug.Log("y is "+mScrollView.transform.localPosition.y);
-			if(mScrollView.transform.localPosition.y > UtilMgr.GetScaledPositionY() * 2f){
+			if((mScrollView.transform.localPosition.y) > UtilMgr.GetScaledPositionY() * 2f){
 				Vector3 pos = new Vector3(0 ,UtilMgr.GetScaledPositionY() * 2f, 0);
 				mScrollView.transform.localPosition = pos;
 

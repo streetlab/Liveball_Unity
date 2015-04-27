@@ -298,4 +298,15 @@ public class CardInfo {
 			_cardLevel = value;
 		}
 	}
+
+	int _backNum;
+
+	public int backNum {
+		get {
+			return _backNum;
+		}
+		set {
+			_backNum = value;
+		}
+	}
 }
