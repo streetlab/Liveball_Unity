@@ -164,17 +164,17 @@ public class fanleaguecontrol : MonoBehaviour {
 		
 
 		
-			for(int i = 0 ; i<10;i++){
+			for(int i = 0 ; i<allp;i++){
 				//Debug.Log(i);
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (5).GetComponent<UISprite> ().SetRect (0,-0,720,797+(bargap*(allp-4)));
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (5).transform.localPosition = new Vector2 (0,-23-(bargap*(allp-4)/2));
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (5).GetComponent<BoxCollider2D> ().size = new Vector2 (720,740+(bargap*(allp-4)));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (5).GetComponent<UISprite> ().SetRect (0,-0,720,797+(bargap*(allu-4)));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (5).transform.localPosition = new Vector2 (0,-23-(bargap*(allu-4)/2));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (5).GetComponent<BoxCollider2D> ().size = new Vector2 (720,740+(bargap*(allu-4)));
 				
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (4).GetComponent<UISprite> ().SetRect (0,-0,680,757+(bargap*(allp-4)));
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (4).transform.localPosition = new Vector2 (0,-23-(bargap*(allp-4)/2));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (4).GetComponent<UISprite> ().SetRect (0,-0,680,757+(bargap*(allu-4)));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (4).transform.localPosition = new Vector2 (0,-23-(bargap*(allu-4)/2));
 				
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (3).GetComponent<UISprite> ().SetRect (0,-0,676,753+(bargap*(allp-4)));
-				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (3).transform.localPosition = new Vector2 (0,-23-(bargap*(allp-4)/2));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (3).GetComponent<UISprite> ().SetRect (0,-0,676,753+(bargap*(allu-4)));
+				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild (3).transform.localPosition = new Vector2 (0,-23-(bargap*(allu-4)/2));
 			//	Debug.Log(	transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild(2).GetChild(0) + "    " + myrank[q][i] );
 				//Debug.Log( myrank[q][i] + " :: " +q + " :: "+ i + " :: "+ myrank.Count+ " :: " +myrank[q].Count ) ;
 				transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild(2).GetChild(0).GetComponent<UILabel>().text = myrank[q][i];
@@ -192,7 +192,7 @@ public class fanleaguecontrol : MonoBehaviour {
 					rankswitch (q,i,1,transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild(0).GetChild(a).GetChild(2).gameObject);
 
 				}
-				for (int t =0; t<allp-4; t++) {
+				for (int t =0; t<allu-4; t++) {
 				//Debug.Log(scv.transform.GetChild(0).GetChild(3).transform.localPosition.y+(bargap*((float)i+1)));
 					exbar = (GameObject)Instantiate (transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild(0).GetChild(3).gameObject, new Vector2 (0, 0),transform.GetChild(q+1).GetChild(i+2).GetChild(0).GetChild(0).GetChild(3).transform.localRotation);
 				

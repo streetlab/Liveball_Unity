@@ -4,6 +4,7 @@ using System.Collections;
 public class ScriptMainMenuLeft : MonoBehaviour {
 
 	public GameObject mBtnTeamHome;
+	public GameObject mBtnIlovebaseball;
 	public GameObject mBtnGameHome;
 	public GameObject mBtnCards;
 	public GameObject mBtnIamPlayer;
@@ -19,6 +20,7 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 
 	void SetBtnsEnable(){
 		mBtnTeamHome.GetComponent<UIButton> ().isEnabled = true;
+		mBtnIlovebaseball.GetComponent<UIButton> ().isEnabled = true;
 		mBtnGameHome.GetComponent<UIButton> ().isEnabled = true;
 		mBtnCards.GetComponent<UIButton> ().isEnabled = true;
 		mBtnIamPlayer.GetComponent<UIButton> ().isEnabled = true;
