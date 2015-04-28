@@ -156,9 +156,9 @@ public class CardInfo {
 		}
 	}
 
-	int _cardNo;
+	double _cardNo;
 
-	public int cardNo {
+	public double cardNo {
 		get {
 			return _cardNo;
 		}

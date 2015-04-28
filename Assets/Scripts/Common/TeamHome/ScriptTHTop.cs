@@ -5,7 +5,7 @@ public class ScriptTHTop : MonoBehaviour {
 
 	public GameObject mTimeline;
 	public GameObject mAlbum;
-	public GameObject mSeason;
+//	public GameObject mSeason;
 	public GameObject mSquad;
 
 	public GameObject mNanoo;
@@ -69,7 +69,7 @@ public class ScriptTHTop : MonoBehaviour {
 
 		mTimeline.SetActive (false);		
 		mAlbum.SetActive (false);
-		mSeason.SetActive (false);
+//		mSeason.SetActive (false);
 		mSquad.SetActive (false);
 	}
 
@@ -83,7 +83,7 @@ public class ScriptTHTop : MonoBehaviour {
 		mTimeline.SetActive (true);
 		
 		mAlbum.SetActive (false);
-		mSeason.SetActive (false);
+//		mSeason.SetActive (false);
 		mSquad.SetActive (false);
 	}
 
@@ -98,7 +98,7 @@ public class ScriptTHTop : MonoBehaviour {
 		mAlbum.GetComponent<ScriptTF_Album> ().OpenWebView ();
 		
 		mTimeline.SetActive (false);
-		mSeason.SetActive (false);
+//		mSeason.SetActive (false);
 		mSquad.SetActive (false);
 	}
 
@@ -109,7 +109,7 @@ public class ScriptTHTop : MonoBehaviour {
 		mBtnAlbum.GetComponent<UIButton> ().isEnabled = true;
 		mBtnSquad.GetComponent<UIButton> ().isEnabled = true;
 
-		mSeason.SetActive (true);
+//		mSeason.SetActive (true);
 		
 		mAlbum.SetActive (false);
 		mTimeline.SetActive (false);
@@ -126,7 +126,7 @@ public class ScriptTHTop : MonoBehaviour {
 		mSquad.SetActive (true);
 		
 		mAlbum.SetActive (false);
-		mSeason.SetActive (false);
+//		mSeason.SetActive (false);
 		mTimeline.SetActive (false);
 	}
 

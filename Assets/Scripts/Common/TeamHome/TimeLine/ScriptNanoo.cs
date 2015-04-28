@@ -27,6 +27,7 @@ public class ScriptNanoo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log("Nanoo Start!");
 		InitNanoo ();
 	}
 
@@ -35,14 +36,23 @@ public class ScriptNanoo : MonoBehaviour {
 		CheckStatusBar();
 	}
 
+	void OnApplicationPause(bool pause){
+		Debug.Log("pause is "+pause);
+		if(pause){
+			HideWebView();
+		} else{
+			ShowWebView();
+		}
+	}
+
 	void CheckStatusBar(){
 //		Debug.Log("y is "+mTop.transform.localPosition.y);
-		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
-			int diff = Screen.height - Constants.SCREEN_HEIGHT_ORIGINAL;
-			Debug.Log("diff is"+diff);
-			mTop.transform.localPosition = new Vector3(0 , -25f+(diff/2)-10, 0);
-		} else
-			mTop.transform.localPosition = new Vector3(0 , -25f, 0);
+//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
+//			int diff = Screen.height - Constants.SCREEN_HEIGHT_ORIGINAL;
+//			Debug.Log("diff is"+diff);
+//			mTop.transform.localPosition = new Vector3(0 , -25f+(diff/2)-10, 0);
+//		} else
+//			mTop.transform.localPosition = new Vector3(0 , -25f, 0);
 
 
 
@@ -64,6 +74,7 @@ public class ScriptNanoo : MonoBehaviour {
 
 		mWebView = GetComponent<UniWebView>();
 		if (mWebView == null) {
+			Debug.Log("Nanoo Creating");
 			mWebView = gameObject.AddComponent<UniWebView>();
 			mWebView.SetShowSpinnerWhenLoading(true);
 			mWebView.autoShowWhenLoadComplete = true;
@@ -121,11 +132,11 @@ public class ScriptNanoo : MonoBehaviour {
 
 		float myRatio = Screen.width / 720f;
 
-		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
+//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
 			return new UniWebViewEdgeInsets((int)(125*myRatio),0,0,0);
-		} else {
-			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
-		}
+//		} else {
+//			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
+//		}
 	}
 	
 	void OnLoadComplete(UniWebView webView, bool success, string errorMessage) {

@@ -247,10 +247,10 @@ public class ScriptTitle : MonoBehaviour {
 
 		Debug.Log("UserMgr.UserInfo.activeAuth is "+UserMgr.UserInfo.activeAuth);
 		//Check Auth
-		if(UserMgr.UserInfo.activeAuth < 1){
-			OpenCert();
-			return;
-		}
+//		if(UserMgr.UserInfo.activeAuth < 1){
+//			OpenCert();
+//			return;
+//		}
 
 		Debug.Log("UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
 

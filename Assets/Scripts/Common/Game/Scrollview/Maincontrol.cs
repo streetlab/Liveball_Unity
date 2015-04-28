@@ -91,6 +91,13 @@ public class Maincontrol : MonoBehaviour {
 					bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)),position.z);
 				}
 			}
+
+			//why crashed? below this line
+			if(i > 5)
+				return;
+			Debug.Log("i : "+i);
+			Debug.Log("bg_g length : "+bg_g.Count);
+
 			Cdata (bg_g[i].transform.GetChild(0).gameObject,i);
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().localSize);
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().transform.position);

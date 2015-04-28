@@ -86,7 +86,7 @@ public class ScriptMainTop : MonoBehaviour {
 		if (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Count > 0) {
 			mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteJoinQuiz"));
 			NetMgr.JoinQuiz (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0], mJoinQuizEvent);
-			mBetting.transform.FindChild("SprBetting")
+			mBetting.GetComponent<ScriptTF_Betting>().mSprBetting
 				.GetComponent<ScriptBetting>().UpdateHitterItem(
 					mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0]);
 		}
@@ -220,6 +220,7 @@ public class ScriptMainTop : MonoBehaviour {
 		#else
 
 		#endif
+		mLivetalk.SetActive(false);
 
 		if (UtilMgr.HasBackEvent ()) {
 			UtilMgr.RunAllBackEvents();

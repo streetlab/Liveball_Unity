@@ -6,6 +6,8 @@ public class ScriptBettingCard : UIDragDropItem {
 	CardInfo mCardInfo;
 	ItemStrategyInfo mStrategyInfo;
 
+	public GameObject mSprBetting;
+
 	public GameObject mBG;
 	public GameObject mNumber;
 	public GameObject mFace;
@@ -13,7 +15,12 @@ public class ScriptBettingCard : UIDragDropItem {
 	public GameObject mRatio;
 	public GameObject mName;
 
+	public GameObject mPosIn;
+	public GameObject mPosOut;
+
 	public GameObject mSprItem;
+
+	public AudioClip mAudioError;
 
 	public enum TYPE{
 		Hitter,
@@ -32,7 +39,15 @@ public class ScriptBettingCard : UIDragDropItem {
 	public TYPE mType;
 
 	protected override void Start(){
+//		Debug.Log("start!");
 		base.Start();
+
+//		Init();
+//		Debug.Log("end!");
+	}
+
+	public void Init(){
+
 		if(mType == TYPE.Hitter){
 			mCardInfo = UserMgr.CardInvenInfo.hitter[0];
 		} else if(mType == TYPE.Pitcher){
@@ -41,10 +56,8 @@ public class ScriptBettingCard : UIDragDropItem {
 			mStrategyInfo = UserMgr.UserInfo.item[0];
 		}
 
-		Init();
-	}
+		gameObject.SetActive(true);
 
-	void Init(){
 		if(mType == TYPE.Strategy)
 			InitStrategy();
 		else
@@ -100,7 +113,9 @@ public class ScriptBettingCard : UIDragDropItem {
 		if (surface != null) {
 //			Debug.Log("surface.name : "+surface.name);
 			CheckSurface(surface);
-		}
+			ReturnCard();
+		} else
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioError);
 	}
 
 	void CheckSurface(GameObject surface){
@@ -136,16 +151,28 @@ public class ScriptBettingCard : UIDragDropItem {
 			}
 		}
 
-		ReturnCard();
+//		ReturnCard();
+		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioError);
 	}
 
 	public void ReturnCard(){
-
+		Vector3 pos = mPosIn.transform.localPosition;
+		pos.y += 57f;
+		mTrans.localPosition = pos;
 	}
 	
 	void OpenBetWindow(Transform btnGroup, string name){
 		gameObject.SetActive(false);
-		btnGroup.FindChild(name).GetComponent<ScriptBettingItem>().OnClicked(name);
+//		btnGroup.FindChild(name).GetComponent<ScriptBettingItem>().OnClicked(name);
+		mSprBetting.SetActive (true);
+		if(mType == TYPE.Strategy)
+			mSprBetting.GetComponent<ScriptBetting> ().InitWithStrategy(name, mStrategyInfo);
+		else
+			mSprBetting.GetComponent<ScriptBetting> ().InitWithCard(name, mCardInfo);
+		
+		UtilMgr.AddBackEvent(
+			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),
+		                   "CloseWindow"));
 	}
 
 	protected override void OnDragDropMove (Vector2 delta)
@@ -156,8 +183,9 @@ public class ScriptBettingCard : UIDragDropItem {
 		float ratio = 720f / Screen.currentResolution.width;
 
 		float touchedX = (UICamera.currentTouch.pos.x * ratio) -360f;
-		float touchedY = (UICamera.currentTouch.pos.y * ratio) - 615f;
+		float touchedY = (UICamera.currentTouch.pos.y * ratio) - 640f;
 		mTrans.localPosition = new Vector3(touchedX, touchedY, 1f);
+//		Debug.Log("UICamera.currentTouch.pos.x : "+UICamera.currentTouch.pos.x);
 //		Debug.Log ("x is "+touchedX);
 //		Debug.Log ("y is "+touchedY);
 	}
@@ -169,7 +197,7 @@ public class ScriptBettingCard : UIDragDropItem {
 
 //		UtilMgr.GetScaledPositionY();
 		float touchedX = UICamera.currentTouch.pos.x - 360f;
-		float touchedY = UICamera.currentTouch.pos.y - 615f;
+		float touchedY = UICamera.currentTouch.pos.y - 640f;
 //		Debug.Log("cameraY : "+UICamera.currentTouch.pos.y);
 //		Debug.Log("touchedY : "+touchedY);
 

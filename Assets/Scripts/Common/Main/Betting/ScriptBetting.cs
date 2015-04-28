@@ -50,9 +50,29 @@ public class ScriptBetting : MonoBehaviour {
 	const double BET_MAX = 100000d;
 	double mAmountUse = BET_MIN;
 
-
+	CardInfo mCardInfo;
+	ItemStrategyInfo mStrategyInfo;
 
 	JoinQuizEvent mJoinQuizEvent;
+
+	public AudioClip mAudioOpenBet;
+	public AudioClip mAudioConfirm;
+	public AudioClip mAudioClick;
+
+	public void ClearCardData(){
+		mCardInfo = null;
+		mStrategyInfo = null;
+	}
+
+	public void InitWithStrategy(string btnName, ItemStrategyInfo strategyInfo){
+		mStrategyInfo = strategyInfo;
+		Init (btnName);
+	}
+
+	public void InitWithCard(string btnName, CardInfo cardInfo){
+		mCardInfo = cardInfo;
+		Init (btnName);
+	}
 
 	public void Init(string btnName)
 	{
@@ -88,14 +108,56 @@ public class ScriptBetting : MonoBehaviour {
 
 		mLblGot.text = UtilMgr.AddsThousandsSeparator (UserMgr.UserInfo.userGoldenBall);
 		mLblUse.text = UtilMgr.AddsThousandsSeparator (mAmountUse);
-		mLblExpect.text = UtilMgr.AddsThousandsSeparator (mAmountUse * float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio));
+		mLblExpect.text = UtilMgr.AddsThousandsSeparator (GetExpectGold());
 
 		mLblSelectedBase.text = QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].description;
 		mLblSelectedRatio.text = QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio+"x";
-		mLblCardName.text = "-";
-		mLblCardRatio.text = "1x";
-		float total = float.Parse (QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio) * 1f;
+
+		if(mCardInfo != null){
+			mLblCardName.text = mCardInfo.cardName;
+		} else if(mStrategyInfo != null){
+			mLblCardName.text = mStrategyInfo.itemName;
+		} else
+			mLblCardName.text = "-";
+
+		if(mCardInfo != null){
+			mLblCardRatio.text = "+"+mCardInfo.rewardRate+"x";
+		} else if(mStrategyInfo != null){
+			mLblCardRatio.text = "*"+mStrategyInfo.multipleRatio+"x";
+		} else
+			mLblCardRatio.text = "-";
+
+		float total = 0;
+		if(mCardInfo != null){
+			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
+				+ mCardInfo.rewardRate;
+		} else if(mStrategyInfo != null){
+			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
+				* mStrategyInfo.multipleRatio;
+		} else
+			total = float.Parse (QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio) * 1f;
+
 		mLblTotalRatio.text = total+"x";
+
+		
+		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioOpenBet);
+	}
+
+	double GetExpectGold(){
+		double expect = 0;
+		if(mCardInfo != null){
+			float tot = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
+				+ mCardInfo.rewardRate;
+			expect = mAmountUse * tot;
+		} else if(mStrategyInfo != null){
+			float tot = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
+				* mStrategyInfo.multipleRatio;
+			expect = mAmountUse * tot;
+		} else{
+			expect = mAmountUse * float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio);
+		}
+		return expect;
+
 	}
 
 	void SetConfirm()
@@ -107,19 +169,31 @@ public class ScriptBetting : MonoBehaviour {
 		joinInfo.MemSeq = UserMgr.UserInfo.memSeq;
 		joinInfo.QuizListSeq = QuizMgr.QuizInfo.quizListSeq;
 		joinInfo.QzType = GetQzType ();
-		joinInfo.UseCardNo = 0;
 		joinInfo.BetPoint = UtilMgr.RemoveThousandSeperator(mLblUse.text);
-		joinInfo.Item = 1000;
+
 		joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
 		joinInfo.ExtendValue = "0";
 //		mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteSending"));
 //		NetMgr.JoinQuiz (joinInfo, mJoinQuizEvent);
+
+		if(mCardInfo != null){
+			joinInfo.UseCardNo = mCardInfo.cardNo;
+		} else if(mStrategyInfo != null){
+			joinInfo.Item = mStrategyInfo.itemId;
+		} else
+			joinInfo.Item = 1000;
+
 		mTFBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Add (joinInfo);
 		double userGoldenBall = double.Parse (UserMgr.UserInfo.userGoldenBall)
 						- double.Parse (joinInfo.BetPoint);
 		UserMgr.UserInfo.userGoldenBall = "" + userGoldenBall;
 
+		ClearCardData();
+
 		CompleteSending ();
+
+		
+		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioConfirm);
 	}
 
 	public void CompleteSending()
@@ -344,7 +418,7 @@ public class ScriptBetting : MonoBehaviour {
 
 
 		mLblUse.text = UtilMgr.AddsThousandsSeparator (mAmountUse);
-		mLblExpect.text = UtilMgr.AddsThousandsSeparator (mAmountUse * float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio));
+		mLblExpect.text = UtilMgr.AddsThousandsSeparator (GetExpectGold());
 
 	}
 
@@ -358,14 +432,14 @@ public class ScriptBetting : MonoBehaviour {
 		}
 
 		mLblUse.text = UtilMgr.AddsThousandsSeparator (mAmountUse);
-		mLblExpect.text = UtilMgr.AddsThousandsSeparator (mAmountUse * float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio));
+		mLblExpect.text = UtilMgr.AddsThousandsSeparator (GetExpectGold());				
 	}
 
 	void BetMin()
 	{
 		mAmountUse = BET_MIN;
 		mLblUse.text = UtilMgr.AddsThousandsSeparator (mAmountUse);
-		mLblExpect.text = UtilMgr.AddsThousandsSeparator (mAmountUse * float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio));
+		mLblExpect.text = UtilMgr.AddsThousandsSeparator (GetExpectGold());
 	}
 
 	public void BtnClicked(string name)
@@ -373,28 +447,35 @@ public class ScriptBetting : MonoBehaviour {
 		switch(name)
 		{
 		case "BtnClose":
-//			CloseWindow();
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
+			ClearCardData();
 			UtilMgr.OnBackPressed();
 			break;
 		case "BtnConfirm":
 			SetConfirm();
 			break;
 		case "BtnCancel":
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			SetCancel();
 			break;
 		case "Btn10":
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			Bet(10);
 			break;
 		case "Btn100":
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			Bet(100);
 			break;
 		case "Btn1000":
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			Bet (1000);
 			break;
 		case "BtnMax":
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			BetMax();
 			break;
 		case "BtnMin":
+			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			BetMin();
 			break;
 		}

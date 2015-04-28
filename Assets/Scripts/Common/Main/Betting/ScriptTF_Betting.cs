@@ -13,6 +13,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 	public GameObject mSprLoaded;
 	public GameObject mScrollView;
 
+	public GameObject mBtnBatter;
+	public GameObject mBtnPitcher;
+	public GameObject mBtnStrategy;
+
 	public GameObject mSpark1;
 	public GameObject mSpark2;
 
@@ -70,13 +74,14 @@ public class ScriptTF_Betting : MonoBehaviour {
 	void Update()
 	{
 //		if(isDragging){
-			Debug.Log("y is "+mScrollView.transform.localPosition.y);
-			if((mScrollView.transform.localPosition.y) > UtilMgr.GetScaledPositionY() * 2f){
-				Vector3 pos = new Vector3(0 ,UtilMgr.GetScaledPositionY() * 2f, 0);
-				mScrollView.transform.localPosition = pos;
+//			Debug.Log("y is "+mScrollView.transform.localPosition.y);
+//		-53f;
+			if((mScrollView.transform.localPosition.y) > (-72f+(UtilMgr.GetScaledPositionY() * 2f))){
+				Vector3 pos = new Vector3(0 ,(-72f+(UtilMgr.GetScaledPositionY() * 2f)), 0);
+					mScrollView.transform.localPosition = pos;
 
-				Vector2 offset = new Vector2(0, -UtilMgr.GetScaledPositionY());
-				mScrollView.GetComponent<UIPanel>().clipOffset = offset;
+				Vector2 offset = new Vector2(0, -(-72f+UtilMgr.GetScaledPositionY()));
+					mScrollView.GetComponent<UIPanel>().clipOffset = offset;
 			}
 //		}
 
@@ -173,6 +178,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 		mSpark1.SetActive (false);
 		mSpark2.SetActive (false);
 		mSprBetting.SetActive (false);
+
+		mBtnBatter.GetComponent<ScriptBettingCard>().Init();
+		mBtnPitcher.GetComponent<ScriptBettingCard>().Init ();
+		mBtnStrategy.GetComponent<ScriptBettingCard>().Init ();
+
+		mScrollView.transform.localPosition = new Vector3(0, -72f, 0);
+		mScrollView.GetComponent<UIPanel>().clipOffset = new Vector2(0, UtilMgr.GetScaledPositionY());
 	}
 
 	void SetBtns()

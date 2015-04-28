@@ -13,6 +13,12 @@ public class ScriptSuperRoot : MonoBehaviour {
 		#endif
 	}
 
+	void Awake(){
+		if(GetComponent<AudioSource>() == null){
+			gameObject.AddComponent<AudioSource>();
+		}
+	}
+
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			OnBackPressed();

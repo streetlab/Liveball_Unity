@@ -36,31 +36,33 @@ public class ScriptQuizResult : MonoBehaviour {
 			}
 		}
 
-		string info = quizInfo.playerName + " / ";
+		string info = quizInfo.playerName + "  ";
 		int quizValue = int.Parse (listResult [0].quizValue);
-		info += quizInfo.order [quizValue - 1].description;
+		info += quizInfo.order [quizValue - 1].description + "!!!";
 		mLblTopRight.GetComponent<UILabel>().text = info;
 
 		int rand = UnityEngine.Random.Range (1, 3);
 
 		if (rewardPoint > 0) {
-			mSprLeft.GetComponent<UISprite>().color = COLOR_CORRECT;
-			mSprBtmRight.GetComponent<UISprite>().color = COLOR_CORRECT;
+//			mSprLeft.GetComponent<UISprite>().color = COLOR_CORRECT;
+//			mSprBtmRight.GetComponent<UISprite>().color = COLOR_CORRECT;
 
 			mLblLeft.GetComponent<UILabel>().text =
 				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Correct"+rand).Value;
-			mLblBtmRight.GetComponent<UILabel>().text = ""+rewardPoint;
+			mLblBtmRight.GetComponent<UILabel>().text = "+"+rewardPoint;
+			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 0);
 
 			double userGoldenBall = double.Parse (UserMgr.UserInfo.userGoldenBall) + rewardPoint;
 			UserMgr.UserInfo.userGoldenBall = ""+userGoldenBall;
 			return true;
 		} else{
-			mSprLeft.GetComponent<UISprite>().color = COLOR_WRONG;
-			mSprBtmRight.GetComponent<UISprite>().color = COLOR_WRONG;
+//			mSprLeft.GetComponent<UISprite>().color = COLOR_WRONG;
+//			mSprBtmRight.GetComponent<UISprite>().color = COLOR_WRONG;
 
 			mLblLeft.GetComponent<UILabel>().text =
 				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
 			mLblBtmRight.GetComponent<UILabel>().text = "-"+betPoint;
+			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 1f);
 
 			return false;
 		}
@@ -77,7 +79,7 @@ public class ScriptQuizResult : MonoBehaviour {
 			firework.transform.parent = transform.FindChild ("ResultWindow").transform;
 			firework.transform.localScale = new Vector3 (1f, 1f, 1f);
 
-			float posX = UnityEngine.Random.Range(-200f, 200f);
+			float posX = UnityEngine.Random.Range(-150f, 150f);
 			float posY = UnityEngine.Random.Range(0f, 18f);
 			firework.transform.localPosition = new Vector3 (posX, posY, 0);
 
