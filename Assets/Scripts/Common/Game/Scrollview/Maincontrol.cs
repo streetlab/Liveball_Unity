@@ -175,7 +175,7 @@ public class Maincontrol : MonoBehaviour {
 			
 			
 		}
-		
+
 	}
 	void nongame(){
 		for (int i =daycount.Count-1; i>0; i--) {
@@ -242,12 +242,12 @@ public class Maincontrol : MonoBehaviour {
 						//Debug.Log(d);
 						//Debug.Log(dayandday[i]+" : "+int.Parse(aa));
 						daycountadd += daycount[6-d];
-						Debug.Log(daycountadd+  "    :    " +dayadd);
+						//Debug.Log(daycountadd+  "    :    " +dayadd);
 						if(daycountadd>dayadd){
 							if(daycount[6-d]==0){
 								sum-=1;
-								Debug.Log(daycount[6-d]+"    "+d);
-								Debug.Log(sum+"    2");
+								//Debug.Log(daycount[6-d]+"    "+d);
+								//Debug.Log(sum+"    2");
 							}
 						}
 					}

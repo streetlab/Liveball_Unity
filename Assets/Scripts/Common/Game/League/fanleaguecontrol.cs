@@ -262,11 +262,11 @@ public class fanleaguecontrol : MonoBehaviour {
 	}
 	public void inallview(int i,int a){
 		Debug.Log (i+" "+a);
-		for(int q = 0; q < 10;q++){
-			transform.GetChild (1+a).GetChild(2+i).gameObject.SetActive (false);
+		for(int q = 0; q < allp;q++){
+			transform.GetChild (1+a).GetChild(1+i).gameObject.SetActive (false);
 		}
 
-		transform.GetChild (1+a).GetChild(i+2).gameObject.SetActive (true);
+		transform.GetChild (1+a).GetChild(i+1).gameObject.SetActive (true);
 		transform.GetChild (1+a).GetChild(1).gameObject.SetActive (false);
 		transform.GetChild (1+a).GetChild(0).gameObject.SetActive (false);
 	}
