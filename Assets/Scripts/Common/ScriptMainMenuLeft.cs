@@ -32,20 +32,29 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 	}
 
 	void SetBtnDisable(){
-		if(Application.loadedLevelName.Equals("SceneTeamHome"))
-		   mBtnTeamHome.GetComponent<UIButton> ().isEnabled = false;
-		else if(Application.loadedLevelName.Equals("SceneGame"))
+		if (Application.loadedLevelName.Equals ("SceneTeamHome")) {
+			mBtnTeamHome.GetComponent<UIButton> ().isEnabled = false;
+			mBtnTeamHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneGame")) {
 			mBtnGameHome.GetComponent<UIButton> ().isEnabled = false;
-		else if(Application.loadedLevelName.Equals("SceneCards"))
+			mBtnGameHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneCards")) {
 			mBtnCards.GetComponent<UIButton> ().isEnabled = false;
-		else if(Application.loadedLevelName.Equals("SceneRanking"))
+			mBtnCards.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneRanking")) {
 			mBtnRanking.GetComponent<UIButton> ().isEnabled = false;
-		else if(Application.loadedLevelName.Equals("SceneProfile"))
+			mBtnRanking.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneProfile")) {
 			mBtnProfile.GetComponent<UIButton> ().isEnabled = false;
-		else if(Application.loadedLevelName.Equals("SceneItems"))
+			mBtnProfile.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneItems")) {
 			mBtnItem.GetComponent<UIButton> ().isEnabled = false;
-		else if(Application.loadedLevelName.Equals("SceneSettings"))
+			mBtnItem.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		}
+		else if(Application.loadedLevelName.Equals("SceneSettings")){
 			mBtnSettings.GetComponent<UIButton> ().isEnabled = false;
+			mBtnSettings.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		}
 	}
 
 	public void BtnClicked(string name)
@@ -55,6 +64,7 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		switch(name)
 		{
 		case "BtnTeamHome":
+
 			if(!Application.loadedLevelName.Equals("SceneTeamHome"))
 				AutoFade.LoadLevel("SceneTeamHome", 0f, 1f);
 			break;

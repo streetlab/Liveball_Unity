@@ -6,7 +6,7 @@ public class cardcontrol : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.localPosition += new Vector3 (0,-40,0);
+		transform.localPosition += new Vector3 (0,-200,0);
 	
 		//transform.GetChild(1) left oicons
 //		for (int i = 0; i<transform.childCount; i++) {

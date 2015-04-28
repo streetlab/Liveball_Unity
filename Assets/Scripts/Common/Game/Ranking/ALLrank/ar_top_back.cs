@@ -39,11 +39,11 @@ public class ar_top_back : MonoBehaviour {
 						transform.parent.GetChild (5).gameObject.SetActive (false);
 						return;
 					}
-					Debug.Log("ion");
+					//Debug.Log("ion");
 					for(int a = 0; a<11;a++){
-						Debug.Log("aon");
+					
 						if(a==10){
-							Debug.Log("ao10");
+						//	Debug.Log("ao10");
 							transform.parent.parent.parent.GetChild (5).GetChild (0).gameObject.SetActive (true);
 							
 							transform.parent.parent.parent.GetChild (5).GetChild (1).gameObject.SetActive (false);
@@ -60,7 +60,7 @@ public class ar_top_back : MonoBehaviour {
 							return;
 						}
 						if(transform.parent.parent.parent.GetChild (5).GetChild(i+1).GetChild(a+2).gameObject.activeSelf){
-							Debug.Log("act");
+						//	Debug.Log("act");
 							transform.parent.parent.parent.GetChild (5).GetChild(i+1).GetChild(0).gameObject.SetActive(true);
 							transform.parent.parent.parent.GetChild (5).GetChild(i+1).GetChild(1).gameObject.SetActive(true);
 //							for(int q = 0; q<10;q++){
