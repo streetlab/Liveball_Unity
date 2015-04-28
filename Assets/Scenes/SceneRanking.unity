@@ -486,12 +486,12 @@ MonoBehaviour:
   mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
   mPivot: 4
   mWidth: 720
-  mHeight: 1230
+  mHeight: 1280
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .585365832
+  aspectRatio: .5625
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -9224,7 +9224,7 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: 0, z: 722, w: 1134}
+  mClipRange: {x: 0, y: 0, z: 722, w: 1185}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 1
   mSortingOrder: 0
@@ -10758,7 +10758,7 @@ Transform:
   m_GameObject: {fileID: 1542475183}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00162469537, y: .00162469537, z: .00162469537}
+  m_LocalScale: {x: .00156250002, y: .00156250002, z: .00156250002}
   m_Children:
   - {fileID: 1701965749}
   - {fileID: 372226281}
@@ -13401,11 +13401,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3001
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: 0, z: 722, w: 1040}
+  mClipRange: {x: 0, y: 0, z: 722, w: 1091}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 1
   mSortingOrder: 0
@@ -14964,13 +14964,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3001
+  startingRenderQueue: 3006
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 0
+  mDepth: 2
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!1 &2129834724

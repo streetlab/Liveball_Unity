@@ -91,14 +91,9 @@ public class Maincontrol : MonoBehaviour {
 					bg_g[i].transform.localPosition = new Vector3(position.x,position.y-((gap*i)-(sumint*bargap)),position.z);
 				}
 			}
-
-			//why crashed? below this line
-			if(i > 5)
-				return;
-			Debug.Log("i : "+i);
-			Debug.Log("bg_g length : "+bg_g.Count);
-
+			if(daycount[i]!=0){
 			Cdata (bg_g[i].transform.GetChild(0).gameObject,i);
+			}
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().localSize);
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().transform.position);
 			if(!editbll){
@@ -196,12 +191,12 @@ public class Maincontrol : MonoBehaviour {
 		addsum = 0;
 		addsumint = 0;
 		dayadd = 0;
-		daycountadd = 0;
+
 		maxheight = 0;
 		for (int i = 0; i<daycount.Count; i++) {
 			if(daycount[i] == 0){
-				addsum+=1;
-				addsumint-=5;
+				//addsum+=1;
+				//addsumint-=5;
 			}
 			maxheight += (gap - (bargap * 5))+((float) daycount[i])*(bargap);
 		}
@@ -220,7 +215,7 @@ public class Maincontrol : MonoBehaviour {
 				
 				todays = (int.Parse(todays)+s).ToString();
 				//Debug.Log(aa +" : "+ todays);
-				dayadd +=i;
+				dayadd =i;
 				if (aa == todays) {
 
 
@@ -242,13 +237,15 @@ public class Maincontrol : MonoBehaviour {
 					}
 
 					//Debug.Log(aa+" : "+dayandday[dayandday.Count-1]);
+					daycountadd = 0;
 					for(int d = 0; d<7;d++){
 						//Debug.Log(d);
 						//Debug.Log(dayandday[i]+" : "+int.Parse(aa));
 						daycountadd += daycount[6-d];
-						if(daycountadd<dayadd){
+						Debug.Log(daycountadd+  "    :    " +dayadd);
+						if(daycountadd>dayadd){
 							if(daycount[6-d]==0){
-								sum+=1;
+								sum-=1;
 								Debug.Log(daycount[6-d]+"    "+d);
 								Debug.Log(sum+"    2");
 							}
@@ -257,13 +254,13 @@ public class Maincontrol : MonoBehaviour {
 					//Debug.Log(aa+" : "+dayandday[0]);
 					//Debug.Log(gap+ "  :  "+ sum);
 					//Debug.Log(sumint+ "  :  "+bargap);
-				
-					float y = (gap * (sum))-(((float)sumint+addsumint)*bargap);
+					//Debug.Log(addsumint+ "  :  "+addsum);
+					float y = (gap * (sum))+(((float)sumint+addsumint)*bargap)-((gap - (bargap * 5))*addsum);
 					//float y = maxheight-((gap * (sum))-(((float)sumint+addsumint)*bargap));
 					//float y = maxheight;
 					//Debug.Log(maxheight);
-					////Debug.Log((gap * (sum))-(((float)sumint+addsumint)*bargap));
-					//Debug.Log(maxheight-((gap * (sum))-(((float)sumint+addsumint)*bargap)));
+					//Debug.Log((gap * (sum))-(((float)sumint+addsumint)*bargap)+((gap - (bargap * 5))*addsum));
+					//Debug.Log(maxheight-((gap * (sum))-(((float)sumint+addsumint)*bargap))+((gap - (bargap * 5))*addsum));
 					y -= UtilMgr.GetScaledPositionY();
 					bgs.transform.localPosition += new Vector3 (0, y, 0);
 
@@ -360,19 +357,22 @@ public class Maincontrol : MonoBehaviour {
 		bg_g.Clear ();
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			//Debug.Log(">?!");
-			if(bgs.transform.GetChild(i).gameObject.activeSelf){
+
 				oldlist.Add (bgs.transform.GetChild(i).transform.localPosition);
-			}
+
 		}
 		int g = 0;
 		for (int i = 0; i<oldlist.Count; i++) {
 			//Debug.Log(">?"+i);
-			if(i>0){
+			//if(i>0){
 				if(daycount[6-i]==0){
-					g +=1;
+					g -=1;
 				}
+			//}
+			//Debug.Log(6-i+g+" fff  ");
+			if(6-i+g>=0 ){
+			bgs.transform.GetChild(6-i+g).transform.localPosition = oldlist[i];
 			}
-			bgs.transform.GetChild(6-i-g).transform.localPosition = oldlist[i];
 		}
 
 
@@ -386,6 +386,10 @@ public class Maincontrol : MonoBehaviour {
 		
 		if (teamname.Count > 0) {
 			//Debug.Log ("g : " + g.transform.parent);
+		//	Debug.Log(a);
+		//	Debug.Log(g.transform.GetChild (0));
+		//	Debug.Log(daycount[a]);
+		//	Debug.Log(day [a]);
 			g.transform.GetChild (0).GetComponent<UILabel> ().text = day [a];
 			g.transform.GetChild (0).GetChild (0).GetComponent<UILabel> ().text = date [a];
 		}
