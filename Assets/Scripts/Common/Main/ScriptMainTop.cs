@@ -12,6 +12,7 @@ public class ScriptMainTop : MonoBehaviour {
 	public GameObject mBingo;
 	public GameObject mLivetalk;
 	public GameObject mBetting;
+	public GameObject mQuizResultPopup;
 
 	public GameObject mMatchInfoTop;
 
@@ -320,8 +321,8 @@ public class ScriptMainTop : MonoBehaviour {
 //		GetSimpleResultEvent simpleEvent
 //			, ScriptBetting scriptBetting, ScriptQuizResult scriptQuizResult
 		QuizMgr.InitSimpleResult (mSimpleEvent,
-		                          mBetting.transform.FindChild("SprBetting").GetComponent<ScriptBetting>(),
-		                          transform.FindChild("QuizResultPopup").GetComponent<ScriptQuizResult>());
+		                          mBetting.GetComponent<ScriptTF_Betting>().mSprBetting.GetComponent<ScriptBetting>(),
+		                          mQuizResultPopup.GetComponent<ScriptQuizResult>());
 	}
 
 

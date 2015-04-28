@@ -175,7 +175,7 @@ public class ScriptNanoo : MonoBehaviour {
 			return SK_URL;
 		case "NC":
 			return NC_URL;
-		case "KT":
+		case "kt":
 			return KT_URL;
 		default:
 			return SAMSUNG_URL;

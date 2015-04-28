@@ -207,7 +207,7 @@ public class UtilMgr : MonoBehaviour {
 		case "NC":
 			return "ic_nc";
 		case "sports_team_baseball_kt.png":
-		case "KT":
+		case "kt":
 			return "ic_kt";
 		}
 		return "ic_liveball";
