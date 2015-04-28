@@ -15,6 +15,8 @@ public class ScriptTHTop : MonoBehaviour {
 	public GameObject mBtnSeason;
 	public GameObject mBtnSquad;
 
+	public AudioClip mAudioWelcome;
+
 	GetScheduleEvent mScheduleEvent;
 
 	void Start(){
@@ -24,8 +26,16 @@ public class ScriptTHTop : MonoBehaviour {
 //		mSeason.SetActive (false);
 //		mSquad.SetActive (false);
 //		OpenTimeline ();
+		CheckFirst();
 		InitTopInfo();
 		OpenNanoo ();
+	}
+
+	void CheckFirst(){
+		if(UserMgr.UserInfo.IsFirstLanding){
+			UserMgr.UserInfo.IsFirstLanding = false;
+			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioWelcome);
+		}
 	}
 
 	void InitTopInfo(){

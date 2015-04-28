@@ -337,6 +337,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0)
 			strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
 		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+		Debug.Log("url : "+Constants.IMAGE_SERVER_HOST + strImage);
 		StartCoroutine (GetImage(www, tfHitter.FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 	}
 

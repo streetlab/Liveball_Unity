@@ -2688,7 +2688,7 @@ Transform:
   m_GameObject: {fileID: 761375862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156250002, y: .00156250002, z: .00156250002}
+  m_LocalScale: {x: .0015600624, y: .0015600624, z: .0015600624}
   m_Children:
   - {fileID: 740811092}
   - {fileID: 226056895}
@@ -4979,6 +4979,7 @@ GameObject:
   - 4: {fileID: 927342455}
   - 114: {fileID: 927342457}
   - 114: {fileID: 927342456}
+  - 114: {fileID: 927342458}
   m_Layer: 0
   m_Name: ListCards
   m_TagString: Untagged
@@ -5076,6 +5077,18 @@ MonoBehaviour:
   mDepth: 2
   mSortingOrder: 0
   mClipOffset: {x: 0, y: -155}
+--- !u!114 &927342458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927342454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37cd523196e7415abe2fa1efb952870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DontResetPosition: 0
 --- !u!1 &949087755
 GameObject:
   m_ObjectHideFlags: 0
@@ -5630,7 +5643,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1062601968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1318242447}

@@ -319,4 +319,10 @@ public class UserInfo {
 			_item = value;
 		}
 	}
+
+	bool isFirstLanding = true;
+	public bool IsFirstLanding{
+		get{return isFirstLanding;}
+		set{isFirstLanding = value;}
+	}
 }
