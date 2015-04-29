@@ -39,7 +39,7 @@ public class NetMgr : MonoBehaviour{
 		}
 		else
 		{
-			Debug.Log(www.error);
+			DialogueMgr.ShowDialogue("Error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		}
 
 		UtilMgr.DismissLoading ();
@@ -138,7 +138,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetSimpleResult(int quizListSeq, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetSimpleResultRequest (quizListSeq), baseEvent);
+		Instance.webAPIProcessEvent (new GetSimpleResultRequest (quizListSeq), baseEvent, false);
 	}
 
 	public static void JoinMember(JoinMemberInfo memInfo, BaseEvent baseEvent)

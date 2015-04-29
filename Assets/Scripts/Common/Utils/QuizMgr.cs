@@ -124,24 +124,27 @@ public class QuizMgr : MonoBehaviour {
 
 		Debug.Log ("InitSimpleResult2");
 		quiz.quizValue = simpleEvent.Response.data [0].quizValue;
+
+		if(simpleEvent.Response.data[0].respStatus > 0){
 		
-		quiz.resp = new List<QuizRespInfo> ();
-		QuizRespInfo tmpInfo;
-		if (simpleEvent.Response.data.Count > 1) {
-			//got 2 answers
+			quiz.resp = new List<QuizRespInfo> ();
+			QuizRespInfo tmpInfo;
+			if (simpleEvent.Response.data.Count > 1) {
+				//got 2 answers
+				tmpInfo = new QuizRespInfo();
+				tmpInfo.respValue = simpleEvent.Response.data[1].respValue;
+				tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[1].rewardPoint);
+				quiz.resp.Add(tmpInfo);
+			} 
+			
 			tmpInfo = new QuizRespInfo();
-			tmpInfo.respValue = simpleEvent.Response.data[1].respValue;
-			tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[1].rewardPoint);
-			quiz.resp.Add(tmpInfo);
-		} 
-		
-		tmpInfo = new QuizRespInfo();
-		tmpInfo.respValue = simpleEvent.Response.data[0].respValue;
-		tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[0].rewardPoint);
-		quiz.resp.Insert(0, tmpInfo);
-		
-		if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
-			scriptQuizResult.InitParticle();
+			tmpInfo.respValue = simpleEvent.Response.data[0].respValue;
+			tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[0].rewardPoint);
+			quiz.resp.Insert(0, tmpInfo);
+			
+			if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
+				scriptQuizResult.InitParticle();
+			}
 		}
 		
 		scriptBetting.UpdateHitterItem(quiz);

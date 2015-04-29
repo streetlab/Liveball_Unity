@@ -51,6 +51,9 @@ public class ScriptJoinForm : MonoBehaviour {
 
 			gameObject.SetActive(false);
 			mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
+
+			PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
+			PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
 		} else
 		{
 			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);

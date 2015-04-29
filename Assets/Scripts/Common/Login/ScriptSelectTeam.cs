@@ -65,9 +65,21 @@ public class ScriptSelectTeam : MonoBehaviour {
 		#endif
 		mMemInfo.MemUID = memUID;
 		GetComponentInParent<ScriptTitle>().mProfileEvent = 
-			new GetProfileEvent(new EventDelegate(GetComponentInParent<ScriptTitle>(), "GotProfile"));
+			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
 		
 		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent);
+	}
+
+	public void CompletedJoin(){
+		if(GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message != null
+		   && GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message.Length > 0){
+
+			return;
+		}
+		PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
+		PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
+
+		GetComponentInParent<ScriptTitle>().DoLogin(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
 	}
 
 	public void BackClicked()

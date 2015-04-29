@@ -32,7 +32,10 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 	}
 
 	void SetBtnDisable(){
-		if (Application.loadedLevelName.Equals ("SceneTeamHome")) {
+		if (Application.loadedLevelName.Equals ("SceneLoveBaseball")) {
+			mBtnIlovebaseball.GetComponent<UIButton> ().isEnabled = false;
+			mBtnIlovebaseball.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneTeamHome")) {
 			mBtnTeamHome.GetComponent<UIButton> ().isEnabled = false;
 			mBtnTeamHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneGame")) {
@@ -50,8 +53,7 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		} else if (Application.loadedLevelName.Equals ("SceneItems")) {
 			mBtnItem.GetComponent<UIButton> ().isEnabled = false;
 			mBtnItem.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
-		}
-		else if(Application.loadedLevelName.Equals("SceneSettings")){
+		} else if(Application.loadedLevelName.Equals("SceneSettings")){
 			mBtnSettings.GetComponent<UIButton> ().isEnabled = false;
 			mBtnSettings.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		}
@@ -76,8 +78,9 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 			if(!Application.loadedLevelName.Equals("SceneCards"))
 				AutoFade.LoadLevel("SceneCards", 0f, 1f);
 			break;
-		case "BtnIamPlayer":
-
+		case "BtnIloveBaseball":
+			if(!Application.loadedLevelName.Equals("SceneLoveBaseball"))
+				AutoFade.LoadLevel("SceneLoveBaseball", 0f, 1f);
 			break;
 		case "BtnRanking":
 			if(!Application.loadedLevelName.Equals("SceneRanking"))

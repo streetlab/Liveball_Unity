@@ -309,4 +309,15 @@ public class CardInfo {
 			_backNum = value;
 		}
 	}
+
+	public string _position;
+
+	public string position {
+		get {
+			return _position;
+		}
+		set {
+			_position = value;
+		}
+	}
 }

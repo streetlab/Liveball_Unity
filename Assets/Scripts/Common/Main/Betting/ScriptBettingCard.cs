@@ -113,7 +113,6 @@ public class ScriptBettingCard : UIDragDropItem {
 		if (surface != null) {
 //			Debug.Log("surface.name : "+surface.name);
 			CheckSurface(surface);
-			ReturnCard();
 		} else
 			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioError);
 	}
@@ -151,17 +150,26 @@ public class ScriptBettingCard : UIDragDropItem {
 			}
 		}
 
-//		ReturnCard();
+		ReturnCard();
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioError);
 	}
 
 	public void ReturnCard(){
+		gameObject.SetActive(true);
 		Vector3 pos = mPosIn.transform.localPosition;
 		pos.y += 57f;
 		mTrans.localPosition = pos;
 	}
 	
 	void OpenBetWindow(Transform btnGroup, string name){
+		UIButton[] btns = btnGroup.GetComponentsInChildren<UIButton>();
+		foreach(UIButton btn in btns){
+			if(!btn.enabled){
+				transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioError);
+				return;
+			}
+		}
+
 		gameObject.SetActive(false);
 //		btnGroup.FindChild(name).GetComponent<ScriptBettingItem>().OnClicked(name);
 		mSprBetting.SetActive (true);

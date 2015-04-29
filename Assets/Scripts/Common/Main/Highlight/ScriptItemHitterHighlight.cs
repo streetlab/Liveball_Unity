@@ -82,6 +82,7 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 		mLblReward.SetActive (false);
 
 		if(quizInfo.quizValue.Length > 0){
+			Debug.Log("quizValue : "+quizInfo.quizValue);
 			int idx = int.Parse(quizInfo.quizValue) -1;
 			mLblResult.GetComponent<UILabel>().text = quizInfo.order[idx].description;
 
@@ -108,7 +109,7 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 
 				return;
 			}
-
+			Debug.Log("quiz1");
 		} else if(quizInfo.resultMsg.Length > 0){
 			//need modify
 			mLblResult.GetComponent<UILabel>().text = quizInfo.resultMsg;
@@ -121,12 +122,14 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 			mLblSelect1.SetActive (false);
 			mLblSelect2_1.SetActive (false);
 			mLblSelect2_2.SetActive (false);
-		} else if(quizInfo.resp.Count == 1){
+		} else if(quizInfo.resp.Count == 1
+		          && quizInfo.resp[0].respValue.Length > 0){
 			mLblSelect1.SetActive (true);
 
 			mLblSelect2_1.SetActive (false);
 			mLblSelect2_2.SetActive (false);
 
+			Debug.Log("quizInfo.resp[0].respValue : "+quizInfo.resp[0].respValue);
 			int respValue = int.Parse(quizInfo.resp[0].respValue) -1;
 			mLblSelect1.GetComponent<UILabel>().text = quizInfo.order[respValue].description;
 		} else if(quizInfo.resp.Count == 2){
@@ -136,9 +139,12 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 			int respValue = int.Parse(quizInfo.resp[0].respValue) -1;
 			mLblSelect2_1.GetComponent<UILabel>().text = quizInfo.order[respValue].description;
 			mLblSelect2_2.SetActive (true);
+
+			Debug.Log("quizInfo.resp[1].respValue : "+quizInfo.resp[1].respValue);
 			respValue = int.Parse(quizInfo.resp[1].respValue) -1;
 			mLblSelect2_2.GetComponent<UILabel>().text = quizInfo.order[respValue].description;
 		}
+		Debug.Log("quiz2");
 	}
 
 	IEnumerator GetImage(WWW www)

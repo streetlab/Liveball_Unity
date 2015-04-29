@@ -11,6 +11,7 @@ public class UtilMgr : MonoBehaviour {
 	GameObject mProgressCircle;
 
 	public static bool IsUntouchable;
+	public static bool OnPause;
 
 	static UtilMgr Instance
 	{

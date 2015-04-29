@@ -20,6 +20,9 @@ public class ScriptBettingItem : MonoBehaviour {
 	ScriptTF_Betting mSb;
 	bool _isSelected;
 
+	CardInfo mCardInfo;
+	ItemStrategyInfo mStrategyInfo;
+
 	static Color ColorSilhouetteDisable = new Color(78f/255f, 89f/255f, 104f/255f);
 	static Color ColorSilhouetteEnable = new Color(67f/255f, 75f/255f, 89f/255f);
 	static Color ColorComboDisable = new Color(141f/255f, 150f/255f, 166f/255f, 100f/255f);
@@ -66,6 +69,24 @@ public class ScriptBettingItem : MonoBehaviour {
 		set{_isSelected = value;}
 	}
 
+	public void SetCardInfo(CardInfo cardInfo){
+		mCardInfo = cardInfo;
+	}
+
+	public void SetStrategyInfo(ItemStrategyInfo strategy){
+		mStrategyInfo = strategy;
+	}
+
+	public void SetSelectedWithCard(CardInfo cardInfo){
+		mCardInfo = cardInfo;
+		SetSelected();
+	}
+
+	public void SetSelectedWithStrategy(ItemStrategyInfo strategy){
+		mStrategyInfo = strategy;
+		SetSelected();
+	}
+
 	public void SetSelected()
 	{
 		IsSelected = true;
@@ -84,6 +105,20 @@ public class ScriptBettingItem : MonoBehaviour {
 	{
 		IsSelected = false;
 		mSprSelected.SetActive (false);
+
+		if(mCardInfo != null){
+			Debug.Log ("mCardInfo.position : "+mCardInfo.position);
+			if(mCardInfo.position.Equals("H")){
+				mSprBetting.transform.parent.FindChild("BtnBatter").GetComponent<ScriptBettingCard>().ReturnCard();
+			} else{
+				mSprBetting.transform.parent.FindChild("BtnPitcher").GetComponent<ScriptBettingCard>().ReturnCard();
+			}
+			mCardInfo = null;
+		} else if(mStrategyInfo != null){
+			Debug.Log (mStrategyInfo);
+			mSprBetting.transform.parent.FindChild("BtnStrategy").GetComponent<ScriptBettingCard>().ReturnCard();
+			mStrategyInfo = null;
+		}
 
 		if(mType == TYPE.Loaded)
 		{

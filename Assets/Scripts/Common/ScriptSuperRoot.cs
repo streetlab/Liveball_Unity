@@ -17,12 +17,19 @@ public class ScriptSuperRoot : MonoBehaviour {
 		if(GetComponent<AudioSource>() == null){
 			gameObject.AddComponent<AudioSource>();
 		}
+//		Debug.Log("frameRate is "+Application.targetFrameRate);
+		Application.targetFrameRate = 30;
+//		Debug.Log("vSyncCount is "+QualitySettings.vSyncCount);
 	}
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			OnBackPressed();
 		}
+	}
+
+	void OnApplicationPause(bool pause){
+		UtilMgr.OnPause = pause;
 	}
 
 	public void OnBackPressed()

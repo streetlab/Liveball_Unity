@@ -47,9 +47,9 @@ public class QuizRespInfo {
 		}
 	}
 
-	int _useCardNo;
+	double _useCardNo;
 
-	public int useCardNo {
+	public double useCardNo {
 		get {
 			return _useCardNo;
 		}
