@@ -58,11 +58,19 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		Debug.Log (mScheduleEvent.Response.data);
 		setposition ();
 	}
+	void resetdata(){
+		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
+		for (int i = 0; i<MaxGame; i++) {	
+			
+			D.transform.parent.GetChild (i).transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
+			D.transform.parent.GetChild (i).transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
+		}
+	}
 	void setposition(){
 		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
 	
 		for (int i = 0; i<MaxGame; i++) {
-		Debug.Log("iiiiiiii");
+		//Debug.Log("iiiiiiii");
 			NEW = (GameObject)Instantiate (D, new Vector2(0,0), D.transform.localRotation);
 		
 			NEW.transform.parent = D.transform.parent;
@@ -79,11 +87,13 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			NEW.transform.GetChild(4).GetComponent<UILabel>().text = ALL[(i*4)+3];
 			//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 			NEW.gameObject.SetActive(true);
-			Debug.Log(NEW);
-			Debug.Log(NEW.transform.parent);
+			//Debug.Log(NEW);
+			//Debug.Log(NEW.transform.parent);
 		}
 	}
 	public void onhit(){
+
+
 		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
 
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
@@ -108,6 +118,24 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}else{
 				what = true;
 				ING = false;
+				D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
+
+				for (int i = 0; i<MaxGame; i++) {
+					//Debug.Log("iiiiiiii");
+
+					mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "resetdata"));
+					NetMgr.GetScheduleMore (null,
+					                        UserMgr.UserInfo.teamSeq,
+					                        mScheduleEvent);
+
+					//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
+
+					//Debug.Log(NEW);
+					//Debug.Log(NEW.transform.parent);
+				}
+
+
+
 				StartCoroutine (rolling ());
 			}
 		}

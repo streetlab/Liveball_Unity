@@ -202,7 +202,7 @@ public class Maincontrol : MonoBehaviour {
 			maxheight += (gap - (bargap * 5))+((float) daycount[i])*(bargap);
 		}
 		maxheight -= (gap - (bargap * 5)) * addsum;
-		for (int s = 0; s<4; s++) {
+		for (int s = 0; s<8; s++) {
 			for (int i = mScheduleEvent.Response.data.Count-1; i>=0; i-=1) {
 				array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
 				for (int z = 6; z<array.Length; z++) {
@@ -213,9 +213,16 @@ public class Maincontrol : MonoBehaviour {
 				aa = string.Join ("", ch.ToArray ());
 				todays=(System.DateTime.Now.Day).ToString();
 				
-				
+				if(s>4){
+					todays = (s-4).ToString();
+				}else{
 				todays = (int.Parse(todays)+s).ToString();
-				//Debug.Log(aa +" : "+ todays);
+				}
+				//todays = "30";
+				if(todays.Length<2){
+					todays = "0"+todays;
+				}
+					//Debug.Log(aa +" : "+ todays);
 				dayadd =i;
 				if (aa == todays) {
 

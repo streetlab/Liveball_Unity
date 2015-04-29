@@ -23,7 +23,7 @@ public class StatisControl : MonoBehaviour {
 		setposition ();
 	}
 	void Start(){
-
+	
 		Init();
 
 		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
@@ -89,6 +89,7 @@ public class StatisControl : MonoBehaviour {
 
 		Debug.Log(mStatisticsEvent.Response.data);
 		setposition ();
+
 	}
 
 
@@ -138,7 +139,7 @@ public class StatisControl : MonoBehaviour {
 			}
 		}
 
-
+	
 	}
 	void setpositionold(){
 		positions = bgs.transform.GetChild(0).transform.localPosition;
