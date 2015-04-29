@@ -12,6 +12,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	bool ING = true;
 	bool LEFT = true;
 	bool what = false;
+	bool nonoff = true;
 	GameObject D;
 	GameObject NEW;
 	List<string> ALL = new List<string>();
@@ -52,7 +53,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			ALL.Add(mScheduleEvent.Response.data[i].extend[0].imageName);
 			ALL.Add(mScheduleEvent.Response.data[i].extend[1].imageName);
 			ALL.Add(mScheduleEvent.Response.data[i].interActive);
-			//ALL.Add(mScheduleEvent.Response.data[i].);
+			ALL.Add((mScheduleEvent.Response.data[i].extend[0].score).ToString ()+ " : " + (mScheduleEvent.Response.data[i].extend[1].score).ToString());
 		}
 		setposition ();
 	}
@@ -67,11 +68,12 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			NEW.transform.localPosition = new Vector2(D.transform.localPosition.x,D.transform.localPosition.y-(gap*(i)));
 
 			NEW.name = "Game"+(i+1).ToString();
-			string imgName = UtilMgr.GetTeamEmblem(ALL[i*3]);
+			string imgName = UtilMgr.GetTeamEmblem(ALL[i*4]);
 			NEW.transform.GetChild(0).GetComponent<UISprite>().spriteName = imgName;
-			imgName = UtilMgr.GetTeamEmblem(ALL[(i*3)+1]);
+			imgName = UtilMgr.GetTeamEmblem(ALL[(i*4)+1]);
 			NEW.transform.GetChild(1).GetComponent<UISprite>().spriteName = imgName;
-			NEW.transform.GetChild(2).GetComponent<UILabel>().text = ALL[(i*3)+2];
+			NEW.transform.GetChild(2).GetComponent<UILabel>().text = ALL[(i*4)+2];
+			NEW.transform.GetChild(4).GetComponent<UILabel>().text = ALL[(i*4)+3];
 			//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 			NEW.gameObject.SetActive(true);
 		}
@@ -80,12 +82,12 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
 
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
-
+	
 		if (ING) {
 			if (B) {
 				B = false;
 				transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
-		
+				w = false;
 				LEFT = true;
 
 			} else {
@@ -117,42 +119,73 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		ING = true;
 	}
 	public void off(){
+		if (nonoff) {
+
+			if (B) {
+				what = false;
+				StartCoroutine (rolling ());
+				w = false;
+				B = false;
+			}
+			Debug.Log ("off");
+			if (ING) {
+		
+				Debug.Log ("ing");
+				if (!w) {
+					Debug.Log ("!B");
+					w = true;
+					Debug.Log (transform.GetChild (1));
+					transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
+
+					LEFT = true;
+				} else {
+			
+					transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
+			
+					LEFT = false;
+					w = false;
+				}
+				if (LEFT) {
+					LEFT = false;
+					transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
+				} else {
+
+					if (what) {
+						transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
+					} else {
+						if (B) {
+							transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
+						} else {
+							transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
+						}
+					}
+					LEFT = true;
+				}
+
+			}
+		}
+
+	}
+	public void ALLBack(){
+		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
+		
+		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		if (B) {
 			what = false;
 			StartCoroutine (rolling ());
 			w = true;
 			B = false;
 		}
-
-		Debug.Log ("off");
-		if (ING) {
-			Debug.Log ("ing");
-			if (!w) {
-				Debug.Log ("!B");
-				w = true;
-				Debug.Log (transform.GetChild (1));
-				transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
-
-				LEFT = true;
-			}else{
-			
-				transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
-			
-				LEFT = false;
-				w = false;
-			}
-			if (LEFT) {
-				LEFT =false;
-				transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
-			}else {
-				LEFT =true;
-				if(what){transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));}else{
-				transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
-			}
-			}
-
-		}
-
-
+		transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
+	}
+	public void mm(){
+		nonoff = false;
+		transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
+	}
+	public void pp(){
+		nonoff = true;
+	}
+	public void ss(){
+		transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
 	}
 }

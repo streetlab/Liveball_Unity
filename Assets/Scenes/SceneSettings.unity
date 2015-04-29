@@ -896,6 +896,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &405534503 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11430726, guid: 72c7a05e5387b442595ba7066c65ff4a,
+    type: 2}
+  m_PrefabInternal: {fileID: 405534502}
+  m_Script: {fileID: 11500000, guid: 627a7b0252b8c4f0489288bc1ccc38b3, type: 3}
 --- !u!1 &409868454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1375,7 @@ Transform:
   m_Children:
   - {fileID: 76245560}
   m_Father: {fileID: 909688695}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!61 &543456811
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1494,7 +1500,7 @@ MonoBehaviour:
         - 
         - iTween Move To
         - 
-        actionEnabled: 010101
+        actionEnabled: 010001
         actionIsOpen: 010101
         actionStartIndex: 000000001900000032000000
         actionHashCodes: f0ad926ef0ad926e0c0142c9
@@ -2061,7 +2067,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 405534503}
+    mMethodName: off
+    mParameters: []
+    oneShot: 0
 --- !u!114 &543456816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2564,8 +2574,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 543456810}
   - {fileID: 916936510}
+  - {fileID: 543456810}
   m_Father: {fileID: 474675856}
   m_RootOrder: 0
 --- !u!114 &909688696
@@ -2691,7 +2701,7 @@ Transform:
   m_Children:
   - {fileID: 1280281382}
   m_Father: {fileID: 909688695}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1 &982264398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2718,7 +2728,7 @@ Transform:
   m_GameObject: {fileID: 982264398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156250002, y: .00156250002, z: .00156250002}
+  m_LocalScale: {x: .00162469537, y: .00162469537, z: .00162469537}
   m_Children:
   - {fileID: 1662117054}
   - {fileID: 1878670090}
@@ -4161,6 +4171,53 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 400012, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
   m_PrefabInternal: {fileID: 405534502}
+--- !u!1 &1725122739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1725122741}
+  - 114: {fileID: 1725122740}
+  m_Layer: 0
+  m_Name: PlayMakerGUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1725122740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1725122739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -73581967, guid: de72a6d2da64d114d95e3c5a01cfaec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewOnGUI: 1
+  enableGUILayout: 1
+  drawStateLabels: 1
+  GUITextureStateLabels: 1
+  GUITextStateLabels: 1
+  filterLabelsWithDistance: 0
+  maxLabelDistance: 10
+  controlMouseCursor: 1
+--- !u!4 &1725122741
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1725122739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!1 &1878670089
 GameObject:
   m_ObjectHideFlags: 0
