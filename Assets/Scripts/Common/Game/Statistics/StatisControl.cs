@@ -87,8 +87,7 @@ public class StatisControl : MonoBehaviour {
 		}
 
 
-		Debug.Log(mStatisticsEvent.Response.data.AVG[0].playerName
-		          +"'s AVG ranking is "+mStatisticsEvent.Response.data.AVG[0].ranking);
+		Debug.Log(mStatisticsEvent.Response.data);
 		setposition ();
 	}
 
@@ -107,7 +106,7 @@ public class StatisControl : MonoBehaviour {
 					barposition.x,barposition.y-(a*bargap),barposition.z);
 			
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST+ALL[i][6][a]+ALL[i][5][a]);
-				Debug.Log(bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(0).GetChild(0).GetChild(0).gameObject);
+			//	Debug.Log(bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(0).GetChild(0).GetChild(0).gameObject);
 				StartCoroutine(GetImage (www,bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(0).GetChild(0).GetChild(0).gameObject));
 
 				//bgs.transform.GetChild(i).GetChild(0).GetChild(0).GetChild(a).GetChild(0).GetChild(0).GetChild(0).
@@ -126,7 +125,7 @@ public class StatisControl : MonoBehaviour {
 			for(int a = 0; a<transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).childCount;a++){
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST+ALL[i][6][a]+ALL[i][5][a]);
 				StartCoroutine(GetImage (www,transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(0).GetChild(0).GetChild(0).gameObject));
-				Debug.Log(Constants.IMAGE_SERVER_HOST+ALL[i][6][a]+ALL[i][5][a]);
+				//Debug.Log(Constants.IMAGE_SERVER_HOST+ALL[i][6][a]+ALL[i][5][a]);
 				//Debug.Log (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 
 				//transform.GetChild(i+2).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(a).GetChild(0).GetComponent<UISprite>().spriteName = "";

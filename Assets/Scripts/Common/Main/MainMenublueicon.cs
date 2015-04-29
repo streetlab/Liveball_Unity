@@ -7,8 +7,6 @@ public class MainMenublueicon : MonoBehaviour {
 
 	//	Debug.Log (GetComponent<UIButton> ().CompareTag());
 		Debug.Log (GetComponent<UIButton> ().state);
-		//Debug.Log (GetComponent<UIButton> ().);
-		//Debug.Log (GetComponent<UIButton> ().CompareTag());
 
 		
 		

@@ -15,8 +15,8 @@ public class ScriptTitle : MonoBehaviour {
 
 	void Start()
 	{
-//		PlayerPrefs.SetString (Constants.PrefEmail, "");
-//		PlayerPrefs.SetString (Constants.PrefPwd, "");
+	//	PlayerPrefs.SetString (Constants.PrefEmail, "");
+	//	PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
 		InitConstants();
 	}

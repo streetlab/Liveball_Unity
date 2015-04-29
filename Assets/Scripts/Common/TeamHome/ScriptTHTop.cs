@@ -41,7 +41,10 @@ public class ScriptTHTop : MonoBehaviour {
 	void InitTopInfo(){
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetGroupInfo();
 		mScheduleEvent = new GetScheduleEvent(new EventDelegate(this, "GotSchedule"));
-		NetMgr.GetScheduleMore(mScheduleEvent);
+		NetMgr.GetScheduleMore(
+			null,
+			UserMgr.UserInfo.teamSeq,
+			mScheduleEvent);
 	}
 
 	public void GotSchedule(){

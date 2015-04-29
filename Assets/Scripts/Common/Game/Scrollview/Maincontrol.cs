@@ -59,7 +59,7 @@ public class Maincontrol : MonoBehaviour {
 		bg_g.Clear();
 	}
 	void positionset(){
-		
+	//	daycount [0] = 0;
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			bg_g.Add(bgs.transform.GetChild(i).gameObject);
 		}
@@ -178,6 +178,7 @@ public class Maincontrol : MonoBehaviour {
 
 	}
 	void nongame(){
+
 		for (int i =daycount.Count-1; i>0; i--) {
 			bg_g[i].SetActive(true);
 			if(daycount[i]==0){
@@ -362,17 +363,24 @@ public class Maincontrol : MonoBehaviour {
 
 		}
 		int g = 0;
+	
+		for (int i = 0; i<oldlist.Count; i++) {
+			if(daycount[i]==0){
+				g+=1;
+			}
+		}
 		for (int i = 0; i<oldlist.Count; i++) {
 			//Debug.Log(">?"+i);
 			//if(i>0){
-				if(daycount[6-i]==0){
-					g -=1;
-				}
+		//	Debug.Log(oldlist.Count-1-g-i+" fff  ");
+		//	Debug.Log(i+" iii  ");
+			if(oldlist.Count-1-g-i>=0){
+			bgs.transform.GetChild(oldlist.Count-1-g-i).transform.localPosition = oldlist[i];
+			}
+
 			//}
 			//Debug.Log(6-i+g+" fff  ");
-			if(6-i+g>=0 ){
-			bgs.transform.GetChild(6-i+g).transform.localPosition = oldlist[i];
-			}
+		
 		}
 
 

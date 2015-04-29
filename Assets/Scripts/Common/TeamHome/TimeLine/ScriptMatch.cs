@@ -25,7 +25,9 @@ public class ScriptMatch : MonoBehaviour {
 	void InitMatchList()
 	{
 		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "GotSchedule"));
-		NetMgr.GetScheduleMore (mScheduleEvent);
+		NetMgr.GetScheduleMore (null,
+		                        UserMgr.UserInfo.teamSeq,
+		                        mScheduleEvent);
 //		UtilMgr.ShowLoading (true);
 	}
 

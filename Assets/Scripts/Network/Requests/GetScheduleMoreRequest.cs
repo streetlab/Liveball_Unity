@@ -4,12 +4,14 @@ using System.Text;
 
 public class GetScheduleMoreRequest : BaseRequest {
 
-	public GetScheduleMoreRequest()
+	public GetScheduleMoreRequest(string teamCode, int teamSeq)
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("date", UtilMgr.GetDateTime ("yyyyMMdd"));
-		Add ("teamCode", UserMgr.UserInfo.GetTeamCode());
-		Add ("teamSeq", UserMgr.UserInfo.teamSeq);
+		if (teamCode != null && teamCode.Length > 0) {
+			Add ("teamCode", teamCode);
+			Add ("teamSeq", teamSeq);
+		}
 
 		mParams = JsonFx.Json.JsonWriter.Serialize (this);
 

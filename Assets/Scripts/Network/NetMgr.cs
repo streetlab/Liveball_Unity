@@ -86,9 +86,9 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetScheduleAllRequest (), baseEvent);
 	}
 
-	public static void GetScheduleMore(BaseEvent baseEvent)
+	public static void GetScheduleMore(string teamCode, int teamSeq, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetScheduleMoreRequest(), baseEvent);
+		Instance.webAPIProcessEvent (new GetScheduleMoreRequest(teamCode, teamSeq), baseEvent);
 	}
 
 	public static void GetGameSposDetailBoard(BaseEvent baseEvent)
