@@ -4897,6 +4897,39 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1821032010}
   m_Script: {fileID: 11500000, guid: 627a7b0252b8c4f0489288bc1ccc38b3, type: 3}
+--- !u!1 &1821032019 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
+  m_PrefabInternal: {fileID: 1821032010}
+--- !u!114 &1821032020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1821032019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 1821032019}
+  hover: {r: 0, g: 0, b: 0, a: .603921592}
+  pressed: {r: 0, g: 0, b: 0, a: .603921592}
+  disabledColor: {r: 0, g: 0, b: 0, a: .603921592}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 1821032018}
+    mMethodName: ALLBack
+    mParameters: []
+    oneShot: 0
 --- !u!1 &1905818353
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,13 +55,16 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			ALL.Add(mScheduleEvent.Response.data[i].interActive);
 			ALL.Add((mScheduleEvent.Response.data[i].extend[0].score).ToString ()+ " : " + (mScheduleEvent.Response.data[i].extend[1].score).ToString());
 		}
+		Debug.Log (mScheduleEvent.Response.data);
 		setposition ();
 	}
 	void setposition(){
 		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
+	
 		for (int i = 0; i<MaxGame; i++) {
-		//	Debug.Log("iiiiiiii");
+		Debug.Log("iiiiiiii");
 			NEW = (GameObject)Instantiate (D, new Vector2(0,0), D.transform.localRotation);
+		
 			NEW.transform.parent = D.transform.parent;
 
 			NEW.transform.localScale = new Vector3(1,1,1);
@@ -76,6 +79,8 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			NEW.transform.GetChild(4).GetComponent<UILabel>().text = ALL[(i*4)+3];
 			//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 			NEW.gameObject.SetActive(true);
+			Debug.Log(NEW);
+			Debug.Log(NEW.transform.parent);
 		}
 	}
 	public void onhit(){
@@ -98,31 +103,35 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}
 			if(what){
 				what = false;
+				ING = false;
 				StartCoroutine (rolling ());
 			}else{
 				what = true;
+				ING = false;
 				StartCoroutine (rolling ());
 			}
 		}
 	}
 	IEnumerator rolling(){
-		ING = false;
-		for(int i = 0; i<5;i++){
-			if(what){
-		transform.GetChild(0).transform.localPosition -= (new Vector3(720/5,0,0));
-			}else{
-		transform.GetChild(0).transform.localPosition += (new Vector3(720/5,0,0));
-			}
-			yield return new WaitForSeconds(0.02f);
+	if (!ING) {
+			for (int i = 0; i<5; i++) {
+				if (what) {
+					transform.GetChild (0).transform.localPosition -= (new Vector3 (720 / 5, 0, 0));
+				} else {
+					transform.GetChild (0).transform.localPosition += (new Vector3 (720 / 5, 0, 0));
+				}
+				yield return new WaitForSeconds (0.02f);
 		
+			}
+			ING = true;
 		}
-		ING = true;
 	}
 	public void off(){
 		if (nonoff) {
 
 			if (B) {
 				what = false;
+				ING  = false;
 				StartCoroutine (rolling ());
 				w = false;
 				B = false;
@@ -168,10 +177,11 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	}
 	public void ALLBack(){
 		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
-		
+		Debug.Log (B);
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		if (B) {
 			what = false;
+			ING  = false;
 			StartCoroutine (rolling ());
 			w = true;
 			B = false;
