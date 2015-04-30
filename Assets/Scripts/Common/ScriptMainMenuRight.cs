@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ScriptMainMenuRight : MonoBehaviour {
 	GameObject BntMenu;
-	char [] array;
+
 	public float MaxGame = 5;
 	public float gap = 200;
 	bool B = false;
@@ -24,12 +24,12 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetScheduleMore (null,
 		                        UserMgr.UserInfo.teamSeq,
-		                        mScheduleEvent);
+	                        mScheduleEvent);
 	
 
 	}
 	void getdata(){
-		array = mScheduleEvent.Response.data [0].startTime.ToString ().ToCharArray ();
+		char [] array = mScheduleEvent.Response.data [0].startTime.ToCharArray ();
 
 		for (int z = 0; z<8; z++) {
 		
@@ -42,28 +42,91 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		string aa = string.Join ("", ch.ToArray ());
 		transform.GetChild (0).GetChild (0).GetChild (1).GetComponent<UILabel> ().text = aa+ " 경기";
 	
-		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
-//			Debug.Log(" I : "+ i + " : " 	+mScheduleEvent.Response.data[i].extend[0].teamName);
-		//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].extend[1].teamName);
-		//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].gameStatus);
-		//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].onairDay);
-		
-		//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].startTime);
-
-			ALL.Add(mScheduleEvent.Response.data[i].extend[0].imageName);
-			ALL.Add(mScheduleEvent.Response.data[i].extend[1].imageName);
-			ALL.Add(mScheduleEvent.Response.data[i].interActive);
-			ALL.Add((mScheduleEvent.Response.data[i].extend[0].score).ToString ()+ " : " + (mScheduleEvent.Response.data[i].extend[1].score).ToString());
+		ch.Clear ();
+;
+		for (int z = 6; z<8; z++) {
+			
+			ch.Add (array [z].ToString ());
+			
+			
 		}
-		Debug.Log (mScheduleEvent.Response.data);
+		aa = string.Join ("", ch.ToArray ());
+		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
+			//Debug.Log(mScheduleEvent.Response.data [i].startTime);
+			//Debug.Log(" i : " + i + " now : " + System.DateTime.Now.Day + " aa : " + int.Parse(aa) );
+			if(System.DateTime.Now.Day == int.Parse(aa)){
+				//			Debug.Log(" I : "+ i + " : " 	+mScheduleEvent.Response.data[i].extend[0].teamName);
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].extend[1].teamName);
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].gameStatus);
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].onairDay);
+				
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].startTime);
+				
+				ALL.Add(mScheduleEvent.Response.data[i].extend[0].imageName);
+				ALL.Add(mScheduleEvent.Response.data[i].extend[1].imageName);
+				ALL.Add(mScheduleEvent.Response.data[i].interActive);
+				ALL.Add((mScheduleEvent.Response.data[i].extend[0].score).ToString ()+ " : " + (mScheduleEvent.Response.data[i].extend[1].score).ToString());
+				Debug.Log((mScheduleEvent.Response.data[i].extend[0].score)+ " : " + (mScheduleEvent.Response.data[i].extend[1].score));
+			}
+		}
+
 		setposition ();
 	}
 	void resetdata(){
+		//array = new char[];
+		char [] array = mScheduleEvent.Response.data [0].startTime.ToCharArray ();
+		ALL.Clear ();
+
+
+
+		
+		for (int z = 0; z<8; z++) {
+			
+			ch.Add (array [z].ToString ());
+			if(z ==3||z==5||z==7){
+				ch.Add (".");
+			}
+			
+		}
+		string aa = string.Join ("", ch.ToArray ());
+		transform.GetChild (0).GetChild (0).GetChild (1).GetComponent<UILabel> ().text = aa+ " 경기";
+		
+		ch.Clear ();
+	
+		for (int z = 6; z<8; z++) {
+			
+			ch.Add (array [z].ToString ());
+			
+			
+		}
+		aa = string.Join ("", ch.ToArray ());
+
+		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
+			//Debug.Log(mScheduleEvent.Response.data [i].startTime);
+			//Debug.Log(" i : " + i + " now : " + System.DateTime.Now.Day + " aa : " + int.Parse(aa) );
+			if(System.DateTime.Now.Day == int.Parse(aa)){
+				//			Debug.Log(" I : "+ i + " : " 	+mScheduleEvent.Response.data[i].extend[0].teamName);
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].extend[1].teamName);
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].gameStatus);
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].onairDay);
+				
+				//	Debug.Log(" I : "+ i + " : " 	+	mScheduleEvent.Response.data[i].startTime);
+				
+				ALL.Add(mScheduleEvent.Response.data[i].extend[0].imageName);
+				ALL.Add(mScheduleEvent.Response.data[i].extend[1].imageName);
+				ALL.Add(mScheduleEvent.Response.data[i].interActive);
+				ALL.Add((mScheduleEvent.Response.data[i].extend[0].score).ToString ()+ " : " + (mScheduleEvent.Response.data[i].extend[1].score).ToString());
+			//	Debug.Log((mScheduleEvent.Response.data[i].extend[0].score)+ " : " + (mScheduleEvent.Response.data[i].extend[1].score));
+			}
+		}
 		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
+
+
+
 		for (int i = 0; i<MaxGame; i++) {	
 			
-			D.transform.parent.GetChild (i).transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
-			D.transform.parent.GetChild (i).transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
+			D.transform.parent.GetChild (i+1).transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
+			D.transform.parent.GetChild (i+1).transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
 		}
 	}
 	void setposition(){
@@ -120,7 +183,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				ING = false;
 				D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
 
-				for (int i = 0; i<MaxGame; i++) {
+			//	for (int i = 0; i<MaxGame; i++) {
 					//Debug.Log("iiiiiiii");
 
 					mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "resetdata"));
@@ -132,7 +195,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 
 					//Debug.Log(NEW);
 					//Debug.Log(NEW.transform.parent);
-				}
+				//}
 
 
 

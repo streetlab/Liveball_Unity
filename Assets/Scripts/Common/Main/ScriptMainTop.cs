@@ -152,7 +152,7 @@ public class ScriptMainTop : MonoBehaviour {
 	void OpenLineup()
 	{
 		mLineup.SetActive (true);
-		mMatchInfoTop.SetActive (false);
+		mMatchInfoTop.SetActive (true);
 
 		mHighlight.SetActive (false);
 		mBingo.SetActive (false);

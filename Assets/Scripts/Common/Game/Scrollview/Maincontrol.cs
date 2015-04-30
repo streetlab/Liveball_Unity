@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class Maincontrol : MonoBehaviour {
 	public GameObject bgs;
-	public float gap = 720;
+	public float gap = 940;
 	float addsum,addsumint;
-	public float bargap = 122;
+	public float bargap = 162;
 	public string yui;
 	List<GameObject> bg_g = new List<GameObject>();
 	List<string> teamname = new List<string>();
@@ -15,6 +15,13 @@ public class Maincontrol : MonoBehaviour {
 	List<string> hometeamimagename = new List<string>();
 	List<string> district = new List<string>();
 	List<string> time = new List<string>();
+	
+	List<string> broad = new List<string>();
+	List<string> Score_L = new List<string>();
+	List<string> Score_R = new List<string>();
+	List<string> interActive = new List<string>();
+	List<string> gameStatus = new List<string>();
+	
 	List<string> day = new List<string>();
 	List<string> date = new List<string>();
 	List<int> dayandday = new List<int>();
@@ -40,7 +47,7 @@ public class Maincontrol : MonoBehaviour {
 	float dayadd =0;
 	float daycountadd =0;
 	float maxheight;
-
+	
 	bool editbll = false;
 	bool b_nongame = false;
 	
@@ -59,7 +66,7 @@ public class Maincontrol : MonoBehaviour {
 		bg_g.Clear();
 	}
 	void positionset(){
-	//	daycount [0] = 0;
+		//	daycount [0] = 0;
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			bg_g.Add(bgs.transform.GetChild(i).gameObject);
 		}
@@ -92,14 +99,14 @@ public class Maincontrol : MonoBehaviour {
 				}
 			}
 			if(daycount[i]!=0){
-			Cdata (bg_g[i].transform.GetChild(0).gameObject,i);
+				Cdata (bg_g[i].transform.GetChild(0).gameObject,i);
 			}
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().localSize);
 			//Debug.Log(bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().transform.position);
 			if(!editbll){
 				
-				bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().SetRect(-338,-353-(((float)daycount[i]-5)*bargap),676,706+(((float)daycount[i]-5)*bargap));
-				bg_g[i].transform.GetChild(0).transform.parent.GetChild(2).GetComponent<UISprite>().SetRect(-340,-355-(((float)daycount[i]-5)*bargap),680,710+(((float)daycount[i]-5)*bargap));
+				bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().SetRect(-338,-((gap-24)/2)-(((float)daycount[i]-5)*bargap),676,(gap-24)+(((float)daycount[i]-5)*bargap));
+				bg_g[i].transform.GetChild(0).transform.parent.GetChild(2).GetComponent<UISprite>().SetRect(-340,-((gap-20)/2)-(((float)daycount[i]-5)*bargap),680,(gap-20)+(((float)daycount[i]-5)*bargap));
 			}
 			editbll = false;
 			//bg_g[i].transform.GetChild(0).transform.parent.GetChild(1).GetComponent<UISprite>().SetRect(-338,-353,676,706);
@@ -134,7 +141,7 @@ public class Maincontrol : MonoBehaviour {
 			}
 			aa = string.Join ("", ch.ToArray ());
 			dayandday.Add(int.Parse(aa));
-
+			
 			if(i>0){
 				if(
 					dayandday[i]!=dayandday[i-1]){
@@ -143,7 +150,7 @@ public class Maincontrol : MonoBehaviour {
 			}else{
 				when.Add(i);
 			}
-		//	Debug.Log(aa+"i : " + i);
+			//	Debug.Log(aa+"i : " + i);
 			ch.Clear ();
 		}
 		daycount.Clear ();
@@ -152,7 +159,7 @@ public class Maincontrol : MonoBehaviour {
 		}
 		for (int i =0; i<dayandday.Count; i++) {
 			//Debug.Log(dayandday[i]+ " I : "+i+ " : " +(dayandday[0]+4));
-		
+			
 			if(dayandday[i]==dayandday[when[0]]){
 				daycount[0]+=1;
 			}else if(dayandday[i]==dayandday[when[1]]){
@@ -162,7 +169,7 @@ public class Maincontrol : MonoBehaviour {
 			}else if(dayandday[i]==dayandday[when[3]]){
 				daycount[3]+=1;
 			}else if(dayandday[i]==dayandday[when[4]]){
-			
+				
 				daycount[4]+=1;
 			}else if(dayandday[i]==dayandday[when[5]]){
 				daycount[5]+=1;
@@ -175,10 +182,10 @@ public class Maincontrol : MonoBehaviour {
 			
 			
 		}
-
+		
 	}
 	void nongame(){
-
+		
 		for (int i =daycount.Count-1; i>0; i--) {
 			bg_g[i].SetActive(true);
 			if(daycount[i]==0){
@@ -192,7 +199,7 @@ public class Maincontrol : MonoBehaviour {
 		addsum = 0;
 		addsumint = 0;
 		dayadd = 0;
-
+		
 		maxheight = 0;
 		for (int i = 0; i<daycount.Count; i++) {
 			if(daycount[i] == 0){
@@ -216,34 +223,34 @@ public class Maincontrol : MonoBehaviour {
 				if(s>4){
 					todays = (s-4).ToString();
 				}else{
-				todays = (int.Parse(todays)+s).ToString();
+					todays = (int.Parse(todays)+s).ToString();
 				}
 				//todays = "30";
 				if(todays.Length<2){
 					todays = "0"+todays;
 				}
-					//Debug.Log(aa +" : "+ todays);
+				//Debug.Log(aa +" : "+ todays);
 				dayadd =i;
 				if (aa == todays) {
-
-
+					
+					
 					for(int k = 0; k<dayandday.Count;k++){
-					//	Debug.Log(aa + "  :  " +dayandday[k]+"   k");
+						//	Debug.Log(aa + "  :  " +dayandday[k]+"   k");
 						if(int.Parse(aa)==dayandday[k]){
 							for(int t = 0; t<when.Count;t++){
 								//Debug.Log(dayandday[when[t]] + "  :  " +dayandday[k]+"   t"+t);
 								if(dayandday[k]==dayandday[when[t]]){
-								//	Debug.Log(t);
+									//	Debug.Log(t);
 									sum = when.Count-(t+1);
 									break;
 								}
 							}
-
-						
+							
+							
 						}
-					
+						
 					}
-
+					
 					//Debug.Log(aa+" : "+dayandday[dayandday.Count-1]);
 					daycountadd = 0;
 					for(int d = 0; d<7;d++){
@@ -271,9 +278,9 @@ public class Maincontrol : MonoBehaviour {
 					//Debug.Log(maxheight-((gap * (sum))-(((float)sumint+addsumint)*bargap))+((gap - (bargap * 5))*addsum));
 					y -= UtilMgr.GetScaledPositionY();
 					bgs.transform.localPosition += new Vector3 (0, y, 0);
-
-
-
+					
+					
+					
 					ch.Clear ();
 					return;
 				}
@@ -283,7 +290,8 @@ public class Maincontrol : MonoBehaviour {
 		}
 	}
 	void setarrray(){
-		
+		gameStatus.Clear ();
+		interActive.Clear ();
 		teamname.Clear ();
 		teamimagename.Clear ();
 		time.Clear ();
@@ -310,7 +318,13 @@ public class Maincontrol : MonoBehaviour {
 		}
 		
 		for(int i = 0;i<mScheduleEvent.Response.data.Count;i++){
-			
+			//Debug.Log(mScheduleEvent.Response.data [i].gameStatus.ToString());
+			gameStatus.Add(mScheduleEvent.Response.data [i].gameStatus.ToString());
+			Score_L.Add(mScheduleEvent.Response.data [i].extend [0].score.ToString());
+			Score_R.Add(mScheduleEvent.Response.data [i].extend [1].score.ToString());
+			broad.Add(mScheduleEvent.Response.data [i].bcastChannel);
+			interActive.Add(mScheduleEvent.Response.data [i].interActive);
+			//Debug.Log(mScheduleEvent.Response.data [i].interActive);
 			teamname.Add (mScheduleEvent.Response.data [i].extend [0].teamName);
 			hometeamname.Add (mScheduleEvent.Response.data [i].extend [1].teamName);
 			string imgName = UtilMgr.GetTeamEmblem(mScheduleEvent.Response.data [i].extend [0].imageName);
@@ -361,16 +375,16 @@ public class Maincontrol : MonoBehaviour {
 		whattoday();
 		
 		nongame ();
-	
+		
 		bg_g.Clear ();
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			//Debug.Log(">?!");
-
-				oldlist.Add (bgs.transform.GetChild(i).transform.localPosition);
-
+			
+			oldlist.Add (bgs.transform.GetChild(i).transform.localPosition);
+			
 		}
 		int g = 0;
-	
+		
 		for (int i = 0; i<oldlist.Count; i++) {
 			if(daycount[i]==0){
 				g+=1;
@@ -379,21 +393,21 @@ public class Maincontrol : MonoBehaviour {
 		for (int i = 0; i<oldlist.Count; i++) {
 			//Debug.Log(">?"+i);
 			//if(i>0){
-		//	Debug.Log(oldlist.Count-1-g-i+" fff  ");
-		//	Debug.Log(i+" iii  ");
+			//	Debug.Log(oldlist.Count-1-g-i+" fff  ");
+			//	Debug.Log(i+" iii  ");
 			if(oldlist.Count-1-g-i>=0){
-			bgs.transform.GetChild(oldlist.Count-1-g-i).transform.localPosition = oldlist[i];
+				bgs.transform.GetChild(oldlist.Count-1-g-i).transform.localPosition = oldlist[i];
 			}
-
+			
 			//}
 			//Debug.Log(6-i+g+" fff  ");
-		
+			
 		}
-
-
+		
+		
 		bgs.SetActive (true);
-
-
+		
+		
 	}
 	
 	public void Cdata(GameObject g,int aaa){
@@ -401,10 +415,10 @@ public class Maincontrol : MonoBehaviour {
 		
 		if (teamname.Count > 0) {
 			//Debug.Log ("g : " + g.transform.parent);
-		//	Debug.Log(a);
-		//	Debug.Log(g.transform.GetChild (0));
-		//	Debug.Log(daycount[a]);
-		//	Debug.Log(day [a]);
+			//	Debug.Log(a);
+			//	Debug.Log(g.transform.GetChild (0));
+			//	Debug.Log(daycount[a]);
+			//	Debug.Log(day [a]);
 			g.transform.GetChild (0).GetComponent<UILabel> ().text = day [a];
 			g.transform.GetChild (0).GetChild (0).GetComponent<UILabel> ().text = date [a];
 		}
@@ -444,6 +458,8 @@ public class Maincontrol : MonoBehaviour {
 				sumint+=1;
 				wheresumint.Add(i + (a * 5));
 			}else{
+				
+				
 				g.transform.GetChild (1).GetChild (i).GetChild (0).GetComponent<UISprite> ().spriteName = teamimagename [i + (a * 5)-sumint];
 				g.transform.GetChild (1).GetChild (i).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = hometeamimagename [i + (a * 5)-sumint];
 				
@@ -452,6 +468,31 @@ public class Maincontrol : MonoBehaviour {
 				
 				g.transform.GetChild (1).GetChild (i).GetChild (2).GetComponent<UILabel> ().text = district [i + (a * 5)-sumint];
 				g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text = time [i + (a * 5)-sumint];
+				g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (1).GetComponent<UILabel> ().text = broad [i + (a * 5)-sumint];
+				//	Debug.Log(i + (a * 5)-sumint);
+				if(gameStatus[i + (a * 5)-sumint]=="0"){
+					g.transform.GetChild (1).GetChild (i).GetChild (3).GetComponent<UILabel> ().text = "";
+					g.transform.GetChild (1).GetChild (i).GetChild (3).GetChild (0).GetComponent<UILabel> ().text = "";
+				}else{
+					
+					g.transform.GetChild (1).GetChild (i).GetChild (3).GetComponent<UILabel> ().text = Score_L [i + (a * 5)-sumint];
+					g.transform.GetChild (1).GetChild (i).GetChild (3).GetChild (0).GetComponent<UILabel> ().text = Score_R [i + (a * 5)-sumint];
+					
+					Debug.Log(gameStatus[i + (a * 5)-sumint]);
+					g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text =interActive[i + (a * 5)-sumint];
+					g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(1,1,1);
+					if(gameStatus[i + (a * 5)-sumint]=="1"){
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text ="LIVE";
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(1,0,0);
+					}else if(gameStatus[i + (a * 5)-sumint]=="2"){
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text ="경기종료";
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(71f/255f,200f/255f,62f/255f);
+					}else if(gameStatus[i + (a * 5)-sumint]=="3"){
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text ="우천취소";
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(217f/255f,65f/255f,140f/255f);
+						
+					}
+				}
 			}
 		}
 	}
