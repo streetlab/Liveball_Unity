@@ -23,6 +23,8 @@ public class ScriptNanoo : MonoBehaviour {
 
 	public GameObject mMainMenu;
 	public GameObject mTop;
+	public GameObject mRight;
+
 	bool StatusBarIsHidden;
 
 	// Use this for initialization
@@ -59,9 +61,11 @@ public class ScriptNanoo : MonoBehaviour {
 	}
 
 	void CheckVisible(){
-		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
+		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().
+			FsmVariables.FindFsmString("StatusAnimation").Value;
+		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 		
-		if (menuStatus.Equals ("Closed")) {
+		if (menuStatus.Equals ("Closed") && !isOpen) {
 			ShowWebView();
 		} else {
 			HideWebView();

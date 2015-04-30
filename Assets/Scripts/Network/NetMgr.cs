@@ -50,6 +50,10 @@ public class NetMgr : MonoBehaviour{
 		WWWForm form = request.GetRequestWWWForm ();
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , form);
 
+		if(UtilMgr.OnPause){
+			Debug.Log("Request is Canceled cause OnPause");
+			return;
+		}
 		StartCoroutine (webAPIProcess(www, baseEvent, true));
 	}
 
@@ -73,6 +77,11 @@ public class NetMgr : MonoBehaviour{
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 
 		Debug.Log (reqParam);
+		if(UtilMgr.OnPause){
+			Debug.Log("Request is Canceled cause OnPause");
+			return;
+		}
+
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
 	}
 
@@ -119,6 +128,11 @@ public class NetMgr : MonoBehaviour{
 	public static void GetProfile(int memSeq, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetProfileRequest (memSeq), baseEvent);
+	}
+
+	public static void ExitGame(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ExitGameRequest (), baseEvent);
 	}
 
 	public static void JoinGame(BaseEvent baseEvent)

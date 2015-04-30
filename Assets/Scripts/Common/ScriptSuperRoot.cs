@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ScriptSuperRoot : MonoBehaviour {
+	string mSceneName;
 
 	void Start () {
 		transform.FindChild ("Camera").transform.localPosition = new Vector3(0, UtilMgr.GetScaledPositionY(), 0);
@@ -30,6 +31,7 @@ public class ScriptSuperRoot : MonoBehaviour {
 
 	void OnApplicationPause(bool pause){
 		UtilMgr.OnPause = pause;
+		Debug.Log("Application pause : "+pause);
 	}
 
 	public void OnBackPressed()

@@ -93,6 +93,7 @@ public class AndroidMgr : MonoBehaviour
 
 	public void NotiReceived(string msg)
 	{
+		Debug.Log("NotiReceived : "+UtilMgr.OnPause);
 		if(!UtilMgr.OnPause)
 			QuizMgr.NotiReceived (msg);
 	}

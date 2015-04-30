@@ -226,4 +226,8 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	public void ss(){
 		transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
 	}
+
+	public bool IsOpen{
+		get{return what;}
+	}
 }

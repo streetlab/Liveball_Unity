@@ -5,6 +5,7 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 
 	public GameObject mTop;
 	public GameObject mMainMenu;
+	public GameObject mRight;
 
 	// Use this for initialization
 	const string DEFAULT_CHANNEL = "Liveballchat.";
@@ -31,8 +32,9 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 
 	void Update(){
 		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
+		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 //		Debug.Log ("menuStatus : " + menuStatus);
-		if (menuStatus.Equals ("Closed")) {
+		if (menuStatus.Equals ("Closed") && !isOpen) {
 			transform.FindChild ("Panel").gameObject.SetActive (true);
 		} else {
 			transform.FindChild ("Panel").gameObject.SetActive (false);

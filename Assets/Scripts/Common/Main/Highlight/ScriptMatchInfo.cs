@@ -98,10 +98,10 @@ public class ScriptMatchInfo : MonoBehaviour {
 		switch(cnt)
 		{
 		case 2:
-			sprite2.color = GREEN;
+			sprite2.color = YELLOW;
 			goto case 1;
 		case 1:
-			sprite1.color = GREEN;
+			sprite1.color = YELLOW;
 			break;
 		}
 	}
@@ -138,13 +138,13 @@ public class ScriptMatchInfo : MonoBehaviour {
 		switch(cnt)
 		{
 		case 3:
-			sprite3.color = YELLOW;
+			sprite3.color = GREEN;
 			goto case 2;
 		case 2:
-			sprite2.color = YELLOW;
+			sprite2.color = GREEN;
 			goto case 1;
 		case 1:
-			sprite1.color = YELLOW;
+			sprite1.color = GREEN;
 			break;
 		}
 	}

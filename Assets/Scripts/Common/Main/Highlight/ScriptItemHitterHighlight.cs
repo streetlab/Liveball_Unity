@@ -233,7 +233,7 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 
 		//move after 1f
 		mClipOffsetPanel = NGUITools.FindInParents<UIPanel> (gameObject).clipOffset;
-		NGUITools.FindInParents<UIPanel>(gameObject).clipOffset = new Vector2(0f, -326f-mPositionY);//191
+//		NGUITools.FindInParents<UIPanel>(gameObject).clipOffset = new Vector2(0f, -326f-mPositionY);//191
 	}
 
 //	IEnumerator moveOffset(){

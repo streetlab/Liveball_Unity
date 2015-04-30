@@ -39,6 +39,18 @@ public class ScriptMatchPlaying : MonoBehaviour {
 
 	}
 
+	void OnApplicationPause(bool pause){
+		if(pause){
+			NetMgr.ExitGame(new ExitGameEvent(new EventDelegate(this, "CompleteExit")));
+		} else{
+			Application.LoadLevel(Application.loadedLevelName);
+		}
+	}
+
+	public void CompleteExit(){
+		Debug.Log("CompleteExit");
+	}
+
 	void JoinGame()
 	{
 		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));

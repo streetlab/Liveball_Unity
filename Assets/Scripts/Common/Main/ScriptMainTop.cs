@@ -280,16 +280,29 @@ public class ScriptMainTop : MonoBehaviour {
 			return;
 		}
 
-		if (mEventQuiz.Response.data.quiz.Count > 1) {
-			QuizMgr.MoreQuiz = true;
-		}
+//		if(QuizMgr.SequenceQuiz < 1){
+//			RefreshQuizList();
+//
+//			if(!QuizMgr.IsBettingOpended)
+//				OpenBetting (mEventQuiz.Response.data.quiz[0]);
+//		} else{
+			if (mEventQuiz.Response.data.quiz.Count > 1) {
+				QuizMgr.MoreQuiz = true;
+			}
+			AddQuizIntoList ();
 
-		AddQuizIntoList ();
+			if(!QuizMgr.IsBettingOpended)
+				OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
+//		}
 
-		if(!QuizMgr.IsBettingOpended)
-			OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
 
 
+
+	}
+
+	void RefreshQuizList(){
+		mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ()
+			.InitQuizList(mEventQuiz);
 	}
 
 	void AddQuizIntoList()
