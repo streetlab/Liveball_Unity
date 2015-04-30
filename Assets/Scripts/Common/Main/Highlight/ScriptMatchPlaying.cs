@@ -32,6 +32,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		UtilMgr.ResizeList (mList);
 		mFirstLoading = true;
 		QuizMgr.IsBettingOpended = false;
+		QuizMgr.SequenceQuiz = 0;
 //		mPosGuide = 0f;
 		mPreGame = true;
 		mGameRoundCounter = 20;

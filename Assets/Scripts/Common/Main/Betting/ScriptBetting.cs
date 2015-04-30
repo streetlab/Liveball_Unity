@@ -166,6 +166,7 @@ public class ScriptBetting : MonoBehaviour {
 		joinInfo.QzType = GetQzType ();
 		joinInfo.BetPoint = UtilMgr.RemoveThousandSeperator(mLblUse.text);
 
+		Debug.Log("QuizMgr.QuizInfo.order size is "+QuizMgr.QuizInfo.order.Count);
 		joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
 		joinInfo.ExtendValue = "0";
 //		mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteSending"));
