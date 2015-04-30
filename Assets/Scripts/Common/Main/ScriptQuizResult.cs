@@ -14,6 +14,7 @@ public class ScriptQuizResult : MonoBehaviour {
 
 	public AudioClip mAudioSuccess;
 	public AudioClip mAudioFail;
+	public AudioClip mAudioGold;
 
 	List<GameObject> mListParticles = new List<GameObject>();
 
@@ -68,6 +69,7 @@ public class ScriptQuizResult : MonoBehaviour {
 			UserMgr.UserInfo.userGoldenBall = ""+userGoldenBall;
 
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioSuccess);
+			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioGold);
 
 			return true;
 		} else{

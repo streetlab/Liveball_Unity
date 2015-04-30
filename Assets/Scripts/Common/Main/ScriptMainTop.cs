@@ -61,6 +61,12 @@ public class ScriptMainTop : MonoBehaviour {
 		QuizMgr.EnterMain(this);
 		#else
 		#endif
+
+		InitTopInfo();
+	}
+
+	void InitTopInfo(){
+		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
 	}
 
 	void Update(){
@@ -84,6 +90,8 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 
 	void CheckAndJoinQuiz(){
+		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
+
 		if (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Count > 0) {
 			mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteJoinQuiz"));
 			NetMgr.JoinQuiz (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0], mJoinQuizEvent);
@@ -238,6 +246,7 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundOpenBet);
 
+		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetGoldInfo();
 	}
 
 	public void RequestBoardInfo()
@@ -257,6 +266,8 @@ public class ScriptMainTop : MonoBehaviour {
 		DetailBoard.play = mBoardEvent.Response.data.play;
 		DetailBoard.player = mBoardEvent.Response.data.player;
 		SetBoardInfo ();
+
+		Debug.Log("HasQuiz is "+QuizMgr.HasQuiz);
 		
 		if(QuizMgr.HasQuiz){
 			QuizMgr.HasQuiz = false;

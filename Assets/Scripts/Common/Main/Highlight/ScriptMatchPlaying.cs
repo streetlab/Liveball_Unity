@@ -31,6 +31,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	void Start () {
 		UtilMgr.ResizeList (mList);
 		mFirstLoading = true;
+		QuizMgr.IsBettingOpended = false;
 //		mPosGuide = 0f;
 		mPreGame = true;
 		mGameRoundCounter = 20;
@@ -91,11 +92,14 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (true);
 		
 		ScriptMainTop.DetailBoard = eventDetail.Response.data;
-		
+
+
 		SetAwayScore (ScriptMainTop.DetailBoard.awayScore);
 		SetHomeScore (ScriptMainTop.DetailBoard.homeScore);
 		SetAwayRHEB (ScriptMainTop.DetailBoard.infoBoard[0]);
 		SetHomeRHEB (ScriptMainTop.DetailBoard.infoBoard[1]);
+
+		mTop.transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
 	}
 
 	void SetProgQuiz(int quizListSeq)
@@ -350,6 +354,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		team.FindChild ("LblH").GetComponent<UILabel> ().text = info.countOfH;
 		team.FindChild ("LblE").GetComponent<UILabel> ().text = info.countOfE;
 		team.FindChild ("LblB").GetComponent<UILabel> ().text = info.countOfB;
+		UserMgr.Schedule.extend[0].score = int.Parse(info.score);
 	}
 
 	void SetHomeRHEB(HEBInfo info)
@@ -359,5 +364,6 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		team.FindChild ("LblH").GetComponent<UILabel> ().text = info.countOfH;
 		team.FindChild ("LblE").GetComponent<UILabel> ().text = info.countOfE;
 		team.FindChild ("LblB").GetComponent<UILabel> ().text = info.countOfB;
+		UserMgr.Schedule.extend[1].score = int.Parse(info.score);
 	}
 }
