@@ -15,6 +15,8 @@ public class ScriptSuperRoot : MonoBehaviour {
 	}
 
 	void Awake(){
+//		DontDestroyOnLoad(this);
+
 		if(GetComponent<AudioSource>() == null){
 			gameObject.AddComponent<AudioSource>();
 		}

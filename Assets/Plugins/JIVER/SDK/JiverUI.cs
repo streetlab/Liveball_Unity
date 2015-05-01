@@ -21,9 +21,8 @@ public class JiverUI : JiverResponder {
 	Vector2 channelScrollViewVector;
 
 	string inputString = "";
-	public string mSend;
-	public static float mScreenRatio;
-//	public static float mFontRatio;
+	public GameObject mInput;
+
 
 	int TOP;
 	int LEFT;
@@ -47,6 +46,9 @@ public class JiverUI : JiverResponder {
 
 	enum TAB_MODE {CHAT, CHANNEL};
 	TAB_MODE tabMode;
+
+	float mScreenRatio;
+	public string mStrSend;
 
 	static string ToHex(Color32 color)
 	{
@@ -94,25 +96,12 @@ public class JiverUI : JiverResponder {
 	{
 		this.channels = channels;
 	}
-
-//	public static List<string> GetChannelUrls(){
-//		if (JiverUI.channels == null)
-//			return null;
-//
-//		List<string> channelUrls = new List<string> ();
-//		foreach(Channel channel in this.channels)
-//			channelUrls.Add (channel.GetUrl ());
-//
-//		return channelUrls;
-//	}
 	
 	#endregion
 
 	void Awake() {
 		mScreenRatio = Screen.width / 720f;
-//		mFontRatio = mScreenRatio * 0.75f;
-//		mFontRatio = mFontRatio < 1f ? 1f : mFontRatio;
-		scrollBarWidth = (int)(10 * mScreenRatio);
+		scrollBarWidth = (int)(30 * mScreenRatio);
 		messageFontSize = (int)(30 * mScreenRatio);
 	}
 
@@ -124,10 +113,6 @@ public class JiverUI : JiverResponder {
 
 	void InitStyle ()
 	{
-//		Debug.Log ("GUI.depth : " + GUI.depth);
-//		GUI.depth = 1000;
-		
-
 		if (messageLabelStyle == null) {
 			messageLabelStyle = new GUIStyle (GUI.skin.label);
 		}
@@ -158,29 +143,31 @@ public class JiverUI : JiverResponder {
 		GUI.skin.verticalScrollbar.fixedWidth = scrollBarWidth;
 		GUI.skin.verticalScrollbarThumb.fixedWidth = scrollBarWidth;
 
-
+//		TOP = (int)(Screen.height * scale.y);
 		TOP = (int)(scale.y * mScreenRatio);
-		LEFT = 0;//(int)(scale.x);
+		LEFT = (int)(scale.x);
 		WIDTH = Screen.width;//(int)(scale.width);
-		HEIGHT = Screen.height - TOP;//(int)(scale.height); 
+		int inputSize = (int)(80 * mScreenRatio);
+		HEIGHT = Screen.height - TOP - inputSize;//(int)(scale.height);
+
 
 		LINE_HEIGHT = inputTextFieldStyle.CalcHeight (new GUIContent ("W"), WIDTH);
 	}
 
 	void DrawTabs(float width, float height)
 	{
-//		if (GUI.Button (new Rect (0, 0, width * 0.5f, height), channelName)) {
-//			tabMode = TAB_MODE.CHAT;
-//		}
-//	
-//		if(GUI.Button(new Rect(width * 0.5f, 0, width * 0.5f, height), "Channels")) {
-//			if(tabMode == TAB_MODE.CHAT) {
-//				tabMode = TAB_MODE.CHANNEL;
-//				Jiver.QueryChannelList();
-//			} else {
-//				tabMode = TAB_MODE.CHAT;
-//			}
-//		}
+		if (GUI.Button (new Rect (0, 0, width * 0.5f, height), channelName)) {
+			tabMode = TAB_MODE.CHAT;
+		}
+	
+		if(GUI.Button(new Rect(width * 0.5f, 0, width * 0.5f, height), "Channels")) {
+			if(tabMode == TAB_MODE.CHAT) {
+				tabMode = TAB_MODE.CHANNEL;
+				Jiver.QueryChannelList();
+			} else {
+				tabMode = TAB_MODE.CHAT;
+			}
+		}
 	}
 
 
@@ -265,6 +252,7 @@ public class JiverUI : JiverResponder {
 
 	void DrawChannels(float width, float height)
 	{
+		return;
 		int columns = 4;
 		int rowCount = (int)Mathf.Ceil ((float)channels.Count / (float)columns);
 
@@ -290,13 +278,13 @@ public class JiverUI : JiverResponder {
 				}
 				GUI.backgroundColor = c;
 			} else {
-//				if(GUI.Button(new Rect(buttonLeft, buttonTop, buttonWidth, buttonHeight), "#" + channel.GetUrlWithoutAppPrefix())) {
-//					Jiver.Join(channel.GetUrl(), "");
-//					Jiver.Connect();
-//					messages.Clear();
-//					tabMode = TAB_MODE.CHAT;
-//					channelName = "Connecting...";
-//				}
+				if(GUI.Button(new Rect(buttonLeft, buttonTop, buttonWidth, buttonHeight), "#" + channel.GetUrlWithoutAppPrefix())) {
+					Jiver.Join(channel.GetUrl());
+					Jiver.Connect();
+					messages.Clear();
+					tabMode = TAB_MODE.CHAT;
+					channelName = "Connecting...";
+				}
 			}
 		}
 		GUI.EndScrollView();
@@ -306,36 +294,35 @@ public class JiverUI : JiverResponder {
 	bool DrawInput(float width, float height)
 	{
 		float buttonWidth = width * 0.2f;
-		float buttonHeight = height * 1f;
 
-		inputString = GUI.TextField (new Rect(0, 0, width - buttonWidth, buttonHeight), inputString, inputTextFieldStyle);
+		inputString = GUI.TextField (new Rect(0, 0, width - buttonWidth, height), inputString, inputTextFieldStyle);
 
-		if (GUI.Button(new Rect(width - buttonWidth, 0, buttonWidth, buttonHeight), mSend, sendButtonStyle)) {
+		if (GUI.Button(new Rect(width - buttonWidth, 0, buttonWidth, height), mStrSend, sendButtonStyle)) {
 			return true;
 		}
 
 		return false;
 	}
 
-	bool CheckSubmit() {
-		bool applying = false;
-		if (Event.current.isKey) {
-			Debug.Log ("Key code: " + Event.current.keyCode);
-			switch (Event.current.keyCode) {
-			case KeyCode.Return:
-			case KeyCode.KeypadEnter:
-				applying = true;
-				break;
-			}
-		}
-		
-		
-		if (Input.GetKeyDown (KeyCode.Return)) {
-			applying = true;
-		}
-
-		return applying;
-	}
+//	bool CheckSubmit() {
+//		bool applying = false;
+//		if (Event.current.isKey) {
+//			Debug.Log ("Key code: " + Event.current.keyCode);
+//			switch (Event.current.keyCode) {
+//			case KeyCode.Return:
+//			case KeyCode.KeypadEnter:
+//				applying = true;
+//				break;
+//			}
+//		}
+//		
+//		
+//		if (Input.GetKeyDown (KeyCode.Return)) {
+//			applying = true;
+//		}
+//
+//		return applying;
+//	}
 
 	void OnGUI () {
 		InitStyle();
@@ -348,7 +335,7 @@ public class JiverUI : JiverResponder {
 		GUI.Box (new Rect (LEFT, TOP, WIDTH, HEIGHT), "");
 		GUI.BeginGroup (new Rect (LEFT, TOP, WIDTH, HEIGHT));
 			GUI.BeginGroup (new Rect (0, 0, WIDTH, tabHeight));
-			DrawTabs (WIDTH, tabHeight);
+//			DrawTabs (WIDTH, tabHeight);
 			GUI.EndGroup ();	
 			
 			GUI.BeginGroup (new Rect (0, tabHeight, WIDTH, HEIGHT - tabHeight - HEIGHT * INPUT_HEIGHT_WEIGHT));
@@ -360,23 +347,29 @@ public class JiverUI : JiverResponder {
 			GUI.EndGroup ();
 
 			GUI.BeginGroup (new Rect (0, HEIGHT - HEIGHT * INPUT_HEIGHT_WEIGHT, WIDTH, HEIGHT * INPUT_HEIGHT_WEIGHT));
-			if (DrawInput (WIDTH, HEIGHT * INPUT_HEIGHT_WEIGHT))
-			{
-				submit = true;
-			}
+//			if (DrawInput (WIDTH, HEIGHT * INPUT_HEIGHT_WEIGHT))
+//			{
+//				submit = true;
+//			}
 			GUI.EndGroup ();
 
 		GUI.EndGroup ();
 
-		if (CheckSubmit ())
-		{
-			submit = true;
-		}
+//		if (CheckSubmit ())
+//		{
+//			submit = true;
+//		}
+//
+//		if (submit) {
+//			Submit();
+//		}
 
-		if (submit) {
-			Submit();
-		}
+	}
 
+	public void CheckSubmit(string str){
+		inputString = str;
+		Submit ();
+		mInput.GetComponent<UIInput>().value = "";
 	}
 
 	void Submit() {

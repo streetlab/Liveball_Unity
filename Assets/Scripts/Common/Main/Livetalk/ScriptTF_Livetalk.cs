@@ -19,7 +19,6 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 				
 		Jiver.Init (appId);
 		Jiver.Login (userId, userName);
-		Jiver.QueryChannelList (false);
 
 		string channelUrl1 = DEFAULT_CHANNEL
 			+UserMgr.Schedule.extend [0].teamCode+UserMgr.Schedule.extend [1].teamCode;
@@ -27,6 +26,10 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 			+UserMgr.Schedule.extend [1].teamCode+UserMgr.Schedule.extend [0].teamCode;
 		Debug.Log(channelUrl1+","+channelUrl2);
 		Jiver.Join (channelUrl1, channelUrl2);
+
+		Jiver.QueryChannelList (false);
+
+
 
 	}
 

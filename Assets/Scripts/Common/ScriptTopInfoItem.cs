@@ -14,11 +14,11 @@ public class ScriptTopInfoItem : MonoBehaviour {
 	}
 	STATE mState;
 
-	void Update(){
-		if(mState == STATE.GOLD){
-
-		}
-	}
+//	void Update(){
+//		if(mState == STATE.GOLD){
+//
+//		}
+//	}
 
 	public void SetGroupInfo(){
 		mState = STATE.GROUP;

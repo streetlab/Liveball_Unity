@@ -27,6 +27,7 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public AudioClip mSoundOpenBet;
 	public AudioClip mSoundCloseBet;
+	public string mStrLive;
 
 	GetQuizEvent mEventQuiz;
 	GetGameSposDetailBoardEvent mBoardEvent;
@@ -67,6 +68,9 @@ public class ScriptMainTop : MonoBehaviour {
 
 	void InitTopInfo(){
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
+		if(UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_PLAYING){
+			mBtnHighlight.transform.FindChild("Label").GetComponent<UILabel>().text = mStrLive;
+		}
 	}
 
 	void Update(){

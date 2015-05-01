@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿// Jiver Unity SDK 0.9.3
+
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using System.Collections;
@@ -6,6 +8,10 @@ using JiverModel;
 using SimpleJSON;
 using System;
 
+#region JIVER Responder Class
+/*
+ * Any custom UI classes must extend this responder class to receive events from JIVER.
+ */
 public abstract class JiverResponder : MonoBehaviour {
 	public abstract void OnConnect (Channel channel);
 
@@ -20,6 +26,7 @@ public abstract class JiverResponder : MonoBehaviour {
 	public abstract void OnQueryChannelList (List<Channel> channels);
 
 }
+#endregion
 
 public class Jiver : MonoBehaviour {
 	private static JiverAdapter instance;
@@ -34,17 +41,30 @@ public class Jiver : MonoBehaviour {
 
 	public GameObject responderGameObject;
 
-	public static string mChannelUrl1;
-	public static string mChannelUrl2;
+	static string mChannel1;
+	static string mChannel2;
 
-	#region JIVER Native Callback 
+	#region JIVER public methods
+	interface JiverAdapter {
+		void Init (string appId, string responder);
+		void Login (string uuid, string nickname);
+		void Join (string channelUrl);
+		void Connect ();
+		void Disconnect ();
+		void QueryChannelList();
+		void SendMessage(string message);
+		void SendMessageWithData(string message, string data);
+	}
+	#endregion
+
+
+	#region JIVER Native Callbacks 
 	void _OnConnect(string arg) {
 		Debug.Log ("OnConnect: " + arg);
 		if (jiverResponder != null) {
 			Channel channel = new Channel(arg);
 			jiverResponder.OnConnect(channel);
 		}
-
 	}
 	
 	void _OnError(string arg) {
@@ -90,34 +110,60 @@ public class Jiver : MonoBehaviour {
 		*/
 	}
 
+	void _OnMessagingStarted(string arg) {
+		// Not Yet Implemented.
+	}
+
+
+	void _OnMessagingEnded(string arg) {
+		// Not Yet Implemented.
+	}
+
+	void _OnReadReceived(string arg) {
+		// Not Yet Implemented.
+	}
+
+	void _OnTypeStartReceived(string arg) {
+		// Not Yet Implemented.
+	}
+
+	void _OnTypeEndReceived(string arg) {
+		// Not Yet Implemented.
+	}
+
+	void _OnMessagesLoaded(string arg) {
+		// Not Yet Implemented.
+	}
+
 	void _OnQueryChannelList(string arg) {
-		Debug.Log ("OnQueryChannelList: " + arg);
+//		Debug.Log ("OnQueryChannelList: " + arg);
+		List<Channel> channelList = new List<Channel>();
+		JSONArray jsonList = JSON.Parse(arg).AsArray;
+		for(int i = 0; i < jsonList.Count; i++) {
+			channelList.Add(new Channel(jsonList[i]));
+		}		
+		cachedChannelList = channelList;
+
 		if (jiverResponder != null) {
-			List<Channel> channelList = new List<Channel>();
-			JSONArray jsonList = JSON.Parse(arg).AsArray;
-			for(int i = 0; i < jsonList.Count; i++) {
-				channelList.Add(new Channel(jsonList[i]));
-			}
-
-			cachedChannelList = channelList;
-
 			jiverResponder.OnQueryChannelList(channelList);
 		}
 
-		string channelUrl = "";
-		foreach (Channel channel in cachedChannelList) {
-			if(channel.GetUrl().Equals(mChannelUrl1)){
-				channelUrl = mChannelUrl1;
+		foreach(Channel channel in channelList){
+			Debug.Log("Channel is "+channel.GetUrl());
+			if(mChannel1.Equals(channel.GetUrl())){
+				Join (mChannel1);
+				Debug.Log("Found Channel : "+channel.GetUrl());
 				break;
-			} else if(channel.GetUrl().Equals(mChannelUrl2)){
-				channelUrl = mChannelUrl2;
+			} else if(mChannel2.Equals(channel.GetUrl())){
+				Join (mChannel2);
+				Debug.Log("Found Channel : "+channel.GetUrl());
 				break;
 			}
 		}
-
-		GetInstance ().Join (channelUrl);
-		GetInstance ().Connect ();
-
+		
+		Connect();
+		
+		
 	}
 	#endregion
 		
@@ -145,49 +191,49 @@ public class Jiver : MonoBehaviour {
 	}
 
 	void Update() {
-//		if (dummyMessageTimer >= 0) {
-//			if(Mathf.Abs(dummyMessageTimer - Time.time) >= 0.3f) {
-//				string msgJson = "MESG{\"channel_id\": \"0\", \"message\": \"Test Message: " + Time.time + "\", \"user\": {\"image\": \"http://url\", \"name\": \"Sender\"}, \"ts\": 1418979273365, \"scrap_id\": \"\"}";
-//				_OnMessageReceived(msgJson);
-//				dummyMessageTimer = Time.time;
-//			}
-//		}
-//
-//		if (dummyChannelListFlag) {
-//			dummyChannelListFlag = false;
-//			JSONArray channels = new JSONArray();
-//			JSONClass channel = new JSONClass();
-//
-//			channel.Add ("id", new JSONData(1));
-//			channel.Add ("channel_url", new JSONData("app_prefix.channel_url"));
-//			channel.Add ("name", new JSONData("Sample"));
-//			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
-//			channel.Add ("member_count", new JSONData(999));
-//			channels.Add(channel.ToString());
-//
-//			channel.Add ("id", new JSONData(2));
-//			channel.Add ("channel_url", new JSONData("app_prefix.Unity3d"));
-//			channel.Add ("name", new JSONData("Unity3d"));
-//			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
-//			channel.Add ("member_count", new JSONData(999));
-//			channels.Add(channel.ToString());
-//
-//			channel.Add ("id", new JSONData(3));
-//			channel.Add ("channel_url", new JSONData("app_prefix.Lobby"));
-//			channel.Add ("name", new JSONData("Lobby"));
-//			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
-//			channel.Add ("member_count", new JSONData(999));
-//			channels.Add(channel.ToString());
-//
-//			channel.Add ("id", new JSONData(4));
-//			channel.Add ("channel_url", new JSONData("app_prefix.Cocos2d"));
-//			channel.Add ("name", new JSONData("Cocos2d"));
-//			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
-//			channel.Add ("member_count", new JSONData(999));
-//			channels.Add(channel.ToString());
-//
-//			_OnQueryChannelList(channels.ToString());
-//		}
+		if (dummyMessageTimer >= 0) {
+			if(Mathf.Abs(dummyMessageTimer - Time.time) >= 0.3f) {
+				string msgJson = "MESG{\"channel_id\": \"0\", \"message\": \"Dummy Text on Editor Mode - " + Time.time + "\", \"user\": {\"image\": \"http://url\", \"name\": \"Sender\"}, \"ts\": 1418979273365, \"scrap_id\": \"\"}";
+				_OnMessageReceived(msgJson);
+				dummyMessageTimer = Time.time;
+			}
+		}
+
+		if (dummyChannelListFlag) {
+			dummyChannelListFlag = false;
+			JSONArray channels = new JSONArray();
+			JSONClass channel = new JSONClass();
+
+			channel.Add ("id", new JSONData(1));
+			channel.Add ("channel_url", new JSONData("app_prefix.channel_url"));
+			channel.Add ("name", new JSONData("Sample"));
+			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
+			channel.Add ("member_count", new JSONData(999));
+			channels.Add(channel.ToString());
+
+			channel.Add ("id", new JSONData(2));
+			channel.Add ("channel_url", new JSONData("app_prefix.Unity3d"));
+			channel.Add ("name", new JSONData("Unity3d"));
+			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
+			channel.Add ("member_count", new JSONData(999));
+			channels.Add(channel.ToString());
+
+			channel.Add ("id", new JSONData(3));
+			channel.Add ("channel_url", new JSONData("app_prefix.Lobby"));
+			channel.Add ("name", new JSONData("Lobby"));
+			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
+			channel.Add ("member_count", new JSONData(999));
+			channels.Add(channel.ToString());
+
+			channel.Add ("id", new JSONData(4));
+			channel.Add ("channel_url", new JSONData("app_prefix.Cocos2d"));
+			channel.Add ("name", new JSONData("Cocos2d"));
+			channel.Add ("cover_img_url", new JSONData("http://localhost/image.jpg"));
+			channel.Add ("member_count", new JSONData(999));
+			channels.Add(channel.ToString());
+
+			_OnQueryChannelList(channels.ToString());
+		}
 	}
 
 	void OnEnable() {
@@ -227,19 +273,14 @@ public class Jiver : MonoBehaviour {
 		GetInstance().Login (uuid, nickname);
 	}
 
-	public static void Join(string channelUrl1, string channelUrl2){
-		mChannelUrl1 = channelUrl1;
-		mChannelUrl2 = channelUrl2;
-//		GetInstance().Join (channelUrl);
+	public static void Join(string channelUrl1, string channelUrl2) {
+		mChannel1 = channelUrl1;
+		mChannel2 = channelUrl2;
 	}
 
-//	public static void Join(string channelUrl) {
-//		Join (channelUrl, "", "");
-//	}
-
-//	public static string GetChannelUrl(){
-//		return channelUrl;
-//	}
+	public static void Join(string channelUrl){
+		GetInstance().Join (channelUrl);
+	}
 
 	private static char[] CHARS_TO_TRIM = {'\n', '\r', };
 	public static new void SendMessage(string message) {
@@ -270,15 +311,6 @@ public class Jiver : MonoBehaviour {
 
 
 
-	interface JiverAdapter {
-		void Init (string appId, string responder);
-		void Login (string uuid, string nickname);
-		void Join (string channelUrl);
-		void Connect ();
-		void Disconnect ();
-		void QueryChannelList();
-		void SendMessage(string message);
-	}
 
 	#region Jiver Adatper Dummy Impl.
 	class JiverDummyImpl : JiverAdapter {
@@ -314,6 +346,10 @@ public class Jiver : MonoBehaviour {
 
 		public void SendMessage (string message) {
 			Debug.Log ("SendMessage: " + message);
+		}
+
+		public void SendMessageWithData (string message, string data) {
+			Debug.Log ("SendMessage: " + message + " with data: " + data);
 		}
 
 	}
@@ -353,6 +389,10 @@ public class Jiver : MonoBehaviour {
 		public void SendMessage (string message) {
 			jiverClass.CallStatic ("send", message);	
 		}
+
+		public void SendMessageWithData (string message, string data) {
+			jiverClass.CallStatic ("sendWithData", message, data);	
+		}
 	}
 	#endregion
 #endif
@@ -381,6 +421,9 @@ public class Jiver : MonoBehaviour {
 	[DllImport ("__Internal")]
 	private static extern void _Jiver_iOS_Send (string message);
 
+	[DllImport ("__Internal")]
+	private static extern void _Jiver_iOS_SendWithData (string message, string data);
+
 	class JiveriOSImpl : JiverAdapter {
 		public void Init(string appId, string responder) {
 			_Jiver_iOS_Init (appId, responder);
@@ -408,6 +451,10 @@ public class Jiver : MonoBehaviour {
 		
 		public void SendMessage (string message) {
 			_Jiver_iOS_Send (message);
+		}
+
+		public void SendMessageWithData (string message, string data) {
+			_Jiver_iOS_SendWithData (message, data);
 		}
 	}
 	#endregion
@@ -530,6 +577,9 @@ namespace JiverModel {
 			return node ["message"];
 		}
 
+		public string GetData() {
+			return node ["data"];
+		}
 
 		public bool IsOpMessage() {
 			return node ["is_op_msg"].AsBool;

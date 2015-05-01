@@ -26,15 +26,17 @@ public class AutoFade : MonoBehaviour
 	
 	private IEnumerator Fade(float aFadeOutTime, float aFadeInTime)
 	{
-		TweenAlpha.Begin (GameObject.Find("UI Root"), aFadeOutTime, 0f);
-		yield return new WaitForSeconds(aFadeOutTime);
+//		TweenAlpha.Begin (GameObject.Find("UI Root"), aFadeOutTime, 0f);
+//		yield return new WaitForSeconds(aFadeOutTime);
+		yield return new WaitForSeconds(0);
 
-		Application.LoadLevel(m_LevelName);
-		yield return new AsyncOperation ();
+//		Application.LoadLevel(m_LevelName);
+		Application.LoadLevelAsync(m_LevelName);
+//		yield return new AsyncOperation ();
 
-		TweenAlpha.Begin (GameObject.Find("UI Root"), 0f, 0f);
-		TweenAlpha.Begin (GameObject.Find("UI Root"), aFadeInTime, 1.0f);
-		yield return new WaitForSeconds(aFadeInTime);
+//		TweenAlpha.Begin (GameObject.Find("UI Root"), 0f, 0f);
+//		TweenAlpha.Begin (GameObject.Find("UI Root"), aFadeInTime, 1.0f);
+//		yield return new WaitForSeconds(aFadeInTime);
 
 	}
 	private void StartFade(float aFadeOutTime, float aFadeInTime)
