@@ -17,7 +17,7 @@ public class JoinMemberRequest : BaseUploadRequest {
 		dic.Add ("memberPwd", memInfo.MemberPwd);
 		dic.Add ("memUID", memInfo.MemUID);
 		dic.Add ("memImage", memInfo.MemImage);
-		dic.Add("FavoBB", memInfo.FavoBB);
+		dic.Add("favoBB", memInfo.FavoBB);
 
 
 		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));

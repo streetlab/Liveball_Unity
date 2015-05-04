@@ -120,4 +120,20 @@ public class ScriptJoinForm : MonoBehaviour {
 		www.LoadImageIntoTexture (tmpTex);
 		transform.FindChild ("PanelPhoto").FindChild ("TexPhoto").GetComponent<UITexture> ().mainTexture = tmpTex;
 	}
+
+	public void ConfirmedEmail(){
+		transform.FindChild ("InputPwd").GetComponent<UIInput>().isSelected = true;
+	}
+	
+	public void ConfirmedPwd(){
+		transform.FindChild ("InputNick").GetComponent<UIInput>().isSelected = true;
+	}
+
+	public void ConfirmedNick(){
+		transform.FindChild ("InputInvite").GetComponent<UIInput>().isSelected = true;
+	}
+
+	public void ConfirmedInvitation(){
+		NextClicked();
+	}
 }

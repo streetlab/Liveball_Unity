@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using JiverModel;
 
 public class JiverUI : JiverResponder {
+	public GameObject mItemChat;
+	public GameObject mScrollChat;
+
 	private List<System.Object> messages = new List<System.Object>();
 	private List<Channel> channels = new List<Channel>();
 
@@ -79,8 +82,15 @@ public class JiverUI : JiverResponder {
 	}
 	public override void OnMessageReceived (JiverModel.Message message)
 	{
-		messages.Add (message);
-		messageAdded = true;
+		GameObject go = Instantiate(mItemChat, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+		go.transform.parent = mScrollChat.transform.FindChild("Grid");
+		go.transform.localScale = new Vector3(1f, 1f, 1f);	
+		go.SendMessage("Init", message, SendMessageOptions.DontRequireReceiver);
+//		mScrollChat.transform.FindChild("Grid").SendMessage("RePosition", SendMessageOptions.DontRequireReceiver);
+//		go.GetComponent<ScriptItemChat>().Init(message.GetSenderName(), message.GetMessage());
+//		go.transform.localPosition = new Vector3(0f, -mPosGuide, 0f);
+//		mPosGuide += 140f;
+//		mListFriendItems.Add (go);
 	}
 	public override void OnSystemMessageReceived (JiverModel.SystemMessage message)
 	{
@@ -196,6 +206,7 @@ public class JiverUI : JiverResponder {
 
 	void DrawChat(float width, float height)
 	{
+		return;
 
 		float totalHeight = 0;
 		float messageWidth = width - scrollBarWidth - 5;
@@ -348,6 +359,7 @@ public class JiverUI : JiverResponder {
 //	}
 
 	void OnGUI () {
+		return;
 		InitStyle();
 
 //		int tabHeight = (int)Mathf.Min (HEIGHT * 0.1f, 48);

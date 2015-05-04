@@ -34,7 +34,7 @@ public class ScriptTitle : MonoBehaviour {
 //		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
 		Debug.Log(SystemInfo.deviceModel);
 
-		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;
+//		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;
 		Constants.IMAGE_SERVER_HOST = mVersionEvent.Response.data.FILE_PATH;
 		Constants.QUERY_SERVER_HOST = mVersionEvent.Response.data.APPS_SVR;//[0].serviceURL;
 	}

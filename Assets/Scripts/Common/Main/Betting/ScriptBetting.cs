@@ -65,17 +65,35 @@ public class ScriptBetting : MonoBehaviour {
 	}
 
 	public void InitWithStrategy(string btnName, ItemStrategyInfo strategyInfo){
+		ClearCardData();
 		mStrategyInfo = strategyInfo;
 		Init (btnName);
 	}
 
 	public void InitWithCard(string btnName, CardInfo cardInfo){
+		ClearCardData();
 		mCardInfo = cardInfo;
 		Init (btnName);
 	}
 
-	public void Init(string btnName)
+	public void InitWithoutCard(string btnName){
+		ClearCardData();
+		Init (btnName);
+	}
+
+	public void DialogueHandler(DialogueMgr.BTNS btn){
+		UtilMgr.OnBackPressed();
+	}
+
+	void Init(string btnName)
 	{
+		if(double.Parse(UserMgr.UserInfo.userGoldenBall) < 1){
+			DialogueMgr.ShowDialogue("not enough gold", "you must have at least one or more gold",
+			                         DialogueMgr.DIALOGUE_TYPE.Alert,
+			                         DialogueHandler);
+			return;
+		}
+
 		mNameSelectedBtn = btnName;
 		mSbi = GetBettingItem ();
 
@@ -171,9 +189,10 @@ public class ScriptBetting : MonoBehaviour {
 		joinInfo.MemSeq = UserMgr.UserInfo.memSeq;
 		joinInfo.QuizListSeq = QuizMgr.QuizInfo.quizListSeq;
 		joinInfo.QzType = GetQzType ();
-		joinInfo.BetPoint = UtilMgr.RemoveThousandSeperator(mLblUse.text);
+		double betPoint = double.Parse(UtilMgr.RemoveThousandSeperator(mLblUse.text));
+		joinInfo.BetPoint = betPoint < 0 ? "0" : betPoint+"";
 
-		Debug.Log("QuizMgr.QuizInfo.order size is "+QuizMgr.QuizInfo.order.Count);
+//		Debug.Log("QuizMgr.QuizInfo.order size is "+QuizMgr.QuizInfo.order.Count);
 		joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
 		joinInfo.ExtendValue = "0";
 //		mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteSending"));

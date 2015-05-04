@@ -48,7 +48,8 @@ public class NetMgr : MonoBehaviour{
 	private void webAPIUploadProcessEvent(BaseUploadRequest request, BaseEvent baseEvent)
 	{	
 		WWWForm form = request.GetRequestWWWForm ();
-		WWW www = new WWW (Constants.QUERY_SERVER_HOST , form);
+
+		WWW www = new WWW (Constants.UPLOAD_SERVER_HOST , form);
 
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
@@ -59,6 +60,22 @@ public class NetMgr : MonoBehaviour{
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent){
 		webAPIProcessEvent (request, baseEvent, true);
+	}
+
+	private void webAPIProcessEventForCheckVersion(BaseRequest request, BaseEvent baseEvent, bool showLoading)
+	{		
+		string reqParam = "";
+		string httpUrl = "";
+		if (request != null) {
+			reqParam = request.ToRequestString();
+		} else {
+		}
+		
+		WWW www = new WWW (Constants.LOGIN_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		
+		Debug.Log (reqParam);
+		
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
 	}
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
@@ -172,7 +189,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void CheckVersion(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new CheckVersionRequest (), baseEvent);
+		Instance.webAPIProcessEventForCheckVersion (new CheckVersionRequest (), baseEvent, true);
 	}
 
 	public static void GetLineup(string teamCode, BaseEvent baseEvent)
