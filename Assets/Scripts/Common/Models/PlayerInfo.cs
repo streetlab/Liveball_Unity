@@ -210,4 +210,26 @@ public class PlayerInfo {
 			_imagePath = value;
 		}
 	}
+
+	int _battingOrder;
+
+	public int battingOrder {
+		get {
+			return _battingOrder;
+		}
+		set {
+			_battingOrder = value;
+		}
+	}
+
+	int _lineup;
+
+	public int lineup {
+		get {
+			return _lineup;
+		}
+		set {
+			_lineup = value;
+		}
+	}
 }

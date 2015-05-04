@@ -174,4 +174,9 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent (new CheckVersionRequest (), baseEvent);
 	}
+
+	public static void GetLineup(string teamCode, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new GetLineupRequest(teamCode), baseEvent);
+	}
 }
