@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ScriptCardsMiddle : MonoBehaviour {
 	//public string grade,maxlv,posi,team,num,name,nowlv,add;
-
+	public GameObject maincard;
 	//public float hp,exp;
 	List<string> grade = new List<string> ();
 	List<string> maxlv = new List<string> ();
@@ -67,7 +67,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 		                                                              delegate(UIListItem item, int index) {
 			
 			item.Target.gameObject.SetActive(true);
-			
+
 			item.Target.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = grade[index];//grade;
 			item.Target.gameObject.transform.GetChild(2).GetChild(1).GetComponent<UILabel>().text = maxlv[index];//maxlv;
 			item.Target.gameObject.transform.GetChild(2).GetChild(2).GetComponent<UILabel>().text = posi[index];//position;
@@ -85,7 +85,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 			//Debug.Log(imgName);
 			item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = imgName;
 			item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (1).GetChild(1).GetComponent<UILabel> ().text = index.ToString();
-
+			item.Target.gameObject.transform.localPosition = new Vector3(maincard.transform.localPosition.x,item.Target.gameObject.transform.localPosition.y,item.Target.gameObject.transform.localPosition.z);
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 			//Debug.Log (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 			StartCoroutine(GetImage (www,item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (2).GetChild(0).gameObject));

@@ -2640,7 +2640,7 @@ Transform:
   m_GameObject: {fileID: 761375862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156494521, y: .00156494521, z: .00156494521}
   m_Children:
   - {fileID: 740811092}
   - {fileID: 1062601969}
@@ -5313,7 +5313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  dragEffect: 2
+  dragEffect: 0
   restrictWithinPanel: 1
   disableDragIfFits: 0
   smoothDragStart: 1
@@ -5324,7 +5324,7 @@ MonoBehaviour:
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1
   customMovement: {x: 0, y: 0}
-  contentPivot: 0
+  contentPivot: 1
   scale: {x: 0, y: 0, z: 0}
   relativePositionOnReset: {x: 0, y: 0}
   centerOnChild: {fileID: 0}
@@ -8496,6 +8496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353ea18fbf1954d629864d5d4bf61ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maincard: {fileID: 1708326982}
 --- !u!1 &1576604623
 GameObject:
   m_ObjectHideFlags: 0

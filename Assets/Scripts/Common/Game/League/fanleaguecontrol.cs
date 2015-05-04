@@ -45,6 +45,70 @@ public class fanleaguecontrol : MonoBehaviour {
 		setposition ();
 		child ();
 		transform.GetChild(0).FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
+		EX ();
+	}
+
+
+	void EX(){
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(0).GetChild(1).GetComponent<UISprite>().spriteName = "ic_lg";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(1).GetChild(1).GetComponent<UISprite>().spriteName = "ic_doosan";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(2).GetChild(1).GetComponent<UISprite>().spriteName = "ic_lotte";
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(0).GetChild(1).GetComponent<UISprite>().spriteName = "ic_lg";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(1).GetChild(1).GetComponent<UISprite>().spriteName = "ic_lotte";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(2).GetChild(1).GetComponent<UISprite>().spriteName = "ic_doosan";
+	
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(0).GetChild(1).GetComponent<UISprite>().spriteName = "ic_lotte";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(1).GetChild(1).GetComponent<UISprite>().spriteName = "ic_lg";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(2).GetChild(1).GetComponent<UISprite>().spriteName = "ic_hanwha";
+
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(0).GetChild(3).GetComponent<UILabel>().text = "LG 트윈스";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(1).GetChild(3).GetComponent<UILabel>().text = "두산 베어스";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(2).GetChild(3).GetComponent<UILabel>().text = "롯데 자이언츠";
+	
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(0).GetChild(3).GetComponent<UILabel>().text = "LG 트윈스";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(1).GetChild(3).GetComponent<UILabel>().text = "롯데 자이언츠";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(2).GetChild(3).GetComponent<UILabel>().text = "두산 베어스";
+		
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(0).GetChild(3).GetComponent<UILabel>().text = "롯데 자이언츠";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(1).GetChild(3).GetComponent<UILabel>().text = "LG 트윈스";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(2).GetChild(3).GetComponent<UILabel>().text = "한화 이글스";
+
+		Debug.Log (		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(0).GetChild(2));
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+		
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(2).GetChild(2).GetComponent<UISprite>().color =new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(2).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0) .GetChild(2).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(1).GetChild(2).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(1).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(1).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(2).GetChild(2).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(2).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0) .GetChild(2).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+
+
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).GetComponent<UISprite>().color =new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(0).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+		
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(1).GetChild(2).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(1).GetChild(2).GetComponent<UISprite>().spriteName = "ic_arrow";
+		transform.GetChild(0).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0) .GetChild(1).GetChild(2).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
+
 	}
 	void getdata(){
 		for (int i = 0; i<scv.Count; i++) {

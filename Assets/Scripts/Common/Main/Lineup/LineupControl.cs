@@ -13,6 +13,10 @@ public class LineupControl : MonoBehaviour {
 	public float gap = 122;
 	// Use this for initialization
 	public void view () {
+		//if (!transform.FindChild ("Scroll View").gameObject.activeSelf && !transform.FindChild ("Scroll View 1").gameObject.activeSelf) {
+			transform.FindChild ("Scroll View").gameObject.SetActive(true);
+			transform.FindChild ("Scroll View 1").gameObject.SetActive(true);
+		//}
 		ScrollView = transform.FindChild ("Scroll View").gameObject;
 		Debug.Log ("what teamcode : " + UserMgr.Schedule.extend[0].teamCode);
 		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
@@ -24,7 +28,7 @@ public class LineupControl : MonoBehaviour {
 		T22.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
 		
 	}
-	
+
 	void setarrray(){
 		
 		UserMgr.AwayLineup = mlineupEvent.Response.data;
@@ -70,21 +74,21 @@ public class LineupControl : MonoBehaviour {
 				StartCoroutine(GetImage (www,S.transform.GetChild (3).GetChild (0).GetChild(0).gameObject));
 				S.transform.GetChild (3).GetChild (1).GetChild (0).GetChild (0).GetComponent<UILabel> ().text = mlineupEvent.Response.data.lineup [i].playerName;
 				break;
-			case 5:
+			case 6:
 				S.transform.GetChild (4).gameObject.SetActive(true);
 				www = new WWW (Constants.IMAGE_SERVER_HOST+mlineupEvent.Response.data.lineup [i].imagePath+mlineupEvent.Response.data.lineup [i].imageName);
 				StartCoroutine(GetImage (www,S.transform.GetChild (4).GetChild (0).GetChild(0).gameObject));
 				S.transform.GetChild (4).GetChild (1).GetChild (0).GetChild (0).GetComponent<UILabel> ().text = mlineupEvent.Response.data.lineup [i].playerName;
 				
 				break;
-			case 6:
+			case 7:
 				S.transform.GetChild (5).gameObject.SetActive(true);
 				www = new WWW (Constants.IMAGE_SERVER_HOST+mlineupEvent.Response.data.lineup [i].imagePath+mlineupEvent.Response.data.lineup [i].imageName);
 				StartCoroutine(GetImage (www,S.transform.GetChild (5).GetChild (0).GetChild(0).gameObject));
 				S.transform.GetChild (5).GetChild (1).GetChild (0).GetChild (0).GetComponent<UILabel> ().text = mlineupEvent.Response.data.lineup [i].playerName;
 				
 				break;
-			case 7:
+			case 5:
 				S.transform.GetChild (6).gameObject.SetActive(true);
 				www = new WWW (Constants.IMAGE_SERVER_HOST+mlineupEvent.Response.data.lineup [i].imagePath+mlineupEvent.Response.data.lineup [i].imageName);
 				StartCoroutine(GetImage (www,S.transform.GetChild (6).GetChild (0).GetChild(0).gameObject));

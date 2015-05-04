@@ -21,7 +21,7 @@ public class ScriptTFProfile : MonoBehaviour {
 		mPoint.transform.GetChild (2).GetChild (2).GetComponent<UILabel> ().text = mProfileEvent.Response.data.userRuby;
 		mPoint.transform.GetChild (3).GetChild (2).GetComponent<UILabel> ().text = mProfileEvent.Response.data.userGoldenBall;
 		mPoint.transform.GetChild (4).GetChild (2).GetComponent<UILabel> ().text = mProfileEvent.Response.data.userDiamond;
-		mPoint.transform.GetChild (5).GetChild (2).GetComponent<UILabel> ().text = mProfileEvent.Response.data.userDiamond;
+		mPoint.transform.GetChild (5).GetChild (2).GetComponent<UILabel> ().text = "0";
 	}
 	void Start () {
 
