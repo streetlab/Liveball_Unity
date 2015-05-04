@@ -135,8 +135,12 @@ public class ScriptBettingItem : MonoBehaviour {
 
 	void OpenBetWindow(string name)
 	{
+
+		if(mSprBetting.GetComponent<ScriptBetting> ().InitWithoutCard (name)){
+			return;
+		}
+
 		mSprBetting.SetActive (true);
-		mSprBetting.GetComponent<ScriptBetting> ().InitWithoutCard (name);
 
 		UtilMgr.AddBackEvent(
 			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),

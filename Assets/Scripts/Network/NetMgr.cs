@@ -119,7 +119,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetGameSposDetailBoard(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetGameSposDetailBoardRequest (), baseEvent);
+		Instance.webAPIProcessEvent (new GetGameSposDetailBoardRequest (), baseEvent, false);
 	}
 
 	public static void GetGameSposPlayBoard(BaseEvent baseEvent)

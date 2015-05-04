@@ -186,11 +186,17 @@ public class ScriptBettingCard : UIDragDropItem {
 
 		gameObject.SetActive(false);
 //		btnGroup.FindChild(name).GetComponent<ScriptBettingItem>().OnClicked(name);
+//		mSprBetting.SetActive (true);
+		if(mType == TYPE.Strategy){
+			if(mSprBetting.GetComponent<ScriptBetting> ().InitWithStrategy(name, mStrategyInfo)){
+				return;
+			}
+		}else{
+			if(mSprBetting.GetComponent<ScriptBetting> ().InitWithCard(name, mCardInfo)){
+				return;
+			}
+		}
 		mSprBetting.SetActive (true);
-		if(mType == TYPE.Strategy)
-			mSprBetting.GetComponent<ScriptBetting> ().InitWithStrategy(name, mStrategyInfo);
-		else
-			mSprBetting.GetComponent<ScriptBetting> ().InitWithCard(name, mCardInfo);
 		
 		UtilMgr.AddBackEvent(
 			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),

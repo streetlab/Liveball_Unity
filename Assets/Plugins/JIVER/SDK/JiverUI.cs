@@ -79,6 +79,11 @@ public class JiverUI : JiverResponder {
 	public override void OnError (int errorCode)
 	{
 		Debug.Log ("JIVER Error: " + errorCode);
+
+		GameObject go = Instantiate(mItemChat, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+		go.transform.parent = mScrollChat.transform.FindChild("Grid");
+		go.transform.localScale = new Vector3(1f, 1f, 1f);	
+		go.SendMessage("Init", "jiver error : "+errorCode, SendMessageOptions.DontRequireReceiver);
 	}
 	public override void OnMessageReceived (JiverModel.Message message)
 	{
@@ -86,11 +91,6 @@ public class JiverUI : JiverResponder {
 		go.transform.parent = mScrollChat.transform.FindChild("Grid");
 		go.transform.localScale = new Vector3(1f, 1f, 1f);	
 		go.SendMessage("Init", message, SendMessageOptions.DontRequireReceiver);
-//		mScrollChat.transform.FindChild("Grid").SendMessage("RePosition", SendMessageOptions.DontRequireReceiver);
-//		go.GetComponent<ScriptItemChat>().Init(message.GetSenderName(), message.GetMessage());
-//		go.transform.localPosition = new Vector3(0f, -mPosGuide, 0f);
-//		mPosGuide += 140f;
-//		mListFriendItems.Add (go);
 	}
 	public override void OnSystemMessageReceived (JiverModel.SystemMessage message)
 	{

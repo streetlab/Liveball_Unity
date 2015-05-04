@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ScriptBetting : MonoBehaviour {
+	public string mNoMoreGoldTitle;
+	public string mNoMoreGoldBody;
 
 	string mNameSelectedBtn;
 	ScriptBettingItem mSbi;
@@ -64,34 +66,34 @@ public class ScriptBetting : MonoBehaviour {
 		mStrategyInfo = null;
 	}
 
-	public void InitWithStrategy(string btnName, ItemStrategyInfo strategyInfo){
+	public bool InitWithStrategy(string btnName, ItemStrategyInfo strategyInfo){
 		ClearCardData();
 		mStrategyInfo = strategyInfo;
-		Init (btnName);
+		return Init (btnName);
 	}
 
-	public void InitWithCard(string btnName, CardInfo cardInfo){
+	public bool InitWithCard(string btnName, CardInfo cardInfo){
 		ClearCardData();
 		mCardInfo = cardInfo;
-		Init (btnName);
+		return Init (btnName);
 	}
 
-	public void InitWithoutCard(string btnName){
+	public bool InitWithoutCard(string btnName){
 		ClearCardData();
-		Init (btnName);
+		return Init (btnName);
 	}
 
 	public void DialogueHandler(DialogueMgr.BTNS btn){
-		UtilMgr.OnBackPressed();
+		DialogueMgr.DismissDialogue();
 	}
 
-	void Init(string btnName)
+	bool Init(string btnName)
 	{
 		if(double.Parse(UserMgr.UserInfo.userGoldenBall) < 1){
-			DialogueMgr.ShowDialogue("not enough gold", "you must have at least one or more gold",
+			DialogueMgr.ShowDialogue(mNoMoreGoldTitle, mNoMoreGoldBody,
 			                         DialogueMgr.DIALOGUE_TYPE.Alert,
 			                         DialogueHandler);
-			return;
+			return true;
 		}
 
 		mNameSelectedBtn = btnName;
@@ -155,6 +157,8 @@ public class ScriptBetting : MonoBehaviour {
 		InitAmountUse();
 		
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioOpenBet);
+
+		return false;
 	}
 
 	void InitAmountUse(){

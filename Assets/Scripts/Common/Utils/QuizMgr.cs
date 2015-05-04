@@ -122,8 +122,10 @@ public class QuizMgr : MonoBehaviour {
 		if (quiz == null)
 			return;
 
-		Debug.Log ("InitSimpleResult2");
 		quiz.quizValue = simpleEvent.Response.data [0].quizValue;
+
+		if(simpleEvent.Response.data[0].isCancel > 0)
+			quiz.resultMsg = simpleEvent.Response.data[0].resultMsg;
 
 		if(simpleEvent.Response.data[0].respStatus > 0){
 		
@@ -168,7 +170,11 @@ public class QuizMgr : MonoBehaviour {
 		if(msgInfo.type.Equals(Constants.POST_MSG)){
 			
 		} else if(msgInfo.type.Equals(Constants.POST_GAME_START)){
-			//refresh schedule list
+			if(UserMgr.Schedule != null){
+				if(UserMgr.Schedule.gameSeq == int.Parse(msgInfo.info.gameSeq)){
+					Application.LoadLevel("SceneGame");
+				}
+			}
 		} else if(msgInfo.type.Equals(Constants.POST_GAME_STATUS)){
 			if(Instance.mMainTop != null){
 				bool hasQuiz = false;
@@ -192,13 +198,11 @@ public class QuizMgr : MonoBehaviour {
 				
 				Instance.mMainTop.RequestBoardInfo();
 			}
-		} else if(msgInfo.type.Equals(Constants.POST_QUIZ_RESULT)){
+		} else if(msgInfo.type.Equals(Constants.POST_QUIZ_RESULT)
+		          || msgInfo.type.Equals(Constants.POST_QUIZ_CANCEL)){
 			if(Instance.mMainTop != null){
 				Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.info.quizListSeq));
-
-//				Instance.mMainTop.mBetting.transform.FindChild("SprBetting")
-//					.GetComponent<ScriptBetting>().UpdateHitterItem(int.Parse(msgInfo.info.quizListSeq));
 			}
-		}
+		} 
 	}
 }
