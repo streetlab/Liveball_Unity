@@ -3,12 +3,15 @@ using System.Collections;
 
 public class UserMgr : MonoBehaviour {
 
+	
 	static UserMgr _instance;
-
+	
 	UserInfo _userInfo;
 	CardInvenInfo _cardInvenInfo;
 	ScheduleInfo _schedule;
-
+	LineupInfo _awayLineup;
+	LineupInfo _homeLineup;
+	
 	
 	static UserMgr Instance
 	{
@@ -38,31 +41,46 @@ public class UserMgr : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
-
+	
 	public static UserInfo UserInfo
 	{
 		get{ return Instance._userInfo;}
 		set{Instance._userInfo = value;}
 	}
-
+	
 	public static CardInvenInfo CardInvenInfo
 	{
 		get{ return Instance._cardInvenInfo;}
 		set{Instance._cardInvenInfo = value;}
 	}
-
+	
 	public static ScheduleInfo Schedule
 	{
 		get{return Instance._schedule;}
 		set{Instance._schedule = value;}
 	}
-
-
+	
+	public static LineupInfo AwayLineup
+	{
+		get{return Instance._awayLineup;}
+		set{Instance._awayLineup = value;}
+	}
+	
+	
+	
+	public static LineupInfo HomeLineup {
+		get {
+			return Instance._homeLineup;
+		}
+		set {
+			Instance._homeLineup = value;
+		}
+	}
 }

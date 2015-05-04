@@ -173,6 +173,8 @@ public class ScriptMainTop : MonoBehaviour {
 		mBetting.SetActive (false);
 
 		mState = STATE.Lineup;
+
+		mLineup.GetComponent<LineupControl> ().view ();
 	}
 
 	void OpenBingo()

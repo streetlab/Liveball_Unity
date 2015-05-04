@@ -20,6 +20,7 @@ public class Maincontrol : MonoBehaviour {
 	List<string> Score_L = new List<string>();
 	List<string> Score_R = new List<string>();
 	List<string> interActive = new List<string>();
+	
 	List<string> gameStatus = new List<string>();
 	
 	List<string> day = new List<string>();
@@ -209,7 +210,7 @@ public class Maincontrol : MonoBehaviour {
 			maxheight += (gap - (bargap * 5))+((float) daycount[i])*(bargap);
 		}
 		maxheight -= (gap - (bargap * 5)) * addsum;
-		for (int s = 0; s<8; s++) {
+		for (int s = 0; s<10; s++) {
 			for (int i = mScheduleEvent.Response.data.Count-1; i>=0; i-=1) {
 				array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
 				for (int z = 6; z<array.Length; z++) {
@@ -220,8 +221,9 @@ public class Maincontrol : MonoBehaviour {
 				aa = string.Join ("", ch.ToArray ());
 				todays=(System.DateTime.Now.Day).ToString();
 				
-				if(s>4){
-					todays = (s-4).ToString();
+				if(s>5){
+					todays = (s-5).ToString();
+					
 				}else{
 					todays = (int.Parse(todays)+s).ToString();
 				}
@@ -238,7 +240,7 @@ public class Maincontrol : MonoBehaviour {
 						//	Debug.Log(aa + "  :  " +dayandday[k]+"   k");
 						if(int.Parse(aa)==dayandday[k]){
 							for(int t = 0; t<when.Count;t++){
-								//Debug.Log(dayandday[when[t]] + "  :  " +dayandday[k]+"   t"+t);
+								Debug.Log(dayandday[when[t]] + "  :  " +dayandday[k]+"   t"+t);
 								if(dayandday[k]==dayandday[when[t]]){
 									//	Debug.Log(t);
 									sum = when.Count-(t+1);
@@ -266,16 +268,16 @@ public class Maincontrol : MonoBehaviour {
 							}
 						}
 					}
-					//Debug.Log(aa+" : "+dayandday[0]);
-					//Debug.Log(gap+ "  :  "+ sum);
-					//Debug.Log(sumint+ "  :  "+bargap);
-					//Debug.Log(addsumint+ "  :  "+addsum);
-					float y = (gap * (sum))+(((float)sumint+addsumint)*bargap)-((gap - (bargap * 5))*addsum);
-					//float y = maxheight-((gap * (sum))-(((float)sumint+addsumint)*bargap));
-					//float y = maxheight;
-					//Debug.Log(maxheight);
-					//Debug.Log((gap * (sum))-(((float)sumint+addsumint)*bargap)+((gap - (bargap * 5))*addsum));
-					//Debug.Log(maxheight-((gap * (sum))-(((float)sumint+addsumint)*bargap))+((gap - (bargap * 5))*addsum));
+					for(int q = (int)dayadd; q<=0;q--){
+						if(daycount[q] != 0&&daycount[q] != 5){
+							addsumint += 5-daycount[q];
+						}
+					}
+					
+					
+					Debug.Log("sumint : " + sumint + " , addsumint : " + addsumint);
+					float y = (gap * (sum))+(((float)addsumint)*bargap)-((gap - (bargap * 5))*addsum);
+					
 					y -= UtilMgr.GetScaledPositionY();
 					bgs.transform.localPosition += new Vector3 (0, y, 0);
 					
@@ -482,8 +484,8 @@ public class Maincontrol : MonoBehaviour {
 					g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text =interActive[i + (a * 5)-sumint];
 					g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(1,1,1);
 					if(gameStatus[i + (a * 5)-sumint]=="1"){
-						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text ="LIVE";
-						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(1,0,0);
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text =interActive[i + (a * 5)-sumint];
+						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(0,0,0);
 					}else if(gameStatus[i + (a * 5)-sumint]=="2"){
 						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text ="경기종료";
 						g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().color = new Color(71f/255f,200f/255f,62f/255f);
