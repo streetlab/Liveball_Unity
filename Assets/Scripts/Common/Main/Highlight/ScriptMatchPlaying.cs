@@ -10,6 +10,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public GameObject itemPoll;
 	public GameObject itemInfo;
 	public GameObject mTop;
+	public GameObject mItemDetail;
 
 	float mPreItemSize;
 	float mPosGuide;
@@ -29,7 +30,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public List<GameObject> mQuizListItems = new List<GameObject>();
 
 	void Start () {
-		UtilMgr.ResizeList (mList);
+//		UtilMgr.ResizeList (mList);
 		mFirstLoading = true;
 		QuizMgr.IsBettingOpended = false;
 		QuizMgr.SequenceQuiz = 0;
@@ -39,6 +40,12 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mInningCounter = 0;
 		JoinGame ();
 
+		if(UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY){
+			mList.transform.FindChild("Label").gameObject.SetActive(true);
+		} else{
+			mList.transform.FindChild("Label").gameObject.SetActive(false);
+		}
+		mItemDetail.SetActive(false);
 	}
 
 	void OnApplicationPause(bool pause){

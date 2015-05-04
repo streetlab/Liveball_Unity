@@ -22,7 +22,7 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 	bool isOpened;
 	bool isImgLoaded;
 //	public bool needSimpleResult;
-	GetSimpleResultEvent mSimpleEvent;
+//	GetSimpleResultEvent mSimpleEvent;
 
 	Vector3 mLocalPosList;
 	Vector2 mClipOffsetPanel;
@@ -201,8 +201,9 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 		if (isOpened) {
 			UtilMgr.RemoveAllBackEvents();
 			isOpened = false;
-			mDetailView.GetComponent<UIPanel> ().depth = 0;
-			mDetailView.transform.FindChild("ListDetail").GetComponent<UIPanel>().depth = 0;
+//			mDetailView.GetComponent<UIPanel> ().depth = 0;
+			mDetailView.SetActive(false);
+			mDetailView.transform.FindChild("ListDetail").gameObject.SetActive(false);//GetComponent<UIPanel>().depth = 0;
 			transform.GetComponent<UIDragScrollView>().enabled = true;
 //			if(transform.parent.GetComponent<SpringPanel> () != null)
 //				transform.parent.GetComponent<SpringPanel> ().enabled = true;
@@ -221,19 +222,23 @@ public class ScriptItemHitterHighlight : MonoBehaviour {
 	public void GotResult()
 	{
 		isOpened = true;
-		mDetailView.GetComponent<UIPanel> ().depth = 2;
-		mDetailView.transform.FindChild("ListDetail").GetComponent<UIPanel>().depth = 3;
+//		mDetailView.GetComponent<UIPanel> ().depth = 2;
+		mDetailView.SetActive(true);
+		mDetailView.transform.FindChild("ListDetail").gameObject.SetActive(true);//GetComponent<UIPanel>().depth = 3;
 		mDetailView.GetComponent<ScriptDetailHighlight> ().Init (mEvent.Response);
 
 		if(transform.parent.GetComponent<SpringPanel> () != null)
 			transform.parent.GetComponent<SpringPanel> ().enabled = false;
 		mLocalPosList = transform.parent.localPosition;
-		transform.parent.localPosition = new Vector3 (0f, 54f+mPositionY, 0f);
+		transform.parent.localPosition = new Vector3 (0f, 52f+mPositionY, 0f);
 //		TweenPosition.Begin(transform.parent.gameObject, 1f, new Vector3(0f, 54f+mPositionY, 0f));
 
 		//move after 1f
 		mClipOffsetPanel = NGUITools.FindInParents<UIPanel> (gameObject).clipOffset;
-//		NGUITools.FindInParents<UIPanel>(gameObject).clipOffset = new Vector2(0f, -326f-mPositionY);//191
+
+		float result = -326f+UtilMgr.GetScaledPositionY();
+
+		NGUITools.FindInParents<UIPanel>(gameObject).clipOffset = new Vector2(0f, result-mPositionY);//191
 	}
 
 //	IEnumerator moveOffset(){

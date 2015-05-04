@@ -8,8 +8,10 @@ public class ScriptTitle : MonoBehaviour {
 	public GetProfileEvent mProfileEvent;
 	GetCardInvenEvent mCardEvent;
 	public LoginInfo mLoginInfo;
+	CheckVersionEvent mVersionEvent;
 
 	bool mFBInitialized;
+	bool mMustUpdate;
 
 	public string mJoinError;
 
@@ -18,20 +20,23 @@ public class ScriptTitle : MonoBehaviour {
 //		PlayerPrefs.SetString (Constants.PrefEmail, "");
 //		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
-		InitConstants();
 	}
 
 	void InitConstants(){
 		#if(UNITY_ANDROID)
-		AndroidMgr.GetHeightStatusBar();
+//		AndroidMgr.GetHeightStatusBar();
 		#elif(UNITY_EDITOR)
 		#else
 		#endif
 
 		Constants.SCREEN_HEIGHT_ORIGINAL = Screen.height;
-		Debug.Log("height : "+Screen.height+", width : "+Screen.width);
-		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
+//		Debug.Log("height : "+Screen.height+", width : "+Screen.width);
+//		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
 		Debug.Log(SystemInfo.deviceModel);
+
+		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;
+		Constants.IMAGE_SERVER_HOST = mVersionEvent.Response.data.FILE_PATH;
+		Constants.QUERY_SERVER_HOST = mVersionEvent.Response.data.APPS_SVR;//[0].serviceURL;
 	}
 
 	public void Init()
@@ -46,13 +51,78 @@ public class ScriptTitle : MonoBehaviour {
 
 		transform.FindChild ("SprLogo").gameObject.SetActive (true);
 		
-		CheckPreference ();
+//		CheckPreference ();
+		mVersionEvent = new CheckVersionEvent(new EventDelegate(this, "ReceivedVersion"));
+		NetMgr.CheckVersion(mVersionEvent);
+	}
+
+	public void ReceivedVersion(){
+		Debug.Log("Application.version is "+Application.version);
+		Debug.Log("Recent.version is "+mVersionEvent.Response.data.recentVer);
+		Debug.Log("Support.version is "+mVersionEvent.Response.data.supportVer);
+
+		int aFirst = int.Parse(Application.version.Substring(0, 1));
+		int aSecond = int.Parse(Application.version.Substring(2, 1));
+		int aThird = int.Parse(Application.version.Substring(4, 1));
+
+		int rFirst = int.Parse(mVersionEvent.Response.data.recentVer.Substring(0, 1));
+		int rSecond = int.Parse(mVersionEvent.Response.data.recentVer.Substring(2, 1));
+		int rThird = int.Parse(mVersionEvent.Response.data.recentVer.Substring(4, 1));
+
+		int sFirst = int.Parse(mVersionEvent.Response.data.supportVer.Substring(0, 1));
+		int sSecond = int.Parse(mVersionEvent.Response.data.supportVer.Substring(2, 1));
+		int sThird = int.Parse(mVersionEvent.Response.data.supportVer.Substring(4, 1));
+
+		if(aFirst < sFirst
+		   || aSecond < sSecond
+		   || aThird < sThird){
+			mMustUpdate = true;
+			DialogueMgr.ShowDialogue("version check", "this app requires the update", DialogueMgr.DIALOGUE_TYPE.YesNo,
+			                         "update", "", "exit",
+			                         DialogueClickHandler);
+			return;
+		} else if(aFirst < rFirst
+		          || aSecond < rSecond
+		          || aThird < rThird){
+			mMustUpdate = false;
+			DialogueMgr.ShowDialogue("version check", "this app has been update", DialogueMgr.DIALOGUE_TYPE.YesNo,
+			                         "update", "", "skip",
+			                         DialogueClickHandler);
+			return;
+		}
+		CheckPreference();
+	}
+
+	public void DialogueClickHandler(DialogueMgr.BTNS btn){
+		if(mMustUpdate){
+			if(btn == DialogueMgr.BTNS.Btn1){
+				Debug.Log("Go to Store");
+				#if(UNITY_ANDROID)
+				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				#elif(UNITY_EDITOR)
+				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				#else
+				#endif
+			} else{
+				Application.Quit();
+			}
+		} else{
+			if(btn == DialogueMgr.BTNS.Btn1){
+				Debug.Log("Go to Store");
+			} else{
+				CheckPreference();
+			}
+		}
 	}
 
 	void CheckPreference()
 	{
+		
+		InitConstants();
+
 		string email = PlayerPrefs.GetString (Constants.PrefEmail);
 		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
+
 		if (email == null || email.Length < 1) {
 			StopLogin();
 		}

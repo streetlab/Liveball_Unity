@@ -20,9 +20,12 @@ public class ScriptSuperRoot : MonoBehaviour {
 		if(GetComponent<AudioSource>() == null){
 			gameObject.AddComponent<AudioSource>();
 		}
-//		Debug.Log("frameRate is "+Application.targetFrameRate);
-		Application.targetFrameRate = 30;
-//		Debug.Log("vSyncCount is "+QualitySettings.vSyncCount);
+		Debug.Log("frameRate is "+Application.targetFrameRate);
+
+		Debug.Log("vSyncCount is "+QualitySettings.vSyncCount);
+
+		QualitySettings.vSyncCount = 0;
+		Application.targetFrameRate = 20;
 	}
 
 	void Update () {

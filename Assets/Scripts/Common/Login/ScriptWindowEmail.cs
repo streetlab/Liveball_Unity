@@ -117,4 +117,12 @@ public class ScriptWindowEmail : MonoBehaviour {
 	{
 
 	}
+
+	public void ConfirmedEmail(){
+		transform.FindChild ("InputPwd").GetComponent<UIInput>().isSelected = true;
+	}
+
+	public void ConfirmedPwd(){
+		NextClicked();
+	}
 }

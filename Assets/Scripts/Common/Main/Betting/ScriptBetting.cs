@@ -53,7 +53,7 @@ public class ScriptBetting : MonoBehaviour {
 	CardInfo mCardInfo;
 	ItemStrategyInfo mStrategyInfo;
 
-	JoinQuizEvent mJoinQuizEvent;
+//	JoinQuizEvent mJoinQuizEvent;
 
 	public AudioClip mAudioOpenBet;
 	public AudioClip mAudioConfirm;
@@ -134,8 +134,15 @@ public class ScriptBetting : MonoBehaviour {
 
 		mLblTotalRatio.text = total+"x";
 
+		InitAmountUse();
 		
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioOpenBet);
+	}
+
+	void InitAmountUse(){
+		if(mAmountUse > double.Parse(UserMgr.UserInfo.userGoldenBall)){
+			mAmountUse = double.Parse(UserMgr.UserInfo.userGoldenBall);
+		}
 	}
 
 	double GetExpectGold(){
@@ -191,22 +198,13 @@ public class ScriptBetting : MonoBehaviour {
 
 		ClearCardData();
 
-		CompleteSending ();
-
 		SetBtnsDisable();
+
+		InitAmountUse();
 		
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioConfirm);
 
 		UtilMgr.OnBackPressed();
-	}
-
-	public void CompleteSending()
-	{
-//		UpdateHitterItem (QuizMgr.QuizInfo.quizListSeq);
-//		SetBtnsDisable ();
-//		CheckToClose ();
-//		UtilMgr.OnBackPressed ();
-
 	}
 
 	public void UpdateHitterItem(JoinQuizInfo quizInfo)

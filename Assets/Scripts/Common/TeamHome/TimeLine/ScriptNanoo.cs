@@ -65,7 +65,9 @@ public class ScriptNanoo : MonoBehaviour {
 			FsmVariables.FindFsmString("StatusAnimation").Value;
 		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 		
-		if (menuStatus.Equals ("Closed") && !isOpen) {
+		if (menuStatus.Equals ("Closed") 
+		    && !isOpen
+		    && !DialogueMgr.IsShown) {
 			ShowWebView();
 		} else {
 			HideWebView();
@@ -112,6 +114,7 @@ public class ScriptNanoo : MonoBehaviour {
 
 	bool OnWebViewShouldClose(UniWebView webView) {
 		Debug.Log ("OnWebViewShouldClose");
+		UtilMgr.OnBackPressed();
 
 		return false;
 

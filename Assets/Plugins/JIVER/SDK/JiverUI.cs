@@ -40,6 +40,8 @@ public class JiverUI : JiverResponder {
 	GUIStyle systemMessageLabelStyle;
 	GUIStyle inputTextFieldStyle;
 	GUIStyle sendButtonStyle;
+	GUIStyle chatBoxStyle;
+	Texture2D chatBoxTex;
 
 	string channelName = "Connecting...";
 	string selectedChannelUrl = "";
@@ -130,6 +132,11 @@ public class JiverUI : JiverResponder {
 			sendButtonStyle = new GUIStyle(GUI.skin.button);
 		}
 
+		if(chatBoxStyle == null){
+			chatBoxStyle = new GUIStyle(GUI.skin.box);
+//			chatBoxTex = MakeTex(WIDTH, HEIGHT, Color.white);
+		}
+
 		messageLabelStyle.fontSize = messageFontSize;
 		messageLabelStyle.normal.textColor = messageDefaultColor;
 		
@@ -138,6 +145,9 @@ public class JiverUI : JiverResponder {
 
 		inputTextFieldStyle.fontSize = messageFontSize;
 		sendButtonStyle.fontSize = messageFontSize;
+
+
+//		chatBoxStyle.normal.background = chatBoxTex;
 
 
 		GUI.skin.verticalScrollbar.fixedWidth = scrollBarWidth;
@@ -152,6 +162,19 @@ public class JiverUI : JiverResponder {
 
 
 		LINE_HEIGHT = inputTextFieldStyle.CalcHeight (new GUIContent ("W"), WIDTH);
+	}
+
+	private Texture2D MakeTex( int width, int height, Color col )
+	{
+		Color[] pix = new Color[width * height];
+		for( int i = 0; i < pix.Length; ++i )
+		{
+			pix[ i ] = col;
+		}
+		Texture2D result = new Texture2D( width, height );
+		result.SetPixels( pix );
+		result.Apply();
+		return result;
 	}
 
 	void DrawTabs(float width, float height)
@@ -332,7 +355,10 @@ public class JiverUI : JiverResponder {
 		INPUT_HEIGHT_WEIGHT = LINE_HEIGHT / HEIGHT * 1.2f;
 
 		bool submit = false;
+//		GUI.backgroundColor = Color.white;
+		GUI.color = Color.white;
 		GUI.Box (new Rect (LEFT, TOP, WIDTH, HEIGHT), "");
+
 		GUI.BeginGroup (new Rect (LEFT, TOP, WIDTH, HEIGHT));
 			GUI.BeginGroup (new Rect (0, 0, WIDTH, tabHeight));
 //			DrawTabs (WIDTH, tabHeight);

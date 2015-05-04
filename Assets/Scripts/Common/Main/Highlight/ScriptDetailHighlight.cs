@@ -30,9 +30,38 @@ public class ScriptDetailHighlight : MonoBehaviour {
 
 	void SetResultGraph(){
 		int i = 0;
+
+//		List<QuizResultGlobal> globalList = new List<QuizResultGlobal>();
+//		List<QuizResultGlobal> friendsList = new List<QuizResultGlobal>();
+//
+//		QuizResultGlobal global = new QuizResultGlobal();
+		QuizInfo myQuiz = null;
+		int resp1 = 0;
+		int resp2 = 0;
+
+		foreach(QuizInfo quiz in QuizMgr.QuizList){
+			if(quiz.quizListSeq == mResponse.data.global[0].quizListSeq)
+				myQuiz = quiz;
+		}
+
+		if(myQuiz != null
+		   && myQuiz.resp != null
+		   && myQuiz.resp.Count > 0){
+			resp1 = int.Parse(myQuiz.resp[0].respValue);
+			if(myQuiz.resp.Count > 1){
+				resp2 = int.Parse(myQuiz.resp[1].respValue);
+			}
+		}
+		
+
 		for (; i < mResponse.data.global.Count; i++) {
+			bool isMyChoice = false;
+			if(mResponse.data.global[i].orderSeq == resp1
+			   || mResponse.data.global[i].orderSeq == resp2)
+				isMyChoice = true;
+
 			Items[i].GetComponent<ScriptItemDetailGraph>().Init(
-				mResponse.data.global[i], mResponse.data.friend[i]);
+				mResponse.data.global[i], mResponse.data.friend[i], isMyChoice);
 		}
 
 		for(; i < 8; i++){

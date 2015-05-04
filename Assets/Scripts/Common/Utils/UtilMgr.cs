@@ -106,12 +106,13 @@ public class UtilMgr : MonoBehaviour {
 
 	public static void ResizeList(GameObject go)
 	{
+
 		Vector3 offset3 = go.transform.localPosition;
 		offset3.y += UtilMgr.GetScaledPositionY () ;
-		go.transform.localPosition = new Vector3 (0, offset3.y, 0);
+		go.transform.localPosition = new Vector3 (offset3.x, offset3.y, offset3.z);
 		Vector4 offset4 = go.GetComponent<UIPanel> ().baseClipRegion;
 		offset4.w -= UtilMgr.GetScaledPositionY () * 2;
-		go.GetComponent<UIPanel> ().baseClipRegion = new Vector4 (0, 0, 720f, offset4.w);
+		go.GetComponent<UIPanel> ().baseClipRegion = new Vector4 (offset4.x, offset4.y, offset4.z, offset4.w);
 	}
 
 	public static float GetScaledPositionY()
@@ -120,7 +121,7 @@ public class UtilMgr : MonoBehaviour {
 		float width = (float)Screen.width;
 		float ratio = height / width;
 		float diff = Constants.DEFAULT_SCR_RATIO - ratio;
-//		Debug.Log ("ScaledPositionY is "+360f * diff);
+		Debug.Log ("ScaledPositionY is "+360f * diff);
 
 		return 360f * diff;
 	}

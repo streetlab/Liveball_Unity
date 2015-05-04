@@ -6,6 +6,8 @@ public class ScriptTopInfoItem : MonoBehaviour {
 	public string mStrDefault;
 	public string mStrLive;
 
+	ScheduleInfo mSchedule;
+
 	public enum STATE{
 		GROUP,
 		GOLD,
@@ -19,6 +21,13 @@ public class ScriptTopInfoItem : MonoBehaviour {
 //
 //		}
 //	}
+	public void GoToGame(){
+		if(Application.loadedLevelName.Equals("SceneMain"))
+			return;
+
+		UserMgr.Schedule = mSchedule;
+		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
+	}
 
 	public void SetGroupInfo(){
 		mState = STATE.GROUP;
@@ -52,6 +61,8 @@ public class ScriptTopInfoItem : MonoBehaviour {
 	}
 
 	public void SetVSInfo(ScheduleInfo scheduleInfo){
+		mSchedule = scheduleInfo;
+
 		mState = STATE.VS;
 
 		transform.FindChild("VSInfo").gameObject.SetActive(true);

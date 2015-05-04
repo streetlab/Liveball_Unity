@@ -13,12 +13,17 @@ public class JoinQuizEvent : BaseEvent {
 	public void InitResponse(string data)
 	{
 		Debug.Log ("JoinQuizResponse : " + data);
-		response = JsonFx.Json.JsonReader.Deserialize<BaseResponse>(data);
+		response = JsonFx.Json.JsonReader.Deserialize<GetProfileResponse>(data);
 
 		if (checkError ())
 			return;
 
 		eventDelegate.Execute ();
+	}
+
+	public GetProfileResponse Response
+	{
+		get{ return response as GetProfileResponse;}
 	}
 
 }

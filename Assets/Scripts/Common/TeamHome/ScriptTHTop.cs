@@ -49,8 +49,17 @@ public class ScriptTHTop : MonoBehaviour {
 
 	public void GotSchedule(){
 		ScheduleInfo schedule = null;
+
+
 		foreach(ScheduleInfo info in mScheduleEvent.Response.data){
-			if(info.gameStatus == ScheduleInfo.GAME_PLAYING){
+			bool bFoundMyTeam = false;
+			if(UserMgr.UserInfo.GetTeamCode().Equals(info.extend[0].teamCode))
+				bFoundMyTeam = true;
+			else if(UserMgr.UserInfo.GetTeamCode().Equals(info.extend[1].teamCode))
+				bFoundMyTeam = true;
+
+			if(bFoundMyTeam
+				&& info.gameStatus == ScheduleInfo.GAME_PLAYING){
 				schedule = info;
 				break;
 			}

@@ -37,7 +37,9 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
 		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 //		Debug.Log ("menuStatus : " + menuStatus);
-		if (menuStatus.Equals ("Closed") && !isOpen) {
+		if (menuStatus.Equals ("Closed")
+		    && !isOpen
+		    && !DialogueMgr.IsShown) {
 			transform.FindChild ("Panel").gameObject.SetActive (true);
 		} else {
 			transform.FindChild ("Panel").gameObject.SetActive (false);

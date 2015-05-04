@@ -79,7 +79,7 @@ public class NetMgr : MonoBehaviour{
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
-			return;
+//			return;
 		}
 
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
@@ -168,5 +168,10 @@ public class NetMgr : MonoBehaviour{
 	public static void GetPlayerStatistics(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetPlayerStatisticsRequest (), baseEvent);
+	}
+
+	public static void CheckVersion(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new CheckVersionRequest (), baseEvent);
 	}
 }

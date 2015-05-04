@@ -86,6 +86,10 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public void AnimateClosing()
 	{
+		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(true);
+		transform.FindChild("TopInfoItem").FindChild("BtnVS").gameObject.SetActive(true);
+		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(false);
+
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
 		transform.GetComponent<PlayMakerFSM> ().SendEvent ("CloseBetting");
 		TweenAlpha.Begin (mBetting.GetComponent<ScriptTF_Betting>().mSprComb, 1f, 0f);
@@ -108,6 +112,11 @@ public class ScriptMainTop : MonoBehaviour {
 	public void CompleteJoinQuiz(){
 		mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.RemoveAt (0);
 		CheckAndJoinQuiz ();
+
+		UserMgr.UserInfo.userGoldenBall = mJoinQuizEvent.Response.data.userGoldenBall;
+		UserMgr.UserInfo.userRuby = mJoinQuizEvent.Response.data.userRuby;
+		UserMgr.UserInfo.userDiamond = mJoinQuizEvent.Response.data.userDiamond;
+
 	}
 
 	void GoPreState()
@@ -251,6 +260,14 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundOpenBet);
 
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetGoldInfo();
+		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
+		transform.FindChild("TopInfoItem").FindChild("BtnVS").gameObject.SetActive(false);
+		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(true);
+	}
+
+	public void AllCancel(){
+		mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Clear();
+		UtilMgr.OnBackPressed();
 	}
 
 	public void RequestBoardInfo()
