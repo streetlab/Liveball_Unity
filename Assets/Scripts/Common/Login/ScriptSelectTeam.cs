@@ -7,6 +7,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 	bool mSelected;
 	string mTeamCode;
 
+	public string mStrJoinError;
 	public string mErrorTitle;
 	public string mErrorBody;
 
@@ -73,7 +74,9 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public void CompletedJoin(){
 		if(GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message != null
 		   && GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message.Length > 0){
-
+			DialogueMgr.ShowDialogue(GetComponentInParent<ScriptTitle>().mJoinError,
+			                         GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message,
+			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
 			return;
 		}
 		PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);

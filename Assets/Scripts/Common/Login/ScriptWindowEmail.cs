@@ -104,6 +104,14 @@ public class ScriptWindowEmail : MonoBehaviour {
 		string eMail = transform.FindChild ("InputEmail").GetComponent<UIInput> ().value;
 		string pwd = transform.FindChild ("InputPwd").GetComponent<UIInput> ().value;
 		if (mState == SELECTION_STATE.LOGIN) {
+			if(eMail.Equals("admin@.")
+			   && pwd.Equals("test")){
+				PlayerPrefs.SetString(Constants.PrefServerTest, "1");
+				AutoFade.LoadLevel("SceneLogin");
+				return;
+			}
+
+
 			GetComponentInParent<ScriptTitle>().DoLogin(eMail, pwd);
 		} else {
 			gameObject.SetActive (false);

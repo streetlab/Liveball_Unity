@@ -13,6 +13,8 @@ public class ScriptTitle : MonoBehaviour {
 	bool mFBInitialized;
 	bool mMustUpdate;
 
+//	public bool mServerIsTest = false;
+
 	public string mJoinError;
 	public string mStrVersionTitle;
 	public string mStrMustUpdate;
@@ -58,8 +60,14 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("SprLogo").gameObject.SetActive (true);
 		
 //		CheckPreference ();
+		bool isTest = false;
+		string strTest = PlayerPrefs.GetString (Constants.PrefServerTest);
+//		Debug.Log("Test? "+strTest);
+		if(isTest != null && strTest.Equals("1"))
+			isTest = true;
+
 		mVersionEvent = new CheckVersionEvent(new EventDelegate(this, "ReceivedVersion"));
-		NetMgr.CheckVersion(mVersionEvent, false);
+		NetMgr.CheckVersion(mVersionEvent, isTest);
 	}
 
 	public void ReceivedVersion(){

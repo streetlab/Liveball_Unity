@@ -75,6 +75,7 @@ public class NetMgr : MonoBehaviour{
 		string host = Constants.CHECK_SERVER_HOST;
 		if(isTest)
 			host = Constants.CHECK_TEST_SERVER_HOST;
+//		Debug.Log("host? "+host);
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		
