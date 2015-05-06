@@ -14,6 +14,12 @@ public class ScriptTitle : MonoBehaviour {
 	bool mMustUpdate;
 
 	public string mJoinError;
+	public string mStrVersionTitle;
+	public string mStrMustUpdate;
+	public string mStrRecommendUpdate;
+	public string mStrBtnUpdate;
+	public string mStrBtnExit;
+	public string mStrBtnContinue;
 
 	void Start()
 	{
@@ -53,7 +59,7 @@ public class ScriptTitle : MonoBehaviour {
 		
 //		CheckPreference ();
 		mVersionEvent = new CheckVersionEvent(new EventDelegate(this, "ReceivedVersion"));
-		NetMgr.CheckVersion(mVersionEvent);
+		NetMgr.CheckVersion(mVersionEvent, false);
 	}
 
 	public void ReceivedVersion(){
@@ -77,16 +83,16 @@ public class ScriptTitle : MonoBehaviour {
 		   || aSecond < sSecond
 		   || aThird < sThird){
 			mMustUpdate = true;
-			DialogueMgr.ShowDialogue("version check", "this app requires the update", DialogueMgr.DIALOGUE_TYPE.YesNo,
-			                         "update", "", "exit",
+			DialogueMgr.ShowDialogue(mStrVersionTitle, mStrMustUpdate, DialogueMgr.DIALOGUE_TYPE.YesNo,
+			                         mStrBtnUpdate, "", mStrBtnExit,
 			                         DialogueClickHandler);
 			return;
 		} else if(aFirst < rFirst
 		          || aSecond < rSecond
 		          || aThird < rThird){
 			mMustUpdate = false;
-			DialogueMgr.ShowDialogue("version check", "this app has been update", DialogueMgr.DIALOGUE_TYPE.YesNo,
-			                         "update", "", "skip",
+			DialogueMgr.ShowDialogue(mStrVersionTitle, mStrRecommendUpdate, DialogueMgr.DIALOGUE_TYPE.YesNo,
+			                         mStrBtnUpdate, "", mStrBtnContinue,
 			                         DialogueClickHandler);
 			return;
 		}
@@ -104,11 +110,17 @@ public class ScriptTitle : MonoBehaviour {
 				#else
 				#endif
 			} else{
-				Application.Quit();
+				UtilMgr.Quit();
 			}
 		} else{
 			if(btn == DialogueMgr.BTNS.Btn1){
 				Debug.Log("Go to Store");
+				#if(UNITY_ANDROID)
+				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				#elif(UNITY_EDITOR)
+				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				#else
+				#endif
 			} else{
 				CheckPreference();
 			}

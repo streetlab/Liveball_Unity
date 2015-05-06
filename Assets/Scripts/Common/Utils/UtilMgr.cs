@@ -12,6 +12,7 @@ public class UtilMgr : MonoBehaviour {
 
 	public static bool IsUntouchable;
 	public static bool OnPause;
+	public static string PreLoadedLevelName;
 
 	static UtilMgr Instance
 	{
@@ -88,9 +89,20 @@ public class UtilMgr : MonoBehaviour {
 		}
 		else
 		{
-			Instance.ShowExitDialog();
+			if(Application.loadedLevelName.Equals("SceneMain")){
+//				AutoFade.LoadLevel(PreLoadedLevelName);
+				AutoFade.LoadLevel("SceneGame");
+			} else{
+				Instance.ShowExitDialog();
+			}
+
 			return false;
 		}
+	}
+
+	public static void Quit(){
+		NetMgr.ExitGame(null);
+		Application.Quit();
 	}
 
 	public void ShowExitDialog(){
@@ -100,7 +112,7 @@ public class UtilMgr : MonoBehaviour {
 	public void DialogClickHandler(DialogueMgr.BTNS btn){
 //		Debug.Log("Clicked : "+btn);
 		if(btn == DialogueMgr.BTNS.Btn1){
-			Application.Quit();
+			UtilMgr.Quit();
 		}
 	}
 

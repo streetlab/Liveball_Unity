@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class ItemShopGoldInfo {
+public class ItemShopItemInfo {
 	int _productNo;
 	public int productNo {
 		get {
@@ -12,7 +12,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// 46,
+// 74,
 	int _productId;
 	public int productId {
 		get {
@@ -23,7 +23,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// 50,
+// 78,
 	int _purchaseType;
 	public int purchaseType {
 		get {
@@ -34,7 +34,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// 4,
+// 3,
 	int _brandNo;
 	public int brandNo {
 		get {
@@ -89,7 +89,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// "ITEM_GOLDEN_50K",
+// "ITEM_BET_DEFENCE",
 	string _productName;
 	public string productName {
 		get {
@@ -100,7 +100,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// "골든볼 50,000 충전",
+// "골든볼 쉴드",
 	int _productPrice;
 	public int productPrice {
 		get {
@@ -111,7 +111,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// 50,
+// 10,
 	string _productValue;
 	public string productValue {
 		get {
@@ -122,7 +122,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// "50000",
+// "5",
 	string _productImage;
 	public string productImage {
 		get {
@@ -133,7 +133,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// "item_goldenball_5k.png",
+// "item_combo_defence.png",
 	int _discountNo;
 	public int discountNo {
 		get {
@@ -166,7 +166,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// "50000",
+// "5",
 	int _purchasePrice;
 	public int purchasePrice {
 		get {
@@ -177,7 +177,7 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// 50,
+// 10,
 	string _productDesc;
 	public string productDesc {
 		get {
@@ -188,8 +188,8 @@ public class ItemShopGoldInfo {
 		}
 	}
 
-// "sdd",
-	string _imagePath;// "shop/goldenball/"
+// "sss",
+	string _imagePath;// "shop/item/"
 
 	public string imagePath {
 		get {

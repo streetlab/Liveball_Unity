@@ -51,6 +51,7 @@ public class ScriptMainTop : MonoBehaviour {
 	STATE mState = STATE.Highlight;
 
 	void Start () {
+		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
 		mBtnHighlight.GetComponent<UIButton>().isEnabled = false;
 		mHighlight.SetActive (true);
 		mLineup.SetActive (false);
@@ -87,7 +88,8 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public void AnimateClosing()
 	{
-		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(true);
+//		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(true);
+		transform.FindChild("TopInfoItem").FindChild("BtnBack").gameObject.SetActive(true);
 		transform.FindChild("TopInfoItem").FindChild("BtnVS").gameObject.SetActive(true);
 		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(false);
 
@@ -263,7 +265,8 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundOpenBet);
 
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetGoldInfo();
-		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
+//		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
+		transform.FindChild("TopInfoItem").FindChild("BtnBack").gameObject.SetActive(false);
 		transform.FindChild("TopInfoItem").FindChild("BtnVS").gameObject.SetActive(false);
 		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(true);
 	}
@@ -380,6 +383,9 @@ public class ScriptMainTop : MonoBehaviour {
 		mBtnLivetalk.GetComponent<UIButton>().isEnabled = true;
 	}
 
+	public void GoPreScene(){
+		UtilMgr.OnBackPressed();
+	}
 
 	public void BtnClicked(string name)
 	{

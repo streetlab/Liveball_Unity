@@ -41,13 +41,22 @@ public class AutoFade : MonoBehaviour
 	}
 	private void StartFade(float aFadeOutTime, float aFadeInTime)
 	{
-		StartCoroutine(Fade(aFadeOutTime, aFadeInTime));
+		UtilMgr.PreLoadedLevelName = Application.loadedLevelName;
+//		StartCoroutine(Fade(aFadeOutTime, aFadeInTime));
+		UtilMgr.IsUntouchable = true;
+		Application.LoadLevelAsync(m_LevelName);
+		UtilMgr.IsUntouchable = false;
 	}
 	
 	public static void LoadLevel(string aLevelName,float aFadeOutTime, float aFadeInTime)
 	{
 		Instance.m_LevelName = aLevelName;
 		Instance.StartFade(aFadeOutTime, aFadeInTime);
+	}
+
+	public static void LoadLevel(string aLevelName)
+	{
+		LoadLevel(aLevelName, 0, 0);
 	}
 
 }

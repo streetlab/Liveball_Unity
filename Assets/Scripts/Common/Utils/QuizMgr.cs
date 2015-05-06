@@ -172,7 +172,7 @@ public class QuizMgr : MonoBehaviour {
 		} else if(msgInfo.type.Equals(Constants.POST_GAME_START)){
 			if(UserMgr.Schedule != null){
 				if(UserMgr.Schedule.gameSeq == int.Parse(msgInfo.info.gameSeq)){
-					Application.LoadLevel("SceneGame");
+					AutoFade.LoadLevel("SceneGame");
 				}
 			}
 		} else if(msgInfo.type.Equals(Constants.POST_GAME_STATUS)){

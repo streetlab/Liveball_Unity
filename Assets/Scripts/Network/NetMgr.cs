@@ -35,7 +35,8 @@ public class NetMgr : MonoBehaviour{
 		{
 			Debug.Log(www.text);
 //			CommonDialogue.Show (www.text);
-			baseEvent.Init(www.text);
+			if(baseEvent != null)
+				baseEvent.Init(www.text);
 		}
 		else
 		{
@@ -62,7 +63,7 @@ public class NetMgr : MonoBehaviour{
 		webAPIProcessEvent (request, baseEvent, true);
 	}
 
-	private void webAPIProcessEventForCheckVersion(BaseRequest request, BaseEvent baseEvent, bool showLoading)
+	private void webAPIProcessEventForCheckVersion(BaseRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
 	{		
 		string reqParam = "";
 		string httpUrl = "";
@@ -70,8 +71,12 @@ public class NetMgr : MonoBehaviour{
 			reqParam = request.ToRequestString();
 		} else {
 		}
+
+		string host = Constants.CHECK_SERVER_HOST;
+		if(isTest)
+			host = Constants.CHECK_TEST_SERVER_HOST;
 		
-		WWW www = new WWW (Constants.LOGIN_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		
 		Debug.Log (reqParam);
 		
@@ -187,9 +192,9 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetPlayerStatisticsRequest (), baseEvent);
 	}
 
-	public static void CheckVersion(BaseEvent baseEvent)
+	public static void CheckVersion(BaseEvent baseEvent, bool isTest)
 	{
-		Instance.webAPIProcessEventForCheckVersion (new CheckVersionRequest (), baseEvent, true);
+		Instance.webAPIProcessEventForCheckVersion (new CheckVersionRequest (), baseEvent, isTest, true);
 	}
 
 	public static void GetLineup(string teamCode, BaseEvent baseEvent)
@@ -205,5 +210,10 @@ public class NetMgr : MonoBehaviour{
 	public static void GetItemShopRubyList(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent(new GetItemShopRubyRequest(), baseEvent);
+	}
+
+	public static void GetItemShopItemList(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new GetItemShopItemRequest(), baseEvent);
 	}
 }

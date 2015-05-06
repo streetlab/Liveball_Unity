@@ -52,7 +52,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		if(pause){
 			NetMgr.ExitGame(new ExitGameEvent(new EventDelegate(this, "CompleteExit")));
 		} else{
-			Application.LoadLevel(Application.loadedLevelName);
+			AutoFade.LoadLevel(Application.loadedLevelName);
 		}
 	}
 
