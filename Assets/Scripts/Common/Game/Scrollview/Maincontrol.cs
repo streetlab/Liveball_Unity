@@ -67,7 +67,7 @@ public class Maincontrol : MonoBehaviour {
 		bg_g.Clear();
 	}
 	void positionset(){
-		//	daycount [0] = 0;
+		//    daycount [0] = 0;
 		for (int i = 0; i<bgs.transform.childCount; i++) {
 			bg_g.Add(bgs.transform.GetChild(i).gameObject);
 		}
@@ -151,7 +151,7 @@ public class Maincontrol : MonoBehaviour {
 			}else{
 				when.Add(i);
 			}
-			//	Debug.Log(aa+"i : " + i);
+			//    Debug.Log(aa+"i : " + i);
 			ch.Clear ();
 		}
 		daycount.Clear ();
@@ -237,12 +237,12 @@ public class Maincontrol : MonoBehaviour {
 					
 					
 					for(int k = 0; k<dayandday.Count;k++){
-						//	Debug.Log(aa + "  :  " +dayandday[k]+"   k");
+						//    Debug.Log(aa + "  :  " +dayandday[k]+"   k");
 						if(int.Parse(aa)==dayandday[k]){
 							for(int t = 0; t<when.Count;t++){
 								Debug.Log(dayandday[when[t]] + "  :  " +dayandday[k]+"   t"+t);
 								if(dayandday[k]==dayandday[when[t]]){
-									//	Debug.Log(t);
+									//    Debug.Log(t);
 									sum = when.Count-(t+1);
 									break;
 								}
@@ -395,8 +395,8 @@ public class Maincontrol : MonoBehaviour {
 		for (int i = 0; i<oldlist.Count; i++) {
 			//Debug.Log(">?"+i);
 			//if(i>0){
-			//	Debug.Log(oldlist.Count-1-g-i+" fff  ");
-			//	Debug.Log(i+" iii  ");
+			//    Debug.Log(oldlist.Count-1-g-i+" fff  ");
+			//    Debug.Log(i+" iii  ");
 			if(oldlist.Count-1-g-i>=0){
 				bgs.transform.GetChild(oldlist.Count-1-g-i).transform.localPosition = oldlist[i];
 			}
@@ -417,10 +417,10 @@ public class Maincontrol : MonoBehaviour {
 		
 		if (teamname.Count > 0) {
 			//Debug.Log ("g : " + g.transform.parent);
-			//	Debug.Log(a);
-			//	Debug.Log(g.transform.GetChild (0));
-			//	Debug.Log(daycount[a]);
-			//	Debug.Log(day [a]);
+			//    Debug.Log(a);
+			//    Debug.Log(g.transform.GetChild (0));
+			//    Debug.Log(daycount[a]);
+			//    Debug.Log(day [a]);
 			g.transform.GetChild (0).GetComponent<UILabel> ().text = day [a];
 			g.transform.GetChild (0).GetChild (0).GetComponent<UILabel> ().text = date [a];
 		}
@@ -471,7 +471,7 @@ public class Maincontrol : MonoBehaviour {
 				g.transform.GetChild (1).GetChild (i).GetChild (2).GetComponent<UILabel> ().text = district [i + (a * 5)-sumint];
 				g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (0).GetComponent<UILabel> ().text = time [i + (a * 5)-sumint];
 				g.transform.GetChild (1).GetChild (i).GetChild (2).GetChild (1).GetComponent<UILabel> ().text = broad [i + (a * 5)-sumint];
-				//	Debug.Log(i + (a * 5)-sumint);
+				//    Debug.Log(i + (a * 5)-sumint);
 				if(gameStatus[i + (a * 5)-sumint]=="0"){
 					g.transform.GetChild (1).GetChild (i).GetChild (3).GetComponent<UILabel> ().text = "";
 					g.transform.GetChild (1).GetChild (i).GetChild (3).GetChild (0).GetComponent<UILabel> ().text = "";
