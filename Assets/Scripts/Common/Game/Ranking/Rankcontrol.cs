@@ -13,6 +13,7 @@ public class Rankcontrol : MonoBehaviour {
 	List<int> l = new List<int> ();
 	List<int> d = new List<int> ();
 	List<int> prevRanking= new List<int> ();
+	List<int> behind= new List<int> ();
 	List<string> image = new List<string> ();
 
 	GetTeamRankingEvent mRankingEvent;
@@ -37,6 +38,7 @@ public class Rankcontrol : MonoBehaviour {
 		d.Clear ();
 		prevRanking.Clear ();
 		image.Clear ();
+		behind.Clear ();
 		Debug.Log (mRankingEvent.Response.data[0].teamName +"'s Ranking is "+mRankingEvent.Response.data[0].ranking);
 		for (int i = 0; i<mRankingEvent.Response.data.Count; i++) {
 			rank.Add (mRankingEvent.Response.data[i].ranking);
@@ -47,6 +49,7 @@ public class Rankcontrol : MonoBehaviour {
 			prevRanking.Add(mRankingEvent.Response.data[i].prevRanking);
 			Debug.Log(mRankingEvent.Response.data[i].prevRanking);
 			image.Add(mRankingEvent.Response.data[i].imageName);
+			behind.Add(mRankingEvent.Response.data[i].behind);
 		}
 		setposition ();
 	}
@@ -66,7 +69,7 @@ public class Rankcontrol : MonoBehaviour {
 			bars.transform.GetChild(i).GetChild(4).GetComponent<UILabel>().text = d[i].ToString();
 
 
-			bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = prevRanking[i].ToString();
+			bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = behind[i].ToString();
 
 
 			string imgName = UtilMgr.GetTeamEmblem(image[i]);
