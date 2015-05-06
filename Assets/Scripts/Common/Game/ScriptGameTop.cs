@@ -13,6 +13,8 @@ public class ScriptGameTop : MonoBehaviour {
 	public GameObject mBtnLeague;
 	public GameObject mBtnStatistics;
 
+	public GameObject mEmblem;
+
 	GetScheduleEvent mScheduleEvent;
 
 	// Use this for initialization
@@ -26,6 +28,8 @@ public class ScriptGameTop : MonoBehaviour {
 		//NetMgr.GetScheduleAll (mScheduleEvent);
 
 //		OpenSchedule ();
+		mEmblem.GetComponent<UISprite>().spriteName =
+			UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
 	}
 
 	public void BtnClicked(string name){
