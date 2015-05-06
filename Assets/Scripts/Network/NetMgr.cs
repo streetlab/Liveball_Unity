@@ -196,4 +196,14 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent(new GetLineupRequest(teamCode), baseEvent);
 	}
+
+	public static void GetItemShopGoldList(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new GetItemShopGoldRequest(), baseEvent);
+	}
+
+	public static void GetItemShopRubyList(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new GetItemShopRubyRequest(), baseEvent);
+	}
 }

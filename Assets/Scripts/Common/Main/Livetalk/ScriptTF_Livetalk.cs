@@ -6,6 +6,7 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 	public GameObject mTop;
 	public GameObject mMainMenu;
 	public GameObject mRight;
+	public GameObject mChatView;
 
 	// Use this for initialization
 	const string DEFAULT_CHANNEL = "Liveballchat.";
@@ -18,7 +19,18 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 		ConnectToJiver();
 	}
 
+	void ClearList(){
+		ScriptItemChat[] itemChats = mChatView.transform.FindChild("Grid").GetComponentsInChildren<ScriptItemChat>();
+		if(itemChats != null){
+			foreach(ScriptItemChat sic in itemChats){
+				NGUITools.DestroyImmediate (sic.gameObject);
+			}
+		}
+	}
+
 	void ConnectToJiver(){
+		ClearList();
+
 		string appId = "1C0C2894-E73D-4711-B9A0-A55C2C4DEBF6";
 		//		string userId = SystemInfo.deviceUniqueIdentifier;
 		string userName = UserMgr.UserInfo.memberName;

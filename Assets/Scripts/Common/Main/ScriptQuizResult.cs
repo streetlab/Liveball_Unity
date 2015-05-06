@@ -94,7 +94,7 @@ public class ScriptQuizResult : MonoBehaviour {
 
 	public void InitParticle(){
 		foreach (GameObject go in mListParticles)
-			DestroyImmediate (go);
+			NGUITools.DestroyImmediate (go);
 		mListParticles.Clear ();
 
 		GameObject prefab = Resources.Load ("CoinBlastGold") as GameObject;
