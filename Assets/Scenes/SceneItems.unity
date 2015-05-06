@@ -524,7 +524,7 @@ MonoBehaviour:
           value: Animate
         fsmObjectParams: []
         fsmVarParams: []
-        byteData: 00000000000000000000000001cdcccc3e000000000000000000000100000000180000000000000000000000000000000000000000000100000000010000000001000000000001000046696e69736820416e696d6174696f6e00000100010000000000000000000000000001000000000000000000000000000001000000001500000000000000000000000000000000000000000001000000000100000000010000000000010000000001000100000000000001000000
+        byteData: 00000000000000000000000001cdcc4c3e000000000000000000000100000000150000000000000000000000000000000000000000000100000000010000000001000000000001000046696e69736820416e696d6174696f6e00000100010000000000000000000000000001000000000000000000000000000001000000001500000000000000000000000000000000000000000001000000000100000000010000000000010000000001000100000000000001000000
         arrayParamSizes: 00000000000000000000000000000000
         arrayParamTypes:
         - HutongGames.PlayMaker.FsmGameObject
@@ -4039,7 +4039,7 @@ Transform:
   m_GameObject: {fileID: 1665048206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00162469537, y: .00162469537, z: .00162469537}
+  m_LocalScale: {x: .0015600624, y: .0015600624, z: .0015600624}
   m_Children:
   - {fileID: 719650216}
   - {fileID: 1551683203}
@@ -5033,6 +5033,7 @@ GameObject:
   - 4: {fileID: 1996669218}
   - 114: {fileID: 1996669220}
   - 114: {fileID: 1996669219}
+  - 114: {fileID: 1996669221}
   m_Layer: 0
   m_Name: Scroll View
   m_TagString: Untagged
@@ -5047,7 +5048,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1996669217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 108, z: 0}
+  m_LocalPosition: {x: 0, y: 94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1197004409}
@@ -5120,11 +5121,23 @@ MonoBehaviour:
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
-  mClipRange: {x: 0, y: 0, z: 722, w: 1185}
+  mClipRange: {x: 0, y: 0, z: 722, w: 1150}
   mClipSoftness: {x: 0, y: 0}
   mDepth: 1
   mSortingOrder: 0
   mClipOffset: {x: 0, y: -155}
+--- !u!114 &1996669221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1996669217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37cd523196e7415abe2fa1efb952870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DontResetPosition: 0
 --- !u!1001 &2068660246
 Prefab:
   m_ObjectHideFlags: 0
@@ -5175,6 +5188,10 @@ Prefab:
     - target: {fileID: 11424532, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
       propertyPath: onClick.Array.data[0].mMethodName
       value: onhit
+      objectReference: {fileID: 0}
+    - target: {fileID: 131932, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
@@ -5516,7 +5533,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: e72b476f4cb2a462d91d0093b0767656, type: 3}
   mFont: {fileID: 0}
-  mText: "\uC815\uADDC \uB9AC\uADF8\uB294 9\uC6D4 \uC911\uC21C\uBD80\uD130 \uC9C4\uD589\uB429\uB2C8\uB2E4."
+  mText: Play ball! Live ball!!!
   mFontSize: 18
   mFontStyle: 0
   mAlignment: 2

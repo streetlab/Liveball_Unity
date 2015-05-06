@@ -51,6 +51,7 @@ public class ScriptMainTop : MonoBehaviour {
 	STATE mState = STATE.Highlight;
 
 	void Start () {
+		mBtnHighlight.GetComponent<UIButton>().isEnabled = false;
 		mHighlight.SetActive (true);
 		mLineup.SetActive (false);
 		mBingo.SetActive (false);
@@ -372,21 +373,33 @@ public class ScriptMainTop : MonoBehaviour {
 		                          mQuizResultPopup.GetComponent<ScriptQuizResult>());
 	}
 
+	void EnableBtns(){
+		mBtnHighlight.GetComponent<UIButton>().isEnabled = true;
+		mBtnLineup.GetComponent<UIButton>().isEnabled = true;
+		mBtnBingo.GetComponent<UIButton>().isEnabled = true;
+		mBtnLivetalk.GetComponent<UIButton>().isEnabled = true;
+	}
+
 
 	public void BtnClicked(string name)
 	{
+		EnableBtns();
 		switch(name)
 		{
 		case "Highlight":
+			mBtnHighlight.GetComponent<UIButton>().isEnabled = false;
 			OpenHighlight();
 			break;
 		case "Lineup":
+			mBtnLineup.GetComponent<UIButton>().isEnabled = false;
 			OpenLineup();
 			break;
-		case "Statistic":
+		case "Bingo":
+			mBtnBingo.GetComponent<UIButton>().isEnabled = false;
 			OpenBingo();
 			break;
 		case "Livetalk":
+			mBtnLivetalk.GetComponent<UIButton>().isEnabled = false;
 			OpenLivetalk();
 			break;
 		}

@@ -11,7 +11,7 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 	const string DEFAULT_CHANNEL = "Liveballchat.";
 
 	void Start () {
-//		ConnectToJiver();
+		ConnectToJiver();
 	}
 
 	void OnEnable(){

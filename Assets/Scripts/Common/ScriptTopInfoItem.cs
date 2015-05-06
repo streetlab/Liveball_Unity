@@ -5,6 +5,8 @@ public class ScriptTopInfoItem : MonoBehaviour {
 
 	public string mStrDefault;
 	public string mStrLive;
+	public string mStrReady;
+	public string mStrEnd;
 
 	ScheduleInfo mSchedule;
 
@@ -78,7 +80,13 @@ public class ScriptTopInfoItem : MonoBehaviour {
 		tfInfo.FindChild("SprVSLogo").GetComponent<UISprite>().spriteName =
 			UtilMgr.GetTeamEmblem(scheduleInfo.extend[1].imageName);
 		tfInfo.FindChild("LblScoreRight").GetComponent<UILabel>().text = scheduleInfo.extend[1].score+"";
-		tfInfo.FindChild("LblInfo").GetComponent<UILabel>().text = mStrLive;
+
+		if(scheduleInfo.gameStatus == ScheduleInfo.GAME_ENDED)
+			tfInfo.FindChild("LblInfo").GetComponent<UILabel>().text = mStrEnd;
+		else if(scheduleInfo.gameStatus == ScheduleInfo.GAME_PLAYING)
+			tfInfo.FindChild("LblInfo").GetComponent<UILabel>().text = mStrLive;
+		else if(scheduleInfo.gameStatus == ScheduleInfo.GAME_READY)
+			tfInfo.FindChild("LblInfo").GetComponent<UILabel>().text = mStrReady;
 	}
 
 	public void SetCardInfo(){
