@@ -2640,7 +2640,7 @@ Transform:
   m_GameObject: {fileID: 761375862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156494521, y: .00156494521, z: .00156494521}
+  m_LocalScale: {x: .00229357788, y: .00229357788, z: .00229357788}
   m_Children:
   - {fileID: 740811092}
   - {fileID: 1062601969}
@@ -5971,6 +5971,7 @@ MonoBehaviour:
   mBtnRanking: {fileID: 0}
   mBtnLeague: {fileID: 0}
   mBtnStatistics: {fileID: 0}
+  mEmblem: {fileID: 0}
 --- !u!114 &1062601971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6950,11 +6951,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400058, guid: 1eb1443bae4094923ac03b41b8b2bcdd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 400058, guid: 1eb1443bae4094923ac03b41b8b2bcdd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 285
       objectReference: {fileID: 0}
     - target: {fileID: 400058, guid: 1eb1443bae4094923ac03b41b8b2bcdd, type: 2}
       propertyPath: m_LocalPosition.z

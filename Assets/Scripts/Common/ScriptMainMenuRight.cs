@@ -91,36 +91,6 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}
 			//Debug.Log(" ALL.Count! :  " + ALL.Count);
 		Debug.Log(count);
-//			int day;
-//			
-//			if(ALL.Count<1){
-//			count = 0;
-//					day = 30;
-//				//Debug.Log(mScheduleEvent.Response.data.Count);
-//					for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
-//				array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
-//				ch.Clear ();
-//				
-//				for (int z = 6; z<8; z++) {
-//					
-//					ch.Add (array [z].ToString ());
-//					
-//					
-//				}
-//				aa = string.Join ("", ch.ToArray ());
-//						Debug.Log(day + " : " + aa);
-//						if (day == int.Parse (aa)) {
-//							count+=1;
-//							
-//							ALL.Add (mScheduleEvent.Response.data [i].extend [0].imageName);
-//							ALL.Add (mScheduleEvent.Response.data [i].extend [1].imageName);
-//							ALL.Add (mScheduleEvent.Response.data [i].interActive);
-//							ALL.Add ((mScheduleEvent.Response.data [i].extend [0].score).ToString () + " : " + (mScheduleEvent.Response.data [i].extend [1].score).ToString ());
-//							
-//
-//					}
-//				}
-		//	}
 			
 			D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
 			if (0<ALL.Count) {
@@ -165,6 +135,8 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				NEW.gameObject.SetActive (true);
 				//Debug.Log(NEW);
 				//Debug.Log(NEW.transform.parent);
+
+				transform.FindChild("BtnRight").FindChild("Scroll").GetComponent<UIScrollView>().ResetPosition();
 			}
 		}
 		Starts = false;

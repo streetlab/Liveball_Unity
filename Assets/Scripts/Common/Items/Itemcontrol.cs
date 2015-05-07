@@ -53,8 +53,8 @@ public class Itemcontrol : MonoBehaviour {
 				temp1.transform.parent = origin1.transform.parent;
 				temp1.transform.localScale = new Vector3 (1, 1, 1);
 				temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - (i * gap), originV1.z);
-				temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = getruby.Response.data [i].productName;
-				temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i].productDesc;
+			temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = "루비 " + getruby.Response.data [i].productValue+"개";
+			temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i].productDesc;
 			temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getruby.Response.data [i].productPrice.ToString ())+"원";
 			
 			
@@ -63,7 +63,7 @@ public class Itemcontrol : MonoBehaviour {
 
 		
 		}
-
+		transform.FindChild ("category 1").GetComponent<UIScrollView> ().ResetPosition ();
 	}
 
 	void gold(){
@@ -88,6 +88,7 @@ public class Itemcontrol : MonoBehaviour {
 			
 			
 		}
+		transform.FindChild ("category 2").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.FindChild ("category 2").gameObject.SetActive (false);
 	}
 
@@ -124,6 +125,7 @@ public class Itemcontrol : MonoBehaviour {
 			
 			
 		}
+		transform.FindChild ("category 3").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.FindChild ("category 3").gameObject.SetActive (false);
 	}
 

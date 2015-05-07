@@ -8,13 +8,13 @@ public class onclick : MonoBehaviour {
 	int pn,bn;
 	// Use this for initialization
 	public void butten(){
-		strings = this.gameObject.transform.parent.parent.parent.ToString ().ToCharArray();
-	
-		pn =int.Parse(strings [5].ToString ());
 		strings = this.gameObject.ToString ().ToCharArray();
-		bn = int.Parse(strings [3].ToString ());
-
-		Maincontrols.GetComponent<Maincontrol> ().buttening ((pn*5)+bn);
-
+		Debug.Log (strings [4].ToString () + " : " + strings [6].ToString ());
+		pn =int.Parse(strings [4].ToString ());
+		strings = this.gameObject.ToString ().ToCharArray();
+		bn = int.Parse(strings [6].ToString ());
+		
+		Maincontrols.GetComponent<Maincontrol> ().buttening (pn,bn);
+		
 	}
 }

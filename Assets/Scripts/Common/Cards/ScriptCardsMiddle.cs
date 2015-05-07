@@ -89,11 +89,13 @@ public class ScriptCardsMiddle : MonoBehaviour {
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 			//Debug.Log (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 			StartCoroutine(GetImage (www,item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (2).GetChild(0).gameObject));
-
+			//item.Target.gameObject.transform.localPosition = new Vector3(999,999,999);
 			
 			
 			
 		});
+
+		//transform.FindChild ("ListCards").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 	}
 	void Start () {
 

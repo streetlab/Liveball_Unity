@@ -39,6 +39,7 @@ public class Rankcontrol : MonoBehaviour {
 		prevRanking.Clear ();
 		image.Clear ();
 		behind.Clear ();
+
 		Debug.Log (mRankingEvent.Response.data[0].teamName +"'s Ranking is "+mRankingEvent.Response.data[0].ranking);
 		for (int i = 0; i<mRankingEvent.Response.data.Count; i++) {
 			rank.Add (mRankingEvent.Response.data[i].ranking);
