@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class ScriptTitle : MonoBehaviour {
 
 	LoginEvent mLoginEvent;
@@ -28,9 +29,11 @@ public class ScriptTitle : MonoBehaviour {
 //		PlayerPrefs.SetString (Constants.PrefEmail, "");
 //		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
+
 	}
 
 	void InitConstants(){
+
 		#if(UNITY_ANDROID)
 //		AndroidMgr.GetHeightStatusBar();
 		#elif(UNITY_EDITOR)

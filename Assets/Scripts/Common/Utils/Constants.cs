@@ -8,6 +8,7 @@ public class Constants {
 	
 	public const bool	IS_TSTORE = false;
 	public const string	MARKET_URI_TSTORE = "PRODUCT_VIEW/0000308300/0";
+	public const string GOOGLE_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu6jn+Es/Lp/MaC6HsFY1XDVd7ZRU19b7NnOmjKN4Zs/kgb1/A8g0tlrgs85/yfzmroPIp66SnTsvtuV1bbbNcIwaecswCTHNOAksokZtLlOc7B/90cp1EdNM1ERKxmcLy3nsaCvWkTDSP/+MD0jdI1KLwCTnjsbcNAUy+zSlIu0xmw+lGSoB/0l4xiniF701yLjWct0OMNljOoSOVRiq5/mhXrt8UWHpB/F4JNJB3CbqODALPII5fcg7KNXo7P0Zov+ndAF2UjzSCru1H97bWoQYScdrtCgnrBGuNtInbSw5qUZFaPDouKaRHOgbSU+4a4+7ZcvjEmXpY9AlNAEZrQIDAQAB";
 	
 	public const string HOST					= 	"appif.liveball.kr";
 	public const string TEST_HOST					= 	"192.168.0.5";

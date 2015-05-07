@@ -7,6 +7,5 @@ public class ScriptTFItems : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		mListItems.transform.GetComponent<UIScrollView> ().ResetPosition ();
 	}
 }
