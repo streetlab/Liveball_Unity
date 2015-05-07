@@ -91,6 +91,7 @@ public class UtilMgr : MonoBehaviour {
 		{
 			if(Application.loadedLevelName.Equals("SceneMain")){
 //				AutoFade.LoadLevel(PreLoadedLevelName);
+				NetMgr.ExitGame(null);
 				AutoFade.LoadLevel("SceneGame");
 			} else{
 				Instance.ShowExitDialog();
@@ -101,7 +102,8 @@ public class UtilMgr : MonoBehaviour {
 	}
 
 	public static void Quit(){
-		NetMgr.ExitGame(null);
+		Debug.Log("Quit");
+//		Instance.QuitGame();
 		Application.Quit();
 	}
 

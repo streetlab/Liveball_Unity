@@ -26,6 +26,7 @@ public class NetMgr : MonoBehaviour{
 
 	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading)
 	{
+		Debug.Log("webAPIProcess");
 		if(showLoading)
 			UtilMgr.ShowLoading (showLoading);
 
@@ -54,12 +55,13 @@ public class NetMgr : MonoBehaviour{
 
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
-			return;
+//			return;
 		}
 		StartCoroutine (webAPIProcess(www, baseEvent, true));
 	}
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent){
+		Debug.Log("webAPIProcessEvent");
 		webAPIProcessEvent (request, baseEvent, true);
 	}
 
@@ -86,7 +88,7 @@ public class NetMgr : MonoBehaviour{
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
 	{
-
+		Debug.Log("webAPIProcessEvent2");
 		string reqParam = "";
 		string httpUrl = "";
 		if (request != null) {
@@ -155,6 +157,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void ExitGame(BaseEvent baseEvent)
 	{
+		Debug.Log("ExitGame");
 		Instance.webAPIProcessEvent (new ExitGameRequest (), baseEvent);
 	}
 
