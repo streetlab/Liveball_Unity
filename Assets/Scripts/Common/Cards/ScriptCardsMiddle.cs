@@ -22,6 +22,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 	List<string> teamimage = new List<string> ();
 	List<string> image = new List<string> ();
 	List<string> number = new List<string> ();
+	List<GameObject> cards = new List<GameObject> ();
 	GetCardInvenEvent mEvent;
 
 	void GotCardsInven(){
@@ -41,6 +42,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 		teamimage.Clear ();
 		image.Clear ();
 		number.Clear ();
+		cards.Clear ();
 		for (int i = 0; i<mEvent.Response.data.hitter.Count; i++) {
 			grade.Add(mEvent.Response.data.hitter [i].className);
 			maxlv.Add(mEvent.Response.data.hitter [i].maxLevel.ToString());
@@ -90,18 +92,17 @@ public class ScriptCardsMiddle : MonoBehaviour {
 			//Debug.Log (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 			StartCoroutine(GetImage (www,item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (2).GetChild(0).gameObject));
 			//item.Target.gameObject.transform.localPosition = new Vector3(999,999,999);
-			
+			cards.Add(item.Target.gameObject);
 			
 			
 		});
 
-		//transform.FindChild ("ListCards").GetComponent<UIDraggablePanel2> ().ResetPosition ();
+		transform.FindChild ("ListCards").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 	}
 	void Start () {
 
 		mEvent = new GetCardInvenEvent(new EventDelegate(this, "GotCardsInven"));
 		NetMgr.GetCardInven (mEvent);
-
 
 	}
 	string grades(int gra){
