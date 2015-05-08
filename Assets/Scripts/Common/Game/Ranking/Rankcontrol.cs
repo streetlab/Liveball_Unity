@@ -7,13 +7,13 @@ public class Rankcontrol : MonoBehaviour {
 	public float gap=122;
 	Vector3 posisions;
 	float vgaps;
-	List<int> rank = new List<int> ();
+	List<string> rank = new List<string> ();
 	List<string> teamname = new List<string> ();
-	List<int> v = new List<int> ();
-	List<int> l = new List<int> ();
-	List<int> d = new List<int> ();
-	List<int> prevRanking= new List<int> ();
-	List<int> behind= new List<int> ();
+	List<string> v = new List<string> ();
+	List<string> l = new List<string> ();
+	List<string> d = new List<string> ();
+	List<string> prevRanking= new List<string> ();
+	List<string> behind= new List<string> ();
 	List<string> image = new List<string> ();
 
 	GetTeamRankingEvent mRankingEvent;
@@ -42,15 +42,17 @@ public class Rankcontrol : MonoBehaviour {
 
 		Debug.Log (mRankingEvent.Response.data[0].teamName +"'s Ranking is "+mRankingEvent.Response.data[0].ranking);
 		for (int i = 0; i<mRankingEvent.Response.data.Count; i++) {
-			rank.Add (mRankingEvent.Response.data[i].ranking);
-			teamname.Add (mRankingEvent.Response.data[i].teamName);
-			v.Add(mRankingEvent.Response.data[i].countWin);
-			l.Add(mRankingEvent.Response.data[i].countLose);
-			d.Add(mRankingEvent.Response.data[i].countDraw);
-			prevRanking.Add(mRankingEvent.Response.data[i].prevRanking);
-			Debug.Log(mRankingEvent.Response.data[i].prevRanking);
-			image.Add(mRankingEvent.Response.data[i].imageName);
-			behind.Add(mRankingEvent.Response.data[i].behind);
+
+
+			rank.Add (mRankingEvent.Response.data[i].ranking.ToString());
+			teamname.Add (mRankingEvent.Response.data[i].teamName.ToString());
+			v.Add(mRankingEvent.Response.data[i].countWin.ToString());
+			l.Add(mRankingEvent.Response.data[i].countLose.ToString());
+			d.Add(mRankingEvent.Response.data[i].countDraw.ToString());
+			prevRanking.Add(mRankingEvent.Response.data[i].prevRanking.ToString());
+			Debug.Log(mRankingEvent.Response.data[i].prevRanking.ToString());
+			image.Add(mRankingEvent.Response.data[i].imageName.ToString());
+			behind.Add(mRankingEvent.Response.data[i].behind.ToString());
 		}
 		setposition ();
 	}
@@ -63,11 +65,11 @@ public class Rankcontrol : MonoBehaviour {
 		posisions = bars.transform.GetChild (0).transform.localPosition;
 		for (int i =0; i<bars.transform.childCount; i++) {
 			bars.transform.GetChild(i).transform.localPosition =new Vector3(posisions.x,posisions.y-(i*gap),posisions.z);
-			bars.transform.GetChild(i).GetChild(0).GetComponent<UILabel>().text = rank[i].ToString();
-			bars.transform.GetChild(i).GetChild(1).GetComponent<UILabel>().text = teamname[i].ToString();
-			bars.transform.GetChild(i).GetChild(2).GetComponent<UILabel>().text = v[i].ToString();
-			bars.transform.GetChild(i).GetChild(3).GetComponent<UILabel>().text = l[i].ToString();
-			bars.transform.GetChild(i).GetChild(4).GetComponent<UILabel>().text = d[i].ToString();
+			bars.transform.GetChild(i).GetChild(0).GetComponent<UILabel>().text = rank[i];
+			bars.transform.GetChild(i).GetChild(1).GetComponent<UILabel>().text = teamname[i];
+			bars.transform.GetChild(i).GetChild(2).GetComponent<UILabel>().text = v[i];
+			bars.transform.GetChild(i).GetChild(3).GetComponent<UILabel>().text = l[i];
+			bars.transform.GetChild(i).GetChild(4).GetComponent<UILabel>().text = d[i];
 
 
 			bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = behind[i].ToString();
@@ -90,15 +92,15 @@ public class Rankcontrol : MonoBehaviour {
 	void rankswitch(int i){
 		//Debug.Log (i + " :: "+rank [i] +" :: "+behind [i]);
 		//	Debug.Log (scv.transform.GetChild(0).GetChild(i).GetChild(1));
-		if (rank [i] == prevRanking [i]) {
+		if (float.Parse(rank [i]) ==  float.Parse(prevRanking [i])) {
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.855f,0.86f,0.888f,1);
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "bg_circle";
 			bars.transform.GetChild(i).GetChild(7).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
-		}else if(rank [i] > prevRanking [i]){
+		}else if(float.Parse(rank [i])  > float.Parse(prevRanking [i])){
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "ic_arrow";
 			bars.transform.GetChild(i).GetChild(7).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
-		}else if(rank [i] < prevRanking [i]){
+		}else if(float.Parse(rank [i])  < float.Parse(prevRanking [i])){
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.88f,0.23f,0.255f,1);
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "ic_arrow";
 			bars.transform.GetChild(i).GetChild(7).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,180));

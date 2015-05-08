@@ -6,7 +6,9 @@ public class SetItemSceneTop : MonoBehaviour {
 	public GameObject Ruby,Gold,Item,Card;
 	public GameObject btRuby,btGold,btItem,btCard;
 	void Start(){
-		rubyon ();
+		//rubyon ();
+		Ruby.SetActive (true);
+		btRuby.GetComponent<UIButton> ().isEnabled = false;
 	}
 	public void rubyon(){
 		Alloff ();
