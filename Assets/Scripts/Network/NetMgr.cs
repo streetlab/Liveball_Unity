@@ -41,7 +41,7 @@ public class NetMgr : MonoBehaviour{
 		}
 		else
 		{
-			DialogueMgr.ShowDialogue("Error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		}
 
 		UtilMgr.DismissLoading ();
@@ -239,5 +239,15 @@ public class NetMgr : MonoBehaviour{
 	public static void CancelIAP(int orderNo, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEventForCheckVersion(new CancelIAPRequest(orderNo), baseEvent, false, true);
+	}
+
+	public static void PurchaseGold(int productId, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new PurchaseGoldRequest(productId), baseEvent);
+	}
+
+	public static void PurchaseItem(int productId, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new PurchaseItemRequest(productId), baseEvent);
 	}
 }

@@ -135,7 +135,7 @@ public class UtilMgr : MonoBehaviour {
 		float width = (float)Screen.width;
 		float ratio = height / width;
 		float diff = Constants.DEFAULT_SCR_RATIO - ratio;
-		Debug.Log ("ScaledPositionY is "+360f * diff);
+//		Debug.Log ("ScaledPositionY is "+360f * diff);
 
 		return 360f * diff;
 	}
