@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ScriptBetting : MonoBehaviour {
 	public string mNoMoreGoldTitle;
 	public string mNoMoreGoldBody;
+	public string mStrNoCard;
 
 	string mNameSelectedBtn;
 	ScriptBettingItem mSbi;
@@ -147,7 +148,7 @@ public class ScriptBetting : MonoBehaviour {
 			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
 				* mStrategyInfo.multipleRatio;
 		} else{
-			mLblCardName.text = "-";
+			mLblCardName.text = mStrNoCard;
 			mLblCardRatio.text = "-";
 			total = float.Parse (QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio) * 1f;
 		}
