@@ -220,4 +220,24 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent(new GetItemShopItemRequest(), baseEvent);
 	}
+
+	public static void RequestIAP(int productId, string productCode, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEventForCheckVersion(new RequestIAPRequest(productId, productCode), baseEvent, false, true);
+	}
+
+	public static void ComsumeIAP(int orderNo, string token, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEventForCheckVersion(new ComsumeIAPRequest(orderNo, token), baseEvent, false, true);
+	}
+
+	public static void DoneIAP(int orderNo, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEventForCheckVersion(new DoneIAPRequest(orderNo), baseEvent, false, true);
+	}
+
+	public static void CancelIAP(int orderNo, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEventForCheckVersion(new CancelIAPRequest(orderNo), baseEvent, false, true);
+	}
 }

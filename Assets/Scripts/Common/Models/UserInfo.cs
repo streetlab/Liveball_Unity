@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UserInfo {
+	public static bool IsTest = false;
+
 	int _memSeq;
 
 	public int memSeq {
