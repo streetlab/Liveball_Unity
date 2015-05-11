@@ -243,4 +243,15 @@ public class TeamInfo {
 			_prevRanking = value;
 		}
 	}
+
+	string _rankDiff;
+
+	public string rankDiff {
+		get {
+			return _rankDiff;
+		}
+		set {
+			_rankDiff = value;
+		}
+	}
 }

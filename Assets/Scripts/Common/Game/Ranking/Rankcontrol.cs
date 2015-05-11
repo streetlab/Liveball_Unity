@@ -15,6 +15,7 @@ public class Rankcontrol : MonoBehaviour {
 	List<string> prevRanking= new List<string> ();
 	List<string> behind= new List<string> ();
 	List<string> image = new List<string> ();
+	List<string> rankDiff = new List<string> ();
 
 	GetTeamRankingEvent mRankingEvent;
 
@@ -50,9 +51,10 @@ public class Rankcontrol : MonoBehaviour {
 			l.Add(mRankingEvent.Response.data[i].countLose.ToString());
 			d.Add(mRankingEvent.Response.data[i].countDraw.ToString());
 			prevRanking.Add(mRankingEvent.Response.data[i].prevRanking.ToString());
-			Debug.Log(mRankingEvent.Response.data[i].prevRanking.ToString());
+			Debug.Log(mRankingEvent.Response.data[i].rankDiff);
 			image.Add(mRankingEvent.Response.data[i].imageName.ToString());
 			behind.Add(mRankingEvent.Response.data[i].behind.ToString());
+			rankDiff.Add(mRankingEvent.Response.data[i].rankDiff);
 		}
 		setposition ();
 	}
@@ -71,8 +73,9 @@ public class Rankcontrol : MonoBehaviour {
 			bars.transform.GetChild(i).GetChild(3).GetComponent<UILabel>().text = l[i];
 			bars.transform.GetChild(i).GetChild(4).GetComponent<UILabel>().text = d[i];
 
-
-			bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = behind[i].ToString();
+			bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = behind[i];
+			if(rankDiff[i] != null && rankDiff[i].Length > 0)
+				bars.transform.GetChild(i).GetChild(5).GetComponent<UILabel>().text = rankDiff[i];
 
 
 			string imgName = UtilMgr.GetTeamEmblem(image[i]);
