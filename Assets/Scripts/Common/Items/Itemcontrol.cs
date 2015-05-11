@@ -115,15 +115,37 @@ public class Itemcontrol : MonoBehaviour {
 		transform.FindChild ("category 2").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.FindChild ("category 2").gameObject.SetActive (false);
 	}
-
+	int Gid,Gcost;
+	string Gs;
+	bool GI = true;
 	public void setusergold(int id,int cost,string s){
-		if (int.Parse (UserMgr.UserInfo.userRuby) < cost) {
-			DialogueMgr.ShowDialogue ("구매실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		} else {
-			Sgold = s;
-			golds = new IAPEvent (new EventDelegate (this, "mGrequestIAP"));
-			NetMgr.PurchaseGold (id, golds);
+		GI = true;
+		Gid = id;
+		Gcost = cost;
+		Gs = s;
+		Debug.Log (s);
+		//Debug.Log("DialogueMgr.DialogClickHandler 1 : " + DialogueMgr.DialogClickHandler);
+		DialogueMgr.ShowDialogue ("구매 확인", s , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
+		//Debug.Log("DialogueMgr.DialogClickHandler 2 : " + DialogueMgr.IsShown);
+
+	}
+
+	void DialogueHandler(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			if (int.Parse (UserMgr.UserInfo.userRuby) < Gcost) {
+				DialogueMgr.ShowDialogue ("구매 실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			} else {
+				Sgold = Gs;
+				if(GI){
+				golds = new IAPEvent (new EventDelegate (this, "mGrequestIAP"));
+				NetMgr.PurchaseGold (Gid, golds);
+				}else{
+					items = new IAPEvent (new EventDelegate (this, "mIrequestIAP"));
+					NetMgr.PurchaseItem (Gid, items);
+				}
+			}
 		}
+
 	}
 
 	void mGrequestIAP(){
@@ -136,7 +158,7 @@ public class Itemcontrol : MonoBehaviour {
 	void addgold(){
 		UserMgr.UserInfo.userGoldenBall = mProfileEvent.Response.data.userGoldenBall;
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
-		DialogueMgr.ShowDialogue ("구매성공", Sgold, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		DialogueMgr.ShowDialogue ("구매 성공", Sgold+" 완료.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 
 	void item(){
@@ -177,13 +199,17 @@ public class Itemcontrol : MonoBehaviour {
 	}
 
 	public void setuseritem(int id,int cost,string s){
-		if (int.Parse (UserMgr.UserInfo.userRuby) < cost) {
-			DialogueMgr.ShowDialogue("구매실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		} else {
-			Sgold = s;
-			items = new IAPEvent (new EventDelegate (this, "mIrequestIAP"));
-			NetMgr.PurchaseItem (id, items);
-		}
+		GI = false;
+		Gid = id;
+		Gcost = cost;
+		Gs = s;
+
+		//Debug.Log("DialogueMgr.DialogClickHandler 1 : " + DialogueMgr.DialogClickHandler);
+		DialogueMgr.ShowDialogue ("구매 확인", s , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
+		//Debug.Log("DialogueMgr.DialogClickHandler 2 : " + DialogueMgr.IsShown);
+	
+
+	
 	}
 
 
@@ -196,7 +222,7 @@ public class Itemcontrol : MonoBehaviour {
 	void additem(){
 		UserMgr.UserInfo.item = mProfileEvent.Response.data.item;
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
-		DialogueMgr.ShowDialogue ("구매성공", Sgold, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		DialogueMgr.ShowDialogue ("구매 성공", Sgold+" 구매 완료.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 	public void prime31(string id,string code,string product,string buyruby,string addruby,string addgold){
 		Debug.Log ("id : " + id + " code : " + code);
