@@ -18,11 +18,17 @@ public class Itemcontrol : MonoBehaviour {
 	public float category = 4;
 	Vector3 originV1,originV2,originV3,originV4;
 
+	bool IsTest = false;
+
 	// Use this for initialization
 
 	void Awake(){
 	//	GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
 	//	GoogleIAB.purchaseProduct( "ruby_50", "payload that gets stored and returned" );
+		string strTest = PlayerPrefs.GetString (Constants.PrefServerTest);
+		//		Debug.Log("Test? "+strTest);
+		if(strTest != null && strTest.Equals("1"))
+			IsTest = true;
 	}
 
 	void Start () {
@@ -157,7 +163,7 @@ public class Itemcontrol : MonoBehaviour {
 		Aruby = float.Parse(addruby);
 		Agold = float.Parse(addgold);
 		RequestIAP  = new IAPEvent (new EventDelegate (this, "mRequestIAP"));
-		NetMgr.RequestIAP (itemid,itemcode,RequestIAP);
+		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);
 	
 //		 NetMgr.RequestIAP
 //		NetMgr.ComsumeIAP
@@ -252,7 +258,7 @@ public class Itemcontrol : MonoBehaviour {
 	{
 
 		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
-		NetMgr.ComsumeIAP (orderNo,purchase.purchaseToken,ComsumeIAP);
+		NetMgr.ComsumeIAP (orderNo,purchase.purchaseToken,IsTest,ComsumeIAP);
 		orderNo = ComsumeIAP.Response.data.orderNo;
 
 		Debug.Log( "purchaseSucceededEvent: " + purchase );
@@ -294,7 +300,7 @@ public class Itemcontrol : MonoBehaviour {
 	void consumePurchaseSucceededEvent( GooglePurchase purchase )
 	{
 		DoneIAP  = new IAPEvent (new EventDelegate (this, "mDoneIAP"));
-		NetMgr.DoneIAP (orderNo,DoneIAP);
+		NetMgr.DoneIAP (orderNo,IsTest,DoneIAP);
 		Debug.Log( "consumePurchaseSucceededEvent: " + purchase );
 	}
 	
@@ -302,7 +308,7 @@ public class Itemcontrol : MonoBehaviour {
 	void consumePurchaseFailedEvent( string error )
 	{
 		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
-		NetMgr.CancelIAP (orderNo,CancelIAP);
+		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
 
 		Debug.Log( "consumePurchaseFailedEvent: " + error );
 	}

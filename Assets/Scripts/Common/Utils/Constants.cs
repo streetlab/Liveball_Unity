@@ -45,8 +45,8 @@ public class Constants {
 //	public const string QUERY_SERVER_HOST 				= 	"http://" + TEST_HOST + ":5002/gameServer/query.frz";
 
 	public static string CHECK_TEST_SERVER_HOST 		= 	"http://" + HOST + ":4002/webTuby/query.frz";
-
 	public static string CHECK_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
+
 	public static string QUERY_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
 	public static string UPLOAD_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
 	public static string IMAGE_SERVER_HOST 				= 	"http://" + HOST + ":6002/tuby_file/";
