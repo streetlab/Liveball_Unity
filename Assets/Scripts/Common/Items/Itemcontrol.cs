@@ -7,8 +7,10 @@ public class Itemcontrol : MonoBehaviour {
 	GetItemShopRubyEvent getruby;
 	GetItemShopGoldEvent getgold;
 	GetItemShopItemEvent getitem;
+
 	GetProfileEvent mProfileEvent;
-	IAPEvent RequestIAP,ComsumeIAP,DoneIAP,CancelIAP;
+
+	IAPEvent RequestIAP,ComsumeIAP,DoneIAP,CancelIAP,golds,items;
 	int itemid,orderNo;
 	float Bruby,Aruby,Agold,Bgold;
 	string itemcode,itemproduct;
@@ -17,7 +19,7 @@ public class Itemcontrol : MonoBehaviour {
 	public float gap = 288;
 	public float category = 4;
 	Vector3 originV1,originV2,originV3,originV4;
-
+	string Sgold;
 	bool IsTest = false;
 
 	// Use this for initialization
@@ -102,8 +104,9 @@ public class Itemcontrol : MonoBehaviour {
 			temp2.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = getgold.Response.data [i].productName;
 			temp2.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getgold.Response.data [i].productDesc;
 			temp2.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getgold.Response.data [i].productPrice.ToString ())+"루비";
-			temp2.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getgold.Response.data [i].productValue;
-			
+			temp2.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getgold.Response.data [i].productPrice.ToString();
+			temp2.transform.FindChild ("id").GetComponent<UILabel> ().text = getgold.Response.data [i].productId.ToString();
+			temp2.transform.FindChild ("Value").GetComponent<UILabel> ().text = getgold.Response.data [i].productValue.ToString();
 			temp2.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_00"+((i%3)+1).ToString();
 			temp2.gameObject.SetActive (true);
 			
@@ -113,9 +116,27 @@ public class Itemcontrol : MonoBehaviour {
 		transform.FindChild ("category 2").gameObject.SetActive (false);
 	}
 
-	void setusergold(){
+	public void setusergold(int id,int cost,string s){
+		if (int.Parse (UserMgr.UserInfo.userRuby) < cost) {
+			DialogueMgr.ShowDialogue ("구매실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else {
+			Sgold = s;
+			golds = new IAPEvent (new EventDelegate (this, "mGrequestIAP"));
+			NetMgr.PurchaseGold (id, golds);
+		}
+	}
 
+	void mGrequestIAP(){
 
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addgold"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
+
+	}
+
+	void addgold(){
+		UserMgr.UserInfo.userGoldenBall = mProfileEvent.Response.data.userGoldenBall;
+		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
+		DialogueMgr.ShowDialogue ("구매성공", Sgold, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 
 	void item(){
@@ -134,7 +155,8 @@ public class Itemcontrol : MonoBehaviour {
 			temp3.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getitem.Response.data [i].productDesc;
 			temp3.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getitem.Response.data [i].productPrice.ToString ())+"루비";
 			//Debug.Log (getitem.Response.data [i].productCode);
-
+			temp3.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getitem.Response.data [i].productPrice.ToString();
+			temp3.transform.FindChild ("id").GetComponent<UILabel> ().text = getitem.Response.data [i].productId.ToString();
 			if(getitem.Response.data [i].productCode =="ITEM_MULTIPLE_200X"){
 				temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_item_2";
 			}else if(getitem.Response.data [i].productCode =="ITEM_MULTIPLE_300X"){
@@ -154,6 +176,28 @@ public class Itemcontrol : MonoBehaviour {
 		transform.FindChild ("category 3").gameObject.SetActive (false);
 	}
 
+	public void setuseritem(int id,int cost,string s){
+		if (int.Parse (UserMgr.UserInfo.userRuby) < cost) {
+			DialogueMgr.ShowDialogue("구매실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else {
+			Sgold = s;
+			items = new IAPEvent (new EventDelegate (this, "mIrequestIAP"));
+			NetMgr.PurchaseItem (id, items);
+		}
+	}
+
+
+	void mIrequestIAP(){
+		
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "additem"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
+		
+	}
+	void additem(){
+		UserMgr.UserInfo.item = mProfileEvent.Response.data.item;
+		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
+		DialogueMgr.ShowDialogue ("구매성공", Sgold, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+	}
 	public void prime31(string id,string code,string product,string buyruby,string addruby,string addgold){
 		Debug.Log ("id : " + id + " code : " + code);
 		itemid = int.Parse(id);
@@ -181,12 +225,12 @@ public class Itemcontrol : MonoBehaviour {
 	void mRequestIAP(){
 
 		//if (RequestIAP.Response.data != null) {
-			if(RequestIAP.Response.data.productId==itemid&&RequestIAP.Response.data.productCode==itemcode){
+			//if(RequestIAP.Response.data.productId==itemid&&RequestIAP.Response.data.productCode==itemcode){
 				orderNo = RequestIAP.Response.data.orderNo;
 				//RequestIAP.Response.data.
 				GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
-				GoogleIAB.purchaseProduct(itemcode, "payload that gets stored and returned" );
-			}
+		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
+			//}
 		//}
 	}
 	void OnEnable()
@@ -272,7 +316,7 @@ public class Itemcontrol : MonoBehaviour {
 	{
 
 		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
-		NetMgr.CancelIAP (orderNo,CancelIAP);
+		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
 
 		Debug.Log( "purchaseFailedEvent: " + error + ", response: " + response );
 	}
@@ -286,8 +330,8 @@ public class Itemcontrol : MonoBehaviour {
 
 	}
 	void addruby(){
-		mProfileEvent.Response.data.userRuby = (float.Parse(mProfileEvent.Response.data.userRuby)+Bruby+Aruby).ToString();
-		mProfileEvent.Response.data.userGoldenBall = (float.Parse(mProfileEvent.Response.data.userGoldenBall)+Agold).ToString();
+		//mProfileEvent.Response.data.userRuby = (float.Parse(mProfileEvent.Response.data.userRuby)+Bruby+Aruby).ToString();
+		//mProfileEvent.Response.data.userGoldenBall = (float.Parse(mProfileEvent.Response.data.userGoldenBall)+Agold).ToString();
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
 		UserMgr.UserInfo.userGoldenBall = mProfileEvent.Response.data.userGoldenBall;
 	}

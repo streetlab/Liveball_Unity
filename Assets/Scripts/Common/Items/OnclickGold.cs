@@ -3,13 +3,8 @@ using System.Collections;
 
 public class OnclickGold : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void onhit(){
+		transform.parent.parent.parent.parent.
+			GetComponent<Itemcontrol> ().setusergold (int.Parse(transform.parent.FindChild("id").GetComponent<UILabel>().text),int.Parse(transform.parent.FindChild("buygold").GetComponent<UILabel>().text),transform.parent.FindChild("LblBody").GetComponent<UILabel>().text+" 완료.");
 	}
 }

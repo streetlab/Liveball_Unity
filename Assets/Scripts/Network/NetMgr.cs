@@ -227,7 +227,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void RequestIAP(int productId, string productCode, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForCheckVersion(new RequestIAPRequest(productId, productCode), baseEvent, isTest, true);
+		Instance.webAPIProcessEventForCheckVersion(new RequestIAPRequest(0, productCode), baseEvent, isTest, true);
 	}
 
 	public static void ComsumeIAP(int orderNo, string token, bool isTest, BaseEvent baseEvent)

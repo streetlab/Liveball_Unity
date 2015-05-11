@@ -22,10 +22,13 @@ public class ScriptCardsMiddle : MonoBehaviour {
 	List<string> teamimage = new List<string> ();
 	List<string> image = new List<string> ();
 	List<string> number = new List<string> ();
+	List<string> needuppoint = new List<string> ();
+	List<string> backnum = new List<string> ();
 	List<GameObject> cards = new List<GameObject> ();
 	GetCardInvenEvent mEvent;
-
+	public float countnum = 0;
 	void GotCardsInven(){
+		needuppoint.Clear ();
 		grade.Clear ();
 		maxlv.Clear ();
 		posi.Clear ();
@@ -43,6 +46,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 		image.Clear ();
 		number.Clear ();
 		cards.Clear ();
+		backnum.Clear ();
 		for (int i = 0; i<mEvent.Response.data.hitter.Count; i++) {
 			grade.Add(mEvent.Response.data.hitter [i].className);
 			maxlv.Add(mEvent.Response.data.hitter [i].maxLevel.ToString());
@@ -52,7 +56,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 			name.Add(mEvent.Response.data.hitter [i].cardName);
 			nowlv.Add(mEvent.Response.data.hitter [i].cardLevel.ToString());
 			add.Add(mEvent.Response.data.hitter [i].rewardRate.ToString());
-
+			backnum.Add(mEvent.Response.data.hitter [i].backNum.ToString());
 			hp.Add(nowhp(mEvent.Response.data.hitter [i].classNo,i));
 			maxhp.Add(maxhps(mEvent.Response.data.hitter [i].classNo));
 
@@ -63,18 +67,19 @@ public class ScriptCardsMiddle : MonoBehaviour {
 			teamimage.Add(mEvent.Response.data.hitter [i].teamImageName.ToString());
 			image.Add(mEvent.Response.data.hitter [i].cardImageName.ToString());
 			number.Add(mEvent.Response.data.hitter [i].accrueCardXp.ToString());
+			needuppoint.Add(mEvent.Response.data.hitter[i].needUpgradePoint.ToString());
 				
 		}
 		transform.GetChild(1). GetComponent<UIDraggablePanel2>().Init(mEvent.Response.data.hitter.Count, 
 		                                                              delegate(UIListItem item, int index) {
 			
 			item.Target.gameObject.SetActive(true);
-
+			item.Target.gameObject.transform.FindChild("needexp").GetComponent<UILabel>().text = needuppoint[index];//grade;
 			item.Target.gameObject.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = grade[index];//grade;
 			item.Target.gameObject.transform.GetChild(2).GetChild(1).GetComponent<UILabel>().text = maxlv[index];//maxlv;
 			item.Target.gameObject.transform.GetChild(2).GetChild(2).GetComponent<UILabel>().text = posi[index];//position;
 			item.Target.gameObject.transform.GetChild(2).GetChild(3).GetComponent<UILabel>().text = team[index];//team;
-			item.Target.gameObject.transform.GetChild(2).GetChild(4).GetComponent<UILabel>().text = index.ToString()+".";//num;
+			item.Target.gameObject.transform.GetChild(2).GetChild(4).GetComponent<UILabel>().text = backnum[index]+".";//num;
 			item.Target.gameObject.transform.GetChild(2).GetChild(5).GetComponent<UILabel>().text = name[index];//name;
 			item.Target.gameObject.transform.GetChild(7).GetChild (1).GetComponent<UISprite> ().SetRect (0,0,16+(hp[index]/maxhp[index]*158),20);
 			item.Target.gameObject.transform.GetChild(7).GetChild (1).localPosition = new Vector3 (-87,0,0);
@@ -86,7 +91,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 			string imgName = UtilMgr.GetTeamEmblem(teamimage[index]);
 			//Debug.Log(imgName);
 			item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (0).GetComponent<UISprite> ().spriteName = imgName;
-			item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (1).GetChild(1).GetComponent<UILabel> ().text = index.ToString();
+			item.Target.gameObject.transform.GetChild (1).GetChild (0).GetChild (1).GetChild(1).GetComponent<UILabel> ().text = backnum[index];
 			item.Target.gameObject.transform.localPosition = new Vector3(maincard.transform.localPosition.x,item.Target.gameObject.transform.localPosition.y,item.Target.gameObject.transform.localPosition.z);
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
 			//Debug.Log (Constants.IMAGE_SERVER_HOST+mEvent.Response.data.hitter [index].cardImagePath+image[index]);
@@ -180,4 +185,18 @@ return int.Parse(mEvent.Response.data.hitter [index].availableHp.ToString());
 //	{
 //		Debug.Log ("GotCardsInven : "+mEvent.Response.data.cardClass.Count);
 //	}
+	public bool cardcountP(){
+		if (countnum < 2) {
+			countnum += 1;
+			return true;
+		}
+		return false;
+	}
+	public bool cardcountN(){
+		if (countnum > 0) {
+			countnum -= 1;
+			return true;
+		}
+		return false;
+	}
 }
