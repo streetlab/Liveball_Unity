@@ -67,8 +67,8 @@ public class ScriptSelectTeam : MonoBehaviour {
 		mMemInfo.MemUID = memUID;
 		GetComponentInParent<ScriptTitle>().mProfileEvent = 
 			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
-		
-		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent);
+
+		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
 	}
 
 	public void CompletedJoin(){

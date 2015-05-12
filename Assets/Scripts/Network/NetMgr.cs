@@ -47,11 +47,18 @@ public class NetMgr : MonoBehaviour{
 		UtilMgr.DismissLoading ();
 	}
 
-	private void webAPIUploadProcessEvent(BaseUploadRequest request, BaseEvent baseEvent)
+	private void webAPIUploadProcessEvent(BaseUploadRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
 	{	
 		WWWForm form = request.GetRequestWWWForm ();
 
-		WWW www = new WWW (Constants.UPLOAD_SERVER_HOST , form);
+		string host = Constants.UPLOAD_SERVER_HOST;
+		if(isTest){
+			host = Constants.UPLOAD_TEST_SERVER_HOST;
+			Debug.Log("Send to Test Server");
+		} else{
+			Debug.Log("Send to Real Server");
+		}
+		WWW www = new WWW (host, form);
 
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
@@ -185,9 +192,9 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetSimpleResultRequest (quizListSeq), baseEvent, false);
 	}
 
-	public static void JoinMember(JoinMemberInfo memInfo, BaseEvent baseEvent)
+	public static void JoinMember(JoinMemberInfo memInfo, BaseEvent baseEvent, bool isTest, bool bShowLoading)
 	{
-		Instance.webAPIUploadProcessEvent (new JoinMemberRequest (memInfo), baseEvent);
+		Instance.webAPIUploadProcessEvent (new JoinMemberRequest (memInfo), baseEvent, isTest, bShowLoading);
 	}
 
 	public static void GetTeamRanking(BaseEvent baseEvent)
@@ -253,5 +260,10 @@ public class NetMgr : MonoBehaviour{
 	public static void PurchaseItem(int productId, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent(new PurchaseItemRequest(productId), baseEvent);
+	}
+
+	public static void UpdateMemberInfo(UserInfo userInfo, BaseEvent baseEvent, bool isTest, bool bShowLoading)
+	{
+		Instance.webAPIUploadProcessEvent(new UpdateMemberInfoRequest(userInfo), baseEvent, isTest, bShowLoading);
 	}
 }

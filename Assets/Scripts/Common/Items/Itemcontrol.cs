@@ -27,10 +27,7 @@ public class Itemcontrol : MonoBehaviour {
 	void Awake(){
 	//	GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
 	//	GoogleIAB.purchaseProduct( "ruby_50", "payload that gets stored and returned" );
-		string strTest = PlayerPrefs.GetString (Constants.PrefServerTest);
-		//		Debug.Log("Test? "+strTest);
-		if(strTest != null && strTest.Equals("1"))
-			IsTest = true;
+		IsTest = UtilMgr.IsTestServer();
 	}
 
 	void Start () {
