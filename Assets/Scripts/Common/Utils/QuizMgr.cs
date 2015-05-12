@@ -143,9 +143,11 @@ public class QuizMgr : MonoBehaviour {
 			tmpInfo.respValue = simpleEvent.Response.data[0].respValue;
 			tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[0].rewardPoint);
 			quiz.resp.Insert(0, tmpInfo);
-			
-			if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
-				scriptQuizResult.InitParticle();
+
+			if(simpleEvent.Response.data[0].isCancel < 1){
+				if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
+					scriptQuizResult.InitParticle();
+				}
 			}
 		}
 		

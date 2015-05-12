@@ -9,8 +9,8 @@ public class ScriptItemChat : MonoBehaviour {
 	public void Init(JiverModel.Message message){
 		mLblName.GetComponent<UILabel>().text = message.GetSenderName();
 		mLblBody.GetComponent<UILabel>().text = message.GetMessage();
-		transform.parent.GetComponent<UIGrid>().Reposition();
-		transform.parent.parent.GetComponent<UIScrollView>().ResetPosition();
+//		transform.parent.GetComponent<UIGrid>().Reposition();
+//		transform.parent.GetComponent<UIScrollView>().ResetPosition();
 
 	}
 }

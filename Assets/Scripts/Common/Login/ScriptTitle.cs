@@ -90,24 +90,44 @@ public class ScriptTitle : MonoBehaviour {
 		int sSecond = int.Parse(mVersionEvent.Response.data.supportVer.Substring(2, 1));
 		int sThird = int.Parse(mVersionEvent.Response.data.supportVer.Substring(4, 1));
 
-		if(aFirst < sFirst
-		   || aSecond < sSecond
-		   || aThird < sThird){
-			mMustUpdate = true;
-			DialogueMgr.ShowDialogue(mStrVersionTitle, mStrMustUpdate, DialogueMgr.DIALOGUE_TYPE.YesNo,
-			                         mStrBtnUpdate, "", mStrBtnExit,
-			                         DialogueClickHandler);
-			return;
-		} else if(aFirst < rFirst
-		          || aSecond < rSecond
-		          || aThird < rThird){
-			mMustUpdate = false;
-			DialogueMgr.ShowDialogue(mStrVersionTitle, mStrRecommendUpdate, DialogueMgr.DIALOGUE_TYPE.YesNo,
-			                         mStrBtnUpdate, "", mStrBtnContinue,
-			                         DialogueClickHandler);
-			return;
+		if(aFirst < sFirst){
+			MustUpdate(); return;
+		} else if(aFirst == sFirst){
+			if(aSecond < sSecond){
+				MustUpdate(); return;
+			} else if(aSecond == sSecond){
+				if(aThird < sThird){
+					MustUpdate(); return;
+				}
+			}
+		}
+
+		if(aFirst < rFirst){
+			ReqUpdate(); return;
+		} else if(aFirst == rFirst){
+			if(aSecond < rSecond){
+				ReqUpdate(); return;
+			} else if(aSecond == rSecond){
+				if(aThird < rThird){
+					ReqUpdate(); return;
+				}
+			}
 		}
 		CheckPreference();
+	}
+
+	void MustUpdate(){
+		mMustUpdate = true;
+		DialogueMgr.ShowDialogue(mStrVersionTitle, mStrMustUpdate, DialogueMgr.DIALOGUE_TYPE.YesNo,
+		                         mStrBtnUpdate, "", mStrBtnExit,
+		                         DialogueClickHandler);
+	}
+
+	void ReqUpdate(){
+		mMustUpdate = false;
+		DialogueMgr.ShowDialogue(mStrVersionTitle, mStrRecommendUpdate, DialogueMgr.DIALOGUE_TYPE.YesNo,
+		                         mStrBtnUpdate, "", mStrBtnContinue,
+		                         DialogueClickHandler);
 	}
 
 	public void DialogueClickHandler(DialogueMgr.BTNS btn){
@@ -115,9 +135,9 @@ public class ScriptTitle : MonoBehaviour {
 			if(btn == DialogueMgr.BTNS.Btn1){
 				Debug.Log("Go to Store");
 				#if(UNITY_ANDROID)
-				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				Application.OpenURL("market://details?id=com.streetlab.tuby");
 				#elif(UNITY_EDITOR)
-				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				Application.OpenURL("market://details?id=com.streetlab.tuby");
 				#else
 				#endif
 			} else{
@@ -127,7 +147,7 @@ public class ScriptTitle : MonoBehaviour {
 			if(btn == DialogueMgr.BTNS.Btn1){
 				Debug.Log("Go to Store");
 				#if(UNITY_ANDROID)
-				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				Application.OpenURL("market://details?id=com.streetlab.tuby");
 				#elif(UNITY_EDITOR)
 				Application.OpenURL("market://details?id=com.streetlab.liveball");
 				#else

@@ -25,6 +25,9 @@ public class JiverUI : JiverResponder {
 
 	string inputString = "";
 	public GameObject mInput;
+	float mChatHeight = 0f;
+	float mFirstY;
+	float mFirstOffset;
 
 
 	int TOP;
@@ -80,17 +83,39 @@ public class JiverUI : JiverResponder {
 	{
 		Debug.Log ("JIVER Error: " + errorCode);
 
-		GameObject go = Instantiate(mItemChat, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-		go.transform.parent = mScrollChat.transform.FindChild("Grid");
-		go.transform.localScale = new Vector3(1f, 1f, 1f);	
-		go.SendMessage("Init", "jiver error : "+errorCode, SendMessageOptions.DontRequireReceiver);
+//		GameObject go = Instantiate(mItemChat, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+//		go.transform.parent = mScrollChat.transform;
+//		go.transform.localScale = new Vector3(1f, 1f, 1f);	
+//		go.SendMessage("Init", "jiver error : "+errorCode, SendMessageOptions.DontRequireReceiver);
 	}
 	public override void OnMessageReceived (JiverModel.Message message)
 	{
 		GameObject go = Instantiate(mItemChat, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-		go.transform.parent = mScrollChat.transform.FindChild("Grid");
+		go.transform.parent = mScrollChat.transform;//.FindChild("Grid");
 		go.transform.localScale = new Vector3(1f, 1f, 1f);	
-		go.SendMessage("Init", message, SendMessageOptions.DontRequireReceiver);
+		go.transform.localPosition = new Vector3(0, mChatHeight, 0);
+		go.transform.FindChild("LblName").GetComponent<UILabel>().text = message.GetSenderName();
+		go.transform.FindChild("LblBody").GetComponent<UILabel>().text = message.GetMessage();
+//		go.transform.FindChild("LblName").GetComponent<UILabel>().text = go.transform.FindChild("LblBody").GetComponent<UILabel>().height+"";
+
+		float baseHeight = 50f;
+		int textHeight = go.transform.FindChild("LblBody").GetComponent<UILabel>().height;
+		baseHeight += textHeight;
+
+		mChatHeight -= baseHeight;
+
+//		if(mScrollChat.GetComponent<UIPanel>().GetViewSize().y < Mathf.Abs(mChatHeight)){
+//			float gab = Mathf.Abs(mChatHeight) - mScrollChat.GetComponent<UIPanel>().GetViewSize().y;
+//			Vector3 pos = mScrollChat.transform.localPosition;
+//			pos.y = mFirstY + gab;
+//			mScrollChat.transform.localPosition = pos;
+//
+//			Vector2 pos2 = mScrollChat.GetComponent<UIPanel>().clipOffset;
+//			pos2.y = mFirstOffset - gab;
+//			mScrollChat.GetComponent<UIPanel>().clipOffset = pos2;
+//		}
+//		go.SendMessage("Init", message, SendMessageOptions.DontRequireReceiver);
+		mScrollChat.GetComponent<UIScrollView>().ResetPosition();
 	}
 	public override void OnSystemMessageReceived (JiverModel.SystemMessage message)
 	{
@@ -115,6 +140,8 @@ public class JiverUI : JiverResponder {
 		mScreenRatio = Screen.width / 720f;
 		scrollBarWidth = (int)(30 * mScreenRatio);
 		messageFontSize = (int)(30 * mScreenRatio);
+		mFirstY = mScrollChat.transform.localPosition.y;
+		mFirstOffset = mScrollChat.GetComponent<UIPanel>().clipOffset.y;
 	}
 
 	string MessageRichText(Message message)

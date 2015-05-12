@@ -20,7 +20,7 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 	}
 
 	void ClearList(){
-		ScriptItemChat[] itemChats = mChatView.transform.FindChild("Grid").GetComponentsInChildren<ScriptItemChat>();
+		ScriptItemChat[] itemChats = mChatView.GetComponentsInChildren<ScriptItemChat>();
 		if(itemChats != null){
 			foreach(ScriptItemChat sic in itemChats){
 				NGUITools.DestroyImmediate (sic.gameObject);
