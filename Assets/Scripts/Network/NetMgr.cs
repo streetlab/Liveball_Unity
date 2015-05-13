@@ -120,7 +120,7 @@ public class NetMgr : MonoBehaviour{
 		} else{
 			Debug.Log("Send to Real Server");
 		}
-		host = Constants.CHECK_SERVER_HOST2;
+//		host = Constants.CHECK_SERVER_HOST2;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		
