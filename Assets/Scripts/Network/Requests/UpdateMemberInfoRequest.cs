@@ -1,18 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Text;
+using System.Collections.Generic;
+using System.IO;
 
-public class UpdateMemberInfoRequest : BaseRequest {
+public class UpdateMemberInfoRequest : BaseUploadRequest {
 
-	public UpdateMemberInfoRequest(UserInfo userInfo)
+	public UpdateMemberInfoRequest(JoinMemberInfo memInfo)
 	{		
-		Add ("memSeq", UserMgr.UserInfo.memSeq);
-		Add ("memName", userInfo.memberName);
-		Add ("memEmail", userInfo.memberEmail);
-		Add ("memImage", userInfo.imageName);
-		Add ("favoBB", userInfo.teamCode);
+		Dictionary<string, object> dic = new Dictionary<string, object> ();
+		dic.Add ("memSeq", UserMgr.UserInfo.memSeq);
+		dic.Add ("memName", memInfo.MemberName);
+		dic.Add ("memEmail", memInfo.MemberEmail);
+		dic.Add ("memImage", memInfo.MemImage);
+		dic.Add ("favoBB", memInfo.FavoBB);		
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));
+		
+		if (memInfo.Photo != null && memInfo.Photo.Length > 0) {
+			if(File.Exists(memInfo.Photo)){
+				Debug.Log("a file exists : "+memInfo.Photo);
+				byte[] bytes = File.ReadAllBytes(memInfo.Photo);
+				AddBinaryData("file", bytes, "profile.png", "image/png");
+			} else{
+				Debug.Log("a file not found : "+memInfo.Photo);
+			}
+			
+		}
 
 	}
 

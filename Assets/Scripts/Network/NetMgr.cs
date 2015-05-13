@@ -262,8 +262,8 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent(new PurchaseItemRequest(productId), baseEvent);
 	}
 
-	public static void UpdateMemberInfo(UserInfo userInfo, BaseEvent baseEvent, bool isTest, bool bShowLoading)
+	public static void UpdateMemberInfo(JoinMemberInfo memInfo, BaseEvent baseEvent, bool isTest, bool bShowLoading)
 	{
-		Instance.webAPIUploadProcessEvent(new UpdateMemberInfoRequest(userInfo), baseEvent, isTest, bShowLoading);
+		Instance.webAPIUploadProcessEvent(new UpdateMemberInfoRequest(memInfo), baseEvent, isTest, bShowLoading);
 	}
 }
