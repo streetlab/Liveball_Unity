@@ -48,17 +48,24 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mItemDetail.SetActive(false);
 	}
 
-	void OnApplicationPause(bool pause){
-		if(pause){
-			NetMgr.ExitGame(new ExitGameEvent(new EventDelegate(this, "CompleteExit")));
-		} else{
-			AutoFade.LoadLevel(Application.loadedLevelName);
-		}
-	}
-
-	public void CompleteExit(){
-		Debug.Log("CompleteExit");
-	}
+//	void OnApplicationFocus(bool focus){
+//		if(!focus){
+//			NetMgr.ExitGame(null);
+//		}
+//	}
+//
+//	void OnApplicationPause(bool pause){
+////		if(pause){
+////			NetMgr.ExitGame(new ExitGameEvent(new EventDelegate(this, "CompleteExit")));
+////		} else{
+//		if(!pause){
+//			AutoFade.LoadLevel(Application.loadedLevelName);
+//		}
+//	}
+//
+//	public void CompleteExit(){
+//		Debug.Log("CompleteExit");
+//	}
 
 	void JoinGame()
 	{

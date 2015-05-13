@@ -12,6 +12,7 @@ public class UtilMgr : MonoBehaviour {
 
 	public static bool IsUntouchable;
 	public static bool OnPause;
+	public static bool OnFocus;
 	public static string PreLoadedLevelName;
 
 	static UtilMgr Instance

@@ -34,6 +34,11 @@ public class ScriptSuperRoot : MonoBehaviour {
 		}
 	}
 
+	void OnApplicationFocus(bool focus){
+		UtilMgr.OnFocus = focus;
+		Debug.Log("Application focus : "+focus);
+	}
+
 	void OnApplicationPause(bool pause){
 		UtilMgr.OnPause = pause;
 		Debug.Log("Application pause : "+pause);

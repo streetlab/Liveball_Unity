@@ -5,6 +5,10 @@ using System.Collections;
 
 public class NetMgr : MonoBehaviour{
 
+	const float TIMEOUT = 10f;
+	WWW mWWW;
+	BaseEvent mBaseEvent;
+
 	private static NetMgr _instance = null;
 	public static NetMgr Instance
 	{
@@ -26,13 +30,26 @@ public class NetMgr : MonoBehaviour{
 
 	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading)
 	{
-		Debug.Log("webAPIProcess");
+		if(www == null){
+			Debug.Log("www is null");
+			yield break;
+		}
+
 		if(showLoading)
 			UtilMgr.ShowLoading (showLoading);
 
-		yield return www;
+		float timeSum = 0f;
+
+		while(!www.isDone && 
+		      string.IsNullOrEmpty(www.error) && 
+		      timeSum < TIMEOUT) { 
+			timeSum += Time.deltaTime; 
+			yield return 0; 
+		} 
+
+//		yield return www;
 		
-		if(www.error == null)
+		if(www.error == null && www.isDone)
 		{
 			Debug.Log(www.text);
 //			CommonDialogue.Show (www.text);
@@ -41,10 +58,25 @@ public class NetMgr : MonoBehaviour{
 		}
 		else
 		{
-			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+//			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
+			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "종료하기", ConnectHandler);
+			mWWW = www;
+			mBaseEvent = baseEvent;
 		}
 
 		UtilMgr.DismissLoading ();
+	}
+
+	void ConnectHandler(DialogueMgr.BTNS btn){
+		if(btn == DialogueMgr.BTNS.Btn1){
+			StartCoroutine(webAPIProcess(mWWW, mBaseEvent, true));
+			mWWW = null;
+			mBaseEvent = null;
+		} else{
+			Application.Quit();
+		}
+
 	}
 
 	private void webAPIUploadProcessEvent(BaseUploadRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
@@ -88,7 +120,7 @@ public class NetMgr : MonoBehaviour{
 		} else{
 			Debug.Log("Send to Real Server");
 		}
-//		Debug.Log("host? "+host);
+		host = Constants.CHECK_SERVER_HOST2;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		

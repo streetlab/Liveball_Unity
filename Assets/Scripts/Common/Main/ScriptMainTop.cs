@@ -77,13 +77,32 @@ public class ScriptMainTop : MonoBehaviour {
 
 	void Update(){
 		SetTopInfo ();
+//		Debug.Log("delta time is "+Time.deltaTime);
 	}
 
 	void SetTopInfo()
 	{
+		if(UserMgr.UserInfo == null)
+			return;
+
 		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
 		mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
 		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
+	}
+
+//	void OnApplicationFocus(bool focus){
+//		if(!focus){
+//			NetMgr.ExitGame(null);
+//		}
+//	}
+	
+	void OnApplicationPause(bool pause){
+		if(pause){
+			NetMgr.ExitGame(null);
+		} else{
+//		if(!pause){
+			AutoFade.LoadLevel(Application.loadedLevelName);
+		}
 	}
 
 	public void AnimateClosing()
