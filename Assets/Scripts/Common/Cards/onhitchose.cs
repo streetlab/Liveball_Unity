@@ -18,6 +18,12 @@ public class onhitchose : MonoBehaviour {
 		GetComponent<UIButton> ().hover = ButtenColor [0];
 	}
 	public void onhit(){
+		string name, needxp,nowlv,maxlv,cardclass;
+		name = transform.parent.FindChild ("Info").FindChild ("LblName").GetComponent<UILabel> ().text;
+		needxp = transform.parent.FindChild ("needexp").GetComponent<UILabel> ().text;
+		nowlv = transform.parent.FindChild ("SprLv").FindChild ("LblLv").GetComponent<UILabel> ().text;
+		maxlv = transform.parent.FindChild ("Info").FindChild ("LblLv").GetComponent<UILabel> ().text;
+		cardclass = transform.parent.FindChild ("Info").FindChild ("LblGrade").GetComponent<UILabel> ().text;
 		strings = transform.parent.gameObject.ToString ().ToCharArray ();
 	
 		if (strings.Length == 37) {
@@ -28,14 +34,14 @@ public class onhitchose : MonoBehaviour {
 			Debug.Log (int.Parse (strings [11].ToString ()) * 100 + int.Parse (strings [12].ToString ()) * 10 + int.Parse (strings [13].ToString ()));
 		}
 		if (onoff) {
-			if (transform.parent.parent.parent.GetComponent<ScriptCardsMiddle> ().cardcountP ()) {
-				onoff = false;
+			if (transform.parent.parent.parent.GetComponent<ScriptCardsMiddle> ().cardcountP (name,needxp,nowlv,maxlv,cardclass)) {
+			
 				on();
 			}
 
 		} else {
-			if (transform.parent.parent.parent.GetComponent<ScriptCardsMiddle> ().cardcountN ()) {
-				onoff = true;
+			if (transform.parent.parent.parent.GetComponent<ScriptCardsMiddle> ().cardcountN (name,needxp,nowlv,maxlv,cardclass)) {
+			
 				off();
 			}
 			;
@@ -48,12 +54,16 @@ public class onhitchose : MonoBehaviour {
 		GetComponent<UIButton> ().pressed = ButtenColor [3];
 		GetComponent<UIButton> ().disabledColor = ButtenColor [3];
 		transform.FindChild ("Label").GetComponent<UILabel> ().text = "취소";
+		transform.parent.FindChild ("SprBack").GetComponent<UISprite> ().spriteName = "bg_card_list_on";
+		onoff = false;
 }
-	void off(){
+	public void off(){
 		GetComponent<UIButton> ().defaultColor = ButtenColor [0];
 		GetComponent<UIButton> ().hover = ButtenColor [0];
 		GetComponent<UIButton> ().pressed = ButtenColor [0];
 		GetComponent<UIButton> ().disabledColor = ButtenColor [0];
 		transform.FindChild ("Label").GetComponent<UILabel> ().text = "선택";
+		transform.parent.FindChild ("SprBack").GetComponent<UISprite> ().spriteName = "bg_card_list_off";
+		onoff = true;
 	}
 }

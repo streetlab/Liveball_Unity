@@ -458,6 +458,7 @@ public class UIDraggablePanel2 : UIScrollView
     /// <param name="headIndex"></param>
     public void SetIndexHeadtoTail(int headIndex)
     {
+
         UIListItem item = null;
         int index = -1;
         for (int i = 0; i < mList.Count; i++)

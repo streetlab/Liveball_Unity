@@ -78,7 +78,13 @@ public class Itemcontrol : MonoBehaviour {
 			temp1.transform.FindChild ("add").FindChild ("buyruby").GetComponent<UILabel> ().text = getruby.Response.data [i].productValue.ToString();
 			temp1.transform.FindChild ("add").FindChild ("addruby").GetComponent<UILabel> ().text = getruby.Response.data [i].bonusRuby.ToString();
 			temp1.transform.FindChild ("add").FindChild ("addgold").GetComponent<UILabel> ().text = getruby.Response.data [i].bonusGoldenball.ToString();
-			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_ruby_00"+((i%3)+1).ToString();
+			Debug.Log("ruby code : " + getruby.Response.data [i].productCode);
+			float nums = 0;
+			nums = i+1;
+			if(nums>2){
+				nums = 3;
+			}
+			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getruby.Response.data [i].rubyImage;
 				temp1.gameObject.SetActive (true);
 
 		
@@ -104,7 +110,13 @@ public class Itemcontrol : MonoBehaviour {
 			temp2.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getgold.Response.data [i].productPrice.ToString();
 			temp2.transform.FindChild ("id").GetComponent<UILabel> ().text = getgold.Response.data [i].productId.ToString();
 			temp2.transform.FindChild ("Value").GetComponent<UILabel> ().text = getgold.Response.data [i].productValue.ToString();
-			temp2.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_00"+((i%3)+1).ToString();
+			Debug.Log("gold code : " + getgold.Response.data [i].productCode);
+			float nums = 0;
+			nums = i+1;
+			if(nums>2){
+				nums = 3;
+			}
+			temp2.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getgold.Response.data [i].productImage;
 			temp2.gameObject.SetActive (true);
 			
 			
@@ -176,14 +188,11 @@ public class Itemcontrol : MonoBehaviour {
 			//Debug.Log (getitem.Response.data [i].productCode);
 			temp3.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getitem.Response.data [i].productPrice.ToString();
 			temp3.transform.FindChild ("id").GetComponent<UILabel> ().text = getitem.Response.data [i].productId.ToString();
-			if(getitem.Response.data [i].productCode =="ITEM_MULTIPLE_200X"){
-				temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_item_2";
-			}else if(getitem.Response.data [i].productCode =="ITEM_MULTIPLE_300X"){
-				temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_item_3";
-			}else{
-				temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_item_5";
-			}
+		
 
+
+			temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getitem.Response.data [i].productImage;
+		
 
 
 			//temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_00"+((i%3)+1).ToString();

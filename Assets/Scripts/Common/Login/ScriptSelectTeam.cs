@@ -89,4 +89,31 @@ public class ScriptSelectTeam : MonoBehaviour {
 	{
 		UtilMgr.OnBackPressed ();
 	}
+
+
+
+	string TeamCode="";
+	public void ChangeTeam(string teamcode){
+		TeamCode = teamcode;
+	}
+	public void GoChangeTeam(){
+		if (TeamCode != "") {
+		
+			transform.parent.FindChild("TF_Profile").FindChild("ProfileSetting").GetComponent<ProfileSetting>().SetMemberTeam(TeamCode);
+			transform.parent.FindChild("TF_Profile").gameObject.SetActive(true);
+			transform.parent.FindChild("Top").gameObject.SetActive(true);
+				this.gameObject.SetActive (false);
+
+		} else {
+			DialogueMgr.ShowDialogue ("ERROR", "팀을 선택해 주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
+	}
+	public void ChangeTeamBack()
+	{
+		this.gameObject.SetActive (false);
+		transform.parent.FindChild("TF_Profile").gameObject.SetActive(true);
+		transform.parent.FindChild("Top").gameObject.SetActive(true);
+		transform.parent.FindChild ("TF_Profile").FindChild ("ProfileSetting").gameObject.SetActive (true);
+		
+	}
 }

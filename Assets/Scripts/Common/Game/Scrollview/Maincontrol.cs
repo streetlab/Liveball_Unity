@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -64,11 +64,13 @@ public class Maincontrol : MonoBehaviour {
 			for(int z = 0; z < when.Count;z++){
 				if(dayandday[i] == dayandday[when[z]] ){
 					daycount[z]+=1;
+				
 				}
 			}	
 		}
 		for (int i =0; i<when.Count; i++) {
 			ALL.Add(new List<List<string>>());
+			Debug.Log("daycount[i] : " + daycount[i]);
 			for(int a = 0; a<daycount[i];a++){
 				ALL[i].Add(new List<string>());
 				for(int w = 0; w < 11 ; w ++){
@@ -84,7 +86,7 @@ public class Maincontrol : MonoBehaviour {
 		int num = 0;
 		for (int i = 0; i < when.Count; i++) {
 			for (int s = 0; s < daycount[i]; s++) {
-				Debug.Log ("max : " + mScheduleEvent.Response.data.Count + " now : " + num);
+				//Debug.Log ("max : " + mScheduleEvent.Response.data.Count + " now : " + num);
 				ALL [i] [s] [0] = mScheduleEvent.Response.data [num].extend [0].teamName;
 				imgName = UtilMgr.GetTeamEmblem (mScheduleEvent.Response.data [num].extend [0].imageName);
 				ALL [i] [s] [1] = imgName;
@@ -147,8 +149,18 @@ public class Maincontrol : MonoBehaviour {
 	}
 	void inputdata (int q,GameObject g){
 		bar_origin = g.transform.FindChild ("bg_add").FindChild ("vars").FindChild ("barorigin").gameObject;
-		Debug.Log ("bar_origin : " + bar_origin);
-		Debug.Log ("daycount[q] : " + daycount [q]);
+		//Debug.Log ("bar_origin : " + bar_origin);
+		//Debug.Log ("daycount[q] : " + daycount [q]);
+		UISprite bw,bg;
+
+		bw = g.transform.FindChild ("Bg_w").GetComponent<UISprite>();
+		bg = g.transform.FindChild ("Bg_g").GetComponent<UISprite>();
+
+		bw.SetRect (0,0,676,(bargap*daycount[q])+topmenu-4-20);
+		bg.SetRect (0,0,680,(bargap*daycount[q])+topmenu-20);
+		bw.transform.localPosition = new Vector3 (0,(((bargap*5)+topmenu-4-20)-((bargap*daycount[q])+topmenu-4-20))/2);
+		//Debug.Log ("bargap : " + bargap + " : " + " topmenu : " + topmenu + " : " + " daycount[q] : " + daycount[q]);
+		bg.transform.localPosition = new Vector3 (0,(((bargap*5)+topmenu-20)-((bargap*daycount[q])+topmenu-20))/2);
 		for (int i = 0; i<daycount[q]; i++) {
 			Childtemp = (GameObject)Instantiate (bar_origin, new Vector3 (0, 0, 0), bar_origin.transform.localRotation);
 			Childtemp.transform.parent = bar_origin.transform.parent;
@@ -213,10 +225,27 @@ public class Maincontrol : MonoBehaviour {
 		for (int i = 0; i < bg_g_list.Count; i++) {
 			bg_g_vectors.Add(bg_g_list[i].transform.localPosition);
 		}
-		
+		float sumdatcount = 0;
+		float sumtopmenu = 0;
 		for (int i = bg_g_vectors.Count-1; i>=0; i--) {
-			bg_g_list[(bg_g_vectors.Count-1)-i].transform.localPosition = bg_g_vectors[i];
+
+			if(i==bg_g_vectors.Count-1){
+				Debug.Log(bg_g_list[(bg_g_vectors.Count-1)-i]);
+				bg_g_list[(bg_g_vectors.Count-1)-i].transform.localPosition = bg_g_vectors[i];
+			}else{
+				sumdatcount += daycount[(bg_g_vectors.Count-1)-i];
+				sumtopmenu += 1;
+				bg_g_list[(bg_g_vectors.Count-1)-i].transform.localPosition = new Vector3(0,bg_g_list[(bg_g_vectors.Count-1)].transform.localPosition.y
+				                                                                          +((sumdatcount*bargap)+((sumtopmenu)*topmenu)),0);
+			//	Debug.Log(bg_g_list[(bg_g_vectors.Count-1)-i] + " : " + sumdatcount + " : " + sumtopmenu);
+			//	Debug.Log(bg_g_list[(bg_g_vectors.Count-1)].transform.localPosition.y + " : " + ((sumdatcount*bargap)+((sumtopmenu)*topmenu)));
+			}
+
+
+
+
 		}
+		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 		for (int v = 0; v<7; v++) {
 			today = (System.DateTime.Now.Day+v).ToString();
 			addtoday ();

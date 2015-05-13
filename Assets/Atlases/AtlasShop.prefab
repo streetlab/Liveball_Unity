@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: cd_platinum_back
     x: 316
-    y: 338
+    y: 702
     width: 156
     height: 180
     borderLeft: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cd_rare_back
-    x: 316
-    y: 520
+    x: 158
+    y: 156
     width: 156
     height: 180
     borderLeft: 0
@@ -68,124 +68,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cd_special_back
-    x: 790
-    y: 702
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_gold_001
-    x: 632
-    y: 702
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_gold_002
-    x: 474
-    y: 702
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_gold_003
-    x: 316
-    y: 702
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_gold_item_2
     x: 158
-    y: 156
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_gold_item_3
-    x: 158
-    y: 338
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_gold_item_5
-    x: 158
-    y: 520
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_ruby_001
-    x: 158
-    y: 702
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_ruby_002
-    x: 0
-    y: 156
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: img_ruby_003
-    x: 0
     y: 338
     width: 156
     height: 180
@@ -198,7 +81,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: img_shield_iitem
-    x: 0
+    x: 158
     y: 520
     width: 156
     height: 180
@@ -211,7 +94,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: img_vip
-    x: 0
+    x: 158
     y: 702
     width: 156
     height: 180
@@ -237,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_card
-    x: 394
-    y: 902
+    x: 332
+    y: 964
     width: 60
     height: 60
     borderLeft: 0
@@ -262,6 +145,71 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: item_goldenball_10k.png
+    x: 316
+    y: 156
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_goldenball_20k.png
+    x: 316
+    y: 520
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_goldenball_30k.png
+    x: 316
+    y: 338
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_goldenball_50k.png
+    x: 632
+    y: 702
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_goldenball_5k.png
+    x: 474
+    y: 338
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: item_item
     x: 394
     y: 964
@@ -275,11 +223,128 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: item_multiple_200X_10.png
+    x: 0
+    y: 156
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_multiple_200X_5.png
+    x: 0
+    y: 338
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_multiple_300X_10.png
+    x: 0
+    y: 520
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_multiple_300X_5.png
+    x: 0
+    y: 702
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: item_ruby
-    x: 332
-    y: 964
+    x: 394
+    y: 902
     width: 60
     height: 60
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_ruby_100.png
+    x: 790
+    y: 702
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_ruby_200.png
+    x: 474
+    y: 520
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_ruby_300.png
+    x: 632
+    y: 520
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_ruby_50.png
+    x: 474
+    y: 702
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_ruby_500.png
+    x: 790
+    y: 520
+    width: 156
+    height: 180
     borderLeft: 0
     borderRight: 0
     borderTop: 0

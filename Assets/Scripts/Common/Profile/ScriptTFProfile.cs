@@ -9,6 +9,8 @@ public class ScriptTFProfile : MonoBehaviour {
 	public GameObject mMessages;
 	public GameObject mLogs;
 	GetProfileEvent mProfileEvent;
+
+
 	// Use this for initialization
 	void setarrray(){
 		Debug.Log (mProfileEvent.Response.data.imageName);
@@ -25,11 +27,7 @@ public class ScriptTFProfile : MonoBehaviour {
 	}
 	void Start () {
 
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "setarrray"));
-		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
-
-
-
+		StartArray ();
 
 
 
@@ -49,6 +47,15 @@ public class ScriptTFProfile : MonoBehaviour {
 
 		mListProfile.GetComponent<UIScrollView> ().ResetPosition ();
 	}
-	
+	public void StartArray(){
 
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "setarrray"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
+	}
+	public void SetProfile(string name,string img){
+
+		mProfile.transform.GetChild (4).GetComponent<UISprite> ().spriteName = img;
+		mProfile.transform.GetChild (5).GetComponent<UILabel> ().text = name;
+
+}
 }

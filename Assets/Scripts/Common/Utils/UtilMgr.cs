@@ -318,13 +318,14 @@ public class UtilMgr : MonoBehaviour {
 
 		UtilMgr.IsUntouchable = false;
 	}
-
+	
 	public static bool IsTestServer(){
 		bool isTest = false;
 		string strTest = PlayerPrefs.GetString (Constants.PrefServerTest);
 		if(strTest != null && strTest.Equals("1"))
 			isTest = true;
-
+		
 		return isTest;
 	}
+
 }
