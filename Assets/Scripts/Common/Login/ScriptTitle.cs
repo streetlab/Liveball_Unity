@@ -161,7 +161,7 @@ public class ScriptTitle : MonoBehaviour {
 		string email = PlayerPrefs.GetString (Constants.PrefEmail);
 		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
 
-		if (email == null || email.Length < 1) {
+		if (email == null || email.Length < 1 || pwd == null || pwd.Length < 1) {
 			StopLogin();
 		}
 		else{
