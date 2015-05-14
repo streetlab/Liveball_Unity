@@ -3607,7 +3607,7 @@ Transform:
   m_GameObject: {fileID: 256027209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0022962112, y: .0022962112, z: .0022962112}
+  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
   m_Children:
   - {fileID: 1795951650}
   - {fileID: 1515130933}
@@ -12417,8 +12417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7da7ecca0251478893afdadfb7e2cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UserName: 
-  UserState: 
+  PM: {fileID: 0}
 --- !u!114 &817330080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14090,6 +14089,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 923050721}
   - 114: {fileID: 923050722}
+  - 114: {fileID: 923050725}
+  - 61: {fileID: 923050724}
+  - 114: {fileID: 923050723}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -14156,6 +14158,61 @@ MonoBehaviour:
   mDepth: 4
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
+--- !u!114 &923050723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 923050720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfd370c45351423e93d6612df63c71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tDynamicTx: {fileID: 0}
+  images: 
+--- !u!61 &923050724
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 923050720}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 210, y: 234}
+--- !u!114 &923050725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 923050720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 923050720}
+  hover: {r: 1, g: 1, b: 1, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
+  disabledColor: {r: 1, g: 1, b: 1, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 935131055}
+    mMethodName: SetPhoto
+    mParameters: []
+    oneShot: 0
 --- !u!1 &926933374
 GameObject:
   m_ObjectHideFlags: 0
@@ -14395,6 +14452,55 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
   mSpriteName: ic_plus
   mFillCenter: 1
+--- !u!1 &935131054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 935131056}
+  - 114: {fileID: 935131055}
+  m_Layer: 0
+  m_Name: ProfileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &935131055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935131054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90760cf9639ba4049b24127363c22e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UserImagePath: 
+  UserImageName: 
+  UserName: 
+  UserEmail: 
+  UserState: 
+  UserTeamCode: 
+  UserTeamFullName: 
+  UserImage: {fileID: 0}
+  Profile: {fileID: 412056585}
+  SettingPage: {fileID: 1333795029}
+--- !u!4 &935131056
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935131054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.084693186, y: .379848301, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!1 &935879958
 GameObject:
   m_ObjectHideFlags: 0
@@ -15373,6 +15479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e18ba03d02502482c912008371e2b022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PM: {fileID: 935131055}
 --- !u!1 &980913966
 GameObject:
   m_ObjectHideFlags: 0
@@ -20027,8 +20134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7da7ecca0251478893afdadfb7e2cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UserName: 
-  UserState: 
+  PM: {fileID: 935131055}
 --- !u!114 &1333795032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27840,6 +27946,7 @@ MonoBehaviour:
   mStrJoinError: 
   mErrorTitle: "\uD300 \uC120\uD0DD"
   mErrorBody: "\uC751\uC6D0\uD558\uB294 \uD300\uC744 \uC120\uD0DD\uD574\uC8FC\uC138\uC694!"
+  PM: {fileID: 935131055}
 --- !u!1 &1725555567
 GameObject:
   m_ObjectHideFlags: 0

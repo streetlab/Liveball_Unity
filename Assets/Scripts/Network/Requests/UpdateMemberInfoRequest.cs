@@ -21,6 +21,7 @@ public class UpdateMemberInfoRequest : BaseUploadRequest {
 			if(File.Exists(memInfo.Photo)){
 				Debug.Log("a file exists : "+memInfo.Photo);
 				byte[] bytes = File.ReadAllBytes(memInfo.Photo);
+
 				AddBinaryData("file", bytes, "profile.png", "image/png");
 			} else{
 				Debug.Log("a file not found : "+memInfo.Photo);
@@ -28,7 +29,19 @@ public class UpdateMemberInfoRequest : BaseUploadRequest {
 			
 		}
 
-	}
+		if (memInfo.PhotoBytes != null && memInfo.PhotoBytes.Length > 0) {
+		
+			Debug.Log("a file exists : "+memInfo.PhotoBytes);
+			byte[] bytes = memInfo.PhotoBytes;
+				
+				AddBinaryData("file", bytes, "profile.png", "image/png");
+			} else{
+			Debug.Log("a file not found : "+memInfo.PhotoBytes);
+			}
+			
+		}
+
+
 
 	public override string GetType ()
 	{

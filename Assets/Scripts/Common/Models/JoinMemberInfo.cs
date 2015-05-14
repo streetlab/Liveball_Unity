@@ -90,6 +90,17 @@ public class JoinMemberInfo {
 		}
 	}
 
+	byte[] photoBytes;
+
+	public byte[] PhotoBytes {
+		get {
+			return photoBytes;
+		}
+		set {
+			photoBytes = value;
+		}
+	}
+
 	string photo;
 
 	public string Photo {

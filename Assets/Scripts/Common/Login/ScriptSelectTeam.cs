@@ -96,12 +96,15 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public void ChangeTeam(string teamcode){
 		TeamCode = teamcode;
 	}
+	public ProfileManager PM;
 	public void GoChangeTeam(){
 		if (TeamCode != "") {
 		
-			transform.parent.FindChild("TF_Profile").FindChild("ProfileSetting").GetComponent<ProfileSetting>().SetMemberTeam(TeamCode);
+			PM.SetMemberTeam(TeamCode);
 			transform.parent.FindChild("TF_Profile").gameObject.SetActive(true);
 			transform.parent.FindChild("Top").gameObject.SetActive(true);
+			transform.parent.FindChild("Top").FindChild("Panel").FindChild("ProfileSettings").gameObject.SetActive(true);
+			transform.parent.FindChild ("TF_Profile").FindChild ("ProfileSetting").gameObject.SetActive (true);
 				this.gameObject.SetActive (false);
 
 		} else {
@@ -113,6 +116,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		transform.parent.FindChild("TF_Profile").gameObject.SetActive(true);
 		transform.parent.FindChild("Top").gameObject.SetActive(true);
+		transform.parent.FindChild("Top").FindChild("Panel").FindChild("ProfileSettings").gameObject.SetActive(true);
 		transform.parent.FindChild ("TF_Profile").FindChild ("ProfileSetting").gameObject.SetActive (true);
 		
 	}
