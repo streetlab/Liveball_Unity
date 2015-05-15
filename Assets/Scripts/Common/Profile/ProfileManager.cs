@@ -24,6 +24,7 @@ public class ProfileManager : MonoBehaviour {
  
 	GetProfileEvent mProfileEvent;
 	public bool Sett = false;
+
 	void Start(){
 		UsetPhotoSize = new Vector2 (100, 100);
 		Set ();
@@ -57,6 +58,13 @@ public class ProfileManager : MonoBehaviour {
     	WWW www= new WWW(images);
 		StartCoroutine (GetImage(www));
 	
+
+
+	}
+	public void SetSame(){
+		SetName = UserName;
+		SetTeamCode = mProfileEvent.Response.data.GetTeamCode ();
+		Setimagebyte = UserImagebyte;
 	}
 	public void SetMainPage(){
 		bool B = Profile.activeSelf;
@@ -154,10 +162,24 @@ public class ProfileManager : MonoBehaviour {
 		
 		
 	}
-	
+	public void SetMemberInfoOut(){
 
+		JoinMemberInfo memInfo = new JoinMemberInfo ();
+		UpdateMemberInfoEvent event1 = null;
+		//memInfo.Photo;
+		//memInfo.MemberID
+		memInfo.MemberName = SetName;
+		memInfo.MemberEmail = UserMgr.UserInfo.memberEmail;
+		memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+		memInfo.FavoBB = SetTeamCode;
+		memInfo.PhotoBytes = Setimagebyte;
+		event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
+		NetMgr.UpdateMemberInfo (memInfo, event1, UtilMgr.IsTestServer (), false);
+	}
+	
 	void DialogueHandler(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Btn1) {
+		
 			JoinMemberInfo memInfo = new JoinMemberInfo ();
 			UpdateMemberInfoEvent event1 = null;
 			//memInfo.Photo;
@@ -169,6 +191,7 @@ public class ProfileManager : MonoBehaviour {
 			memInfo.PhotoBytes = Setimagebyte;
 			event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
 			NetMgr.UpdateMemberInfo (memInfo, event1, UtilMgr.IsTestServer (), false);
+			SettingPage.GetComponent<ProfileSetting>().Save();
 		}
 	}
 			

@@ -13855,7 +13855,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 200, y: 50}
+  m_Size: {x: 680, y: 100}
 --- !u!1 &892208464
 GameObject:
   m_ObjectHideFlags: 0
@@ -14331,7 +14331,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -14408,7 +14408,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 2800000, guid: 117cddd7752664f9ea8b3e4d79bca38d, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -14611,7 +14611,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 2800000, guid: 117cddd7752664f9ea8b3e4d79bca38d, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -14736,12 +14736,12 @@ MonoBehaviour:
   UserImagebyte: 
   Profile: {fileID: 412056585}
   SettingPage: {fileID: 1333795029}
-  ex: {fileID: 0}
   UsetPhotoSize: {x: 0, y: 0}
   SetName: 
   SetTeamCode: 
   Setimagebyte: 
   Setimage: {fileID: 0}
+  Sett: 0
 --- !u!4 &935131056
 Transform:
   m_ObjectHideFlags: 0
@@ -19908,7 +19908,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3010
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -20539,7 +20539,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3005
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
@@ -22873,9 +22873,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -305, y: 0}
   serializedVersion: 2
-  m_Size: {x: 40, y: 40}
+  m_Size: {x: 680, y: 122}
 --- !u!1 &1471152948
 GameObject:
   m_ObjectHideFlags: 0
@@ -26466,7 +26466,9 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: e72b476f4cb2a462d91d0093b0767656, type: 3}
   mFont: {fileID: 0}
-  mText: "\uB208\uC379\uB300\uB9C8\uC655"
+  mText: '
+
+'
   mFontSize: 36
   mFontStyle: 0
   mAlignment: 1
@@ -26622,9 +26624,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -305, y: 0}
   serializedVersion: 2
-  m_Size: {x: 40, y: 40}
+  m_Size: {x: 680, y: 122}
 --- !u!1 &1611058648
 GameObject:
   m_ObjectHideFlags: 0
@@ -29297,7 +29299,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
-  mSpriteName: ic_doosan
+  mSpriteName: default_white
   mFillCenter: 1
 --- !u!1 &1761834241
 GameObject:
@@ -33232,7 +33234,9 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: e72b476f4cb2a462d91d0093b0767656, type: 3}
   mFont: {fileID: 0}
-  mText: "\uC57C\uAD6C\uC758 \uC2E0"
+  mText: '
+
+'
   mFontSize: 24
   mFontStyle: 0
   mAlignment: 1

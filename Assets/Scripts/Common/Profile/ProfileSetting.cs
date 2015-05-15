@@ -68,10 +68,15 @@ public class ProfileSetting : MonoBehaviour {
 	//DialogueMgr.ShowDialogue ("구매 확인", s , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
 	void DialogueHandler(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Btn1) {
-			PM.SetMemberInfo ();
+			PM.SetMemberInfoOut ();
 		} else {
 			PM.Sett = false;
 		}
+		Save ();
+		
+	}
+
+	public void Save(){
 		gameObject.SetActive (false);
 		transform.parent.FindChild ("Scroll View").gameObject.SetActive (true);
 		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("GroupInfoTop").gameObject.SetActive (true);
@@ -79,7 +84,7 @@ public class ProfileSetting : MonoBehaviour {
 		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("BtnBack").gameObject.SetActive (false);
 		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("ProfileSettings").gameObject.SetActive (false);
 		PM.SetMainPage();
-		
+		PM.SetSame ();
 	}
 	
 }
