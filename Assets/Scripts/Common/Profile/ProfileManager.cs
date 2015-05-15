@@ -46,10 +46,13 @@ public class ProfileManager : MonoBehaviour {
 		string imgName = UtilMgr.GetTeamEmblem (UserTeamCode);
 		UserTeamCode = imgName;
 
+		//Debug.Log ("UserMgr.UserInfo.teamCode be : " + UserMgr.UserInfo.GetTeamCode());
 		UserMgr.UserInfo.memberName = UserName;
 		UserMgr.UserInfo.memberEmail = UserEmail;
-		UserMgr.UserInfo.teamCode = mProfileEvent.Response.data.GetTeamCode();
-
+		UserMgr.UserInfo.favoBB.teamCode = mProfileEvent.Response.data.GetTeamCode();
+		UserMgr.UserInfo.favoBB.teamFullName = mProfileEvent.Response.data.GetTeamFullName();
+	//	Debug.Log ("mProfileEvent.Response.data.GetTeamCode(): " + mProfileEvent.Response.data.GetTeamCode());
+	//	Debug.Log ("UserMgr.UserInfo.teamCode af: " + UserMgr.UserInfo.GetTeamCode());
 		SetName = UserName;
 		SetTeamCode = mProfileEvent.Response.data.GetTeamCode ();
 
@@ -171,6 +174,7 @@ public class ProfileManager : MonoBehaviour {
 		memInfo.MemberName = SetName;
 		memInfo.MemberEmail = UserMgr.UserInfo.memberEmail;
 		memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+		Debug.Log("send Team code : " + SetTeamCode);
 		memInfo.FavoBB = SetTeamCode;
 		memInfo.PhotoBytes = Setimagebyte;
 		event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
@@ -187,6 +191,7 @@ public class ProfileManager : MonoBehaviour {
 			memInfo.MemberName = SetName;
 			memInfo.MemberEmail = UserMgr.UserInfo.memberEmail;
 			memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+			Debug.Log("send Team code : " + SetTeamCode);
 			memInfo.FavoBB = SetTeamCode;
 			memInfo.PhotoBytes = Setimagebyte;
 			event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
