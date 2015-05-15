@@ -28,12 +28,19 @@ public class ProfileSetting : MonoBehaviour {
 
 	public void back(){
 		if (gameObject.activeSelf) {
+
+			if(PM.Sett){
+				DialogueMgr.ShowDialogue ("프로필 편집", "변경된 프로필을 저장하시겠습니까?" , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
+			}else{
 			gameObject.SetActive (false);
 			transform.parent.FindChild ("Scroll View").gameObject.SetActive (true);
 			transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("GroupInfoTop").gameObject.SetActive (true);
 			transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("BtnMenu").gameObject.SetActive (true);
 			transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("BtnBack").gameObject.SetActive (false);
 			transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("ProfileSettings").gameObject.SetActive (false);
+			PM.SetMainPage();
+			}
+
 
 		}
 	else{
@@ -58,6 +65,21 @@ public class ProfileSetting : MonoBehaviour {
 
 
 	}
-
-
+	//DialogueMgr.ShowDialogue ("구매 확인", s , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
+	void DialogueHandler(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			PM.SetMemberInfo ();
+		} else {
+			PM.Sett = false;
+		}
+		gameObject.SetActive (false);
+		transform.parent.FindChild ("Scroll View").gameObject.SetActive (true);
+		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("GroupInfoTop").gameObject.SetActive (true);
+		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("BtnMenu").gameObject.SetActive (true);
+		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("BtnBack").gameObject.SetActive (false);
+		transform.parent.parent.FindChild ("Top").FindChild ("Panel").FindChild ("ProfileSettings").gameObject.SetActive (false);
+		PM.SetMainPage();
+		
+	}
+	
 }

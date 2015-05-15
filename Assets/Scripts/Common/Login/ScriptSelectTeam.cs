@@ -93,14 +93,16 @@ public class ScriptSelectTeam : MonoBehaviour {
 
 
 	string TeamCode="";
-	public void ChangeTeam(string teamcode){
+	string TeamFullName="";
+	public void ChangeTeam(string teamcode,string teamfullname){
 		TeamCode = teamcode;
+		TeamFullName = teamfullname;
 	}
 	public ProfileManager PM;
 	public void GoChangeTeam(){
 		if (TeamCode != "") {
 		
-			PM.SetMemberTeam(TeamCode);
+			PM.SetMemberTeam(TeamCode,TeamFullName);
 			transform.parent.FindChild("TF_Profile").gameObject.SetActive(true);
 			transform.parent.FindChild("Top").gameObject.SetActive(true);
 			transform.parent.FindChild("Top").FindChild("Panel").FindChild("ProfileSettings").gameObject.SetActive(true);

@@ -16,7 +16,8 @@ public class onclickbutten : MonoBehaviour {
 		GetComponent<UIButton> ().hover  = new Color(1,1,1,1);
 		GetComponent<UIButton> ().disabledColor  = new Color(1,1,1,1);
 		GetComponent<UIButton> ().normalSprite = "btn_team_check_on";
-		transform.parent.parent.parent.parent.parent.parent.parent.GetComponent<ScriptSelectTeam> ().ChangeTeam (transform.parent.name);
+		transform.parent.parent.parent.parent.parent.parent.parent.GetComponent<ScriptSelectTeam> ().ChangeTeam (transform.parent.name,
+		                                                                                                         transform.parent.FindChild("Name").GetComponent<UILabel>().text);
 
 	}
 }
