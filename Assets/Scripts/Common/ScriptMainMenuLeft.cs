@@ -76,7 +76,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 			break;
 		case "BtnCards":
 			if(!Application.loadedLevelName.Equals("SceneCards"))
-				AutoFade.LoadLevel("SceneCards", 0f, 1f);
+				DialogueMgr.ShowDialogue("준비중", "추후 업데이트 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+				//AutoFade.LoadLevel("SceneCards", 0f, 1f);
 			break;
 		case "BtnIloveBaseball":
 			if(!Application.loadedLevelName.Equals("SceneLoveBaseball"))
