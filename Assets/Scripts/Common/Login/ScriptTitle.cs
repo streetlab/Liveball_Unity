@@ -29,7 +29,7 @@ public class ScriptTitle : MonoBehaviour {
 //		PlayerPrefs.SetString (Constants.PrefEmail, "");
 //		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
-
+		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
 	}
 
 	void InitConstants(){

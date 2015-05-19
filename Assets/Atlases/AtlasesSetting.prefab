@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: btn_set_off
     x: 0
-    y: 82
+    y: 210
     width: 122
     height: 46
     borderLeft: 0
@@ -56,8 +56,34 @@ MonoBehaviour:
     paddingBottom: 0
   - name: btn_set_on
     x: 0
-    y: 35
+    y: 163
     width: 122
+    height: 46
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: set_check_off
+    x: 0
+    y: 116
+    width: 46
+    height: 46
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: set_check_on
+    x: 47
+    y: 116
+    width: 46
     height: 46
     borderLeft: 0
     borderRight: 0

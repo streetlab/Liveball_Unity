@@ -36,17 +36,17 @@ public class ScriptSuperRoot : MonoBehaviour {
 
 	void OnApplicationFocus(bool focus){
 		UtilMgr.OnFocus = focus;
-		Debug.Log("Application focus : "+focus);
+//		Debug.Log("Application focus : "+focus);
 	}
 
 	void OnApplicationPause(bool pause){
 		UtilMgr.OnPause = pause;
-		Debug.Log("Application pause : "+pause);
+//		Debug.Log("Application pause : "+pause);
 	}
 
 	public void OnBackPressed()
 	{
-		Debug.Log ("DialogueMgr.IsShown : " + DialogueMgr.IsShown);
+//		Debug.Log ("DialogueMgr.IsShown : " + DialogueMgr.IsShown);
 		if (DialogueMgr.IsShown) {
 			DialogueMgr.DismissDialogue();
 		} else {

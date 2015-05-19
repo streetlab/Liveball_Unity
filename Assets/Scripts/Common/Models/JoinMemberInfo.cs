@@ -79,6 +79,17 @@ public class JoinMemberInfo {
 		}
 	}
 
+	string deviceID;
+
+	public string DeviceID {
+		get {
+			return deviceID;
+		}
+		set {
+			deviceID = value;
+		}
+	}
+
 	string memImage;
 
 	public string MemImage {

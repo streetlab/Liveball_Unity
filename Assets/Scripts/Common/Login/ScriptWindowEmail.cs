@@ -16,11 +16,13 @@ public class ScriptWindowEmail : MonoBehaviour {
 
 	public GameObject mFindPwd1;
 	public GameObject mFindPwd2;
-	public GameObject mStrJoinWhite1;
+//	public GameObject mStrJoinWhite1;
 	public GameObject mStrJoinWhite2;
 	public GameObject mStrJoinWhite3;
 	public GameObject mStrJoinYellow1;
 	public GameObject mStrJoinYellow2;
+	public GameObject mTglPrivacy;
+	public GameObject mTglTerms;
 
 	static Color GRAY = new Color (120f / 255f, 130f / 255f, 150f / 255f);
 	static Color WHITE = new Color (1f, 1f, 1f);
@@ -49,7 +51,7 @@ public class ScriptWindowEmail : MonoBehaviour {
 
 		mFindPwd1.SetActive(true);
 		mFindPwd2.SetActive(true);
-		mStrJoinWhite1.SetActive(false);
+//		mStrJoinWhite1.SetActive(false);
 		mStrJoinWhite2.SetActive(false);
 		mStrJoinWhite3.SetActive(false);
 		mStrJoinYellow1.SetActive(false);
@@ -71,7 +73,7 @@ public class ScriptWindowEmail : MonoBehaviour {
 
 		mFindPwd1.SetActive(false);
 		mFindPwd2.SetActive(false);
-		mStrJoinWhite1.SetActive(true);
+//		mStrJoinWhite1.SetActive(true);
 		mStrJoinWhite2.SetActive(true);
 		mStrJoinWhite3.SetActive(true);
 		mStrJoinYellow1.SetActive(true);
@@ -97,8 +99,25 @@ public class ScriptWindowEmail : MonoBehaviour {
 		UtilMgr.OnBackPressed ();
 	}
 
+	bool CheckAgreement(){
+		if(!mTglPrivacy.GetComponent<UIToggle>().value){
+			DialogueMgr.ShowDialogue("개인정보취급방침", "개인정보취급방침에 동의하여야 합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			return true;
+		}
+
+		if(!mTglTerms.GetComponent<UIToggle>().value){
+			DialogueMgr.ShowDialogue("서비스약관", "서비스약관에 동의하여야 합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			return true;
+		}
+		return false;
+	}
+
 	public void NextClicked()
 	{
+		if(CheckAgreement())
+			return;
+
+
 		UtilMgr.AddBackEvent(new EventDelegate(transform.parent.GetComponent<ScriptTitle>(), "OpenEmail"));
 
 		string eMail = transform.FindChild ("InputEmail").GetComponent<UIInput> ().value;
@@ -132,5 +151,13 @@ public class ScriptWindowEmail : MonoBehaviour {
 
 	public void ConfirmedPwd(){
 		NextClicked();
+	}
+
+	public void OpenPrivacy(){
+		Application.OpenURL("http://www.naver.com");
+	}
+
+	public void OpenTerms(){
+		Application.OpenURL("http://www.daum.net");
 	}
 }

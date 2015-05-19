@@ -58,13 +58,16 @@ public class ScriptSelectTeam : MonoBehaviour {
 	{
 		Debug.Log ("CompleteGCM");
 		string memUID = "";
+//		string deviceID = "";
 		#if(UNITY_EDITOR)
 
 		#elif(UNITY_ANDROID)
 		memUID = AndroidMgr.GetMsg();
 		#else
 		#endif
+
 		mMemInfo.MemUID = memUID;
+		mMemInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
 		GetComponentInParent<ScriptTitle>().mProfileEvent = 
 			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
 
