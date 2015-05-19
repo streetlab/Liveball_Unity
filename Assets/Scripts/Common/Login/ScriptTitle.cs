@@ -380,7 +380,14 @@ public class ScriptTitle : MonoBehaviour {
 		UserMgr.CardInvenInfo = mCardEvent.Response.data;
 
 		UtilMgr.RemoveAllBackEvents ();
-		AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
+//		AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
+		string value = PlayerPrefs.GetString (Constants.PrefNotice);
+		if(value != null && value.Equals("1")){
+			AutoFade.LoadLevel ("SceneGame");
+		} else{
+			PlayerPrefs.SetString (Constants.PrefNotice, "1");
+			AutoFade.LoadLevel("SceneNotice");
+		}
 	}
 
 	public void OpenCert(){

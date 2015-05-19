@@ -23,7 +23,7 @@ public class ScriptJoinForm : MonoBehaviour {
 			//need selection window
 			AndroidMgr.OpenGallery(new EventDelegate(this, "GotUserImg"));
 		} else{
-
+			IOSMgr.OpenGallery(new EventDelegate(this, "GotUserImg"));
 		}
 	}
 

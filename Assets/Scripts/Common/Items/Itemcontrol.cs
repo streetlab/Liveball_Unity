@@ -239,23 +239,10 @@ public class Itemcontrol : MonoBehaviour {
 		Aruby = float.Parse(addruby);
 		Agold = float.Parse(addgold);
 		RequestIAP  = new IAPEvent (new EventDelegate (this, "mRequestIAP"));
-		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);
-	
-//		 NetMgr.RequestIAP
-//		NetMgr.ComsumeIAP
-//		GoogleIAB.consumeProduct
-	//	NetMgr.DoneIAP
-	
-	
-		//Debug.Log ("prime31");
-//			GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
-//		GoogleIAB.purchaseProduct(code, "payload that gets stored and returned" );
-	
-		//GoogleIAB.consumeProduct(code);
-		
+		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);			
 	}
 	void mRequestIAP(){
-
+		#if(UNITY_ANDROID)
 		//if (RequestIAP.Response.data != null) {
 			//if(RequestIAP.Response.data.productId==itemid&&RequestIAP.Response.data.productCode==itemcode){
 				orderNo = RequestIAP.Response.data.orderNo;
@@ -264,10 +251,14 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
 			//}
 		//}
+		#else
+
+		#endif
 	}
+
 	void OnEnable()
 	{
-		// Listen to all events for illustration purposes
+		#if(UNITY_ANDROID)
 		GoogleIABManager.billingSupportedEvent += billingSupportedEvent;
 		GoogleIABManager.billingNotSupportedEvent += billingNotSupportedEvent;
 		GoogleIABManager.queryInventorySucceededEvent += queryInventorySucceededEvent;
@@ -277,12 +268,14 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIABManager.purchaseFailedEvent += purchaseFailedEvent;
 		GoogleIABManager.consumePurchaseSucceededEvent += consumePurchaseSucceededEvent;
 		GoogleIABManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;
+		#else
+		#endif
 	}
 	
 	
 	void OnDisable()
 	{
-		// Remove all event handlers
+		#if(UNITY_ANDROID)
 		GoogleIABManager.billingSupportedEvent -= billingSupportedEvent;
 		GoogleIABManager.billingNotSupportedEvent -= billingNotSupportedEvent;
 		GoogleIABManager.queryInventorySucceededEvent -= queryInventorySucceededEvent;
@@ -292,9 +285,16 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIABManager.purchaseFailedEvent -= purchaseFailedEvent;
 		GoogleIABManager.consumePurchaseSucceededEvent -= consumePurchaseSucceededEvent;
 		GoogleIABManager.consumePurchaseFailedEvent -= consumePurchaseFailedEvent;
+		#else
+		#endif
 	}
 	
-	
+	void addruby(){
+		//mProfileEvent.Response.data.userRuby = (float.Parse(mProfileEvent.Response.data.userRuby)+Bruby+Aruby).ToString();
+		//mProfileEvent.Response.data.userGoldenBall = (float.Parse(mProfileEvent.Response.data.userGoldenBall)+Agold).ToString();
+		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
+		UserMgr.UserInfo.userGoldenBall = mProfileEvent.Response.data.userGoldenBall;
+	}
 	
 	void billingSupportedEvent()
 	{
@@ -309,7 +309,7 @@ public class Itemcontrol : MonoBehaviour {
 		Debug.Log( "billingNotSupportedEvent: " + error );
 	}
 	
-	
+	#if(UNITY_ANDROID)
 	void queryInventorySucceededEvent( List<GooglePurchase> purchases, List<GoogleSkuInfo> skus )
 	{
 		Debug.Log( string.Format( "queryInventorySucceededEvent. total purchases: {0}, total skus: {1}", purchases.Count, skus.Count ) );
@@ -328,7 +328,6 @@ public class Itemcontrol : MonoBehaviour {
 	{
 		Debug.Log( "purchaseCompleteAwaitingVerificationEvent. purchaseData: " + purchaseData + ", signature: " + signature );
 	}
-	
 
 	void purchaseSucceededEvent( GooglePurchase purchase )
 	{
@@ -339,9 +338,9 @@ public class Itemcontrol : MonoBehaviour {
 
 		Debug.Log( "purchaseSucceededEvent: " + purchase );
 	}
+
 	void mComsumeIAP(){
 		GoogleIAB.consumeProduct (itemcode);
-
 	}
 	
 	void purchaseFailedEvent( string error, int response )
@@ -352,6 +351,7 @@ public class Itemcontrol : MonoBehaviour {
 
 		Debug.Log( "purchaseFailedEvent: " + error + ", response: " + response );
 	}
+
 	void mDoneIAP(){
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
 		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
@@ -361,18 +361,14 @@ public class Itemcontrol : MonoBehaviour {
 		Debug.Log ("All PurchaseSucceeded");
 
 	}
-	void addruby(){
-		//mProfileEvent.Response.data.userRuby = (float.Parse(mProfileEvent.Response.data.userRuby)+Bruby+Aruby).ToString();
-		//mProfileEvent.Response.data.userGoldenBall = (float.Parse(mProfileEvent.Response.data.userGoldenBall)+Agold).ToString();
-		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
-		UserMgr.UserInfo.userGoldenBall = mProfileEvent.Response.data.userGoldenBall;
-	}
+
 	void mCancelIAP(){
 		DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 구매를 실패 했습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		Debug.Log ("FailedEvent");
-
-	
+		
+		
 	}
+
 	void consumePurchaseSucceededEvent( GooglePurchase purchase )
 	{
 		DoneIAP  = new IAPEvent (new EventDelegate (this, "mDoneIAP"));
@@ -385,8 +381,12 @@ public class Itemcontrol : MonoBehaviour {
 	{
 		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
 		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
-
+		
 		Debug.Log( "consumePurchaseFailedEvent: " + error );
 	}
+
+	#else
+	
+	#endif
 
 }

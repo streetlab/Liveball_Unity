@@ -76,13 +76,13 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: com.streetlab.tuby
-  bundleVersion: 3.0.2
+  bundleVersion: 3.0.3
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   productGUID: c615ee150cad342a3ba822c1fa700164
-  AndroidBundleVersionCode: 302
+  AndroidBundleVersionCode: 303
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -153,6 +153,24 @@ PlayerSettings:
       m_Size: 48
     - m_Icon: {fileID: 2800000, guid: 298abb3732ea54f05bb54dd66b858281, type: 3}
       m_Size: 36
+  - m_BuildTarget: iPhone
+    m_Icons:
+    - m_Icon: {fileID: 0}
+      m_Size: 180
+    - m_Icon: {fileID: 0}
+      m_Size: 152
+    - m_Icon: {fileID: 2800000, guid: a507fcb18e1d1426d9e54f5d2dadaeb5, type: 3}
+      m_Size: 144
+    - m_Icon: {fileID: 0}
+      m_Size: 120
+    - m_Icon: {fileID: 0}
+      m_Size: 114
+    - m_Icon: {fileID: 0}
+      m_Size: 76
+    - m_Icon: {fileID: 2800000, guid: bfafc58a16b3f43afb7468363633c0c1, type: 3}
+      m_Size: 72
+    - m_Icon: {fileID: 0}
+      m_Size: 57
   m_BuildTargetBatching:
   - m_BuildTarget: Android
     m_StaticBatching: 1

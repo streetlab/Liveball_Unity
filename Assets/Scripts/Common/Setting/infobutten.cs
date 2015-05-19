@@ -7,9 +7,11 @@ public class infobutten : MonoBehaviour {
 	public void onhit(){
 		strings = gameObject.ToString ().ToCharArray ();
 		if (strings [3] == '1') {
-			Debug.Log ("FAQ :" + strings [3]);
+//			Debug.Log ("FAQ :" + strings [3]);
+
 		} else {
-			Debug.Log ("INFO :" + strings [3]);
+//			Debug.Log ("INFO :" + strings [3]);
+			AutoFade.LoadLevel("SceneNotice");
 		}
 	}
 }

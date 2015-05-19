@@ -283,12 +283,12 @@ public class ScriptBetting : MonoBehaviour {
 		case "BtnHit2":
 		case "BtnHit3":
 		case "BtnHit4":
-			mBtnHit1.GetComponent<BoxCollider2D>().enabled = false;
-			mBtnHit2.GetComponent<BoxCollider2D>().enabled = false;
-			mBtnHit3.GetComponent<BoxCollider2D>().enabled = false;
-			mBtnHit4.GetComponent<BoxCollider2D>().enabled = false;
-			Debug.Log("Hit Disabled");
-			break;
+//			mBtnHit1.GetComponent<BoxCollider2D>().enabled = false;
+//			mBtnHit2.GetComponent<BoxCollider2D>().enabled = false;
+//			mBtnHit3.GetComponent<BoxCollider2D>().enabled = false;
+//			mBtnHit4.GetComponent<BoxCollider2D>().enabled = false;
+//			Debug.Log("Hit Disabled");
+//			break;
 		case "BtnOut1":
 		case "BtnOut2":
 		case "BtnOut3":
@@ -297,6 +297,11 @@ public class ScriptBetting : MonoBehaviour {
 			mBtnOut2.GetComponent<BoxCollider2D>().enabled = false;
 			mBtnOut3.GetComponent<BoxCollider2D>().enabled = false;
 			mBtnOut4.GetComponent<BoxCollider2D>().enabled = false;
+
+			mBtnHit1.GetComponent<BoxCollider2D>().enabled = false;
+			mBtnHit2.GetComponent<BoxCollider2D>().enabled = false;
+			mBtnHit3.GetComponent<BoxCollider2D>().enabled = false;
+			mBtnHit4.GetComponent<BoxCollider2D>().enabled = false;
 			Debug.Log("Out Disabled");
 			break;
 		}

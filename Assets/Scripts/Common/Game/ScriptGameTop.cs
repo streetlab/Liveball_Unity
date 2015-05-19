@@ -13,6 +13,8 @@ public class ScriptGameTop : MonoBehaviour {
 	public GameObject mBtnLeague;
 	public GameObject mBtnStatistics;
 
+	public AudioClip mAudioWelcome;
+
 	public GameObject mEmblem;
 
 	GetScheduleEvent mScheduleEvent;
@@ -28,8 +30,17 @@ public class ScriptGameTop : MonoBehaviour {
 		//NetMgr.GetScheduleAll (mScheduleEvent);
 
 //		OpenSchedule ();
+		CheckFirst();
+
 		mEmblem.GetComponent<UISprite>().spriteName =
 			UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
+	}
+
+	void CheckFirst(){
+		if(UserMgr.UserInfo.IsFirstLanding){
+			UserMgr.UserInfo.IsFirstLanding = false;
+			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioWelcome);
+		}
 	}
 
 	public void BtnClicked(string name){

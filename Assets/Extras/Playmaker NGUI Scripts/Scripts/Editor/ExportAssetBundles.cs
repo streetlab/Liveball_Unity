@@ -59,13 +59,13 @@ public class ExportAssetBundles
     [MenuItem("Assets/Asset Bundles/iOS - Build AssetBundle From Selection - With dependencies")]
     static void ExportResource_iOS()
     {
-        ExportWithDependencies(BuildTarget.iPhone);
+        ExportWithDependencies(BuildTarget.iOS);
     }
 
     [MenuItem("Assets/Asset Bundles/iOS - Build AssetBundle From Selection - No dependency tracking")]
     static void ExportResourceNoTrack_iOS()
     {
-        ExportNoDependencies(BuildTarget.iPhone );
+        ExportNoDependencies(BuildTarget.iOS );
     }
 
 #endif
