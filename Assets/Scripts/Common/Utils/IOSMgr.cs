@@ -7,6 +7,7 @@ public class IOSMgr : MonoBehaviour
 	EventDelegate mEventDelegate;
 	static IOSMgr _instance;
 	string mMsg;
+	bool gotToken = false;
 
 	[DllImport("__Internal")]
 	private static extern void OpenGallery(string str);
@@ -52,7 +53,7 @@ public class IOSMgr : MonoBehaviour
 
 	}
 
-#else
+	#else
 	public static void CallIOSFunc( string strFuncName, string str){
 		switch(strFuncName){
 		case "OpenGallery":
@@ -61,7 +62,23 @@ public class IOSMgr : MonoBehaviour
 		}
 	}
 
-#endif
+	void Update(){
+		if(gotToken)
+			return;
+		
+		if(UnityEngine.iOS.NotificationServices.deviceToken != null){
+//			string token = System.Text.Encoding.UTF8.GetString(UnityEngine.iOS.NotificationServices.deviceToken);
+			mMsg = System.BitConverter.ToString(UnityEngine.iOS.NotificationServices.deviceToken)
+				.Replace("-", "").ToLower();
+			Debug.Log("token is "+mMsg);
+			gotToken = true;
+			mEventDelegate.Execute();
+		}
+		//		else
+		//			Debug.Log("token is null");
+	}
+
+	#endif
 	private static IOSMgr Instance
 	{
 		get
@@ -147,5 +164,21 @@ public class IOSMgr : MonoBehaviour
 		Debug.Log("Size of StatusBar is "+Constants.HEIGHT_STATUS_BAR);
 	}
 
+
+	/////////////////////////
+
+
+	public static void RegistAPNS(EventDelegate eventDelegate){
+		Instance.gotToken = false;
+		Instance.mEventDelegate = eventDelegate;
+		#if(UNITY_ANDROID)
+		#else
+		UnityEngine.iOS.NotificationServices.RegisterForNotifications(
+			UnityEngine.iOS.NotificationType.Alert |
+			UnityEngine.iOS.NotificationType.Badge |
+			UnityEngine.iOS.NotificationType.Sound
+			);
+		#endif
+	}
 
 }

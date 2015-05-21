@@ -6,11 +6,13 @@ public class ScriptSuperRoot : MonoBehaviour {
 
 	void Start () {
 		transform.FindChild ("Camera").transform.localPosition = new Vector3(0, UtilMgr.GetScaledPositionY(), 0);
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		#if(UNITY_EDITOR)
 		#elif(UNITY_ANDROID)
-		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
 		#else
-		iPhoneSettings.screenCanDarken = false;
+//		iPhoneSettings.screenCanDarken = false;
+
 		#endif
 	}
 

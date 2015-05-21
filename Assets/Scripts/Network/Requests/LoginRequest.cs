@@ -65,6 +65,7 @@ public class LoginRequest : BaseRequest {
 		Add ("osType", loginInfo.osType);
 		Add ("registType", loginInfo.registType);
 		Add ("memberPwd", loginInfo.memberPwd);
+		Add ("version", Application.version);
 
 		mParams = JsonFx.Json.JsonWriter.Serialize (this);
 

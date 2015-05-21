@@ -254,7 +254,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 
 	}
 	public void ALLBack(){
-		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
+		BntMenu = transform.parent.parent.parent.FindChild ("Top").FindChild ("BtnMenu").gameObject;
 		Debug.Log (B);
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		if (B) {

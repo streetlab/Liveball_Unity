@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScriptNotice : MonoBehaviour {
-
-	const string LOVE_URL = "https://game.nanoo.so/liveball/notice/1250";
+public class ScriptTutorial : MonoBehaviour {	
+	const string LOVE_URL = "http://service.liveball.kr/lb_tutorial_001.html";
 	
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
@@ -50,13 +49,13 @@ public class ScriptNotice : MonoBehaviour {
 	}
 	
 	void CheckVisible(){
-//		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
-//		
-//		if (menuStatus.Equals ("Closed")) {
-//			ShowWebView();
-//		} else {
-//			HideWebView();
-//		}
+		//		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
+		//		
+		//		if (menuStatus.Equals ("Closed")) {
+		//			ShowWebView();
+		//		} else {
+		//			HideWebView();
+		//		}
 	}
 	
 	void InitNanoo(){
@@ -84,6 +83,15 @@ public class ScriptNotice : MonoBehaviour {
 		mWebView.url = LOVE_URL;
 		
 		mWebView.Load ();
+	}
+
+	public void GoTo(string url){
+		mWebView.url = url;
+		mWebView.Load();
+	}
+
+	public string GetUrl(){
+		return mWebView.url;
 	}
 	
 	void OnReceivedKeyCode (UniWebView webView, int keyCode)

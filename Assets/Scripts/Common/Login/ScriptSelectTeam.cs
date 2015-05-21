@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class ScriptSelectTeam : MonoBehaviour {
 
 	public GameObject mBGBtnConfirm;
@@ -10,6 +11,9 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public string mStrJoinError;
 	public string mErrorTitle;
 	public string mErrorBody;
+
+	bool GotToken = false;
+	string mToken;
 
 	JoinMemberInfo mMemInfo;
 
@@ -45,13 +49,16 @@ public class ScriptSelectTeam : MonoBehaviour {
 			mMemInfo.OsType = 1;
 			AndroidMgr.RegistGCM(new EventDelegate(this, "CompleteGCM"));
 			#else
-			memInfo.OsType = 2;
+			mMemInfo.OsType = 2;
+			IOSMgr.RegistAPNS(new EventDelegate(this, "CompleteGCM"));
 			#endif
 		} else if(!mSelected) {
 			DialogueMgr.ShowDialogue (
 				mErrorTitle, mErrorBody, DialogueMgr.DIALOGUE_TYPE.Alert,
 			                          null, null, null, null);
 		}
+
+
 	}
 
 	public void CompleteGCM()
@@ -64,6 +71,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 		#elif(UNITY_ANDROID)
 		memUID = AndroidMgr.GetMsg();
 		#else
+		memUID = IOSMgr.GetMsg();
 		#endif
 
 		mMemInfo.MemUID = memUID;

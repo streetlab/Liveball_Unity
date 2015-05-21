@@ -29,7 +29,7 @@ public class ScriptTitle : MonoBehaviour {
 //		PlayerPrefs.SetString (Constants.PrefEmail, "");
 //		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
-		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
+//		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
 	}
 
 	void InitConstants(){
@@ -189,7 +189,7 @@ public class ScriptTitle : MonoBehaviour {
 		if (Application.platform == RuntimePlatform.Android) {
 			AndroidMgr.RegistGCM(new EventDelegate(this, "SetGCMId"));
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
-			
+			IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
 			mLoginInfo.memUID = "";
 			NetMgr.DoLogin (mLoginInfo, mLoginEvent);
@@ -304,7 +304,11 @@ public class ScriptTitle : MonoBehaviour {
 
 	public void SetGCMId()
 	{
+		#if(UNITY_ANDROID)
 		mLoginInfo.memUID = AndroidMgr.GetMsg();
+		#else
+		mLoginInfo.memUID = IOSMgr.GetMsg();
+		#endif
 		NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 	}
 
@@ -313,10 +317,10 @@ public class ScriptTitle : MonoBehaviour {
 		UtilMgr.DismissLoading ();
 		if (mLoginEvent.Response.code > 0) {
 			Debug.Log("error : "+mLoginEvent.Response.message);
-			if(mLoginEvent.Response.code == 100){
+//			if(mLoginEvent.Response.code == 100){
 				LoginFailed();
-			}
-			UtilMgr.DismissLoading ();
+//			}
+//			UtilMgr.DismissLoading ();
 			return;
 		}
 		mLoginInfo = mLoginEvent.Response.data;
@@ -381,12 +385,12 @@ public class ScriptTitle : MonoBehaviour {
 
 		UtilMgr.RemoveAllBackEvents ();
 //		AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
-		string value = PlayerPrefs.GetString (Constants.PrefNotice);
+		string value = PlayerPrefs.GetString (Constants.PrefTutorial);
 		if(value != null && value.Equals("1")){
 			AutoFade.LoadLevel ("SceneGame");
-		} else{
-			PlayerPrefs.SetString (Constants.PrefNotice, "1");
-			AutoFade.LoadLevel("SceneNotice");
+		}
+		else{
+			AutoFade.LoadLevel("SceneTutorial");
 		}
 	}
 
@@ -400,23 +404,37 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("Certification").gameObject.SetActive (true);
 	}
 
-
-	public void BtnClicked(string name)
-	{
-		UtilMgr.AddBackEvent (new EventDelegate (this, "Init"));
-		switch(name)
-		{
-		case "BtnFacebook":
-			OpenFacebook();
-			break;
-		case "BtnKakao":
-			OpenKakao();
-			break;
-		case "BtnEmail":
-			OpenEmail();
-			break;
-
-		
-		}
+	public void EmailClicked(){
+//		Debug.Log("EmailClicked");
+		OpenEmail();
 	}
+
+	public void KakaoClicked(){
+		OpenKakao();
+	}
+
+	public void FacebookClicked(){
+		OpenFacebook();
+	}
+
+//	public void BtnClicked(string name)
+//	{
+//		Debug.Log("BtnClicked : "+name);
+//		UtilMgr.AddBackEvent (new EventDelegate (this, "Init"));
+//		Debug.Log("added");
+//		switch(name)
+//		{
+//		case "BtnFacebook":
+//			OpenFacebook();
+//			break;
+//		case "BtnKakao":
+//			OpenKakao();
+//			break;
+//		case "BtnEmail":
+//			OpenEmail();
+//			break;
+//
+//		
+//		}
+//	}
 }

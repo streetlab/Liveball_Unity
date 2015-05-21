@@ -123,7 +123,7 @@ public class ScriptLove : MonoBehaviour {
 		float myRatio = Screen.width / 720f;
 		
 		//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
-		return new UniWebViewEdgeInsets((int)(125*myRatio),0,0,0);
+		return new UniWebViewEdgeInsets((int)(96*myRatio),0,0,0);
 		//		} else {
 		//			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
 		//		}
