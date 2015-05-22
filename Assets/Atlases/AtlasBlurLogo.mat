@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AtlasMain
-  m_Shader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
+  m_Name: AtlasBlurLogo
+  m_Shader: {fileID: 4800000, guid: c96d46110b19d4124b0af643ba46b761, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -18,8 +18,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 9680d56d09c19481bac868293bf6985e, type: 3}
+          m_Texture: {fileID: 2800000, guid: 9e2c5ced7d4bd4066a2c751f277e474d, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Distance
+        second: .00100000005
     m_Colors: {}

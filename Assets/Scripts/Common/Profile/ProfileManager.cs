@@ -38,11 +38,13 @@ public class ProfileManager : MonoBehaviour {
 		UserImagePath = mProfileEvent.Response.data.imagePath;
 		UserImageName = mProfileEvent.Response.data.imageName;
 		UserName = mProfileEvent.Response.data.memberName;
+		//Debug.Log ("UserName : " + mProfileEvent.Response.data.memberName);
 		UserEmail = mProfileEvent.Response.data.memberEmail;
 		UserState = mProfileEvent.Response.data.memberEmail;
 		UserTeamCode = mProfileEvent.Response.data.GetTeamCode();
+		//Debug.Log ("GetTeamCode : " + mProfileEvent.Response.data.GetTeamCode());
 		UserTeamFullName = mProfileEvent.Response.data.GetTeamFullName ();
-
+		//Debug.Log ("UserTeamFullName : " + mProfileEvent.Response.data.GetTeamFullName ());
 		string imgName = UtilMgr.GetTeamEmblem (UserTeamCode);
 		UserTeamCode = imgName;
 
@@ -57,7 +59,9 @@ public class ProfileManager : MonoBehaviour {
 		SetTeamCode = mProfileEvent.Response.data.GetTeamCode ();
 
 		string images = Constants.IMAGE_SERVER_HOST+ UserImagePath + UserImageName;
-	
+		//Profile.transform.FindChild ("LblNick").GetComponent<UILabel> ().text = UserName;
+		//Profile.transform.FindChild ("LblStatus").GetComponent<UILabel> ().text = UserState;
+		//Profile.transform.FindChild ("SprEmblem").GetComponent<UISprite> ().spriteName = UserTeamCode;
     	WWW www= new WWW(images);
 		StartCoroutine (GetImage(www));
 	
@@ -143,10 +147,12 @@ public class ProfileManager : MonoBehaviour {
 		}
 		Setimagebyte = Photo;
 		Setimage.LoadImage (Setimagebyte);
-		if (Setimage != null) {
+	//	if (Setimage != null) {
 			SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = Setimage;
 
-		}
+		//}
+		SettingPage.SetActive (false);
+		SettingPage.SetActive (true);
 		SettingPage.SetActive (B);
 		
 		
@@ -211,11 +217,17 @@ public class ProfileManager : MonoBehaviour {
 		AndroidMgr.OpenGallery(new EventDelegate(this, "OpenGallery"));
 	}
 	void OpenGallery(){
-		
+		Debug.Log("OpenGallery");
 		images = "file://"+ AndroidMgr.GetMsg();
+		Debug.Log("images");
 		tLoad= new WWW(images);
+		Debug.Log("tLoad");
 		tDynamicTx= new Texture2D((int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
+		Debug.Log("tDynamicTx");
 		tLoad.LoadImageIntoTexture(tDynamicTx);
+		tLoad.Dispose ();
+
+
 		
 		tDynamicTx = ScaleTexture (tDynamicTx, (int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
 		//transform.FindChild("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
@@ -264,11 +276,14 @@ public class ProfileManager : MonoBehaviour {
 		
 		Texture2D temp = new Texture2D (0, 0);
 		www.LoadImageIntoTexture (temp);
-		Debug.Log ("temp : " + temp);
-		UserImagebyte =temp.EncodeToPNG();
-		UserImage = temp;
-		Setimagebyte =temp.EncodeToPNG();
-		Setimage = temp;
+		Debug.Log ("temp : " + temp.EncodeToPNG ());
+	
+			UserImagebyte = temp.EncodeToPNG ();
+	
+			UserImage = temp;
+			Setimagebyte = temp.EncodeToPNG ();
+			Setimage = temp;
+
 		SetMainPage();
 
 	
