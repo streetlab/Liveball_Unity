@@ -8,8 +8,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 	public GameObject mBtnGameHome;
 	public GameObject mBtnCards;
 	public GameObject mBtnIamPlayer;
-	public GameObject mBtnTeamRanking;
-	public GameObject mBtnRecord;
+//	public GameObject mBtnTeamRanking;
+//	public GameObject mBtnRecord;
 	public GameObject mBtnRanking;
 	public GameObject mBtnProfile;
 	public GameObject mBtnItem;
@@ -31,8 +31,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		mBtnItem.GetComponent<UIButton> ().isEnabled = true;
 		mBtnNotice.GetComponent<UIButton> ().isEnabled = true;
 		mBtnSettings.GetComponent<UIButton> ().isEnabled = true;
-		mBtnTeamRanking.GetComponent<UIButton> ().isEnabled = true;
-		mBtnRecord.GetComponent<UIButton> ().isEnabled = true;
+//		mBtnTeamRanking.GetComponent<UIButton> ().isEnabled = true;
+//		mBtnRecord.GetComponent<UIButton> ().isEnabled = true;
 	}
 
 	void SetBtnDisable(){

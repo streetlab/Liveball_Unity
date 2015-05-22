@@ -427,6 +427,13 @@ public class Jiver : MonoBehaviour {
 	class JiveriOSImpl : JiverAdapter {
 		public void Init(string appId, string responder) {
 			_Jiver_iOS_Init (appId, responder);
+
+//			libicucore.dylib
+//			MobileCoreServices.framework
+//			Foundation.framework
+//			Security.framework
+//			CFNetwork.framework
+//			QuartzCore.framework
 		}
 		
 		public void Login(string uuid, string nickname) {

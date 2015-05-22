@@ -179,6 +179,7 @@ public class IOSMgr : MonoBehaviour
 			UnityEngine.iOS.NotificationType.Sound
 			);
 		#endif
+
 	}
 
 }

@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScriptLove : MonoBehaviour {
+public class ScriptPP : MonoBehaviour {
 	
-	
-	const string LOVE_URL = "https://game.nanoo.so/liveball/board?cd=221";
+	const string LOVE_URL = "http://www.pointpark.com/html/ma/Hmain.html";
 	
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
@@ -19,7 +18,7 @@ public class ScriptLove : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Love Start!");
+		Debug.Log("PointPark");
 		InitNanoo ();
 	}
 	
@@ -51,13 +50,13 @@ public class ScriptLove : MonoBehaviour {
 	}
 	
 	void CheckVisible(){
-		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
-		
-		if (menuStatus.Equals ("Closed")) {
-			ShowWebView();
-		} else {
-			HideWebView();
-		}
+		//		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
+		//		
+		//		if (menuStatus.Equals ("Closed")) {
+		//			ShowWebView();
+		//		} else {
+		//			HideWebView();
+		//		}
 	}
 	
 	void InitNanoo(){
@@ -75,10 +74,8 @@ public class ScriptLove : MonoBehaviour {
 			mWebView.OnEvalJavaScriptFinished += OnEvalJavaScriptFinished;			
 			mWebView.InsetsForScreenOreitation += InsetsForScreenOreitation;
 			mWebView.OnReceivedKeyCode += OnReceivedKeyCode;
-			
-			
-			//			mWebView.SetTransparentBackground(true);
-			//			mWebView.toolBarShow = true;
+
+			mWebView.backButtonEnable = false;
 			
 		}
 		
@@ -100,7 +97,6 @@ public class ScriptLove : MonoBehaviour {
 		Debug.Log ("OnWebViewShouldClose");
 		
 		return false;
-
 		
 		if (webView == mWebView) {
 			mWebView = null;

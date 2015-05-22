@@ -606,10 +606,8 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 239817222}
-    mMethodName: BtnClicked
-    mParameters:
-    - obj: {fileID: 62476650}
-      field: name
+    mMethodName: ScheduleClicked
+    mParameters: []
     oneShot: 0
 --- !u!61 &62476656
 BoxCollider2D:
@@ -6473,10 +6471,8 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 239817222}
-    mMethodName: BtnClicked
-    mParameters:
-    - obj: {fileID: 762257180}
-      field: name
+    mMethodName: RankingClicked
+    mParameters: []
     oneShot: 0
 --- !u!61 &762257184
 BoxCollider2D:
@@ -9159,10 +9155,8 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 239817222}
-    mMethodName: BtnClicked
-    mParameters:
-    - obj: {fileID: 1171141301}
-      field: name
+    mMethodName: LeagueClicked
+    mParameters: []
     oneShot: 0
 --- !u!61 &1171141305
 BoxCollider2D:
@@ -9298,7 +9292,7 @@ Transform:
   m_GameObject: {fileID: 1193512822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00157977885, y: .00157977885, z: .00157977885}
   m_Children:
   - {fileID: 1653202002}
   - {fileID: 239817221}
@@ -11409,10 +11403,8 @@ MonoBehaviour:
   pixelSnap: 0
   onClick:
   - mTarget: {fileID: 239817222}
-    mMethodName: BtnClicked
-    mParameters:
-    - obj: {fileID: 1542888633}
-      field: name
+    mMethodName: StatisticsClicked
+    mParameters: []
     oneShot: 0
 --- !u!61 &1542888637
 BoxCollider2D:

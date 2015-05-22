@@ -43,22 +43,38 @@ public class ScriptGameTop : MonoBehaviour {
 		}
 	}
 
-	public void BtnClicked(string name){
-		switch(name){
-		case "BtnSchedule":
-			OpenSchedule();
-			break;
-		case "BtnRanking":
-			OpenRanking();
-			break;
-		case "BtnLeague":
-			OpenLeague();
-			break;
-		case "BtnStatistics":
-			OpenStatistics();
-			break;
-		}
+	public void ScheduleClicked(){
+		OpenSchedule();
 	}
+
+	public void RankingClicked(){
+		OpenRanking();
+	}
+
+	public void LeagueClicked(){
+		OpenLeague();
+	}
+
+	public void StatisticsClicked(){
+		OpenStatistics();
+	}
+
+//	public void BtnClicked(string name){
+//		switch(name){
+//		case "BtnSchedule":
+//			OpenSchedule();
+//			break;
+//		case "BtnRanking":
+//			OpenRanking();
+//			break;
+//		case "BtnLeague":
+//			OpenLeague();
+//			break;
+//		case "BtnStatistics":
+//			OpenStatistics();
+//			break;
+//		}
+//	}
 
 	void OpenSchedule(){
 		mBtnSchedule.GetComponent<UIButton> ().isEnabled = false;

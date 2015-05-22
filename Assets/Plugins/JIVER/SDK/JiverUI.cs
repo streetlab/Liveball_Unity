@@ -431,8 +431,8 @@ public class JiverUI : JiverResponder {
 
 	}
 
-	public void CheckSubmit(string str){
-		inputString = str;
+	public void CheckSubmit(){
+		inputString = mInput.GetComponent<UIInput>().value;
 		Submit ();
 		mInput.GetComponent<UIInput>().value = "";
 	}
