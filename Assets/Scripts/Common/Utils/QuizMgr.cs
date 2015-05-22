@@ -172,7 +172,9 @@ public class QuizMgr : MonoBehaviour {
 		if(msgInfo.type.Equals(Constants.POST_MSG)){
 			
 		} else if(msgInfo.type.Equals(Constants.POST_GAME_START)){
+			Debug.Log("UserMgr.Schedule.gameSeq is "+UserMgr.Schedule.gameSeq);
 			if(UserMgr.Schedule != null){
+				Debug.Log("msgInfo.info.gameSeq is "+msgInfo.info.gameSeq);
 				if(UserMgr.Schedule.gameSeq == int.Parse(msgInfo.info.gameSeq)){
 					AutoFade.LoadLevel("SceneGame");
 				}
