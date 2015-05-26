@@ -187,10 +187,13 @@ public class ScriptTitle : MonoBehaviour {
 		PlayerPrefs.SetString (Constants.PrefPwd, pwd);
 		
 		if (Application.platform == RuntimePlatform.Android) {
+			mLoginInfo.osType = 1;
 			AndroidMgr.RegistGCM(new EventDelegate(this, "SetGCMId"));
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			mLoginInfo.osType = 2;
 			IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
+			mLoginInfo.osType = 0;
 			mLoginInfo.memUID = "";
 			NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 		}

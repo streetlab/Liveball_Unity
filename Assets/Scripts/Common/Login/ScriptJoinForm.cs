@@ -95,7 +95,7 @@ public class ScriptJoinForm : MonoBehaviour {
 		#elif(UNITY_ANDROID)
 		AndroidMgr.OpenGallery(new EventDelegate(this, "GotImage"));
 		#else
-
+		IOSMgr.OpenGallery(new EventDelegate(this, "GotImage"));
 		#endif
 	}
 
@@ -105,11 +105,17 @@ public class ScriptJoinForm : MonoBehaviour {
 		#elif(UNITY_ANDROID)
 		mImgPath = AndroidMgr.GetMsg();
 		#else
-		
+		mImgPath = IOSMgr.GetMsg();
 		#endif
 
-		WWW www = new WWW ("file://"+mImgPath);
-		StartCoroutine (LoadImage (www));
+//		string filePath = mImgPath;
+		if(System.IO.File.Exists(mImgPath)){
+			WWW www = new WWW ("file://"+mImgPath);
+			StartCoroutine (LoadImage (www));
+		} else{
+			DialogueMgr.ShowDialogue("Error", "파일을 찾을 수 없습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
+
 
 	}
 

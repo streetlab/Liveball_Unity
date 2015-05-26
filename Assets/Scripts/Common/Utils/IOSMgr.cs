@@ -63,6 +63,11 @@ public class IOSMgr : MonoBehaviour
 	}
 
 	void Update(){
+		if(UnityEngine.iOS.NotificationServices.remoteNotifications.Length > 0){
+			UnityEngine.iOS.NotificationServices.ClearRemoteNotifications();
+			Debug.Log("noti received");
+		}
+
 		if(gotToken)
 			return;
 		
@@ -100,6 +105,8 @@ public class IOSMgr : MonoBehaviour
 			return _instance;
 		}
 	}
+
+
 
 	public static string GetMsg()
 	{
