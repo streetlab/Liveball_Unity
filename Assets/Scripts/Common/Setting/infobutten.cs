@@ -9,9 +9,12 @@ public class infobutten : MonoBehaviour {
 		if (strings [3] == '1') {
 //			Debug.Log ("FAQ :" + strings [3]);
 			AutoFade.LoadLevel("SceneTutorial");
-		} else {
+		} else if((strings [3] == '2')) {
 //			Debug.Log ("INFO :" + strings [3]);
 			AutoFade.LoadLevel("SceneNotice");
+		} else {
+			//			Debug.Log ("INFO :" + strings [3]);
+			AutoFade.LoadLevel("SceneEvents");
 		}
 	}
 }

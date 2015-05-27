@@ -71,8 +71,8 @@ public class NetMgr : MonoBehaviour{
 	void ConnectHandler(DialogueMgr.BTNS btn){
 		if(btn == DialogueMgr.BTNS.Btn1){
 			StartCoroutine(webAPIProcess(mWWW, mBaseEvent, true));
-			mWWW = null;
-			mBaseEvent = null;
+//			mWWW = null;
+//			mBaseEvent = null;
 		} else{
 			Application.Quit();
 		}
@@ -150,6 +150,29 @@ public class NetMgr : MonoBehaviour{
 //			return;
 		}
 
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
+	}
+
+	private void webAPINanooEvent(BaseNanooRequest request, BaseEvent baseEvent, bool showLoading)
+	{
+		Debug.Log("webAPINanoo");
+		string reqParam = "";
+		string httpUrl = "";
+		if (request != null) {
+			reqParam = request.ToRequestString();
+		} else {
+
+		}
+		
+//		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		WWW www = new WWW(reqParam);
+		
+		Debug.Log (reqParam);
+		if(UtilMgr.OnPause){
+			Debug.Log("Request is Canceled cause OnPause");
+			//			return;
+		}
+		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
 	}
 
@@ -297,5 +320,10 @@ public class NetMgr : MonoBehaviour{
 	public static void UpdateMemberInfo(JoinMemberInfo memInfo, BaseEvent baseEvent, bool isTest, bool bShowLoading)
 	{
 		Instance.webAPIUploadProcessEvent(new UpdateMemberInfoRequest(memInfo), baseEvent, isTest, bShowLoading);
+	}
+
+	public static void GetEvents(BaseEvent baseEvent)
+	{
+		Instance.webAPINanooEvent(new GetEventsRequest(), baseEvent, true);
 	}
 }

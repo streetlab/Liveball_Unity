@@ -2,24 +2,27 @@
 using System.Collections;
 
 public class ScriptEvents : MonoBehaviour {
-	
-	const string LOVE_URL = "https://game.nanoo.so/liveball/event";
-	
+		
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
 		VISIBLE,
 		INVISIBLE
 	}
 	STATE_WEBVIEW mStateWebview;
-	
-	public GameObject mMainMenu;
-	public GameObject mTop;
+
+	public GameObject mLblTitle;
 	bool StatusBarIsHidden;
+
+	GetEventsEvent mEvent;
+	public int Page;
+	public int MAX_PAGE;
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Love Start!");
+		Debug.Log("Events Start!");
 		InitNanoo ();
+		mEvent = new GetEventsEvent(new EventDelegate(this, "GotEvents"));
+		NetMgr.GetEvents(mEvent);
 	}
 	
 	void Update(){
@@ -34,6 +37,23 @@ public class ScriptEvents : MonoBehaviour {
 		} else{
 			ShowWebView();
 		}
+	}
+
+	public void GotEvents(){
+		Page = 1;
+		MAX_PAGE = mEvent.Response.result.count;
+		GoToNext();
+	}
+
+	public void GoToNext(){
+		mLblTitle.GetComponent<UILabel>().text = mEvent.Response.result.data[Page-1].title;
+
+		mWebView.url = mEvent.Response.result.data[Page-1].url;
+		mWebView.Load();
+	}
+	
+	public string GetUrl(){
+		return mWebView.url;
 	}
 	
 	void CheckStatusBar(){
@@ -80,10 +100,10 @@ public class ScriptEvents : MonoBehaviour {
 			//			mWebView.toolBarShow = true;
 			
 		}
-		
-		mWebView.url = LOVE_URL;
-		
-		mWebView.Load ();
+//		
+//		mWebView.url = LOVE_URL;
+//		
+//		mWebView.Load ();
 	}
 	
 	void OnReceivedKeyCode (UniWebView webView, int keyCode)

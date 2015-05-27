@@ -390,7 +390,12 @@ public class ScriptTitle : MonoBehaviour {
 //		AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
 		string value = PlayerPrefs.GetString (Constants.PrefTutorial);
 		if(value != null && value.Equals("1")){
-			AutoFade.LoadLevel ("SceneGame");
+			value = PlayerPrefs.GetString(Constants.PrefNotice);
+			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
+				AutoFade.LoadLevel ("SceneGame");
+			} else{
+				AutoFade.LoadLevel ("SceneNotice");
+			}
 		}
 		else{
 			AutoFade.LoadLevel("SceneTutorial");

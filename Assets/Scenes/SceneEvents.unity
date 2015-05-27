@@ -1252,6 +1252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152e38b4869734127b30e8ecaa9d8d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mEvents: {fileID: 1639640042}
+  mLblTitle: {fileID: 0}
 --- !u!1 &566558773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,13 +1359,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 162
-  mHeight: 36
+  mWidth: 500
+  mHeight: 78
   mDepth: 21
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.5
+  aspectRatio: 6.41025639
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: e72b476f4cb2a462d91d0093b0767656, type: 3}
   mFont: {fileID: 0}
@@ -1372,7 +1374,7 @@ MonoBehaviour:
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
-  mMaxLineCount: 0
+  mMaxLineCount: 2
   mEffectStyle: 0
   mEffectColor: {r: 0, g: 0, b: 0, a: 1}
   mSymbols: 1
@@ -1383,7 +1385,7 @@ MonoBehaviour:
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
   mSpacingX: 0
-  mSpacingY: 0
+  mSpacingY: 2
   mUseFloatSpacing: 0
   mFloatSpacingX: 0
   mFloatSpacingY: 0
@@ -2834,8 +2836,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00715cd0c214b4cf48a06597b47276cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMainMenu: {fileID: 0}
-  mTop: {fileID: 0}
+  mLblTitle: {fileID: 617408643}
+  Page: 0
+  MAX_PAGE: 0
 --- !u!1 &1646167262
 GameObject:
   m_ObjectHideFlags: 0
