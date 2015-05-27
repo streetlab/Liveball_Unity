@@ -17,8 +17,8 @@ public class JoinQuizRequest : BaseRequest {
 		Add ("selectValue", joinInfo.SelectValue);
 		Add ("extendValue", joinInfo.ExtendValue);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
-
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 	}
 
 	public override string GetType ()

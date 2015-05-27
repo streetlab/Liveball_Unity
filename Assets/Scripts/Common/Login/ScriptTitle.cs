@@ -193,7 +193,7 @@ public class ScriptTitle : MonoBehaviour {
 			mLoginInfo.osType = 2;
 			IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
-			mLoginInfo.osType = 0;
+			mLoginInfo.osType = 1;
 			mLoginInfo.memUID = "";
 			NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 		}

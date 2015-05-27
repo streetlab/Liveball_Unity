@@ -4,10 +4,15 @@ using System.Collections;
 public class ScriptNoticeTop : MonoBehaviour {
 
 	void Start(){
-		PlayerPrefs.SetString (Constants.PrefNotice, "1");
+		PlayerPrefs.SetString (Constants.PrefNotice, UtilMgr.GetDateTime("yyyyMMdd"));
 	}
 
 	public void CloseClicked(){
-		AutoFade.LoadLevel("SceneGame");
+		string value = PlayerPrefs.GetString(Constants.PrefEvents);
+		if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
+			AutoFade.LoadLevel("SceneGame");
+		} else{
+			AutoFade.LoadLevel("SceneEvents");
+		}
 	}
 }

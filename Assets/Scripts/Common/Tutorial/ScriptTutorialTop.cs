@@ -25,7 +25,7 @@ public class ScriptTutorialTop : MonoBehaviour {
 
 	public void CloseClicked(){
 		string value = PlayerPrefs.GetString(Constants.PrefNotice);
-		if(value != null && value.Equals("1")){
+		if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
 			AutoFade.LoadLevel("SceneGame");
 		} else{
 			AutoFade.LoadLevel("SceneNotice");

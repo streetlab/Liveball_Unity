@@ -10,7 +10,8 @@ public class GetPreparedQuizRequest : BaseRequest {
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
 		Add ("quizListSeq", 0);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 
 	}
 

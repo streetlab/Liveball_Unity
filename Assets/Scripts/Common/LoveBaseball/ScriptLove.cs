@@ -51,9 +51,11 @@ public class ScriptLove : MonoBehaviour {
 	}
 	
 	void CheckVisible(){
-		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
+		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().
+			FsmVariables.FindFsmString("StatusAnimation").Value;
 		
-		if (menuStatus.Equals ("Closed")) {
+		if (menuStatus.Equals ("Closed") 
+		    && !DialogueMgr.IsShown) {
 			ShowWebView();
 		} else {
 			HideWebView();
@@ -98,9 +100,9 @@ public class ScriptLove : MonoBehaviour {
 	
 	bool OnWebViewShouldClose(UniWebView webView) {
 		Debug.Log ("OnWebViewShouldClose");
+		UtilMgr.OnBackPressed();
 		
 		return false;
-
 		
 		if (webView == mWebView) {
 			mWebView = null;

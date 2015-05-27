@@ -8,7 +8,8 @@ public class GetProfileRequest : BaseRequest {
 	{
 		Add ("memSeq", memSeq);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 
 	}
 

@@ -8,7 +8,8 @@ public class GetPlayerStatisticsRequest : BaseRequest {
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 
 	}
 

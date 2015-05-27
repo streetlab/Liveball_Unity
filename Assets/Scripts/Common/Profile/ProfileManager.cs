@@ -150,6 +150,27 @@ public class ProfileManager : MonoBehaviour {
 	//	if (Setimage != null) {
 			SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = Setimage;
 
+
+		//}
+		SettingPage.SetActive (false);
+		SettingPage.SetActive (true);
+		SettingPage.SetActive (B);
+		
+		
+	}
+	public void SetMemberPhoto(Texture2D texture){
+		Sett = true;
+		bool B = SettingPage.activeSelf;
+		if (!SettingPage.activeSelf) {
+			SettingPage.SetActive (true);
+		}
+//		Setimagebyte = Photo;
+		Setimagebyte = File.ReadAllBytes(IOSMgr.GetMsg());
+		//		Setimage.LoadImage (Setimagebyte);
+		//	if (Setimage != null) {
+		SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = texture;
+		
+		
 		//}
 		SettingPage.SetActive (false);
 		SettingPage.SetActive (true);
@@ -213,31 +234,42 @@ public class ProfileManager : MonoBehaviour {
 	 string images;
 	
 	public void SetPhoto(){
-
+		#if(UNITY_ANDROID)
 		AndroidMgr.OpenGallery(new EventDelegate(this, "OpenGallery"));
+		#else
+		IOSMgr.OpenGallery(new EventDelegate(this, "OpenGallery"));
+		#endif
 	}
 	void OpenGallery(){
 		Debug.Log("OpenGallery");
+		#if(UNITY_ANDROID)
 		images = "file://"+ AndroidMgr.GetMsg();
+		#else
+		images = "file://"+ IOSMgr.GetMsg();
+		#endif
 		Debug.Log("images");
 		tLoad= new WWW(images);
+		StartCoroutine(LoadImage(tLoad));
+		
+	}
+
+	IEnumerator LoadImage(WWW www)
+	{
+		yield return www;
 		Debug.Log("tLoad");
-		tDynamicTx= new Texture2D((int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
+		//		tDynamicTx= new Texture2D((int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
+		tDynamicTx= new Texture2D(0, 0);
 		Debug.Log("tDynamicTx");
 		tLoad.LoadImageIntoTexture(tDynamicTx);
 		tLoad.Dispose ();
-
-
 		
-		tDynamicTx = ScaleTexture (tDynamicTx, (int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
+		tDynamicTx = UtilMgr.ScaleTexture (tDynamicTx, (int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
 		//transform.FindChild("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
 		//Save (tDynamicTx);
 		Debug.Log("Image name : " + images);
 		byte[] bytes = tDynamicTx.EncodeToPNG();
 		SetMemberPhoto (bytes);
-		
-		Debug.Log ("tDynamicTx : " + tDynamicTx.width + " , " + tDynamicTx.height);
-		
+//		SetMemberPhoto(tDynamicTx);
 	}
 //	public void Save(Texture2D t) {
 //		
@@ -252,20 +284,6 @@ public class ProfileManager : MonoBehaviour {
 //		
 //		
 //	}    
-	private Texture2D ScaleTexture(Texture2D source,int targetWidth,int targetHeight) {
-		Texture2D result=new Texture2D(targetWidth,targetHeight,source.format,true);
-		Color[] rpixels=result.GetPixels(0);
-		float incX=((float)1/source.width)*((float)source.width/targetWidth);
-		float incY=((float)1/source.height)*((float)source.height/targetHeight);
-		for(int px=0; px<rpixels.Length; px++) {
-			rpixels[px] = source.GetPixelBilinear(incX*((float)px%targetWidth),
-			                                      incY*((float)Mathf.Floor(px/targetWidth)));
-		}
-		result.SetPixels(rpixels,0);
-		result.Apply();
-		return result;
-	}
-
 
 
 
@@ -276,7 +294,7 @@ public class ProfileManager : MonoBehaviour {
 		
 		Texture2D temp = new Texture2D (0, 0);
 		www.LoadImageIntoTexture (temp);
-		Debug.Log ("temp : " + temp.EncodeToPNG ());
+		Debug.Log ("temp : " + temp.EncodeToPNG ().Length);
 	
 			UserImagebyte = temp.EncodeToPNG ();
 	

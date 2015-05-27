@@ -15,44 +15,9 @@ public class IOSMgr : MonoBehaviour
 	#if(UNITY_EDITOR)
 	public static void CallIOSFunc( string strFuncName, string str){}
 	#elif(UNITY_ANDROID)
-	private AndroidJavaObject curActivity;
-
-	void Awake()
-	{
-		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-		curActivity = jc.GetStatic<AndroidJavaObject>("currentActivity");
-		DontDestroyOnLoad (this);
-	}
-
 	public static void CallIOSFunc( string strFuncName, string str)
 	{
-		if( Instance.curActivity == null )
-			return;
-
-		Instance.curActivity.Call( strFuncName, str);
 	}
-
-//	public void SetGalleryImage(string image)
-//	{
-//		ScriptItemPhoto sip = mReceiver as ScriptItemPhoto;
-//		sip.SetImgData (image);
-//	}
-
-	public void SetGalleryImages(string images)
-	{
-//		if(images.Length < 1)
-//		{
-//			IOSMgr.Instance.strLog = "no Images";
-//		}
-//
-//		JSONObject json = new JSONObject (images);
-//
-//		ScriptUpload su = mReceiver as ScriptUpload;
-//
-//		su.setImageDictionary (json);
-
-	}
-
 	#else
 	public static void CallIOSFunc( string strFuncName, string str){
 		switch(strFuncName){
@@ -106,7 +71,10 @@ public class IOSMgr : MonoBehaviour
 		}
 	}
 
-
+	void Awake()
+	{
+		DontDestroyOnLoad (this);
+	}
 
 	public static string GetMsg()
 	{

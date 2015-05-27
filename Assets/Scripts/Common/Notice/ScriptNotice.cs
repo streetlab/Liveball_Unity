@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScriptNotice : MonoBehaviour {
 
-	const string LOVE_URL = "https://game.nanoo.so/liveball/notice/1250";
+	const string LOVE_URL = "https://game.nanoo.so/liveball/notice";
 	
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{

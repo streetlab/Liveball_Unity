@@ -3,15 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BaseRequest : Dictionary<string, object>{
-//	protected JSONObject json = new JSONObject();
-//	Dictionary<string, string> mDic = new Dictionary<string, string>();
-	protected string mParams;
+	protected Dictionary<string, object> mDic;
 
 	public string ToRequestString()
 	{
-//		string str = "?";
 		string str = "";
-		str += "param=" + mParams;
+		#if(UNITY_ANDROID)
+		mDic.Add("osType", 1);
+		mDic.Add("version", Application.version);
+		#elif(UNITY_EDITOR)
+		mDic.Add("osType", 1);
+		mDic.Add("version", "3.9.9");
+		#else
+		mDic.Add("osType", 2);
+		mDic.Add("version", Application.version);
+		#endif
+
+		string param = JsonFx.Json.JsonWriter.Serialize (mDic);
+		str += "param=" + param;
 		str += "&type="+GetType();
 		str += "&id=" + GetQueryId ();
 

@@ -104,6 +104,7 @@ public class Constants {
 	public const string PrefPwd = "pwd";
 	public const string PrefNotice = "notice";
 	public const string PrefTutorial = "tutorial";
+	public const string PrefEvents = "events";
 	public const string PrefRegistType = "RegistType";
 	public const string PrefServerTest = "serverTest";
 	public const string PrefSetting_vibrate_on_off = "setting_vibrate_on_off";

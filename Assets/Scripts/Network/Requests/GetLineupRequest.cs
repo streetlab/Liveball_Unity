@@ -10,8 +10,8 @@ public class GetLineupRequest : BaseRequest {
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
 		Add ("teamCode", teamCode);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
-
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 	}
 
 	public override string GetType ()

@@ -43,7 +43,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 		if (mSelected) {
 			mMemInfo.FavoBB = mTeamCode;
 			#if(UNITY_EDITOR)
-			mMemInfo.OsType = 0;
+			mMemInfo.OsType = 1;
 			CompleteGCM();
 			#elif(UNITY_ANDROID)
 			mMemInfo.OsType = 1;

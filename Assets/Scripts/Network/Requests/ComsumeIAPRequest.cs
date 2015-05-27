@@ -10,7 +10,8 @@ public class ComsumeIAPRequest : BaseRequest {
 		Add ("orderNo", orderNo);
 		Add ("token", token);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 
 	}
 

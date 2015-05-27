@@ -327,5 +327,4 @@ public class UtilMgr : MonoBehaviour {
 		
 		return isTest;
 	}
-
 }

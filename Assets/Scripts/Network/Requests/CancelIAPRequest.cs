@@ -9,7 +9,8 @@ public class CancelIAPRequest : BaseRequest {
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("orderNo", orderNo);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 
 	}
 

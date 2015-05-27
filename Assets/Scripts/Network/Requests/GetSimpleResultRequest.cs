@@ -10,8 +10,8 @@ public class GetSimpleResultRequest : BaseRequest {
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
 		Add ("quizListSeq", quizListSeq);
 
-		mParams = JsonFx.Json.JsonWriter.Serialize (this);
-
+//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		mDic = this;
 	}
 
 	public override string GetType ()
