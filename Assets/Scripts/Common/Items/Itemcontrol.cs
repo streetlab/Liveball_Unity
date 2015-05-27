@@ -33,6 +33,8 @@ public class Itemcontrol : MonoBehaviour {
 	void Start () {
 		transform.FindChild ("category 1").gameObject.SetActive (true);
 		origin1 = transform.FindChild("category 1").GetChild(0).FindChild("origin").gameObject;
+		imageC1 = transform.FindChild("category 1").GetChild(0).FindChild("C").gameObject;
+		imageC2 = transform.FindChild("category 1").GetChild(0).FindChild("C2").gameObject;
 		originV1 = new Vector3(origin1.transform.localPosition.x,235,origin1.transform.localPosition.z);
 		origin1.gameObject.SetActive (false);
 		getruby = new GetItemShopRubyEvent (new EventDelegate (this, "ruby"));
@@ -40,8 +42,7 @@ public class Itemcontrol : MonoBehaviour {
 
 		transform.FindChild ("category 2").gameObject.SetActive (true);
 		origin2 = transform.FindChild("category 2").GetChild(0).FindChild("origin").gameObject;
-		imageC1 = transform.FindChild("category 2").GetChild(0).FindChild("C").gameObject;
-		imageC2 = transform.FindChild("category 2").GetChild(0).FindChild("C2").gameObject;
+
 		originV2 = new Vector3(origin2.transform.localPosition.x,235,origin2.transform.localPosition.z);
 		origin2.gameObject.SetActive (false);	
 		getgold = new GetItemShopGoldEvent (new EventDelegate (this, "gold"));

@@ -258,6 +258,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 			go.transform.parent = null;
 			NGUITools.DestroyImmediate(go);		
 		}
+
 		mQuizListItems.Clear ();
 		mFirstLoading = true;
 		mAccumulatedY = 0f;
