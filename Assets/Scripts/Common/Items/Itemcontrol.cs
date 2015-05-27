@@ -15,7 +15,7 @@ public class Itemcontrol : MonoBehaviour {
 	float Bruby,Aruby,Agold,Bgold;
 	string itemcode,itemproduct;
 	GetCardInvenEvent getcard;
-	GameObject origin1,origin2,origin3,origin4,temp1,temp2,temp3,temp4;
+	GameObject origin1,origin2,origin3,origin4,temp1,temp2,temp3,temp4,imageC1,imageC2;
 	public float gap = 288;
 	public float category = 4;
 	Vector3 originV1,originV2,originV3,originV4;
@@ -40,6 +40,8 @@ public class Itemcontrol : MonoBehaviour {
 
 		transform.FindChild ("category 2").gameObject.SetActive (true);
 		origin2 = transform.FindChild("category 2").GetChild(0).FindChild("origin").gameObject;
+		imageC1 = transform.FindChild("category 2").GetChild(0).FindChild("C").gameObject;
+		imageC2 = transform.FindChild("category 2").GetChild(0).FindChild("C2").gameObject;
 		originV2 = new Vector3(origin2.transform.localPosition.x,235,origin2.transform.localPosition.z);
 		origin2.gameObject.SetActive (false);	
 		getgold = new GetItemShopGoldEvent (new EventDelegate (this, "gold"));
@@ -62,29 +64,28 @@ public class Itemcontrol : MonoBehaviour {
 	
 
 
-			
+		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
+		temp1.transform.parent = origin1.transform.parent;
+		temp1.transform.localScale = new Vector3 (1, 1, 1);
+		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);
+		temp1.gameObject.SetActive (true);
+		for (int i = 1; i<getruby.Response.data.Count+1; i++) {
 
-			for (int i = 0; i<getruby.Response.data.Count; i++) {
-			
 				temp1 = (GameObject)Instantiate (origin1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 				temp1.transform.parent = origin1.transform.parent;
 				temp1.transform.localScale = new Vector3 (1, 1, 1);
-				temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - (i * gap), originV1.z);
-			temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = "루비 " + getruby.Response.data [i].productValue+"개";
-			temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i].productDesc;
-			temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getruby.Response.data [i].productPrice.ToString ())+"원";
-			temp1.transform.FindChild ("code").GetComponent<UILabel> ().text = getruby.Response.data [i].productCode;
-			temp1.transform.FindChild ("id").GetComponent<UILabel> ().text = getruby.Response.data [i].productId.ToString();
-			temp1.transform.FindChild ("add").FindChild ("buyruby").GetComponent<UILabel> ().text = getruby.Response.data [i].productValue.ToString();
-			temp1.transform.FindChild ("add").FindChild ("addruby").GetComponent<UILabel> ().text = getruby.Response.data [i].bonusRuby.ToString();
-			temp1.transform.FindChild ("add").FindChild ("addgold").GetComponent<UILabel> ().text = getruby.Response.data [i].bonusGoldenball.ToString();
+				temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((i) * gap), originV1.z);
+			temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = "루비 " + getruby.Response.data [i-1].productValue+"개";
+			temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productDesc;
+			temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getruby.Response.data [i-1].productPrice.ToString ())+"원";
+			temp1.transform.FindChild ("code").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productCode;
+			temp1.transform.FindChild ("id").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productId.ToString();
+			temp1.transform.FindChild ("add").FindChild ("buyruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productValue.ToString();
+			temp1.transform.FindChild ("add").FindChild ("addruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusRuby.ToString();
+			temp1.transform.FindChild ("add").FindChild ("addgold").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusGoldenball.ToString();
 			Debug.Log("ruby code : " + getruby.Response.data [i].productCode);
-			float nums = 0;
-			nums = i+1;
-			if(nums>2){
-				nums = 3;
-			}
-			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getruby.Response.data [i].rubyImage;
+
+			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getruby.Response.data [i-1].rubyImage;
 				temp1.gameObject.SetActive (true);
 
 		

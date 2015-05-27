@@ -26,7 +26,7 @@ public class ProfileManager : MonoBehaviour {
 	public bool Sett = false;
 
 	void Start(){
-		UsetPhotoSize = new Vector2 (100, 100);
+		UsetPhotoSize = new Vector2 (206, 230);
 		Set ();
 	}
 	public void Set(){

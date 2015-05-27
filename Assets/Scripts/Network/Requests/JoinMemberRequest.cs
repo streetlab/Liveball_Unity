@@ -34,9 +34,20 @@ public class JoinMemberRequest : BaseUploadRequest {
 
 		}
 
+		if (memInfo.PhotoBytes != null && memInfo.PhotoBytes.Length > 0) {
+			
+			Debug.Log("a file exists : "+memInfo.PhotoBytes);
+			byte[] bytes = memInfo.PhotoBytes;
+			
+			AddBinaryData("file", bytes, "profile.png", "image/png");
+		} else{
+			Debug.Log("a file not found : "+memInfo.PhotoBytes);
+		}
+		
+	}
 //		Debug.Log ("memberPwd : " + memInfo.MemberPwd);
 
-	}
+
 
 	public override string GetType ()
 	{

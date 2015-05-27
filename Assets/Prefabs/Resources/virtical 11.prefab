@@ -13,7 +13,7 @@ GameObject:
   - 26: {fileID: 2600000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: spark 08s
+  m_Name: virtical 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.10000002, y: -2.55999994, z: 2.8900001}
-  m_LocalScale: {x: 1.21000004, y: 1.21000004, z: 1.21000004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.19193053, y: 1.19193053, z: 1.19193053}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,25 +46,25 @@ ParticleAnimator:
   Does Animate Color?: 1
   colorAnimation[0]:
     serializedVersion: 2
-    rgba: 4284735999
+    rgba: 184090472
   colorAnimation[1]:
     serializedVersion: 2
-    rgba: 4278213023
+    rgba: 4294922320
   colorAnimation[2]:
     serializedVersion: 2
-    rgba: 4287495423
+    rgba: 4281956607
   colorAnimation[3]:
     serializedVersion: 2
-    rgba: 4278218751
+    rgba: 4294916512
   colorAnimation[4]:
     serializedVersion: 2
-    rgba: 4292277503
+    rgba: 175833080
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
-  sizeGrow: -.899999976
+  sizeGrow: 0
   rndForce: {x: 0, y: 0, z: 0}
   force: {x: 0, y: 0, z: 0}
-  damping: .100000001
+  damping: 1
   stopSimulation: 0
   autodestruct: 1
 --- !u!15 &1500000
@@ -76,23 +76,23 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 1
-  maxSize: 1.5
-  minEnergy: .800000012
-  maxEnergy: 1
-  minEmission: 15
+  minSize: .5
+  maxSize: 1
+  minEnergy: 1
+  maxEnergy: 1.5
+  minEmission: 30
   maxEmission: 50
   worldVelocity: {x: 0, y: 0, z: 0}
-  localVelocity: {x: 0, y: 0, z: 0}
-  rndVelocity: {x: 5, y: 5, z: 5}
+  localVelocity: {x: 0, y: 4, z: 0}
+  rndVelocity: {x: 0, y: 0, z: 0}
   emitterVelocityScale: .0500000007
   tangentVelocity: {x: 0, y: 0, z: 0}
   angularVelocity: 0
   rndAngularVelocity: 0
   rndRotation: 0
   Simulate in Worldspace?: 1
-  m_OneShot: 1
-  m_Ellipsoid: {x: 0, y: 0, z: 0}
+  m_OneShot: 0
+  m_Ellipsoid: {x: 1.60000002, y: 10, z: 1.60000002}
   m_MinEmitterRange: 0
 --- !u!26 &2600000
 ParticleRenderer:
@@ -104,7 +104,7 @@ ParticleRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4b294e20f51814785818b6a20b456aa8, type: 2}
+  - {fileID: 2100000, guid: c9fbd21108d83b74cb88ff8b84606cf6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -121,7 +121,7 @@ ParticleRenderer:
   serializedVersion: 2
   m_CameraVelocityScale: 0
   m_StretchParticles: 0
-  m_LengthScale: 2
+  m_LengthScale: 30
   m_VelocityScale: 0
   m_MaxParticleSize: .25
   UV Animation:

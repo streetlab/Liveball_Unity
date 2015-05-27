@@ -7,7 +7,7 @@ public class ScriptJoinForm : MonoBehaviour {
 //	GetProfileEvent mEvent;
 	JoinMemberInfo mMemInfo;
 	string mImgPath;
-
+	byte[] ImageBate;
 	public string mJoinError;
 
 	public void Init(string eMail, string pwd, bool pwdEnable)
@@ -29,7 +29,35 @@ public class ScriptJoinForm : MonoBehaviour {
 
 	public void GotUserImg()
 	{
-		string path = AndroidMgr.GetMsg ();
+		string images;
+		Debug.Log("OpenGallery");
+		if (Application.platform == RuntimePlatform.Android) {
+		images = "file://" + AndroidMgr.GetMsg ();
+		} else {
+			images = "file://" + IOSMgr.GetMsg ();
+		}
+		Debug.Log("images");
+		WWW tLoad= new WWW(images);
+		Debug.Log("tLoad");
+		Texture2D tDynamicTx= new Texture2D((int)100, (int)100);
+		Debug.Log("tDynamicTx");
+		tLoad.LoadImageIntoTexture(tDynamicTx);
+		tLoad.Dispose ();
+		//mImgPath = images;
+		
+		
+		tDynamicTx = ScaleTexture (tDynamicTx, (int)100, (int)100);
+		//transform.FindChild("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
+		//Save (tDynamicTx);
+		Debug.Log("Image name : " + images);
+		byte[] bytes = tDynamicTx.EncodeToPNG();
+		ImageBate = bytes;
+		transform.FindChild ("PanelPhoto").FindChild ("TexPhoto").GetComponent<UITexture> ().mainTexture = tDynamicTx;
+		Debug.Log ("tDynamicTx : " + tDynamicTx.width + " , " + tDynamicTx.height);
+
+
+
+	//	string path = AndroidMgr.GetMsg ();
 		//here we go!!!!
 	}
 
@@ -48,6 +76,7 @@ public class ScriptJoinForm : MonoBehaviour {
 			mMemInfo.MemberPwd = transform.FindChild ("InputPwd").GetComponent<UIInput> ().value;
 			mMemInfo.MemImage = "";//preprocess
 			mMemInfo.Photo = mImgPath;
+			mMemInfo.PhotoBytes = ImageBate;
 
 			gameObject.SetActive(false);
 			mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
@@ -130,6 +159,34 @@ public class ScriptJoinForm : MonoBehaviour {
 	public void ConfirmedEmail(){
 		transform.FindChild ("InputPwd").GetComponent<UIInput>().isSelected = true;
 	}
+
+
+
+
+
+	private Texture2D ScaleTexture(Texture2D source,int targetWidth,int targetHeight) {
+		Texture2D result=new Texture2D(targetWidth,targetHeight,source.format,true);
+		Color[] rpixels=result.GetPixels(0);
+		float incX=((float)1/source.width)*((float)source.width/targetWidth);
+		float incY=((float)1/source.height)*((float)source.height/targetHeight);
+		for(int px=0; px<rpixels.Length; px++) {
+			rpixels[px] = source.GetPixelBilinear(incX*((float)px%targetWidth),
+			                                      incY*((float)Mathf.Floor(px/targetWidth)));
+		}
+		result.SetPixels(rpixels,0);
+		result.Apply();
+		return result;
+	}
+	
+	
+
+
+
+
+
+
+
+
 	
 	public void ConfirmedPwd(){
 		transform.FindChild ("InputNick").GetComponent<UIInput>().isSelected = true;

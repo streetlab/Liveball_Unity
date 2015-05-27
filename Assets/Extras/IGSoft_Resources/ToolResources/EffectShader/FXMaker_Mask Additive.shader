@@ -5,7 +5,7 @@ Shader "FXMaker/Mask Additive" {
 	}
 
 	Category {
-		Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
+		Tags { "Queue"="Transparent+100" "IgnoreProjector"="True" "RenderType"="Transparent" }
 		Blend SrcAlpha One
 // 		AlphaTest Greater .01
 // 		ColorMask RGB
