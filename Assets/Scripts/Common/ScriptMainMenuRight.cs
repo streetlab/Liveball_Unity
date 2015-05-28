@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ScriptMainMenuRight : MonoBehaviour {
-	GameObject BntMenu;
+	public GameObject BntMenu;
 
 	public float MaxGame = 5;
 	public float gap = 200;
@@ -254,7 +254,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 
 	}
 	public void ALLBack(){
-		BntMenu = transform.parent.parent.parent.FindChild ("Top").FindChild ("BtnMenu").gameObject;
+//		BntMenu = transform.parent.parent.parent.FindChild ("Top").FindChild("Panel").FindChild ("BtnMenu").gameObject;
 		Debug.Log (B);
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		if (B) {

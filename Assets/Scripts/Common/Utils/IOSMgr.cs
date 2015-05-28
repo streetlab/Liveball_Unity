@@ -157,4 +157,8 @@ public class IOSMgr : MonoBehaviour
 
 	}
 
+	public void DisagreePush(string str){
+		DialogueMgr.ShowDialogue("disagree", "disagree", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+	}
+
 }

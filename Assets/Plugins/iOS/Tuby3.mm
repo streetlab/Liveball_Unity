@@ -84,3 +84,8 @@ void OpenGallery(const char* str){
     [IOSMgr sharedInstance].imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [UnityGetGLViewController() presentViewController:[IOSMgr sharedInstance].imagePicker animated:YES completion:NULL];
 }
+
+//extern "C"
+//void CheckNotiAgree(const char* str){
+//    UIRemoteNotificationType types
+//}
