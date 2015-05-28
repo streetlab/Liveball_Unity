@@ -59,11 +59,7 @@ public class ScriptMainTop : MonoBehaviour {
 		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
 
-		#if(UNITY_EDITOR)
-		#elif(UNITY_ANDROID)
 		QuizMgr.EnterMain(this);
-		#else
-		#endif
 
 		InitTopInfo();
 	}

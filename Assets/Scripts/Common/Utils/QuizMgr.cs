@@ -160,14 +160,14 @@ public class QuizMgr : MonoBehaviour {
 		return scriptQuizResult.GetComponent<ScriptQuizResult> ().Init (simpleEvent.Response.data);
 	}
 
-	public static void NotiReceived(string msg)
-	{
-		Debug.Log ("ReceivedMsg : " + msg);
-		NotiMsgInfo msgInfo = JsonFx.Json.JsonReader.Deserialize<NotiMsgInfo> (msg);
+	public static void NotiReceived(NotiMsgInfo msgInfo){
 		Debug.Log ("push type : " + msgInfo.type);
 //		Debug.Log ("msgInfo.info.gameSeq : " + msgInfo.info.gameSeq);
 //		Debug.Log ("msgInfo.info.scheduleSeq : " + msgInfo.info.scheduleSeq);
 //		Debug.Log ("msgInfo.info.quizListSeq : " + msgInfo.info.quizListSeq);
+//		Debug.Log ("msgInfo.info.quiz : " + msgInfo.info.quiz);
+//		Debug.Log ("msgInfo.info.inning : " + msgInfo.info.inning);
+//		Debug.Log ("msgInfo.info.score : " + msgInfo.info.score);
 		
 		if(msgInfo.type.Equals(Constants.POST_MSG)){
 			
@@ -184,12 +184,15 @@ public class QuizMgr : MonoBehaviour {
 				bool hasQuiz = false;
 				if(msgInfo.info.quiz != null
 				   && msgInfo.info.quiz.Equals("1")){
-					if(QuizMgr.IsBettingOpended)
+					if(QuizMgr.IsBettingOpended){
 						MoreQuiz = true;
-					else
+//						Debug.Log ("MoreQuiz");
+					} else{
 						HasQuiz = true;
+//						Debug.Log ("HasQuiz");
+					}
 				}
-
+				
 				if(msgInfo.info.inning != null
 				   && msgInfo.info.inning.Equals("1")){
 					NeedsDetailInfo = true;
@@ -199,7 +202,8 @@ public class QuizMgr : MonoBehaviour {
 				} else{
 					NeedsDetailInfo = false;
 				}
-				
+
+//				Debug.Log ("RequestBoardInfo");
 				Instance.mMainTop.RequestBoardInfo();
 			}
 		} else if(msgInfo.type.Equals(Constants.POST_QUIZ_RESULT)
@@ -207,6 +211,14 @@ public class QuizMgr : MonoBehaviour {
 			if(Instance.mMainTop != null){
 				Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.info.quizListSeq));
 			}
-		} 
+		}
+	}
+
+	public static void NotiReceived(string msg)
+	{
+		Debug.Log ("ReceivedMsg : " + msg);
+		NotiMsgInfo msgInfo = null;
+		msgInfo = JsonFx.Json.JsonReader.Deserialize<NotiMsgInfo> (msg);
+		NotiReceived(msgInfo);		 
 	}
 }

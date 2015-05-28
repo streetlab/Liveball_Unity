@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 public class IOSMgr : MonoBehaviour
@@ -29,8 +30,10 @@ public class IOSMgr : MonoBehaviour
 
 	void Update(){
 		if(UnityEngine.iOS.NotificationServices.remoteNotifications.Length > 0){
-			UnityEngine.iOS.NotificationServices.ClearRemoteNotifications();
 			Debug.Log("noti received");
+			NotiReceived();
+		} else{
+//			Debug.Log("none");
 		}
 
 		if(gotToken)
@@ -93,13 +96,6 @@ public class IOSMgr : MonoBehaviour
 		Debug.Log (msg);
 	}
 
-	public void NotiReceived(string msg)
-	{
-		Debug.Log("NotiReceived : "+UtilMgr.OnPause);
-		if(!UtilMgr.OnPause)
-			QuizMgr.NotiReceived (msg);
-	}
-
 	public static void OpenCamera(EventDelegate eventDelegate){
 		Instance.mEventDelegate = eventDelegate;
 		string timeStr = UtilMgr.GetDateTime ("yyyy-MM-dd HH:mm:ss");
@@ -157,8 +153,37 @@ public class IOSMgr : MonoBehaviour
 
 	}
 
-	public void DisagreePush(string str){
-		DialogueMgr.ShowDialogue("disagree", "disagree", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+//	public void DisagreePush(string str){
+//		DialogueMgr.ShowDialogue("disagree", "disagree", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+//	}
+
+	public void NotiReceived()
+	{
+//		Debug.Log("AlertBody : "+UnityEngine.iOS.NotificationServices.remoteNotifications[0].alertBody);
+		ICollection col = UnityEngine.iOS.NotificationServices.remoteNotifications[0].userInfo.Keys;
+		IEnumerator enu = col.GetEnumerator();
+		while(enu.MoveNext()){
+			Debug.Log ("key : "+enu.Current);
+		}
+//		for(int i = 0; i < col.Count; i++){
+//			Debug.Log("key("+i+") : "+col.);
+//			Debug.Log("value("+i+") : "+UnityEngine.iOS.NotificationServices.remoteNotifications[0].userInfo.Values[i]);
+//		}
+		string type = UnityEngine.iOS.NotificationServices.remoteNotifications[0].userInfo["type"].ToString();
+		string info = UnityEngine.iOS.NotificationServices.remoteNotifications[0].userInfo["info"].ToString();
+
+//		Dictionary<string, object> dic = new Dictionary<string, object>();
+		NotiMsgInfo notiInfo = new NotiMsgInfo();
+		notiInfo.type = type;
+		notiInfo.info = JsonFx.Json.JsonReader.Deserialize<NotiQuizInfo>(info);
+//		dic.Add("type", type);
+//		dic.Add("info", quizInfo);
+
+		Debug.Log("NotiReceived : "+UtilMgr.OnPause);
+		if(!UtilMgr.OnPause)
+			QuizMgr.NotiReceived (notiInfo);
+
+		UnityEngine.iOS.NotificationServices.ClearRemoteNotifications();
 	}
 
 }
