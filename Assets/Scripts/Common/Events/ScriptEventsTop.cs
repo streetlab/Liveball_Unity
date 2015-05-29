@@ -11,7 +11,7 @@ public class ScriptEventsTop : MonoBehaviour {
 	
 	public void CloseClicked(){
 		if(mEvents.GetComponent<ScriptEvents>().Page >= mEvents.GetComponent<ScriptEvents>().MAX_PAGE){
-			AutoFade.LoadLevel("SceneGame");
+		AutoFade.LoadLevel("SceneMain");
 		} else{
 			mEvents.GetComponent<ScriptEvents>().Page++;
 			mEvents.GetComponent<ScriptEvents>().GoToNext();

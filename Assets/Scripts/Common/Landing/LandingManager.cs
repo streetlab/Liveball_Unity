@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LandingManager : MonoBehaviour {
+	public GameObject test;
 	public GameObject Pitcher;
+	int a = 0;
 	UILabel I_Gold,I_TeamName,I_RankScore,I_TodayDealWith,I_TodayInfo,I_Memo,I_PlayersName,I_Batting;
     UITexture I_PlayersImage;
 	UISprite LineTop,GameInfo,OkStrategy,Item,Community,I_BigLogo,I_TeamImage;
@@ -12,7 +14,7 @@ public class LandingManager : MonoBehaviour {
 	List<UILabel> I_LabelList = new List<UILabel>();
 	List<string> I_StringList = new List<string>();
 	List<UISprite> I_SpriteList = new List<UISprite>();
-
+	GetLineupEvent mlineupEvent;
 
 	UILabel V_LTeamName,V_RTeamName,V_BroadCasting,V_Location,V_time,V_LBatting,V_LPlayerName,V_RBatting,V_RPlayerName,V_Memo;
 	UISprite V_LeftTeamImage,V_RightTeamImage;
@@ -22,10 +24,27 @@ public class LandingManager : MonoBehaviour {
 	UISprite P_LeftTeamImage,P_RightTeamImage,One,Two,Three;
 	UITexture P_LPlayerImage,P_RPlayerImage;
 	// Use this for initialization
+	public void Clcik(){
+		if (a % 2 == 0) {
+			test.transform.FindChild ("Info").gameObject.SetActive (true);
+			test.transform.FindChild ("Playing").gameObject.SetActive (false);
+		} else {
+			test.transform.FindChild ("Info").gameObject.SetActive (false);
+			test.transform.FindChild ("Playing").gameObject.SetActive (true);
+		}
+		a++;
+
+		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
+		NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
+
+	}
 	void Start () {
+		test.transform.FindChild ("Info").gameObject.SetActive (true);
+		test.transform.FindChild ("Playing").gameObject.SetActive (false);
+		test.transform.FindChild ("VS").gameObject.SetActive (false);
 		PathSettings ();
 		GetData ();
-		InPutData ();
+		//InPutData ();
 		SetTeamColor ();
 		Debug.Log ("SetPitcher");
 		//SetPitcher ();
@@ -56,8 +75,8 @@ public class LandingManager : MonoBehaviour {
 
 		//Info
 		GameObject temp = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BG_W").gameObject;
-		I_Gold = transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("TopGoldbar").FindChild ("Label").GetComponent<UILabel> ();
-		I_LabelList.Add (I_Gold);
+//		I_Gold = transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("TopGoldbar").FindChild ("Label").GetComponent<UILabel> ();
+//		I_LabelList.Add (I_Gold);
 		I_TeamName = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").FindChild ("Team Name").GetComponent<UILabel> ();
 		I_LabelList.Add (I_TeamName);
 		I_RankScore = temp.transform.FindChild ("RankScore").GetComponent<UILabel> ();
@@ -132,10 +151,12 @@ public class LandingManager : MonoBehaviour {
 		I_TeamImage = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").FindChild ("TeamImage").GetComponent<UISprite> ();
 	}
 	void GetData(){
-		TeamColor = "005bac";
-		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
-		I_StringList.Add (Is_Gold);
-		Is_TeamName = "";
+		TeamColor = "";
+//		UserMgr.Schedule.
+//			TeamInfo
+//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
+//		I_StringList.Add (Is_Gold);
+		Is_TeamName = UserMgr.UserInfo.GetTeamFullName();
 		I_StringList.Add (Is_TeamName);
 		Is_RankScore = "";
 		I_StringList.Add (Is_RankScore);

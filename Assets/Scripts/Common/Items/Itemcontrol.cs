@@ -84,7 +84,7 @@ public class Itemcontrol : MonoBehaviour {
 			temp1.transform.FindChild ("add").FindChild ("buyruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productValue.ToString();
 			temp1.transform.FindChild ("add").FindChild ("addruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusRuby.ToString();
 			temp1.transform.FindChild ("add").FindChild ("addgold").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusGoldenball.ToString();
-			Debug.Log("ruby code : " + getruby.Response.data [i].productCode);
+		//	Debug.Log("ruby code : " + getruby.Response.data [i].productCode);
 
 			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getruby.Response.data [i-1].rubyImage;
 				temp1.gameObject.SetActive (true);

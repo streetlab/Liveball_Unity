@@ -104,9 +104,9 @@ public class LineupControl : MonoBehaviour {
 			transform.FindChild ("non").gameObject.SetActive(false);
 			transform.FindChild ("Scroll View").gameObject.SetActive(true);
 			transform.FindChild ("Scroll View 1").gameObject.SetActive(true);
-			for (int i = 0; i<S.transform.childCount; i++) {
-				S.transform.GetChild (i).gameObject.SetActive (false);
-			}
+//			for (int i = 0; i<S.transform.childCount; i++) {
+//				S.transform.GetChild (i).gameObject.SetActive (false);
+//			}
 			
 			for (int i =0; i<UserMgr.AwayLineup.lineup.Count; i++) {
 				//Debug.Log("Image pach! : " + UserMgr.AwayLineup.lineup [i].imagePath+UserMgr.AwayLineup.lineup [i].imageName);
@@ -494,5 +494,14 @@ public class LineupControl : MonoBehaviour {
 			
 			
 		}
+		if (UserMgr.AwayLineup.hit.Count < 9) {
+			ScrollView.transform.FindChild ("Bg_g 1").gameObject.SetActive (false);
+			ScrollView.transform.FindChild ("Bg_g 2").gameObject.SetActive (false);
+		} else {
+			ScrollView.transform.FindChild ("Bg_g 1").gameObject.SetActive (true);
+			ScrollView.transform.FindChild ("Bg_g 2").gameObject.SetActive (true);
+		}
+
+
 	}
 }
