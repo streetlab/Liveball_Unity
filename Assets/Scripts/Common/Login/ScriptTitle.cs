@@ -26,8 +26,8 @@ public class ScriptTitle : MonoBehaviour {
 
 	void Start()
 	{
-//		PlayerPrefs.SetString (Constants.PrefEmail, "");
-//		PlayerPrefs.SetString (Constants.PrefPwd, "");
+		PlayerPrefs.SetString (Constants.PrefEmail, "");
+		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
 //		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
 	}
@@ -211,11 +211,15 @@ public class ScriptTitle : MonoBehaviour {
 	}
 
 	bool CheckPushAgree(){
+#if(UNITY_ANDROID)
+#else
 		UnityEngine.iOS.NotificationType type = UnityEngine.iOS.NotificationServices.enabledNotificationTypes;
 		if(type == UnityEngine.iOS.NotificationType.None || type == 0){
 			return true;
 		}
+#endif
 		return false;
+
 	}
 
 	public void FBReceived(){

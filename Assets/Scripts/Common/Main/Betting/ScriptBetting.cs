@@ -229,6 +229,7 @@ public class ScriptBetting : MonoBehaviour {
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioConfirm);
 
 		UtilMgr.OnBackPressed();
+
 	}
 
 	public void UpdateHitterItem(JoinQuizInfo quizInfo)

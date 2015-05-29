@@ -46,9 +46,9 @@ public class SetItemSceneTop : MonoBehaviour {
 
 }
 
-	void Update(){
-		SetTopInfo ();
-	}
+//	void Update(){
+//		SetTopInfo ();
+//	}
 	
 	void SetTopInfo()
 	{

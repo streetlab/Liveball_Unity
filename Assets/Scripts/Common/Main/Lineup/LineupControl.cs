@@ -28,12 +28,25 @@ public class LineupControl : MonoBehaviour {
 	Vector3 pits,hits,Cpits,Chits;
 	
 	WWW www;
+	void Start(){
+		Reset ();
+	}
+	public void Reset(){
+		T1.GetComponent<UIButton> ().isEnabled = false;
+		T2.GetComponent<UIButton> ().isEnabled = true;
+		
+		T11.GetComponent<UIButton> ().isEnabled = false;
+		T22.GetComponent<UIButton> ().isEnabled = true;
+	}
 	// Use this for initialization
 	public void view () {
 		//if (!transform.FindChild ("Scroll View").gameObject.activeSelf && !transform.FindChild ("Scroll View 1").gameObject.activeSelf) {
 		
 		//}
+
 		ScrollView = transform.FindChild ("Scroll View").gameObject;
+		//ScrollView.GetComponent<UIScrollView> ().ResetPosition ();
+		Reset ();
 		if (fist) {
 			fist = false;
 			pits = ScrollView.transform.GetChild (1).GetChild (0).GetChild(1).transform.localPosition;
@@ -257,25 +270,38 @@ public class LineupControl : MonoBehaviour {
 	}
 	public void ChangesA(){
 		
-		transform.FindChild ("Scroll View").transform.localPosition = transform.FindChild ("Scroll View 1").transform.localPosition;
-		transform.FindChild ("Scroll View").GetComponent<UIPanel> ().clipOffset = transform.FindChild ("Scroll View 1").GetComponent<UIPanel> ().clipOffset;
+		//transform.FindChild ("Scroll View").transform.localPosition = transform.FindChild ("Scroll View 1").transform.localPosition;
+		//transform.FindChild ("Scroll View").GetComponent<UIPanel> ().clipOffset = transform.FindChild ("Scroll View 1").GetComponent<UIPanel> ().clipOffset;
 		transform.FindChild ("Scroll View").gameObject.SetActive (true);
+		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition();
 		transform.FindChild ("Scroll View 1").gameObject.SetActive (false);
-		
-		//T1.GetComponent<UILabel>().color = new Color(147f/255f,147f/255f,147f/255f);
-		//T2.GetComponent<UILabel>().color = new Color(37f/255f,170f/255f,225f/255f);
-		
+
+		T1.GetComponent<UIButton> ().isEnabled = false;
+		T2.GetComponent<UIButton> ().isEnabled = true;
+
+		T11.GetComponent<UIButton> ().isEnabled = false;
+		T22.GetComponent<UIButton> ().isEnabled = true;
+
+//		T1.GetComponent<UILabel>().color = new Color(147f/255f,147f/255f,147f/255f);
+//		T2.GetComponent<UILabel>().color = new Color(37f/255f,170f/255f,225f/255f);
+//		T11.GetComponent<UILabel>().color = new Color(147f/255f,147f/255f,147f/255f);
+//		T22.GetComponent<UILabel>().color = new Color(37f/255f,170f/255f,225f/255f);
+//		
 	}
 	public void ChangesH(){
 		
-		transform.FindChild ("Scroll View 1").transform.localPosition = transform.FindChild ("Scroll View").transform.localPosition;
-		transform.FindChild ("Scroll View 1").GetComponent<UIPanel> ().clipOffset = transform.FindChild ("Scroll View").GetComponent<UIPanel> ().clipOffset;
+		//transform.FindChild ("Scroll View 1").transform.localPosition = transform.FindChild ("Scroll View").transform.localPosition;
+		//transform.FindChild ("Scroll View 1").GetComponent<UIPanel> ().clipOffset = transform.FindChild ("Scroll View").GetComponent<UIPanel> ().clipOffset;
 		
 		transform.FindChild ("Scroll View 1").gameObject.SetActive (true);
+		transform.FindChild ("Scroll View 1").GetComponent<UIScrollView> ().ResetPosition();
 		transform.FindChild ("Scroll View").gameObject.SetActive (false);
 		
-		//T2.GetComponent<UILabel>().color = new Color(147f/255f,147f/255f,147f/255f);
-		//T1.GetComponent<UILabel>().color = new Color(37f/255f,170f/255f,225f/255f);
+		T1.GetComponent<UIButton> ().isEnabled = true;
+		T2.GetComponent<UIButton> ().isEnabled = false;
+		
+		T11.GetComponent<UIButton> ().isEnabled = true;
+		T22.GetComponent<UIButton> ().isEnabled = false;
 		
 	}
 	

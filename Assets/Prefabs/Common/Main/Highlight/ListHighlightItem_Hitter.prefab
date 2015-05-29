@@ -417,8 +417,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 720, y: 122}
-  m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -715,13 +717,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3086
   mClipTexture: {fileID: 2800000, guid: 66fa3c17449fd41689524fdcd6bd54c0, type: 3}
   mAlpha: 1
   mClipping: 1
   mClipRange: {x: 0, y: 0, z: 80, w: 90}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 2
+  mDepth: 19
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11400010
@@ -1045,7 +1047,6 @@ MonoBehaviour:
   mLblSelect2_1: {fileID: 100024}
   mLblSelect2_2: {fileID: 100022}
   mPositionY: 0
-  needSimpleResult: 0
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1252,4 +1253,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100018}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

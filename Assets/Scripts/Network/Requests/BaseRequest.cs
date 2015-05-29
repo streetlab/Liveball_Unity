@@ -8,12 +8,13 @@ public class BaseRequest : Dictionary<string, object>{
 	public string ToRequestString()
 	{
 		string str = "";
-		#if(UNITY_ANDROID)
-		mDic.Add("osType", 1);
-		mDic.Add("version", Application.version);
-		#elif(UNITY_EDITOR)
+
+		#if(UNITY_EDITOR)
 		mDic.Add("osType", 1);
 		mDic.Add("version", "3.9.9");
+		#elif(UNITY_ANDROID)
+		mDic.Add("osType", 1);
+		mDic.Add("version", Application.version);
 		#else
 		mDic.Add("osType", 2);
 		mDic.Add("version", Application.version);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LandingManager : MonoBehaviour {
+	public GameObject Pitcher;
 	UILabel I_Gold,I_TeamName,I_RankScore,I_TodayDealWith,I_TodayInfo,I_Memo,I_PlayersName,I_Batting;
     UITexture I_PlayersImage;
 	UISprite LineTop,GameInfo,OkStrategy,Item,Community,I_BigLogo,I_TeamImage;
@@ -26,8 +27,29 @@ public class LandingManager : MonoBehaviour {
 		GetData ();
 		InPutData ();
 		SetTeamColor ();
+		Debug.Log ("SetPitcher");
+		//SetPitcher ();
+		Debug.Log ("SetPitcher2");
 	}
+	void SetPitcher(){
+		Debug.Log ("SetPitcher");
+		Debug.Log ("SetPitcher");
+		Debug.Log ("SetPitcher");
+		Debug.Log (ScriptMainTop.DetailBoard.player [0].playerName);
+		Pitcher.transform.FindChild ("Players Name").GetComponent<UILabel> ().text = ScriptMainTop.DetailBoard.player [0].playerName+"#" + ScriptMainTop.DetailBoard.player [0].playerNumber;
+		Pitcher.transform.FindChild ("Batting").GetComponent<UILabel> ().text = ScriptMainTop.DetailBoard.player [0].ERA;
 
+		string strImage = ScriptMainTop.DetailBoard.player [0].imageName;
+		if (ScriptMainTop.DetailBoard.player [0].imagePath != null 
+		    && ScriptMainTop.DetailBoard.player [0].imagePath.Length > 0)
+			strImage = ScriptMainTop.DetailBoard.player [0].imagePath
+				+ ScriptMainTop.DetailBoard.player [0].imageName;
+		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+		StartCoroutine (GetImage(www, Pitcher.transform.FindChild("Players Image BackGround").GetChild(0).GetChild(0).GetComponent<UITexture>()));
+		Debug.Log ("SetPitcher2");
+		Debug.Log ("SetPitcher2");
+		Debug.Log ("SetPitcher2");
+	}
 	
 	// Update is called once per frame
 	void PathSettings () {
@@ -163,5 +185,12 @@ public class LandingManager : MonoBehaviour {
 	public void BlueButtenOff(){
 		transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (false);
 		
+	}
+	IEnumerator GetImage(WWW www, UITexture texture)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (0, 0);
+		www.LoadImageIntoTexture (tmpTex);
+		texture.mainTexture = tmpTex;
 	}
 }

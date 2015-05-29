@@ -25,6 +25,11 @@ public class ScriptMainTop : MonoBehaviour {
 	public GameObject mLblRuby;
 	public GameObject mLblDia;
 
+	public GameObject mLblNewGold;
+
+	public GameObject mLblNewRuby;
+	public GameObject mLblNewDia;
+
 	public AudioClip mSoundOpenBet;
 	public AudioClip mSoundCloseBet;
 	public string mStrLive;
@@ -84,6 +89,11 @@ public class ScriptMainTop : MonoBehaviour {
 		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
 		mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
 		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
+
+		mLblNewGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
+
+		mLblNewDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
+		mLblNewRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
 	}
 
 //	void OnApplicationFocus(bool focus){
