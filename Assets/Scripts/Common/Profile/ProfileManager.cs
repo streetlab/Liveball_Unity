@@ -262,7 +262,7 @@ public class ProfileManager : MonoBehaviour {
 		Debug.Log("tDynamicTx");
 		tLoad.LoadImageIntoTexture(tDynamicTx);
 		tLoad.Dispose ();
-		
+
 		tDynamicTx = UtilMgr.ScaleTexture (tDynamicTx, (int)UsetPhotoSize.x, (int)UsetPhotoSize.y);
 		//transform.FindChild("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
 		//Save (tDynamicTx);

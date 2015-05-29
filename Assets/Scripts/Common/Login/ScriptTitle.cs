@@ -26,8 +26,8 @@ public class ScriptTitle : MonoBehaviour {
 
 	void Start()
 	{
-		PlayerPrefs.SetString (Constants.PrefEmail, "");
-		PlayerPrefs.SetString (Constants.PrefPwd, "");
+//		PlayerPrefs.SetString (Constants.PrefEmail, "");
+//		PlayerPrefs.SetString (Constants.PrefPwd, "");
 		Init ();
 //		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
 	}
@@ -190,13 +190,6 @@ public class ScriptTitle : MonoBehaviour {
 			mLoginInfo.osType = 1;
 			AndroidMgr.RegistGCM(new EventDelegate(this, "SetGCMId"));
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
-			if(CheckPushAgree()){
-				DialogueMgr.ShowDialogue("오류",
-				                         "서버 알림이 반드시 필요합니다.\n설정->라이브볼->알림\n위의 경로에서 알림을 허용해주세요.",
-				                         DialogueMgr.DIALOGUE_TYPE.Alert, DialogueExitHandler);
-				return;
-			}
-
 			mLoginInfo.osType = 2;
 			IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
@@ -334,6 +327,13 @@ public class ScriptTitle : MonoBehaviour {
 		mLoginInfo.memUID = AndroidMgr.GetMsg();
 		#else
 		mLoginInfo.memUID = IOSMgr.GetMsg();
+
+		if(CheckPushAgree()){
+			DialogueMgr.ShowDialogue("오류",
+			                         "서버 알림이 반드시 필요합니다.\n설정->라이브볼->알림\n위의 경로에서 알림을 허용해주세요.",
+			                         DialogueMgr.DIALOGUE_TYPE.Alert, DialogueExitHandler);
+			return;
+		}
 		#endif
 		NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 	}

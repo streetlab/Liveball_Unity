@@ -11,6 +11,9 @@ public class UtilMgr : MonoBehaviour {
 	GameObject mProgressCircle;
 
 	public static bool IsUntouchable;
+	public static bool IsShowLoading;
+	public static WWW mWWW;
+
 	public static bool OnPause;
 	public static bool OnFocus;
 	public static string PreLoadedLevelName;
@@ -40,6 +43,14 @@ public class UtilMgr : MonoBehaviour {
 	void Awake()
 	{
 		DontDestroyOnLoad (this);
+	}
+
+	void Update(){
+		if(mWWW != null && IsShowLoading){
+			UILabel label = Instance.mProgressCircle.transform.FindChild("Panel").FindChild("SprBG").FindChild("Label").GetComponent<UILabel>();
+			int per = (int)(mWWW.uploadProgress * 100f);
+			label.text = per + "%";
+		}
 	}
 
 	public static void AddBackEvent(EventDelegate eventDel)
@@ -295,20 +306,34 @@ public class UtilMgr : MonoBehaviour {
 		return result;
 	}
 
-	public static void ShowLoading(bool unTouchable)
-	{
+	public static void ShowLoading(bool unTouchable, WWW www){
 		if (Instance.mProgressCircle == null) {
 			GameObject prefab = Resources.Load ("ProgressCircle1") as GameObject;
 			Instance.mProgressCircle = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
 			Instance.mProgressCircle.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 			Instance.mProgressCircle.transform.localPosition = new Vector3(0, 0, 0);
 		}
-
+		
 		Instance.mProgressCircle.transform.parent = GameObject.Find ("UI Root").transform;
 		Instance.mProgressCircle.SetActive (true);
-
-
+		
 		UtilMgr.IsUntouchable = unTouchable;
+
+		if(www != null){
+			mWWW = www;
+			Instance.mProgressCircle.transform.FindChild("Panel").FindChild("SprBG").FindChild("Label").gameObject.SetActive(true);
+			Instance.mProgressCircle.transform.FindChild("Panel").FindChild("SprBG").FindChild("Sprite").gameObject.SetActive(true);
+		} else{
+			Instance.mProgressCircle.transform.FindChild("Panel").FindChild("SprBG").FindChild("Label").gameObject.SetActive(false);
+			Instance.mProgressCircle.transform.FindChild("Panel").FindChild("SprBG").FindChild("Sprite").gameObject.SetActive(false);
+		}
+
+		IsShowLoading = true;
+	}
+
+	public static void ShowLoading(bool unTouchable)
+	{
+		ShowLoading(unTouchable, null);
 	}
 
 	public static void DismissLoading()
@@ -317,6 +342,8 @@ public class UtilMgr : MonoBehaviour {
 			Instance.mProgressCircle.SetActive (false);
 
 		UtilMgr.IsUntouchable = false;
+		IsShowLoading = false;
+		mWWW = null;
 	}
 	
 	public static bool IsTestServer(){

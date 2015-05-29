@@ -8,6 +8,8 @@ public class NetMgr : MonoBehaviour{
 	const float TIMEOUT = 10f;
 	WWW mWWW;
 	BaseEvent mBaseEvent;
+	bool mIsUpload;
+	bool mIsLoading;
 
 	private static NetMgr _instance = null;
 	public static NetMgr Instance
@@ -28,26 +30,30 @@ public class NetMgr : MonoBehaviour{
 		}
 	}
 
-	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading)
+	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading, bool isUpload)
 	{
 		if(www == null){
 			Debug.Log("www is null");
 			yield break;
 		}
 
-		if(showLoading)
-			UtilMgr.ShowLoading (showLoading);
-
 		float timeSum = 0f;
 
-		while(!www.isDone && 
-		      string.IsNullOrEmpty(www.error) && 
-		      timeSum < TIMEOUT) { 
-			timeSum += Time.deltaTime; 
-			yield return 0; 
-		} 
+		if(isUpload){
+			UtilMgr.ShowLoading(true, www);
 
-//		yield return www;
+			yield return www;
+		} else{
+			if(showLoading)
+				UtilMgr.ShowLoading (showLoading);
+
+			while(!www.isDone && 
+			      string.IsNullOrEmpty(www.error) && 
+			      timeSum < TIMEOUT) { 
+				timeSum += Time.deltaTime; 
+				yield return 0; 
+			} 
+		}
 		
 		if(www.error == null && www.isDone)
 		{
@@ -63,6 +69,8 @@ public class NetMgr : MonoBehaviour{
 			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "종료하기", ConnectHandler);
 			mWWW = www;
 			mBaseEvent = baseEvent;
+			mIsUpload = isUpload;
+			mIsLoading = showLoading;
 		}
 
 		UtilMgr.DismissLoading ();
@@ -70,7 +78,7 @@ public class NetMgr : MonoBehaviour{
 
 	void ConnectHandler(DialogueMgr.BTNS btn){
 		if(btn == DialogueMgr.BTNS.Btn1){
-			StartCoroutine(webAPIProcess(mWWW, mBaseEvent, true));
+			StartCoroutine(webAPIProcess(mWWW, mBaseEvent, mIsLoading, mIsUpload));
 //			mWWW = null;
 //			mBaseEvent = null;
 		} else{
@@ -96,7 +104,7 @@ public class NetMgr : MonoBehaviour{
 			Debug.Log("Request is Canceled cause OnPause");
 //			return;
 		}
-		StartCoroutine (webAPIProcess(www, baseEvent, true));
+		StartCoroutine (webAPIProcess(www, baseEvent, true, true));
 	}
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent){
@@ -126,7 +134,7 @@ public class NetMgr : MonoBehaviour{
 		
 		Debug.Log (reqParam);
 		
-		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
 
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
@@ -150,7 +158,7 @@ public class NetMgr : MonoBehaviour{
 //			return;
 		}
 
-		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
 
 	private void webAPINanooEvent(BaseNanooRequest request, BaseEvent baseEvent, bool showLoading)
@@ -173,7 +181,7 @@ public class NetMgr : MonoBehaviour{
 			//			return;
 		}
 		
-		StartCoroutine (webAPIProcess(www, baseEvent, showLoading));
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
 
 	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent)

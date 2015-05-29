@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScriptPP : MonoBehaviour {
 	
-	const string LOVE_URL = "http://www.pointpark.com/html/ma/Hmain.html";
+	const string PP_URL = "http://partner.liveball.kr/store/pointpark.php";
 	
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
@@ -79,7 +79,7 @@ public class ScriptPP : MonoBehaviour {
 			
 		}
 		
-		mWebView.url = LOVE_URL;
+		mWebView.url = PP_URL + "?mem=" + UserMgr.UserInfo.memSeq + "&count=" + UserMgr.UserInfo.ppCount;
 		
 		mWebView.Load ();
 	}

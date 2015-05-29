@@ -322,9 +322,22 @@ public class UserInfo {
 		}
 	}
 
+	int _ppCount;
+
+	public int ppCount {
+		get {
+			return _ppCount;
+		}
+		set {
+			_ppCount = value;
+		}
+	}
+
 	bool isFirstLanding = true;
 	public bool IsFirstLanding{
 		get{return isFirstLanding;}
 		set{isFirstLanding = value;}
 	}
+
+
 }
