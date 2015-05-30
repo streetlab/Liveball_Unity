@@ -2221,6 +2221,7 @@ MonoBehaviour:
   mBtnRanking: {fileID: 762257179}
   mBtnLeague: {fileID: 1171141300}
   mBtnStatistics: {fileID: 1542888632}
+  mWebview: {fileID: 523745123}
   mAudioWelcome: {fileID: 8300000, guid: be257939451a73e49b0753f9183bcc49, type: 3}
   mEmblem: {fileID: 1372560717}
 --- !u!1 &269501481
@@ -5733,6 +5734,46 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!1 &523745123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 3017173eca5bb493fb675c0b8fa7f90b, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 523745124}
+  - 114: {fileID: 523745125}
+  m_Layer: 0
+  m_Name: UniWebViewObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &523745124
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 3017173eca5bb493fb675c0b8fa7f90b, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523745123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1000, y: 0, z: -997.499817}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1193512823}
+  m_RootOrder: 8
+--- !u!114 &523745125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 3017173eca5bb493fb675c0b8fa7f90b,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 523745123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d70506fade247fc98b08c43733e9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &534770317
 GameObject:
   m_ObjectHideFlags: 0
@@ -10227,7 +10268,7 @@ Transform:
   m_GameObject: {fileID: 1193512822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156250002, y: .00156250002, z: .00156250002}
+  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
   m_Children:
   - {fileID: 1653202002}
   - {fileID: 239817221}
@@ -10237,6 +10278,7 @@ Transform:
   - {fileID: 476115520}
   - {fileID: 536302100}
   - {fileID: 1022134340}
+  - {fileID: 523745124}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!114 &1193512824

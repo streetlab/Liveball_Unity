@@ -26,7 +26,8 @@ public class Constants {
 	public static int HEIGHT_STATUS_BAR = 0;
 
 	public const string URL_CERT = "http://auth.friize.com/m/user_auth.php";
-	
+	public const string URL_ATTENDANCE = "http://tuby10.friize.com/events/attendance_confirm/";
+
 	/*/
 	// Real
 	public static string QUERY_SERVER_HOST 	= 	"http://" + HOST + ":5002/webTuby/query.frz";
