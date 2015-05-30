@@ -35,6 +35,7 @@ public class Maincontrol : MonoBehaviour {
 		topmenu = gap - (bargap*5);
 		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "setarrray"));
 		NetMgr.GetScheduleAll (mScheduleEvent);
+	
 	}
 	void chacktoday(){
 		dayandday.Clear ();

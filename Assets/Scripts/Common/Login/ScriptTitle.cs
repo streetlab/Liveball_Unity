@@ -415,7 +415,7 @@ public class ScriptTitle : MonoBehaviour {
 		if(value != null && value.Equals("1")){
 			value = PlayerPrefs.GetString(Constants.PrefNotice);
 			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
-				AutoFade.LoadLevel ("SceneGame");
+				AutoFade.LoadLevel ("SceneMain");
 			} else{
 				AutoFade.LoadLevel ("SceneNotice");
 			}

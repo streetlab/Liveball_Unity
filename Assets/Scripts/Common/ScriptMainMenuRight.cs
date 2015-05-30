@@ -20,6 +20,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	GameObject D;
 	GameObject NEW;
 	List<string> ALL = new List<string>();
+	List<string> Code = new List<string>();
 	List<string> ch = new List<string> ();
 	// Use this for initialization
 	GetScheduleEvent mScheduleEvent;
@@ -38,7 +39,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		char [] array;
 			//	Debug.Log(mScheduleEvent.Response.data [q].startTime);
 			ALL.Clear ();
-			
+		Code.Clear ();
 			
 
 		string aa;
@@ -58,7 +59,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				
 			}
 			aa = string.Join ("", ch.ToArray ());
-				if (System.DateTime.Now.Day == int.Parse (aa)) {
+				if (System.DateTime.Now.Day-1 == int.Parse (aa)) {
 				if(whens){
 				when = i;
 					whens = false;
@@ -68,6 +69,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 					ALL.Add (mScheduleEvent.Response.data [i].extend [1].imageName);
 					ALL.Add (mScheduleEvent.Response.data [i].interActive);
 					ALL.Add ((mScheduleEvent.Response.data [i].extend [0].score).ToString () + " : " + (mScheduleEvent.Response.data [i].extend [1].score).ToString ());
+				Code.Add ((mScheduleEvent.Response.data [i].extend [0].teamCode));
 					//	Debug.Log((mScheduleEvent.Response.data[i].extend[0].score)+ " : " + (mScheduleEvent.Response.data[i].extend[1].score));
 				//ALL.Clear ();
 				
@@ -103,6 +105,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 					if((i * 4) + 2<ALL.Count){
 					D.transform.parent.GetChild (i + 1).transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
 					D.transform.parent.GetChild (i + 1).transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
+					D.transform.parent.GetChild (i + 1).transform.GetChild (5).GetComponent<UILabel> ().text = Code [(i)];
 				}
 				}
 			}
@@ -131,6 +134,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				NEW.transform.GetChild (1).GetComponent<UISprite> ().spriteName = imgName;
 				NEW.transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
 				NEW.transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
+				NEW.transform.GetChild (5).GetComponent<UILabel> ().text = Code [(i)];
 				//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 				NEW.gameObject.SetActive (true);
 				//Debug.Log(NEW);

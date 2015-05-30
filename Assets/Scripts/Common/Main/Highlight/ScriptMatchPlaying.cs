@@ -12,6 +12,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public GameObject itemInfo;
 	public GameObject mTop;
 	public GameObject mItemDetail;
+	public GameObject TF_Landing;
 	
 	float mPreItemSize;
 	float mPosGuide;
@@ -30,7 +31,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	public List<GameObject> mQuizListItems = new List<GameObject>();
 	
-	void Start () {
+	public void Start () {
 		//		UtilMgr.ResizeList (mList);
 		mFirstLoading = true;
 		QuizMgr.IsBettingOpended = false;
@@ -40,11 +41,13 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mGameRoundCounter = 20;
 		mInningCounter = 0;
 		JoinGame ();
-		
+
 		if(UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY){
 			mList.transform.FindChild("Label").gameObject.SetActive(true);
+			//TF_Landing.GetComponent<LandingManager>().Nongame();
 		} else{
 			mList.transform.FindChild("Label").gameObject.SetActive(false);
+			//TF_Landing.GetComponent<LandingManager>().Startgame();
 		}
 		mItemDetail.SetActive(false);
 	}
