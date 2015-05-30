@@ -161,5 +161,8 @@ public class ScriptGameTop : MonoBehaviour {
 		mSchedule.SetActive (false);
 	}
 
+	public void CloseWebview(){
+		mWebview.GetComponent<ScriptGameWebview>().HideWebView();
+	}
 
 }

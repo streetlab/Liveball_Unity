@@ -139,6 +139,10 @@ public class ScriptGameWebview : MonoBehaviour {
 			mStateWebview = STATE_WEBVIEW.VISIBLE;
 		}
 	}
-	
+
+	public void CloseWebview(){
+		CloseWebview();
+		mWebView = null;
+	}
 
 }
