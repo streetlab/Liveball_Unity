@@ -8,8 +8,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 	public GameObject mBtnGameHome;
 	public GameObject mBtnCards;
 	public GameObject mBtnIamPlayer;
-//	public GameObject mBtnTeamRanking;
-//	public GameObject mBtnRecord;
+	public GameObject mBtnTeamRanking;
+	public GameObject mBtnRecord;
 	public GameObject mBtnRanking;
 	public GameObject mBtnProfile;
 	public GameObject mBtnItem;
@@ -31,8 +31,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		mBtnItem.GetComponent<UIButton> ().isEnabled = true;
 		mBtnNotice.GetComponent<UIButton> ().isEnabled = true;
 		mBtnSettings.GetComponent<UIButton> ().isEnabled = true;
-//		mBtnTeamRanking.GetComponent<UIButton> ().isEnabled = true;
-//		mBtnRecord.GetComponent<UIButton> ().isEnabled = true;
+		mBtnTeamRanking.GetComponent<UIButton> ().isEnabled = true;
+		mBtnRecord.GetComponent<UIButton> ().isEnabled = true;
 	}
 
 	void SetBtnDisable(){
@@ -57,13 +57,16 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		} else if (Application.loadedLevelName.Equals ("SceneItems")) {
 			mBtnItem.GetComponent<UIButton> ().isEnabled = false;
 			mBtnItem.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
-		} else if(Application.loadedLevelName.Equals("SceneSettings")){
+		} else if (Application.loadedLevelName.Equals ("SceneSettings")) {
 			mBtnSettings.GetComponent<UIButton> ().isEnabled = false;
 			mBtnSettings.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		} else if (Application.loadedLevelName.Equals ("SceneTeamRanking")) {
+			mBtnTeamRanking.GetComponent<UIButton> ().isEnabled = false;
+			mBtnTeamRanking.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+		}else if(Application.loadedLevelName.Equals("SceneRecord")){
+			mBtnRecord.GetComponent<UIButton> ().isEnabled = false;
+			mBtnRecord.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		}
-//		else if(Application.loadedLevelName.Equals("SceneTeamRanking")){
-//		}else if(Application.loadedLevelName.Equals("SceneRecord")){
-//		}
 
 
 
@@ -94,8 +97,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 				AutoFade.LoadLevel("SceneLoveBaseball", 0f, 1f);
 			break;
 		case "BtnRanking":
-			if(!Application.loadedLevelName.Equals("SceneRanking"))
-				AutoFade.LoadLevel("SceneRanking", 0f, 1f);
+//			if(!Application.loadedLevelName.Equals("SceneRanking"))
+//				AutoFade.LoadLevel("SceneRanking", 0f, 1f);
 			break;
 		case "BtnProfile":
 			if(!Application.loadedLevelName.Equals("SceneProfile"))
@@ -114,8 +117,12 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 
 			break;
 		case "BtnTeamRanking":
+			if(!Application.loadedLevelName.Equals("SceneTeamRanking"))
+				AutoFade.LoadLevel("SceneTeamRanking", 0f, 1f);
 			break;
 		case "BtnRecord":
+			if(!Application.loadedLevelName.Equals("SceneRecord"))
+				AutoFade.LoadLevel("SceneRecord", 0f, 1f);
 			break;
 		}
 	}

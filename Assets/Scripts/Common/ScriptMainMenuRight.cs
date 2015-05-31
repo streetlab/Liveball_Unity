@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -59,7 +59,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				
 			}
 			aa = string.Join ("", ch.ToArray ());
-				if (System.DateTime.Now.Day-1 == int.Parse (aa)) {
+				if (System.DateTime.Now.Day == int.Parse (aa)) {
 				if(whens){
 				when = i;
 					whens = false;

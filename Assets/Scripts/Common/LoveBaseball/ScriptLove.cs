@@ -23,10 +23,10 @@ public class ScriptLove : MonoBehaviour {
 		InitNanoo ();
 	}
 	
-	void Update(){
-		CheckVisible();
-		CheckStatusBar();
-	}
+//	void Update(){
+//		CheckVisible();
+//		CheckStatusBar();
+//	}
 	
 	void OnApplicationPause(bool pause){
 		Debug.Log("pause is "+pause);

@@ -190,16 +190,16 @@ public class ScriptNanoo : MonoBehaviour {
 	}
 
 	public void HideWebView(){
-		if (mStateWebview == STATE_WEBVIEW.VISIBLE) {
+		//if (mStateWebview == STATE_WEBVIEW.VISIBLE) {
 			mWebView.Hide ();
 			mStateWebview = STATE_WEBVIEW.INVISIBLE;
-		}
+		//}
 	}
 
 	public void ShowWebView(){
-		if (mStateWebview == STATE_WEBVIEW.INVISIBLE) {
+		//if (mStateWebview == STATE_WEBVIEW.INVISIBLE) {
 			mWebView.Show ();
 			mStateWebview = STATE_WEBVIEW.VISIBLE;
-		}
+		//}
 	}
 }

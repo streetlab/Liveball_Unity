@@ -124,4 +124,9 @@ public class Rankcontrol : MonoBehaviour {
 //			break;
 //		}
 }
+	public void GoMainScens(string teamname){
+		ScriptMainTop.LandingState = 0;
+		UtilMgr.SelectTeam = teamname;
+		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+	}
 }

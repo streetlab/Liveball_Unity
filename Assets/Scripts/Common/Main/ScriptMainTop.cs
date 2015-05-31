@@ -60,28 +60,103 @@ public class ScriptMainTop : MonoBehaviour {
 	static GetScheduleEvent mScheduleEvent;
 	void Start () {
 		QuizMgr.EnterMain(this);
-		if(LandingState==3){
-		LandingState = 0;
+		if (LandingState == 3) {
+			LandingState = 0;
 		
-		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
-		mBtnHighlight.GetComponent<UIButton>().isEnabled = false;
-		mHighlight.SetActive (false);
-		mLineup.SetActive (false);
-		mBingo.SetActive (false);
-		mLivetalk.SetActive (false);
-		mBetting.SetActive (false);
-		gameobj.SetActive (false);
-		QuizMgr.EnterMain(this);
+			transform.FindChild ("TopInfoItem").FindChild ("BtnMenu 1").gameObject.SetActive (false);
+			mBtnHighlight.GetComponent<UIButton> ().isEnabled = false;
+			mHighlight.SetActive (false);
+			mLineup.SetActive (false);
+			mBingo.SetActive (false);
+			mLivetalk.SetActive (false);
+			mBetting.SetActive (false);
+			gameobj.SetActive (false);
+			QuizMgr.EnterMain (this);
 
 
 
-		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "SetSchedule"));
-		NetMgr.GetScheduleAll (mScheduleEvent);
+			mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "SetSchedule"));
+			NetMgr.GetScheduleAll (mScheduleEvent);
 
 
 
+		} else if (LandingState == 0) {
+			transform.FindChild ("TopInfoItem").FindChild ("BtnMenu 1").gameObject.SetActive (false);
+			mBtnHighlight.GetComponent<UIButton> ().isEnabled = false;
+			mHighlight.SetActive (false);
+			mLineup.SetActive (false);
+			mBingo.SetActive (false);
+			mLivetalk.SetActive (false);
+			mBetting.SetActive (false);
+			gameobj.SetActive (false);
+			QuizMgr.EnterMain (this);
+			
+			
+			
+			mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "SetSchedule1"));
+			NetMgr.GetScheduleAll (mScheduleEvent);
 		}
 
+	}
+
+	void SetSchedule1(){
+		
+		
+		
+		bool chek = false;
+		
+		
+		List<string> ch = new List<string> ();
+		
+		
+		for (int p = 0; p < 7; p++) {
+			
+			for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
+				char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+				for (int z = 6; z<array.Length; z++) {
+					ch.Add (array [z].ToString ());
+				}
+				string result = string.Join ("", ch.ToArray ());
+				
+				
+				ch.Clear ();
+				int num = p;
+				if (System.DateTime.Now.Day+num>31) {
+					num = System.DateTime.Now.Day+num-31;
+					num = num-System.DateTime.Now.Day;
+				}
+				if (System.DateTime.Now.Day+num == int.Parse(result)) {
+					Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
+					chek = true;
+					if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
+						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						
+						gameobj.SetActive (true);
+						mHighlight.SetActive (true);
+						
+						InitTopInfo();
+						return;
+					} else if (mScheduleEvent.Response.data [i].extend [1].teamName == UtilMgr.SelectTeam) {
+						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						
+						gameobj.SetActive (true);
+						mHighlight.SetActive (true);
+						
+						InitTopInfo();
+						return;
+					}
+				}
+				
+			}
+		}
+		
+		
+		
+		QuizMgr.EnterMain(this);
+		gameobj.SetActive (true);
+		mHighlight.SetActive (true);
+		
+		InitTopInfo();
 	}
 	void SetSchedule(){
 	
@@ -104,8 +179,12 @@ public class ScriptMainTop : MonoBehaviour {
 				
 				
 				ch.Clear ();
-				
-				if (System.DateTime.Now.Day-p == int.Parse(result)) {
+				int num = p;
+				if (System.DateTime.Now.Day+num>31) {
+					num = System.DateTime.Now.Day+num-31;
+					num = num-System.DateTime.Now.Day;
+				}
+				if (System.DateTime.Now.Day+num == int.Parse(result)) {
 					chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
@@ -158,7 +237,12 @@ public class ScriptMainTop : MonoBehaviour {
 			
 				ch.Clear ();
 		
-				if (System.DateTime.Now.Day-p == int.Parse(result)) {
+				int num = p;
+				if (System.DateTime.Now.Day+num>31) {
+					num = System.DateTime.Now.Day+num-31;
+					num = num-System.DateTime.Now.Day;
+				}
+				if (System.DateTime.Now.Day+num == int.Parse(result)) {
 					chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == teamC) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
