@@ -654,6 +654,10 @@ public class ScriptMainTop : MonoBehaviour {
 		UtilMgr.OnBackPressed();
 	}
 
+	public void CloseWebview(){
+		mWebview.GetComponent<ScriptGameWebview>().HideWebView();
+	}
+
 	public void BtnClicked(string name)
 	{
 		EnableBtns();
