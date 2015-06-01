@@ -333,6 +333,17 @@ public class UserInfo {
 		}
 	}
 
+	Texture2D _Textures;
+	
+	public Texture2D Textures {
+		get {
+			return _Textures;
+		}
+		set {
+			_Textures = value;
+		}
+	}
+
 	bool isFirstLanding = true;
 	public bool IsFirstLanding{
 		get{return isFirstLanding;}

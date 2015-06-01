@@ -368,40 +368,65 @@ public class ScriptTitle : MonoBehaviour {
 		                         title, body, DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
 		UtilMgr.AddBackEvent (new EventDelegate (transform.root.GetComponent<ScriptLoginRoot>(), "DismissDialogue"));
 	}
-
-	public void GotProfile()
+	
+		public void GotProfile()
 	{
 		UserMgr.UserInfo = mProfileEvent.Response.data;
 
+		string images = Constants.IMAGE_SERVER_HOST+ UserMgr.UserInfo.imagePath +  UserMgr.UserInfo.imageName;
+		
+		WWW www= new WWW(images);
+		StartCoroutine (GetImage(www));
+
 		if(mProfileEvent.Response.message != null
 		   && mProfileEvent.Response.message.Length > 0){
-//			UtilMgr.OnBackPressed();
-
+			//			UtilMgr.OnBackPressed();
+			
 			DialogueMgr.ShowDialogue(mJoinError, mProfileEvent.Response.message,
 			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
-
+			
 			return;
 		}
-
+		
 		Debug.Log("UserMgr.UserInfo.activeAuth is "+UserMgr.UserInfo.activeAuth);
 		//Check Auth
-//		if(UserMgr.UserInfo.activeAuth < 1){
-//			OpenCert();
-//			return;
-//		}
-
+		//		if(UserMgr.UserInfo.activeAuth < 1){
+		//			OpenCert();
+		//			return;
+		//		}
+		
 		Debug.Log("UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
-
-//		if (mLoginInfo != null) {
-//			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
-//			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
-//
-//			Debug.Log("2 UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
-//		}
-
+		
+		//		if (mLoginInfo != null) {
+		//			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
+		//			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
+		//
+		//			Debug.Log("2 UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
+		//		}
+		
 		Debug.Log ("GotProfile");
 		mCardEvent = new GetCardInvenEvent (new EventDelegate (this, "GotCardInven"));
 		NetMgr.GetCardInven (mCardEvent);
+		
+
+	}
+
+	
+	IEnumerator GetImage(WWW www)
+	{
+		
+		yield return www;
+		
+		Texture2D temp = new Texture2D (0, 0);
+		www.LoadImageIntoTexture (temp);
+		
+		
+		UserMgr.UserInfo.Textures = temp;
+		
+		
+
+		
+		
 	}
 
 	public void GotCardInven()

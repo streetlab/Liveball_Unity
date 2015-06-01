@@ -17,7 +17,17 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 	public GameObject mBtnSettings;
 
 	void Start(){
+		SetProfile ();
 		SetBtnDisable ();
+	}
+	void SetProfile(){
+		GameObject LeftProfile = transform.FindChild ("LeftMenuProfile").gameObject;
+		LeftProfile.transform.FindChild ("Profile").FindChild ("UserName").GetComponent<UILabel> ().text = 
+			UserMgr.UserInfo.memberName;
+		LeftProfile.transform.FindChild ("Profile").FindChild ("TeamName").GetComponent<UILabel> ().text = 
+			UserMgr.UserInfo.GetTeamName();
+		LeftProfile.transform.FindChild ("UserImage").FindChild ("Sprite").GetComponent<UITexture> ().mainTexture = 
+			UserMgr.UserInfo.Textures;
 	}
 
 	void SetBtnsEnable(){

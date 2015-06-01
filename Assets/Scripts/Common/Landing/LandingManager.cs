@@ -145,6 +145,13 @@ public class LandingManager : MonoBehaviour {
 		PathSettings ();
 		//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
 		Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
+		if (ScriptMainTop.LandingState == 3) {
+			string images = Constants.IMAGE_SERVER_HOST+ UserMgr.UserInfo.imagePath + UserMgr.UserInfo.imageName;
+			
+			WWW www= new WWW(images);
+			StartCoroutine (GetImage(www));
+		}
+
 		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 3) {	
 			StartHeamhome();
 
@@ -362,6 +369,25 @@ public class LandingManager : MonoBehaviour {
 		texture.mainTexture = tmpTex;
 	}
 
+
+	IEnumerator GetImage(WWW www)
+	{
+		
+		yield return www;
+		
+		Texture2D temp = new Texture2D (0, 0);
+		www.LoadImageIntoTexture (temp);
+		
+		
+		UserMgr.UserInfo.Textures = temp;
+		
+		
+		
+		
+
+		
+		
+	}
 	List<string> ch = new List<string>();
 	char[] array;
 	int num;
