@@ -32,8 +32,11 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public AudioClip mSoundOpenBet;
 	public AudioClip mSoundCloseBet;
+	public AudioClip mAudioWelcome;
+
 	public string mStrLive;
 	public GameObject gameobj;
+	public GameObject mWebview;
 
 	public static int LandingState=3;
 
@@ -97,6 +100,39 @@ public class ScriptMainTop : MonoBehaviour {
 			NetMgr.GetScheduleAll (mScheduleEvent);
 		}
 
+		CheckFirst();
+	}
+
+	void CheckFirst(){
+		if(UserMgr.UserInfo.IsFirstLanding){
+			UserMgr.UserInfo.IsFirstLanding = false;
+			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioWelcome);
+			
+			CheckAttendance();
+		}
+	}
+	
+	void CheckAttendance(){
+		WWW www = new WWW(Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
+		StartCoroutine(RunAttendance(www));
+		UtilMgr.ShowLoading(true);
+	}
+	
+	IEnumerator RunAttendance(WWW www){
+		yield return www;
+		
+		UtilMgr.DismissLoading();
+		if(www.error != null){
+			DialogueMgr.ShowDialogue("attendance error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else{
+			if(www.text != null && www.text.Length > 0){
+				//popup webview
+				mWebview.SetActive(true);
+				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
+			} else{
+				Debug.Log("Attendance is already done");
+			}
+		}
 	}
 
 	void SetSchedule1(){

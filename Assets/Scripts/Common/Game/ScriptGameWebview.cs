@@ -12,6 +12,7 @@ public class ScriptGameWebview : MonoBehaviour {
 	
 	public GameObject mMainMenu;
 	public GameObject mTop;
+
 	bool StatusBarIsHidden;
 	
 	// Use this for initialization
