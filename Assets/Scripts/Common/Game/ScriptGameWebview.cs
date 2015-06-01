@@ -142,7 +142,7 @@ public class ScriptGameWebview : MonoBehaviour {
 	}
 
 	public void CloseWebview(){
-		CloseWebview();
+		HideWebView();
 		mWebView = null;
 	}
 

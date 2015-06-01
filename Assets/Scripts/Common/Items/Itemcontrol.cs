@@ -35,8 +35,6 @@ public class Itemcontrol : MonoBehaviour {
 		Debug.Log("start1");
 		#if(UNITY_ANDROID)
 		#else
-//		StoreEvents.OnSoomlaStoreInitialized += onSoomlaStoreInitialized;
-//		StoreEvents.OnCurrencyBalanceChanged += onCurrencyBalanceChanged;
 		SoomlaStore.Initialize(new ScriptItemAssets());
 		#endif
 		
@@ -263,7 +261,13 @@ public class Itemcontrol : MonoBehaviour {
 			//}
 		//}
 		#else
-
+		orderNo = RequestIAP.Response.data.orderNo;
+		//RequestIAP.Response.data.
+//		GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
+//		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
+		StoreInventory.BuyItem(itemcode);
+		//}
+		//}
 		#endif
 	}
 
@@ -468,7 +472,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// <param name="pvi">Purchasable virtual item.</param>
 	/// <param name="purchaseToken">Purchase token.</param>
 	public void onMarketPurchase(PurchasableVirtualItem pvi, string payload, Dictionary<string, string> extra) {
-		
+		Debug.Log("onMarketPurchase");
 	}
 	
 	/// <summary>
@@ -476,7 +480,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="pvi">Purchasable virtual item.</param>
 	public void onMarketRefund(PurchasableVirtualItem pvi) {
-		
+		Debug.Log("onMarketRefund");
 	}
 	
 	/// <summary>
@@ -484,7 +488,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="pvi">Purchasable virtual item.</param>
 	public void onItemPurchased(PurchasableVirtualItem pvi, string payload) {
-		
+		Debug.Log("onItemPurchased");
 	}
 	
 	/// <summary>
@@ -492,7 +496,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="good">Equippable virtual good.</param>
 	public void onGoodEquipped(EquippableVG good) {
-		
+		Debug.Log("onGoodEquipped");
 	}
 	
 	/// <summary>
@@ -500,7 +504,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="good">Equippable virtual good.</param>
 	public void onGoodUnequipped(EquippableVG good) {
-		
+		Debug.Log("onGoodUnequipped");
 	}
 	
 	/// <summary>
@@ -510,7 +514,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// <param name="currentUpgrade">The current upgrade that the given virtual
 	/// good is being upgraded to.</param>
 	public void onGoodUpgrade(VirtualGood good, UpgradeVG currentUpgrade) {
-		
+		Debug.Log("onGoodUpgrade");
 	}
 	
 	/// <summary>
@@ -532,7 +536,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="pvi">Purchasable virtual item.</param>
 	public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
-		
+		Debug.Log("onMarketPurchaseStarted");
 	}
 	
 	/// <summary>
@@ -540,7 +544,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="pvi">Purchasable virtual item.</param>
 	public void onItemPurchaseStarted(PurchasableVirtualItem pvi) {
-		
+		Debug.Log("onItemPurchaseStarted");
 	}
 	
 	/// <summary>
@@ -548,7 +552,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="pvi">Purchasable virtual item.</param>
 	public void onMarketPurchaseCancelled(PurchasableVirtualItem pvi) {
-		
+		Debug.Log("onMarketPurchaseCancelled");
 	}
 	
 	/// <summary>
@@ -556,7 +560,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="message">Error message.</param>
 	public void onUnexpectedErrorInStore(string message) {
-		
+		Debug.Log("onUnexpectedErrorInStore");
 	}
 	
 	/// <summary>
@@ -576,14 +580,14 @@ public class Itemcontrol : MonoBehaviour {
 	/// <param name="balance">Balance.</param>
 	/// <param name="amountAdded">Amount added.</param>
 	public void onGoodBalanceChanged(VirtualGood good, int balance, int amountAdded) {
-		
+		Debug.Log("onGoodBalanceChanged");
 	}
 	
 	/// <summary>
 	/// Handles a restore Transactions process started event.
 	/// </summary>
 	public void onRestoreTransactionsStarted() {
-		
+		Debug.Log("onRestoreTransactionsStarted");
 	}
 	
 	/// <summary>
@@ -591,7 +595,7 @@ public class Itemcontrol : MonoBehaviour {
 	/// </summary>
 	/// <param name="success">If set to <c>true</c> success.</param>
 	public void onRestoreTransactionsFinished(bool success) {
-		
+		Debug.Log("onRestoreTransactionsFinished");
 	}
 	
 	/// <summary>

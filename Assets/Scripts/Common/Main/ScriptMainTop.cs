@@ -654,8 +654,9 @@ public class ScriptMainTop : MonoBehaviour {
 		UtilMgr.OnBackPressed();
 	}
 
-	public void CloseWebview(){
-		mWebview.GetComponent<ScriptGameWebview>().HideWebView();
+	public void CloseAttendance(){
+		mWebview.SetActive(false);
+		mWebview.GetComponent<ScriptGameWebview>().CloseWebview();
 	}
 
 	public void BtnClicked(string name)
