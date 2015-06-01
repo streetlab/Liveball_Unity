@@ -97,8 +97,8 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 				AutoFade.LoadLevel("SceneLoveBaseball", 0f, 1f);
 			break;
 		case "BtnRanking":
-//			if(!Application.loadedLevelName.Equals("SceneRanking"))
-//				AutoFade.LoadLevel("SceneRanking", 0f, 1f);
+			if(!Application.loadedLevelName.Equals("SceneRanking"))
+				AutoFade.LoadLevel("SceneRanking", 0f, 1f);
 			break;
 		case "BtnProfile":
 			if(!Application.loadedLevelName.Equals("SceneProfile"))

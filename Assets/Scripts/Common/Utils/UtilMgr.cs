@@ -103,14 +103,14 @@ public class UtilMgr : MonoBehaviour {
 		}
 		else
 		{
-			if(Application.loadedLevelName.Equals("SceneMain")){
-//				AutoFade.LoadLevel(PreLoadedLevelName);
-				NetMgr.ExitGame(null);
-				AutoFade.LoadLevel("SceneGame");
-			} else{
-				Instance.ShowExitDialog();
-			}
-
+//			if(Application.loadedLevelName.Equals("SceneMain")){
+////				AutoFade.LoadLevel(PreLoadedLevelName);
+//				NetMgr.ExitGame(null);
+//				AutoFade.LoadLevel("SceneGame");
+//			} else{
+//				Instance.ShowExitDialog();
+//			}
+			Instance.ShowExitDialog();
 			return false;
 		}
 	}

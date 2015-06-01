@@ -304,7 +304,7 @@ public class LandingManager : MonoBehaviour {
 			
 			Is_PlayersName = mlineupEvent.Response.data.pit [0].playerName + "#" + mlineupEvent.Response.data.pit [0].playerNumber;
 			I_StringList.Add (Is_PlayersName);
-			Is_Batting = "Null";
+			Is_Batting = "";
 			
 			I_StringList.Add (Is_Batting);
 			

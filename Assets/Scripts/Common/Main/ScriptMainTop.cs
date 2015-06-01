@@ -103,7 +103,7 @@ public class ScriptMainTop : MonoBehaviour {
 		
 		
 		
-		bool chek = false;
+		//bool chek = false;
 		
 		
 		List<string> ch = new List<string> ();
@@ -127,7 +127,7 @@ public class ScriptMainTop : MonoBehaviour {
 				}
 				if (System.DateTime.Now.Day+num == int.Parse(result)) {
 					Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
-					chek = true;
+					//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
 						
@@ -162,7 +162,7 @@ public class ScriptMainTop : MonoBehaviour {
 	
 
 
-		bool chek = false;
+		//bool chek = false;
 		
 		
 		List<string> ch = new List<string> ();
@@ -185,7 +185,7 @@ public class ScriptMainTop : MonoBehaviour {
 					num = num-System.DateTime.Now.Day;
 				}
 				if (System.DateTime.Now.Day+num == int.Parse(result)) {
-					chek = true;
+					//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
 				
@@ -219,7 +219,7 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public void GoGame(string teamC){
 		
-		bool chek = false;
+		//bool chek = false;
 		
 		
 		List<string> ch = new List<string> ();
@@ -243,7 +243,7 @@ public class ScriptMainTop : MonoBehaviour {
 					num = num-System.DateTime.Now.Day;
 				}
 				if (System.DateTime.Now.Day+num == int.Parse(result)) {
-					chek = true;
+				//	chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == teamC) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
 						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
