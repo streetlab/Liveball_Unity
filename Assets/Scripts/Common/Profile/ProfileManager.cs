@@ -234,6 +234,7 @@ public class ProfileManager : MonoBehaviour {
 	 string images;
 	
 	public void SetPhoto(){
+		Debug.Log("OpenGallery!!!");
 		#if(UNITY_ANDROID)
 		AndroidMgr.OpenGallery(new EventDelegate(this, "OpenGallery"));
 		#else

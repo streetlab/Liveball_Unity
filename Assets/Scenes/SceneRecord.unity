@@ -3456,7 +3456,7 @@ Transform:
   m_GameObject: {fileID: 426068208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
   m_Children:
   - {fileID: 1027082538}
   - {fileID: 907119978}
@@ -11484,7 +11484,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3022
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -13951,6 +13951,10 @@ GameObject:
 --- !u!1 &1310498002 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 132050, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+  m_PrefabInternal: {fileID: 1310497996}
+--- !u!1 &1310498003 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 117076, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
   m_PrefabInternal: {fileID: 1310497996}
 --- !u!1 &1315101405
 GameObject:
@@ -20293,7 +20297,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {fileID: 0}
+          value: {fileID: 1310498003}
         - useVariable: 1
           name: 
           tooltip: 

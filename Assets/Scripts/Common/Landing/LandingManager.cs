@@ -141,17 +141,10 @@ public class LandingManager : MonoBehaviour {
 
 
 	}
-	void Start () {
+	public void Start () {
 		PathSettings ();
 		//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
 		Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
-		if (ScriptMainTop.LandingState == 3) {
-			string images = Constants.IMAGE_SERVER_HOST+ UserMgr.UserInfo.imagePath + UserMgr.UserInfo.imageName;
-			
-			WWW www= new WWW(images);
-			StartCoroutine (GetImage(www));
-		}
-
 		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 3) {	
 			StartHeamhome();
 
@@ -326,7 +319,7 @@ public class LandingManager : MonoBehaviour {
 		SetTeamColor ();
 	}
 	void InPutData(){
-		for (int i = 0; i < I_LabelList.Count; i++) {
+		for (int i = 0; i < I_StringList.Count; i++) {
 			I_LabelList[i].text = I_StringList[i];
 		}
 		//BigLogo.spriteName = "";
@@ -370,24 +363,6 @@ public class LandingManager : MonoBehaviour {
 	}
 
 
-	IEnumerator GetImage(WWW www)
-	{
-		
-		yield return www;
-		
-		Texture2D temp = new Texture2D (0, 0);
-		www.LoadImageIntoTexture (temp);
-		
-		
-		UserMgr.UserInfo.Textures = temp;
-		
-		
-		
-		
-
-		
-		
-	}
 	List<string> ch = new List<string>();
 	char[] array;
 	int num;

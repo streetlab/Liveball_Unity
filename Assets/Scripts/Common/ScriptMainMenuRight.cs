@@ -290,7 +290,15 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		//Debug.Log (i+" and "+a);
 
 		UserMgr.Schedule = mScheduleEvent.Response.data [when+(i-1)];
-		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
+		if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
+			//non
+			ScriptMainTop.LandingState =1;
+			AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+		} else {
+			//Startgame();
+			ScriptMainTop.LandingState =2;
+			AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+		}
 		
 	}
 }

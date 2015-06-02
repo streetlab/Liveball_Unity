@@ -155,6 +155,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	public void Init(QuizInfo quizInfo)
 	{
+		if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
+			ScriptMainTop.LandingState = 2;
+			transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager>().Start();
+		}
 		Debug.Log("Init");
 		mListJoin.Clear ();
 //		quizInfo = quizInfo;

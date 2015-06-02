@@ -8,16 +8,16 @@ public class GetGameSposDetailBoardRequest : BaseRequest {
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
-
-//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+		
+		//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
 		mDic = this;
 	}
-
+	
 	public override string GetType ()
 	{
 		return "spos";
 	}
-
+	
 	public override string GetQueryId()
 	{
 		return "gameSposDetailBoard";

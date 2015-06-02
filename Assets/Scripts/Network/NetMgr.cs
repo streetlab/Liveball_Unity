@@ -150,8 +150,9 @@ public class NetMgr : MonoBehaviour{
 //			httpUrl = Constants.QUERY_SERVER_HOST;
 		}
 
-		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
-
+	
+		//WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+			WWW www = new WWW (Constants.UPLOAD_TEST_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
@@ -197,6 +198,26 @@ public class NetMgr : MonoBehaviour{
 	public static void GetScheduleMore(string teamCode, int teamSeq, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetScheduleMoreRequest(teamCode, teamSeq), baseEvent);
+	}
+
+	public static void GetUserRankingDailyForecast(int memSeq, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetUserRankingDailyForecast (memSeq), baseEvent);
+	}
+
+	public static void GetUserRankingDailyGold(int memSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetUserRankingDailyGold (memSeq), baseEvent);
+	}
+
+	public static void GetUserRankingWeeklyForecast(int memSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetUserRankingWeeklyForecast (memSeq), baseEvent);
+	}
+
+	public static void GetUserRankingWeeklyGold(int memSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetUserRankingWeeklyGold (memSeq), baseEvent);
 	}
 
 	public static void GetGameSposDetailBoard(BaseEvent baseEvent)
