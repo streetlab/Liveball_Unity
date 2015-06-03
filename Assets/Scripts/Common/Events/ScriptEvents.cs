@@ -40,12 +40,14 @@ public class ScriptEvents : MonoBehaviour {
 	}
 
 	public void GotEvents(){
+//		Debug.Log("GotEvents");
 		Page = 1;
 		MAX_PAGE = mEvent.Response.result.count;
 		GoToNext();
 	}
 
 	public void GoToNext(){
+//		Debug.Log("GoToNext");
 		mLblTitle.GetComponent<UILabel>().text = mEvent.Response.result.data[Page-1].title;
 
 		mWebView.url = mEvent.Response.result.data[Page-1].url;
@@ -95,7 +97,6 @@ public class ScriptEvents : MonoBehaviour {
 			mWebView.InsetsForScreenOreitation += InsetsForScreenOreitation;
 			mWebView.OnReceivedKeyCode += OnReceivedKeyCode;
 			
-			
 			//			mWebView.SetTransparentBackground(true);
 			//			mWebView.toolBarShow = true;
 			
@@ -104,6 +105,7 @@ public class ScriptEvents : MonoBehaviour {
 //		mWebView.url = LOVE_URL;
 //		
 //		mWebView.Load ();
+//		mWebView.Stop();
 	}
 	
 	void OnReceivedKeyCode (UniWebView webView, int keyCode)

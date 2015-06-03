@@ -185,7 +185,7 @@ public class NetMgr : MonoBehaviour{
 
 		}
 		
-//		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+//		WWW www = new WWW (request.GetParam(), System.Text.Encoding.UTF8.GetBytes(reqParam));
 		WWW www = new WWW(reqParam);
 		
 		Debug.Log (reqParam);

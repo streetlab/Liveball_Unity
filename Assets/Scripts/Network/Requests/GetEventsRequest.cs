@@ -6,6 +6,7 @@ public class GetEventsRequest : BaseNanooRequest {
 
 	public GetEventsRequest()
 	{
-		mParam = Constants.QUERY_SERVER_NANOO + "/v1/news/event?";
+//		mParam = Constants.QUERY_SERVER_NANOO + "/v1/news/event?";
+		mParam = Constants.QUERY_SERVER_NANOO + "/v1/news/event";
 	}
 }
