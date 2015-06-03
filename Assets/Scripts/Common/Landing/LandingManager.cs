@@ -112,6 +112,8 @@ public class LandingManager : MonoBehaviour {
 		test.transform.FindChild ("Info").gameObject.SetActive (false);
 		test.transform.FindChild ("VS").gameObject.SetActive (false);
 		test.transform.FindChild ("Playing").gameObject.SetActive (true);
+		SetPitcher ();
+		SetHitter ();
 	}
 
 	public void Heamhome(){
@@ -124,13 +126,60 @@ public class LandingManager : MonoBehaviour {
 		test.transform.FindChild ("VS").gameObject.SetActive (false);
 		test.transform.FindChild ("Playing").gameObject.SetActive (false);
 	}
+
+	string Poldname = "";
+	public void SetPitcher()
+	{
+		if (ScriptMainTop.DetailBoard != null) {
+			string playerInfo = ScriptMainTop.DetailBoard.player [0].playerName + "#" + ScriptMainTop.DetailBoard.player [0].playerNumber;
+			P_RPlayersName.text = playerInfo;
+			string playerAVG = ScriptMainTop.DetailBoard.player [0].ERA;
+			P_RBatting.text = playerAVG;
+			string strImage = ScriptMainTop.DetailBoard.player [0].imageName;
+			if (Poldname != playerInfo) {
+				if (ScriptMainTop.DetailBoard.player [0].imagePath != null 
+					&& ScriptMainTop.DetailBoard.player [0].imagePath.Length > 0)
+					strImage = ScriptMainTop.DetailBoard.player [0].imagePath
+						+ ScriptMainTop.DetailBoard.player [0].imageName;
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+				StartCoroutine (GetImage (www, P_RPlayerImage));
+			}
+			Poldname = playerInfo;
+		}
+	}
+	void SetHitterStart(){
+	
+	}
+	string Holdname = "";
+	public void SetHitter()
+	{ 
+		Debug.Log("SetHitter0");
+		if (QuizMgr.QuizInfo!=null) {
+			Debug.Log("SetHitter1");
+			string playerInfo = QuizMgr.QuizInfo.playerName + "#" + QuizMgr.QuizInfo.playerNumber;
+			P_LPlayersName.text = playerInfo;
+			string playerAVG = ScriptMainTop.DetailBoard.player [ScriptMainTop.DetailBoard.player.Count - 1].AVG;
+			P_LBatting.text = playerAVG;
+
+			string strImage = QuizMgr.QuizInfo.imageName;
+			if(Holdname!=strImage){
+			if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0)
+				strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
+			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+			StartCoroutine (GetImage (www, P_LPlayerImage));
+			}
+			Holdname = strImage;
+		}
+	}
+
 	void GetStartPleyer(){
 
 
 
 
 
-		Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
+	//	Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
 		if (UtilMgr.SelectTeam.Length > 0) {
 			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetData1"));
 			NetMgr.GetLineup (GetTeamCode (UtilMgr.SelectTeam), mlineupEvent);
@@ -144,7 +193,7 @@ public class LandingManager : MonoBehaviour {
 	public void Start () {
 		PathSettings ();
 		//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
-		Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
+		//Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
 		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 3) {	
 			StartHeamhome();
 

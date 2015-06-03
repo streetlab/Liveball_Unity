@@ -151,8 +151,8 @@ public class NetMgr : MonoBehaviour{
 		}
 
 	
-		//WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
-			WWW www = new WWW (Constants.UPLOAD_TEST_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+			//WWW www = new WWW (Constants.UPLOAD_TEST_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");

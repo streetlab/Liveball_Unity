@@ -64,15 +64,18 @@ public class Itemcontrol : MonoBehaviour {
 		
 		//getcard = new GetCardInvenEvent (new EventDelegate (this, "card"));
 		//NetMgr.GetCardInven (getcard);
-		Debug.Log("start2");
+		//Debug.Log("start2");
 	}
 
 
 	void ruby(){
 	
-
-
-		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
+		Debug.Log ("UserMgr.UserInfo.ppCount : " + UserMgr.UserInfo.ppCount);
+		if (UserMgr.UserInfo.ppCount > 1) {
+			temp1 = (GameObject)Instantiate (imageC1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
+		} else {
+			temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
+		}
 		temp1.transform.parent = origin1.transform.parent;
 		temp1.transform.localScale = new Vector3 (1, 1, 1);
 		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);

@@ -15,7 +15,7 @@ public class UtilMgr : MonoBehaviour {
 	public static WWW mWWW;
 
 	public static string SelectTeam = "";
-
+	public static string SelectTeamSeq = "";
 	public static bool OnPause;
 	public static bool OnFocus;
 	public static string PreLoadedLevelName;

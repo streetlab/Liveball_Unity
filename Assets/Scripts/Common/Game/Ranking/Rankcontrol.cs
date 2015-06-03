@@ -16,6 +16,7 @@ public class Rankcontrol : MonoBehaviour {
 	List<string> behind= new List<string> ();
 	List<string> image = new List<string> ();
 	List<string> rankDiff = new List<string> ();
+	List<string> Seq = new List<string> ();
 
 	GetTeamRankingEvent mRankingEvent;
 
@@ -40,11 +41,10 @@ public class Rankcontrol : MonoBehaviour {
 		prevRanking.Clear ();
 		image.Clear ();
 		behind.Clear ();
-
+		Seq.Clear ();
 		Debug.Log (mRankingEvent.Response.data[0].teamName +"'s Ranking is "+mRankingEvent.Response.data[0].ranking);
 		for (int i = 0; i<mRankingEvent.Response.data.Count; i++) {
-
-
+		
 			rank.Add (mRankingEvent.Response.data[i].ranking.ToString());
 			teamname.Add (mRankingEvent.Response.data[i].teamName.ToString());
 			v.Add(mRankingEvent.Response.data[i].countWin.ToString());
@@ -55,6 +55,7 @@ public class Rankcontrol : MonoBehaviour {
 			image.Add(mRankingEvent.Response.data[i].imageName.ToString());
 			behind.Add(mRankingEvent.Response.data[i].behind.ToString());
 			rankDiff.Add(mRankingEvent.Response.data[i].rankDiff);
+			Seq.Add(mRankingEvent.Response.data[i].teamSeq.ToString());
 		}
 		setposition ();
 	}
@@ -81,6 +82,7 @@ public class Rankcontrol : MonoBehaviour {
 			string imgName = UtilMgr.GetTeamEmblem(image[i]);
 			bars.transform.GetChild(i).GetChild(6).GetComponent<UISprite>().spriteName = imgName;
 			rankswitch(i);
+			bars.transform.GetChild(i).GetChild(8).GetComponent<UILabel>().text = Seq[i];
 		}
 
 	}
@@ -124,9 +126,10 @@ public class Rankcontrol : MonoBehaviour {
 //			break;
 //		}
 }
-	public void GoMainScens(string teamname){
+	public void GoMainScens(string teamname,string temeseq){
 		ScriptMainTop.LandingState = 0;
 		UtilMgr.SelectTeam = teamname;
+		UtilMgr.SelectTeamSeq = temeseq;
 		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
 	}
 }

@@ -162,7 +162,7 @@ public class ScriptMainTop : MonoBehaviour {
 					num = num-System.DateTime.Now.Day;
 				}
 				if (System.DateTime.Now.Day+num == int.Parse(result)) {
-					Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
+				//	Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
 					//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];

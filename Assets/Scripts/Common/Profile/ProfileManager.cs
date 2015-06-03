@@ -62,9 +62,10 @@ public class ProfileManager : MonoBehaviour {
 		//Profile.transform.FindChild ("LblNick").GetComponent<UILabel> ().text = UserName;
 		//Profile.transform.FindChild ("LblStatus").GetComponent<UILabel> ().text = UserState;
 		//Profile.transform.FindChild ("SprEmblem").GetComponent<UISprite> ().spriteName = UserTeamCode;
-    	WWW www= new WWW(images);
-		StartCoroutine (GetImage(www));
-	
+		if (UserImageName != "") {
+			WWW www = new WWW (images);
+			StartCoroutine (GetImage (www));
+		}
 
 
 	}

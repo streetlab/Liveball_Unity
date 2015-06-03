@@ -6,6 +6,9 @@ GameObject Top;
 	//char [] array;
 	public void Onhit(){
 		//array = gameObject.ToString ().ToCharArray ();
+		if (transform.parent.parent.parent.parent.parent.parent.parent.name == "UI Root"){
+			Top = transform.parent.parent.parent.parent.parent.parent.parent.transform.FindChild ("Top").gameObject;
+		}else
 		if (transform.parent.parent.parent.parent.parent.parent.parent.parent.name == "UI Root") {
 			Top = transform.parent.parent.parent.parent.parent.parent.parent.parent.transform.FindChild ("Top").gameObject;
 		} else {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ScriptMainMenuRight : MonoBehaviour {
 	public GameObject BntMenu;
-
+	
 	public float MaxGame = 5;
 	public float gap = 200;
 	bool B = false;
@@ -15,155 +15,290 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	bool nonoff = true;
 	bool Starts = true;
 	bool whens = true;
-	int count = 0;
+	
 	int when = 0;
 	GameObject D;
 	GameObject NEW;
-	List<string> ALL = new List<string>();
+	
+	List<string> LImage = new List<string>();
+	List<string> RImage = new List<string>();
+	List<string> interActive = new List<string> ();
+	List<string> Score = new List<string> ();
 	List<string> Code = new List<string>();
+	List<string> Day = new List<string>();
+	List<int> Count = new List<int>();
 	List<string> ch = new List<string> ();
+	List<GameObject> News = new List<GameObject> ();
 	// Use this for initialization
 	GetScheduleEvent mScheduleEvent;
+
+	List<int> dayandday = new List<int>();
+	List<int> When = new List<int>();
+	List<int> daycount = new List<int>();
+
+	void chacktoday(){
+		dayandday.Clear ();
+		When.Clear ();
+		char [] array;
+		string result;
+		for (int i = 0; i<mScheduleEvent.Response.data.Count; i+=1) {
+			array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+			for (int z = 6; z<array.Length; z++) {
+				ch.Add (array [z].ToString ());
+			}
+			result = string.Join ("", ch.ToArray ());
+			dayandday.Add(int.Parse(result));
+			if(i>0){
+				if(
+					dayandday[i]!=dayandday[i-1]){
+					When.Add(i);
+				}
+			}else{
+				When.Add(i);
+			}
+			ch.Clear ();
+		}
+		daycount.Clear ();
+		for (int i =0; i<When.Count; i++) {
+			daycount.Add(0);
+		}
+		for (int i =0; i<dayandday.Count; i++) {
+			for(int z = 0; z < When.Count;z++){
+				if(dayandday[i] == dayandday[When[z]] ){
+					daycount[z]+=1;
+					
+				}
+			}	
+		}
+
+	}
 	void Start () {
 		ING = true;
 		//mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "getdata"));
-	//	NetMgr.GetScheduleMore (null,
+		//    NetMgr.GetScheduleMore (null,
 		//                        UserMgr.UserInfo.teamSeq,
-	   //                     mScheduleEvent);
-	
-
-	}
-	void getdata(){
-		whens = true;
-		count = 0;
-		char [] array;
-			//	Debug.Log(mScheduleEvent.Response.data [q].startTime);
-			ALL.Clear ();
-		Code.Clear ();
-			
-
-		string aa;
-
-
-
-				transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = "경기 없음";
+		//                     mScheduleEvent);
 		
-			for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
+		
+	}
+	public void P(){
+		nums +=1;
+		Button ();
+	}
+	public void M(){
+		nums -=1;
+		Button ();
+	}
+	void Button(){
+		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "Setdata"));
+		    NetMgr.GetScheduleAll (
+		                     mScheduleEvent);
+	}
+	int nums = 0;
+	void Setdata(){
+		int days = 0;
+		for (int a = 0; a < 7; a++) {
+			for (int i = 0; i<When.Count; i++) {
+				if (System.DateTime.Now.Day+a == dayandday [When [i]]) {
+					int v = i + nums;
+					if (i + nums > When.Count - 1) {
+						v = When.Count - 1;
+						nums -= 1;
+					} else if (i + nums < 0) {
+						v = 0;
+						nums += 1;
+					}
+					days = dayandday [When [v]];
+					a = 99;
+					break;
+				}
+			}
+		}
+		Starts = true;
+		whens = true;
+		char [] array;
+		string aa;
+		Count.Clear ();
+		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			ch.Clear ();
+			for (int z = 0; z<8; z++) {
 			
+				ch.Add (array [z].ToString ());
+				if (z == 3 || z == 5) {
+					ch.Add (".");
+				}
+			
+			}
+			aa = string.Join ("", ch.ToArray ());
+		
+			Debug.Log (aa);
+			ch.Clear ();
+			for (int z = 6; z<8; z++) {
+			
+				ch.Add (array [z].ToString ());
+			
+			
+			}
+			string bb = string.Join ("", ch.ToArray ());
+		
+		
+			if (days == int.Parse (bb)) {
+				if(whens){
+					when = i;
+					whens = false;
+				}
+
+				Count.Add (i);
+
+				transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = aa + " 경기";
+			}
+		}
+		D = transform.GetChild (0).GetChild (0).GetChild (0).gameObject;
+		for (int i = 1; i < D.transform.childCount; i++) {
+			Destroy(D.transform.GetChild(i).gameObject);
+		}
+		if (0 < Count.Count) {
+			if (Starts) {
+				setposition ();
+			}
+		}
+	}
+	void getdata(){
+		chacktoday ();
+		whens = true;
+		
+		char [] array;
+		//    Debug.Log(mScheduleEvent.Response.data [q].startTime);
+		LImage.Clear ();
+		RImage.Clear ();
+		interActive.Clear ();
+		Score.Clear ();
+		Code.Clear ();
+		Day.Clear ();
+		
+		string aa;
+		
+		
+		
+		transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = "경기 없음";
+		
+		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
+			LImage.Add (mScheduleEvent.Response.data [i].extend [0].imageName);
+			RImage.Add (mScheduleEvent.Response.data [i].extend [1].imageName);
+			interActive.Add (mScheduleEvent.Response.data [i].interActive);
+			Score.Add ((mScheduleEvent.Response.data [i].extend [0].score).ToString () + " : " + (mScheduleEvent.Response.data [i].extend [1].score).ToString ());
+			Code.Add ((mScheduleEvent.Response.data [i].extend [0].teamCode));
+			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
+			ch.Clear ();
+			for (int z = 0; z<8; z++) {
+				
+				ch.Add (array [z].ToString ());
+				if (z == 3 || z == 5) {
+					ch.Add (".");
+				}
+				
+			}
+			aa = string.Join ("", ch.ToArray ());
+		
+			Debug.Log(aa);
+			ch.Clear ();
 			for (int z = 6; z<8; z++) {
 				
 				ch.Add (array [z].ToString ());
 				
 				
 			}
-			aa = string.Join ("", ch.ToArray ());
-				if (System.DateTime.Now.Day == int.Parse (aa)) {
+			string bb = string.Join ("", ch.ToArray ());
+			//Day.Add (aa);
+
+			if (System.DateTime.Now.Day == int.Parse (bb)) {
+	
 				if(whens){
-				when = i;
+					when = i;
 					whens = false;
 				}
-					count+=1;
-					ALL.Add (mScheduleEvent.Response.data [i].extend [0].imageName);
-					ALL.Add (mScheduleEvent.Response.data [i].extend [1].imageName);
-					ALL.Add (mScheduleEvent.Response.data [i].interActive);
-					ALL.Add ((mScheduleEvent.Response.data [i].extend [0].score).ToString () + " : " + (mScheduleEvent.Response.data [i].extend [1].score).ToString ());
-				Code.Add ((mScheduleEvent.Response.data [i].extend [0].teamCode));
-					//	Debug.Log((mScheduleEvent.Response.data[i].extend[0].score)+ " : " + (mScheduleEvent.Response.data[i].extend[1].score));
+				Count.Add (i);
+				//    Debug.Log((mScheduleEvent.Response.data[i].extend[0].score)+ " : " + (mScheduleEvent.Response.data[i].extend[1].score));
 				//ALL.Clear ();
-				
-				ch.Clear ();
-				
-				
-				for (int z = 0; z<8; z++) {
-					
-					ch.Add (array [z].ToString ());
-					if (z == 3 || z == 5) {
-						ch.Add (".");
-					}
-					
-				}
-				aa = string.Join ("", ch.ToArray ());
-				Debug.Log(aa);
-				
 				
 				transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = aa + " 경기";
 			}
-			}
-			//Debug.Log(" ALL.Count! :  " + ALL.Count);
-		Debug.Log(count);
-			
-			D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
-			if (0<ALL.Count) {
-			if(Starts){
-			setposition ();
-			}
+		}
+		//Debug.Log(" ALL.Count! :  " + ALL.Count);
 		
-				for (int i = 0; i<count; i++) {	
-				//Debug.Log(((i * 4) + 2)+" : " + ALL.Count);
-					if((i * 4) + 2<ALL.Count){
-					D.transform.parent.GetChild (i + 1).transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
-					D.transform.parent.GetChild (i + 1).transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
-					D.transform.parent.GetChild (i + 1).transform.GetChild (5).GetComponent<UILabel> ().text = Code [(i)];
-				}
-				}
-			}
-
-
-
-	}
-
-	void setposition(){
+		
 		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
-	
-		for (int i = 0; i<count; i++) {
-			//Debug.Log("iiiiiiii");
-			if ((i * 4) + 2 < ALL.Count) {
-				NEW = (GameObject)Instantiate (D, new Vector2 (0, 0), D.transform.localRotation);
+		if (0<Count.Count) {
+			if(Starts){
+				setposition ();
+			}
+			
+//			for (int i = 0; i<Count.Count; i++) {    
+//				//Debug.Log(((i * 4) + 2)+" : " + ALL.Count);
+//				
+//				D.transform.parent.GetChild (i + 1).transform.GetChild (2).GetComponent<UILabel> ().text = interActive [Count[i]];
+//				D.transform.parent.GetChild (i + 1).transform.GetChild (4).GetComponent<UILabel> ().text = Score [Count[i]];
+//				D.transform.parent.GetChild (i + 1).transform.GetChild (5).GetComponent<UILabel> ().text = Code [Count[i]];
+//				
+//			}
+		}
 		
+		
+		
+	}
+	
+	void setposition(){
+		News.Clear ();
+		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
+		
+		for (int i = 0; i<Count.Count; i++) {
+			//Debug.Log("iiiiiiii");
+		
+				NEW = (GameObject)Instantiate (D, new Vector2 (0, 0), D.transform.localRotation);
+				
 				NEW.transform.parent = D.transform.parent;
-
+				
 				NEW.transform.localScale = new Vector3 (1, 1, 1);
 				NEW.transform.localPosition = new Vector2 (D.transform.localPosition.x, D.transform.localPosition.y - (gap * (i)));
-
+				
 				NEW.name = "Game" + (i + 1).ToString ();
-				string imgName = UtilMgr.GetTeamEmblem (ALL [i * 4]);
+				string imgName = UtilMgr.GetTeamEmblem (LImage[Count[i]]);
 				NEW.transform.GetChild (0).GetComponent<UISprite> ().spriteName = imgName;
-				imgName = UtilMgr.GetTeamEmblem (ALL [(i * 4) + 1]);
+			imgName = UtilMgr.GetTeamEmblem (RImage[Count[i]]);
 				NEW.transform.GetChild (1).GetComponent<UISprite> ().spriteName = imgName;
-				NEW.transform.GetChild (2).GetComponent<UILabel> ().text = ALL [(i * 4) + 2];
-				NEW.transform.GetChild (4).GetComponent<UILabel> ().text = ALL [(i * 4) + 3];
-				NEW.transform.GetChild (5).GetComponent<UILabel> ().text = Code [(i)];
+			NEW.transform.GetChild (2).GetComponent<UILabel> ().text = interActive [Count[i]];
+			NEW.transform.GetChild (4).GetComponent<UILabel> ().text = Score [Count[i]];
+			NEW.transform.GetChild (5).GetComponent<UILabel> ().text = Code [Count[i]];
 				//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 				NEW.gameObject.SetActive (true);
 				//Debug.Log(NEW);
 				//Debug.Log(NEW.transform.parent);
-
+			News.Add(NEW);
 				transform.FindChild("BtnRight").FindChild("Scroll").GetComponent<UIScrollView>().ResetPosition();
-			}
+
 		}
 		Starts = false;
 	}
 	public void onhit(){
-
-
+		
+		
 		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
-
+		
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
-	
+		
 		if (ING) {
 			if (B) {
 				B = false;
 				transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
 				w = false;
 				LEFT = true;
-
+				
 			} else {
 				B = true;
 				transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
 				LEFT = false;
-
+				
 			}
 			if(what){
 				what = false;
@@ -173,29 +308,28 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				what = true;
 				ING = false;
 				D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
-
-			//	for (int i = 0; i<MaxGame; i++) {
-					//Debug.Log("iiiiiiii");
-			
+				
+				//    for (int i = 0; i<MaxGame; i++) {
+				//Debug.Log("iiiiiiii");
+				
 				mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "getdata"));
-					NetMgr.GetScheduleMore (null,
-					                        UserMgr.UserInfo.teamSeq,
-					                        mScheduleEvent);
-
-					//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
-
-					//Debug.Log(NEW);
-					//Debug.Log(NEW.transform.parent);
+				NetMgr.GetScheduleAll (
+					mScheduleEvent);
+				
+				//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
+				
+				//Debug.Log(NEW);
+				//Debug.Log(NEW.transform.parent);
 				//}
-
-
-
+				
+				
+				
 				StartCoroutine (rolling ());
 			}
 		}
 	}
 	IEnumerator rolling(){
-	if (!ING) {
+		if (!ING) {
 			for (int i = 0; i<5; i++) {
 				if (what) {
 					transform.GetChild (0).transform.localPosition -= (new Vector3 (720 / 5, 0, 0));
@@ -203,14 +337,14 @@ public class ScriptMainMenuRight : MonoBehaviour {
 					transform.GetChild (0).transform.localPosition += (new Vector3 (720 / 5, 0, 0));
 				}
 				yield return new WaitForSeconds (0.02f);
-		
+				
 			}
 			ING = true;
 		}
 	}
 	public void off(){
 		if (nonoff) {
-
+			
 			if (B) {
 				what = false;
 				ING  = false;
@@ -220,19 +354,19 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}
 			Debug.Log ("off");
 			if (ING) {
-		
+				
 				Debug.Log ("ing");
 				if (!w) {
 					Debug.Log ("!B");
 					w = true;
 					Debug.Log (transform.GetChild (1));
 					transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
-
+					
 					LEFT = true;
 				} else {
-			
+					
 					transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
-			
+					
 					LEFT = false;
 					w = false;
 				}
@@ -240,7 +374,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 					LEFT = false;
 					transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
 				} else {
-
+					
 					if (what) {
 						transform.GetChild (1).transform.localPosition = (new Vector3 (-720, 0, 0));
 					} else {
@@ -252,13 +386,13 @@ public class ScriptMainMenuRight : MonoBehaviour {
 					}
 					LEFT = true;
 				}
-
+				
 			}
 		}
-
+		
 	}
 	public void ALLBack(){
-//		BntMenu = transform.parent.parent.parent.FindChild ("Top").FindChild("Panel").FindChild ("BtnMenu").gameObject;
+		//        BntMenu = transform.parent.parent.parent.FindChild ("Top").FindChild("Panel").FindChild ("BtnMenu").gameObject;
 		Debug.Log (B);
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		if (B) {
@@ -280,24 +414,24 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	public void ss(){
 		transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
 	}
-
+	
 	public bool IsOpen{
 		get{return what;}
 	}
 	public void buttening(int i){
-
+		
 		//}
 		//Debug.Log (i+" and "+a);
-
+		
 		UserMgr.Schedule = mScheduleEvent.Response.data [when+(i-1)];
 		if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
 			//non
 			ScriptMainTop.LandingState =1;
-			AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+			AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);    
 		} else {
 			//Startgame();
 			ScriptMainTop.LandingState =2;
-			AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+			AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);    
 		}
 		
 	}

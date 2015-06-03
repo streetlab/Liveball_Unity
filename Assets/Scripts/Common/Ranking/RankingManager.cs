@@ -50,7 +50,7 @@ public class RankingManager : MonoBehaviour {
 				mGetRankEvent.Response.data.ranking [i].rankValue.ToString() + " 회";
 			if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
-				StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
+				StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 			}	}
 		mGetRankEvent = new GetRankEvent (new EventDelegate (this, "Set3"));
 		NetMgr.GetUserRankingDailyGold (UserMgr.UserInfo.memSeq,mGetRankEvent);
@@ -72,7 +72,7 @@ public class RankingManager : MonoBehaviour {
 				UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.ranking [i].rankValue) + " Gold";
 			if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
-				StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
+				StartCoroutine (GetImage (www, D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 			}	}
 		mGetRankEvent = new GetRankEvent (new EventDelegate (this, "Set4"));
 		NetMgr.GetUserRankingDailyForecast (UserMgr.UserInfo.memSeq,mGetRankEvent);
@@ -95,7 +95,7 @@ public class RankingManager : MonoBehaviour {
 					
 
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
-				StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
+				StartCoroutine (GetImage (www, D.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 
 				
 			}
@@ -125,6 +125,8 @@ public class RankingManager : MonoBehaviour {
 		D.transform.FindChild ("Label").GetComponent<UILabel> ().color = G;
 		M.transform.FindChild ("Label").GetComponent<UILabel> ().color = G;
 		W.transform.FindChild ("List").transform.localPosition = new Vector2 (212,-31);
+		W.transform.FindChild ("List").gameObject.SetActive (false);
+		W.transform.FindChild ("List").gameObject.SetActive (true);
 		D.transform.FindChild ("List").transform.localPosition = new Vector2 (720,-31);
 		M.transform.FindChild ("List").gameObject.SetActive (false);
 	}
@@ -137,6 +139,8 @@ public class RankingManager : MonoBehaviour {
 		M.transform.FindChild ("Label").GetComponent<UILabel> ().color = G;
 		W.transform.FindChild ("List").transform.localPosition = new Vector2 (932,-31);
 		D.transform.FindChild ("List").transform.localPosition = new Vector2 (0,-31);
+		D.transform.FindChild ("List").gameObject.SetActive (false);
+		D.transform.FindChild ("List").gameObject.SetActive (true);
 		M.transform.FindChild ("List").gameObject.SetActive (false);
 	}
 	public void My(){

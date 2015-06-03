@@ -8,6 +8,6 @@ public class rankbutten : MonoBehaviour {
 //		strings = gameObject.ToString ().ToCharArray ();
 //		num = int.Parse(strings [3].ToString ());
 //		Debug.Log ("rankbutten : "+num);
-		transform.parent.parent.parent.parent.parent.parent.GetComponent<Rankcontrol> ().GoMainScens (transform.FindChild("name").GetComponent<UILabel>().text);
+		transform.parent.parent.parent.parent.parent.parent.GetComponent<Rankcontrol> ().GoMainScens (transform.FindChild("name").GetComponent<UILabel>().text,transform.FindChild("Seq").GetComponent<UILabel>().text);
 	}
 }

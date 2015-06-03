@@ -91,7 +91,8 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
 		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
 		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
-
+		transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetHitter ();
+		transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetPitcher ();
 		//Progressing
 		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
 		NetMgr.GetGameSposDetailBoard (mEventDetail);
@@ -118,10 +119,11 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		BG_G.transform.FindChild ("Num").gameObject.SetActive (true);
 		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (true);
 		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (true);
-		
+
+	
 		ScriptMainTop.DetailBoard = eventDetail.Response.data;
-		
-		
+	
+
 		SetAwayScore (ScriptMainTop.DetailBoard.awayScore);
 		SetHomeScore (ScriptMainTop.DetailBoard.homeScore);
 		SetAwayRHEB (ScriptMainTop.DetailBoard.infoBoard[0]);
