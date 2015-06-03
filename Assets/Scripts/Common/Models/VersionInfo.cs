@@ -79,4 +79,26 @@ public class VersionInfo {
 			_FILE_SVR = value;
 		}
 	}
+
+	public string _GAME_SVR;
+
+	public string GAME_SVR {
+		get {
+			return _GAME_SVR;
+		}
+		set {
+			_GAME_SVR = value;
+		}
+	}
+
+	public string _GAME_PORT;
+
+	public string GAME_PORT {
+		get {
+			return _GAME_PORT;
+		}
+		set {
+			_GAME_PORT = value;
+		}
+	}
 }

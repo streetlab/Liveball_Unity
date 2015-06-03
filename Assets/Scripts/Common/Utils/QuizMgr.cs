@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class QuizMgr : MonoBehaviour {
 
 	ScriptMainTop mMainTop;
+	ScriptMatchPlaying mMatchPlaying;
 
 	int sequenceQuiz;
 	public static int SequenceQuiz {
@@ -83,11 +84,15 @@ public class QuizMgr : MonoBehaviour {
 	public static void EnterMain(ScriptMainTop script)
 	{
 		Instance.mMainTop = script;
+		Instance.mMatchPlaying = Instance.mMainTop.GetComponent<ScriptMainTop>()
+			.mHighlight.transform.FindChild("MatchPlaying").GetComponent<ScriptMatchPlaying>();
+
 	}
 
 	public static void LeaveMain()
 	{
 		Instance.mMainTop = null;
+		Instance.mMatchPlaying = null;
 	}
 
 	public static void InitBetting()
@@ -158,6 +163,54 @@ public class QuizMgr : MonoBehaviour {
 	{
 		scriptQuizResult.GetComponent<PlayMakerFSM>().SendEvent("OpenResultEvent");
 		return scriptQuizResult.GetComponent<ScriptQuizResult> ().Init (simpleEvent.Response.data);
+	}
+
+	public static void SocketReceived(SocketMsgInfo msgInfo){
+		if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_JOIN)){
+			if(Instance.mMatchPlaying != null){
+				Instance.mMatchPlaying.CompleteJoin();
+			}
+		} else if(msgInfo.type.Equals(Constants.POST_GAME_START)){
+//			Debug.Log("UserMgr.Schedule.gameSeq is "+UserMgr.Schedule.gameSeq);
+//			if(UserMgr.Schedule != null){
+//				Debug.Log("msgInfo.info.gameSeq is "+msgInfo.info.gameSeq);
+//				if(UserMgr.Schedule.gameSeq == int.Parse(msgInfo.info.gameSeq)){
+//					AutoFade.LoadLevel("SceneGame");
+//				}
+//			}
+		} else if(msgInfo.type.Equals(Constants.POST_GAME_STATUS)){
+//			if(Instance.mMainTop != null){
+//				bool hasQuiz = false;
+//				if(msgInfo.info.quiz != null
+//				   && msgInfo.info.quiz.Equals("1")){
+//					if(QuizMgr.IsBettingOpended){
+//						MoreQuiz = true;
+//						//						Debug.Log ("MoreQuiz");
+//					} else{
+//						HasQuiz = true;
+//						//						Debug.Log ("HasQuiz");
+//					}
+//				}
+//				
+//				if(msgInfo.info.inning != null
+//				   && msgInfo.info.inning.Equals("1")){
+//					NeedsDetailInfo = true;
+//				} else if(msgInfo.info.score != null
+//				          && msgInfo.info.score.Equals("1")){
+//					NeedsDetailInfo = true;
+//				} else{
+//					NeedsDetailInfo = false;
+//				}
+//				
+//				//				Debug.Log ("RequestBoardInfo");
+//				Instance.mMainTop.RequestBoardInfo();
+//			}
+		} else if(msgInfo.type.Equals(Constants.POST_QUIZ_RESULT)
+		          || msgInfo.type.Equals(Constants.POST_QUIZ_CANCEL)){
+//			if(Instance.mMainTop != null){
+//				Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.info.quizListSeq));
+//			}
+		}
 	}
 
 	public static void NotiReceived(NotiMsgInfo msgInfo){

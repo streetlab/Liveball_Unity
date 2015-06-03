@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
-
-
+using System.Net;
+using System.Net.Sockets;
+using System;
+using System.Text;
+using System.Collections.Generic;
 
 public class NetMgr : MonoBehaviour{
 
@@ -10,6 +13,15 @@ public class NetMgr : MonoBehaviour{
 	BaseEvent mBaseEvent;
 	bool mIsUpload;
 	bool mIsLoading;
+		
+	private static Socket mSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+	private static AsyncCallback mConnectionCallback = new AsyncCallback(Instance.HandleConnect);
+	private static AsyncCallback mSendingCallback = new AsyncCallback(Instance.HandleDataSend);
+	private static AsyncCallback mReceivingCallback = new AsyncCallback(Instance.HandleDataReceive);
+	private static byte[] mReceiveBuffer = new byte[8142];
+	private static byte[] mSendBuffer = new byte[8142];
+	private static List<SocketMsgInfo> mSocketMsgList = new List<SocketMsgInfo>();
+	private static bool mRecvSemaphore;
 
 	private static NetMgr _instance = null;
 	public static NetMgr Instance
@@ -66,7 +78,7 @@ public class NetMgr : MonoBehaviour{
 		{
 //			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
-			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "종료하기", ConnectHandler);
+			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "타이틀로 가기", ConnectHandlerForHttp);
 			mWWW = www;
 			mBaseEvent = baseEvent;
 			mIsUpload = isUpload;
@@ -76,13 +88,14 @@ public class NetMgr : MonoBehaviour{
 		UtilMgr.DismissLoading ();
 	}
 
-	void ConnectHandler(DialogueMgr.BTNS btn){
+	void ConnectHandlerForHttp(DialogueMgr.BTNS btn){
 		if(btn == DialogueMgr.BTNS.Btn1){
 			StartCoroutine(webAPIProcess(mWWW, mBaseEvent, mIsLoading, mIsUpload));
 //			mWWW = null;
 //			mBaseEvent = null;
 		} else{
-			Application.Quit();
+//			Application.Quit();
+			AutoFade.LoadLevel("SceneLogin");
 		}
 
 	}
@@ -150,9 +163,8 @@ public class NetMgr : MonoBehaviour{
 //			httpUrl = Constants.QUERY_SERVER_HOST;
 		}
 
-	
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
-			//WWW www = new WWW (Constants.UPLOAD_TEST_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
@@ -185,6 +197,64 @@ public class NetMgr : MonoBehaviour{
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
 
+	private void tcpAPIProcessEvent(BaseSocketRequest request, BaseEvent baseEvent, bool showLoading)
+	{
+		if(mSocket == null && !mSocket.Connected){
+//			Instance.socketJoinEvent(baseEvent);
+			//req reconnect;
+			return;
+		}
+
+		string reqParam = "";
+		string httpUrl = "";
+		if (request != null) {
+			reqParam = request.ToRequestString();
+		} else {
+			
+		}
+		
+		//		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		WWW www = new WWW(reqParam);
+		
+		Debug.Log (reqParam);
+		if(UtilMgr.OnPause){
+			Debug.Log("Request is Canceled cause OnPause");
+			//			return;
+		}
+		
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
+	}
+
+	private void socketJoinEvent(){
+		mSocket.Close();
+		mSocket = null;
+//		if(mSocket == null || !mSocket.Connected)
+		mSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+		try{
+			mSocket.BeginConnect(Constants.GAME_SERVER_HOST, Constants.GAME_SERVER_PORT,
+				                     mConnectionCallback, null);
+		} catch(Exception e){
+			Debug.Log ("beginConnect : "+e.Message);
+			DialogueMgr.ShowDialogue("서버 연결 오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
+			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "타이틀로 가기", ConnectHandlerForTcp);
+		}				
+	}
+
+	void ConnectHandlerForTcp(DialogueMgr.BTNS btn){
+		if(btn == DialogueMgr.BTNS.Btn1){
+			socketJoinEvent();
+		} else{
+			//			Application.Quit();
+			AutoFade.LoadLevel("SceneLogin");
+		}
+		
+	}
+
+	private void socketExitEvent(BaseEvent baseEvent){
+
+	}
+
 	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new LoginRequest(loginInfo), baseEvent);
@@ -204,21 +274,22 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent (new GetUserRankingDailyForecast (memSeq), baseEvent);
 	}
-
+	
 	public static void GetUserRankingDailyGold(int memSeq,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetUserRankingDailyGold (memSeq), baseEvent);
 	}
-
+	
 	public static void GetUserRankingWeeklyForecast(int memSeq,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetUserRankingWeeklyForecast (memSeq), baseEvent);
 	}
-
+	
 	public static void GetUserRankingWeeklyGold(int memSeq,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetUserRankingWeeklyGold (memSeq), baseEvent);
 	}
+
 
 	public static void GetGameSposDetailBoard(BaseEvent baseEvent)
 	{
@@ -252,13 +323,15 @@ public class NetMgr : MonoBehaviour{
 
 	public static void ExitGame(BaseEvent baseEvent)
 	{
-		Debug.Log("ExitGame");
-		Instance.webAPIProcessEvent (new ExitGameRequest (), baseEvent);
+//		Instance.webAPIProcessEvent (new ExitGameRequest (), baseEvent);
+		Instance.socketExitEvent(baseEvent);
 	}
 
 	public static void JoinGame(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new JoinGameRequest (), baseEvent);
+//		Instance.webAPIProcessEvent (new JoinGameRequest (), baseEvent);
+//		Instance.tcpAPIProcessEvent(new JoinGameSocketRequest(), baseEvent, true);
+		Instance.socketJoinEvent();
 	}
 
 	public static void JoinQuiz(JoinQuizInfo joinInfo, BaseEvent baseEvent)
@@ -354,5 +427,106 @@ public class NetMgr : MonoBehaviour{
 	public static void GetEvents(BaseEvent baseEvent)
 	{
 		Instance.webAPINanooEvent(new GetEventsRequest(), baseEvent, true);
+	}
+
+	public static void SendSocketMsg(String msg) {
+		mSendBuffer = Encoding.UTF8.GetBytes(msg);
+
+		if(mSocket == null || !mSocket.Connected){
+			Instance.socketJoinEvent();
+			Debug.Log("reconnect socket");
+			return;
+		}
+
+
+		try {
+			mSocket.BeginSend(mSendBuffer, 0, mSendBuffer.Length, SocketFlags.None,
+			                  mSendingCallback, null);
+		} catch (Exception ex) {
+			Debug.Log("전송 중 오류 발생! : "+ ex.Message);
+		}
+	}
+
+	private void HandleConnect(IAsyncResult ar){
+		Debug.Log("Connection Succeed!");
+		
+//		if(mReceivingCallback == null)
+//			mReceivingCallback = new AsyncCallback(HandleDataReceive);
+
+		mSocket.BeginReceive(mReceiveBuffer, 0, mReceiveBuffer.Length, SocketFlags.None, mReceivingCallback, null);
+
+		SendSocketMsg(new JoinGameSocketRequest().ToRequestString());
+	}
+
+	private void HandleDataReceive(IAsyncResult ar) {
+		Int32 recvBytes = 0;
+		try{
+			recvBytes = mSocket.EndReceive(ar);
+		} catch{
+			Debug.Log("recv error");
+			return;
+		}
+
+		// 수신받은 자료의 크기가 1 이상일 때에만 자료 처리
+		if ( recvBytes > 0 ) {
+			mRecvSemaphore = true;
+
+			Byte[] msgByte = new Byte[recvBytes];
+			Array.Copy(mReceiveBuffer, msgByte, recvBytes);
+			string msg = Encoding.UTF8.GetString(msgByte);
+			
+			// 받은 메세지를 출력
+			Debug.Log("Received : "+ msg);
+
+			SocketMsgInfo msgInfo = JsonFx.Json.JsonReader.Deserialize<SocketMsgInfo>(msg);
+			mSocketMsgList.Add(msgInfo);
+//			QuizMgr.SocketReceived(msgInfo);
+//			if(msgInfo.type == ConstantsSocketType.RES.TYPE_JOIN){
+//
+//			} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_ALIVE){
+//				SendSocketMsg(new AliveRequest().ToRequestString());
+//			}
+//			else{
+//
+//			}
+
+			mRecvSemaphore = false;
+		}
+
+		try {
+			mSocket.BeginReceive(mReceiveBuffer, 0, mReceiveBuffer.Length, SocketFlags.None, mReceivingCallback, null);
+		} catch (Exception ex) {
+			// 예외가 발생하면 mReceiveBuffer 종료한다mReceiveBuffer("자료 수신 대기 도중 오류 발생! 메세지: "+ ex.Message);
+			return;
+		}
+	}
+
+	private void HandleDataSend(IAsyncResult ar){		
+		// 보낸 바이트 수를 저장할 변수 선언
+		Int32 sentBytes;
+
+		try {
+			// 자료를 전송하고, 전송한 바이트를 가져옵니다.
+			sentBytes = mSocket.EndSend(ar);
+		} catch (Exception ex) {
+			// 예외가 발생하면 예외 정보 출력 후 함수를 종료한다.
+			Debug.Log("자료 송신 도중 오류 발생! 메세지: "+ ex.Message);
+			return;
+		}
+		
+		if ( sentBytes > 0 ) {
+			// 여기도 마찬가지로 보낸 바이트 수 만큼 배열 선언 후 복사한다.
+			Byte[] msgByte = new Byte[sentBytes];
+			Array.Copy(mSendBuffer, msgByte, sentBytes);
+			
+			Debug.Log("Sending : "+ Encoding.UTF8.GetString(msgByte));
+		}
+	}
+
+	void Update(){
+		if(mSocketMsgList.Count > 0 && !mRecvSemaphore){
+			QuizMgr.SocketReceived(mSocketMsgList[0]);
+			mSocketMsgList.RemoveAt(0);
+		}
 	}
 }

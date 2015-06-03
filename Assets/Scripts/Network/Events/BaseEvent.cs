@@ -12,10 +12,15 @@ public class BaseEvent {
 	protected bool checkError()
 	{
 		if (response.code > 0) {
+			if(response.code == 100){
+				AutoFade.LoadLevel("SceneLogin");
+				return true;
+			}
+
 			Debug.Log("Response Error : " + response.message);
-			DialogueMgr.ShowDialogue("Error", response.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue("서버에러", response.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			return true;
-		}
+		} 
 		return false;
 	}
 

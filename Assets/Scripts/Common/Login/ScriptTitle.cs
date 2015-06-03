@@ -48,6 +48,8 @@ public class ScriptTitle : MonoBehaviour {
 //		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;
 		Constants.IMAGE_SERVER_HOST = mVersionEvent.Response.data.FILE_PATH;
 		Constants.QUERY_SERVER_HOST = mVersionEvent.Response.data.APPS_SVR;//[0].serviceURL;
+		Constants.GAME_SERVER_HOST = mVersionEvent.Response.data.GAME_SVR;
+		Constants.GAME_SERVER_PORT = int.Parse(mVersionEvent.Response.data.GAME_PORT);
 	}
 
 	public void Init()

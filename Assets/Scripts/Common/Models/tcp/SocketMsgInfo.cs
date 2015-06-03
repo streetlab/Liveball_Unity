@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NotiMsgInfo {
+public class SocketMsgInfo {
 	string _title;
 
 	public string title {
@@ -24,9 +24,9 @@ public class NotiMsgInfo {
 		}
 	}
 
-	string _type;
+	int _type;
 
-	public string type {
+	public int type {
 		get {
 			return _type;
 		}
@@ -35,9 +35,9 @@ public class NotiMsgInfo {
 		}
 	}
 
-	string _code;
+	int _code;
 
-	public string code {
+	public int code {
 		get {
 			return _code;
 		}
@@ -46,14 +46,14 @@ public class NotiMsgInfo {
 		}
 	}
 
-	NotiQuizInfo _info;
+	NotiQuizInfo _data;
 
-	public NotiQuizInfo info {
+	public NotiQuizInfo data {
 		get {
-			return _info;
+			return _data;
 		}
 		set {
-			_info = value;
+			_data = value;
 		}
 	}
 

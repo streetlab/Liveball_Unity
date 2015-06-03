@@ -32,7 +32,6 @@ public class Itemcontrol : MonoBehaviour {
 	}
 	
 	void Start () {
-		Debug.Log("start1");
 		#if(UNITY_ANDROID)
 		#else
 		SoomlaStore.Initialize(new ScriptItemAssets());
@@ -64,18 +63,14 @@ public class Itemcontrol : MonoBehaviour {
 		
 		//getcard = new GetCardInvenEvent (new EventDelegate (this, "card"));
 		//NetMgr.GetCardInven (getcard);
-		//Debug.Log("start2");
 	}
 
 
 	void ruby(){
 	
-		Debug.Log ("UserMgr.UserInfo.ppCount : " + UserMgr.UserInfo.ppCount);
-		if (UserMgr.UserInfo.ppCount > 1) {
-			temp1 = (GameObject)Instantiate (imageC1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
-		} else {
-			temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
-		}
+
+
+		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 		temp1.transform.parent = origin1.transform.parent;
 		temp1.transform.localScale = new Vector3 (1, 1, 1);
 		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);
@@ -268,6 +263,11 @@ public class Itemcontrol : MonoBehaviour {
 		//RequestIAP.Response.data.
 //		GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
 //		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
+		Debug.Log("Goods cnt : "+StoreInfo.Goods.Count);
+		foreach(VirtualGood vg in StoreInfo.Goods){
+			Debug.Log("Goods name : "+vg.Name);
+		}
+
 		StoreInventory.BuyItem(itemcode);
 		//}
 		//}
