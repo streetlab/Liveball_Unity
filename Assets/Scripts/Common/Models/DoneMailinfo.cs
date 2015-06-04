@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class DoneMailinfo {
 	
-	private int _outMessage;
-	public int outMessage {
+	private string _outMessage;
+	public string outMessage {
 		get {
 			return _outMessage;
 		}
