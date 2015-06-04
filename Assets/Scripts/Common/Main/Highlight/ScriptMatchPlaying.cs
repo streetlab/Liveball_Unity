@@ -146,13 +146,13 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	public void InitQuizFirst()
 	{
-		Debug.Log("list Cnt : "+mEventProgQuiz.Response.data.quiz.Count);
+//		Debug.Log("list Cnt : "+mEventProgQuiz.Response.data.quiz.Count);
 		mList.GetComponent<UIDraggablePanel2> ().Init (mEventProgQuiz.Response.data.quiz.Count,
 			delegate(UIListItem item, int index) {
 
 			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
 			QuizInfo quizInfo = mEventProgQuiz.Response.data.quiz[index];
-			Debug.Log("index : "+index+", type : "+quizInfo.typeCode);
+//			Debug.Log("index : "+index+", type : "+quizInfo.typeCode);
 
 			if (quizInfo.typeCode.Contains ("_QZA_")) {
 			} else {
@@ -247,6 +247,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	public void AddQuizList(QuizInfo quizInfo)
 	{	
+		Debug.Log("AddQuizList");
 		mAccumulatedY = 0f;
 		//		mPosGuide = 0f;
 		mPosGuide = (122 - 30f) / 2f;
@@ -269,30 +270,18 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mGameRound = quizInfo.gameRound;
 		mInningType = quizInfo.inningType;
 
-		mQuizListItems[1].transform.FindChild("Round").gameObject.SetActive(false);
-		mQuizListItems[0].transform.FindChild("Round").gameObject.SetActive(true);
-		mQuizListItems[0].transform.FindChild("Round").FindChild("LblRound")
-			.GetComponent<UILabel>().text = ""+mGameRound;
-		
-//		GameObject obj = Instantiate(itemRound, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-//		mQuizListItems.Insert(0, obj);
-//		RepositionItems(obj.GetComponent<BoxCollider2D> ().size.y);
-//		
-//		obj.transform.parent = mList.transform;//.FindChild("Grid");
-//		obj.transform.localScale = new Vector3(1f, 1f, 1f);
-		if(mInningType == 0){
-			mQuizListItems[0].transform.FindChild("Round").FindChild("SprArrow")
-				.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
-		}else{
-			mQuizListItems[0].transform.FindChild("Round").FindChild("SprArrow")
-				.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
-		}
+//		mQuizListItems[1].transform.FindChild("Round").gameObject.SetActive(false);
+//		mQuizListItems[0].transform.FindChild("Round").gameObject.SetActive(true);
+//		mQuizListItems[0].transform.FindChild("Round").FindChild("LblRound")
+//			.GetComponent<UILabel>().text = ""+mGameRound;
 
-//		
-//		obj.transform.FindChild("LblRound").GetComponent<UILabel>().text = mGameRound + "";
-//		obj.transform.localPosition = new Vector3(0f, 0f, 0f);
-		
-		mList.GetComponent<UIScrollView> ().ResetPosition ();
+//		if(mInningType == 0){
+//			mQuizListItems[0].transform.FindChild("Round").FindChild("SprArrow")
+//				.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
+//		}else{
+//			mQuizListItems[0].transform.FindChild("Round").FindChild("SprArrow")
+//				.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
+//		}
 	}
 	
 	//	void RefreshQuizListDatas()

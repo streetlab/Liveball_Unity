@@ -605,11 +605,9 @@ public class ScriptMainTop : MonoBehaviour {
 				QuizMgr.MoreQuiz = true;
 			}
 			AddQuizIntoList ();
-
 			if(!QuizMgr.IsBettingOpended)
 				OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
 //		}
-
 
 
 

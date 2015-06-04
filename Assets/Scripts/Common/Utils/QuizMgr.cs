@@ -166,7 +166,7 @@ public class QuizMgr : MonoBehaviour {
 	}
 
 	public static void SocketReceived(SocketMsgInfo msgInfo){
-		if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_JOIN)){
+		if(msgInfo.type == ConstantsSocketType.RES.TYPE_JOIN){
 			if(Instance.mMatchPlaying != null){
 				Instance.mMatchPlaying.CompleteJoin();
 			}
@@ -178,38 +178,40 @@ public class QuizMgr : MonoBehaviour {
 //					AutoFade.LoadLevel("SceneGame");
 //				}
 //			}
-		} else if(msgInfo.type.Equals(Constants.POST_GAME_STATUS)){
-//			if(Instance.mMainTop != null){
+		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
+			if(Instance.mMainTop != null){
 //				bool hasQuiz = false;
-//				if(msgInfo.info.quiz != null
-//				   && msgInfo.info.quiz.Equals("1")){
-//					if(QuizMgr.IsBettingOpended){
-//						MoreQuiz = true;
-//						//						Debug.Log ("MoreQuiz");
-//					} else{
-//						HasQuiz = true;
-//						//						Debug.Log ("HasQuiz");
-//					}
-//				}
-//				
-//				if(msgInfo.info.inning != null
-//				   && msgInfo.info.inning.Equals("1")){
-//					NeedsDetailInfo = true;
-//				} else if(msgInfo.info.score != null
-//				          && msgInfo.info.score.Equals("1")){
-//					NeedsDetailInfo = true;
-//				} else{
-//					NeedsDetailInfo = false;
-//				}
-//				
-//				//				Debug.Log ("RequestBoardInfo");
-//				Instance.mMainTop.RequestBoardInfo();
-//			}
+				if(msgInfo.data.quiz != null
+				   && msgInfo.data.quiz.Equals("1")){
+					if(QuizMgr.IsBettingOpended){
+						MoreQuiz = true;
+												Debug.Log ("MoreQuiz");
+					} else{
+						HasQuiz = true;
+												Debug.Log ("HasQuiz");
+					}
+				}
+				
+				if(msgInfo.data.inning != null
+				   && msgInfo.data.inning.Equals("1")){
+					NeedsDetailInfo = true;
+				} else if(msgInfo.data.score != null
+				          && msgInfo.data.score.Equals("1")){
+					NeedsDetailInfo = true;
+				} else{
+					NeedsDetailInfo = false;
+				}
+				
+				//				Debug.Log ("RequestBoardInfo");
+				Instance.mMainTop.RequestBoardInfo();
+			}
 		} else if(msgInfo.type.Equals(Constants.POST_QUIZ_RESULT)
 		          || msgInfo.type.Equals(Constants.POST_QUIZ_CANCEL)){
 //			if(Instance.mMainTop != null){
 //				Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.info.quizListSeq));
 //			}
+		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_ALIVE){
+			NetMgr.SendSocketMsg(new AliveRequest().ToRequestString());
 		}
 	}
 

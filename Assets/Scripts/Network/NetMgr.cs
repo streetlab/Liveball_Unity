@@ -136,13 +136,13 @@ public class NetMgr : MonoBehaviour{
 		}
 
 		string host = Constants.CHECK_SERVER_HOST;
-		if(!isTest){
+		if(isTest){
 			host = Constants.CHECK_TEST_SERVER_HOST;
 			Debug.Log("Send to Test Server");
 		} else{
 			Debug.Log("Send to Real Server");
 		}
-		host = Constants.CHECK_TEST_SERVER_HOST;
+//		host = Constants.CHECK_TEST_SERVER_HOST;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		

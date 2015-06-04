@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 
 
 public class ScriptTitle : MonoBehaviour {
@@ -26,8 +27,19 @@ public class ScriptTitle : MonoBehaviour {
 
 	void Start()
 	{
-//		PlayerPrefs.SetString (Constants.PrefEmail, "");
-//		PlayerPrefs.SetString (Constants.PrefPwd, "");
+		#if(UNITY_EDITOR)
+		if(EditorUtility.DisplayDialog("Delete player preferences",
+		                               "Are you sure delete player preferences?",
+		                               "Yes",
+		                               "No")){
+//			PlayerPrefs.SetString (Constants.PrefEmail, "");
+//			PlayerPrefs.SetString (Constants.PrefPwd, "");
+			PlayerPrefs.DeleteAll();
+			Init ();
+		} else
+			Init ();
+		return;
+		#endif
 		Init ();
 //		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
 	}

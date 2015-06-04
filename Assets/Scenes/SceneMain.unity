@@ -11635,8 +11635,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 179363052}
   - 114: {fileID: 179363054}
-  - 114: {fileID: 179363053}
   - 114: {fileID: 179363055}
+  - 114: {fileID: 179363053}
   m_Layer: 0
   m_Name: ListHighlight
   m_TagString: Untagged
@@ -11665,7 +11665,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 179363051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81807633ea807d4c8e3fff7e10c6000, type: 3}
+  m_Script: {fileID: 11500000, guid: e929446003480481aae85be5ebce2a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
@@ -11679,11 +11679,16 @@ MonoBehaviour:
   horizontalScrollBar: {fileID: 0}
   verticalScrollBar: {fileID: 0}
   showScrollBars: 1
-  customMovement: {x: 1, y: 0}
+  customMovement: {x: 0, y: 0}
   contentPivot: 0
   scale: {x: 0, y: 0, z: 0}
   relativePositionOnReset: {x: 0, y: 0}
   centerOnChild: {fileID: 0}
+  Arrangement: 0
+  CellWidth: 720
+  CellHeight: 146
+  LineCount: 1
+  TemplatePrefab: {fileID: 100018, guid: 102dc5c51a196458bb65c09873d9098b, type: 2}
 --- !u!114 &179363054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11720,7 +11725,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3026
+  startingRenderQueue: 3024
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -62538,7 +62543,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3033
+  startingRenderQueue: 3031
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -70481,7 +70486,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3017
+  startingRenderQueue: 3015
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -87615,7 +87620,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3023
+  startingRenderQueue: 3021
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -94287,7 +94292,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3025
+  startingRenderQueue: 3023
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -109832,7 +109837,6 @@ MonoBehaviour:
   mScoreBoard: {fileID: 397105650}
   mList: {fileID: 179363051}
   itemHitter: {fileID: 100018, guid: 102dc5c51a196458bb65c09873d9098b, type: 2}
-  itemRound: {fileID: 100014, guid: ac8820ab178754007b97ee10fafd0664, type: 2}
   itemPoll: {fileID: 100000, guid: 623c485b70de14ad697522d981d6fbe4, type: 2}
   itemInfo: {fileID: 100002, guid: f58daeefb556149b09739f20efb8d8be, type: 2}
   mTop: {fileID: 654317283}
@@ -126840,7 +126844,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
+  startingRenderQueue: 3014
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
