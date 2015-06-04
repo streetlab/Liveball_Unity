@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ScriptItemHitterHighlight : MonoBehaviour {
+public class ScriptItemHitterHighlight : cUIScrollListBase {
 
 	public GameObject mBG;
 	public GameObject mPhoto;
