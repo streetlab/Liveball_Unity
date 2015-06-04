@@ -201,7 +201,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}
 			aa = string.Join ("", ch.ToArray ());
 		
-			Debug.Log(aa);
+		//	Debug.Log(aa);
 			ch.Clear ();
 			for (int z = 6; z<8; z++) {
 				
@@ -424,6 +424,8 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		//Debug.Log (i+" and "+a);
 		
 		UserMgr.Schedule = mScheduleEvent.Response.data [when+(i-1)];
+		Debug.Log ("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus);
+		Debug.Log ("ScheduleInfo.GAME_READY : " + ScheduleInfo.GAME_READY);
 		if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
 			//non
 			ScriptMainTop.LandingState =1;

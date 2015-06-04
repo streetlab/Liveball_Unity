@@ -22,6 +22,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	public AudioClip mBoom;
 
+	public GameObject Landing;
 	public List<JoinQuizInfo> mListJoin = new List<JoinQuizInfo>();
 
 //	QuizInfo quizInfo;
@@ -331,6 +332,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	void SetHitter()
 	{ 
+		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.QuizInfo);
 		Transform tfHitter = mSprComb.transform.FindChild ("SprHitter");
 		string playerInfo = QuizMgr.QuizInfo.playerName + " No." + QuizMgr.QuizInfo.playerNumber;
 		tfHitter.FindChild ("LblName").GetComponent<UILabel> ().text = playerInfo;

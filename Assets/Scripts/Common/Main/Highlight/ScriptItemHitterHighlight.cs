@@ -155,6 +155,7 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 		Texture2D temp = new Texture2D (0, 0);
 		www.LoadImageIntoTexture (temp);
 		mPhoto.transform.FindChild("Panel").FindChild("Texture").GetComponent<UITexture>().mainTexture = temp;
+
 	}
 
 	void OnEnable()

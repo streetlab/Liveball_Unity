@@ -111,6 +111,7 @@ public class NetMgr : MonoBehaviour{
 		} else{
 			Debug.Log("Send to Real Server");
 		}
+		host = Constants.UPLOAD_TEST_SERVER_HOST;
 		WWW www = new WWW (host, form);
 
 		if(UtilMgr.OnPause){
@@ -135,13 +136,13 @@ public class NetMgr : MonoBehaviour{
 		}
 
 		string host = Constants.CHECK_SERVER_HOST;
-		if(isTest){
+		if(!isTest){
 			host = Constants.CHECK_TEST_SERVER_HOST;
 			Debug.Log("Send to Test Server");
 		} else{
 			Debug.Log("Send to Real Server");
 		}
-//		host = Constants.CHECK_SERVER_HOST2;
+		host = Constants.CHECK_TEST_SERVER_HOST;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		
@@ -288,6 +289,16 @@ public class NetMgr : MonoBehaviour{
 	public static void GetUserRankingWeeklyGold(int memSeq,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetUserRankingWeeklyGold (memSeq), baseEvent);
+	}
+
+	public static void GetUserMailBox(int memSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetMailboxRequest (memSeq), baseEvent);
+	}
+
+	public static void GetUserDoneMailBox(int memSeq,int mailSeq,int attachSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetDoneMailboxRequset (memSeq,mailSeq,attachSeq), baseEvent);
 	}
 
 

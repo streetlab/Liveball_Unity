@@ -114,6 +114,7 @@ public class LandingManager : MonoBehaviour {
 		test.transform.FindChild ("Playing").gameObject.SetActive (true);
 		SetPitcher ();
 		SetHitter ();
+		StartCoroutine (view());
 	}
 
 	public void Heamhome(){
@@ -127,10 +128,26 @@ public class LandingManager : MonoBehaviour {
 		test.transform.FindChild ("Playing").gameObject.SetActive (false);
 	}
 
+	IEnumerator view(){
+		yield return new WaitForSeconds (5f);
+		if(QuizMgr.QuizInfo==null)
+		Debug.Log ("null!!");
+	}
 	string Poldname = "";
 	public void SetPitcher()
 	{
 		if (ScriptMainTop.DetailBoard != null) {
+			if (ScriptMainTop.DetailBoard.player.Count > 0) {
+				
+		
+			P_RPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Name").GetComponent<UILabel> ();
+			P_RBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Batting").GetComponent<UILabel> ();		
+			P_RPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+
+
+		
+
+
 			string playerInfo = ScriptMainTop.DetailBoard.player [0].playerName + "#" + ScriptMainTop.DetailBoard.player [0].playerNumber;
 			P_RPlayersName.text = playerInfo;
 			string playerAVG = ScriptMainTop.DetailBoard.player [0].ERA;
@@ -145,34 +162,80 @@ public class LandingManager : MonoBehaviour {
 				StartCoroutine (GetImage (www, P_RPlayerImage));
 			}
 			Poldname = playerInfo;
+			}
 		}
 	}
-	void SetHitterStart(){
-	
-	}
-	string Holdname = "";
-	public void SetHitter()
+
+
+
+
+
+
+
+	public void SetHitter(QuizInfo quizInfo)
 	{ 
+
 		Debug.Log("SetHitter0");
 		if (QuizMgr.QuizInfo!=null) {
+			P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
+			P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
+			P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+			
 			Debug.Log("SetHitter1");
-			string playerInfo = QuizMgr.QuizInfo.playerName + "#" + QuizMgr.QuizInfo.playerNumber;
+			string playerInfo = quizInfo.playerName + "#" + quizInfo.playerNumber;
 			P_LPlayersName.text = playerInfo;
-			string playerAVG = ScriptMainTop.DetailBoard.player [ScriptMainTop.DetailBoard.player.Count - 1].AVG;
+			string playerAVG = quizInfo.rewardDividend;
 			P_LBatting.text = playerAVG;
-
-			string strImage = QuizMgr.QuizInfo.imageName;
+			
+			string strImage = quizInfo.imageName;
 			if(Holdname!=strImage){
-			if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0)
-				strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
-			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
-			StartCoroutine (GetImage (www, P_LPlayerImage));
+				if (quizInfo.imagePath != null && quizInfo.imagePath.Length > 0)
+					strImage =quizInfo .imagePath + quizInfo.imageName;
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+				Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+				StartCoroutine (GetImage (www, P_LPlayerImage));
 			}
 			Holdname = strImage;
 		}
 	}
 
+	string Holdname = "";
+	GetQuizEvent mEventQuiz;
+	public void SetHitter()
+	{ 
+
+		mEventQuiz = new GetQuizEvent (new EventDelegate (this, "GotQuiz"));
+		Debug.Log ("QuizMgr.SequenceQuiz : " + QuizMgr.SequenceQuiz);
+		NetMgr.GetProgressQuiz (0, mEventQuiz);
+		Debug.Log("SetHitter0");
+	
+	}
+	void GotQuiz(){
+
+
+		if (QuizMgr.QuizInfo!=null) {
+			
+			P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
+			P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
+			P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+			
+			Debug.Log("SetHitter1");
+			string playerInfo = mEventQuiz.Response.data.quiz[0].playerName + "#" + mEventQuiz.Response.data.quiz[0].playerNumber;
+			P_LPlayersName.text = playerInfo;
+			string playerAVG = mEventQuiz.Response.data.quiz[0].rewardDividend;
+			P_LBatting.text = playerAVG;
+			
+			string strImage = mEventQuiz.Response.data.quiz[0].imageName;
+			if(Holdname!=strImage){
+				if (mEventQuiz.Response.data.quiz[0].imagePath != null && mEventQuiz.Response.data.quiz[0].imagePath.Length > 0)
+					strImage = mEventQuiz.Response.data.quiz[0].imagePath + mEventQuiz.Response.data.quiz[0].imageName;
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+				Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+				StartCoroutine (GetImage (www, P_LPlayerImage));
+			}
+			Holdname = strImage;
+		}
+	}
 	void GetStartPleyer(){
 
 

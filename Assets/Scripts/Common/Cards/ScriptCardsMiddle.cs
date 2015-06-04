@@ -28,6 +28,7 @@ public class ScriptCardsMiddle : MonoBehaviour {
 	List<GameObject> cards = new List<GameObject> ();
 	GetCardInvenEvent mEvent;
 	public float countnum = 0;
+
 	void GotCardsInven(){
 		needuppoint.Clear ();
 		grade.Clear ();

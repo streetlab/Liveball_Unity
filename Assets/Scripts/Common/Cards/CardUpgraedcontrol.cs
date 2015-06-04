@@ -10,6 +10,14 @@ public class CardUpgraedcontrol : MonoBehaviour {
 		this.transform.localPosition += new Vector3 (0,UtilMgr.GetScaledPositionY (),0);
 		UtilMgr.ResizeList(gameObject);
 	}
-	
+
+	public void cardon(){
+		transform.parent.FindChild ("Card").gameObject.SetActive (true);
+		transform.parent.FindChild ("Item").gameObject.SetActive (false);
+	}
+	public void itemon(){
+		transform.parent.FindChild ("Card").gameObject.SetActive (false);
+		transform.parent.FindChild ("Item").gameObject.SetActive (true);
+	}
 
 }

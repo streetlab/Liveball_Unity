@@ -253,7 +253,7 @@ public class ScriptMainTop : MonoBehaviour {
 		InitTopInfo();
 	}
 
-	public void GoGame(string teamC){
+	public void GoGame(string teamC,string nowday){
 		
 		//bool chek = false;
 		
@@ -278,10 +278,15 @@ public class ScriptMainTop : MonoBehaviour {
 					num = System.DateTime.Now.Day+num-31;
 					num = num-System.DateTime.Now.Day;
 				}
-				if (System.DateTime.Now.Day+num == int.Parse(result)) {
+				if (int.Parse(nowday) == int.Parse(result)) {
 				//	chek = true;
+				
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == teamC) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
+						Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
+						Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
+
 						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
 							//non
 							LandingState =1;
@@ -294,6 +299,10 @@ public class ScriptMainTop : MonoBehaviour {
 						return;
 					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == teamC) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
+						Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
+						Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
+						
 						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
 							//non
 							//Nongame();
@@ -559,6 +568,7 @@ public class ScriptMainTop : MonoBehaviour {
 		Debug.Log("GotBoard");
 		DetailBoard.play = mBoardEvent.Response.data.play;
 		DetailBoard.player = mBoardEvent.Response.data.player;
+		gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().SetPitcher();
 		SetBoardInfo ();
 
 		Debug.Log("HasQuiz is "+QuizMgr.HasQuiz);
