@@ -17,10 +17,19 @@ public class PostgetButton : MonoBehaviour {
 		transform.parent.FindChild ("get").gameObject.SetActive (false);
 		transform.parent.FindChild ("com").gameObject.SetActive (true);
 
+		if (get.Response.data.userGoldenBall != null) {
+			UserMgr.UserInfo.userGoldenBall = get.Response.data.userGoldenBall;}
+		if (get.Response.data.userDiamond != null) {
+			UserMgr.UserInfo.userDiamond = get.Response.data.userDiamond;}
+		if (get.Response.data.useActiveDiamond != null) {
+			UserMgr.UserInfo.useActiveDiamond = get.Response.data.useActiveDiamond;}
+		if (get.Response.data.userRuby != null) {
+			UserMgr.UserInfo.userRuby = get.Response.data.userRuby;}
+
 		//getprofile
 
 
-		DialogueMgr.ShowDialogue ("지급 완료", get.Response.data.outMessage, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		DialogueMgr.ShowDialogue ("지급 완료", transform.parent.FindChild("Name").GetComponent<UILabel>().text+" 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		
 
 	

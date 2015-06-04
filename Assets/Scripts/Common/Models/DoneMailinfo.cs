@@ -4,25 +4,68 @@ using System.Collections.Generic;
 
 public class DoneMailinfo {
 	
-	private string _outMessage;
-	public string outMessage {
+//	private string _outMessage;
+//	public string outMessage {
+//		get {
+//			return _outMessage;
+//		}
+//		set {
+//			_outMessage = value;
+//		}
+//	}
+//	
+//
+//	private int _outCode;
+//	public int outCode {
+//		get {
+//			return _outCode;
+//		}
+//		set {
+//			_outCode = value;
+//		}
+//	}
+	string _userGoldenBall;
+	public string userGoldenBall {
 		get {
-			return _outMessage;
+			return _userGoldenBall;
 		}
 		set {
-			_outMessage = value;
+			_userGoldenBall = value;
 		}
 	}
 	
-
-	private int _outCode;
-	public int outCode {
+	// "775296",
+	string _userDiamond;
+	public string userDiamond {
 		get {
-			return _outCode;
+			return _userDiamond;
 		}
 		set {
-			_outCode = value;
+			_userDiamond = value;
 		}
 	}
+	
+	// "982892",
+	string _userRuby;
+	public string userRuby {
+		get {
+			return _userRuby;
+		}
+		set {
+			_userRuby = value;
+		}
+	}
+	
+	// "9432",
+	string _useActiveDiamond;
+	public string useActiveDiamond {
+		get {
+			return _useActiveDiamond;
+		}
+		set {
+			_useActiveDiamond = value;
+		}
+	}
+
 
 }

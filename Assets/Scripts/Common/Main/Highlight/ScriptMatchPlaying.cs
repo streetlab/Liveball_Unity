@@ -91,8 +91,9 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
 		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
 		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
-		transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetHitter ();
-		transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetPitcher ();
+	//	Debug.Log("Playing");
+		//transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetHitter ();
+
 		//Progressing
 		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
 		NetMgr.GetGameSposDetailBoard (mEventDetail);
@@ -122,7 +123,15 @@ public class ScriptMatchPlaying : MonoBehaviour {
 
 	
 		ScriptMainTop.DetailBoard = eventDetail.Response.data;
-	
+		if (ScriptMainTop.DetailBoard.player != null) {
+			if (ScriptMainTop.DetailBoard.player.Count > 0) {
+				for(int i = 0 ; i < ScriptMainTop.DetailBoard.player.Count;i++){
+				Debug.Log ("ScriptMainTop.DetailBoard : " + ScriptMainTop.DetailBoard.player[i].playerName);
+				}
+				transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetPitcher ();
+
+			}
+		}
 
 		SetAwayScore (ScriptMainTop.DetailBoard.awayScore);
 		SetHomeScore (ScriptMainTop.DetailBoard.homeScore);
@@ -134,6 +143,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	void SetProgQuiz(int quizListSeq)
 	{
+		Debug.Log ("quizListSeq : " + quizListSeq);
 		mEventProgQuiz = new GetQuizEvent (new EventDelegate (this, "InitQuizFirst"));
 		NetMgr.GetProgressQuiz (quizListSeq, mEventProgQuiz);
 	}
@@ -146,6 +156,15 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	public void InitQuizFirst()
 	{
+		if (mEventProgQuiz.Response.data != null) {
+			if(mEventProgQuiz.Response.data.quiz.Count>0){
+				Debug.Log("InitQuizFirst");
+				Debug.Log("mEventProgQuiz.Response.data.quiz[0] : " + mEventProgQuiz.Response.data.quiz[0].playerName);
+				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
+					SetHitter(mEventProgQuiz.Response.data.quiz[0]);
+			
+			}
+		}
 //		Debug.Log("list Cnt : "+mEventProgQuiz.Response.data.quiz.Count);
 		mList.GetComponent<UIDraggablePanel2> ().Init (mEventProgQuiz.Response.data.quiz.Count,
 			delegate(UIListItem item, int index) {
@@ -167,6 +186,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 				
 //				obj.transform.parent = mList.transform;//.FindChild("Grid");
 //				obj.transform.localScale = new Vector3 (1f, 1f, 1f);		
+			
 				sItem.Init (quizInfo, transform.FindChild ("ItemDetail").gameObject);
 				
 //				mPosGuide += (obj.GetComponent<BoxCollider2D> ().size.y - mPreItemSize) / 2f;

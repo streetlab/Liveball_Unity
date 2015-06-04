@@ -112,9 +112,8 @@ public class LandingManager : MonoBehaviour {
 		test.transform.FindChild ("Info").gameObject.SetActive (false);
 		test.transform.FindChild ("VS").gameObject.SetActive (false);
 		test.transform.FindChild ("Playing").gameObject.SetActive (true);
-		SetPitcher ();
-		SetHitter ();
-		StartCoroutine (view());
+
+		//StartCoroutine (view());
 	}
 
 	public void Heamhome(){
@@ -128,11 +127,7 @@ public class LandingManager : MonoBehaviour {
 		test.transform.FindChild ("Playing").gameObject.SetActive (false);
 	}
 
-	IEnumerator view(){
-		yield return new WaitForSeconds (5f);
-		if(QuizMgr.QuizInfo==null)
-		Debug.Log ("null!!");
-	}
+
 	string Poldname = "";
 	public void SetPitcher()
 	{
@@ -176,7 +171,7 @@ public class LandingManager : MonoBehaviour {
 	{ 
 
 		Debug.Log("SetHitter0");
-		if (QuizMgr.QuizInfo!=null) {
+		if (quizInfo!=null) {
 			P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
 			P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
 			P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
@@ -200,42 +195,7 @@ public class LandingManager : MonoBehaviour {
 	}
 
 	string Holdname = "";
-	GetQuizEvent mEventQuiz;
-	public void SetHitter()
-	{ 
 
-		mEventQuiz = new GetQuizEvent (new EventDelegate (this, "GotQuiz"));
-		Debug.Log ("QuizMgr.SequenceQuiz : " + QuizMgr.SequenceQuiz);
-		NetMgr.GetProgressQuiz (0, mEventQuiz);
-		Debug.Log("SetHitter0");
-	
-	}
-	void GotQuiz(){
-
-
-		if (QuizMgr.QuizInfo!=null) {
-			
-			P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
-			P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
-			P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
-			
-			Debug.Log("SetHitter1");
-			string playerInfo = mEventQuiz.Response.data.quiz[0].playerName + "#" + mEventQuiz.Response.data.quiz[0].playerNumber;
-			P_LPlayersName.text = playerInfo;
-			string playerAVG = mEventQuiz.Response.data.quiz[0].rewardDividend;
-			P_LBatting.text = playerAVG;
-			
-			string strImage = mEventQuiz.Response.data.quiz[0].imageName;
-			if(Holdname!=strImage){
-				if (mEventQuiz.Response.data.quiz[0].imagePath != null && mEventQuiz.Response.data.quiz[0].imagePath.Length > 0)
-					strImage = mEventQuiz.Response.data.quiz[0].imagePath + mEventQuiz.Response.data.quiz[0].imageName;
-				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
-				Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
-				StartCoroutine (GetImage (www, P_LPlayerImage));
-			}
-			Holdname = strImage;
-		}
-	}
 	void GetStartPleyer(){
 
 

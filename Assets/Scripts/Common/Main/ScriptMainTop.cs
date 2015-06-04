@@ -283,9 +283,9 @@ public class ScriptMainTop : MonoBehaviour {
 				
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == teamC) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-						Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
-						Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
-						Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
+					//	Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
+					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
+					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 
 						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
 							//non
@@ -299,9 +299,9 @@ public class ScriptMainTop : MonoBehaviour {
 						return;
 					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == teamC) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-						Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
-						Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
-						Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
+					//	Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
+					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
+					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 						
 						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
 							//non
@@ -568,7 +568,8 @@ public class ScriptMainTop : MonoBehaviour {
 		Debug.Log("GotBoard");
 		DetailBoard.play = mBoardEvent.Response.data.play;
 		DetailBoard.player = mBoardEvent.Response.data.player;
-		gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().SetPitcher();
+	
+	
 		SetBoardInfo ();
 
 		Debug.Log("HasQuiz is "+QuizMgr.HasQuiz);

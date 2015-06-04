@@ -10163,6 +10163,10 @@ Prefab:
       propertyPath: Ground
       value: 
       objectReference: {fileID: 975577637}
+    - target: {fileID: 192972, guid: 8231a975df905495592042a672a2d084, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8231a975df905495592042a672a2d084, type: 2}
   m_IsPrefabParent: 0
@@ -11606,7 +11610,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3024
+  startingRenderQueue: 3031
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -26201,7 +26205,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3015
+  startingRenderQueue: 3012
   mClipTexture: {fileID: 2800000, guid: f79abc22c89594b27868e5c708e860eb, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -28251,7 +28255,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: e72b476f4cb2a462d91d0093b0767656, type: 3}
   mFont: {fileID: 0}
-  mText: "\uD5EC\uC950"
+  mText: "\uC5D8\uC9C0"
   mFontSize: 30
   mFontStyle: 0
   mAlignment: 0
@@ -34526,7 +34530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &556822754
 Transform:
   m_ObjectHideFlags: 0
@@ -35105,7 +35109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &570519908
 Transform:
   m_ObjectHideFlags: 0
@@ -38825,7 +38829,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3012
   mClipTexture: {fileID: 2800000, guid: f79abc22c89594b27868e5c708e860eb, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -43423,7 +43427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &680182587
 Transform:
   m_ObjectHideFlags: 0
@@ -61737,7 +61741,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3031
+  startingRenderQueue: 3035
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -65876,7 +65880,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1039010116
 Transform:
   m_ObjectHideFlags: 0
@@ -67082,7 +67086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1068847587
 Transform:
   m_ObjectHideFlags: 0
@@ -67123,7 +67127,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: .90196085, g: .90196085, b: .90196085, a: 1}
   mPivot: 4
   mWidth: 52
   mHeight: 32
@@ -69568,7 +69572,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3015
+  startingRenderQueue: 3024
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -69861,7 +69865,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3020
+  startingRenderQueue: 3013
   mClipTexture: {fileID: 2800000, guid: f79abc22c89594b27868e5c708e860eb, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -76524,7 +76528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1251608030
 Transform:
   m_ObjectHideFlags: 0
@@ -86456,7 +86460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1430077382
 Transform:
   m_ObjectHideFlags: 0
@@ -87165,7 +87169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1445060215
 Transform:
   m_ObjectHideFlags: 0
@@ -93010,7 +93014,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3023
+  startingRenderQueue: 3030
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -96433,7 +96437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1616863302
 Transform:
   m_ObjectHideFlags: 0
@@ -100029,7 +100033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1669558160
 Transform:
   m_ObjectHideFlags: 0
@@ -103528,7 +103532,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3008
+  startingRenderQueue: 3023
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -106747,7 +106751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1780219598
 Transform:
   m_ObjectHideFlags: 0
@@ -106788,7 +106792,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: .90196085, g: .90196085, b: .90196085, a: 1}
   mPivot: 4
   mWidth: 52
   mHeight: 32
@@ -107076,7 +107080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1783884678
 Transform:
   m_ObjectHideFlags: 0
@@ -108421,7 +108425,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3001
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
@@ -108777,7 +108781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1815077347
 Transform:
   m_ObjectHideFlags: 0
@@ -108966,7 +108970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1815393716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109094,7 +109098,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3024
+  startingRenderQueue: 3021
   mClipTexture: {fileID: 2800000, guid: f79abc22c89594b27868e5c708e860eb, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -110340,7 +110344,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3022
+  startingRenderQueue: 3019
   mClipTexture: {fileID: 2800000, guid: 180ee040478a6455c9387b25d48bb131, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -114076,7 +114080,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11433284, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: mDepth
+      value: 23
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11458206, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1901180148
@@ -122459,7 +122468,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3025
+  startingRenderQueue: 3022
   mClipTexture: {fileID: 2800000, guid: f79abc22c89594b27868e5c708e860eb, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -125348,7 +125357,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3014
+  startingRenderQueue: 3023
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

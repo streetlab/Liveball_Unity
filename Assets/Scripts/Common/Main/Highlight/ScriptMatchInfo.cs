@@ -82,21 +82,21 @@ public class ScriptMatchInfo : MonoBehaviour {
 	
 	public void SetHalftime(int value)
 	{
-		UISprite up = mRound.FindChild ("Up").GetComponent<UISprite> ();
-		UISprite down = mRound.FindChild ("Down").GetComponent<UISprite> ();
-		
-		up.color = DISABLE;
-		down.color = DISABLE;
-		
-		if(value == 0)
-		{
-			up.color = YELLOW;
-		}
-		else if(value == 1)
-		{
-			down.color = YELLOW;
-		}
-
+//		UISprite up = mRound.FindChild ("Up").GetComponent<UISprite> ();
+//		UISprite down = mRound.FindChild ("Down").GetComponent<UISprite> ();
+//		
+//		up.color = DISABLE;
+//		down.color = DISABLE;
+//		
+//		if(value == 0)
+//		{
+//			up.color = YELLOW;
+//		}
+//		else if(value == 1)
+//		{
+//			down.color = YELLOW;
+//		}
+//
 
 
 
@@ -120,11 +120,30 @@ public class ScriptMatchInfo : MonoBehaviour {
 	
 	public void SetStrike(int cnt)
 	{
-		UISprite sprite1 = mStrike.FindChild ("Sprite1").GetComponent<UISprite> ();
-		UISprite sprite2 = mStrike.FindChild ("Sprite2").GetComponent<UISprite> ();
+//		UISprite sprite1 = mStrike.FindChild ("Sprite1").GetComponent<UISprite> ();
+//		UISprite sprite2 = mStrike.FindChild ("Sprite2").GetComponent<UISprite> ();
+//		
+//		sprite1.color = DISABLE;
+//		sprite2.color = DISABLE;
+//		
+//		switch(cnt)
+//		{
+//		case 2:
+//			sprite2.color = YELLOW;
+//			goto case 1;
+//		case 1:
+//			sprite1.color = YELLOW;
+//			break;
+//		}
+
+
+		UISprite sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("1").GetComponent<UISprite> ();
+		UISprite sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("2").GetComponent<UISprite> ();
 		
-		sprite1.color = DISABLE;
-		sprite2.color = DISABLE;
+		sprite1.color = NewDISABLE;
+		sprite2.color = NewDISABLE;
 		
 		switch(cnt)
 		{
@@ -135,34 +154,35 @@ public class ScriptMatchInfo : MonoBehaviour {
 			sprite1.color = YELLOW;
 			break;
 		}
-
-
-		sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("1").GetComponent<UISprite> ();
-		sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("2").GetComponent<UISprite> ();
-		
-		sprite1.color = NewDISABLE;
-		sprite2.color = NewDISABLE;
-		
-		switch(cnt)
-		{
-		case 2:
-			sprite2.color = NewRed;
-			goto case 1;
-		case 1:
-			sprite1.color = NewRed;
-			break;
-		}
 	}
 	
 	public void SetOut(int cnt)
 	{
-		UISprite sprite1 = mOut.FindChild ("Sprite1").GetComponent<UISprite> ();
-		UISprite sprite2 = mOut.FindChild ("Sprite2").GetComponent<UISprite> ();
+//		UISprite sprite1 = mOut.FindChild ("Sprite1").GetComponent<UISprite> ();
+//		UISprite sprite2 = mOut.FindChild ("Sprite2").GetComponent<UISprite> ();
+//		
+//		sprite1.color = DISABLE;
+//		sprite2.color = DISABLE;
+//		
+//		switch(cnt)
+//		{
+//		case 2:
+//			sprite2.color = RED;
+//			goto case 1;
+//		case 1:
+//			sprite1.color = RED;
+//			break;
+//		}
+
+
+
+		UISprite  sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Out").FindChild ("1").GetComponent<UISprite> ();
+		UISprite  sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Out").FindChild ("2").GetComponent<UISprite> ();
 		
-		sprite1.color = DISABLE;
-		sprite2.color = DISABLE;
+		sprite1.color = NewDISABLE;
+		sprite2.color = NewDISABLE;
 		
 		switch(cnt)
 		{
@@ -174,37 +194,44 @@ public class ScriptMatchInfo : MonoBehaviour {
 			break;
 		}
 
-
-
-	 sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Out").FindChild ("1").GetComponent<UISprite> ();
-	 sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Out").FindChild ("2").GetComponent<UISprite> ();
-		
-		sprite1.color = NewDISABLE;
-		sprite2.color = NewDISABLE;
-		
-		switch(cnt)
-		{
-		case 2:
-			sprite2.color = NewRed;
-			goto case 1;
-		case 1:
-			sprite1.color = NewRed;
-			break;
-		}
-
 	}
 	
 	public void SetBall(int cnt)
 	{
-		UISprite sprite1 = mBall.FindChild ("Sprite1").GetComponent<UISprite> ();
-		UISprite sprite2 = mBall.FindChild ("Sprite2").GetComponent<UISprite> ();
-		UISprite sprite3 = mBall.FindChild ("Sprite3").GetComponent<UISprite> ();
+
+//		UISprite sprite1 = mBall.FindChild ("Sprite1").GetComponent<UISprite> ();
+//		UISprite sprite2 = mBall.FindChild ("Sprite2").GetComponent<UISprite> ();
+//		UISprite sprite3 = mBall.FindChild ("Sprite3").GetComponent<UISprite> ();
+//		
+//		sprite1.color = DISABLE;
+//		sprite2.color = DISABLE;
+//		sprite3.color = DISABLE;
+//		
+//		switch(cnt)
+//		{
+//		case 3:
+//			sprite3.color = GREEN;
+//			goto case 2;
+//		case 2:
+//			sprite2.color = GREEN;
+//			goto case 1;
+//		case 1:
+//			sprite1.color = GREEN;
+//			break;
+//		}
+
+
+
+		UISprite sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("1").GetComponent<UISprite> ();
+		UISprite sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("2").GetComponent<UISprite> ();
+		UISprite sprite3 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("3").GetComponent<UISprite> ();
 		
-		sprite1.color = DISABLE;
-		sprite2.color = DISABLE;
-		sprite3.color = DISABLE;
+		sprite1.color = NewDISABLE;
+		sprite2.color = NewDISABLE;
+		sprite3.color = NewDISABLE;
 		
 		switch(cnt)
 		{
@@ -221,69 +248,43 @@ public class ScriptMatchInfo : MonoBehaviour {
 
 
 
-		sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("1").GetComponent<UISprite> ();
-		sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("2").GetComponent<UISprite> ();
-		sprite3 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("3").GetComponent<UISprite> ();
-		
-		sprite1.color = NewDISABLE;
-		sprite2.color = NewDISABLE;
-		sprite3.color = NewDISABLE;
-		
-		switch(cnt)
-		{
-		case 3:
-			sprite3.color = NewRed;
-			goto case 2;
-		case 2:
-			sprite2.color = NewRed;
-			goto case 1;
-		case 1:
-			sprite1.color = NewRed;
-			break;
-		}
-
-
-
 
 	}
 	
 	public void SetBases(List<int> bases)
 	{
-		UISprite sprite1 = mSprBases.FindChild ("Sprite1").GetComponent<UISprite> ();
-		UISprite sprite2 = mSprBases.FindChild ("Sprite2").GetComponent<UISprite> ();
-		UISprite sprite3 = mSprBases.FindChild ("Sprite3").GetComponent<UISprite> ();
-		
-		sprite1.color = DISABLE;
-		sprite2.color = DISABLE;
-		sprite3.color = DISABLE;
-		
-		if (bases == null || bases.Count < 1)
-			return;
-		
-		foreach(int value in bases)
-		{
-			if(value == 1)
-			{
-				sprite1.color = GREEN;
-			}
-			else if(value == 2)
-			{
-				sprite2.color = GREEN;
-			}
-			else if(value == 3)
-			{
-				sprite3.color = GREEN;
-			}
-		}
+//		UISprite sprite1 = mSprBases.FindChild ("Sprite1").GetComponent<UISprite> ();
+//		UISprite sprite2 = mSprBases.FindChild ("Sprite2").GetComponent<UISprite> ();
+//		UISprite sprite3 = mSprBases.FindChild ("Sprite3").GetComponent<UISprite> ();
+//		
+//		sprite1.color = DISABLE;
+//		sprite2.color = DISABLE;
+//		sprite3.color = DISABLE;
+//		
+//		if (bases == null || bases.Count < 1)
+//			return;
+//		
+//		foreach(int value in bases)
+//		{
+//			if(value == 1)
+//			{
+//				sprite1.color = GREEN;
+//			}
+//			else if(value == 2)
+//			{
+//				sprite2.color = GREEN;
+//			}
+//			else if(value == 3)
+//			{
+//				sprite3.color = GREEN;
+//			}
+//		}
 
 
 
-		sprite1 = Ground.transform.FindChild ("Base").FindChild("1").GetComponent<UISprite> ();
-		sprite2 = Ground.transform.FindChild ("Base").FindChild ("2").GetComponent<UISprite> ();
-		sprite3 = Ground.transform.FindChild ("Base").FindChild ("3").GetComponent <UISprite> ();
+		UISprite sprite1 = Ground.transform.FindChild ("Base").FindChild("1").GetComponent<UISprite> ();
+		UISprite sprite2 = Ground.transform.FindChild ("Base").FindChild ("2").GetComponent<UISprite> ();
+		UISprite sprite3 = Ground.transform.FindChild ("Base").FindChild ("3").GetComponent <UISprite> ();
 		
 		sprite1.spriteName = "base_off";
 		sprite2.spriteName = "base_off";
@@ -320,8 +321,10 @@ public class ScriptMatchInfo : MonoBehaviour {
 	{
 		mRound.GetComponent<UILabel> ().text = round.ToString ();
 		mRound.FindChild ("Label").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (round);
-
-
+		GameObject Left = Ground.transform.FindChild ("LeftTeam").FindChild ("Sprite").gameObject;
+		GameObject Right = Ground.transform.FindChild ("RightTeam").FindChild ("Sprite").gameObject;
+		Left.SetActive(false);
+		Right.SetActive(false);
 
 
 		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
@@ -330,10 +333,14 @@ public class ScriptMatchInfo : MonoBehaviour {
 		
 		if (Halftime.text [Halftime.text.Length - 1] == '초') {
 			Halftime.text = RoundNum + "회초";
+			Left.SetActive(true);
+			Right.SetActive(false);
 		}
 		else if(Halftime.text [Halftime.text.Length - 1] == '말'){
 			
 			Halftime.text = RoundNum + "회말";
+			Left.SetActive(false);
+			Right.SetActive(true);
 		}
 	}
 }

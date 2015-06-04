@@ -132,7 +132,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}
 			aa = string.Join ("", ch.ToArray ());
 		
-			Debug.Log (aa);
+			//Debug.Log (aa);
 			ch.Clear ();
 			for (int z = 6; z<8; z++) {
 			
