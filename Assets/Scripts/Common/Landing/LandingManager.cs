@@ -202,7 +202,7 @@ public class LandingManager : MonoBehaviour {
 
 
 
-	//	Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
+		Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
 		if (UtilMgr.SelectTeam.Length > 0) {
 			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetData1"));
 			NetMgr.GetLineup (GetTeamCode (UtilMgr.SelectTeam), mlineupEvent);
@@ -337,7 +337,7 @@ public class LandingManager : MonoBehaviour {
 
 			Is_PlayersName = mlineupEvent.Response.data.pit [0].playerName + "#" + mlineupEvent.Response.data.pit [0].playerNumber;
 			I_StringList.Add (Is_PlayersName);
-			Is_Batting = "Null";
+			Is_Batting = "";
 
 			I_StringList.Add (Is_Batting);
 
@@ -346,7 +346,9 @@ public class LandingManager : MonoBehaviour {
 			//Debug.Log();
 
 		}
+		I_BigLogo.color = new Color (1,1,1,1);
 		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
+		I_TeamImage.color = new Color (1,1,1,1);
 		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
 		InPutData ();
 		SetTeamColor ();
@@ -385,7 +387,9 @@ public class LandingManager : MonoBehaviour {
 			//Debug.Log();
 			
 		}
+		I_BigLogo.color = new Color (1,1,1,1);
 		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
+		I_TeamImage.color = new Color (1,1,1,1);
 		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
 		InPutData ();
 		SetTeamColor ();
@@ -419,7 +423,11 @@ public class LandingManager : MonoBehaviour {
 		}
 	}
 	public void BlueButten(){
-		transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (true);
+		if (!transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.activeSelf) {
+			transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (true);
+		} else {
+			transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (false);
+		}
 
 	}
 	public void BlueButtenOff(){

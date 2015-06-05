@@ -660,9 +660,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 139292, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 155628, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Name
+      value: Lmite
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
@@ -1889,7 +1889,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
       propertyPath: m_Name
@@ -2536,7 +2536,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3013
+  startingRenderQueue: 3011
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -3264,11 +3264,11 @@ Transform:
   m_GameObject: {fileID: 982264398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
   m_Children:
+  - {fileID: 1878670090}
   - {fileID: 1662117054}
   - {fileID: 1403842801}
-  - {fileID: 1878670090}
   - {fileID: 889170307}
   - {fileID: 474675856}
   - {fileID: 1894011436}
@@ -6043,7 +6043,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 481654, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11492580, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
       propertyPath: BntMenu
@@ -6207,6 +6207,61 @@ BoxCollider2D:
   m_Offset: {x: 2.50000381, y: 1.90734863e-06}
   serializedVersion: 2
   m_Size: {x: 127, y: 46}
+--- !u!1 &1617936933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1617936934}
+  - 114: {fileID: 1617936936}
+  - 114: {fileID: 1617936935}
+  m_Layer: 0
+  m_Name: Explosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1617936934
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1617936933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.553236961, y: 0, z: -2.23436499}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+--- !u!114 &1617936935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 031d08f52af1daa4f929b85221519426,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1617936933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039587c051912eb4ead9e58344c5f3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+--- !u!114 &1617936936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 031d08f52af1daa4f929b85221519426,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1617936933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac1691131a8c844dafe8b6ace6a172a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionForce: 20
 --- !u!4 &1662117054 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400012, guid: 72c7a05e5387b442595ba7066c65ff4a, type: 2}
@@ -6285,7 +6340,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 982264399}
-  m_RootOrder: 2
+  m_RootOrder: 0
 --- !u!114 &1878670091
 MonoBehaviour:
   m_ObjectHideFlags: 0

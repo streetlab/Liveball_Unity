@@ -394,9 +394,11 @@ public class ScriptTitle : MonoBehaviour {
 		UserMgr.UserInfo = mProfileEvent.Response.data;
 
 		string images = Constants.IMAGE_SERVER_HOST+ UserMgr.UserInfo.imagePath +  UserMgr.UserInfo.imageName;
-		
-		WWW www= new WWW(images);
-		StartCoroutine (GetImage(www));
+
+		if (UserMgr.UserInfo.imageName != "") {
+			WWW www = new WWW (images);
+			StartCoroutine (GetImage (www));
+		}
 
 		if(mProfileEvent.Response.message != null
 		   && mProfileEvent.Response.message.Length > 0){

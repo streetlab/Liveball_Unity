@@ -104,6 +104,7 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 
 	void CheckFirst(){
+
 		if(UserMgr.UserInfo.IsFirstLanding){
 			UserMgr.UserInfo.IsFirstLanding = false;
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioWelcome);
@@ -114,6 +115,7 @@ public class ScriptMainTop : MonoBehaviour {
 	
 	void CheckAttendance(){
 		WWW www = new WWW(Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
+		Debug.Log ("Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq : " + Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
 		StartCoroutine(RunAttendance(www));
 		UtilMgr.ShowLoading(true);
 	}
@@ -221,7 +223,10 @@ public class ScriptMainTop : MonoBehaviour {
 					num = num-System.DateTime.Now.Day;
 				}
 				if (System.DateTime.Now.Day+num == int.Parse(result)) {
-					//chek = true;
+					if(mScheduleEvent.Response.data [i].gameStatus == 1){
+					LandingState = 2;
+					}
+						//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
 				
