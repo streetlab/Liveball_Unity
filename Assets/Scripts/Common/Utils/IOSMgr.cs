@@ -12,6 +12,14 @@ public class IOSMgr : MonoBehaviour
 
 	[DllImport("__Internal")]
 	private static extern void OpenGallery(string str);
+	[DllImport("__Internal")]
+	private static extern void iOSInAppInit();
+	[DllImport("__Internal")]
+	private static extern void iOSBuyItem(string strProductId);
+	[DllImport("__Internal")]
+	private static extern void iOSRestoreCompletedTransactions();
+
+
 
 	#if(UNITY_EDITOR)
 	public static void CallIOSFunc( string strFuncName, string str){}
@@ -181,6 +189,25 @@ public class IOSMgr : MonoBehaviour
 		#endif
 
 	}
+
+	public static void InAppInit(EventDelegate eventDelegate){
+		Instance.mEventDelegate = eventDelegate;
+		iOSInAppInit();
+	}
+
+	public static void ButItem(string strProductId){
+		iOSBuyItem(strProductId);
+	}
+
+	public void ResultBuyItem(string strResult){
+		DialogueMgr.ShowDialogue("result", strResult, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+	}
+
+	public void RestorecompletedTransactions(){
+		iOSRestoreCompletedTransactions();
+	}
+
+
 
 //	public void DisagreePush(string str){
 //		DialogueMgr.ShowDialogue("disagree", "disagree", DialogueMgr.DIALOGUE_TYPE.Alert, null);

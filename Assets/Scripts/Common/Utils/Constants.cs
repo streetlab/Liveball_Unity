@@ -28,6 +28,9 @@ public class Constants {
 	public const string URL_CERT = "http://auth.friize.com/m/user_auth.php";
 	public const string URL_ATTENDANCE = "http://tuby10.friize.com/events/attendance_confirm/";
 
+	public const string STORE_GOOGLE ="market://details?id=com.streetlab.tuby";
+	public const string STORE_IPHONE ="https://itunes.apple.com/kr/app/id1000138413?mt=8";
+
 	/*/
 	// Real
 	public static string QUERY_SERVER_HOST 	= 	"http://" + HOST + ":5002/webTuby/query.frz";

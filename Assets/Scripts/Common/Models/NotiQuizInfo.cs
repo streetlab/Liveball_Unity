@@ -89,4 +89,15 @@ public class NotiQuizInfo {
 			_time = value;
 		}
 	}
+
+	string _result;
+
+	public string result {
+		get {
+			return _result;
+		}
+		set {
+			_result = value;
+		}
+	}
 }

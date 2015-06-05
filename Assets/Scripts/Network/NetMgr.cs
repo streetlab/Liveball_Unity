@@ -22,6 +22,7 @@ public class NetMgr : MonoBehaviour{
 	private static byte[] mSendBuffer = new byte[8142];
 	private static List<SocketMsgInfo> mSocketMsgList = new List<SocketMsgInfo>();
 	private static bool mRecvSemaphore;
+//	BaseEvent mSocketEvent;
 
 	private static NetMgr _instance = null;
 	public static NetMgr Instance
@@ -338,7 +339,7 @@ public class NetMgr : MonoBehaviour{
 		Instance.socketExitEvent(baseEvent);
 	}
 
-	public static void JoinGame(BaseEvent baseEvent)
+	public static void JoinGame()
 	{
 //		Instance.webAPIProcessEvent (new JoinGameRequest (), baseEvent);
 //		Instance.tcpAPIProcessEvent(new JoinGameSocketRequest(), baseEvent, true);
@@ -455,6 +456,7 @@ public class NetMgr : MonoBehaviour{
 			                  mSendingCallback, null);
 		} catch (Exception ex) {
 			Debug.Log("전송 중 오류 발생! : "+ ex.Message);
+			Instance.socketJoinEvent();
 		}
 	}
 
@@ -491,16 +493,6 @@ public class NetMgr : MonoBehaviour{
 
 			SocketMsgInfo msgInfo = JsonFx.Json.JsonReader.Deserialize<SocketMsgInfo>(msg);
 			mSocketMsgList.Add(msgInfo);
-//			QuizMgr.SocketReceived(msgInfo);
-//			if(msgInfo.type == ConstantsSocketType.RES.TYPE_JOIN){
-//
-//			} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_ALIVE){
-//				SendSocketMsg(new AliveRequest().ToRequestString());
-//			}
-//			else{
-//
-//			}
-
 			mRecvSemaphore = false;
 		}
 
@@ -508,6 +500,7 @@ public class NetMgr : MonoBehaviour{
 			mSocket.BeginReceive(mReceiveBuffer, 0, mReceiveBuffer.Length, SocketFlags.None, mReceivingCallback, null);
 		} catch (Exception ex) {
 			// 예외가 발생하면 mReceiveBuffer 종료한다mReceiveBuffer("자료 수신 대기 도중 오류 발생! 메세지: "+ ex.Message);
+			Instance.socketJoinEvent();
 			return;
 		}
 	}
@@ -522,6 +515,7 @@ public class NetMgr : MonoBehaviour{
 		} catch (Exception ex) {
 			// 예외가 발생하면 예외 정보 출력 후 함수를 종료한다.
 			Debug.Log("자료 송신 도중 오류 발생! 메세지: "+ ex.Message);
+			Instance.socketJoinEvent();
 			return;
 		}
 		

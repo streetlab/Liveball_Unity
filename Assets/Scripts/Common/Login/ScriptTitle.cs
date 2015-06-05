@@ -1,9 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-#if(UNITY_EDITOR)
-using UnityEditor;
-#endif
 
 public class ScriptTitle : MonoBehaviour {
 
@@ -29,20 +26,26 @@ public class ScriptTitle : MonoBehaviour {
 	void Start()
 	{
 		#if(UNITY_EDITOR)
-		if(EditorUtility.DisplayDialog("Delete player preferences",
+		CheckPrefsForEditor();
+		#else
+		Init ();
+		#endif
+//		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
+	}
+
+	void CheckPrefsForEditor(){
+		#if(UNITY_EDITOR)
+		if(UnityEditor.EditorUtility.DisplayDialog("Delete player preferences",
 		                               "Are you sure delete player preferences?",
 		                               "Yes",
 		                               "No")){
-//			PlayerPrefs.SetString (Constants.PrefEmail, "");
-//			PlayerPrefs.SetString (Constants.PrefPwd, "");
+			//			PlayerPrefs.SetString (Constants.PrefEmail, "");
+			//			PlayerPrefs.SetString (Constants.PrefPwd, "");
 			PlayerPrefs.DeleteAll();
 			Init ();
 		} else
 			Init ();
-		return;
 		#endif
-		Init ();
-//		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
 	}
 
 	void InitConstants(){
@@ -149,10 +152,9 @@ public class ScriptTitle : MonoBehaviour {
 			if(btn == DialogueMgr.BTNS.Btn1){
 				Debug.Log("Go to Store");
 				#if(UNITY_ANDROID)
-				Application.OpenURL("market://details?id=com.streetlab.tuby");
-				#elif(UNITY_EDITOR)
-				Application.OpenURL("market://details?id=com.streetlab.tuby");
+				Application.OpenURL(Constants.STORE_GOOGLE);
 				#else
+				Application.OpenURL(Constants.STORE_IPHONE);
 				#endif
 			} else{
 				UtilMgr.Quit();
@@ -161,10 +163,9 @@ public class ScriptTitle : MonoBehaviour {
 			if(btn == DialogueMgr.BTNS.Btn1){
 				Debug.Log("Go to Store");
 				#if(UNITY_ANDROID)
-				Application.OpenURL("market://details?id=com.streetlab.tuby");
-				#elif(UNITY_EDITOR)
-				Application.OpenURL("market://details?id=com.streetlab.liveball");
+				Application.OpenURL(Constants.STORE_GOOGLE);
 				#else
+				Application.OpenURL(Constants.STORE_IPHONE);
 				#endif
 			} else{
 				CheckPreference();
@@ -222,17 +223,17 @@ public class ScriptTitle : MonoBehaviour {
 		Application.Quit();
 	}
 
-	bool CheckPushAgree(){
-#if(UNITY_ANDROID)
-#else
-		UnityEngine.iOS.NotificationType type = UnityEngine.iOS.NotificationServices.enabledNotificationTypes;
-		if(type == UnityEngine.iOS.NotificationType.None || type == 0){
-			return true;
-		}
-#endif
-		return false;
-
-	}
+//	bool CheckPushAgree(){
+//#if(UNITY_ANDROID)
+//#else
+//		UnityEngine.iOS.NotificationType type = UnityEngine.iOS.NotificationServices.enabledNotificationTypes;
+//		if(type == UnityEngine.iOS.NotificationType.None || type == 0){
+//			return true;
+//		}
+//#endif
+//		return false;
+//
+//	}
 
 	public void FBReceived(){
 		string jsonStr = AndroidMgr.GetMsg ();
@@ -347,12 +348,12 @@ public class ScriptTitle : MonoBehaviour {
 		#else
 		mLoginInfo.memUID = IOSMgr.GetMsg();
 
-		if(CheckPushAgree()){
-			DialogueMgr.ShowDialogue("오류",
-			                         "서버 알림이 반드시 필요합니다.\n설정->라이브볼->알림\n위의 경로에서 알림을 허용해주세요.",
-			                         DialogueMgr.DIALOGUE_TYPE.Alert, DialogueExitHandler);
-			return;
-		}
+//		if(CheckPushAgree()){
+//			DialogueMgr.ShowDialogue("오류",
+//			                         "서버 알림이 반드시 필요합니다.\n설정->라이브볼->알림\n위의 경로에서 알림을 허용해주세요.",
+//			                         DialogueMgr.DIALOGUE_TYPE.Alert, DialogueExitHandler);
+//			return;
+//		}
 		#endif
 		NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 	}

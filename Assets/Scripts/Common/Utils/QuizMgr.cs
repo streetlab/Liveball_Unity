@@ -166,6 +166,11 @@ public class QuizMgr : MonoBehaviour {
 	}
 
 	public static void SocketReceived(SocketMsgInfo msgInfo){
+		if(Instance.mMatchPlaying != null){
+			Instance.mMatchPlaying.mCntAlive = 0;
+			Instance.mMatchPlaying.mNeedResponse = false;
+		}
+
 		if(msgInfo.type == ConstantsSocketType.RES.TYPE_JOIN){
 			if(Instance.mMatchPlaying != null){
 				Instance.mMatchPlaying.CompleteJoin();
@@ -198,6 +203,11 @@ public class QuizMgr : MonoBehaviour {
 				} else if(msgInfo.data.score != null
 				          && msgInfo.data.score.Equals("1")){
 					NeedsDetailInfo = true;
+				} else if(msgInfo.data.result != null
+				          && msgInfo.data.result.Equals("1")){
+					if(Instance.mMainTop != null){
+						Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.data.quizListSeq));
+					}
 				} else{
 					NeedsDetailInfo = false;
 				}
@@ -205,13 +215,10 @@ public class QuizMgr : MonoBehaviour {
 				//				Debug.Log ("RequestBoardInfo");
 				Instance.mMainTop.RequestBoardInfo();
 			}
-		} else if(msgInfo.type.Equals(Constants.POST_QUIZ_RESULT)
-		          || msgInfo.type.Equals(Constants.POST_QUIZ_CANCEL)){
-//			if(Instance.mMainTop != null){
-//				Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.info.quizListSeq));
-//			}
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_ALIVE){
-			NetMgr.SendSocketMsg(new AliveRequest().ToRequestString());
+//			NetMgr.SendSocketMsg(new AliveRequest().ToRequestString());
+			if(Instance.mMatchPlaying != null)
+				Instance.mMatchPlaying.mCntAlive = ScriptMatchPlaying.TIME_MAX_ALIVE;
 		}
 	}
 

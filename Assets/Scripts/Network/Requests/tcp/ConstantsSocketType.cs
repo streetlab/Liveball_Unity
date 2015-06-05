@@ -5,7 +5,7 @@ using System.Text;
 namespace ConstantsSocketType{
 	public class REQ{
 		public const int TYPE_JOIN = 5001;
-		public const int TYPE_ALIVE = 7001;
+		public const int TYPE_ALIVE = 7000;
 	}
 
 	public class RES{

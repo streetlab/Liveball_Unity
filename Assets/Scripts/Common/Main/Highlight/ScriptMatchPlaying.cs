@@ -24,6 +24,11 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	int mGameRound;
 	int mInningType;
 	int mInningCounter;
+	bool mIsJoined;
+	public bool mNeedResponse;
+	public int mCntAlive;
+	public const int TIME_MAX_ALIVE = 1200;// 20 frame per second * minute
+	const float TIMEOUT = 10f;
 	
 	GetGameSposDetailBoardEvent mEventDetail;
 	//	GetQuizEvent mEventPreQuiz;
@@ -40,7 +45,8 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mPreGame = true;
 		mGameRoundCounter = 99;
 		mInningCounter = 0;
-		JoinGame ();
+//		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
+		NetMgr.JoinGame();
 
 		if(UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY){
 			mList.transform.FindChild("Label").gameObject.SetActive(true);
@@ -71,14 +77,10 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	//		Debug.Log("CompleteExit");
 	//	}
 	
-	void JoinGame()
-	{
-		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
-	}
-	
 	public void CompleteJoin()
 	{
 		Debug.Log("CompleteJoin");
+		mIsJoined = true;
 		SetScoreBoard ();
 	}
 	
@@ -389,5 +391,32 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		team.FindChild ("LblE").GetComponent<UILabel> ().text = info.countOfE;
 		team.FindChild ("LblB").GetComponent<UILabel> ().text = info.countOfB;
 		UserMgr.Schedule.extend[1].score = int.Parse(info.score);
+	}
+
+	void Update(){
+		if(mIsJoined){
+			if(mCntAlive++ >= TIME_MAX_ALIVE){
+				mCntAlive = 0;
+				NetMgr.SendSocketMsg(new AliveRequest().ToRequestString());
+				mNeedResponse = true;
+				StartCoroutine("WaitingForResponse");
+			}
+		}
+	}
+
+	IEnumerator WaitingForResponse()
+	{		
+		float timeSum = 0f;
+
+		while(mNeedResponse && 
+			      timeSum < TIMEOUT) { 
+				timeSum += Time.deltaTime; 
+				yield return 0; 
+		}
+		
+		if(mNeedResponse)
+		{
+			NetMgr.JoinGame();
+		}
 	}
 }

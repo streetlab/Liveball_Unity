@@ -30,11 +30,17 @@ public class Itemcontrol : MonoBehaviour {
 	//	GoogleIAB.purchaseProduct( "ruby_50", "payload that gets stored and returned" );
 		IsTest = UtilMgr.IsTestServer();
 	}
+
+	public void purchaseAble(){
+		Debug.Log("iOS purchase able : "+IOSMgr.GetMsg());
+	}
 	
 	void Start () {
 		#if(UNITY_ANDROID)
 		#else
-		SoomlaStore.Initialize(new ScriptItemAssets());
+//		SoomlaStore.Initialize(new ScriptItemAssets());
+		EventDelegate eventd = new EventDelegate(this, "purchaseAble");
+		IOSMgr.InAppInit(eventd);
 		#endif
 		
 		transform.FindChild ("category 1").gameObject.SetActive (true);
@@ -260,15 +266,16 @@ public class Itemcontrol : MonoBehaviour {
 		//}
 		#else
 		orderNo = RequestIAP.Response.data.orderNo;
+		IOSMgr.ButItem(itemcode);
 		//RequestIAP.Response.data.
 //		GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
 //		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
-		Debug.Log("Goods cnt : "+StoreInfo.Goods.Count);
-		foreach(VirtualGood vg in StoreInfo.Goods){
-			Debug.Log("Goods name : "+vg.Name);
-		}
-
-		StoreInventory.BuyItem(itemcode);
+//		Debug.Log("Goods cnt : "+StoreInfo.Goods.Count);
+//		foreach(VirtualGood vg in StoreInfo.Goods){
+//			Debug.Log("Goods name : "+vg.Name);
+//		}
+//
+//		StoreInventory.BuyItem(itemcode);
 		//}
 		//}
 		#endif
