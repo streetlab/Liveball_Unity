@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class QuizInfo {
+	public bool mShowInningFlag;
+
 	List<QuizRespInfo> _resp;
 
 	public List<QuizRespInfo> resp {

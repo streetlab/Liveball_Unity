@@ -234,9 +234,11 @@ public class ScriptBetting : MonoBehaviour {
 
 	public void UpdateHitterItem(JoinQuizInfo quizInfo)
 	{
-		List<GameObject>list = mMatchPlaying.GetComponent<ScriptMatchPlaying>().mQuizListItems;
-		foreach (GameObject item in list) {
-			ScriptItemHitterHighlight hitterItem = item.GetComponent<ScriptItemHitterHighlight>();
+//		List<GameObject>list = mMatchPlaying.GetComponent<ScriptMatchPlaying>().mQuizListItems;
+		ScriptItemHitterHighlight[] hitterArr = mMatchPlaying.GetComponent<ScriptMatchPlaying>()
+			.mList.GetComponentsInChildren<ScriptItemHitterHighlight>();
+		foreach (ScriptItemHitterHighlight hitterItem in hitterArr) {
+//			ScriptItemHitterHighlight hitterItem = item.GetComponent<ScriptItemHitterHighlight>();
 			if(hitterItem != null
 			   && hitterItem.mQuizInfo.quizListSeq == quizInfo.QuizListSeq){
 				if(hitterItem.mQuizInfo.resp == null)
@@ -254,9 +256,11 @@ public class ScriptBetting : MonoBehaviour {
 
 	public void UpdateHitterItem(QuizInfo quiz)
 	{
-		List<GameObject>list = mMatchPlaying.GetComponent<ScriptMatchPlaying>().mQuizListItems;
-		foreach (GameObject item in list) {
-			ScriptItemHitterHighlight hitterItem = item.GetComponent<ScriptItemHitterHighlight>();
+//		List<GameObject>list = mMatchPlaying.GetComponent<ScriptMatchPlaying>().mQuizListItems;
+		ScriptItemHitterHighlight[] hitterArr = mMatchPlaying.GetComponent<ScriptMatchPlaying>()
+			.mList.GetComponentsInChildren<ScriptItemHitterHighlight>();
+		foreach (ScriptItemHitterHighlight hitterItem in hitterArr) {
+//			ScriptItemHitterHighlight hitterItem = item.GetComponent<ScriptItemHitterHighlight>();
 			if(hitterItem != null
 			   && hitterItem.mQuizInfo.quizListSeq == quiz.quizListSeq){
 				hitterItem.SetQuizResult(quiz);

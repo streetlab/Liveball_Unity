@@ -6,7 +6,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public GameObject BG_G;
 	public GameObject mScoreBoard;
 	public GameObject mList;
-	public GameObject itemHitter;
+	public GameObject mItemHitter;
 //	public GameObject itemRound;
 	public GameObject itemPoll;
 	public GameObject itemInfo;
@@ -29,12 +29,17 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public int mCntAlive;
 	public const int TIME_MAX_ALIVE = 1200;// 20 frame per second * minute
 	const float TIMEOUT = 10f;
+
+	QuizInfo mSelectedQuiz;
+	public bool mDetailOpened;
+	public Vector3 mLocalPosList;
+	public Vector2 mClipOffsetPanel;
 	
 	GetGameSposDetailBoardEvent mEventDetail;
 	//	GetQuizEvent mEventPreQuiz;
 	GetQuizEvent mEventProgQuiz;
 	
-	public List<GameObject> mQuizListItems = new List<GameObject>();
+//	public List<GameObject> mQuizListItems = new List<GameObject>();
 	
 	public void Start () {
 		//		UtilMgr.ResizeList (mList);
@@ -43,7 +48,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		QuizMgr.SequenceQuiz = 0;
 		//		mPosGuide = 0f;
 		mPreGame = true;
-		mGameRoundCounter = 99;
+//		mGameRoundCounter = 99;
 		mInningCounter = 0;
 //		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
 		NetMgr.JoinGame();
@@ -56,6 +61,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 			//TF_Landing.GetComponent<LandingManager>().Startgame();
 		}
 		mItemDetail.SetActive(false);
+		mItemHitter.SetActive(false);
 	}
 	
 	//	void OnApplicationFocus(bool focus){
@@ -150,12 +156,6 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		NetMgr.GetProgressQuiz (quizListSeq, mEventProgQuiz);
 	}
 	
-	void AddQuizIntoList(QuizInfo quizInfo)
-	{		
-		if(QuizMgr.SequenceQuiz < quizInfo.quizListSeq)
-			QuizMgr.SequenceQuiz = quizInfo.quizListSeq;
-	}
-	
 	public void InitQuizFirst()
 	{
 		if (mEventProgQuiz.Response.data != null) {
@@ -167,163 +167,100 @@ public class ScriptMatchPlaying : MonoBehaviour {
 			
 			}
 		}
-//		Debug.Log("list Cnt : "+mEventProgQuiz.Response.data.quiz.Count);
-		mList.GetComponent<UIDraggablePanel2> ().Init (mEventProgQuiz.Response.data.quiz.Count,
-			delegate(UIListItem item, int index) {
 
+		UtilMgr.DismissLoading ();
+		QuizMgr.SetQuizList (mEventProgQuiz.Response.data.quiz);
+		ResetList();
+		mFirstLoading = false;
+	}
+
+	public void SetList(QuizInfo quiz){
+		mSelectedQuiz = quiz;
+		mList.GetComponent<UIDraggablePanel2>().Init(1, delegate(UIListItem item, int index){
 			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
-			QuizInfo quizInfo = mEventProgQuiz.Response.data.quiz[index];
-//			Debug.Log("index : "+index+", type : "+quizInfo.typeCode);
+			sItem.Init (this, mSelectedQuiz, transform.FindChild ("ItemDetail").gameObject);				
+			item.Target.transform.FindChild("Round").gameObject.SetActive(false);
+		});
+		mList.GetComponent<UIDraggablePanel2>().ResetPosition();
+	}
 
-			if (quizInfo.typeCode.Contains ("_QZA_")) {
-			} else {
-				if (!mFirstLoading) {
-//					RepositionItems (obj.GetComponent<BoxCollider2D> ().size.y);
-					mQuizListItems.Insert (0, item.Target);
-				} else
-					mQuizListItems.Add (item.Target);
-				
-//				obj.GetComponent<ScriptItemHitterHighlight> ().mPositionY = mAccumulatedY;
-//				mAccumulatedY += obj.GetComponent<BoxCollider2D> ().size.y;
-				
-//				obj.transform.parent = mList.transform;//.FindChild("Grid");
-//				obj.transform.localScale = new Vector3 (1f, 1f, 1f);		
-			
-				sItem.Init (quizInfo, transform.FindChild ("ItemDetail").gameObject);
-				
-//				mPosGuide += (obj.GetComponent<BoxCollider2D> ().size.y - mPreItemSize) / 2f;
-//				obj.transform.localPosition = new Vector3 (0f, -mPosGuide, 0f);
-//				mPosGuide += obj.GetComponent<BoxCollider2D> ().size.y;
-//				mPreItemSize = obj.GetComponent<BoxCollider2D> ().size.y;
-				
-				item.Target.transform.FindChild("Round").gameObject.SetActive(false);
-			}
-			
-			if(quizInfo.typeCode.Contains("_QZD_") && mFirstLoading){
+	public void ResetList(){
+		ResetList(Vector3.zero, Vector2.zero);
+	}
+
+	public void ResetList(Vector3 vector3, Vector2 vector2){		
+		Debug.Log("list Cnt : "+QuizMgr.QuizList.Count);
+		mGameRoundCounter = 99;
+		foreach(QuizInfo quizInfo in QuizMgr.QuizList){
+			quizInfo.mShowInningFlag = false;
+			if(quizInfo.typeCode.Contains("_QZD_")){
 				if(mGameRoundCounter > quizInfo.gameRound){
 					if(mGameRoundCounter < 99){
-						//					mPosGuide -= (122 - 30f) / 2f;
 					} else{
 						mGameRound = quizInfo.gameRound;
 						mInningType = quizInfo.inningType;
-					}
-					
+					}					
 					mGameRoundCounter = quizInfo.gameRound;
 					mInningCounter = quizInfo.inningType;
-					
-					item.Target.transform.FindChild("Round").gameObject.SetActive(true);
-					item.Target.transform.FindChild("Round").FindChild("LblRound").GetComponent<UILabel>().text = ""+mGameRound;
-					if(mInningCounter == 0){
-						item.Target.transform.FindChild("Round").FindChild("SprArrow")
-							.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
-					} else{
-						item.Target.transform.FindChild("Round").FindChild("SprArrow")
-							.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
-					}
-					
+					quizInfo.mShowInningFlag = true;
 				} else if(mInningCounter != quizInfo.inningType){
 					mInningCounter = quizInfo.inningType;
-					
-					item.Target.transform.FindChild("Round").gameObject.SetActive(true);
-					item.Target.transform.FindChild("Round").FindChild("LblRound").GetComponent<UILabel>().text = ""+mGameRound;
-					if(mInningCounter == 0){
-						item.Target.transform.FindChild("Round").FindChild("SprArrow")
-							.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
-					} else{
-						item.Target.transform.FindChild("Round").FindChild("SprArrow")
-							.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
-					}
+					quizInfo.mShowInningFlag = true;
+				}
+			}
+		}
+
+		mList.GetComponent<UIDraggablePanel2> ().Init (QuizMgr.QuizList.Count,
+		                                               delegate(UIListItem item, int index) {
+			
+			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
+			QuizInfo quizInfo = mEventProgQuiz.Response.data.quiz[index];
+			sItem.Init (this, quizInfo, transform.FindChild ("ItemDetail").gameObject);				
+			item.Target.transform.FindChild("Round").gameObject.SetActive(false);
+			if(quizInfo.mShowInningFlag){
+				item.Target.transform.FindChild("Round").gameObject.SetActive(true);
+				item.Target.transform.FindChild("Round").FindChild("LblRound")
+					.GetComponent<UILabel>().text = ""+quizInfo.gameRound;
+				if(quizInfo.inningType == 0){
+					item.Target.transform.FindChild("Round").FindChild("SprArrow")
+						.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
+				} else{
+					item.Target.transform.FindChild("Round").FindChild("SprArrow")
+						.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
 				}
 			}
 			
 		});
-
-		UtilMgr.DismissLoading ();
-		InitQuizList (null);
-
-	}
-	
-	public void InitQuizList(GetQuizEvent quizEvent)
-	{
-		QuizMgr.SetQuizList (mEventProgQuiz.Response.data.quiz);
-		
-		foreach (GameObject go in mQuizListItems) {
-			go.transform.parent = null;
-			NGUITools.DestroyImmediate(go);		
-		}
-		mQuizListItems.Clear ();
-		mFirstLoading = true;
-		mAccumulatedY = 0f;
-		mPosGuide = 0f;
-		mPreItemSize = 30f;
-		
-		for(int i = 0; i < mEventProgQuiz.Response.data.quiz.Count; i++)
-		{
-			QuizInfo quizInfo = mEventProgQuiz.Response.data.quiz[i];
-			AddQuizIntoList(quizInfo);
-		}
-		
-		mList.GetComponent<UIScrollView> ().ResetPosition ();
-		mFirstLoading = false;
+		mList.GetComponent<UIDraggablePanel2> ().ResetPosition();
+//		if(vector3 == Vector3.zero){
+//			Debug.Log("no vector");
+//		} else{
+//			Debug.Log("vector : "+vector3.y);
+//			mList.transform.localPosition = vector3;
+//			mList.GetComponent<UIPanel>().clipOffset = vector2;
+//		}
 	}
 	
 	public void AddQuizList(QuizInfo quizInfo)
 	{	
-		Debug.Log("AddQuizList");
-		mAccumulatedY = 0f;
-		//		mPosGuide = 0f;
-		mPosGuide = (122 - 30f) / 2f;
-		mPreItemSize = 122f;
-		
+		Debug.Log("AddQuizList");		
 		QuizMgr.AddQuizList (quizInfo);
-		//		QuizInfo quizInfo = quizEvent.Response.data.quiz[quizEvent.Response.data.quiz.Count-1];
-//		if(quizInfo.gameRound == mGameRound
-//		   && quizInfo.inningType == mInningType){
-//			GameObject go = mQuizListItems [0];
-//			RepositionItems(-go.GetComponent<BoxCollider2D> ().size.y);
-//			mQuizListItems.RemoveAt (0);
-//			NGUITools.Destroy (go);
-//		}
-		//		Debug.Log ("quizInfo.gameRound : " + quizInfo.gameRound + ", mGameRound : " + mGameRound);
-		//		Debug.Log ("quizInfo.inningType : " + quizInfo.inningType + ", mInningType : " + mInningType);
-		
-		AddQuizIntoList(quizInfo);
+		ResetList();
 		
 		mGameRound = quizInfo.gameRound;
 		mInningType = quizInfo.inningType;
-
-//		mQuizListItems[1].transform.FindChild("Round").gameObject.SetActive(false);
-//		mQuizListItems[0].transform.FindChild("Round").gameObject.SetActive(true);
-//		mQuizListItems[0].transform.FindChild("Round").FindChild("LblRound")
-//			.GetComponent<UILabel>().text = ""+mGameRound;
-
-//		if(mInningType == 0){
-//			mQuizListItems[0].transform.FindChild("Round").FindChild("SprArrow")
-//				.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
-//		}else{
-//			mQuizListItems[0].transform.FindChild("Round").FindChild("SprArrow")
-//				.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
+	}
+	
+//	void RepositionItems(float size)
+//	{
+//		foreach(GameObject tmp in mQuizListItems){
+//			Vector3 vector = tmp.transform.localPosition;
+//			vector.y -= size;
+//			tmp.transform.localPosition = vector;
+//			if(tmp.GetComponent<ScriptItemHitterHighlight>() != null)		
+//				tmp.GetComponent<ScriptItemHitterHighlight>().mPositionY += size;
 //		}
-	}
-	
-	//	void RefreshQuizListDatas()
-	//	{
-	//		for(int i = 0; i < QuizMgr.QuizList.Count; i++)
-	//		{
-	//			QuizInfo quizInfo = QuizMgr.QuizList[i];
-	//		}
-	//	}
-	
-	void RepositionItems(float size)
-	{
-		foreach(GameObject tmp in mQuizListItems){
-			Vector3 vector = tmp.transform.localPosition;
-			vector.y -= size;
-			tmp.transform.localPosition = vector;
-			if(tmp.GetComponent<ScriptItemHitterHighlight>() != null)		
-				tmp.GetComponent<ScriptItemHitterHighlight>().mPositionY += size;
-		}
-	}
+//	}
 	
 	void SetAwayScore(List<ScoreInfo> listScore)
 	{

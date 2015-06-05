@@ -619,10 +619,10 @@ public class ScriptMainTop : MonoBehaviour {
 
 	}
 
-	void RefreshQuizList(){
-		mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ()
-			.InitQuizList(mEventQuiz);
-	}
+//	void RefreshQuizList(){
+//		mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ()
+//			.InitQuizList(mEventQuiz);
+//	}
 
 	void AddQuizIntoList()
 	{

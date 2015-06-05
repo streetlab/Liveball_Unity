@@ -36,7 +36,7 @@ public class Itemcontrol : MonoBehaviour {
 	}
 	
 	void Start () {
-		#if(UNITY_ANDROID)
+		#if(UNITY_ANDROID || UNITY_EDITOR)
 		#else
 //		SoomlaStore.Initialize(new ScriptItemAssets());
 		EventDelegate eventd = new EventDelegate(this, "purchaseAble");

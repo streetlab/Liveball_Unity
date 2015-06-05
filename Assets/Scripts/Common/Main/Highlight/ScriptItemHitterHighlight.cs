@@ -17,15 +17,13 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 	public QuizInfo mQuizInfo;
 	GetQuizResultEvent mEvent;
 	GameObject mDetailView;
+	ScriptMatchPlaying mMatchPlaying;
 
 	public float mPositionY;
-	bool isOpened;
+//	bool isOpened;
 	bool isImgLoaded;
 //	public bool needSimpleResult;
 //	GetSimpleResultEvent mSimpleEvent;
-
-	Vector3 mLocalPosList;
-	Vector2 mClipOffsetPanel;
 
 	void Update()
 	{
@@ -37,10 +35,11 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 //		}
 	}
 
-	public void Init(QuizInfo quizInfo, GameObject detailView)
+	public void Init(ScriptMatchPlaying matchPlaying, QuizInfo quizInfo, GameObject detailView)
 	{
 		isImgLoaded = false;
 		mDetailView = detailView;
+		mMatchPlaying = matchPlaying;
 		mQuizInfo = quizInfo;
 
 		if (mQuizInfo.typeCode.Contains ("_QZC_")) {
@@ -56,7 +55,7 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 //			                          mLblName.transform.localPosition.z);
 //			pos.x += width;
 			Vector3 pos = mLblNumber.transform.localPosition;
-			pos.x += width;
+			pos.x = -80f+width;
 			mLblNumber.transform.localPosition = pos;
 		}
 
@@ -67,7 +66,7 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 		StartCoroutine(GetImage (www));
 		SetQuizResult (mQuizInfo);
-		isOpened = false;
+//		isOpened = false;
 	}
 
 //	public void RefreshDatas()
@@ -200,9 +199,10 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 
 	public void OnClicked()
 	{
-		if (isOpened) {
+		if (mMatchPlaying.mDetailOpened) {
 			UtilMgr.RemoveAllBackEvents();
-			isOpened = false;
+			mMatchPlaying.mDetailOpened = false;
+
 //			mDetailView.GetComponent<UIPanel> ().depth = 0;
 			mDetailView.SetActive(false);
 			mDetailView.transform.FindChild("ListDetail").gameObject.SetActive(false);//GetComponent<UIPanel>().depth = 0;
@@ -210,37 +210,56 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 //			if(transform.parent.GetComponent<SpringPanel> () != null)
 //				transform.parent.GetComponent<SpringPanel> ().enabled = true;
 			mDetailView.GetComponent<ScriptDetailHighlight> ().ClearList();
+//			NGUITools.FindInParents<UIPanel> (gameObject).clipOffset = mClipOffsetPanel;
 
-			transform.parent.localPosition = mLocalPosList;
-			NGUITools.FindInParents<UIPanel> (gameObject).clipOffset = mClipOffsetPanel;
+			Debug.Log("mLocalPosList 2 : "+mMatchPlaying.mLocalPosList.y);
+//			mMatchPlaying.ResetList(mMatchPlaying.mLocalPosList, mMatchPlaying.mClipOffsetPanel);
+//			transform.parent.localPosition = mLocalPosList;
+			mMatchPlaying.mList.SetActive(true);
+			mMatchPlaying.mItemHitter.SetActive(false);
 		} else{
+			mMatchPlaying.mDetailOpened = true;
+
 			UtilMgr.AddBackEvent(new EventDelegate(this, "OnClicked"));
 			mEvent = new GetQuizResultEvent (new EventDelegate (this, "GotResult"));
 			NetMgr.GetQuizResult (mQuizInfo.quizListSeq, mEvent);
 			transform.GetComponent<UIDragScrollView>().enabled = false;
+
+			mMatchPlaying.mLocalPosList = new Vector3(transform.parent.localPosition.x, transform.parent.localPosition.y);
+			Debug.Log("mLocalPosList 1 : "+mMatchPlaying.mLocalPosList.y);
+			mMatchPlaying.mClipOffsetPanel = new Vector2(NGUITools.FindInParents<UIPanel> (gameObject).clipOffset.x
+			                               ,NGUITools.FindInParents<UIPanel> (gameObject).clipOffset.y);
+//			mMatchPlaying.SetList(mQuizInfo);
 		}
 	}
 
 	public void GotResult()
 	{
-		isOpened = true;
+		Debug.Log("GotResult");
+		mMatchPlaying.mList.SetActive(false);
+		mMatchPlaying.mItemHitter.SetActive(true);
+		mMatchPlaying.mItemHitter.GetComponent<ScriptItemHitterHighlight>()
+			.Init (mMatchPlaying, mQuizInfo, mDetailView);
+		mMatchPlaying.mItemHitter.transform.FindChild("Round").gameObject.SetActive(false);
+		
+		
 //		mDetailView.GetComponent<UIPanel> ().depth = 2;
 		mDetailView.SetActive(true);
 		mDetailView.transform.FindChild("ListDetail").gameObject.SetActive(true);//GetComponent<UIPanel>().depth = 3;
 		mDetailView.GetComponent<ScriptDetailHighlight> ().Init (mEvent.Response);
 
-		if(transform.parent.GetComponent<SpringPanel> () != null)
-			transform.parent.GetComponent<SpringPanel> ().enabled = false;
-		mLocalPosList = transform.parent.localPosition;
-		transform.parent.localPosition = new Vector3 (0f, 52f+mPositionY, 0f);
+//		if(transform.parent.GetComponent<SpringPanel> () != null)
+//			transform.parent.GetComponent<SpringPanel> ().enabled = false;
+//		mLocalPosList = transform.parent.localPosition;
+//		transform.parent.localPosition = new Vector3 (0f, 52f+mPositionY, 0f);
 //		TweenPosition.Begin(transform.parent.gameObject, 1f, new Vector3(0f, 54f+mPositionY, 0f));
 
 		//move after 1f
-		mClipOffsetPanel = NGUITools.FindInParents<UIPanel> (gameObject).clipOffset;
+//		mClipOffsetPanel = NGUITools.FindInParents<UIPanel> (gameObject).clipOffset;
 
-		float result = -326f+UtilMgr.GetScaledPositionY();
+//		float result = -326f+UtilMgr.GetScaledPositionY();
 
-		NGUITools.FindInParents<UIPanel>(gameObject).clipOffset = new Vector2(0f, result-mPositionY);//191
+//		NGUITools.FindInParents<UIPanel>(gameObject).clipOffset = new Vector2(0f, result-mPositionY);//191
 	}
 
 //	IEnumerator moveOffset(){

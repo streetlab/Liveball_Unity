@@ -102,12 +102,18 @@ public class QuizMgr : MonoBehaviour {
 
 	public static void SetQuizList(List<QuizInfo> quizList)
 	{
-		QuizMgr.QuizList = quizList;
+		QuizList = quizList;
+		foreach(QuizInfo quiz in quizList){
+			if(SequenceQuiz < quiz.quizListSeq)
+				SequenceQuiz = quiz.quizListSeq;
+		}
 	}
 
 	public static void AddQuizList(QuizInfo quiz)
 	{
-		QuizMgr.QuizList.Insert(0, quiz);
+		QuizList.Insert(0, quiz);
+		if(SequenceQuiz < quiz.quizListSeq)
+			SequenceQuiz = quiz.quizListSeq;
 	}
 
 	public static void InitSimpleResult(GetSimpleResultEvent simpleEvent
