@@ -265,8 +265,10 @@ public class Itemcontrol : MonoBehaviour {
 			//}
 		//}
 		#else
-		orderNo = RequestIAP.Response.data.orderNo;
-		IOSMgr.ButItem(itemcode);
+//		orderNo = RequestIAP.Response.data.orderNo;
+		Debug.Log("itemcode is "+itemcode);
+		IOSMgr.ButItem("ruby_50");
+//		IOSMgr.ButItem(itemcode);
 		//RequestIAP.Response.data.
 //		GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
 //		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );

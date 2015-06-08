@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 6
   AndroidProfiler: 0
   defaultScreenOrientation: 0
-  targetDevice: 2
+  targetDevice: 0
   targetGlesGraphics: 1
   targetIOSGraphics: -1
   targetResolution: 0
@@ -423,11 +423,13 @@ PlayerSettings:
   WebGL::audioCompressionFormat: 4
   WebGL::exceptionSupport: 0
   WebGL::memorySize: 256
-  iOS::Architecture: 0
-  iOS::ScriptingBackend: 0
+  iOS::Architecture: 2
+  iOS::ScriptingBackend: 1
   boolPropertyNames:
   - WebGL::dataCaching
+  - iOS::UseIl2CppPrecompiledHeader
   WebGL::dataCaching: 0
+  iOS::UseIl2CppPrecompiledHeader: 0
   stringPropertyNames:
   - WebGL::emscriptenArgs
   - WebGL::template

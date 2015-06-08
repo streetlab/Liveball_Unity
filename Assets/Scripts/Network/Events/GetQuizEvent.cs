@@ -12,7 +12,7 @@ public class GetQuizEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetQuizResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetQuizResponse>(data);
 
 		if (checkError ())
 			return;

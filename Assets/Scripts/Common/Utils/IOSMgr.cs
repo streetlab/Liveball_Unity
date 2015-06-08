@@ -46,7 +46,7 @@ public class IOSMgr : MonoBehaviour
 		//		Dictionary<string, object> dic = new Dictionary<string, object>();
 		NotiMsgInfo notiInfo = new NotiMsgInfo();
 		notiInfo.type = type;
-		notiInfo.info = JsonFx.Json.JsonReader.Deserialize<NotiQuizInfo>(info);
+		notiInfo.info = Newtonsoft.Json.JsonConvert.DeserializeObject<NotiQuizInfo>(info);
 		//		dic.Add("type", type);
 		//		dic.Add("info", quizInfo);
 		
@@ -84,8 +84,8 @@ public class IOSMgr : MonoBehaviour
 			gotToken = true;
 			mEventDelegate.Execute();
 		}
-		//		else
-		//			Debug.Log("token is null");
+//		else
+//			Debug.Log("token is null");
 	}
 
 	#endif

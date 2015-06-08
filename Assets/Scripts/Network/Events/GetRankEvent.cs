@@ -12,7 +12,7 @@ public class GetRankEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetRankResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetRankResponse>(data);
 
 //		if (checkError ())
 //			return;

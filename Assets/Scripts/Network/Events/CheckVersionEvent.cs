@@ -12,7 +12,7 @@ public class CheckVersionEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<CheckVersionResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<CheckVersionResponse>(data);
 
 		if (checkError ())
 			return;

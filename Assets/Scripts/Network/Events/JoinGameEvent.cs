@@ -12,7 +12,7 @@ public class JoinGameEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<BaseResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<BaseResponse>(data);
 
 		if (checkError ())
 			return;

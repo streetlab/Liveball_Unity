@@ -12,7 +12,7 @@ public class GetPlayerStatisticsEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetPlayerStatisticsResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlayerStatisticsResponse>(data);
 
 		if (checkError ())
 			return;

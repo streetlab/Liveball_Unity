@@ -238,7 +238,7 @@ public class ScriptTitle : MonoBehaviour {
 	public void FBReceived(){
 		string jsonStr = AndroidMgr.GetMsg ();
 		Dictionary<string, string> dic = new Dictionary<string, string>();
-		dic = JsonFx.Json.JsonReader.Deserialize<Dictionary<string, string>> (jsonStr);
+//		dic = Newtonsoft.Json.JsonConvert.Deserialize<Dictionary<string, string>> (jsonStr);
 
 		foreach (string key in dic.Keys) {
 			Debug.Log(key+" : "+dic[key]);

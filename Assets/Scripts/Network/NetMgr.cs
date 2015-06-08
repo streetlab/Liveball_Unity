@@ -491,7 +491,7 @@ public class NetMgr : MonoBehaviour{
 			// 받은 메세지를 출력
 			Debug.Log("Received : "+ msg);
 
-			SocketMsgInfo msgInfo = JsonFx.Json.JsonReader.Deserialize<SocketMsgInfo>(msg);
+			SocketMsgInfo msgInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<SocketMsgInfo>(msg);
 			mSocketMsgList.Add(msgInfo);
 			mRecvSemaphore = false;
 		}

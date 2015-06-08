@@ -12,7 +12,7 @@ public class IAPEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<IAPResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<IAPResponse>(data);
 
 		if (checkError ())
 			return;

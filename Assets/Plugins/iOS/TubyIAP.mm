@@ -77,7 +77,7 @@ extern "C"
         }
     }
     
-    [request release];
+//    [request release];
     
     for (NSString *invalidProductId in response.invalidProductIdentifiers)
     {

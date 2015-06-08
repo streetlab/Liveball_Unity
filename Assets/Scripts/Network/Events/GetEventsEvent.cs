@@ -13,7 +13,7 @@ public class GetEventsEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		mResponse = JsonFx.Json.JsonReader.Deserialize<GetEventsResponse>(data);
+		mResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetEventsResponse>(data);
 
 		eventDelegate.Execute ();
 	}

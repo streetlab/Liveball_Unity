@@ -12,7 +12,7 @@ public class GetSimpleResultEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetSimpleResultResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetSimpleResultResponse>(data);
 
 		if (checkError ())
 			return;

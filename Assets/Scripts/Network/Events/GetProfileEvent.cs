@@ -12,7 +12,7 @@ public class GetProfileEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetProfileResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetProfileResponse>(data);
 
 //		if (checkError ())
 //			return;

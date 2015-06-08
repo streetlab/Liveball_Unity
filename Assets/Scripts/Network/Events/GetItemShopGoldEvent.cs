@@ -12,7 +12,7 @@ public class GetItemShopGoldEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetItemShopGoldResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetItemShopGoldResponse>(data);
 
 		if (checkError ())
 			return;

@@ -12,7 +12,7 @@ public class GetDoneMailEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetDoneMailResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetDoneMailResponse>(data);
 
 //		if (checkError ())
 //			return;

@@ -12,7 +12,7 @@ public class GetItemShopRubyEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetItemShopRubyResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetItemShopRubyResponse>(data);
 
 		if (checkError ())
 			return;

@@ -57,9 +57,9 @@ public class CardInfo {
 		}
 	}
 
-	double _memCardNo;
+	long _memCardNo;
 
-	public double memCardNo {
+	public long memCardNo {
 		get {
 			return _memCardNo;
 		}
@@ -101,9 +101,9 @@ public class CardInfo {
 		}
 	}
 
-	int _needDiaPoint;
+	float _needDiaPoint;
 
-	public int needDiaPoint {
+	public float needDiaPoint {
 		get {
 			return _needDiaPoint;
 		}
@@ -156,9 +156,9 @@ public class CardInfo {
 		}
 	}
 
-	double _cardNo;
+	long _cardNo;
 
-	public double cardNo {
+	public long cardNo {
 		get {
 			return _cardNo;
 		}
@@ -233,9 +233,9 @@ public class CardInfo {
 		}
 	}
 
-	double _registKey;
+	long _registKey;
 
-	public double registKey {
+	public long registKey {
 		get {
 			return _registKey;
 		}

@@ -24,8 +24,8 @@ public class ItemStrategyInfo {
 	}
 
 //: "콤보쉴드",
-	int _multipleRatio;
-	public int multipleRatio {
+	float _multipleRatio;
+	public float multipleRatio {
 		get {
 			return _multipleRatio;
 		}

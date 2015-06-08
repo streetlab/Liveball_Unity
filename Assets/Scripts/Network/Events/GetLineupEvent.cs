@@ -12,7 +12,7 @@ public class GetLineupEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetLineupResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetLineupResponse>(data);
 
 		if (checkError ())
 			return;

@@ -181,14 +181,10 @@ public class QuizMgr : MonoBehaviour {
 			if(Instance.mMatchPlaying != null){
 				Instance.mMatchPlaying.CompleteJoin();
 			}
-		} else if(msgInfo.type.Equals(Constants.POST_GAME_START)){
-//			Debug.Log("UserMgr.Schedule.gameSeq is "+UserMgr.Schedule.gameSeq);
-//			if(UserMgr.Schedule != null){
-//				Debug.Log("msgInfo.info.gameSeq is "+msgInfo.info.gameSeq);
-//				if(UserMgr.Schedule.gameSeq == int.Parse(msgInfo.info.gameSeq)){
-//					AutoFade.LoadLevel("SceneGame");
-//				}
-//			}
+		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_START)){
+
+		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_CLOSE)){
+
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
 			if(Instance.mMainTop != null){
 //				bool hasQuiz = false;
@@ -286,7 +282,8 @@ public class QuizMgr : MonoBehaviour {
 	{
 		Debug.Log ("ReceivedMsg : " + msg);
 		NotiMsgInfo msgInfo = null;
-		msgInfo = JsonFx.Json.JsonReader.Deserialize<NotiMsgInfo> (msg);
+//		msgInfo = JsonFx.Json.JsonReader.DeserializeObject<NotiMsgInfo> (msg);
+		msgInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<NotiMsgInfo>(msg);
 		NotiReceived(msgInfo);		 
 	}
 }

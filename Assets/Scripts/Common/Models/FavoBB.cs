@@ -90,8 +90,8 @@ public class FavoBB {
 	}
 
 //":200,"
-	int _teamColor;
-	public int teamColor {
+	string _teamColor;
+	public string teamColor {
 		get {
 			return _teamColor;
 		}

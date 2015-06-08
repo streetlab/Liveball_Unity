@@ -12,7 +12,7 @@ public class GetScheduleEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetScheduleResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetScheduleResponse>(data);
 
 		if (checkError ())
 			return;

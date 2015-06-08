@@ -12,7 +12,7 @@ public class GetGameSposDetailBoardEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetGameSposDetailBoardResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetGameSposDetailBoardResponse>(data);
 
 		if (checkError ())
 			return;
