@@ -67,7 +67,11 @@ public class ProfileManager : MonoBehaviour {
 			StartCoroutine (GetImage (www));
 		}
 
-
+		//if (UserImageName != "") {
+			Profile.transform.FindChild ("LblNick").GetComponent<UILabel> ().text = UserName;
+			Profile.transform.FindChild ("LblStatus").GetComponent<UILabel> ().text = UserState;
+			Profile.transform.FindChild ("SprEmblem").GetComponent<UISprite> ().spriteName = UserTeamCode;
+		//}
 	}
 	public void SetSame(){
 		SetName = UserName;

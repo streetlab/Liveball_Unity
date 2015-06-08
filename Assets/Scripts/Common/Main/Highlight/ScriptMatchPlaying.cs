@@ -52,13 +52,16 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		mInningCounter = 0;
 //		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
 		NetMgr.JoinGame();
-
-		if(UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY){
-			mList.transform.FindChild("Label").gameObject.SetActive(true);
-			//TF_Landing.GetComponent<LandingManager>().Nongame();
-		} else{
-			mList.transform.FindChild("Label").gameObject.SetActive(false);
-			//TF_Landing.GetComponent<LandingManager>().Startgame();
+		if (UserMgr.Schedule != null) {
+			if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
+				mList.transform.FindChild ("Label").gameObject.SetActive (true);
+				//TF_Landing.GetComponent<LandingManager>().Nongame();
+			} else {
+				mList.transform.FindChild ("Label").gameObject.SetActive (false);
+				//TF_Landing.GetComponent<LandingManager>().Startgame();
+			}
+		} else {
+			mList.transform.FindChild ("Label").gameObject.SetActive (true);
 		}
 		mItemDetail.SetActive(false);
 		mItemHitter.SetActive(false);

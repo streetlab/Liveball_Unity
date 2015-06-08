@@ -21,7 +21,7 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		SetBtnDisable ();
 	}
 	void SetProfile(){
-		GameObject LeftProfile = transform.FindChild ("LeftMenuProfile").gameObject;
+		GameObject LeftProfile = transform.FindChild("Scroll").FindChild ("LeftMenuProfile").gameObject;
 		LeftProfile.transform.FindChild ("Profile").FindChild ("UserName").GetComponent<UILabel> ().text = 
 			UserMgr.UserInfo.memberName;
 		LeftProfile.transform.FindChild ("Profile").FindChild ("TeamName").GetComponent<UILabel> ().text = 

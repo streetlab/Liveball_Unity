@@ -95,11 +95,26 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		                     mScheduleEvent);
 	}
 	int nums = 0;
+	void numset(){
+		if (nums > 4) {
+			nums = 4;
+		} else if (nums < -4) {
+			nums = -4;
+		}
+	}
+
 	void Setdata(){
+		numset ();
 		int days = 0;
-		for (int a = 0; a < 7; a++) {
+		int a;
+		for (a = 0; a < 7; a++) {
 			for (int i = 0; i<When.Count; i++) {
-				if (System.DateTime.Now.Day+a == dayandday [When [i]]) {
+				int day = System.DateTime.Now.Day+a;
+				//Debug.Log("search for day ... " + day);
+				if(day>31){
+					day = day-31;
+				}
+				if (day == dayandday [When [i]]) {
 					int v = i + nums;
 					if (i + nums > When.Count - 1) {
 						v = When.Count - 1;
@@ -109,16 +124,46 @@ public class ScriptMainMenuRight : MonoBehaviour {
 						nums += 1;
 					}
 					days = dayandday [When [v]];
-					a = 99;
+					a = 100;
 					break;
 				}
 			}
 		}
+		Debug.Log ("a is " + a);
+		Debug.Log ("nums is " + nums);
+		if (a < 100&&nums<0) {
+		//	Debug.Log ("m m m m");
+			for (a = 0; a > -7; a--) {
+				for (int i = 0; i<When.Count; i++) {
+					int day = System.DateTime.Now.Day+a;
+
+					if(day>31){
+						day = day-31;
+					}
+					Debug.Log("search for day ... " + day);
+					if (day == dayandday [When [i]]) {
+						int v = i + nums;
+						if (i + nums > When.Count - 1) {
+							v = When.Count - 1;
+							nums -= 1;
+						} else if (i + nums < 0) {
+							v = 0;
+							nums += 1;
+						}
+						days = dayandday [When [v+1]];
+						a = -100;
+						break;
+					}
+				}
+			}
+		}
+		numset ();
 		Starts = true;
 		whens = true;
 		char [] array;
 		string aa;
 		Count.Clear ();
+		transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = "경기 없음";
 		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			ch.Clear ();
@@ -165,6 +210,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 	}
 	void getdata(){
+	
 		chacktoday ();
 		whens = true;
 		
@@ -291,6 +337,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			if (B) {
 				B = false;
 				transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
+				transform.FindChild ("SprBack").GetComponent<UIButton>().enabled =false;
 				w = false;
 				LEFT = true;
 				
@@ -338,6 +385,9 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				}
 				yield return new WaitForSeconds (0.02f);
 				
+			}
+			if(what){
+				transform.FindChild ("SprBack").GetComponent<UIButton>().enabled =true;
 			}
 			ING = true;
 		}
@@ -403,6 +453,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			B = false;
 		}
 		transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
+		transform.FindChild ("SprBack").GetComponent<UIButton>().enabled =false;
 	}
 	public void mm(){
 		nonoff = false;
@@ -410,9 +461,11 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	}
 	public void pp(){
 		nonoff = true;
+		transform.FindChild ("SprBack").GetComponent<UIButton>().enabled =true;
 	}
 	public void ss(){
 		transform.GetChild (1).transform.localPosition = (new Vector3 (0, 0, 0));
+		transform.FindChild ("SprBack").GetComponent<UIButton>().enabled =false;
 	}
 	
 	public bool IsOpen{

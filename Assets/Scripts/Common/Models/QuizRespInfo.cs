@@ -146,9 +146,9 @@ public class QuizRespInfo {
 		}
 	}
 
-	int _addRewardRate;
+	float _addRewardRate;
 
-	public int addRewardRate {
+	public float addRewardRate {
 		get {
 			return _addRewardRate;
 		}

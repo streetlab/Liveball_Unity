@@ -25,7 +25,7 @@ public class LandingManager : MonoBehaviour {
 	UISprite P_LeftTeamImage,P_RightTeamImage,One,Two,Three;
 	UITexture P_LPlayerImage,P_RPlayerImage;
 
-
+	GetSposTeamInfoEvent TeamMain;
 
 	// Use this for initialization
 	public void Clcik(){
@@ -63,13 +63,14 @@ public class LandingManager : MonoBehaviour {
 			UserMgr.Schedule.extend [1].teamName;
 		V_BroadCasting.text = 
 			UserMgr.Schedule.bcastChannel;
-		V_Location.text = 
-			getarea();
-		V_time.text = 
-			gettime();
-
-		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetNonGameData"));
-		NetMgr.GetLineup (UserMgr.Schedule.extend[0].teamCode, mlineupEvent);
+//		V_Location.text = 
+//			getarea();
+//		V_time.text = 
+//			gettime();
+		if (UserMgr.Schedule != null) {
+			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetNonGameData"));
+			NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
+		}
 	}
 	void GetNonGameData(){
 	
@@ -138,21 +139,26 @@ public class LandingManager : MonoBehaviour {
 			P_RPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Name").GetComponent<UILabel> ();
 			P_RBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Batting").GetComponent<UILabel> ();		
 			P_RPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+				int num;
+				if(ScriptMainTop.DetailBoard.play.playInningType==1){
+					num = 0;
+				}else{
+					num = 1;
+				}
+
+				num = 0;
 
 
-		
-
-
-			string playerInfo = ScriptMainTop.DetailBoard.player [0].playerName + "#" + ScriptMainTop.DetailBoard.player [0].playerNumber;
+				string playerInfo = ScriptMainTop.DetailBoard.player [num].playerName + "#" + ScriptMainTop.DetailBoard.player [num].playerNumber;
 			P_RPlayersName.text = playerInfo;
-			string playerAVG = ScriptMainTop.DetailBoard.player [0].ERA;
+				string playerAVG = ScriptMainTop.DetailBoard.player [num].ERA;
 			P_RBatting.text = playerAVG;
-			string strImage = ScriptMainTop.DetailBoard.player [0].imageName;
+				string strImage = ScriptMainTop.DetailBoard.player [num].imageName;
 			if (Poldname != playerInfo) {
-				if (ScriptMainTop.DetailBoard.player [0].imagePath != null 
-					&& ScriptMainTop.DetailBoard.player [0].imagePath.Length > 0)
-					strImage = ScriptMainTop.DetailBoard.player [0].imagePath
-						+ ScriptMainTop.DetailBoard.player [0].imageName;
+					if (ScriptMainTop.DetailBoard.player [num].imagePath != null 
+					    && ScriptMainTop.DetailBoard.player [num].imagePath.Length > 0)
+						strImage = ScriptMainTop.DetailBoard.player [num].imagePath
+							+ ScriptMainTop.DetailBoard.player [num].imageName;
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 				StartCoroutine (GetImage (www, P_RPlayerImage));
 			}
@@ -197,18 +203,21 @@ public class LandingManager : MonoBehaviour {
 	string Holdname = "";
 
 	void GetStartPleyer(){
-
-
-
-
-
 		Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
 		if (UtilMgr.SelectTeam.Length > 0) {
-			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetData1"));
-			NetMgr.GetLineup (GetTeamCode (UtilMgr.SelectTeam), mlineupEvent);
+			Debug.Log ("GetDate");
+			if (UserMgr.Schedule != null) {
+				Debug.Log ("GetDate");
+				TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetData"));
+				NetMgr.GetSposTeamInfo (GetTeamCode (UtilMgr.SelectTeam), TeamMain);
+			}
 		} else {
-			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetData"));
-			NetMgr.GetLineup (UserMgr.UserInfo.GetTeamCode (), mlineupEvent);
+			Debug.Log ("GetDate1");
+			if (UserMgr.Schedule != null) {
+				Debug.Log ("GetDate1");
+				TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetData1"));
+				NetMgr.GetSposTeamInfo (UserMgr.UserInfo.GetTeamCode(), TeamMain);
+			}
 		}
 
 
@@ -309,88 +318,109 @@ public class LandingManager : MonoBehaviour {
 		Community = transform.FindChild ("Scroll View").FindChild ("Buttens").FindChild ("Community").GetComponent<UISprite> ();
 		I_SpriteList.Add (Community);
 
+		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Highlight").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
+		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Lineup").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
+		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Livetalk").FindChild("Panel 1").FindChild("LineTopBlue").GetComponent<UISprite> ());
+		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Items").FindChild("TF_Items").FindChild("Top").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
+
+
 		I_BigLogo = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").GetComponent<UISprite> ();
 		I_TeamImage = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").FindChild ("TeamImage").GetComponent<UISprite> ();
 	}
 
+
 	void GetData(){
-		TeamColor = "c8004c";
-//		UserMgr.Schedule.
-//			TeamInfo
-//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
-//		I_StringList.Add (Is_Gold);
-		Is_TeamName = UserMgr.UserInfo.GetTeamFullName();
-		I_StringList.Add (Is_TeamName);
-		Is_RankScore = "";
-		I_StringList.Add (Is_RankScore);
-		if (UserMgr.Schedule.extend [0].teamCode == UserMgr.UserInfo.GetTeamCode()) {
-			Is_TodayDealWith = "오늘의 상대 : " + UserMgr.Schedule.extend[1].teamName;
-		}else if (UserMgr.Schedule.extend [1].teamCode == UserMgr.UserInfo.GetTeamCode()) {
-			Is_TodayDealWith = "오늘의 상대 : " + UserMgr.Schedule.extend[0].teamName;
-		}
-		I_StringList.Add (Is_TodayDealWith);
-		Is_TodayInfo = UserMgr.Schedule.bcastChannel + " | " + getarea() + " | " + gettime();
-		I_StringList.Add (Is_TodayInfo);
-		Is_Memo = "경기 시작과 함께 시청자 예측이 시작됩니다.";
-		I_StringList.Add (Is_Memo);
-		if (mlineupEvent.Response.data.pit.Count > 0) {
-
-			Is_PlayersName = mlineupEvent.Response.data.pit [0].playerName + "#" + mlineupEvent.Response.data.pit [0].playerNumber;
-			I_StringList.Add (Is_PlayersName);
-			Is_Batting = "";
-
-			I_StringList.Add (Is_Batting);
-
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit [0].imagePath + mlineupEvent.Response.data.pit [0].imageName);
-			StartCoroutine (GetImage (www, I_PlayersImage));
-			//Debug.Log();
-
-		}
-		I_BigLogo.color = new Color (1,1,1,1);
-		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
-		I_TeamImage.color = new Color (1,1,1,1);
-		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
-		InPutData ();
-		SetTeamColor ();
-	}
-	void GetData1(){
-		TeamColor = "c8004c";
+		Debug.Log ("GetDate");
+		SposTeamInfo T = TeamMain.Response.data;
+		TeamColor = T.myTeam.teamColor;
+		TeamColor = TeamColor.Replace("#","");
 		//		UserMgr.Schedule.
 		//			TeamInfo
 		//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
 		//		I_StringList.Add (Is_Gold);
-	
+		
 		Is_TeamName = GetTeamFullName(UtilMgr.SelectTeam);
 		I_StringList.Add (Is_TeamName);
-		Is_RankScore = "";
+		Is_RankScore = T.myTeam.ranking + "위 " + T.myTeam.countWin + "승 "
+			+ T.myTeam.countLose + "패 " + T.myTeam.countDraw+"무 ";
 		I_StringList.Add (Is_RankScore);
-		if (UserMgr.Schedule.extend [0].teamName == UtilMgr.SelectTeam) {
-			Is_TodayDealWith = "오늘의 상대 : " + UserMgr.Schedule.extend[1].teamName;
-		}else if (UserMgr.Schedule.extend [1].teamName == UtilMgr.SelectTeam) {
-			Is_TodayDealWith = "오늘의 상대 : " + UserMgr.Schedule.extend[0].teamName;
+		Is_TodayDealWith = "오늘의 상대 : ";
+		if (T.other.teamName != null) {
+			Is_TodayDealWith = "오늘의 상대 : " + T.other.teamName;
 		}
 		I_StringList.Add (Is_TodayDealWith);
-		Is_TodayInfo = UserMgr.Schedule.bcastChannel + " | " + getarea() + " | " + gettime();
+		Is_TodayInfo = T.schedule.bcastChannel + " | " + getarea(T) + " | " + gettime(T);
 		I_StringList.Add (Is_TodayInfo);
 		Is_Memo = "경기 시작과 함께 시청자 예측이 시작됩니다.";
 		I_StringList.Add (Is_Memo);
-		if (mlineupEvent.Response.data.pit.Count > 0) {
-			
-			Is_PlayersName = mlineupEvent.Response.data.pit [0].playerName + "#" + mlineupEvent.Response.data.pit [0].playerNumber;
-			I_StringList.Add (Is_PlayersName);
-			Is_Batting = "";
-			
-			I_StringList.Add (Is_Batting);
-			
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit [0].imagePath + mlineupEvent.Response.data.pit [0].imageName);
-			StartCoroutine (GetImage (www, I_PlayersImage));
-			//Debug.Log();
-			
-		}
 		I_BigLogo.color = new Color (1,1,1,1);
 		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
 		I_TeamImage.color = new Color (1,1,1,1);
 		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
+		if (T.myTeam.pitcher!=null) {
+			
+			Is_PlayersName = T.myTeam.pitcher.playerName + "#" + T.myTeam.pitcher.playerNumber.ToString();
+			I_StringList.Add (Is_PlayersName);
+			Is_Batting = T.myTeam.pitcher.ERA;
+			
+			I_StringList.Add (Is_Batting);
+			
+			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + T.myTeam.pitcher.imagePath + T.myTeam.pitcher.imageName);
+			StartCoroutine (GetImage (www, I_PlayersImage));
+			//Debug.Log();
+			
+		}
+
+		
+		InPutData ();
+		SetTeamColor ();
+
+	}
+	void GetData1(){
+		Debug.Log ("GetDate1");
+		SposTeamInfo T = TeamMain.Response.data;
+
+	
+
+		TeamColor = T.myTeam.teamColor;
+		TeamColor = TeamColor.Replace("#","");
+		//		UserMgr.Schedule.
+		//			TeamInfo
+		//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
+		//		I_StringList.Add (Is_Gold);
+		
+		Is_TeamName = UserMgr.UserInfo.GetTeamFullName();
+		I_StringList.Add (Is_TeamName);
+		Is_RankScore = T.myTeam.ranking + "위 " + T.myTeam.countWin + "승 "
+			+ T.myTeam.countLose + "패 " + T.myTeam.countDraw+"무 ";
+		I_StringList.Add (Is_RankScore);
+		Is_TodayDealWith = "오늘의 상대 : ";
+		if (T.other.teamName != null) {
+			Is_TodayDealWith = "오늘의 상대 : " + T.other.teamName;
+		}
+		I_StringList.Add (Is_TodayDealWith);
+		Is_TodayInfo = T.schedule.bcastChannel + " | " + getarea(T) + " | " + gettime(T);
+		I_StringList.Add (Is_TodayInfo);
+		Is_Memo = "경기 시작과 함께 시청자 예측이 시작됩니다.";
+		I_StringList.Add (Is_Memo);
+		I_BigLogo.color = new Color (1,1,1,1);
+		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
+		I_TeamImage.color = new Color (1,1,1,1);
+		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
+		if (T.myTeam.pitcher!=null) {
+			
+			Is_PlayersName = T.myTeam.pitcher.playerName + "#" + T.myTeam.pitcher.playerNumber.ToString();
+			I_StringList.Add (Is_PlayersName);
+			Is_Batting = T.myTeam.pitcher.ERA;
+			
+			I_StringList.Add (Is_Batting);
+			
+			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + T.myTeam.pitcher.imagePath + T.myTeam.pitcher.imageName);
+			StartCoroutine (GetImage (www, I_PlayersImage));
+			//Debug.Log();
+			
+		}
+		
 		InPutData ();
 		SetTeamColor ();
 	}
@@ -448,28 +478,23 @@ public class LandingManager : MonoBehaviour {
 	int num;
 	string result;
 
-	string getarea(){
+	string getarea(SposTeamInfo T){
 		ch.Clear ();
-		array = UserMgr.Schedule.subTitle.ToCharArray ();
+		array = T.schedule.scheduleName.ToCharArray ();
 		
-		for(int z = 0; z<array.Length;z++){
-			if(num==3){
+		for(int z = array.Length-2; z<array.Length;z++){
 				ch.Add (array[z].ToString());
 			}
-			if(num==2){
-				num+=1;	
-			}
-			if(array[z]==','){
-				num+=1;
-			}
-		}
-		num=0;
+
+			
+
+		
 		result = string.Join("", ch.ToArray());
 		return result;
 	}
-	string gettime(){
+	string gettime(SposTeamInfo T){
 		ch.Clear();
-		array = UserMgr.Schedule.startTime.ToCharArray ();
+		array = T.schedule.startTime.ToCharArray ();
 		for(int z = 8; z<12;z++){
 			ch.Add (array[z].ToString());
 			if(z==9){

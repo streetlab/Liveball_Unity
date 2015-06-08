@@ -40,6 +40,8 @@ public class LineupControl : MonoBehaviour {
 	}
 	// Use this for initialization
 	public void view () {
+		transform.FindChild ("Scroll View").gameObject.SetActive(false);
+		transform.FindChild ("Scroll View 1").gameObject.SetActive(false);
 		//if (!transform.FindChild ("Scroll View").gameObject.activeSelf && !transform.FindChild ("Scroll View 1").gameObject.activeSelf) {
 		
 		//}
@@ -77,15 +79,16 @@ public class LineupControl : MonoBehaviour {
 		Ghit.Clear ();
 		Gpit2.Clear ();
 		Ghit2.Clear ();
-		Debug.Log ("what teamcode : " + UserMgr.Schedule.extend[0].teamCode);
-		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
-		NetMgr.GetLineup (UserMgr.Schedule.extend[0].teamCode,mlineupEvent);
+		//Debug.Log ("what teamcode : " + UserMgr.Schedule.extend[0].teamCode);
+		if (UserMgr.Schedule != null) {
+			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
+			NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
 		
-		T1.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
-		T2.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
-		T11.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
-		T22.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
-		
+			T1.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
+			T2.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+			T11.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
+			T22.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+		}
 		
 	}
 	

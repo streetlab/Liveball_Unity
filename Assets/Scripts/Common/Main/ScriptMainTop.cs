@@ -327,8 +327,10 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 	void InitTopInfo(){
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
-		if(UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_PLAYING){
-			mBtnHighlight.transform.FindChild("Label").GetComponent<UILabel>().text = mStrLive;
+		if (UserMgr.Schedule != null) {
+			if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_PLAYING) {
+				mBtnHighlight.transform.FindChild ("Label").GetComponent<UILabel> ().text = mStrLive;
+			}
 		}
 	}
 
