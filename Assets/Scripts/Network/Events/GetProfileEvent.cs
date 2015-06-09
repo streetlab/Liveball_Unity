@@ -12,8 +12,8 @@ public class GetProfileEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetProfileResponse>(data);
-
+		response = (GetProfileResponse)Newtonsoft.Json.JsonConvert.DeserializeObject(data, typeof(GetProfileResponse));
+//		Newtonsoft.Json.JsonConvert.DeserializeObject<System.Data.DataSet>(data);
 //		if (checkError ())
 //			return;
 

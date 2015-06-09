@@ -12,7 +12,8 @@ public class CheckVersionEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = Newtonsoft.Json.JsonConvert.DeserializeObject<CheckVersionResponse>(data);
+		response = (CheckVersionResponse)Newtonsoft.Json.JsonConvert.DeserializeObject(data, typeof(CheckVersionResponse));
+//		Newtonsoft.Json.JsonConvert.DeserializeObject(
 
 		if (checkError ())
 			return;

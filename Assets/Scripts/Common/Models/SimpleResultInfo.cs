@@ -244,8 +244,8 @@ public class SimpleResultInfo {
 	}
 
 // "",
-	int _multipleRatio;
-	public int multipleRatio {
+	float _multipleRatio;
+	public float multipleRatio {
 		get {
 			return _multipleRatio;
 		}
