@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LandingManager : MonoBehaviour {
-	public GameObject test;
+	public GameObject LandingScroll;
 	public GameObject Pitcher;
 	int a = 0;
 	UILabel I_Gold,I_TeamName,I_RankScore,I_TodayDealWith,I_TodayInfo,I_Memo,I_PlayersName,I_Batting;
@@ -31,11 +31,11 @@ public class LandingManager : MonoBehaviour {
 	// Use this for initialization
 	public void Clcik(){
 		if (a % 2 == 0) {
-			test.transform.FindChild ("Info").gameObject.SetActive (true);
-			test.transform.FindChild ("Playing").gameObject.SetActive (false);
+			LandingScroll.transform.FindChild ("Info").gameObject.SetActive (true);
+			LandingScroll.transform.FindChild ("Playing").gameObject.SetActive (false);
 		} else {
-			test.transform.FindChild ("Info").gameObject.SetActive (false);
-			test.transform.FindChild ("Playing").gameObject.SetActive (true);
+			LandingScroll.transform.FindChild ("Info").gameObject.SetActive (false);
+			LandingScroll.transform.FindChild ("Playing").gameObject.SetActive (true);
 		}
 		a++;
 
@@ -50,9 +50,9 @@ public class LandingManager : MonoBehaviour {
 	
 
 
-		test.transform.FindChild ("Info").gameObject.SetActive (false);
-		test.transform.FindChild ("VS").gameObject.SetActive (true);
-		test.transform.FindChild ("Playing").gameObject.SetActive (false);
+		LandingScroll.transform.FindChild ("Info").gameObject.SetActive (false);
+		LandingScroll.transform.FindChild ("VS").gameObject.SetActive (true);
+		LandingScroll.transform.FindChild ("Playing").gameObject.SetActive (false);
 		V_LeftTeamImage.spriteName = UtilMgr
 			.GetTeamEmblem (UserMgr.Schedule.extend[0].imageName);
 		V_RightTeamImage.spriteName = UtilMgr
@@ -107,18 +107,21 @@ public class LandingManager : MonoBehaviour {
 	}
 
 	public void Startgame(){
-		test.transform.FindChild ("Info").gameObject.SetActive (false);
-		test.transform.FindChild ("VS").gameObject.SetActive (false);
-		test.transform.FindChild ("Playing").gameObject.SetActive (true);
+		LandingScroll.transform.FindChild ("Info").gameObject.SetActive (false);
+		LandingScroll.transform.FindChild ("VS").gameObject.SetActive (false);
+		LandingScroll.transform.FindChild ("Playing").gameObject.SetActive (true);
+		if (ScriptMainTop.LandingState == 3) {
+			LandingScroll.transform.FindChild ("Playing").FindChild("Ground").FindChild("END").gameObject.SetActive (true);
+		}
 
 		//StartCoroutine (view());
 	}
 
 
 	public void StartHeamhome(){
-		test.transform.FindChild ("Info").gameObject.SetActive (true);
-		test.transform.FindChild ("VS").gameObject.SetActive (false);
-		test.transform.FindChild ("Playing").gameObject.SetActive (false);
+		LandingScroll.transform.FindChild ("Info").gameObject.SetActive (true);
+		LandingScroll.transform.FindChild ("VS").gameObject.SetActive (false);
+		LandingScroll.transform.FindChild ("Playing").gameObject.SetActive (false);
 	}
 
 
@@ -197,8 +200,8 @@ public class LandingManager : MonoBehaviour {
 
 						MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(nextPlayer[i].hitAvg)));
 					
-						MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString();
-						MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = "아웃 " + ((1-float.Parse(nextPlayer[i].hitAvg))*100f).ToString();
+						MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString()+"%";
+						MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(nextPlayer[i].hitAvg))*100f).ToString()+"% 아웃";
 
 			if(Holdname!=strImage){
 							if (nextPlayer[i].imagePath != null && nextPlayer[i].imagePath.Length > 0){
@@ -278,18 +281,19 @@ public class LandingManager : MonoBehaviour {
 
 	}
 	public void Start () {
+	
 		N = null;
 		PathSettings ();
 		//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
-		Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
-		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 3) {	
+		//Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
+		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 4) {	
 			StartHeamhome();
 
 			//GetData ();
 			GetStartPleyer ();
 		}else if(ScriptMainTop.LandingState == 1){
 			Nongame();
-		}else if(ScriptMainTop.LandingState == 2){
+		}else if(ScriptMainTop.LandingState == 2||ScriptMainTop.LandingState == 3){
 			Startgame();
 		}
 			//InPutData ();
@@ -301,7 +305,7 @@ public class LandingManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void PathSettings () {
-
+		LandingScroll.transform.FindChild ("Playing").FindChild("Ground").FindChild("END").gameObject.SetActive (false);
 		//Info
 		GameObject temp = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BG_W").gameObject;
 //		I_Gold = transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("TopGoldbar").FindChild ("Label").GetComponent<UILabel> ();
@@ -387,7 +391,7 @@ public class LandingManager : MonoBehaviour {
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Highlight").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Lineup").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Livetalk").FindChild("Panel 1").FindChild("LineTopBlue").GetComponent<UISprite> ());
-		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Items").FindChild("TF_Items").FindChild("Top").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
+		//I_SpriteList.Add (transform.parent.parent.FindChild("TF_Items").FindChild("TF_Items").FindChild("Top").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
 
 
 		I_BigLogo = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").GetComponent<UISprite> ();
@@ -521,14 +525,19 @@ public class LandingManager : MonoBehaviour {
 	public void BlueButten(){
 		if (!transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.activeSelf) {
 			transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (true);
+			transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("Base").FindChild("BlueButten")
+				.GetComponent<UIButton>().defaultColor = new Color(225f/255f,200f/255f,150f/255f);
 		} else {
 			transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (false);
+			transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("Base").FindChild("BlueButten")
+				.GetComponent<UIButton>().defaultColor = new Color(1f,1f,1f);
 		}
 
 	}
 	public void BlueButtenOff(){
 		transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W Panel").gameObject.SetActive (false);
-		
+		transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("Base").FindChild("BlueButten")
+			.GetComponent<UIButton>().defaultColor = new Color(1f,1f,1f);
 	}
 	IEnumerator GetImage(WWW www, UITexture texture)
 	{

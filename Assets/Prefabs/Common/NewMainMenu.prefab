@@ -61,6 +61,7 @@ GameObject:
   - 114: {fileID: 11404284}
   - 114: {fileID: 11466112}
   - 114: {fileID: 11465370}
+  - 114: {fileID: 11428844}
   m_Layer: 0
   m_Name: BtnProfile
   m_TagString: Untagged
@@ -436,6 +437,7 @@ GameObject:
   - 114: {fileID: 11460452}
   - 114: {fileID: 11485616}
   - 114: {fileID: 11423752}
+  - 114: {fileID: 11448328}
   m_Layer: 0
   m_Name: BtnTeamHome
   m_TagString: Untagged
@@ -490,6 +492,7 @@ GameObject:
   - 114: {fileID: 11498620}
   - 114: {fileID: 11430614}
   - 114: {fileID: 11401326}
+  - 114: {fileID: 11431718}
   m_Layer: 0
   m_Name: BtnTeamRanking
   m_TagString: Untagged
@@ -599,6 +602,7 @@ GameObject:
   - 114: {fileID: 11472638}
   - 114: {fileID: 11475108}
   - 114: {fileID: 11416738}
+  - 114: {fileID: 11467048}
   m_Layer: 0
   m_Name: BtnSettings
   m_TagString: Untagged
@@ -889,6 +893,7 @@ GameObject:
   - 114: {fileID: 11473396}
   - 114: {fileID: 11462062}
   - 114: {fileID: 11466822}
+  - 114: {fileID: 11482520}
   m_Layer: 0
   m_Name: BtnRanking
   m_TagString: Untagged
@@ -1605,6 +1610,7 @@ GameObject:
   - 114: {fileID: 11433510}
   - 114: {fileID: 11477026}
   - 114: {fileID: 11435164}
+  - 114: {fileID: 11462618}
   m_Layer: 0
   m_Name: BtnRecord
   m_TagString: Untagged
@@ -5681,6 +5687,19 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
   mSpriteName: default_white
   mFillCenter: 1
+--- !u!114 &11428844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11428860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5798,7 +5817,7 @@ MonoBehaviour:
   mClipping: 1
   mClipRange: {x: 0, y: 0, z: 400, w: 104}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 23
+  mDepth: 17
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11430486
@@ -5864,6 +5883,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   targetFSM: {fileID: 0}
+--- !u!114 &11431718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11432262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6217,7 +6249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  dragEffect: 2
+  dragEffect: 0
   restrictWithinPanel: 1
   disableDragIfFits: 0
   smoothDragStart: 1
@@ -6433,13 +6465,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3013
+  startingRenderQueue: 3010
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
   mClipRange: {x: 0, y: 0, z: 540, w: 1184}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 21
+  mDepth: 15
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11445512
@@ -6478,7 +6510,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3010
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -6865,6 +6897,19 @@ MonoBehaviour:
     StepFrame: 0
     activeStateName: 
   fsmTemplate: {fileID: 0}
+--- !u!114 &11448328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11449282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7952,7 +7997,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 540
   mHeight: 1184
-  mDepth: 19
+  mDepth: 14
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -8216,6 +8261,19 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick: []
+--- !u!114 &11462618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11462808
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9213,6 +9271,19 @@ MonoBehaviour:
     StepFrame: 0
     activeStateName: 
   fsmTemplate: {fileID: 0}
+--- !u!114 &11467048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11467282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9990,7 +10061,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3007
+  startingRenderQueue: 3014
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -10749,13 +10820,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
+  startingRenderQueue: 3020
   mClipTexture: {fileID: 2800000, guid: bbee9e06cd16a4cc7b8c04c280235d31, type: 3}
   mAlpha: 1
   mClipping: 1
   mClipRange: {x: 0, y: 0, z: 104, w: 104}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 23
+  mDepth: 18
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11480092
@@ -10938,6 +11009,19 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
   mSpriteName: default_white
   mFillCenter: 1
+--- !u!114 &11482520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11483190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11088,7 +11172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: 1
-  dragEffect: 2
+  dragEffect: 0
   restrictWithinPanel: 1
   disableDragIfFits: 0
   smoothDragStart: 1
@@ -11700,7 +11784,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3006
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

@@ -38,7 +38,7 @@ public class ScriptMainTop : MonoBehaviour {
 	public GameObject gameobj;
 	public GameObject mWebview;
 
-	public static int LandingState=3;
+	public static int LandingState=4;
 
 	GetQuizEvent mEventQuiz;
 	GetGameSposDetailBoardEvent mBoardEvent;
@@ -63,7 +63,7 @@ public class ScriptMainTop : MonoBehaviour {
 	static GetScheduleEvent mScheduleEvent;
 	void Start () {
 		QuizMgr.EnterMain(this);
-		if (LandingState == 3) {
+		if (LandingState == 4) {
 			LandingState = 0;
 		
 			transform.FindChild ("TopInfoItem").FindChild ("BtnMenu 1").gameObject.SetActive (false);
@@ -230,6 +230,8 @@ public class ScriptMainTop : MonoBehaviour {
 						if(mScheduleEvent.Response.data [i].gameStatus == 1){
 							
 							LandingState = 2;
+						}else if(mScheduleEvent.Response.data [i].gameStatus == 2){
+							LandingState = 3;
 						}
 				
 						gameobj.SetActive (true);
@@ -242,6 +244,8 @@ public class ScriptMainTop : MonoBehaviour {
 						if(mScheduleEvent.Response.data [i].gameStatus == 1){
 							
 							LandingState = 2;
+						}else if(mScheduleEvent.Response.data [i].gameStatus == 2){
+							LandingState = 3;
 						}
 					
 						gameobj.SetActive (true);
