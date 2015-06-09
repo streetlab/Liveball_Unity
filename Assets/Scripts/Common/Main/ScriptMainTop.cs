@@ -223,12 +223,14 @@ public class ScriptMainTop : MonoBehaviour {
 					num = num-System.DateTime.Now.Day;
 				}
 				if (System.DateTime.Now.Day+num == int.Parse(result)) {
-					if(mScheduleEvent.Response.data [i].gameStatus == 1){
-					LandingState = 2;
-					}
+				
 						//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if(mScheduleEvent.Response.data [i].gameStatus == 1){
+							
+							LandingState = 2;
+						}
 				
 						gameobj.SetActive (true);
 						mHighlight.SetActive (true);
@@ -237,6 +239,10 @@ public class ScriptMainTop : MonoBehaviour {
 						return;
 					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == UserMgr.UserInfo.GetTeamCode()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if(mScheduleEvent.Response.data [i].gameStatus == 1){
+							
+							LandingState = 2;
+						}
 					
 						gameobj.SetActive (true);
 						mHighlight.SetActive (true);
@@ -613,7 +619,8 @@ public class ScriptMainTop : MonoBehaviour {
 				QuizMgr.MoreQuiz = true;
 			}
 			AddQuizIntoList ();
-			if(!QuizMgr.IsBettingOpended)
+			if (!QuizMgr.IsBettingOpended)
+			QuizMgr.NextPlayerInfo = mEventQuiz.Response.data.nextPlayer;
 				OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
 //		}
 

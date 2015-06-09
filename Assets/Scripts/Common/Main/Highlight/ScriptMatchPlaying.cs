@@ -166,7 +166,11 @@ public class ScriptMatchPlaying : MonoBehaviour {
 				Debug.Log("InitQuizFirst");
 				Debug.Log("mEventProgQuiz.Response.data.quiz[0] : " + mEventProgQuiz.Response.data.quiz[0].playerName);
 				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
-					SetHitter(mEventProgQuiz.Response.data.quiz[0]);
+					SetHitter(mEventProgQuiz.Response.data.nextPlayer);
+				string TeamColor = mEventProgQuiz.Response.data.team[1].teamColor;
+				TeamColor = TeamColor.Replace("#","");
+				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
+					SetTeamColor(TeamColor);
 			
 			}
 		}

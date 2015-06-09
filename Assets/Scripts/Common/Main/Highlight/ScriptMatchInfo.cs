@@ -48,7 +48,7 @@ public class ScriptMatchInfo : MonoBehaviour {
 		SetStrike (play.strikeCount);
 		SetBall (play.ballCount);
 		SetOut (play.outCount);
-		SetRound (play.playRound);
+		//SetRound (play.playRound);
 		SetHalftime (play.playInningType);
 		List<int> bases = new List<int> ();
 		if (play.base1st > 0)
@@ -67,7 +67,7 @@ public class ScriptMatchInfo : MonoBehaviour {
 		SetOut (outCnt);
 		SetBases (bases);
 		SetHalftime (half);
-		SetRound (round);
+		//SetRound (round);
 	}
 	
 	public void ClearBoard()
@@ -77,7 +77,7 @@ public class ScriptMatchInfo : MonoBehaviour {
 		SetOut (0);
 		SetBases (new List<int> ());
 		SetHalftime (0);
-		SetRound (1);
+		//SetRound (1);
 	}
 	
 	public void SetHalftime(int value)
@@ -101,7 +101,10 @@ public class ScriptMatchInfo : MonoBehaviour {
 
 
 		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
-		
+		GameObject Left = Ground.transform.FindChild ("LeftTeam").FindChild ("Sprite").gameObject;
+		GameObject Right = Ground.transform.FindChild ("RightTeam").FindChild ("Sprite").gameObject;
+		Left.SetActive(false);
+		Right.SetActive(false);
 		
 		
 		
@@ -109,11 +112,15 @@ public class ScriptMatchInfo : MonoBehaviour {
 		{
 			Halftime.text = RoundNum + "회초";
 			
-			
+			Left.SetActive(true);
+			Right.SetActive(false);
 		}
 		else if(value == 1)
 		{
 			Halftime.text = RoundNum + "회말";
+
+			Left.SetActive(false);
+			Right.SetActive(true);
 		}
 
 	}
@@ -317,30 +324,30 @@ public class ScriptMatchInfo : MonoBehaviour {
 
 	}
 	
-	public void SetRound(int round)
-	{
-		mRound.GetComponent<UILabel> ().text = round.ToString ();
-		mRound.FindChild ("Label").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (round);
-		GameObject Left = Ground.transform.FindChild ("LeftTeam").FindChild ("Sprite").gameObject;
-		GameObject Right = Ground.transform.FindChild ("RightTeam").FindChild ("Sprite").gameObject;
-		Left.SetActive(false);
-		Right.SetActive(false);
-
-
-		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
-		
-		RoundNum = round;
-		
-		if (Halftime.text [Halftime.text.Length - 1] == '초') {
-			Halftime.text = RoundNum + "회초";
-			Left.SetActive(true);
-			Right.SetActive(false);
-		}
-		else if(Halftime.text [Halftime.text.Length - 1] == '말'){
-			
-			Halftime.text = RoundNum + "회말";
-			Left.SetActive(false);
-			Right.SetActive(true);
-		}
-	}
+//	public void SetRound(int round)
+//	{
+//		mRound.GetComponent<UILabel> ().text = round.ToString ();
+//		mRound.FindChild ("Label").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (round);
+//		GameObject Left = Ground.transform.FindChild ("LeftTeam").FindChild ("Sprite").gameObject;
+//		GameObject Right = Ground.transform.FindChild ("RightTeam").FindChild ("Sprite").gameObject;
+//		Left.SetActive(false);
+//		Right.SetActive(false);
+//
+//
+//		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
+//		
+//		RoundNum = round;
+//		
+//		if (Halftime.text [0] == '초') {
+//			Halftime.text = RoundNum + "회초";
+//			Left.SetActive(true);
+//			Right.SetActive(false);
+//		}
+//		else if(Halftime.text [0] == '말'){
+//			
+//			Halftime.text = RoundNum + "회말";
+//			Left.SetActive(false);
+//			Right.SetActive(true);
+//		}
+//	}
 }

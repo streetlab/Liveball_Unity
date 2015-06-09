@@ -14,16 +14,17 @@ public class LandingManager : MonoBehaviour {
 	List<UILabel> I_LabelList = new List<UILabel>();
 	List<string> I_StringList = new List<string>();
 	List<UISprite> I_SpriteList = new List<UISprite>();
-	GetLineupEvent mlineupEvent;
+
 
 
 	UILabel V_LTeamName,V_RTeamName,V_BroadCasting,V_Location,V_time,V_LBatting,V_LPlayerName,V_RBatting,V_RPlayerName,V_Memo;
 	UISprite V_LeftTeamImage,V_RightTeamImage;
 	UITexture V_LPlayerImage,V_RPlayerImage;
 
-	UILabel P_LTeamName,P_RTeamName,P_GameState,P_Score,P_LPlayersName,P_LBatting,P_RPlayersName,P_RBatting,P_Hit,P_Out;
+	UILabel P_LTeamName,P_RTeamName,P_GameState,P_Score,P_LPlayersName,P_LBatting,P_RPlayersName,P_RBatting,P_Hit,P_Out,P_B1,P_B2,P_B3,P_B4,P_B,P_T,P_VS;
 	UISprite P_LeftTeamImage,P_RightTeamImage,One,Two,Three;
 	UITexture P_LPlayerImage,P_RPlayerImage;
+	GameObject MidBar;
 
 	GetSposTeamInfoEvent TeamMain;
 
@@ -68,47 +69,43 @@ public class LandingManager : MonoBehaviour {
 //		V_time.text = 
 //			gettime();
 		if (UserMgr.Schedule != null) {
-			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetNonGameData"));
-			NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
+
+			TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetNonGameData"));
+			NetMgr.GetSposTeamInfo (UserMgr.Schedule.extend [1].teamCode, TeamMain);
+			
+		
 		}
 	}
 	void GetNonGameData(){
 	
-		if (mlineupEvent.Response.data.pit.Count > 0) {
-			
-			V_LPlayerName.text = mlineupEvent.Response.data.pit [0].playerName + "#" + mlineupEvent.Response.data.pit [0].playerNumber;
+		if (TeamMain.Response.data != null) {
+			TeamColor = TeamMain.Response.data.myTeam.teamColor;
+			TeamColor = TeamColor.Replace("#","");
+			SetTeamColor(TeamColor);
+			V_LPlayerName.text = TeamMain.Response.data.other.pitcher.playerName + "#" + TeamMain.Response.data.other.pitcher.playerNumber;
 
-			V_LBatting.text = "";
+			V_LBatting.text = TeamMain.Response.data.other.pitcher.ERA;
 			
 
 			
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit [0].imagePath + mlineupEvent.Response.data.pit [0].imageName);
+			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + TeamMain.Response.data.other.pitcher.imagePath + TeamMain.Response.data.other.pitcher.imageName);
 			StartCoroutine (GetImage (www, V_LPlayerImage));
-			//Debug.Log();
-			
-		}
-		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "GetNonGameData2"));
-		NetMgr.GetLineup (UserMgr.Schedule.extend[1].teamCode, mlineupEvent);
 
-	}
-	void GetNonGameData2(){
-		
-		if (mlineupEvent.Response.data.pit.Count > 0) {
+			V_RPlayerName.text = TeamMain.Response.data.myTeam.pitcher.playerName + "#" + TeamMain.Response.data.myTeam.pitcher.playerNumber;
 			
-			V_RPlayerName.text = mlineupEvent.Response.data.pit [0].playerName + "#" + mlineupEvent.Response.data.pit [0].playerNumber;
-			
-			V_RBatting.text = "";
+			V_RBatting.text = TeamMain.Response.data.myTeam.pitcher.ERA;
 			
 			
 			
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit [0].imagePath + mlineupEvent.Response.data.pit [0].imageName);
+			www = new WWW (Constants.IMAGE_SERVER_HOST + TeamMain.Response.data.myTeam.pitcher.imagePath + TeamMain.Response.data.myTeam.pitcher.imageName);
 			StartCoroutine (GetImage (www, V_RPlayerImage));
 			//Debug.Log();
 			
 		}
 	
-		
+
 	}
+
 	public void Startgame(){
 		test.transform.FindChild ("Info").gameObject.SetActive (false);
 		test.transform.FindChild ("VS").gameObject.SetActive (false);
@@ -117,11 +114,7 @@ public class LandingManager : MonoBehaviour {
 		//StartCoroutine (view());
 	}
 
-	public void Heamhome(){
-		test.transform.FindChild ("Info").gameObject.SetActive (true);
-		test.transform.FindChild ("VS").gameObject.SetActive (false);
-		test.transform.FindChild ("Playing").gameObject.SetActive (false);
-	}
+
 	public void StartHeamhome(){
 		test.transform.FindChild ("Info").gameObject.SetActive (true);
 		test.transform.FindChild ("VS").gameObject.SetActive (false);
@@ -172,34 +165,96 @@ public class LandingManager : MonoBehaviour {
 
 
 
-
-	public void SetHitter(QuizInfo quizInfo)
+	static List<nextPlayerInfo> N;
+	string strImage;
+	public void SetHitter(List<nextPlayerInfo> nextPlayer)
 	{ 
-
+	
+		if(ScriptMainTop.LandingState==2&&nextPlayer!=null){
+		N = nextPlayer;
+			strImage = "";
 		Debug.Log("SetHitter0");
-		if (quizInfo!=null) {
-			P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
-			P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
-			P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
-			
-			Debug.Log("SetHitter1");
-			string playerInfo = quizInfo.playerName + "#" + quizInfo.playerNumber;
+		if (nextPlayer!=null) {
+//			P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
+//			P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
+//			P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+//			
+				for(int i = 0; i <nextPlayer.Count;i++ ){
+					if(nextPlayer[i].type == 1){
+						string playerInfo = nextPlayer[i].playerName + "#" + nextPlayer[i].playerNumber;
 			P_LPlayersName.text = playerInfo;
-			string playerAVG = quizInfo.rewardDividend;
+						string playerAVG = nextPlayer[i].hitAvg;
 			P_LBatting.text = playerAVG;
 			
-			string strImage = quizInfo.imageName;
+						strImage = nextPlayer[i].imageName;
+						P_B.text = nextPlayer[i].hitAvg;
+						P_B1.text = nextPlayer[i].hitH.ToString()+"%";
+						P_B2.text = nextPlayer[i].hit2B.ToString()+"%";
+						P_B3.text = nextPlayer[i].hitHr.ToString()+"%";
+						P_B4.text = nextPlayer[i].hitBB.ToString()+"%";
+						P_VS.text = "VS 시즌타율 " + nextPlayer[i].hitAvg;
+
+
+						MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(nextPlayer[i].hitAvg)));
+					
+						MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString();
+						MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = "아웃 " + ((1-float.Parse(nextPlayer[i].hitAvg))*100f).ToString();
+
 			if(Holdname!=strImage){
-				if (quizInfo.imagePath != null && quizInfo.imagePath.Length > 0)
-					strImage =quizInfo .imagePath + quizInfo.imageName;
+							if (nextPlayer[i].imagePath != null && nextPlayer[i].imagePath.Length > 0){
+								strImage =nextPlayer[i] .imagePath + nextPlayer[i].imageName;
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 				Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
 				StartCoroutine (GetImage (www, P_LPlayerImage));
+							}
+
+						}
 			}
+				}
 			Holdname = strImage;
 		}
+		}
 	}
-
+	public void M1(){
+	
+		P_T.text = "시즌타율";
+		P_B.text = "";
+		P_B1.text = "";
+		P_B2.text = "";
+		P_B3.text ="";
+		P_B4.text = "";
+		if (N != null) {
+			for (int i = 0; i <N.Count; i++) {
+				if (N [i].type == 1) {
+					P_B.text = N[i].hitAvg;
+					P_B1.text = N[i].hitH.ToString()+"%";
+					P_B2.text = N[i].hit2B.ToString()+"%";
+					P_B3.text = N[i].hitHr.ToString()+"%";
+					P_B4.text = N[i].hitBB.ToString()+"%";
+				}
+			}
+		}
+	}
+	public void M2(){
+		P_T.text = "기준";
+		P_B.text = "";
+		P_B1.text = "";
+		P_B2.text = "";
+		P_B3.text ="";
+		P_B4.text = "";
+		if (N != null) {
+				for(int i = 0; i <N.Count;i++ ){
+					if(N[i].type == 2){
+				
+					P_B.text = N[i].title;
+					P_B1.text = N[i].hitH.ToString()+"%";
+					P_B2.text = N[i].hit2B.ToString()+"%";
+					P_B3.text = N[i].hitHr.ToString()+"%";
+					P_B4.text = N[i].hitBB.ToString()+"%";
+					}
+				}
+		}
+	}
 	string Holdname = "";
 
 	void GetStartPleyer(){
@@ -223,9 +278,10 @@ public class LandingManager : MonoBehaviour {
 
 	}
 	public void Start () {
+		N = null;
 		PathSettings ();
 		//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
-		//Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
+		Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
 		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 3) {	
 			StartHeamhome();
 
@@ -306,6 +362,16 @@ public class LandingManager : MonoBehaviour {
 
 		P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
 		P_RPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+
+		P_B1 = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("Bot").FindChild ("Top 1").GetComponent<UILabel> ();
+		P_B2 = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("Bot").FindChild ("Top 2").GetComponent<UILabel> ();
+		P_B3 = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("Bot").FindChild ("Top 3").GetComponent<UILabel> ();
+		P_B4 = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("Bot").FindChild ("Top 4").GetComponent<UILabel> ();
+		P_B = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("Bot").GetComponent<UILabel> ();
+		P_T = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("Top").GetComponent<UILabel> ();
+		P_VS = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Mid_BG").FindChild ("VS").GetComponent<UILabel> ();
+		MidBar = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("MidBar").gameObject;
+
 		//Buttens
 		LineTop = transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("LineTop").GetComponent<UISprite> ();
 		I_SpriteList.Add (LineTop);
@@ -373,7 +439,7 @@ public class LandingManager : MonoBehaviour {
 
 		
 		InPutData ();
-		SetTeamColor ();
+		SetTeamColor (TeamColor);
 
 	}
 	void GetData1(){
@@ -422,7 +488,7 @@ public class LandingManager : MonoBehaviour {
 		}
 		
 		InPutData ();
-		SetTeamColor ();
+		SetTeamColor (TeamColor);
 	}
 	void InPutData(){
 		for (int i = 0; i < I_StringList.Count; i++) {
@@ -431,11 +497,11 @@ public class LandingManager : MonoBehaviour {
 		//BigLogo.spriteName = "";
 		//TeamImage.spriteName = "";	
 	}
-	void SetTeamColor(){
-		if (TeamColor.Length > 5) {
-			int R = int.Parse( TeamColor.Substring (0, 2), System.Globalization.NumberStyles.HexNumber);
-			int G = int.Parse( TeamColor.Substring (2, 2), System.Globalization.NumberStyles.HexNumber);
-			int B = int.Parse( TeamColor.Substring (4, 2), System.Globalization.NumberStyles.HexNumber);
+	public void SetTeamColor(string teamcolor){
+		if (teamcolor.Length > 5) {
+			int R = int.Parse( teamcolor.Substring (0, 2), System.Globalization.NumberStyles.HexNumber);
+			int G = int.Parse( teamcolor.Substring (2, 2), System.Globalization.NumberStyles.HexNumber);
+			int B = int.Parse( teamcolor.Substring (4, 2), System.Globalization.NumberStyles.HexNumber);
 			//Debug.Log("R : " +R);
 			//Debug.Log("G : " +G);
 			//Debug.Log("B : " +B);

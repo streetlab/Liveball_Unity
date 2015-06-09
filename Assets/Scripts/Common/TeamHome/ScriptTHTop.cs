@@ -26,8 +26,8 @@ public class ScriptTHTop : MonoBehaviour {
 //		mSeason.SetActive (false);
 //		mSquad.SetActive (false);
 //		OpenTimeline ();
-		CheckFirst();
-		InitTopInfo();
+		//CheckFirst();
+	//	InitTopInfo();
 		OpenNanoo ();
 	}
 

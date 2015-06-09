@@ -222,9 +222,9 @@ public class TeamInfo {
 		}
 	}
 
-	int _behind;
+	float _behind;
 
-	public int behind {
+	public float behind {
 		get {
 			return _behind;
 		}

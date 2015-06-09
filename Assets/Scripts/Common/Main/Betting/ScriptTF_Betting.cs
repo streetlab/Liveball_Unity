@@ -332,7 +332,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	void SetHitter()
 	{ 
-		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.QuizInfo);
+		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.NextPlayerInfo);
 		Transform tfHitter = mSprComb.transform.FindChild ("SprHitter");
 		string playerInfo = QuizMgr.QuizInfo.playerName + " No." + QuizMgr.QuizInfo.playerNumber;
 		tfHitter.FindChild ("LblName").GetComponent<UILabel> ().text = playerInfo;

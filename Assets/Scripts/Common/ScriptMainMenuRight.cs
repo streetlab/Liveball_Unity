@@ -163,7 +163,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		char [] array;
 		string aa;
 		Count.Clear ();
-		transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = "경기 없음";
+		transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = "경기 없음";
 		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			ch.Clear ();
@@ -196,7 +196,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 
 				Count.Add (i);
 
-				transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = aa + " 경기";
+				transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = aa + " 경기";
 			}
 		}
 		D = transform.GetChild (0).GetChild (0).GetChild (0).gameObject;
@@ -227,7 +227,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		
 		
 		
-		transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = "경기 없음";
+		transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = "경기 없음";
 		
 		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
 			LImage.Add (mScheduleEvent.Response.data [i].extend [0].imageName);
@@ -268,7 +268,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				//    Debug.Log((mScheduleEvent.Response.data[i].extend[0].score)+ " : " + (mScheduleEvent.Response.data[i].extend[1].score));
 				//ALL.Clear ();
 				
-				transform.GetChild (0).GetChild (1).GetComponent<UILabel> ().text = aa + " 경기";
+				transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = aa + " 경기";
 			}
 		}
 		//Debug.Log(" ALL.Count! :  " + ALL.Count);

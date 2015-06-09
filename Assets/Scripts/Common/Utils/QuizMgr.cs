@@ -51,7 +51,12 @@ public class QuizMgr : MonoBehaviour {
 		get{return Instance.quizInfo;}
 		set{Instance.quizInfo = value;}
 	}
-
+	List<nextPlayerInfo> nextPlayerInfo;
+	public static List<nextPlayerInfo> NextPlayerInfo
+	{
+		get{return Instance.nextPlayerInfo;}
+		set{Instance.nextPlayerInfo = value;}
+	}
 	static QuizMgr _instance;
 
 	static QuizMgr Instance
@@ -183,7 +188,11 @@ public class QuizMgr : MonoBehaviour {
 			}
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_START)){
 
+
+
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_CLOSE)){
+
+
 
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
 			if(Instance.mMainTop != null){
