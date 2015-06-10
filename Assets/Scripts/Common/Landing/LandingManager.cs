@@ -10,7 +10,7 @@ public class LandingManager : MonoBehaviour {
     UITexture I_PlayersImage;
 	UISprite LineTop,GameInfo,OkStrategy,Item,Community,I_BigLogo,I_TeamImage;
 	string Is_Gold,Is_TeamName,Is_RankScore,Is_TodayDealWith,Is_TodayInfo,Is_Memo,Is_PlayersName,Is_Batting;
-	string TeamColor;
+	static string TeamColor;
 	List<UILabel> I_LabelList = new List<UILabel>();
 	List<string> I_StringList = new List<string>();
 	List<UISprite> I_SpriteList = new List<UISprite>();
@@ -82,6 +82,9 @@ public class LandingManager : MonoBehaviour {
 			TeamColor = TeamMain.Response.data.myTeam.teamColor;
 			TeamColor = TeamColor.Replace("#","");
 			SetTeamColor(TeamColor);
+			if(TeamMain.Response.data.other.pitcher != null){
+
+			Debug.Log("V_LPlayerName : " + V_LPlayerName);
 			V_LPlayerName.text = TeamMain.Response.data.other.pitcher.playerName + "#" + TeamMain.Response.data.other.pitcher.playerNumber;
 
 			V_LBatting.text = TeamMain.Response.data.other.pitcher.ERA;
@@ -102,7 +105,7 @@ public class LandingManager : MonoBehaviour {
 			//Debug.Log();
 			
 		}
-	
+	}
 
 	}
 
@@ -281,9 +284,13 @@ public class LandingManager : MonoBehaviour {
 
 	}
 	public void Start () {
-	
-		N = null;
 		PathSettings ();
+		if (TeamColor != null) {
+			TeamColor = TeamColor.Replace("#","");
+			SetTeamColor(TeamColor);
+		}
+		N = null;
+	
 		//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
 		//Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
 		if (ScriptMainTop.LandingState == 0||ScriptMainTop.LandingState == 4) {	
@@ -392,7 +399,7 @@ public class LandingManager : MonoBehaviour {
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Lineup").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Livetalk").FindChild("Panel 1").FindChild("LineTopBlue").GetComponent<UISprite> ());
 		//I_SpriteList.Add (transform.parent.parent.FindChild("TF_Items").FindChild("TF_Items").FindChild("Top").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
-
+		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Betting").FindChild("Panel").FindChild("LineTop").GetComponent<UISprite> ());
 
 		I_BigLogo = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").GetComponent<UISprite> ();
 		I_TeamImage = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").FindChild ("TeamImage").GetComponent<UISprite> ();
