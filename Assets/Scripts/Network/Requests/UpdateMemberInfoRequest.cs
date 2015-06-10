@@ -15,7 +15,8 @@ public class UpdateMemberInfoRequest : BaseUploadRequest {
 		dic.Add ("memImage", memInfo.MemImage);
 		dic.Add ("favoBB", memInfo.FavoBB);		
 
-		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));
+//		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));
+		AddField("param", Newtonsoft.Json.JsonConvert.SerializeObject(dic));
 		
 		if (memInfo.Photo != null && memInfo.Photo.Length > 0) {
 			if(File.Exists(memInfo.Photo)){

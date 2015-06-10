@@ -20,7 +20,8 @@ public class BaseRequest : Dictionary<string, object>{
 		mDic.Add("version", Application.version);
 		#endif
 
-		string param = JsonFx.Json.JsonWriter.Serialize (mDic);
+//		string param = JsonFx.Json.JsonWriter.Serialize (mDic);
+		string param = Newtonsoft.Json.JsonConvert.SerializeObject(mDic);
 		str += "param=" + param;
 		str += "&type="+GetType();
 		str += "&id=" + GetQueryId ();

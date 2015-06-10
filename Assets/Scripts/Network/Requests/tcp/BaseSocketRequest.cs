@@ -11,8 +11,8 @@ public class BaseSocketRequest : Dictionary<string, object>{
 //	{"type":5001,"memSeq":222,"memberEmail":"aaaa@aaaa.com","memberName":"afafdasdf","imagePath":"eee/","imageName":"aaaa.png","gameSeq":0}
 		string str = "";
 
-		str = JsonFx.Json.JsonWriter.Serialize (mDic);
-
+//		str = JsonFx.Json.JsonWriter.Serialize (mDic);
+		str = Newtonsoft.Json.JsonConvert.SerializeObject(mDic);
 
 		return str;
 	}

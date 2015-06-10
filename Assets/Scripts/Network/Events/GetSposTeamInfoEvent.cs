@@ -12,7 +12,8 @@ public class GetSposTeamInfoEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = JsonFx.Json.JsonReader.Deserialize<GetSposTeamInfoResponse>(data);
+//		response = JsonFx.Json.JsonReader.Deserialize<GetSposTeamInfoResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetSposTeamInfoResponse>(data);
 
 //		if (checkError ())
 //			return;

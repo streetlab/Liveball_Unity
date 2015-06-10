@@ -21,7 +21,8 @@ public class JoinMemberRequest : BaseUploadRequest {
 		dic.Add("deviceID", memInfo.DeviceID);
 
 
-		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));
+//		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));
+		AddField("param", Newtonsoft.Json.JsonConvert.SerializeObject(dic));
 
 		if (memInfo.Photo != null && memInfo.Photo.Length > 0) {
 			if(File.Exists(memInfo.Photo)){
