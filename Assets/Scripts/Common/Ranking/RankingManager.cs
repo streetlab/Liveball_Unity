@@ -28,6 +28,7 @@ public class RankingManager : MonoBehaviour {
 			W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
 				UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.ranking [i].rankValue) + " Gold";
 			if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
+				Debug.Log("1");
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
 				StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 			}
@@ -49,6 +50,7 @@ public class RankingManager : MonoBehaviour {
 			W.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
 				mGetRankEvent.Response.data.ranking [i].rankValue.ToString() + " 회";
 			if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
+				Debug.Log("2");
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
 				StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 			}	}
@@ -71,6 +73,7 @@ public class RankingManager : MonoBehaviour {
 			D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
 				UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.ranking [i].rankValue) + " Gold";
 			if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
+				Debug.Log("3");
 				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
 				StartCoroutine (GetImage (www, D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 			}	}
@@ -93,7 +96,7 @@ public class RankingManager : MonoBehaviour {
 
 			if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
 					
-
+				Debug.Log("4");
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName);
 				StartCoroutine (GetImage (www, D.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 

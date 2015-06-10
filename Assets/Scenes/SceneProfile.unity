@@ -13383,13 +13383,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3013
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 13
+  mDepth: 25
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!1 &923050720
@@ -20940,7 +20940,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            value: {fileID: 0}
+            value: {fileID: 2096001317}
         animationCurveParams: []
         functionCallParams:
         - FunctionName: mm
@@ -21788,7 +21788,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 2096001319}
+    mMethodName: off
+    mParameters: []
+    oneShot: 0
 --- !u!1 &1417587062 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 130194, guid: cf6baed3bcc614296babf94e152953b1, type: 2}

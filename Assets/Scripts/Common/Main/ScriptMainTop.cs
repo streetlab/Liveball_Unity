@@ -30,6 +30,8 @@ public class ScriptMainTop : MonoBehaviour {
 	public GameObject mLblNewRuby;
 	public GameObject mLblNewDia;
 
+
+
 	public AudioClip mSoundOpenBet;
 	public AudioClip mSoundCloseBet;
 	public AudioClip mAudioWelcome;
@@ -540,28 +542,37 @@ public class ScriptMainTop : MonoBehaviour {
 		#else
 
 		#endif
-		mLivetalk.SetActive(false);
 
 		if (UtilMgr.HasBackEvent ()) {
-			UtilMgr.RunAllBackEvents();
+			UtilMgr.RunAllBackEvents ();
 		}
 		QuizMgr.QuizInfo = quizInfo;
 		QuizMgr.IsBettingOpended = true;
 		QuizMgr.JoinCount = 0;
+		
+		UtilMgr.AddBackEvent (new EventDelegate (this, "AnimateClosing"));
+		
+		
 
-		UtilMgr.AddBackEvent(new EventDelegate(this, "AnimateClosing"));
 
-		mBetting.SetActive (true);
-		mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
+			//mLivetalk.SetActive(false);
 
-		transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
-		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundOpenBet);
+		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+			mBetting.SetActive (true);
+		}
+			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
+		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+			transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
+			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
+		}
 
-		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetGoldInfo();
+			transform.FindChild ("TopInfoItem").GetComponent<ScriptTopInfoItem> ().SetGoldInfo ();
 //		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
-		transform.FindChild("TopInfoItem").FindChild("BtnBack").gameObject.SetActive(false);
-		transform.FindChild("TopInfoItem").FindChild("BtnVS").gameObject.SetActive(false);
-		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(true);
+			transform.FindChild ("TopInfoItem").FindChild ("BtnBack").gameObject.SetActive (false);
+			transform.FindChild ("TopInfoItem").FindChild ("BtnVS").gameObject.SetActive (false);
+			transform.FindChild ("TopInfoItem").FindChild ("BtnCancel").gameObject.SetActive (true);
+
+	
 	}
 
 	public void AllCancel(){
@@ -625,6 +636,7 @@ public class ScriptMainTop : MonoBehaviour {
 			AddQuizIntoList ();
 			if (!QuizMgr.IsBettingOpended)
 			QuizMgr.NextPlayerInfo = mEventQuiz.Response.data.nextPlayer;
+
 				OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
 //		}
 

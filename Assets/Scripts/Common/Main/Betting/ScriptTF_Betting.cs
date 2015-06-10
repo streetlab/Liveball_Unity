@@ -156,40 +156,45 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	public void Init(QuizInfo quizInfo)
 	{
-		if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
-			ScriptMainTop.LandingState = 2;
-			transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager>().Start();
-		}
-		Debug.Log("Init");
-		mListJoin.Clear ();
-//		quizInfo = quizInfo;
-		SetHitter ();
-		Debug.Log("Hitter");
-		SetPitcher ();
-		Debug.Log("Pitcher");
-		SetBases ();
-		Debug.Log("Bases");
-		SetBtns ();
-		Debug.Log("Btns");
-		mSprBetting.SetActive (false);
 
-		mStartTime = System.DateTime.Now.ToFileTime ();
-		mTimeOut = false;
+
+			if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
+				ScriptMainTop.LandingState = 2;
+				transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().Start ();
+			}
+			Debug.Log ("Init");
+			mListJoin.Clear ();
+//		quizInfo = quizInfo;
+			SetHitter ();
+			Debug.Log ("Hitter");
+			SetPitcher ();
+			Debug.Log ("Pitcher");
+			SetBases ();
+			Debug.Log ("Bases");
+			SetBtns ();
+			Debug.Log ("Btns");
+			mSprBetting.SetActive (false);
+
+			mStartTime = System.DateTime.Now.ToFileTime ();
+			mTimeOut = false;
 //		mStartSec = System.DateTime.Now.Second;
 //		mStartMilSec = System.DateTime.Now.Millisecond / 10;
-		TweenAlpha.Begin (mSprComb, 0f, 0f);
-		TweenAlpha.Begin (mSprComb, 1f, 1.0f);
+			TweenAlpha.Begin (mSprComb, 0f, 0f);
+			TweenAlpha.Begin (mSprComb, 1f, 1.0f);
 
-		mSpark1.SetActive (false);
-		mSpark2.SetActive (false);
-		mSprBetting.SetActive (false);
+			mSpark1.SetActive (false);
+			mSpark2.SetActive (false);
+			mSprBetting.SetActive (false);
 
-		mBtnBatter.GetComponent<ScriptBettingCard>().Init();
-		mBtnPitcher.GetComponent<ScriptBettingCard>().Init ();
-		mBtnStrategy.GetComponent<ScriptBettingCard>().Init ();
+			mBtnBatter.GetComponent<ScriptBettingCard> ().Init ();
+			mBtnPitcher.GetComponent<ScriptBettingCard> ().Init ();
+			mBtnStrategy.GetComponent<ScriptBettingCard> ().Init ();
 
-		mScrollView.transform.localPosition = new Vector3(0, -72f, 0);
-		mScrollView.GetComponent<UIPanel>().clipOffset = new Vector2(0, UtilMgr.GetScaledPositionY());
+			mScrollView.transform.localPosition = new Vector3 (0, -72f, 0);
+			mScrollView.GetComponent<UIPanel> ().clipOffset = new Vector2 (0, UtilMgr.GetScaledPositionY ());
+
+
+
 	}
 
 	void SetBtns()
