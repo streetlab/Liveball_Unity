@@ -49,7 +49,7 @@ extern "C" {
         
         jiveriOS.unityResponder = CreateNSString(responder);
         [Jiver initWithAppKey:CreateNSString(appId)];
-        
+
         [Jiver setEventHandlerConnectBlock:^(Channel *channel) {
             // Connected to JIVER channel
             [jiveriOS sendMessage: @"_OnConnect" andArg: [channel toJson]];
@@ -86,6 +86,7 @@ extern "C" {
         } messagesLoadedBlock:^(int count) {
             // Callback for [Jiver loadMoreMessagesWithLimit:]
             [jiveriOS sendMessage: @"_OnMessagesLoaded" andArg: [@(count) stringValue]];
+        } allDataReceivedBlock:^(void){
         }];
         
     }

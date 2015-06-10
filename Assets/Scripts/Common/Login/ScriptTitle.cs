@@ -211,7 +211,12 @@ public class ScriptTitle : MonoBehaviour {
 			AndroidMgr.RegistGCM(new EventDelegate(this, "SetGCMId"));
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
 			mLoginInfo.osType = 2;
-			IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
+			if(CheckPushAgree()){
+				mLoginInfo.memUID = "";
+				NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+			} else{
+				IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
+			}
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
 			mLoginInfo.osType = 1;
 			mLoginInfo.memUID = "";
@@ -223,17 +228,17 @@ public class ScriptTitle : MonoBehaviour {
 		Application.Quit();
 	}
 
-//	bool CheckPushAgree(){
-//#if(UNITY_ANDROID)
-//#else
-//		UnityEngine.iOS.NotificationType type = UnityEngine.iOS.NotificationServices.enabledNotificationTypes;
-//		if(type == UnityEngine.iOS.NotificationType.None || type == 0){
-//			return true;
-//		}
-//#endif
-//		return false;
-//
-//	}
+	bool CheckPushAgree(){
+#if(UNITY_ANDROID)
+#else
+		UnityEngine.iOS.NotificationType type = UnityEngine.iOS.NotificationServices.enabledNotificationTypes;
+		if(type == UnityEngine.iOS.NotificationType.None || type == 0){
+			return true;
+		}
+#endif
+		return false;
+
+	}
 
 	public void FBReceived(){
 		string jsonStr = AndroidMgr.GetMsg ();

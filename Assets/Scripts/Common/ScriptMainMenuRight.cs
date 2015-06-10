@@ -393,6 +393,15 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 	}
 	public void off(){
+//		if the menu start opening then under line
+//		UtilMgr.AddBackEvent(new EventDelegate(this, "CloseMethod"));
+
+//		and case closing then under
+//		UtilMgr.RemoveAllBackEvents();
+
+//		in Button4.cs, line 42. it will be a good exam for you
+
+
 		if (nonoff) {
 			
 			if (B) {

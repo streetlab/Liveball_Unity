@@ -38,26 +38,35 @@ public class Button4 : MonoBehaviour {
 			break;
 
 		}
+
+		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
 		if (transform.name == "BtnClose") {
-			StartCoroutine(Down(UiRoot.transform.FindChild("TF_Highlight").gameObject));
-			StartCoroutine(Down(UiRoot.transform.FindChild("TF_Lineup").gameObject));
-			StartCoroutine(Down(UiRoot.transform.FindChild("TF_Items").gameObject));
-			StartCoroutine(Down(UiRoot.transform.FindChild("TF_Livetalk").gameObject));
-//			if(UiRoot.transform.FindChild("TF_Highlight").transform.localPosition.y==25){
-//			StartCoroutine(Down(UiRoot.transform.FindChild("TF_Highlight").gameObject));
-//			}else if(UiRoot.transform.FindChild("TF_Lineup").transform.localPosition.y==25){
-//				StartCoroutine(Down(UiRoot.transform.FindChild("TF_Lineup").gameObject));
-//			}else if(UiRoot.transform.FindChild("TF_Livetalk").transform.localPosition.y==25){
-//				StartCoroutine(Down(UiRoot.transform.FindChild("TF_Livetalk").gameObject));
-//			}
-
-
-
-	
+			BackPressed();
 		}
 
 
 	}
+
+	public void BackPressed(){
+		UtilMgr.RemoveAllBackEvents();
+
+		StartCoroutine(Down(UiRoot.transform.FindChild("TF_Highlight").gameObject));
+		StartCoroutine(Down(UiRoot.transform.FindChild("TF_Lineup").gameObject));
+		StartCoroutine(Down(UiRoot.transform.FindChild("TF_Items").gameObject));
+		StartCoroutine(Down(UiRoot.transform.FindChild("TF_Livetalk").gameObject));
+		//			if(UiRoot.transform.FindChild("TF_Highlight").transform.localPosition.y==25){
+		//			StartCoroutine(Down(UiRoot.transform.FindChild("TF_Highlight").gameObject));
+		//			}else if(UiRoot.transform.FindChild("TF_Lineup").transform.localPosition.y==25){
+		//				StartCoroutine(Down(UiRoot.transform.FindChild("TF_Lineup").gameObject));
+		//			}else if(UiRoot.transform.FindChild("TF_Livetalk").transform.localPosition.y==25){
+		//				StartCoroutine(Down(UiRoot.transform.FindChild("TF_Livetalk").gameObject));
+		//			}
+		
+		
+		
+
+	}
+
 	IEnumerator Up(GameObject G){
 		G.SetActive (true);
 		if(G.name == "TF_Lineup"){

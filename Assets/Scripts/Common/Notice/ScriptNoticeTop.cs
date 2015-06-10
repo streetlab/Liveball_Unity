@@ -10,7 +10,7 @@ public class ScriptNoticeTop : MonoBehaviour {
 	public void CloseClicked(){
 		string value = PlayerPrefs.GetString(Constants.PrefEvents);
 		if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
-			AutoFade.LoadLevel("SceneGame");
+			AutoFade.LoadLevel("SceneMain");
 		} else{
 			AutoFade.LoadLevel("SceneEvents");
 		}

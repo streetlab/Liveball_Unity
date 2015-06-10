@@ -48,7 +48,8 @@ extern "C"
 - (void) requestProductData:(NSString*)strProductId
 {
     ///< iTunes Connect에 설정한 Product ID들
-    NSSet* productIdentifiers = [NSSet setWithObject:strProductId];
+//    NSSet* productIdentifiers = [NSSet setWithObject:strProductId];
+    NSSet * productIdentifiers = [NSSet setWithObjects:@"ruby_50", @"ruby_100", @"com.streetlab.tuby.ruby_500", @"ruby_500", @"com.streetlab.tuby.ruby_50", nil];
     SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
     request.delegate = self;
     [request start];
