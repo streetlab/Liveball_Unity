@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ScriptTutorial : MonoBehaviour {	
-	const string LOVE_URL = "http://service.liveball.kr/lb_tutorial_001.html";
+	const string LOVE_URL = "http://service.liveball.kr/lb_tutorial.html";
 	
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
@@ -17,8 +17,8 @@ public class ScriptTutorial : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Love Start!");
-		InitNanoo ();
+		Debug.Log("Tuto Start!");
+		InitTuto ();
 	}
 	
 	void Update(){
@@ -58,7 +58,7 @@ public class ScriptTutorial : MonoBehaviour {
 		//		}
 	}
 	
-	void InitNanoo(){
+	void InitTuto(){
 		mStateWebview = STATE_WEBVIEW.INVISIBLE;
 		
 		mWebView = GetComponent<UniWebView>();

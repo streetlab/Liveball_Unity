@@ -8,9 +8,10 @@ public class ScriptTutorialTop : MonoBehaviour {
 	public GameObject mBtnPrev;
 	public GameObject mWebView;
 
-	string[] URLS = {"http://service.liveball.kr/lb_tutorial_001.html",
-		"http://service.liveball.kr/lb_tutorial_002.html",
-		"http://service.liveball.kr/lb_tutorial_003.html"};
+//	string[] URLS = {"http://service.liveball.kr/lb_tutorial_001.html",
+//		"http://service.liveball.kr/lb_tutorial_002.html",
+//		"http://service.liveball.kr/lb_tutorial_003.html"};
+	string URL = "http://service.liveball.kr/lb_tutorial.html";
 
 	int mPage;
 	const int PAGE_MAX = 3;
@@ -19,8 +20,11 @@ public class ScriptTutorialTop : MonoBehaviour {
 
 		PlayerPrefs.SetString (Constants.PrefTutorial, "1");
 		mPage = 0;
+//		mBtnPrev.SetActive(false);
+//		mBtnClose.SetActive(false);
+		mBtnClose.SetActive(true);
 		mBtnPrev.SetActive(false);
-		mBtnClose.SetActive(false);
+		mBtnNext.SetActive(false);
 	}
 
 	public void CloseClicked(){
@@ -42,7 +46,7 @@ public class ScriptTutorialTop : MonoBehaviour {
 			mBtnClose.SetActive(true);
 			mBtnNext.SetActive(false);
 		}
-		mWebView.GetComponent<ScriptTutorial>().GoTo(URLS[mPage]);
+//		mWebView.GetComponent<ScriptTutorial>().GoTo(URLS[mPage]);
 	}
 
 	public void PrevClicked(){
@@ -55,6 +59,6 @@ public class ScriptTutorialTop : MonoBehaviour {
 		if(mPage == 0){
 			mBtnPrev.SetActive(false);
 		}
-		mWebView.GetComponent<ScriptTutorial>().GoTo(URLS[mPage]);
+//		mWebView.GetComponent<ScriptTutorial>().GoTo(URLS[mPage]);
 	}
 }

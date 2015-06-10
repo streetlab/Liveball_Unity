@@ -23,7 +23,7 @@ public class ScriptPP : MonoBehaviour {
 	}
 	
 	void Update(){
-		CheckVisible();
+		CheckURL();
 		CheckStatusBar();
 	}
 	
@@ -49,7 +49,12 @@ public class ScriptPP : MonoBehaviour {
 		
 	}
 	
-	void CheckVisible(){
+	void CheckURL(){
+		if(mWebView != null){
+			if(mWebView.url.Equals("http://partner.liveball.kr/store/pointpark_close.php")){
+				mTop.GetComponent<ScriptPPTop>().CloseClicked();
+			}
+		}
 		//		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("StatusAnimation").Value;
 		//		
 		//		if (menuStatus.Equals ("Closed")) {

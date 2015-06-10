@@ -254,7 +254,10 @@ public class NetMgr : MonoBehaviour{
 	}
 
 	private void socketExitEvent(BaseEvent baseEvent){
-
+		if(mSocket != null){
+			mSocket.Disconnect(false);
+		}
+		mSocket = null;
 	}
 
 	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent)
