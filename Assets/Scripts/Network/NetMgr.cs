@@ -14,7 +14,7 @@ public class NetMgr : MonoBehaviour{
 	bool mIsUpload;
 	bool mIsLoading;
 		
-	private static Socket mSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+	private static Socket mSocket;// = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 	private static AsyncCallback mConnectionCallback = new AsyncCallback(Instance.HandleConnect);
 	private static AsyncCallback mSendingCallback = new AsyncCallback(Instance.HandleDataSend);
 	private static AsyncCallback mReceivingCallback = new AsyncCallback(Instance.HandleDataReceive);
@@ -228,7 +228,9 @@ public class NetMgr : MonoBehaviour{
 	}
 
 	private void socketJoinEvent(){
-		mSocket.Close();
+		if(mSocket != null)
+			mSocket.Close();
+
 		mSocket = null;
 //		if(mSocket == null || !mSocket.Connected)
 		mSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
