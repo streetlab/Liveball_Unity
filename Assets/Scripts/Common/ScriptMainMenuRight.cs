@@ -328,11 +328,11 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	}
 	public void onhit(){
 		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
-		if(transform.parent.parent.parent.name=="UI Root"){
-			BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
-		}else if(transform.parent.parent.parent.parent.name=="UI Root"){
-			BntMenu = transform.parent.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
-		}
+//		if(transform.parent.parent.parent.name=="UI Root"){
+//			BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
+//		}else if(transform.parent.parent.parent.parent.name=="UI Root"){
+//			BntMenu = transform.parent.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
+//		}
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		
 		if (ING) {

@@ -4946,7 +4946,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 322761280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57e4b829ce1954dd89526951c4e14721, type: 3}
   m_Name: 
@@ -8508,7 +8508,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3011
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -10716,6 +10716,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 869227583}
   - 114: {fileID: 869227584}
+  - 114: {fileID: 869227585}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -10759,6 +10760,40 @@ MonoBehaviour:
   mWebview: {fileID: 0}
   mAudioWelcome: {fileID: 8300000, guid: be257939451a73e49b0753f9183bcc49, type: 3}
   mEmblem: {fileID: 1822601963}
+--- !u!114 &869227585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 869227582}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e4b829ce1954dd89526951c4e14721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mHighlight: {fileID: 0}
+  mLineup: {fileID: 0}
+  mBingo: {fileID: 0}
+  mLivetalk: {fileID: 0}
+  mBetting: {fileID: 0}
+  mQuizResultPopup: {fileID: 1624945375}
+  mMatchInfoTop: {fileID: 2143347645}
+  mBtnHighlight: {fileID: 1613029881}
+  mBtnLineup: {fileID: 480224417}
+  mBtnBingo: {fileID: 1255536586}
+  mBtnLivetalk: {fileID: 1491584907}
+  mLblGold: {fileID: 1276281486}
+  mLblRuby: {fileID: 1276281487}
+  mLblDia: {fileID: 1276281485}
+  mLblNewGold: {fileID: 1172520742}
+  mLblNewRuby: {fileID: 0}
+  mLblNewDia: {fileID: 0}
+  mSoundOpenBet: {fileID: 8300000, guid: d0e9951b8375344d09d343e525630e8d, type: 3}
+  mSoundCloseBet: {fileID: 8300000, guid: a216ac216200f364991f350a587099b1, type: 3}
+  mAudioWelcome: {fileID: 0}
+  mStrLive: "\uB77C\uC774\uBE0C"
+  gameobj: {fileID: 2101393077}
+  mWebview: {fileID: 0}
 --- !u!1 &873650715
 GameObject:
   m_ObjectHideFlags: 0
@@ -18419,7 +18454,7 @@ Transform:
   m_GameObject: {fileID: 1588515764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
   m_Children:
   - {fileID: 305540599}
   - {fileID: 322761281}

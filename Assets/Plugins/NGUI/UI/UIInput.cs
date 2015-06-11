@@ -185,7 +185,10 @@ public class UIInput : MonoBehaviour
 	// Unity fails to compile if the touch screen keyboard is used on a non-mobile device
 	static protected TouchScreenKeyboard mKeyboard;
 	static bool mWaitForKeyboard = false;
+	static string OldValue = "";
+	bool OldValueUse;
 #endif
+
 	[System.NonSerialized] protected int mSelectionStart = 0;
 	[System.NonSerialized] protected int mSelectionEnd = 0;
 	[System.NonSerialized] protected UITexture mHighlight = null;
@@ -199,7 +202,23 @@ public class UIInput : MonoBehaviour
 	/// <summary>
 	/// Default text used by the input's label.
 	/// </summary>
+	/// 
 
+	public void CloseKeboard(){
+
+		#if MOBILE
+		OldValue = mKeyboard.text;
+		mKeyboard.active = false;
+		mKeyboard.active = true;
+		#endif
+	}
+	public void OpenKeboard(){
+	
+		#if MOBILE
+		OldValueUse = true;
+		isSelected = true;
+		#endif
+	}
 	public string defaultText
 	{
 		get
@@ -635,7 +654,10 @@ public class UIInput : MonoBehaviour
 						val = mValue;
 						mSelectionStart = mSelectionEnd;
 					}
-
+					if(OldValueUse){
+						val = OldValue;
+						OldValueUse = false;
+					}
 					mWaitForKeyboard = true;
 					mKeyboard = (inputType == InputType.Password) ?
 						TouchScreenKeyboard.Open(val, kt, false, false, true) :

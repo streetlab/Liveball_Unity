@@ -48,34 +48,34 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 	void SetBtnDisable(){
 		if (Application.loadedLevelName.Equals ("SceneLoveBaseball")) {
 			mBtnIlovebaseball.GetComponent<UIButton> ().isEnabled = false;
-			mBtnIlovebaseball.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnIlovebaseball.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneTeamHome")) {
 			mBtnTeamHome.GetComponent<UIButton> ().isEnabled = false;
-			mBtnTeamHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnTeamHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneMain")) {
 			mBtnGameHome.GetComponent<UIButton> ().isEnabled = false;
-			mBtnGameHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnGameHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneCards")) {
 			mBtnCards.GetComponent<UIButton> ().isEnabled = false;
-			mBtnCards.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnCards.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneRanking")) {
 			mBtnRanking.GetComponent<UIButton> ().isEnabled = false;
-			mBtnRanking.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnRanking.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneProfile")) {
 			mBtnProfile.GetComponent<UIButton> ().isEnabled = false;
-			mBtnProfile.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnProfile.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneItems")) {
 			mBtnItem.GetComponent<UIButton> ().isEnabled = false;
-			mBtnItem.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnItem.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneSettings")) {
 			mBtnSettings.GetComponent<UIButton> ().isEnabled = false;
-			mBtnSettings.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnSettings.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneTeamRanking")) {
 			mBtnTeamRanking.GetComponent<UIButton> ().isEnabled = false;
-			mBtnTeamRanking.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnTeamRanking.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		}else if(Application.loadedLevelName.Equals("SceneRecord")){
 			mBtnRecord.GetComponent<UIButton> ().isEnabled = false;
-			mBtnRecord.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
+			//mBtnRecord.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		}
 
 

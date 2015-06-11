@@ -100,7 +100,9 @@ public class Button4 : MonoBehaviour {
 			}
 		}
 		if (G.name != "TF_Highlight") {
+	
 			G.SetActive(false);
+			
 //			if(G.name == "TF_Items"){
 //				AutoFade.LoadLevel(Application.loadedLevelName);
 //			}

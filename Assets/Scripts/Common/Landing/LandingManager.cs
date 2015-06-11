@@ -283,7 +283,9 @@ public class LandingManager : MonoBehaviour {
 
 
 	}
+
 	public void Start () {
+	
 		PathSettings ();
 		if (TeamColor != null) {
 			TeamColor = TeamColor.Replace("#","");

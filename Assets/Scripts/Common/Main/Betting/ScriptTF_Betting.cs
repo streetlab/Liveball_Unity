@@ -23,6 +23,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 	public AudioClip mBoom;
 
 	public GameObject Landing;
+	public GameObject mLivetalk;
 	public List<JoinQuizInfo> mListJoin = new List<JoinQuizInfo>();
 
 //	QuizInfo quizInfo;
@@ -34,6 +35,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 //	int mStartMilSec;
 	long mStartTime;
 	bool mTimeOut;
+	bool backCheck;
 
 	static Color YELLOW = new Color(1f, 1f, 0f);
 	static Color WHITE = new Color(1f, 1f, 1f);
@@ -85,11 +87,16 @@ public class ScriptTF_Betting : MonoBehaviour {
 					mScrollView.GetComponent<UIPanel>().clipOffset = offset;
 			}
 //		}
-
+	
 		if (mTimeOut) {
-//			if(UtilMgr.HasBackEvent)
-//				UtilMgr.OnBackPressed ();
-			UtilMgr.RunAllBackEvents();
+			if(backCheck){		
+				//backCheck = false;
+		
+			}
+			//if(UtilMgr.HasBackEvent)
+			//UtilMgr.RunAllBackEvents();
+		//	UtilMgr.RemoveBackEvent();
+
 			return;
 		}
 
@@ -105,6 +112,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 		
 		if (sec < -15) {
 			mTimeOut = true;
+			UtilMgr.OnBackPressed ();
+
+			mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().OpenKeboard ();
+
 			sec = 0;
 			milSec = 0;
 		} else{
@@ -177,6 +188,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 			mStartTime = System.DateTime.Now.ToFileTime ();
 			mTimeOut = false;
+		backCheck = true;
 //		mStartSec = System.DateTime.Now.Second;
 //		mStartMilSec = System.DateTime.Now.Millisecond / 10;
 			TweenAlpha.Begin (mSprComb, 0f, 0f);
@@ -366,7 +378,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		smt.mBtnHighlight.SetActive (false);
 //		smt.mBtnLineup.SetActive (false);
 //		smt.mBtnLivetalk.SetActive (false);
-//		smt.mBtnBingo.SetActive (false);
+//		//smt.mBtnBingo.SetActive (false);
 //	}
 //
 //	void OnDisable()
@@ -375,7 +387,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		smt.mBtnHighlight.SetActive (true);
 //		smt.mBtnLineup.SetActive (true);
 //		smt.mBtnLivetalk.SetActive (true);
-//		smt.mBtnBingo.SetActive (true);
+//		//smt.mBtnBingo.SetActive (true);
 //	}
 
 	public void AnimateVS()

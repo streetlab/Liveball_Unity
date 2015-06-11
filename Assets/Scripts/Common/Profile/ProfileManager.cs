@@ -25,10 +25,12 @@ public class ProfileManager : MonoBehaviour {
 	GetProfileEvent mProfileEvent;
 	public bool Sett = false;
 
+	public UITexture LeftProfileImg;
 	void Start(){
 		UsetPhotoSize = new Vector2 (206, 230);
 		Set ();
 	}
+
 	public void Set(){
 		Sett = false;
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "Setting"));
@@ -291,7 +293,7 @@ public class ProfileManager : MonoBehaviour {
 //		
 //	}    
 
-
+	//
 
 	IEnumerator GetImage(WWW www)
 	{
@@ -305,7 +307,9 @@ public class ProfileManager : MonoBehaviour {
 			UserImagebyte = temp.EncodeToPNG ();
 	
 			UserImage = temp;
-			Setimagebyte = temp.EncodeToPNG ();
+		UserMgr.UserInfo.Textures=temp;
+		LeftProfileImg.mainTexture = temp;
+		Setimagebyte = temp.EncodeToPNG ();
 			Setimage = temp;
 
 		SetMainPage();

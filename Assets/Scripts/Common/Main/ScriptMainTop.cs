@@ -452,9 +452,9 @@ public class ScriptMainTop : MonoBehaviour {
 		mHighlight.SetActive (true);
 		mMatchInfoTop.SetActive (true);
 
-		mLineup.SetActive (false);
-		mBingo.SetActive (false);
-		mLivetalk.SetActive (false);
+//		mLineup.SetActive (false);
+//		mBingo.SetActive (false);
+//		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
 
 		mState = STATE.Highlight;
@@ -467,9 +467,9 @@ public class ScriptMainTop : MonoBehaviour {
 		mLineup.SetActive (true);
 		mMatchInfoTop.SetActive (true);
 
-		mHighlight.SetActive (false);
-		mBingo.SetActive (false);
-		mLivetalk.SetActive (false);
+//		mHighlight.SetActive (false);
+//		mBingo.SetActive (false);
+//		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
 
 		mState = STATE.Lineup;
@@ -482,9 +482,9 @@ public class ScriptMainTop : MonoBehaviour {
 		mBingo.SetActive (true);
 		mMatchInfoTop.SetActive (false);
 
-		mHighlight.SetActive (false);
-		mLineup.SetActive (false);
-		mLivetalk.SetActive (false);
+//		mHighlight.SetActive (false);
+//		mLineup.SetActive (false);
+//		mLivetalk.SetActive (false);
 		mBetting.SetActive (false);
 
 		mState = STATE.Bingo;
@@ -495,9 +495,9 @@ public class ScriptMainTop : MonoBehaviour {
 		mLivetalk.SetActive (true);
 		mMatchInfoTop.SetActive (true);
 
-		mHighlight.SetActive (false);
-		mLineup.SetActive (false);
-		mBingo.SetActive (false);
+//		mHighlight.SetActive (false);
+//		mLineup.SetActive (false);
+//		mBingo.SetActive (false);
 		mBetting.SetActive (false);
 
 		mState = STATE.Livetalk;
@@ -545,9 +545,9 @@ public class ScriptMainTop : MonoBehaviour {
 
 		#endif
 
-		if (UtilMgr.HasBackEvent ()) {
-			UtilMgr.RunAllBackEvents ();
-		}
+//		if (UtilMgr.HasBackEvent ()) {
+//			UtilMgr.RunAllBackEvents ();
+//		}
 		QuizMgr.QuizInfo = quizInfo;
 		QuizMgr.IsBettingOpended = true;
 		QuizMgr.JoinCount = 0;
@@ -561,7 +561,12 @@ public class ScriptMainTop : MonoBehaviour {
 
 		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
 			mBetting.SetActive (true);
+		} 
+		if (mLivetalk.activeSelf) {
+	
+			mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().CloseKeboard ();
 		}
+	
 			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
 		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
 			transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
@@ -577,9 +582,13 @@ public class ScriptMainTop : MonoBehaviour {
 	
 	}
 
+
 	public void AllCancel(){
 		mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Clear();
 		UtilMgr.OnBackPressed();
+		if (mLivetalk.activeSelf) {
+			mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().OpenKeboard ();
+		}
 	}
 
 	public void RequestBoardInfo()

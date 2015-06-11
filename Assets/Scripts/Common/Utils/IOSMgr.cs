@@ -19,13 +19,11 @@ public class IOSMgr : MonoBehaviour
 	[DllImport("__Internal")]
 	private static extern void iOSRestoreCompletedTransactions();
 
-	#if(UNITY_ANDROID)
-	#else
 	public delegate void purchaseSucceeded(string receipt);
 	public delegate void purchaseFailed(string receipt);
 	public static event purchaseSucceeded PurchaseSucceededEvent;
 	public static event purchaseFailed PurchaseFailedEvent;
-	#endif
+
 
 
 
