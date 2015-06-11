@@ -10,7 +10,7 @@ public class LandingManager : MonoBehaviour {
     UITexture I_PlayersImage;
 	UISprite LineTop,GameInfo,OkStrategy,Item,Community,I_BigLogo,I_TeamImage;
 	string Is_Gold,Is_TeamName,Is_RankScore,Is_TodayDealWith,Is_TodayInfo,Is_Memo,Is_PlayersName,Is_Batting;
-	static string TeamColor;
+	public static string TeamColor;
 	List<UILabel> I_LabelList = new List<UILabel>();
 	List<string> I_StringList = new List<string>();
 	List<UISprite> I_SpriteList = new List<UISprite>();
@@ -400,6 +400,7 @@ public class LandingManager : MonoBehaviour {
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Livetalk").FindChild("Panel 1").FindChild("LineTopBlue").GetComponent<UISprite> ());
 		//I_SpriteList.Add (transform.parent.parent.FindChild("TF_Items").FindChild("TF_Items").FindChild("Top").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
 		I_SpriteList.Add (transform.parent.parent.FindChild("TF_Betting").FindChild("Panel").FindChild("LineTop").GetComponent<UISprite> ());
+		I_SpriteList.Add (transform.parent.parent.FindChild("GameObject").FindChild("Top").FindChild("Panel").FindChild("BtnPost").FindChild("TF_Post").FindChild("Panel").FindChild("LineTopBlue").GetComponent<UISprite> ());
 
 		I_BigLogo = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").GetComponent<UISprite> ();
 		I_TeamImage = transform.FindChild ("Scroll View").FindChild ("Info").FindChild ("BigLogo").FindChild ("TeamImage").GetComponent<UISprite> ();

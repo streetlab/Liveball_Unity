@@ -170,6 +170,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 				if(ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3){
 				string TeamColor = mEventProgQuiz.Response.data.team[1].teamColor;
 				TeamColor = TeamColor.Replace("#","");
+					LandingManager.TeamColor = TeamColor;
 				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
 		
 					SetTeamColor(TeamColor);

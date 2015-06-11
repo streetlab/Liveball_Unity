@@ -188,7 +188,7 @@ GameObject:
   - 4: {fileID: 463734}
   - 114: {fileID: 11492280}
   m_Layer: 0
-  m_Name: Name 1
+  m_Name: Lmite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,7 +489,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -220, y: -565.5, z: 0}
+  m_LocalPosition: {x: -220, y: -1900, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 449904}
@@ -782,13 +782,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3017
+  startingRenderQueue: 3021
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
   mClipRange: {x: 0, y: 0, z: 720, w: 1188}
   mClipSoftness: {x: 0, y: 0}
-  mDepth: 21
+  mDepth: 27
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11410450
@@ -1804,14 +1804,14 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   softBorderPadding: 1
-  renderQueue: 2
-  startingRenderQueue: 9999
+  renderQueue: 0
+  startingRenderQueue: 3019
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 25
+  mDepth: 26
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11470434

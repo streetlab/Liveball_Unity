@@ -26,7 +26,7 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 			UserMgr.UserInfo.memberName;
 		LeftProfile.transform.FindChild ("Profile").FindChild ("TeamName").GetComponent<UILabel> ().text = 
 			UserMgr.UserInfo.GetTeamName();
-		LeftProfile.transform.FindChild ("UserImage").FindChild ("Sprite").GetComponent<UITexture> ().mainTexture = 
+		LeftProfile.transform.FindChild ("UserImage").FindChild ("img").GetComponent<UITexture> ().mainTexture = 
 			UserMgr.UserInfo.Textures;
 	}
 
@@ -52,7 +52,7 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		} else if (Application.loadedLevelName.Equals ("SceneTeamHome")) {
 			mBtnTeamHome.GetComponent<UIButton> ().isEnabled = false;
 			mBtnTeamHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
-		} else if (Application.loadedLevelName.Equals ("SceneGame")) {
+		} else if (Application.loadedLevelName.Equals ("SceneMain")) {
 			mBtnGameHome.GetComponent<UIButton> ().isEnabled = false;
 			mBtnGameHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneCards")) {
@@ -94,8 +94,9 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 				AutoFade.LoadLevel("SceneTeamHome", 0f, 1f);
 			break;
 		case "BtnGameHome":
-			if(!Application.loadedLevelName.Equals("SceneGame"))
-				AutoFade.LoadLevel("SceneGame", 0f, 1f);
+			if(!Application.loadedLevelName.Equals("SceneMain"))
+				ScriptMainTop.LandingState = 4;
+				AutoFade.LoadLevel("SceneMain", 0f, 1f);
 			break;
 		case "BtnCards":
 			if(!Application.loadedLevelName.Equals("SceneCards"))

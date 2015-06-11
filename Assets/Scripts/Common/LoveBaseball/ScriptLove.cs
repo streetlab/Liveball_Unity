@@ -15,6 +15,8 @@ public class ScriptLove : MonoBehaviour {
 	
 	public GameObject mMainMenu;
 	public GameObject mTop;
+	public GameObject TF_Post;
+	public GameObject mRight;
 	bool StatusBarIsHidden;
 	
 	// Use this for initialization
@@ -23,10 +25,10 @@ public class ScriptLove : MonoBehaviour {
 		InitNanoo ();
 	}
 	
-//	void Update(){
-//		CheckVisible();
-//		CheckStatusBar();
-//	}
+	void Update(){
+		CheckVisible();
+		CheckStatusBar();
+	}
 	
 	void OnApplicationPause(bool pause){
 		Debug.Log("pause is "+pause);
@@ -38,13 +40,13 @@ public class ScriptLove : MonoBehaviour {
 	}
 	
 	void CheckStatusBar(){
-		//		Debug.Log("y is "+mTop.transform.localPosition.y);
-		//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
-		//			int diff = Screen.height - Constants.SCREEN_HEIGHT_ORIGINAL;
-		//			Debug.Log("diff is"+diff);
-		//			mTop.transform.localPosition = new Vector3(0 , -25f+(diff/2)-10, 0);
-		//		} else
-		//			mTop.transform.localPosition = new Vector3(0 , -25f, 0);
+				Debug.Log("y is "+mTop.transform.localPosition.y);
+				if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
+					int diff = Screen.height - Constants.SCREEN_HEIGHT_ORIGINAL;
+					Debug.Log("diff is"+diff);
+					mTop.transform.localPosition = new Vector3(0 , -25f+(diff/2)-10, 0);
+				} else
+					mTop.transform.localPosition = new Vector3(0 , -25f, 0);
 		
 		
 		
@@ -53,9 +55,13 @@ public class ScriptLove : MonoBehaviour {
 	void CheckVisible(){
 		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().
 			FsmVariables.FindFsmString("StatusAnimation").Value;
+		Debug.Log ("menuStatus : " + menuStatus + " ?? " + mMainMenu);
+		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 		
 		if (menuStatus.Equals ("Closed") 
-		    && !DialogueMgr.IsShown) {
+		    && !isOpen
+		    && !DialogueMgr.IsShown
+		    && !TF_Post.activeSelf) {
 			ShowWebView();
 		} else {
 			HideWebView();

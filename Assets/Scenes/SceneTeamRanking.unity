@@ -4916,7 +4916,7 @@ GameObject:
   - 114: {fileID: 322761283}
   - 114: {fileID: 322761282}
   m_Layer: 0
-  m_Name: Top
+  m_Name: Top 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8508,7 +8508,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -10734,8 +10734,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 591584838}
-  m_Father: {fileID: 2101393078}
-  m_RootOrder: 1
+  m_Father: {fileID: 1588515765}
+  m_RootOrder: 2
 --- !u!114 &869227584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16945,7 +16945,7 @@ Transform:
   - {fileID: 272698124}
   - {fileID: 562654116}
   m_Father: {fileID: 2101393078}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!114 &1466342226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18423,6 +18423,7 @@ Transform:
   m_Children:
   - {fileID: 305540599}
   - {fileID: 322761281}
+  - {fileID: 869227583}
   - {fileID: 2101393078}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -25178,10 +25179,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1612775205}
-  - {fileID: 869227583}
   - {fileID: 1466342225}
   m_Father: {fileID: 1588515765}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &2102255761
 GameObject:
   m_ObjectHideFlags: 0

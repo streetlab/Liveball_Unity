@@ -327,10 +327,12 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		Starts = false;
 	}
 	public void onhit(){
-		
-		
-		BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
-		
+		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
+		if(transform.parent.parent.parent.name=="UI Root"){
+			BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
+		}else if(transform.parent.parent.parent.parent.name=="UI Root"){
+			BntMenu = transform.parent.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
+		}
 		BntMenu.GetComponent<PlayMakerFSM> ().SendEvent ("Close Menu");
 		
 		if (ING) {
@@ -392,15 +394,16 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			ING = true;
 		}
 	}
+
+	public void BackPressed(){
+		UtilMgr.RemoveAllBackEvents();
+		Debug.Log ("Button!!!!");
+		ALLBack ();
+	}
+
 	public void off(){
-//		if the menu start opening then under line
-//		UtilMgr.AddBackEvent(new EventDelegate(this, "CloseMethod"));
 
-//		and case closing then under
-//		UtilMgr.RemoveAllBackEvents();
-
-//		in Button4.cs, line 42. it will be a good exam for you
-
+		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
 
 		if (nonoff) {
 			

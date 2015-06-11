@@ -17,7 +17,7 @@ public class PostButton : MonoBehaviour {
 
 //		Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
 //		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
-		transform.FindChild ("TF_Post").gameObject.SetActive (true);
+	//	transform.FindChild ("TF_Post").gameObject.SetActive (true);
 		Setdata();	
 
 
@@ -25,7 +25,8 @@ public class PostButton : MonoBehaviour {
 	public void off(){
 		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
-			transform.FindChild ("TF_Post").gameObject.SetActive (false);
+		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
+			
 	
 	}
 	void getdata(){
@@ -98,7 +99,41 @@ public class PostButton : MonoBehaviour {
 			}
 			}
 	}
-	
+		StartCoroutine (Up(transform.FindChild ("TF_Post").gameObject));
+	}
+	IEnumerator Up(GameObject G){
+		G.SetActive (true);
+		if(G.name == "TF_Lineup"){
+			G.transform.FindChild("Scroll View").gameObject.SetActive(true);
+			G.transform.FindChild("Scroll View").GetComponent<UIScrollView>().ResetPosition();
+		}
+		for (int i =0; i<5; i++) {
+			if(G.transform.localPosition.y!=-565.5){
+				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
+				
+				yield return new WaitForSeconds(0.01f);
+			}else{
+				//UiRoot.transform.FindChild("TF_Items").FindChild("TF_Items").FindChild("category 1").GetComponent<UIScrollView>().ResetPosition();
+				break;
+			}
+		}
+	}
+	IEnumerator Down(GameObject G){
+		if(G.name == "TF_Lineup"){
+			G.transform.FindChild("Scroll View").gameObject.SetActive(false);
+			G.transform.FindChild("Scroll View 1").gameObject.SetActive(false);
+		}
+		for (int i =0; i<5; i++) {
+			if(G.transform.localPosition.y!=-1900){
+				G.transform.localPosition -= new Vector3(0,1334.5f/5f,0);
+				yield return new WaitForSeconds(0.02f);
+			}else{
+				break;
+			}
+		}
+
+			G.SetActive(false);
+
 	}
 
 }
