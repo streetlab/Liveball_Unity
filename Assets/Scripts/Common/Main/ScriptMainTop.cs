@@ -42,6 +42,7 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public static int LandingState=4;
 
+
 	GetQuizEvent mEventQuiz;
 	GetGameSposDetailBoardEvent mBoardEvent;
 	GetSimpleResultEvent mSimpleEvent;
@@ -376,8 +377,9 @@ public class ScriptMainTop : MonoBehaviour {
 		if(pause){
 			NetMgr.ExitGame(null);
 		} else{
-//		if(!pause){
-			AutoFade.LoadLevel(Application.loadedLevelName);
+			if(!transform.parent.FindChild ("TF_Items").gameObject.activeSelf){
+				AutoFade.LoadLevel(Application.loadedLevelName);
+			}
 		}
 	}
 

@@ -41,6 +41,7 @@ extern "C"
     
     NSLog(@"InAppPurchase init OK");
     UnitySendMessage("IOSMgr", "MsgReceived", "OK");
+    
     return true;
 }
 
@@ -48,8 +49,7 @@ extern "C"
 - (void) requestProductData:(NSString*)strProductId
 {
     ///< iTunes Connect에 설정한 Product ID들
-//    NSSet* productIdentifiers = [NSSet setWithObject:strProductId];
-    NSSet * productIdentifiers = [NSSet setWithObjects:@"ruby_50", @"ruby_100", @"com.streetlab.tuby.ruby_500", @"ruby_500", @"com.streetlab.tuby.ruby_50", nil];
+    NSSet* productIdentifiers = [NSSet setWithObject:strProductId];
     SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
     request.delegate = self;
     [request start];
@@ -78,7 +78,7 @@ extern "C"
         }
     }
     
-//    [request release];
+    [request release];
     
     for (NSString *invalidProductId in response.invalidProductIdentifiers)
     {
@@ -121,12 +121,12 @@ extern "C"
     ///< 구매 완료 후 아이템 인벤등 게임쪽 후 처리 진행
     /* 빌트 인 모델
      const char* pszProductId = [[[transaction payment] productIdentifier] UTF8String];
-     UnitySendMessage("iOSManager", "ResultBuyItem", pszProductId);
+     UnitySendMessage("IOSMgr", "ResultBuyItem", pszProductId);
      */
     
     NSString* strReceipt = [[NSString alloc] initWithBytes:transaction.transactionReceipt.bytes length:transaction.transactionReceipt.length encoding:NSUTF8StringEncoding];
     
-    UnitySendMessage("iOSManager", "ResultBuyItem", [strReceipt UTF8String]);
+    UnitySendMessage("IOSMgr", "PurchaseSucceeded", [strReceipt UTF8String]);
     
     // Remove the transaction from the payment queue.
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -136,7 +136,7 @@ extern "C"
 {
     NSLog(@"InAppPurchase restoreTransaction");
     const char* pszRestoreProductId = [transaction.originalTransaction.payment.productIdentifier UTF8String];
-    UnitySendMessage("iOSManager", "ResultRestoreItem", pszRestoreProductId);
+    UnitySendMessage("IOSMgr", "ResultRestoreItem", pszRestoreProductId);
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 
@@ -146,7 +146,7 @@ extern "C"
     const char* pszResult = 0;
     if( transaction.error.code != SKErrorPaymentCancelled )
     {
-        pszResult = "faileIAP";
+        pszResult = "failedIAP";
         NSLog(@"InAppPurchase failedTransaction SKErrorDomain - %d", transaction.error.code );
     }
     else
@@ -154,7 +154,7 @@ extern "C"
         pszResult = "cancelIAP";
         NSLog(@"InAppPurchase failedTransaction SKErrorPaymentCancelled");
     }
-    UnitySendMessage("iOSManager", "ResultBuyItem", pszResult);
+    UnitySendMessage("IOSMgr", "PurchaseFailed", pszResult);
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 

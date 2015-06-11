@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Soomla.Store;
 
 public class Itemcontrol : MonoBehaviour {
 
@@ -30,16 +29,11 @@ public class Itemcontrol : MonoBehaviour {
 	//	GoogleIAB.purchaseProduct( "ruby_50", "payload that gets stored and returned" );
 		IsTest = UtilMgr.IsTestServer();
 	}
-
-	public void purchaseAble(){
-		Debug.Log("iOS purchase able : "+IOSMgr.GetMsg());
-	}
 	
 	void Start () {
 		#if(UNITY_ANDROID || UNITY_EDITOR)
 		#else
-//		SoomlaStore.Initialize(new ScriptItemAssets());
-		EventDelegate eventd = new EventDelegate(this, "purchaseAble");
+		EventDelegate eventd = new EventDelegate(this, "purchaseInit");
 		IOSMgr.InAppInit(eventd);
 		#endif
 		
@@ -265,21 +259,8 @@ public class Itemcontrol : MonoBehaviour {
 			//}
 		//}
 		#else
-//		orderNo = RequestIAP.Response.data.orderNo;
-		Debug.Log("itemcode is "+itemcode);
-		IOSMgr.ButItem("ruby_50");
-//		IOSMgr.ButItem(itemcode);
-		//RequestIAP.Response.data.
-//		GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
-//		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
-//		Debug.Log("Goods cnt : "+StoreInfo.Goods.Count);
-//		foreach(VirtualGood vg in StoreInfo.Goods){
-//			Debug.Log("Goods name : "+vg.Name);
-//		}
-//
-//		StoreInventory.BuyItem(itemcode);
-		//}
-		//}
+		orderNo = RequestIAP.Response.data.orderNo;
+		IOSMgr.BuyItem(itemcode);
 		#endif
 	}
 
@@ -296,23 +277,8 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIABManager.consumePurchaseSucceededEvent += consumePurchaseSucceededEvent;
 		GoogleIABManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;
 		#else
-		StoreEvents.OnMarketPurchase += onMarketPurchase;
-		StoreEvents.OnMarketRefund += onMarketRefund;
-		StoreEvents.OnItemPurchased += onItemPurchased;
-		StoreEvents.OnGoodEquipped += onGoodEquipped;
-		StoreEvents.OnGoodUnEquipped += onGoodUnequipped;
-		StoreEvents.OnGoodUpgrade += onGoodUpgrade;
-		StoreEvents.OnBillingSupported += onBillingSupported;
-		StoreEvents.OnBillingNotSupported += onBillingNotSupported;
-		StoreEvents.OnMarketPurchaseStarted += onMarketPurchaseStarted;
-		StoreEvents.OnItemPurchaseStarted += onItemPurchaseStarted;
-		StoreEvents.OnUnexpectedErrorInStore += onUnexpectedErrorInStore;
-		StoreEvents.OnCurrencyBalanceChanged += onCurrencyBalanceChanged;
-		StoreEvents.OnGoodBalanceChanged += onGoodBalanceChanged;
-		StoreEvents.OnMarketPurchaseCancelled += onMarketPurchaseCancelled;
-		StoreEvents.OnRestoreTransactionsStarted += onRestoreTransactionsStarted;
-		StoreEvents.OnRestoreTransactionsFinished += onRestoreTransactionsFinished;
-		StoreEvents.OnSoomlaStoreInitialized += onSoomlaStoreInitialized;
+		IOSMgr.PurchaseSucceededEvent += purchaseSucceededEvent;
+		IOSMgr.PurchaseFailedEvent += purchaseFailedEvent;
 		#endif
 	}
 	
@@ -330,23 +296,8 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIABManager.consumePurchaseSucceededEvent -= consumePurchaseSucceededEvent;
 		GoogleIABManager.consumePurchaseFailedEvent -= consumePurchaseFailedEvent;
 		#else
-		StoreEvents.OnMarketPurchase -= onMarketPurchase;
-		StoreEvents.OnMarketRefund -= onMarketRefund;
-		StoreEvents.OnItemPurchased -= onItemPurchased;
-		StoreEvents.OnGoodEquipped -= onGoodEquipped;
-		StoreEvents.OnGoodUnEquipped -= onGoodUnequipped;
-		StoreEvents.OnGoodUpgrade -= onGoodUpgrade;
-		StoreEvents.OnBillingSupported -= onBillingSupported;
-		StoreEvents.OnBillingNotSupported -= onBillingNotSupported;
-		StoreEvents.OnMarketPurchaseStarted -= onMarketPurchaseStarted;
-		StoreEvents.OnItemPurchaseStarted -= onItemPurchaseStarted;
-		StoreEvents.OnUnexpectedErrorInStore -= onUnexpectedErrorInStore;
-		StoreEvents.OnCurrencyBalanceChanged -= onCurrencyBalanceChanged;
-		StoreEvents.OnGoodBalanceChanged -= onGoodBalanceChanged;
-		StoreEvents.OnMarketPurchaseCancelled -= onMarketPurchaseCancelled;
-		StoreEvents.OnRestoreTransactionsStarted -= onRestoreTransactionsStarted;
-		StoreEvents.OnRestoreTransactionsFinished -= onRestoreTransactionsFinished;
-		StoreEvents.OnSoomlaStoreInitialized -= onSoomlaStoreInitialized;
+		IOSMgr.PurchaseSucceededEvent -= purchaseSucceededEvent;
+		IOSMgr.PurchaseFailedEvent -= purchaseFailedEvent;
 		#endif
 	}
 	
@@ -370,6 +321,23 @@ public class Itemcontrol : MonoBehaviour {
 		Debug.Log( "billingNotSupportedEvent: " + error );
 	}
 	
+	void mComsumeIAP(){
+		if(ComsumeIAP.Response.message.Equals("200")){
+			DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 영수증 정보에 오류가 있습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else{
+			#if(UNITY_ANDROID)
+			GoogleIAB.consumeProduct (itemcode);
+			#else
+			RequestDone();
+			#endif
+		}
+	}
+
+	void RequestDone(){
+		DoneIAP  = new IAPEvent (new EventDelegate (this, "mDoneIAP"));
+		NetMgr.DoneIAP (orderNo,IsTest,DoneIAP);
+	}
+
 	#if(UNITY_ANDROID)
 	void queryInventorySucceededEvent( List<GooglePurchase> purchases, List<GoogleSkuInfo> skus )
 	{
@@ -398,10 +366,6 @@ public class Itemcontrol : MonoBehaviour {
 		orderNo = ComsumeIAP.Response.data.orderNo;
 
 		Debug.Log( "purchaseSucceededEvent: " + purchase );
-	}
-
-	void mComsumeIAP(){
-		GoogleIAB.consumeProduct (itemcode);
 	}
 	
 	void purchaseFailedEvent( string error, int response )
@@ -432,191 +396,60 @@ public class Itemcontrol : MonoBehaviour {
 
 	void consumePurchaseSucceededEvent( GooglePurchase purchase )
 	{
-		DoneIAP  = new IAPEvent (new EventDelegate (this, "mDoneIAP"));
-		NetMgr.DoneIAP (orderNo,IsTest,DoneIAP);
-		Debug.Log( "consumePurchaseSucceededEvent: " + purchase );
+		RequestDone();
 	}
 	
 	
 	void consumePurchaseFailedEvent( string error )
 	{
-		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
-		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
-		
-		Debug.Log( "consumePurchaseFailedEvent: " + error );
+		DialogueMgr.ShowDialogue("컨슘 실패", itemproduct + " 컨슘을 실패 했습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		Debug.Log ("FailedConsume");
+		//		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
+		//		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
+		//		
+		//		Debug.Log( "consumePurchaseFailedEvent: " + error );
 	}
-
+	
 	#else
 
-	public void onSoomlaStoreInitialized() {
-		
-		// some usage examples for add/remove currency
-		// some examples
-		if (StoreInfo.Currencies.Count>0) {
-			try {
-				StoreInventory.GiveItem(StoreInfo.Currencies[0].ItemId,4000);
-//				SoomlaUtils.LogDebug("SOOMLA ExampleEventHandler", "Currency balance:" + StoreInventory.GetItemBalance(StoreInfo.Currencies[0].ItemId));
-				Debug.Log("Initialize succeed");
-			} catch (VirtualItemNotFoundException ex){
-//				SoomlaUtils.LogError("SOOMLA ExampleEventHandler", ex.Message);
-				Debug.Log("Initialize failed");
-			}
+	public void purchaseInit(){
+		if(IOSMgr.GetMsg().Equals("OK")){
+			billingSupportedEvent();
+		} else{
+			billingNotSupportedEvent(IOSMgr.GetMsg());
 		}
-		Debug.Log("Initialize end");
-//		setupItemsTextures();
-//		
-//		setupItemsAffordability ();
 	}
 
-	public void onCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance, int amountAdded) {
-		Debug.Log("onCurrencyBalanceChanged");
-//		if (itemsAffordability != null)
-//		{
-//			List<string> keys = new List<string> (itemsAffordability.Keys);
-//			foreach(string key in keys)
-//				itemsAffordability[key] = StoreInventory.CanAfford(key);
-//		}
+	void purchaseSucceededEvent(string receipt)
+	{		
+		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
+		NetMgr.ComsumeIAP (orderNo,receipt,IsTest,ComsumeIAP);
+		orderNo = ComsumeIAP.Response.data.orderNo;
+	}
+	
+	void purchaseFailedEvent(string receipt)
+	{		
+		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
+		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
+	}
+	
+	void mDoneIAP(){
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
+		
+		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		
+		Debug.Log ("All PurchaseSucceeded");
+		
+	}
+	
+	void mCancelIAP(){
+		DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 구매를 실패 했습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		Debug.Log ("FailedEvent");
+		
+		
 	}
 
-	/// <summary>
-	/// Handles a market purchase event.
-	/// </summary>
-	/// <param name="pvi">Purchasable virtual item.</param>
-	/// <param name="purchaseToken">Purchase token.</param>
-	public void onMarketPurchase(PurchasableVirtualItem pvi, string payload, Dictionary<string, string> extra) {
-		Debug.Log("onMarketPurchase");
-	}
-	
-	/// <summary>
-	/// Handles a market refund event.
-	/// </summary>
-	/// <param name="pvi">Purchasable virtual item.</param>
-	public void onMarketRefund(PurchasableVirtualItem pvi) {
-		Debug.Log("onMarketRefund");
-	}
-	
-	/// <summary>
-	/// Handles an item purchase event.
-	/// </summary>
-	/// <param name="pvi">Purchasable virtual item.</param>
-	public void onItemPurchased(PurchasableVirtualItem pvi, string payload) {
-		Debug.Log("onItemPurchased");
-	}
-	
-	/// <summary>
-	/// Handles a good equipped event.
-	/// </summary>
-	/// <param name="good">Equippable virtual good.</param>
-	public void onGoodEquipped(EquippableVG good) {
-		Debug.Log("onGoodEquipped");
-	}
-	
-	/// <summary>
-	/// Handles a good unequipped event.
-	/// </summary>
-	/// <param name="good">Equippable virtual good.</param>
-	public void onGoodUnequipped(EquippableVG good) {
-		Debug.Log("onGoodUnequipped");
-	}
-	
-	/// <summary>
-	/// Handles a good upgraded event.
-	/// </summary>
-	/// <param name="good">Virtual good that is being upgraded.</param>
-	/// <param name="currentUpgrade">The current upgrade that the given virtual
-	/// good is being upgraded to.</param>
-	public void onGoodUpgrade(VirtualGood good, UpgradeVG currentUpgrade) {
-		Debug.Log("onGoodUpgrade");
-	}
-	
-	/// <summary>
-	/// Handles a billing supported event.
-	/// </summary>
-	public void onBillingSupported() {
-		Debug.Log("BillingSupported!");
-	}
-	
-	/// <summary>
-	/// Handles a billing NOT supported event.
-	/// </summary>
-	public void onBillingNotSupported() {
-		Debug.Log("BillingNotSupported!");
-	}
-	
-	/// <summary>
-	/// Handles a market purchase started event.
-	/// </summary>
-	/// <param name="pvi">Purchasable virtual item.</param>
-	public void onMarketPurchaseStarted(PurchasableVirtualItem pvi) {
-		Debug.Log("onMarketPurchaseStarted");
-	}
-	
-	/// <summary>
-	/// Handles an item purchase started event.
-	/// </summary>
-	/// <param name="pvi">Purchasable virtual item.</param>
-	public void onItemPurchaseStarted(PurchasableVirtualItem pvi) {
-		Debug.Log("onItemPurchaseStarted");
-	}
-	
-	/// <summary>
-	/// Handles an item purchase cancelled event.
-	/// </summary>
-	/// <param name="pvi">Purchasable virtual item.</param>
-	public void onMarketPurchaseCancelled(PurchasableVirtualItem pvi) {
-		Debug.Log("onMarketPurchaseCancelled");
-	}
-	
-	/// <summary>
-	/// Handles an unexpected error in store event.
-	/// </summary>
-	/// <param name="message">Error message.</param>
-	public void onUnexpectedErrorInStore(string message) {
-		Debug.Log("onUnexpectedErrorInStore");
-	}
-	
-	/// <summary>
-	/// Handles a currency balance changed event.
-	/// </summary>
-	/// <param name="virtualCurrency">Virtual currency whose balance has changed.</param>
-	/// <param name="balance">Balance of the given virtual currency.</param>
-	/// <param name="amountAdded">Amount added to the balance.</param>
-//	public void onCurrencyBalanceChanged(VirtualCurrency virtualCurrency, int balance, int amountAdded) {
-//		
-//	}
-	
-	/// <summary>
-	/// Handles a good balance changed event.
-	/// </summary>
-	/// <param name="good">Virtual good whose balance has changed.</param>
-	/// <param name="balance">Balance.</param>
-	/// <param name="amountAdded">Amount added.</param>
-	public void onGoodBalanceChanged(VirtualGood good, int balance, int amountAdded) {
-		Debug.Log("onGoodBalanceChanged");
-	}
-	
-	/// <summary>
-	/// Handles a restore Transactions process started event.
-	/// </summary>
-	public void onRestoreTransactionsStarted() {
-		Debug.Log("onRestoreTransactionsStarted");
-	}
-	
-	/// <summary>
-	/// Handles a restore transactions process finished event.
-	/// </summary>
-	/// <param name="success">If set to <c>true</c> success.</param>
-	public void onRestoreTransactionsFinished(bool success) {
-		Debug.Log("onRestoreTransactionsFinished");
-	}
-	
-	/// <summary>
-	/// Handles a store controller initialized event.
-	/// </summary>
-//	public void onSoomlaStoreInitialized() {
-//		
-//	}
-	
 	#endif
 
 }

@@ -23,16 +23,14 @@ public class Button4 : MonoBehaviour {
 			StartCoroutine(Up(UiRoot.transform.FindChild("TF_Highlight").gameObject));
 			//UiRoot.transform.FindChild("TF_Highlight").transform.localPosition= new Vector3(0,25,0);
 			break;
-		case "OK Strategy":
-		
+		case "OK Strategy":		
 			StartCoroutine(Up(UiRoot.transform.FindChild("TF_Lineup").gameObject));
 			//UiRoot.transform.FindChild("TF_Lineup").transform.localPosition= new Vector3(0,25,0);
 			break;
 		case "Item":
 			StartCoroutine(Up(UiRoot.transform.FindChild("TF_Items").gameObject));
 			break;
-		case "Community":
-		
+		case "Community":		
 			StartCoroutine(Up(UiRoot.transform.FindChild("TF_Livetalk").gameObject));
 			//UiRoot.transform.FindChild("TF_Livetalk").transform.localPosition= new Vector3(0,25,0);
 			break;
@@ -92,6 +90,10 @@ public class Button4 : MonoBehaviour {
 		for (int i =0; i<5; i++) {
 			if(G.transform.localPosition.y!=-1275){
 				G.transform.localPosition -= new Vector3(0,1300/5,0);
+
+				if(G.name == "TF_Items" && i == 3){
+					AutoFade.LoadLevel(Application.loadedLevelName);
+				}
 				yield return new WaitForSeconds(0.02f);
 			}else{
 				break;
@@ -99,6 +101,9 @@ public class Button4 : MonoBehaviour {
 		}
 		if (G.name != "TF_Highlight") {
 			G.SetActive(false);
+//			if(G.name == "TF_Items"){
+//				AutoFade.LoadLevel(Application.loadedLevelName);
+//			}
 		}
 	}
 

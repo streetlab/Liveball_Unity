@@ -19,6 +19,14 @@ public class IOSMgr : MonoBehaviour
 	[DllImport("__Internal")]
 	private static extern void iOSRestoreCompletedTransactions();
 
+	#if(UNITY_ANDROID)
+	#else
+	public delegate void purchaseSucceeded(string receipt);
+	public delegate void purchaseFailed(string receipt);
+	public static event purchaseSucceeded PurchaseSucceededEvent;
+	public static event purchaseFailed PurchaseFailedEvent;
+	#endif
+
 
 
 	#if(UNITY_EDITOR)
@@ -195,7 +203,7 @@ public class IOSMgr : MonoBehaviour
 		iOSInAppInit();
 	}
 
-	public static void ButItem(string strProductId){
+	public static void BuyItem(string strProductId){
 		iOSBuyItem(strProductId);
 	}
 
@@ -207,6 +215,15 @@ public class IOSMgr : MonoBehaviour
 		iOSRestoreCompletedTransactions();
 	}
 
+	public void PurchaseSucceeded(string receipt){
+		Debug.Log("purchaseSucceeded : "+receipt);
+		PurchaseSucceededEvent(receipt);
+	}
+
+	public void PurchaseFailed(string receipt){
+		Debug.Log("purchaseFailed : "+receipt);
+		PurchaseFailedEvent(receipt);
+	}
 
 
 //	public void DisagreePush(string str){
