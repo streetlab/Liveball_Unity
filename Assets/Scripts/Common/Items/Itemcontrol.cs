@@ -200,15 +200,18 @@ public class Itemcontrol : MonoBehaviour {
 			temp3.transform.localPosition = new Vector3 (originV3.x, originV3.y - (i * gap), originV3.z);
 			temp3.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = getitem.Response.data [i].productName;
 			temp3.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getitem.Response.data [i].productDesc;
-			temp3.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getitem.Response.data [i].productPrice.ToString ())+"루비";
+			temp3.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getitem.Response.data [i].productPrice.ToString ())+"마일리지";
 			//Debug.Log (getitem.Response.data [i].productCode);
 			temp3.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getitem.Response.data [i].productPrice.ToString();
 			temp3.transform.FindChild ("id").GetComponent<UILabel> ().text = getitem.Response.data [i].productId.ToString();
 			
 			
-			
+
+			if(getitem.Response.data [i].productCode == "GACHA_500"||getitem.Response.data [i].productCode == "GACHA_1500"){
+				temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "mileage";
+			}else{
 			temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getitem.Response.data [i].productImage;
-			
+			}
 			
 			
 			//temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_00"+((i%3)+1).ToString();

@@ -107,45 +107,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cd_bg01_normal
-    x: 613
-    y: 1200
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: cd_bg02_special
-    x: 393
-    y: 134
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: cd_bg03_rare
-    x: 208
-    y: 41
-    width: 156
-    height: 180
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: cd_bg04_platinum
     x: 220
     y: 341
     width: 156
@@ -158,7 +119,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: cd_bg05_elite
+  - name: cd_bg02_special
     x: 220
     y: 641
     width: 156
@@ -171,7 +132,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: cd_bg06_legend
+  - name: cd_bg03_rare
     x: 220
     y: 941
     width: 156
@@ -184,9 +145,48 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: cd_bg04_platinum
+    x: 208
+    y: 41
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg05_elite
+    x: 393
+    y: 134
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: cd_bg06_legend
+    x: 613
+    y: 1200
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: cd_btn_arrow
     x: 613
-    y: 865
+    y: 1047
     width: 96
     height: 151
     borderLeft: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: cd_game_bg01_normal
     x: 393
-    y: 1216
+    y: 316
     width: 218
     height: 298
     borderLeft: 0
@@ -211,58 +211,6 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: cd_game_bg02_special
-    x: 0
-    y: 223
-    width: 218
-    height: 298
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 1
-    paddingTop: 1
-    paddingBottom: 1
-  - name: cd_game_bg03_rare
-    x: 0
-    y: 523
-    width: 218
-    height: 298
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 1
-    paddingTop: 1
-    paddingBottom: 1
-  - name: cd_game_bg04_platinum
-    x: 0
-    y: 823
-    width: 218
-    height: 298
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 1
-    paddingTop: 1
-    paddingBottom: 1
-  - name: cd_game_bg05_elite
-    x: 393
-    y: 916
-    width: 218
-    height: 298
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 1
-    paddingTop: 1
-    paddingBottom: 1
-  - name: cd_game_bg06_legend
     x: 393
     y: 616
     width: 218
@@ -275,9 +223,61 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 1
     paddingBottom: 1
-  - name: cd_game_bg07_plan
+  - name: cd_game_bg03_rare
     x: 393
-    y: 316
+    y: 916
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg04_platinum
+    x: 393
+    y: 1216
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg05_elite
+    x: 0
+    y: 223
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg06_legend
+    x: 0
+    y: 523
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg07_plan
+    x: 0
+    y: 823
     width: 218
     height: 298
     borderLeft: 0
@@ -380,45 +380,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_2x
-    x: 1404
-    y: 1570
-    width: 206
-    height: 206
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: item_3x
-    x: 1612
-    y: 1570
-    width: 206
-    height: 206
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: item_5x
-    x: 1820
-    y: 1570
-    width: 206
-    height: 206
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: item_bs
     x: 0
     y: 15
     width: 206
@@ -431,11 +392,37 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: mileage
-    x: 613
-    y: 1018
-    width: 156
-    height: 180
+  - name: item_3x
+    x: 1820
+    y: 1570
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_5x
+    x: 1612
+    y: 1570
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_bs
+    x: 1404
+    y: 1570
+    width: 206
+    height: 206
     borderLeft: 0
     borderRight: 0
     borderTop: 0
