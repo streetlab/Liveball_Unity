@@ -50,7 +50,12 @@ public class ScriptSelectTeam : MonoBehaviour {
 			AndroidMgr.RegistGCM(new EventDelegate(this, "CompleteGCM"));
 			#else
 			mMemInfo.OsType = 2;
-			IOSMgr.RegistAPNS(new EventDelegate(this, "CompleteGCM"));
+			if(GetComponentInParent<ScriptTitle>().CheckPushAgree()){
+				CompleteGCM();
+			} else{
+				IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
+			}
+//			IOSMgr.RegistAPNS(new EventDelegate(this, "CompleteGCM"));
 			#endif
 		} else if(!mSelected) {
 			DialogueMgr.ShowDialogue (
@@ -64,21 +69,30 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public void CompleteGCM()
 	{
 		Debug.Log ("CompleteGCM");
-		string memUID = "";
-//		string deviceID = "";
 		#if(UNITY_EDITOR)
-
+		mMemInfo.MemUID = "";
+		mMemInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+		DoJoin();
 		#elif(UNITY_ANDROID)
-		memUID = AndroidMgr.GetMsg();
+		mMemInfo.MemUID = AndroidMgr.GetMsg();
+		mMemInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+		DoJoin();
 		#else
-		memUID = IOSMgr.GetMsg();
+		mMemInfo.MemUID = IOSMgr.GetMsg();
+		EventDelegate eventd = new EventDelegate(this, "DoJoin");
+		IOSMgr.GetUID("", eventd);
 		#endif
 
-		mMemInfo.MemUID = memUID;
-		mMemInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+
+
+	}
+
+	public void DoJoin(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			mMemInfo.DeviceID = IOSMgr.GetMsg();
+		}
 		GetComponentInParent<ScriptTitle>().mProfileEvent = 
 			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
-
 		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
 	}
 
@@ -93,7 +107,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 		PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
 		PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
 
-		GetComponentInParent<ScriptTitle>().DoLogin(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
+		GetComponentInParent<ScriptTitle>().Login(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
 	}
 
 	public void BackClicked()

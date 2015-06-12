@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ScriptWindowEmail : MonoBehaviour {
@@ -125,7 +125,7 @@ public class ScriptWindowEmail : MonoBehaviour {
 			}
 
 
-			GetComponentInParent<ScriptTitle>().DoLogin(eMail, pwd);
+			GetComponentInParent<ScriptTitle>().Login(eMail, pwd);
 		} else {
 			if(CheckAgreement())
 				return;

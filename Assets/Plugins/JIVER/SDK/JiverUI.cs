@@ -9,6 +9,7 @@ public class JiverUI : JiverResponder {
 
 	private List<System.Object> messages = new List<System.Object>();
 	private List<Channel> channels = new List<Channel>();
+	private List<GameObject> goList = new List<GameObject>();
 
 	private static float EPSILON = 10e-4f;
 
@@ -37,6 +38,7 @@ public class JiverUI : JiverResponder {
 	float LINE_HEIGHT;
 
 	bool messageAdded;
+	long mPreTimeStamp;
 
 	bool autoScroll;
 
@@ -91,9 +93,15 @@ public class JiverUI : JiverResponder {
 	public override void OnMessageReceived (JiverModel.Message message)
 	{
 		GameObject go = Instantiate(mItemChat, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+		goList.Add(go);
 		go.transform.parent = mScrollChat.transform;//.FindChild("Grid");
-		go.transform.localScale = new Vector3(1f, 1f, 1f);	
-		go.transform.localPosition = new Vector3(0, mChatHeight, 0);
+		go.transform.localScale = new Vector3(1f, 1f, 1f);
+//		if(message.GetTimestamp() > mPreTimeStamp){
+			go.transform.localPosition = new Vector3(0, mChatHeight, 0);
+//		} else{
+//			go.transform.localPosition = new Vector3(0, 0, 0);
+//		}
+
 		go.transform.FindChild("LblName").GetComponent<UILabel>().text = message.GetSenderName();
 		go.transform.FindChild("LblBody").GetComponent<UILabel>().text = message.GetMessage();
 //		go.transform.FindChild("LblName").GetComponent<UILabel>().text = go.transform.FindChild("LblBody").GetComponent<UILabel>().height+"";
@@ -102,19 +110,17 @@ public class JiverUI : JiverResponder {
 		int textHeight = go.transform.FindChild("LblBody").GetComponent<UILabel>().height;
 		baseHeight += textHeight;
 
-		mChatHeight -= baseHeight;
-
-//		if(mScrollChat.GetComponent<UIPanel>().GetViewSize().y < Mathf.Abs(mChatHeight)){
-//			float gab = Mathf.Abs(mChatHeight) - mScrollChat.GetComponent<UIPanel>().GetViewSize().y;
-//			Vector3 pos = mScrollChat.transform.localPosition;
-//			pos.y = mFirstY + gab;
-//			mScrollChat.transform.localPosition = pos;
-//
-//			Vector2 pos2 = mScrollChat.GetComponent<UIPanel>().clipOffset;
-//			pos2.y = mFirstOffset - gab;
-//			mScrollChat.GetComponent<UIPanel>().clipOffset = pos2;
+//		if(message.GetTimestamp() < mPreTimeStamp){
+//			foreach(GameObject g in goList){
+//				Vector3 oriVec = g.transform.localPosition;
+//				Vector3 newVec = new Vector3(oriVec.x, oriVec.y+baseHeight, oriVec.z);
+//				g.transform.localPosition = newVec;
+//			}
 //		}
-//		go.SendMessage("Init", message, SendMessageOptions.DontRequireReceiver);
+
+		mPreTimeStamp = message.GetTimestamp();
+
+		mChatHeight -= baseHeight;
 		mScrollChat.GetComponent<UIScrollView>().ResetPosition();
 	}
 	public override void OnSystemMessageReceived (JiverModel.SystemMessage message)

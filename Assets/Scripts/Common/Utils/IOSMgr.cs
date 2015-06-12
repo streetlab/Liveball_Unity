@@ -18,6 +18,8 @@ public class IOSMgr : MonoBehaviour
 	private static extern void iOSBuyItem(string strProductId);
 	[DllImport("__Internal")]
 	private static extern void iOSRestoreCompletedTransactions();
+	[DllImport("__Internal")]
+	private static extern void GetUID(string str);
 
 	public delegate void purchaseSucceeded(string receipt);
 	public delegate void purchaseFailed(string receipt);
@@ -223,6 +225,10 @@ public class IOSMgr : MonoBehaviour
 		PurchaseFailedEvent(receipt);
 	}
 
+	public static void GetUID(string msg, EventDelegate eventDelegate){
+		Instance.mEventDelegate = eventDelegate;
+		GetUID(msg);
+	}
 
 //	public void DisagreePush(string str){
 //		DialogueMgr.ShowDialogue("disagree", "disagree", DialogueMgr.DIALOGUE_TYPE.Alert, null);

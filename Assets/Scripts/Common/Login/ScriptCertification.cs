@@ -91,6 +91,6 @@ public class ScriptCertification : MonoBehaviour {
 	public void OnDialogClicked(DialogueMgr.BTNS type){
 		string email = PlayerPrefs.GetString (Constants.PrefEmail);
 		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
-		transform.parent.GetComponent<ScriptTitle>().DoLogin(email, pwd);
+		transform.parent.GetComponent<ScriptTitle>().Login(email, pwd);
 	}
 }

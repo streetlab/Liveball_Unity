@@ -35,6 +35,7 @@ public class Itemcontrol : MonoBehaviour {
 	}
 	
 	void Start () {
+		UtilMgr.ShowLoading(true);
 		SetDelegates();
 
 		#if(UNITY_ANDROID || UNITY_EDITOR)
@@ -103,10 +104,8 @@ public class Itemcontrol : MonoBehaviour {
 		#endif
 	}
 
-
 	void ruby(){
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
-			UtilMgr.ShowLoading(true);
 			EventDelegate eventd = new EventDelegate(this, "purchaseInit");
 			string prodList = "";
 			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
@@ -232,6 +231,8 @@ public class Itemcontrol : MonoBehaviour {
 			temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 		}
 
+		UtilMgr.DismissLoading();
+		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 		temp1.transform.parent = origin1.transform.parent;
 		temp1.transform.localScale = new Vector3 (1, 1, 1);
 		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);
@@ -429,7 +430,6 @@ public class Itemcontrol : MonoBehaviour {
 	#else
 
 	public void purchaseInit(){
-		UtilMgr.DismissLoading();
 		string msg = IOSMgr.GetMsg();
 		if(msg.Equals("NO")){
 			billingNotSupportedEvent("");

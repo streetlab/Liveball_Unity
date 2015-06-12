@@ -18,6 +18,16 @@ public class LoginInfo {
 	private int _tutorialYn;
 	int _teamSeq;
 	string _teamCode;
+	string _deviceID;
+
+	public string DeviceID {
+		get {
+			return _deviceID;
+		}
+		set {
+			_deviceID = value;
+		}
+	}
 
 	public int teamSeq
 	{

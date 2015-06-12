@@ -1,4 +1,5 @@
 #import "Tuby3.h"
+#import "KeychainitemWrapper.h"
 
 static IOSMgr *_instance = [IOSMgr sharedInstance];
 
@@ -31,7 +32,7 @@ static IOSMgr *_instance = [IOSMgr sharedInstance];
 -(void)dealloc{
 //    [imagePicker release];
     imagePicker = nil;
-//    [super dealloc];
+    [super dealloc];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -83,6 +84,32 @@ extern "C"
 void OpenGallery(const char* str){
     [IOSMgr sharedInstance].imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [UnityGetGLViewController() presentViewController:[IOSMgr sharedInstance].imagePicker animated:YES completion:NULL];
+}
+
+extern "C"
+void GetUID(const char* str){
+    // initialize keychaing item for saving UUID.
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"LiveballID" accessGroup:nil];
+    
+    NSString *uuid = [wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
+    
+    if( uuid == nil || uuid.length == 0)
+    {
+        NSLog(@"make new uuid");
+        // if there is not UUID in keychain, make UUID and save it.
+        CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+        CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
+        CFRelease(uuidRef);
+        uuid = [NSString stringWithString:(__bridge NSString *) uuidStringRef];
+        CFRelease(uuidStringRef);
+        
+        // save UUID in keychain
+        [wrapper setObject:uuid forKey:(__bridge id)(kSecAttrAccount)];
+    } else{
+        NSLog(@"alreay got uuid");
+    }
+    
+    UnitySendMessage("IOSMgr", "MsgReceived", [uuid cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 //extern "C"

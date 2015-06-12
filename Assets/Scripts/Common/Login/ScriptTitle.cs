@@ -55,11 +55,12 @@ public class ScriptTitle : MonoBehaviour {
 		#elif(UNITY_EDITOR)
 		#else
 		#endif
+		Debug.Log("ScreenSize.x : "+Screen.width+", y : "+Screen.height);
 
 		Constants.SCREEN_HEIGHT_ORIGINAL = Screen.height;
 //		Debug.Log("height : "+Screen.height+", width : "+Screen.width);
 //		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
-		Debug.Log(SystemInfo.deviceModel);
+		Debug.Log("SystemInfo.deviceModel is "+SystemInfo.deviceModel);
 
 		try{
 //		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;
@@ -185,7 +186,7 @@ public class ScriptTitle : MonoBehaviour {
 			StopLogin();
 		}
 		else{
-			DoLogin(email, pwd);
+			Login(email, pwd);
 		}
 	}
 
@@ -194,7 +195,7 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (true);
 	}
 
-	public void DoLogin(string eMail, string pwd)
+	public void Login(string eMail, string pwd)
 	{
 		mLoginInfo = new LoginInfo ();
 		mLoginInfo.memberEmail = eMail;
@@ -205,7 +206,7 @@ public class ScriptTitle : MonoBehaviour {
 
 		PlayerPrefs.SetString (Constants.PrefEmail, eMail);
 		PlayerPrefs.SetString (Constants.PrefPwd, pwd);
-		
+
 		if (Application.platform == RuntimePlatform.Android) {
 			mLoginInfo.osType = 1;
 			AndroidMgr.RegistGCM(new EventDelegate(this, "SetGCMId"));
@@ -213,14 +214,16 @@ public class ScriptTitle : MonoBehaviour {
 			mLoginInfo.osType = 2;
 			if(CheckPushAgree()){
 				mLoginInfo.memUID = "";
-				NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+//				NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+				SetGCMId();
 			} else{
 				IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
 			}
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
 			mLoginInfo.osType = 1;
 			mLoginInfo.memUID = "";
-			NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+//			NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+			SetGCMId();
 		}
 	}
 
@@ -228,7 +231,7 @@ public class ScriptTitle : MonoBehaviour {
 		Application.Quit();
 	}
 
-	bool CheckPushAgree(){
+	public bool CheckPushAgree(){
 #if(UNITY_ANDROID)
 #else
 		UnityEngine.iOS.NotificationType type = UnityEngine.iOS.NotificationServices.enabledNotificationTypes;
@@ -348,18 +351,26 @@ public class ScriptTitle : MonoBehaviour {
 
 	public void SetGCMId()
 	{
-		#if(UNITY_ANDROID)
+		#if(UNITY_EDITOR)
 		mLoginInfo.memUID = AndroidMgr.GetMsg();
+		mLoginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+		DoLogin();
+		#elif(UNITY_ANDROID)
+		mLoginInfo.memUID = AndroidMgr.GetMsg();
+		mLoginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+		DoLogin();
 		#else
 		mLoginInfo.memUID = IOSMgr.GetMsg();
-
-//		if(CheckPushAgree()){
-//			DialogueMgr.ShowDialogue("오류",
-//			                         "서버 알림이 반드시 필요합니다.\n설정->라이브볼->알림\n위의 경로에서 알림을 허용해주세요.",
-//			                         DialogueMgr.DIALOGUE_TYPE.Alert, DialogueExitHandler);
-//			return;
-//		}
+		EventDelegate eventd = new EventDelegate(this, "DoLogin");
+		IOSMgr.GetUID("", eventd);
 		#endif
+	}
+
+	public void DoLogin(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			mLoginInfo.DeviceID = IOSMgr.GetMsg();
+		}
+		Debug.Log("ID is "+mLoginInfo.DeviceID);
 		NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 	}
 

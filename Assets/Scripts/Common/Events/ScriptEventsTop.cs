@@ -15,12 +15,13 @@ public class ScriptEventsTop : MonoBehaviour {
 			return;
 
 		if(mEvents.GetComponent<ScriptEvents>().Page >= mEvents.GetComponent<ScriptEvents>().MAX_PAGE){
-		AutoFade.LoadLevel("SceneMain");
+			closeClicked = true;
+			AutoFade.LoadLevel("SceneMain");
 		} else{
 			mEvents.GetComponent<ScriptEvents>().Page++;
 			mEvents.GetComponent<ScriptEvents>().GoToNext();
 		}
 
-		closeClicked = true;
+
 	}
 }
