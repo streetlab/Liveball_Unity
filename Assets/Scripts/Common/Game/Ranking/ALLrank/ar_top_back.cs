@@ -14,14 +14,10 @@ public class ar_top_back : MonoBehaviour {
 			transform.parent.parent.parent.GetChild (3).GetChild (4).gameObject.SetActive (false);
 			transform.parent.parent.parent.GetChild (3).GetChild (5).gameObject.SetActive (false);
 
+			transform.parent.FindChild("BtnMenu").gameObject.SetActive(true);
+			gameObject.SetActive(false);
+			transform.parent.FindChild("Label").GetComponent<UILabel>().text = "기록";
 		
-			transform.parent.parent.GetChild (1).gameObject.SetActive (true);
-			transform.parent.GetChild (1).gameObject.SetActive (true);
-			transform.parent.GetChild (2).gameObject.SetActive (true);
-			transform.parent.GetChild (3).gameObject.SetActive (true);
-			transform.parent.GetChild (4).gameObject.SetActive (false);
-			transform.parent.GetChild (5).gameObject.SetActive (false);
-			transform.parent.GetChild (6).gameObject.SetActive (false);
 		} else if (transform.parent.parent.parent.GetChild (5).gameObject.activeSelf) {
 			for(int i = 0 ; i<4;i++){
 				if(transform.parent.parent.parent.GetChild (5).GetChild(i+1).gameObject.activeSelf){
@@ -34,13 +30,9 @@ public class ar_top_back : MonoBehaviour {
 						
 						
 						
-						transform.parent.parent.GetChild (1).gameObject.SetActive (true);
-						transform.parent.GetChild (1).gameObject.SetActive (true);
-						transform.parent.GetChild (2).gameObject.SetActive (true);
-						transform.parent.GetChild (3).gameObject.SetActive (true);
-						transform.parent.GetChild (4).gameObject.SetActive (false);
-						transform.parent.GetChild (5).gameObject.SetActive (false);
-						transform.parent.GetChild (6).gameObject.SetActive (false);
+						transform.parent.FindChild("BtnMenu").gameObject.SetActive(true);
+						gameObject.SetActive(false);
+						transform.parent.FindChild("Label").GetComponent<UILabel>().text = "기록";
 						return;
 					}
 					//Debug.Log("ion");
@@ -56,13 +48,9 @@ public class ar_top_back : MonoBehaviour {
 							
 							
 							
-							transform.parent.parent.GetChild (1).gameObject.SetActive (true);
-							transform.parent.GetChild (1).gameObject.SetActive (true);
-							transform.parent.GetChild (2).gameObject.SetActive (true);
-							transform.parent.GetChild (3).gameObject.SetActive (true);
-							transform.parent.GetChild (4).gameObject.SetActive (false);
-							transform.parent.GetChild (5).gameObject.SetActive (false);
-							transform.parent.GetChild (6).gameObject.SetActive (false);
+							transform.parent.FindChild("BtnMenu").gameObject.SetActive(true);
+							gameObject.SetActive(false);
+							transform.parent.FindChild("Label").GetComponent<UILabel>().text = "기록";
 							return;
 						}
 						if(transform.parent.parent.parent.GetChild (5).GetChild(i+1).GetChild(a+2).gameObject.activeSelf){

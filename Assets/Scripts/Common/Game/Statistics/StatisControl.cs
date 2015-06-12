@@ -7,6 +7,8 @@ public class StatisControl : MonoBehaviour {
 	public float gap = 536;
 	public float bargap = 122;
 	public List<string> labals = new List<string>();
+	public GameObject MenuButton;
+	public GameObject BackButton;
 	Vector3 positions;
 	Vector3 barposition;
 	List<List<List<string>>> ALL = new List<List<List<string>>> ();
@@ -175,26 +177,21 @@ public class StatisControl : MonoBehaviour {
 	
 		switch (i) {
 		case 0:
-			transform.parent.GetChild (1).GetChild (0).GetChild(6).GetComponent<UILabel>().text = "타율";
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "타율";
 			break;
 		case 1:
-			transform.parent.GetChild (1).GetChild (0).GetChild(6).GetComponent<UILabel>().text = "방어율";
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "방어율";
 			break;
 		case 2:
-			transform.parent.GetChild (1).GetChild (0).GetChild(6).GetComponent<UILabel>().text = "홈런";
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "홈런";
 			break;
 		case 3:
-			transform.parent.GetChild (1).GetChild (0).GetChild(6).GetComponent<UILabel>().text = "다승";
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "다승";
 			break;
 		}
-
-		transform.parent.GetChild (1).GetChild (1).gameObject.SetActive (false);
-		transform.parent.GetChild (1).GetChild (0).GetChild(1).gameObject.SetActive (false);
-		transform.parent.GetChild (1).GetChild (0).GetChild(2).gameObject.SetActive (false);
-		transform.parent.GetChild (1).GetChild (0).GetChild(3).gameObject.SetActive (false);
-		transform.parent.GetChild (1).GetChild (0).GetChild(4).gameObject.SetActive (true);
-		transform.parent.GetChild (1).GetChild (0).GetChild(5).gameObject.SetActive (false);
-		transform.parent.GetChild (1).GetChild (0).GetChild(6).gameObject.SetActive (true);
+		MenuButton.SetActive (false);
+		BackButton.SetActive (true);
+	//back button on
 	}
 
 	IEnumerator GetImage(WWW www,GameObject g)
