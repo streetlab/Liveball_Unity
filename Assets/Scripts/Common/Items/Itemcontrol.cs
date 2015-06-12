@@ -106,6 +106,7 @@ public class Itemcontrol : MonoBehaviour {
 
 	void ruby(){
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			UtilMgr.ShowLoading(true);
 			EventDelegate eventd = new EventDelegate(this, "purchaseInit");
 			string prodList = "";
 			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
@@ -420,6 +421,7 @@ public class Itemcontrol : MonoBehaviour {
 	#else
 
 	public void purchaseInit(){
+		UtilMgr.DismissLoading();
 		string msg = IOSMgr.GetMsg();
 		if(msg.Equals("NO")){
 			billingNotSupportedEvent("");
