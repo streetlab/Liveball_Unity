@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ScriptEventsTop : MonoBehaviour {
+	bool closeClicked = false;
 
 	public GameObject mEvents;
 
@@ -10,11 +11,16 @@ public class ScriptEventsTop : MonoBehaviour {
 	}
 	
 	public void CloseClicked(){
+		if(closeClicked)
+			return;
+
 		if(mEvents.GetComponent<ScriptEvents>().Page >= mEvents.GetComponent<ScriptEvents>().MAX_PAGE){
 		AutoFade.LoadLevel("SceneMain");
 		} else{
 			mEvents.GetComponent<ScriptEvents>().Page++;
 			mEvents.GetComponent<ScriptEvents>().GoToNext();
 		}
+
+		closeClicked = true;
 	}
 }

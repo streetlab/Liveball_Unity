@@ -13,7 +13,7 @@ public class IOSMgr : MonoBehaviour
 	[DllImport("__Internal")]
 	private static extern void OpenGallery(string str);
 	[DllImport("__Internal")]
-	private static extern void iOSInAppInit();
+	private static extern void iOSInAppInit(string strProductIds);
 	[DllImport("__Internal")]
 	private static extern void iOSBuyItem(string strProductId);
 	[DllImport("__Internal")]
@@ -196,9 +196,9 @@ public class IOSMgr : MonoBehaviour
 
 	}
 
-	public static void InAppInit(EventDelegate eventDelegate){
+	public static void InAppInit(string prodList, EventDelegate eventDelegate){
 		Instance.mEventDelegate = eventDelegate;
-		iOSInAppInit();
+		iOSInAppInit(prodList);
 	}
 
 	public static void BuyItem(string strProductId){

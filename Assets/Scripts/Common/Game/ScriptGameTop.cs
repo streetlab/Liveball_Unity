@@ -21,6 +21,8 @@ public class ScriptGameTop : MonoBehaviour {
 
 	GetScheduleEvent mScheduleEvent;
 
+	bool closeClicked = false;
+
 	// Use this for initialization
 	void Start () {
 //		mSchedule.SetActive (true);
@@ -162,7 +164,11 @@ public class ScriptGameTop : MonoBehaviour {
 	}
 
 	public void CloseWebview(){
+		if(closeClicked)
+			return;
+
 		mWebview.GetComponent<ScriptGameWebview>().HideWebView();
+		closeClicked = true;
 	}
 
 }

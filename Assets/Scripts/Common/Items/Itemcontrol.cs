@@ -29,12 +29,16 @@ public class Itemcontrol : MonoBehaviour {
 	//	GoogleIAB.purchaseProduct( "ruby_50", "payload that gets stored and returned" );
 		IsTest = UtilMgr.IsTestServer();
 	}
+
+	void OnDestroy(){
+		ClearDelegates();
+	}
 	
 	void Start () {
+		SetDelegates();
+
 		#if(UNITY_ANDROID || UNITY_EDITOR)
 		#else
-		EventDelegate eventd = new EventDelegate(this, "purchaseInit");
-		IOSMgr.InAppInit(eventd);
 		#endif
 		
 		transform.FindChild ("category 1").gameObject.SetActive (true);
@@ -65,46 +69,55 @@ public class Itemcontrol : MonoBehaviour {
 		//NetMgr.GetCardInven (getcard);
 	}
 
-
-	void ruby(){
-	
-
-
-		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
-		temp1.transform.parent = origin1.transform.parent;
-		temp1.transform.localScale = new Vector3 (1, 1, 1);
-		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);
-		temp1.gameObject.SetActive (true);
-		for (int i = 1; i<getruby.Response.data.Count+1; i++) {
-
-				temp1 = (GameObject)Instantiate (origin1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
-				temp1.transform.parent = origin1.transform.parent;
-				temp1.transform.localScale = new Vector3 (1, 1, 1);
-				temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((i) * gap), originV1.z);
-			temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = "루비 " + getruby.Response.data [i-1].productValue+"개";
-			temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productDesc;
-			temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getruby.Response.data [i-1].productPrice.ToString ())+"원";
-			temp1.transform.FindChild ("code").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productCode;
-			temp1.transform.FindChild ("id").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productId.ToString();
-			temp1.transform.FindChild ("add").FindChild ("buyruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productValue.ToString();
-			temp1.transform.FindChild ("add").FindChild ("addruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusRuby.ToString();
-			temp1.transform.FindChild ("add").FindChild ("addgold").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusGoldenball.ToString();
-		//	Debug.Log("ruby code : " + getruby.Response.data [i].productCode);
-
-			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getruby.Response.data [i-1].rubyImage;
-				temp1.gameObject.SetActive (true);
-
-		
-		}
-		transform.FindChild ("category 1").GetComponent<UIScrollView> ().ResetPosition ();
+	void SetDelegates(){
+		#if(UNITY_ANDROID)
+		GoogleIABManager.billingSupportedEvent += billingSupportedEvent;
+		GoogleIABManager.billingNotSupportedEvent += billingNotSupportedEvent;
+		GoogleIABManager.queryInventorySucceededEvent += queryInventorySucceededEvent;
+		GoogleIABManager.queryInventoryFailedEvent += queryInventoryFailedEvent;
+		GoogleIABManager.purchaseCompleteAwaitingVerificationEvent += purchaseCompleteAwaitingVerificationEvent;
+		GoogleIABManager.purchaseSucceededEvent += purchaseSucceededEvent;
+		GoogleIABManager.purchaseFailedEvent += purchaseFailedEvent;
+		GoogleIABManager.consumePurchaseSucceededEvent += consumePurchaseSucceededEvent;
+		GoogleIABManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;
+		#else
+		IOSMgr.PurchaseSucceededEvent += purchaseSucceededEvent;
+		IOSMgr.PurchaseFailedEvent += purchaseFailedEvent;
+		#endif
 	}
 
-	void gold(){
-		
-		
-		
+	void ClearDelegates(){
+		#if(UNITY_ANDROID)
+		GoogleIABManager.billingSupportedEvent -= billingSupportedEvent;
+		GoogleIABManager.billingNotSupportedEvent -= billingNotSupportedEvent;
+		GoogleIABManager.queryInventorySucceededEvent -= queryInventorySucceededEvent;
+		GoogleIABManager.queryInventoryFailedEvent -= queryInventoryFailedEvent;
+		GoogleIABManager.purchaseCompleteAwaitingVerificationEvent -= purchaseCompleteAwaitingVerificationEvent;
+		GoogleIABManager.purchaseSucceededEvent -= purchaseSucceededEvent;
+		GoogleIABManager.purchaseFailedEvent -= purchaseFailedEvent;
+		GoogleIABManager.consumePurchaseSucceededEvent -= consumePurchaseSucceededEvent;
+		GoogleIABManager.consumePurchaseFailedEvent -= consumePurchaseFailedEvent;
+		#else
+		IOSMgr.PurchaseSucceededEvent -= purchaseSucceededEvent;
+		IOSMgr.PurchaseFailedEvent -= purchaseFailedEvent;
+		#endif
+	}
 
-		
+
+	void ruby(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			EventDelegate eventd = new EventDelegate(this, "purchaseInit");
+			string prodList = "";
+			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
+				prodList += rubyInfo.productCode + ";";
+			}
+			IOSMgr.InAppInit(prodList, eventd);
+		} else{
+			InitRubyList();
+		}
+	}
+
+	void gold(){		
 		for (int i = 0; i<getgold.Response.data.Count; i++) {
 			
 			temp2 = (GameObject)Instantiate (origin2, new Vector3 (0, 0, 0), origin2.transform.localRotation);
@@ -177,12 +190,7 @@ public class Itemcontrol : MonoBehaviour {
 		DialogueMgr.ShowDialogue ("구매 성공", Sgold+" 완료.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 
-	void item(){
-		
-		
-		
-		
-	//	Debug.Log ("getitem.Response.data.Count : " + getitem.Response.data.Count);
+	void item(){		
 		for (int i = 0; i<getitem.Response.data.Count; i++) {
 			
 			temp3 = (GameObject)Instantiate (origin3, new Vector3 (0, 0, 0), origin3.transform.localRotation);
@@ -195,13 +203,13 @@ public class Itemcontrol : MonoBehaviour {
 			//Debug.Log (getitem.Response.data [i].productCode);
 			temp3.transform.FindChild ("buygold").GetComponent<UILabel> ().text = getitem.Response.data [i].productPrice.ToString();
 			temp3.transform.FindChild ("id").GetComponent<UILabel> ().text = getitem.Response.data [i].productId.ToString();
-		
-
-
+			
+			
+			
 			temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getitem.Response.data [i].productImage;
-		
-
-
+			
+			
+			
 			//temp3.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = "img_gold_00"+((i%3)+1).ToString();
 			temp3.gameObject.SetActive (true);
 			
@@ -209,6 +217,41 @@ public class Itemcontrol : MonoBehaviour {
 		}
 		transform.FindChild ("category 3").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.FindChild ("category 3").gameObject.SetActive (false);
+	//	Debug.Log ("getitem.Response.data.Count : " + getitem.Response.data.Count);
+
+	}
+
+	void InitRubyList(){
+		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
+		temp1.transform.parent = origin1.transform.parent;
+		temp1.transform.localScale = new Vector3 (1, 1, 1);
+		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);
+		temp1.gameObject.SetActive (true);
+		for (int i = 1; i<getruby.Response.data.Count+1; i++) {
+			
+			temp1 = (GameObject)Instantiate (origin1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
+			temp1.transform.parent = origin1.transform.parent;
+			temp1.transform.localScale = new Vector3 (1, 1, 1);
+			temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((i) * gap), originV1.z);
+			temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = "루비 " + getruby.Response.data [i-1].productValue+"개";
+			temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productDesc;
+			if(Application.platform == RuntimePlatform.IPhonePlayer)
+				temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : $ " + getruby.Response.data [i-1].productPriceIOS;
+			else
+				temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getruby.Response.data [i-1].productPrice.ToString ())+"원";
+			temp1.transform.FindChild ("code").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productCode;
+			temp1.transform.FindChild ("id").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productId.ToString();
+			temp1.transform.FindChild ("add").FindChild ("buyruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productValue.ToString();
+			temp1.transform.FindChild ("add").FindChild ("addruby").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusRuby.ToString();
+			temp1.transform.FindChild ("add").FindChild ("addgold").GetComponent<UILabel> ().text = getruby.Response.data [i-1].bonusGoldenball.ToString();
+			//	Debug.Log("ruby code : " + getruby.Response.data [i].productCode);
+			
+			temp1.transform.FindChild ("SprImgItem").GetComponent<UISprite> ().spriteName = getruby.Response.data [i-1].rubyImage;
+			temp1.gameObject.SetActive (true);
+			
+			
+		}
+		transform.FindChild ("category 1").GetComponent<UIScrollView> ().ResetPosition ();
 	}
 
 	public void setuseritem(int id,int cost,string s){
@@ -246,8 +289,9 @@ public class Itemcontrol : MonoBehaviour {
 		Aruby = float.Parse(addruby);
 		Agold = float.Parse(addgold);
 		RequestIAP  = new IAPEvent (new EventDelegate (this, "mRequestIAP"));
-		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);			
+		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);
 	}
+
 	void mRequestIAP(){
 		#if(UNITY_ANDROID)
 		//if (RequestIAP.Response.data != null) {
@@ -264,43 +308,6 @@ public class Itemcontrol : MonoBehaviour {
 		#endif
 	}
 
-	void OnEnable()
-	{
-		#if(UNITY_ANDROID)
-		GoogleIABManager.billingSupportedEvent += billingSupportedEvent;
-		GoogleIABManager.billingNotSupportedEvent += billingNotSupportedEvent;
-		GoogleIABManager.queryInventorySucceededEvent += queryInventorySucceededEvent;
-		GoogleIABManager.queryInventoryFailedEvent += queryInventoryFailedEvent;
-		GoogleIABManager.purchaseCompleteAwaitingVerificationEvent += purchaseCompleteAwaitingVerificationEvent;
-		GoogleIABManager.purchaseSucceededEvent += purchaseSucceededEvent;
-		GoogleIABManager.purchaseFailedEvent += purchaseFailedEvent;
-		GoogleIABManager.consumePurchaseSucceededEvent += consumePurchaseSucceededEvent;
-		GoogleIABManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;
-		#else
-		IOSMgr.PurchaseSucceededEvent += purchaseSucceededEvent;
-		IOSMgr.PurchaseFailedEvent += purchaseFailedEvent;
-		#endif
-	}
-	
-	
-	void OnDisable()
-	{
-		#if(UNITY_ANDROID)
-		GoogleIABManager.billingSupportedEvent -= billingSupportedEvent;
-		GoogleIABManager.billingNotSupportedEvent -= billingNotSupportedEvent;
-		GoogleIABManager.queryInventorySucceededEvent -= queryInventorySucceededEvent;
-		GoogleIABManager.queryInventoryFailedEvent -= queryInventoryFailedEvent;
-		GoogleIABManager.purchaseCompleteAwaitingVerificationEvent -= purchaseCompleteAwaitingVerificationEvent;
-		GoogleIABManager.purchaseSucceededEvent -= purchaseSucceededEvent;
-		GoogleIABManager.purchaseFailedEvent -= purchaseFailedEvent;
-		GoogleIABManager.consumePurchaseSucceededEvent -= consumePurchaseSucceededEvent;
-		GoogleIABManager.consumePurchaseFailedEvent -= consumePurchaseFailedEvent;
-		#else
-		IOSMgr.PurchaseSucceededEvent -= purchaseSucceededEvent;
-		IOSMgr.PurchaseFailedEvent -= purchaseFailedEvent;
-		#endif
-	}
-	
 	void addruby(){
 		//mProfileEvent.Response.data.userRuby = (float.Parse(mProfileEvent.Response.data.userRuby)+Bruby+Aruby).ToString();
 		//mProfileEvent.Response.data.userGoldenBall = (float.Parse(mProfileEvent.Response.data.userGoldenBall)+Agold).ToString();
@@ -363,7 +370,7 @@ public class Itemcontrol : MonoBehaviour {
 
 		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
 		NetMgr.ComsumeIAP (orderNo,purchase.purchaseToken,IsTest,ComsumeIAP);
-		orderNo = ComsumeIAP.Response.data.orderNo;
+//		orderNo = ComsumeIAP.Response.data.orderNo;
 
 		Debug.Log( "purchaseSucceededEvent: " + purchase );
 	}
@@ -413,18 +420,35 @@ public class Itemcontrol : MonoBehaviour {
 	#else
 
 	public void purchaseInit(){
-		if(IOSMgr.GetMsg().Equals("OK")){
-			billingSupportedEvent();
+		string msg = IOSMgr.GetMsg();
+		if(msg.Equals("NO")){
+			billingNotSupportedEvent("");
 		} else{
-			billingNotSupportedEvent(IOSMgr.GetMsg());
+			billingSupportedEvent();
+			IOSProducts products = Newtonsoft.Json.JsonConvert.DeserializeObject<IOSProducts>(msg);
+			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
+				switch(rubyInfo.productCode){
+				case "ruby_50" : rubyInfo.productPriceIOS = products.ruby_50;
+					break;
+				case "ruby_100" : rubyInfo.productPriceIOS = products.ruby_100;
+					break;
+				case "ruby_200" : rubyInfo.productPriceIOS = products.ruby_200;
+					break;
+				case "ruby_300" : rubyInfo.productPriceIOS = products.ruby_300;
+					break;
+				case "ruby_500" : rubyInfo.productPriceIOS = products.ruby_500;
+					break;
+				}
+			}
 		}
+		InitRubyList();
 	}
 
 	void purchaseSucceededEvent(string receipt)
 	{		
 		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
 		NetMgr.ComsumeIAP (orderNo,receipt,IsTest,ComsumeIAP);
-		orderNo = ComsumeIAP.Response.data.orderNo;
+//		orderNo = ComsumeIAP.Response.data.orderNo;
 	}
 	
 	void purchaseFailedEvent(string receipt)
@@ -451,5 +475,62 @@ public class Itemcontrol : MonoBehaviour {
 	}
 
 	#endif
+
+	class IOSProducts{
+		string _ruby_50;
+		
+		public string ruby_50 {
+			get {
+				return _ruby_50;
+			}
+			set {
+				_ruby_50 = value;
+			}
+		}
+		
+		string _ruby_100;
+		
+		public string ruby_100 {
+			get {
+				return _ruby_100;
+			}
+			set {
+				_ruby_100 = value;
+			}
+		}
+		
+		string _ruby_200;
+		
+		public string ruby_200 {
+			get {
+				return _ruby_200;
+			}
+			set {
+				_ruby_200 = value;
+			}
+		}
+		
+		string _ruby_300;
+		
+		public string ruby_300 {
+			get {
+				return _ruby_300;
+			}
+			set {
+				_ruby_300 = value;
+			}
+		}
+		
+		string _ruby_500;
+		
+		public string ruby_500 {
+			get {
+				return _ruby_500;
+			}
+			set {
+				_ruby_500 = value;
+			}
+		}
+	}
 
 }

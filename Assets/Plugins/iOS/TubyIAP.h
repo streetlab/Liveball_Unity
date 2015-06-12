@@ -3,7 +3,7 @@
 @interface TubyIAP : NSObject<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 + (TubyIAP*) sharedTubyIAP;
-- (BOOL) initInApp;
+- (BOOL) initInApp:(NSString*)strProductIds;
 - (void) requestProductData:(NSString*)strProductId;
 
 - (void) completeTransaction:(SKPaymentTransaction*)transaction;

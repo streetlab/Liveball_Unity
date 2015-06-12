@@ -68,6 +68,16 @@ public class ItemShopRubyInfo {
 	}
 
 // "스타터 PACK",
+	string _productPriceIOS;
+	public string productPriceIOS {
+		get {
+			return _productPriceIOS;
+		}
+		set {
+			_productPriceIOS = value;
+		}
+	}
+
 	int _productPrice;
 	public int productPrice {
 		get {

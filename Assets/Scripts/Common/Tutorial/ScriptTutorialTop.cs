@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ScriptTutorialTop : MonoBehaviour {
 
+	bool closeClicked = false;
 	public GameObject mBtnClose;
 	public GameObject mBtnNext;
 	public GameObject mBtnPrev;
@@ -28,6 +29,10 @@ public class ScriptTutorialTop : MonoBehaviour {
 	}
 
 	public void CloseClicked(){
+		if(closeClicked)
+			return;
+
+		closeClicked = true;
 		string value = PlayerPrefs.GetString(Constants.PrefNotice);
 		if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
 			AutoFade.LoadLevel("SceneMain");

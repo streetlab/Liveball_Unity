@@ -50,6 +50,7 @@ public class ScriptPP : MonoBehaviour {
 	}
 	
 	void CheckURL(){
+		Debug.Log ("url is "+mWebView.url);
 		if(mWebView != null){
 			if(mWebView.url.Equals("http://partner.liveball.kr/store/pointpark_close.php")){
 				mTop.GetComponent<ScriptPPTop>().CloseClicked();

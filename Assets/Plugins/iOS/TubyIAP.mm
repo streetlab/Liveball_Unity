@@ -1,11 +1,14 @@
 #import "TubyIAP.h"
 #import "Tuby3.h"
 
+BOOL isInit;
+
 extern "C"
 {
-    void iOSInAppInit()
+    void iOSInAppInit(const char* pszProductIds)
     {
-        [[TubyIAP sharedTubyIAP] initInApp];
+        NSString* strProductIds = [NSString stringWithUTF8String:pszProductIds];
+        [[TubyIAP sharedTubyIAP] initInApp:strProductIds];
     }
     void iOSBuyItem(const char* pszProductId)
     {
@@ -30,17 +33,24 @@ extern "C"
     return pInstance;
 }
 
-- (BOOL) initInApp
+- (BOOL) initInApp:(NSString*)strProductIds
 {
     if( [SKPaymentQueue canMakePayments] == NO ){
         UnitySendMessage("IOSMgr", "MsgReceived", "NO");
         return NO;
     }
     
+    isInit = true;
+    
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
     NSLog(@"InAppPurchase init OK");
-    UnitySendMessage("IOSMgr", "MsgReceived", "OK");
+//    UnitySendMessage("IOSMgr", "MsgReceived", "OK");
+    NSArray *prodList = [strProductIds componentsSeparatedByString:@";"];
+    NSSet* productIdentifiers = [NSSet setWithArray:prodList];
+    SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
+    request.delegate = self;
+    [request start];
     
     return true;
 }
@@ -59,6 +69,8 @@ extern "C"
 ///< 아이템 정보 요청 결과 callback
 - (void) productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
+    NSMutableArray *prodKeys = [[NSMutableArray alloc] init];
+    NSMutableArray *prodPrices = [[NSMutableArray alloc] init];
     NSLog( @"InAppPurchase didReceiveResponse" );
     for( SKProduct* product in response.products )
     {
@@ -70,14 +82,24 @@ extern "C"
             //product.priceLocale
             NSLog(@"InAppPurchase Product id: %@", product.productIdentifier);
             
-            ///< 구매 요청
-            
-            SKPayment* payment = [SKPayment paymentWithProduct:product];
-            //payment.quantity = 10;
-            [[SKPaymentQueue defaultQueue] addPayment:payment];
+            if(isInit){
+                [prodKeys addObject:product.productIdentifier];
+                [prodPrices addObject:[product.price stringValue]];
+            } else{
+                ///< 구매 요청
+                SKPayment* payment = [SKPayment paymentWithProduct:product];
+                //payment.quantity = 10;
+                [[SKPaymentQueue defaultQueue] addPayment:payment];
+            }
         }
     }
-    
+    if(isInit){
+        NSDictionary *dics = [[NSDictionary alloc] initWithObjects:prodPrices forKeys:prodKeys];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dics options:0 error:nil];
+        NSString *tmp = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        UnitySendMessage("IOSMgr", "MsgReceived", [tmp UTF8String]);
+    }
+    isInit = false;
     [request release];
     
     for (NSString *invalidProductId in response.invalidProductIdentifiers)
