@@ -53,10 +53,11 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 			mBtnTeamHome.GetComponent<UIButton> ().isEnabled = false;
 			//mBtnTeamHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneMain")) {
-			mBtnGameHome.GetComponent<UIButton> ().isEnabled = false;
+			mBtnGameHome.GetComponent<UIButton> ().defaultColor = new Color (66f / 255f, 69f / 255f, 76f / 255f);
+			//mBtnGameHome.GetComponent<UIButton> ().isEnabled = false;
 			//mBtnGameHome.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneCards")) {
-			mBtnCards.GetComponent<UIButton> ().isEnabled = false;
+			//mBtnCards.GetComponent<UIButton> ().isEnabled = false;
 			//mBtnCards.transform.GetChild (0).GetComponent<UISprite> ().color = new Color (134f / 255f, 220f / 255f, 1, 1);
 		} else if (Application.loadedLevelName.Equals ("SceneRanking")) {
 			mBtnRanking.GetComponent<UIButton> ().isEnabled = false;
@@ -95,7 +96,10 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 			break;
 		case "BtnGameHome":
 			if(!Application.loadedLevelName.Equals("SceneMain"))
+	
 				ScriptMainTop.LandingState = 4;
+			UtilMgr.SelectTeam = "";
+		
 				AutoFade.LoadLevel("SceneMain", 0f, 1f);
 			break;
 		case "BtnCards":

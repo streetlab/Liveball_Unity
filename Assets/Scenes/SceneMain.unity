@@ -72573,7 +72573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1153484024
 Transform:
   m_ObjectHideFlags: 0
@@ -88065,6 +88065,42 @@ Prefab:
       propertyPath: startingRenderQueue
       value: 3001
       objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: hover.r
+      value: .258823544
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: hover.g
+      value: .270588249
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: hover.b
+      value: .298039228
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: pressed.r
+      value: .258823544
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: pressed.g
+      value: .270588249
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: pressed.b
+      value: .298039228
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: disabledColor.r
+      value: .258823544
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: disabledColor.g
+      value: .270588249
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462270, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
+      propertyPath: disabledColor.b
+      value: .298039228
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf6baed3bcc614296babf94e152953b1, type: 2}
   m_IsPrefabParent: 0
@@ -91343,7 +91379,7 @@ Transform:
   m_GameObject: {fileID: 1465707728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0015600624, y: .0015600624, z: .0015600624}
+  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
   m_Children:
   - {fileID: 1171594848}
   - {fileID: 654317284}
@@ -103461,7 +103497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1672788546
 Transform:
   m_ObjectHideFlags: 0
@@ -114119,7 +114155,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: e72b476f4cb2a462d91d0093b0767656, type: 3}
   mFont: {fileID: 0}
-  mText: "\uC804\uB825\uD655\uC778"
+  mText: "\uB77C\uC778\uC5C5"
   mFontSize: 36
   mFontStyle: 0
   mAlignment: 1
