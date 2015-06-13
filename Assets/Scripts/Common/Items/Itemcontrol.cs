@@ -176,7 +176,23 @@ public class Itemcontrol : MonoBehaviour {
 		}
 
 	}
-
+	void MileageDialogueHandler(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			if (int.Parse (UserMgr.UserInfo.userDiamond) < Gcost) {
+				DialogueMgr.ShowDialogue ("구매 실패", "마일리지가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			} else {
+				Sgold = Gs;
+				if(GI){
+					golds = new IAPEvent (new EventDelegate (this, "mGrequestIAP"));
+					NetMgr.PurchaseGold (Gid, golds);
+				}else{
+					items = new IAPEvent (new EventDelegate (this, "mIrequestIAP"));
+					NetMgr.PurchaseItem (Gid, items);
+				}
+			}
+		}
+		
+	}
 	void mGrequestIAP(){
 
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addgold"));
@@ -271,7 +287,7 @@ public class Itemcontrol : MonoBehaviour {
 		Gs = s;
 
 		//Debug.Log("DialogueMgr.DialogClickHandler 1 : " + DialogueMgr.DialogClickHandler);
-		DialogueMgr.ShowDialogue ("구매 확인", s , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
+		DialogueMgr.ShowDialogue ("구매 확인", s , DialogueMgr.DIALOGUE_TYPE.YesNo , MileageDialogueHandler);
 		//Debug.Log("DialogueMgr.DialogClickHandler 2 : " + DialogueMgr.IsShown);
 	
 

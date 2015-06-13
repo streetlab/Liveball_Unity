@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PostButton : MonoBehaviour {
 	GetMailEvent Mail;
 	List<Mailinfo> Mails = new List<Mailinfo>();
+	public GameObject GachaAnim;
 
 	public void getitem (int mailseq,int attachseq){
 	
@@ -92,7 +93,8 @@ public class PostButton : MonoBehaviour {
 					//+ " " + Mails[i].attach[0].attachValue.ToString();
 				Debug.Log(temp.transform.FindChild("Name").GetComponent<UILabel>().text + " status : " + Mails[i].mailStatus);
 				temp.transform.FindChild("mailseq").GetComponent<UILabel>().text = Mails[i].mailSeq.ToString();
-				temp.transform.FindChild("attachseq").GetComponent<UILabel>().text = Mails[i].attach[0].attachSeq.ToString();
+						temp.transform.FindChild("attachseq").GetComponent<UILabel>().text = Mails[i].attach[0].attachSeq.ToString();
+						temp.transform.FindChild("Code").GetComponent<UILabel>().text = Mails[i].attach[0].attachCode.ToString();
 						temp.gameObject.SetActive(true);
 
 					}
@@ -134,6 +136,12 @@ public class PostButton : MonoBehaviour {
 
 			G.SetActive(false);
 
+	}
+	public void GachaOK(){
+		//	transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite")
+		transform.FindChild ("PostDialogue").gameObject.SetActive (false);
+		PostgetButton.anim.SetActive (false);
+		Destroy (PostgetButton.anim);
 	}
 
 }

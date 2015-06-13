@@ -376,12 +376,12 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: 5
-  maxSize: 5
+  minSize: 50
+  maxSize: 50
   minEnergy: 1
   maxEnergy: 1
-  minEmission: 7
-  maxEmission: 7
+  minEmission: 10
+  maxEmission: 10
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   rndVelocity: {x: 0, y: 0, z: 0}
@@ -431,14 +431,14 @@ EllipsoidParticleEmitter:
   m_Enabled: 1
   m_Emit: 1
   minSize: .300000012
-  maxSize: .5
-  minEnergy: 1.20000005
-  maxEnergy: 1.20000005
-  minEmission: 20
-  maxEmission: 20
+  maxSize: 1
+  minEnergy: 3
+  maxEnergy: 3
+  minEmission: 30
+  maxEmission: 30
   worldVelocity: {x: 0, y: 0, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
-  rndVelocity: {x: .699999988, y: .699999988, z: .699999988}
+  rndVelocity: {x: 3, y: 3, z: .699999988}
   emitterVelocityScale: .0500000007
   tangentVelocity: {x: 0, y: 0, z: 0}
   angularVelocity: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0, g: 0, b: 0, a: .650980413}
+  mColor: {r: 0, g: 0, b: 0, a: .784313738}
   mPivot: 4
   mWidth: 720
   mHeight: 1280
@@ -770,7 +770,7 @@ MonoBehaviour:
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 20
+  mDepth: 150
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11463496

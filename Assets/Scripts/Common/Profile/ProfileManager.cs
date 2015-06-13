@@ -297,7 +297,7 @@ public class ProfileManager : MonoBehaviour {
 
 	IEnumerator GetImage(WWW www)
 	{
-		
+
 		yield return www;
 		
 		Texture2D temp = new Texture2D (0, 0);

@@ -297,6 +297,16 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetUserRankingWeeklyGold (memSeq), baseEvent);
 	}
 
+	public static void GetInvenItem(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetInvenItemRequest (), baseEvent);
+	}
+
+	public static void DeleteInvenItem(int itemNo,int itemid, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new DeleteInvenItemInfoRequest (itemNo,itemid), baseEvent);
+	}
+
 	public static void GetUserMailBox(int memSeq,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetMailboxRequest (memSeq), baseEvent);
@@ -307,6 +317,10 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetDoneMailboxRequset (memSeq,mailSeq,attachSeq), baseEvent);
 	}
 
+	public static void GetUserCheckMailBox(int memSeq,int mailSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetCheckMailboxRequset (memSeq,mailSeq), baseEvent);
+	}
 
 	public static void GetGameSposDetailBoard(BaseEvent baseEvent)
 	{

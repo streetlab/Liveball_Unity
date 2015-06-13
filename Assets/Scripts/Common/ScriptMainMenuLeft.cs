@@ -116,10 +116,10 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 			break;
 		case "BtnCards":
 			if(!Application.loadedLevelName.Equals("SceneCards"))
-				DialogueMgr.ShowDialogue("준비중", "추후 업데이트 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+				AutoFade.LoadLevel("SceneCards", 0f, 1f);
 			else
 				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
-			//AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			//DialogueMgr.ShowDialogue("준비중", "추후 업데이트 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			break;
 		case "BtnIloveBaseball":
 			if(!Application.loadedLevelName.Equals("SceneLoveBaseball"))
