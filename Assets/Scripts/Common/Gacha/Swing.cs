@@ -15,5 +15,6 @@ public class Swing : MonoBehaviour {
 	public void ground23(){
 		transform.FindChild("ground 23").gameObject.SetActive (true);
 		transform.FindChild("Plasma 11").gameObject.SetActive (true);
+		transform.parent.parent.FindChild ("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<BoxCollider2D>().enabled = true;
 	}
 }

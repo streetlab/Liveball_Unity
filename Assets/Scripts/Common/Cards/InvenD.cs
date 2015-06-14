@@ -12,11 +12,9 @@ public class InvenD : MonoBehaviour {
 	
 	} 
 	void D(){
-		DialogueMgr.ShowDialogue ("삭제 성공", transform.parent.FindChild("name").GetComponent<UILabel>().text
-		                          +"\n삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		GetComponent<UIButton> ().isEnabled = false;
-		transform.FindChild ("Label").GetComponent<UILabel> ().text = "삭제됨";
-		//AutoFade.LoadLevel("SceneCards", 0f, 1f);
+		ScriptItemMiddle.Delete = true;
+		AutoFade.LoadLevel("SceneCards", 0f, 1f);
+	
 	}
 
 	void MileageDialogueHandler(DialogueMgr.BTNS btn){
@@ -27,4 +25,5 @@ public class InvenD : MonoBehaviour {
 		}
 		
 	}
+
 }

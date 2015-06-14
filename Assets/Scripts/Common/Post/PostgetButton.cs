@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class PostgetButton : MonoBehaviour {
+
 	GetDoneMailEvent getdone;
 	GetCheckMailEvent getCheck;
 	public void Getit(){
@@ -44,22 +45,66 @@ public class PostgetButton : MonoBehaviour {
 	}
 	public static GameObject anim ;
 	void getcheckdata(){
-
+		transform.parent.parent.parent.parent.GetComponent<PostButton> ().CheckMail = getCheck.Response.data;
 		Debug.Log("gat");
 		transform.parent.FindChild ("get").gameObject.SetActive (false);
 		transform.parent.FindChild ("com").gameObject.SetActive (true);
 
 		//getprofile
-		
+		if (getCheck.Response.data.userGoldenBall != null) {
+			UserMgr.UserInfo.userGoldenBall = getCheck.Response.data.userGoldenBall;}
+		if (getCheck.Response.data.userDiamond != null) {
+			UserMgr.UserInfo.userDiamond = getCheck.Response.data.userDiamond;}
+		if (getCheck.Response.data.useActiveDiamond != null) {
+			UserMgr.UserInfo.useActiveDiamond = getCheck.Response.data.useActiveDiamond;}
+		if (getCheck.Response.data.userRuby != null) {
+			UserMgr.UserInfo.userRuby = getCheck.Response.data.userRuby;}
 		//anim
 		GameObject Anim = transform.parent.parent.parent.parent.GetComponent<PostButton> ().GachaAnim;
 		anim = (GameObject)Instantiate (Anim,new Vector3 (0.0390625f,-0.0078125f,0),Anim.transform.localRotation);
 		anim.transform.parent = transform.parent.parent.parent.parent;
 		anim.transform.localPosition = new Vector3 (-195f, -595f, 0);
 		anim.transform.localScale = new Vector3 (100f,100f,1f);
-	//	transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite")
-		anim.SetActive (true);
+		switch (getCheck.Response.data.gacha.itemCode) {
+		case "ITEM_RUBY":
+			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
+				spriteName = "item_ruby_30";
+			break;
+		case "ITEM_GOLD":
+			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
+				spriteName = "item_goldenball_30k";
+			break;
 
+		case "ITEM_MILEAGE":
+			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
+				spriteName = "gift_m";
+			break;
+
+		case "ITEM_ITEM":
+
+			break;
+
+		case "ITEM_CARD":
+	
+			break;
+
+		case "ITEM_GIFT":
+			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
+				spriteName = "gift_c";
+			break;
+
+		case "ITEM_PPOINT":
+			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
+				spriteName = "gift_p";
+			break;
+
+
+		}
+	
+	
+		anim.SetActive (true);
+		transform.parent.parent.parent.parent.GetComponent<PostButton> ().GachaCount++;
+		Debug.Log ("gachacount : " + transform.parent.parent.parent.parent.GetComponent<PostButton> ().GachaCount);
 		//DialogueMgr.ShowDialogue ("지급 완료", transform.parent.FindChild("Name").GetComponent<UILabel>().text+" 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		
 		

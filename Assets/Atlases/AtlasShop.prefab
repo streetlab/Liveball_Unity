@@ -42,8 +42,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 50760fac256e946b3a18f0c9f55ee4e0, type: 2}
   mSprites:
   - name: cd_platinum_back
-    x: 632
-    y: 960
+    x: 1156
+    y: 844
     width: 156
     height: 180
     borderLeft: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cd_rare_back
-    x: 474
-    y: 960
+    x: 998
+    y: 116
     width: 156
     height: 180
     borderLeft: 0
@@ -68,8 +68,47 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: cd_special_back
-    x: 316
-    y: 960
+    x: 998
+    y: 298
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: gift_c
+    x: 998
+    y: 480
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: gift_m
+    x: 1314
+    y: 844
+    width: 156
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: gift_p
+    x: 998
+    y: 662
     width: 156
     height: 180
     borderLeft: 0
@@ -81,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: img_shield_iitem
-    x: 158
-    y: 960
+    x: 998
+    y: 844
     width: 156
     height: 180
     borderLeft: 0
@@ -94,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: img_vip
-    x: 0
-    y: 960
+    x: 840
+    y: 116
     width: 156
     height: 180
     borderLeft: 0
@@ -107,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_bg
-    x: 682
-    y: 1908
+    x: 0
+    y: 340
     width: 330
     height: 140
     borderLeft: 230
@@ -120,8 +159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_card
-    x: 744
-    y: 1784
+    x: 62
+    y: 96
     width: 60
     height: 60
     borderLeft: 0
@@ -133,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_gold
-    x: 682
-    y: 1784
+    x: 0
+    y: 34
     width: 60
     height: 60
     borderLeft: 0
@@ -146,8 +185,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_goldenball_10k.png
-    x: 790
-    y: 1142
+    x: 840
+    y: 298
     width: 156
     height: 180
     borderLeft: 0
@@ -159,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_goldenball_20k.png
-    x: 632
-    y: 1142
+    x: 840
+    y: 480
     width: 156
     height: 180
     borderLeft: 0
@@ -172,8 +211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_goldenball_30k.png
-    x: 474
-    y: 1142
+    x: 840
+    y: 662
     width: 156
     height: 180
     borderLeft: 0
@@ -185,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_goldenball_50k.png
-    x: 316
-    y: 1142
+    x: 840
+    y: 844
     width: 156
     height: 180
     borderLeft: 0
@@ -198,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_goldenball_5k.png
-    x: 158
-    y: 1142
+    x: 682
+    y: 116
     width: 156
     height: 180
     borderLeft: 0
@@ -211,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_item
-    x: 682
-    y: 1846
+    x: 0
+    y: 96
     width: 60
     height: 60
     borderLeft: 0
@@ -224,8 +263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_multiple_200X_10.png
-    x: 0
-    y: 1142
+    x: 682
+    y: 298
     width: 156
     height: 180
     borderLeft: 0
@@ -237,8 +276,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_multiple_200X_5.png
-    x: 790
-    y: 1324
+    x: 682
+    y: 480
     width: 156
     height: 180
     borderLeft: 0
@@ -250,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_multiple_300X_10.png
-    x: 632
-    y: 1324
+    x: 682
+    y: 662
     width: 156
     height: 180
     borderLeft: 0
@@ -263,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_multiple_300X_5.png
-    x: 474
-    y: 1324
+    x: 682
+    y: 844
     width: 156
     height: 180
     borderLeft: 0
@@ -276,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_ruby
-    x: 744
-    y: 1846
+    x: 62
+    y: 34
     width: 60
     height: 60
     borderLeft: 0
@@ -289,8 +328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_ruby_100.png
-    x: 316
-    y: 1324
+    x: 490
+    y: 118
     width: 156
     height: 180
     borderLeft: 0
@@ -302,8 +341,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_ruby_200.png
-    x: 158
-    y: 1324
+    x: 332
+    y: 118
     width: 156
     height: 180
     borderLeft: 0
@@ -315,8 +354,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_ruby_300.png
-    x: 0
-    y: 1324
+    x: 490
+    y: 300
     width: 156
     height: 180
     borderLeft: 0
@@ -328,8 +367,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_ruby_50.png
-    x: 840
-    y: 1596
+    x: 332
+    y: 300
     width: 156
     height: 180
     borderLeft: 0
@@ -341,8 +380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_ruby_500.png
-    x: 682
-    y: 1596
+    x: 158
+    y: 158
     width: 156
     height: 180
     borderLeft: 0
@@ -354,8 +393,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: mileage
-    x: 790
-    y: 960
+    x: 0
+    y: 158
     width: 156
     height: 180
     borderLeft: 0
@@ -368,7 +407,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: pp_banner_001
     x: 0
-    y: 1506
+    y: 482
     width: 680
     height: 270
     borderLeft: 0
@@ -381,7 +420,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: pp_banner_002
     x: 0
-    y: 1778
+    y: 754
     width: 680
     height: 270
     borderLeft: 0

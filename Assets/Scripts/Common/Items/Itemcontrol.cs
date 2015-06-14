@@ -304,6 +304,7 @@ public class Itemcontrol : MonoBehaviour {
 	void additem(){
 		UserMgr.UserInfo.item = mProfileEvent.Response.data.item;
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
+		UserMgr.UserInfo.userDiamond = mProfileEvent.Response.data.userDiamond;
 		DialogueMgr.ShowDialogue ("구매 성공", Sgold+" 구매 완료.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 	public void prime31(string id,string code,string product,string buyruby,string addruby,string addgold){

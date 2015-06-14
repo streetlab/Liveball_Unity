@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PostButton : MonoBehaviour {
+	public CheckMailbox CheckMail;
+	public int GachaCount = 0;
 	GetMailEvent Mail;
 	List<Mailinfo> Mails = new List<Mailinfo>();
 	public GameObject GachaAnim;
@@ -27,6 +29,8 @@ public class PostButton : MonoBehaviour {
 		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
+	
+
 			
 	
 	}
@@ -135,13 +139,24 @@ public class PostButton : MonoBehaviour {
 		}
 
 			G.SetActive(false);
+		Debug.Log (GachaCount);
+		if (GachaCount > 0&&Application.loadedLevelName.Equals("SceneCards")) {
+			AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			
+		}
 
 	}
 	public void GachaOK(){
-		//	transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite")
+	
 		transform.FindChild ("PostDialogue").gameObject.SetActive (false);
 		PostgetButton.anim.SetActive (false);
+		transform.FindChild ("PostDialogue").FindChild ("Panel").FindChild ("Sprite").GetComponent<BoxCollider2D> ().enabled = false;
 		Destroy (PostgetButton.anim);
+		if (CheckMail.gacha.itemType >= 6) {
+			DialogueMgr.ShowDialogue ("경품 확인", CheckMail.gacha.itemName+ " 지급 완료 되었습니다.\n인벤토리를 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else {
+			DialogueMgr.ShowDialogue ("경품 확인", CheckMail.gacha.itemName + " 지급 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
 	}
 
 }
