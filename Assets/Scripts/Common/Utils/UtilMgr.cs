@@ -134,13 +134,15 @@ public class UtilMgr : MonoBehaviour {
 
 	public static void ResizeList(GameObject go)
 	{
-
+		try{
 		Vector3 offset3 = go.transform.localPosition;
 		offset3.y += UtilMgr.GetScaledPositionY () ;
 		go.transform.localPosition = new Vector3 (offset3.x, offset3.y, offset3.z);
 		Vector4 offset4 = go.GetComponent<UIPanel> ().baseClipRegion;
 		offset4.w -= UtilMgr.GetScaledPositionY () * 2;
 		go.GetComponent<UIPanel> ().baseClipRegion = new Vector4 (offset4.x, offset4.y, offset4.z, offset4.w);
+		}catch{
+		}
 	}
 
 	public static float GetScaledPositionY()

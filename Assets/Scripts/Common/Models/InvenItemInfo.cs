@@ -169,6 +169,14 @@ public class InvenItemInfo {
 			_itemCode = value;
 		}
 	}
-
+	private string _limitDateTime;
+	public string limitDateTime {
+		get {
+			return _limitDateTime;
+		}
+		set {
+			_limitDateTime = value;
+		}
+	}
 
 }

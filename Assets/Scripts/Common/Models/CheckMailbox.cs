@@ -159,4 +159,13 @@ public class CheckMailbox {
 			_gacha = value;
 		}
 	}
+	private string _limitDateTime;
+	public string limitDateTime {
+		get {
+			return _limitDateTime;
+		}
+		set {
+			_limitDateTime = value;
+		}
+	}
 }

@@ -45,6 +45,30 @@ public class ScriptItemMiddle : MonoBehaviour {
 			}
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemid").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemId.ToString();
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemNo").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemNo.ToString();
+			if(mEvent.Response.data[UseItems[index]].limitDateTime!=null){
+				string limit = mEvent.Response.data[UseItems[index]].limitDateTime;
+				char [] limitlist;
+				List<string> result = new List<string>();
+				if(limit.Length>10){
+					limitlist = limit.ToCharArray();
+					for(int q = 0; q<limitlist.Length-2;q++){
+						result.Add(limitlist[q].ToString());
+						if(q==3){
+							result.Add("년");
+						}else if(q==5){
+							result.Add("월");
+						}else if(q==7){
+							result.Add("일");
+						}else if(q==9){
+							result.Add("시");
+						}else if(q==11){
+							result.Add("분");
+						}
+					}
+				}
+					limit = string.Join("",result.ToArray());
+				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("value").GetComponent<UILabel>().text = "삭제일 : "+ limit;
+			}
 			item.Target.gameObject.SetActive(true);
 			ItemList.Add(item);
 		});

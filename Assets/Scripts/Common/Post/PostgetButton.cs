@@ -102,13 +102,17 @@ public class PostgetButton : MonoBehaviour {
 		}
 	
 	
-		anim.SetActive (true);
+		StartCoroutine ("AnimStart");
 		transform.parent.parent.parent.parent.GetComponent<PostButton> ().GachaCount++;
 		Debug.Log ("gachacount : " + transform.parent.parent.parent.parent.GetComponent<PostButton> ().GachaCount);
 		//DialogueMgr.ShowDialogue ("지급 완료", transform.parent.FindChild("Name").GetComponent<UILabel>().text+" 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		
 		
 		
+	}
+	IEnumerator AnimStart(){
+		yield return new WaitForSeconds (1f);
+		anim.SetActive (true);
 	}
 
 

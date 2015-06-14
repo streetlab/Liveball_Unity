@@ -75,7 +75,7 @@ public class PostButton : MonoBehaviour {
 				List<string> result = new List<string>();
 				if(limit.Length>10){
 				limitlist = limit.ToCharArray();
-				for(int q = 0; i<limitlist.Length-2;q++){
+				for(int q = 0; q<limitlist.Length-2;q++){
 					result.Add(limitlist[q].ToString());
 					if(q==3){
 							result.Add("년");
