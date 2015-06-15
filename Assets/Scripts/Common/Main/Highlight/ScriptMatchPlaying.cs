@@ -53,7 +53,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
 		NetMgr.JoinGame();
 		if (UserMgr.Schedule != null) {
-			if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
+			if (UserMgr.Schedule.gameStatus == 0) {
 				mList.transform.FindChild ("Label").gameObject.SetActive (true);
 				//TF_Landing.GetComponent<LandingManager>().Nongame();
 			} else {

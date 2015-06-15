@@ -187,6 +187,7 @@ public class UIInput : MonoBehaviour
 	static bool mWaitForKeyboard = false;
 	static string OldValue = "";
 	bool OldValueUse;
+	bool KeboardClosing;
 #endif
 
 	[System.NonSerialized] protected int mSelectionStart = 0;
@@ -210,13 +211,17 @@ public class UIInput : MonoBehaviour
 		OldValue = mKeyboard.text;
 		mKeyboard.active = false;
 		mKeyboard.active = true;
+		KeboardClosing = true;
 		#endif
 	}
 	public void OpenKeboard(){
 	
 		#if MOBILE
+		if(KeboardClosing){
 		OldValueUse = true;
 		isSelected = true;
+			KeboardClosing = false;
+		}
 		#endif
 	}
 	public string defaultText

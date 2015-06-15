@@ -17,7 +17,7 @@ public class PostButton : MonoBehaviour {
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 	}
 	public void on(){
-
+		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
 //		Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
 //		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 	//	transform.FindChild ("TF_Post").gameObject.SetActive (true);
@@ -26,6 +26,7 @@ public class PostButton : MonoBehaviour {
 
 	}
 	public void off(){
+	
 		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
@@ -144,6 +145,13 @@ public class PostButton : MonoBehaviour {
 			AutoFade.LoadLevel("SceneCards", 0f, 1f);
 			
 		}
+
+	}
+
+
+	public void BackPressed(){
+		UtilMgr.RemoveAllBackEvents();
+		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
 
 	}
 	public void GachaOK(){

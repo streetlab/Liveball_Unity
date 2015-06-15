@@ -305,7 +305,7 @@ public class ScriptMainTop : MonoBehaviour {
 					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
 					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 
-						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
+						if (UserMgr.Schedule.gameStatus == 0) {
 							//non
 							LandingState =1;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
@@ -321,7 +321,7 @@ public class ScriptMainTop : MonoBehaviour {
 					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
 					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 						
-						if (UserMgr.Schedule.gameStatus == ScheduleInfo.GAME_READY) {
+						if (UserMgr.Schedule.gameStatus == 0) {
 							//non
 							//Nongame();
 							LandingState =1;

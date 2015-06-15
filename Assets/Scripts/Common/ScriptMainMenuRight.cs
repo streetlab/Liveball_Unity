@@ -35,7 +35,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	List<int> dayandday = new List<int>();
 	List<int> When = new List<int>();
 	List<int> daycount = new List<int>();
-
+	int c;
 	void chacktoday(){
 		dayandday.Clear ();
 		When.Clear ();
@@ -82,10 +82,14 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		
 	}
 	public void P(){
-		nums +=1;
+		if (c != 0) {
+			nums += 1;
+		}
+		c = 2;
 		Button ();
 	}
 	public void M(){
+		c = 1;
 		nums -=1;
 		Button ();
 	}
@@ -210,7 +214,11 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 	}
 	void getdata(){
-	
+		c = 0;
+		D = transform.GetChild (0).GetChild (0).GetChild (0).gameObject;
+		for (int i = 1; i < D.transform.childCount; i++) {
+			Destroy(D.transform.GetChild(i).gameObject);
+		}
 		chacktoday ();
 		whens = true;
 		
