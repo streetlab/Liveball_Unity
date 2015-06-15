@@ -49,6 +49,7 @@ public class ScriptBettingCard : UIDragDropItem {
 	public void Init(){
 
 		if(mType == TYPE.Hitter){
+			if(UserMgr.CardInvenInfo.hitter != null){
 			if(UserMgr.CardInvenInfo.hitter.Count > 0){
 				mCardInfo = UserMgr.CardInvenInfo.hitter[0];
 				InitCard();
@@ -56,7 +57,9 @@ public class ScriptBettingCard : UIDragDropItem {
 				gameObject.SetActive(false);
 				return;
 			}
+			}
 		} else if(mType == TYPE.Pitcher){
+			if(UserMgr.CardInvenInfo.pitcher!=null){
 			if(UserMgr.CardInvenInfo.pitcher.Count > 0){
 				mCardInfo = UserMgr.CardInvenInfo.pitcher[0];
 				InitCard();
@@ -64,13 +67,16 @@ public class ScriptBettingCard : UIDragDropItem {
 				gameObject.SetActive(false);
 				return;
 			}
+			}
 		} else{
+			if(UserMgr.UserInfo.item !=null){
 			if(UserMgr.UserInfo.item.Count > 0){
 				mStrategyInfo = UserMgr.UserInfo.item[0];
 				InitStrategy();
 			} else{
 				gameObject.SetActive(false);
 				return;
+			}
 			}
 		}
 

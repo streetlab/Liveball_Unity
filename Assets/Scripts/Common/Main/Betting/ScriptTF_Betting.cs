@@ -180,6 +180,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
 				ScriptMainTop.LandingState = 2;
 				transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().Start ();
+			transform.parent.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label").gameObject.SetActive(false);
 			}
 			Debug.Log ("Init");
 			mListJoin.Clear ();

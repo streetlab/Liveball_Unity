@@ -16,6 +16,7 @@ GameObject Top;
 		Debug.Log (transform.FindChild ("Code").GetComponent<UILabel> ().text + " is teamcode");
 		string result = transform.parent.parent.parent.FindChild ("Panel").FindChild ("Label").GetComponent<UILabel> ().text;
 		result = result [8].ToString () + result [9].ToString ();
-		Top.GetComponent<ScriptMainTop> ().GoGame (transform.FindChild("Code").GetComponent<UILabel>().text,result);
+		Top.GetComponent<ScriptMainTop> ().GoGame (transform.FindChild("Code").GetComponent<UILabel>().text,
+		                                           transform.FindChild("Statue").GetComponent<UILabel>().text,result);
 	}
 }

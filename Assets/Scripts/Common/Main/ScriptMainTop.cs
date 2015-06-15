@@ -271,7 +271,7 @@ public class ScriptMainTop : MonoBehaviour {
 		InitTopInfo();
 	}
 
-	public void GoGame(string teamC,string nowday){
+	public void GoGame(string teamC,string GameS,string nowday){
 		
 		//bool chek = false;
 		
@@ -305,7 +305,7 @@ public class ScriptMainTop : MonoBehaviour {
 					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
 					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 
-						if (UserMgr.Schedule.gameStatus == 0) {
+						if (int.Parse(GameS) == 0) {
 							//non
 							LandingState =1;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	

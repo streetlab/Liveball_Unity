@@ -25,6 +25,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	List<string> interActive = new List<string> ();
 	List<string> Score = new List<string> ();
 	List<string> Code = new List<string>();
+	List<string> Statue = new List<string>();
 	List<string> Day = new List<string>();
 	List<int> Count = new List<int>();
 	List<string> ch = new List<string> ();
@@ -215,11 +216,12 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	}
 	void getdata(){
 		c = 1;
+		Count.Clear ();
+		chacktoday ();
 		D = transform.GetChild (0).GetChild (0).GetChild (0).gameObject;
 		for (int i = 1; i < D.transform.childCount; i++) {
 			Destroy(D.transform.GetChild(i).gameObject);
 		}
-		chacktoday ();
 		whens = true;
 		
 		char [] array;
@@ -230,6 +232,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		Score.Clear ();
 		Code.Clear ();
 		Day.Clear ();
+		Statue.Clear ();
 		
 		string aa;
 		
@@ -243,6 +246,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			interActive.Add (mScheduleEvent.Response.data [i].interActive);
 			Score.Add ((mScheduleEvent.Response.data [i].extend [0].score).ToString () + " : " + (mScheduleEvent.Response.data [i].extend [1].score).ToString ());
 			Code.Add ((mScheduleEvent.Response.data [i].extend [0].teamCode));
+			Statue.Add(mScheduleEvent.Response.data[i].gameStatus.ToString());
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			ch.Clear ();
 			for (int z = 0; z<8; z++) {
@@ -283,10 +287,13 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		
 		
 		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
+		Debug.Log ("Count.Count" + Count.Count);
+		Debug.Log ("Starts" + Starts);
 		if (0<Count.Count) {
-			if(Starts){
+			//if(Starts){
+				Debug.Log("ononononononon");
 				setposition ();
-			}
+			//}
 			
 //			for (int i = 0; i<Count.Count; i++) {    
 //				//Debug.Log(((i * 4) + 2)+" : " + ALL.Count);
@@ -326,6 +333,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			NEW.transform.GetChild (2).GetComponent<UILabel> ().text = interActive [Count[i]];
 			NEW.transform.GetChild (4).GetComponent<UILabel> ().text = Score [Count[i]];
 			NEW.transform.GetChild (5).GetComponent<UILabel> ().text = Code [Count[i]];
+			NEW.transform.GetChild (6).GetComponent<UILabel> ().text = Statue [Count[i]];
 				//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 				NEW.gameObject.SetActive (true);
 				//Debug.Log(NEW);
@@ -406,13 +414,14 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	}
 
 	public void BackPressed(){
+		nums = 0;
 		UtilMgr.RemoveAllBackEvents();
 		Debug.Log ("Button!!!!");
 		ALLBack ();
 	}
 
 	public void off(){
-
+		nums = 0;
 		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
 
 		if (nonoff) {
