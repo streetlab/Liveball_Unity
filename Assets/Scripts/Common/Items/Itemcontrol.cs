@@ -21,6 +21,7 @@ public class Itemcontrol : MonoBehaviour {
 	Vector3 originV1,originV2,originV3,originV4;
 	string Sgold;
 	bool IsTest = false;
+	static PointParkResponse mResPP;
 
 	// Use this for initialization
 
@@ -113,7 +114,8 @@ public class Itemcontrol : MonoBehaviour {
 			}
 			IOSMgr.InAppInit(prodList, eventd);
 		} else{
-			InitRubyList();
+//			InitRubyList();
+			GetAblePP();
 		}
 	}
 
@@ -240,19 +242,25 @@ public class Itemcontrol : MonoBehaviour {
 
 	}
 
-	void InitRubyList(){
+	void SetBanner(){
 		if (UserMgr.UserInfo.ppCount > 0) {
 			temp1 = (GameObject)Instantiate (imageC1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 		} else {
 			temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 		}
-
+		
 		UtilMgr.DismissLoading();
 		temp1 = (GameObject)Instantiate (imageC2, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 		temp1.transform.parent = origin1.transform.parent;
 		temp1.transform.localScale = new Vector3 (1, 1, 1);
 		temp1.transform.localPosition = new Vector3 (originV1.x, originV1.y - ((0) * gap), originV1.z);
 		temp1.gameObject.SetActive (true);
+	}
+
+	void InitRubyList(){
+		if(mResPP != null && mResPP.pointpark.Equals("on")){
+			SetBanner();
+		}
 		for (int i = 1; i<getruby.Response.data.Count+1; i++) {
 			
 			temp1 = (GameObject)Instantiate (origin1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
@@ -468,7 +476,8 @@ public class Itemcontrol : MonoBehaviour {
 				}
 			}
 		}
-		InitRubyList();
+//		InitRubyList();
+		GetAblePP();
 	}
 
 	void purchaseSucceededEvent(string receipt)
@@ -502,6 +511,45 @@ public class Itemcontrol : MonoBehaviour {
 	}
 
 	#endif
+
+	void GetAblePP(){
+		EventDelegate eventd = new EventDelegate(this, "InitRubyList");
+		WWW www = new WWW("http://partner.liveball.kr/store/store_event.php");
+		StartCoroutine(webProcess(www, eventd));
+	}
+
+	IEnumerator webProcess(WWW www, EventDelegate eventd){
+		float timeSum = 0f;
+		
+		while(!www.isDone && 
+		      string.IsNullOrEmpty(www.error) && 
+		      timeSum < 10f) { 
+			timeSum += Time.deltaTime; 
+			yield return 0; 
+		} 
+
+		
+		if(www.error == null && www.isDone)
+		{
+			Debug.Log(www.text);
+			mResPP = Newtonsoft.Json.JsonConvert.DeserializeObject<PointParkResponse>(www.text);
+		}
+
+		eventd.Execute();
+	}
+
+	class PointParkResponse{
+		string _pointpark;
+
+		public string pointpark {
+			get {
+				return _pointpark;
+			}
+			set {
+				_pointpark = value;
+			}
+		}
+	}
 
 	class IOSProducts{
 		string _ruby_50;
