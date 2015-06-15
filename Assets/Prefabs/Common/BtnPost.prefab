@@ -1035,7 +1035,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!61 &6112504
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 3f5b8fdc2541d4048abac00b62f696d2, type: 2}
+  mAtlas: {fileID: 11488278, guid: bd514b4b57867483d9dacccac9588978, type: 2}
   mSpriteName: gift_c
   mFillCenter: 1
 --- !u!114 &11421714
@@ -3197,6 +3197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3294d59daf2ab46bf936115b957d5582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GachaCount: 0
   GachaAnim: {fileID: 120562, guid: 09db289c683b0468a9c0206a3118ee4e, type: 2}
 --- !u!114 &11496062
 MonoBehaviour:

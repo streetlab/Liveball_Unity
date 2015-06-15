@@ -47,8 +47,7 @@ public class PostgetButton : MonoBehaviour {
 	void getcheckdata(){
 		transform.parent.parent.parent.parent.GetComponent<PostButton> ().CheckMail = getCheck.Response.data;
 		Debug.Log("gat");
-		transform.parent.FindChild ("get").gameObject.SetActive (false);
-		transform.parent.FindChild ("com").gameObject.SetActive (true);
+
 
 		//getprofile
 		if (getCheck.Response.data.userGoldenBall != null) {
@@ -65,14 +64,16 @@ public class PostgetButton : MonoBehaviour {
 		anim.transform.parent = transform.parent.parent.parent.parent;
 		anim.transform.localPosition = new Vector3 (-195f, -595f, 0);
 		anim.transform.localScale = new Vector3 (100f,100f,1f);
+		Debug.Log ("getCheck.Response.data.gacha.itemCode" + getCheck.Response.data.gacha.itemCode);
 		switch (getCheck.Response.data.gacha.itemCode) {
 		case "ITEM_RUBY":
 			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
-				spriteName = "item_ruby_30";
+				spriteName = "item_ruby_30.png";
 			break;
 		case "ITEM_GOLD":
 			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
-				spriteName = "item_goldenball_30k";
+				spriteName = "item_goldenball_30k.png";
+
 			break;
 
 		case "ITEM_MILEAGE":
@@ -113,6 +114,8 @@ public class PostgetButton : MonoBehaviour {
 	IEnumerator AnimStart(){
 		yield return new WaitForSeconds (1f);
 		anim.SetActive (true);
+		transform.parent.FindChild ("get").gameObject.SetActive (false);
+		transform.parent.FindChild ("com").gameObject.SetActive (true);
 	}
 
 

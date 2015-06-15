@@ -214,7 +214,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 	}
 	void getdata(){
-		c = 0;
+		c = 1;
 		D = transform.GetChild (0).GetChild (0).GetChild (0).gameObject;
 		for (int i = 1; i < D.transform.childCount; i++) {
 			Destroy(D.transform.GetChild(i).gameObject);
@@ -299,7 +299,9 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 		
 		
-		
+		if (transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel> ().text == "경기 없음") {
+			c = 0;
+		}
 	}
 	
 	void setposition(){

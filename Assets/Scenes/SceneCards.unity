@@ -3680,7 +3680,7 @@ Transform:
   m_GameObject: {fileID: 761375862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156494521, y: .00156494521, z: .00156494521}
+  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
   m_Children:
   - {fileID: 740811092}
   - {fileID: 1062601969}
@@ -4503,6 +4503,14 @@ Prefab:
     - target: {fileID: 11424532, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
       propertyPath: onClick.Array.data[0].mMethodName
       value: onhit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
@@ -8095,7 +8103,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &1266171020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13021,6 +13029,14 @@ Prefab:
     - target: {fileID: 11414206, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
       propertyPath: mText
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Size.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b13028b441fbc41d58c9949f4137f223, type: 2}

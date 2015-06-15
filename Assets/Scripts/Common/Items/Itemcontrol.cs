@@ -215,7 +215,7 @@ public class Itemcontrol : MonoBehaviour {
 			temp3.transform.parent = origin3.transform.parent;
 			temp3.transform.localScale = new Vector3 (1, 1, 1);
 			temp3.transform.localPosition = new Vector3 (originV3.x, originV3.y - (i * gap), originV3.z);
-			temp3.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = getitem.Response.data [i].purchaseValue.ToString() + " 마일리지 복권";
+			temp3.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = getitem.Response.data [i].productName.ToString();
 			temp3.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getitem.Response.data [i].productDesc;
 			temp3.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getitem.Response.data [i].productPrice.ToString ())+"마일리지";
 			//Debug.Log (getitem.Response.data [i].productCode);

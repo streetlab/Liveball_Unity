@@ -6412,7 +6412,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &87487127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18630,6 +18630,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11458206, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
@@ -22608,7 +22612,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &364628981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29691,7 +29695,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &450073227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91414,6 +91418,14 @@ Prefab:
       propertyPath: hover.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.y
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
   m_IsPrefabParent: 0
@@ -111880,7 +111892,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &1798260713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113279,7 +113291,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &1824493445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118177,6 +118189,14 @@ Prefab:
     - target: {fileID: 11433284, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
       propertyPath: mDepth
       value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Size.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11458206, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
@@ -124016,7 +124036,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &1978296288
 MonoBehaviour:
   m_ObjectHideFlags: 0

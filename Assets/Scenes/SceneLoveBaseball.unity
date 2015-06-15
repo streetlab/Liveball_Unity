@@ -234,6 +234,14 @@ Prefab:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 69bf93726be5c31469e3fb4d139f26fc, type: 3}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.y
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
   m_IsPrefabParent: 0
@@ -588,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 313630528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
   m_Children:
   - {fileID: 1696598380}
   - {fileID: 2058157539}
@@ -1165,7 +1173,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &633037460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4303,6 +4311,14 @@ Prefab:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 69bf93726be5c31469e3fb4d139f26fc, type: 3}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+      propertyPath: m_Size.y
+      value: 80
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
   m_IsPrefabParent: 0

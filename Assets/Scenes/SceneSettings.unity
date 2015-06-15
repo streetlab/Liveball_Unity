@@ -2603,7 +2603,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3015
+  startingRenderQueue: 3014
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -4891,7 +4891,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 56, y: 56}
+  m_Size: {x: 80, y: 80}
 --- !u!114 &1369352111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6535,6 +6535,14 @@ Prefab:
     - target: {fileID: 11424532, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
       propertyPath: onClick.Array.data[0].mMethodName
       value: onhit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168424, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}
+      propertyPath: m_Size.y
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c30f86e6d033e4a6aa5490534e4aa125, type: 2}

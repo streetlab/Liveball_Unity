@@ -219,7 +219,7 @@ public class UIInput : MonoBehaviour
 		#if MOBILE
 		if(KeboardClosing){
 		OldValueUse = true;
-		isSelected = true;
+		//isSelected = true;
 			KeboardClosing = false;
 		}
 		#endif

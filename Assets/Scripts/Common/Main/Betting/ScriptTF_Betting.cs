@@ -113,9 +113,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (sec < -15) {
 			mTimeOut = true;
 			if(mSprBetting.activeSelf){
+				//UtilMgr.OnBackPressed ();
+				UtilMgr.RunAllBackEvents();
+			}else{
 				UtilMgr.OnBackPressed ();
 			}
-			UtilMgr.OnBackPressed ();
+		
+
 //			UtilMgr.RunAllBackEvents();
 
 			mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().OpenKeboard ();
