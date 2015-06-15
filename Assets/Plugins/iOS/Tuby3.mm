@@ -32,7 +32,7 @@ static IOSMgr *_instance = [IOSMgr sharedInstance];
 -(void)dealloc{
 //    [imagePicker release];
     imagePicker = nil;
-    [super dealloc];
+//    [super dealloc];
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{

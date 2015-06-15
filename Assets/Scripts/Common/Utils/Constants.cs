@@ -45,7 +45,8 @@ public class Constants {
 	public static string MAIL_BOX_URL 				= 	"http://auth.liveball.kr/mailbox/";
 	public static string MAIL_BOX_RECEIVE_REWARD_URL 	= 	"http://auth.liveball.kr/mailbox/receive.php";
 	/*/
-	
+
+	public static float WEBVIEW_GAB_TOP = 96f;
 //	public const string QUERY_SERVER_HOST 				= 	"http://" + TEST_HOST + ":5002/gameServer/query.frz";
 	public static string NANOO_API_KEY					= 	"El1VRQgMG464OF0LRd1vPWGmRadCpfwyITK5ZpuNKLCBTIGSZE";
 	public static string QUERY_SERVER_NANOO				= 	"https://api.nanoo.so";

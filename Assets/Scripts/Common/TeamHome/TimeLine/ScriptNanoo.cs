@@ -49,16 +49,16 @@ public class ScriptNanoo : MonoBehaviour {
 	}
 
 	void CheckStatusBar(){
-		Debug.Log("y is "+mTop.transform.localPosition.y);
-		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
-			int diff = Screen.height - Constants.SCREEN_HEIGHT_ORIGINAL;
-			Debug.Log("diff is"+diff);
-			mTop.transform.localPosition = new Vector3(0 , -25f+(diff/2)-10, 0);
-		} else
-			mTop.transform.localPosition = new Vector3(0 , -25f, 0);
-
-
-
+//		Debug.Log("y is "+mTop.transform.localPosition.y);
+//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
+//			int diff = Screen.height - Constants.SCREEN_HEIGHT_ORIGINAL;
+//			Debug.Log("diff is"+diff);
+//			mTop.transform.localPosition = new Vector3(0 , -25f+(diff/2)-10, 0);
+//		} else
+//			mTop.transform.localPosition = new Vector3(0 , -25f, 0);
+//
+//
+//
 	}
 
 	void CheckVisible(){
@@ -144,7 +144,7 @@ public class ScriptNanoo : MonoBehaviour {
 
 //		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
 		//return new UniWebViewEdgeInsets((int)(125*myRatio),0,0,0);
-		return new UniWebViewEdgeInsets((int)(96*myRatio),0,0,0);
+		return new UniWebViewEdgeInsets((int)(Constants.WEBVIEW_GAB_TOP*myRatio),0,0,0);
 //		} else {
 //			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
 //		}
