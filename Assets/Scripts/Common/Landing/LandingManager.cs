@@ -79,9 +79,12 @@ public class LandingManager : MonoBehaviour {
 	void GetNonGameData(){
 	
 		if (TeamMain.Response.data != null) {
+			if(TeamMain.Response.data.myTeam!= null){
 			TeamColor = TeamMain.Response.data.myTeam.teamColor;
 			TeamColor = TeamColor.Replace("#","");
 			SetTeamColor(TeamColor);
+			}
+			if(TeamMain.Response.data.other!=null){
 			if(TeamMain.Response.data.other.pitcher != null){
 
 			Debug.Log("V_LPlayerName : " + V_LPlayerName);
@@ -93,7 +96,7 @@ public class LandingManager : MonoBehaviour {
 			
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + TeamMain.Response.data.other.pitcher.imagePath + TeamMain.Response.data.other.pitcher.imageName);
 			StartCoroutine (GetImage (www, V_LPlayerImage));
-
+					if(TeamMain.Response.data.myTeam!= null){
 			V_RPlayerName.text = TeamMain.Response.data.myTeam.pitcher.playerName + "#" + TeamMain.Response.data.myTeam.pitcher.playerNumber;
 			
 			V_RBatting.text = TeamMain.Response.data.myTeam.pitcher.ERA;
@@ -103,7 +106,8 @@ public class LandingManager : MonoBehaviour {
 			www = new WWW (Constants.IMAGE_SERVER_HOST + TeamMain.Response.data.myTeam.pitcher.imagePath + TeamMain.Response.data.myTeam.pitcher.imageName);
 			StartCoroutine (GetImage (www, V_RPlayerImage));
 			//Debug.Log();
-			
+				}
+				}
 		}
 	}
 
@@ -413,24 +417,33 @@ public class LandingManager : MonoBehaviour {
 	void GetData(){
 		Debug.Log ("GetDate");
 		SposTeamInfo T = TeamMain.Response.data;
-		TeamColor = T.myTeam.teamColor;
-		TeamColor = TeamColor.Replace("#","");
-		//		UserMgr.Schedule.
-		//			TeamInfo
-		//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
-		//		I_StringList.Add (Is_Gold);
-		
+		if (T.myTeam != null) {
+			TeamColor = T.myTeam.teamColor;
+			TeamColor = TeamColor.Replace ("#", "");
+			//		UserMgr.Schedule.
+			//			TeamInfo
+			//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
+			//		I_StringList.Add (Is_Gold);
+		}
 		Is_TeamName = GetTeamFullName(UtilMgr.SelectTeam);
 		I_StringList.Add (Is_TeamName);
-		Is_RankScore = T.myTeam.ranking + "위 " + T.myTeam.countWin + "승 "
-			+ T.myTeam.countLose + "패 " + T.myTeam.countDraw+"무 ";
+		Is_RankScore = "";
+		if (T.myTeam != null) {
+			Is_RankScore = T.myTeam.ranking + "위 " + T.myTeam.countWin + "승 "
+				+ T.myTeam.countLose + "패 " + T.myTeam.countDraw + "무 ";
+		}
 		I_StringList.Add (Is_RankScore);
 		Is_TodayDealWith = "오늘의 상대 : ";
-		if (T.other.teamName != null) {
-			Is_TodayDealWith = "오늘의 상대 : " + T.other.teamName;
+		if (T.other != null) {
+			if (T.other.teamName != null) {
+				Is_TodayDealWith = "오늘의 상대 : " + T.other.teamName;
+			}
 		}
 		I_StringList.Add (Is_TodayDealWith);
-		Is_TodayInfo = T.schedule.bcastChannel + " | " + getarea(T) + " | " + gettime(T);
+		Is_TodayInfo = "";
+		if (T.schedule != null) {
+			Is_TodayInfo = T.schedule.bcastChannel + " | " + getarea (T) + " | " + gettime (T);
+		}
 		I_StringList.Add (Is_TodayInfo);
 		Is_Memo = "경기 시작과 함께 시청자 예측이 시작됩니다.";
 		I_StringList.Add (Is_Memo);
@@ -438,20 +451,22 @@ public class LandingManager : MonoBehaviour {
 		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
 		I_TeamImage.color = new Color (1,1,1,1);
 		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
-		if (T.myTeam.pitcher!=null) {
+		if (T.myTeam != null) {
+			if (T.myTeam.pitcher != null) {
 			
-			Is_PlayersName = T.myTeam.pitcher.playerName + "#" + T.myTeam.pitcher.playerNumber.ToString();
-			I_StringList.Add (Is_PlayersName);
-			Is_Batting = T.myTeam.pitcher.ERA;
+				Is_PlayersName = T.myTeam.pitcher.playerName + "#" + T.myTeam.pitcher.playerNumber.ToString ();
+				I_StringList.Add (Is_PlayersName);
+				Is_Batting = T.myTeam.pitcher.ERA;
 			
-			I_StringList.Add (Is_Batting);
+				I_StringList.Add (Is_Batting);
 			
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + T.myTeam.pitcher.imagePath + T.myTeam.pitcher.imageName);
-			StartCoroutine (GetImage (www, I_PlayersImage));
-			//Debug.Log();
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + T.myTeam.pitcher.imagePath + T.myTeam.pitcher.imageName);
+				StartCoroutine (GetImage (www, I_PlayersImage));
+				//Debug.Log();
 			
-		}
+			}
 
+		}
 		
 		InPutData ();
 		SetTeamColor (TeamColor);
@@ -462,9 +477,11 @@ public class LandingManager : MonoBehaviour {
 		SposTeamInfo T = TeamMain.Response.data;
 
 	
-
-		TeamColor = T.myTeam.teamColor;
+		if (T.myTeam != null) {
+			TeamColor = T.myTeam.teamColor;
+		
 		TeamColor = TeamColor.Replace("#","");
+		}
 		//		UserMgr.Schedule.
 		//			TeamInfo
 		//		Is_Gold = UtilMgr.AddsThousandsSeparator ("123456789");
@@ -472,15 +489,23 @@ public class LandingManager : MonoBehaviour {
 		
 		Is_TeamName = UserMgr.UserInfo.GetTeamFullName();
 		I_StringList.Add (Is_TeamName);
-		Is_RankScore = T.myTeam.ranking + "위 " + T.myTeam.countWin + "승 "
-			+ T.myTeam.countLose + "패 " + T.myTeam.countDraw+"무 ";
+		Is_RankScore = "";
+		if (T.myTeam != null) {
+			Is_RankScore = T.myTeam.ranking + "위 " + T.myTeam.countWin + "승 "
+				+ T.myTeam.countLose + "패 " + T.myTeam.countDraw + "무 ";
+		}
 		I_StringList.Add (Is_RankScore);
 		Is_TodayDealWith = "오늘의 상대 : ";
+		if (T.other != null){
 		if (T.other.teamName != null) {
 			Is_TodayDealWith = "오늘의 상대 : " + T.other.teamName;
 		}
+		}
 		I_StringList.Add (Is_TodayDealWith);
-		Is_TodayInfo = T.schedule.bcastChannel + " | " + getarea(T) + " | " + gettime(T);
+		Is_TodayInfo = "";
+		if (T.schedule != null) {
+			Is_TodayInfo = T.schedule.bcastChannel + " | " + getarea (T) + " | " + gettime (T);
+		}
 		I_StringList.Add (Is_TodayInfo);
 		Is_Memo = "경기 시작과 함께 시청자 예측이 시작됩니다.";
 		I_StringList.Add (Is_Memo);
@@ -488,20 +513,21 @@ public class LandingManager : MonoBehaviour {
 		I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
 		I_TeamImage.color = new Color (1,1,1,1);
 		I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
-		if (T.myTeam.pitcher!=null) {
+		if (T.myTeam != null) {
+			if (T.myTeam.pitcher != null) {
 			
-			Is_PlayersName = T.myTeam.pitcher.playerName + "#" + T.myTeam.pitcher.playerNumber.ToString();
-			I_StringList.Add (Is_PlayersName);
-			Is_Batting = T.myTeam.pitcher.ERA;
+				Is_PlayersName = T.myTeam.pitcher.playerName + "#" + T.myTeam.pitcher.playerNumber.ToString ();
+				I_StringList.Add (Is_PlayersName);
+				Is_Batting = T.myTeam.pitcher.ERA;
 			
-			I_StringList.Add (Is_Batting);
+				I_StringList.Add (Is_Batting);
 			
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + T.myTeam.pitcher.imagePath + T.myTeam.pitcher.imageName);
-			StartCoroutine (GetImage (www, I_PlayersImage));
-			//Debug.Log();
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + T.myTeam.pitcher.imagePath + T.myTeam.pitcher.imageName);
+				StartCoroutine (GetImage (www, I_PlayersImage));
+				//Debug.Log();
 			
+			}
 		}
-		
 		InPutData ();
 		SetTeamColor (TeamColor);
 	}

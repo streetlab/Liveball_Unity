@@ -247,6 +247,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			Score.Add ((mScheduleEvent.Response.data [i].extend [0].score).ToString () + " : " + (mScheduleEvent.Response.data [i].extend [1].score).ToString ());
 			Code.Add ((mScheduleEvent.Response.data [i].extend [0].teamCode));
 			Statue.Add(mScheduleEvent.Response.data[i].gameStatus.ToString());
+			//Debug.Log("Schedule : " + mScheduleEvent.Response.data [i].startTime+ " i : " + i +"\n" + mScheduleEvent.Response.data [i].subTitle);
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			ch.Clear ();
 			for (int z = 0; z<8; z++) {
@@ -269,7 +270,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}
 			string bb = string.Join ("", ch.ToArray ());
 			//Day.Add (aa);
-
+			//Debug.Log("Today : " + System.DateTime.Now.Day  + " GameDay : " + bb);
 			if (System.DateTime.Now.Day == int.Parse (bb)) {
 	
 				if(whens){
@@ -345,6 +346,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		Starts = false;
 	}
 	public void onhit(){
+		nums = 0;
 		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
 //		if(transform.parent.parent.parent.name=="UI Root"){
 //			BntMenu = transform.parent.parent.parent.FindChild ("Top").GetChild (0).GetChild (1).gameObject;
@@ -421,7 +423,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	}
 
 	public void off(){
-		nums = 0;
+
 		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
 
 		if (nonoff) {

@@ -50,8 +50,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 	{
 //		transform.FindChild ("Lightning Spark").GetComponent<ScriptParticleResizer> ().ResizeRatio (0.5f);
 
-		mSpark1.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
-		mSpark2.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
+		mSpark1.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 10010;
+		mSpark2.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 10010;
 //		transform.FindChild ("Lightning Spark").FindChild("Lightning").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Spakles").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Ring").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
@@ -113,9 +113,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (sec < -15) {
 			mTimeOut = true;
 			if(mSprBetting.activeSelf){
-				//UtilMgr.OnBackPressed ();
-				//UtilMgr.OnBackPressed ();
-				UtilMgr.RunAllBackEvents();
+				UtilMgr.OnBackPressed ();
+				UtilMgr.OnBackPressed ();
+				//UtilMgr.RunAllBackEvents();
 			}else{
 				UtilMgr.OnBackPressed ();
 			}
