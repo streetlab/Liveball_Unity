@@ -40,6 +40,7 @@ public class RankingManager : MonoBehaviour {
 						Imagewww = Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName;
 					
 					}
+					//Debug.Log("Imgae URL : " + Imagewww);
 					WWW www = new WWW (Imagewww);
 					StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 				}

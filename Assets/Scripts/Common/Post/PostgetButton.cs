@@ -68,7 +68,7 @@ public class PostgetButton : MonoBehaviour {
 		switch (getCheck.Response.data.gacha.itemCode) {
 		case "ITEM_RUBY":
 			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
-				spriteName = "item_ruby_30.png";
+				spriteName = "item_ruby_300.png";
 			break;
 		case "ITEM_GOLD":
 			transform.parent.parent.parent.parent.FindChild("PostDialogue").FindChild("Panel").FindChild("Sprite").GetComponent<UISprite>().
