@@ -105,14 +105,14 @@ public class NetMgr : MonoBehaviour{
 	{	
 		WWWForm form = request.GetRequestWWWForm ();
 
-		string host = Constants.UPLOAD_SERVER_HOST;
-		if(isTest){
-			host = Constants.UPLOAD_TEST_SERVER_HOST;
-			Debug.Log("Send to Test Server");
-		} else{
-			Debug.Log("Send to Real Server");
-		}
-		host = Constants.UPLOAD_TEST_SERVER_HOST;
+		string host = Constants.AUTH_SERVER_HOST;
+//		if(isTest){
+//			host = Constants.UPLOAD_TEST_SERVER_HOST;
+//			Debug.Log("Send to Test Server");
+//		} else{
+//			Debug.Log("Send to Real Server");
+//		}
+//		host = Constants.UPLOAD_TEST_SERVER_HOST;
 		WWW www = new WWW (host, form);
 
 		if(UtilMgr.OnPause){
@@ -144,6 +144,31 @@ public class NetMgr : MonoBehaviour{
 			Debug.Log("Send to Real Server");
 		}
 //		host = Constants.CHECK_TEST_SERVER_HOST;
+		
+		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		
+		Debug.Log (reqParam);
+		
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
+	}
+
+	private void webAPIProcessEventForIAP(BaseRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
+	{		
+		string reqParam = "";
+		string httpUrl = "";
+		if (request != null) {
+			reqParam = request.ToRequestString();
+		} else {
+		}
+		
+		string host = Constants.AUTH_SERVER_HOST;
+//		if(isTest){
+//			host = Constants.CHECK_TEST_SERVER_HOST;
+//			Debug.Log("Send to Test Server");
+//		} else{
+//			Debug.Log("Send to Real Server");
+//		}
+		//		host = Constants.CHECK_TEST_SERVER_HOST;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		
@@ -422,22 +447,22 @@ public class NetMgr : MonoBehaviour{
 
 	public static void RequestIAP(int productId, string productCode, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForCheckVersion(new RequestIAPRequest(0, productCode), baseEvent, isTest, true);
+		Instance.webAPIProcessEventForIAP(new RequestIAPRequest(0, productCode), baseEvent, isTest, true);
 	}
 
 	public static void ComsumeIAP(int orderNo, string token, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForCheckVersion(new ComsumeIAPRequest(orderNo, token), baseEvent, isTest, true);
+		Instance.webAPIProcessEventForIAP(new ComsumeIAPRequest(orderNo, token), baseEvent, isTest, true);
 	}
 
 	public static void DoneIAP(int orderNo, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForCheckVersion(new DoneIAPRequest(orderNo), baseEvent, isTest, true);
+		Instance.webAPIProcessEventForIAP(new DoneIAPRequest(orderNo), baseEvent, isTest, true);
 	}
 
 	public static void CancelIAP(int orderNo, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForCheckVersion(new CancelIAPRequest(orderNo), baseEvent, isTest, true);
+		Instance.webAPIProcessEventForIAP(new CancelIAPRequest(orderNo), baseEvent, isTest, true);
 	}
 
 	public static void PurchaseGold(int productId, BaseEvent baseEvent)

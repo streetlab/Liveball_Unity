@@ -70,10 +70,11 @@ public class ScriptTitle : MonoBehaviour {
 
 		try{
 //		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;
-		Constants.IMAGE_SERVER_HOST = mVersionEvent.Response.data.FILE_PATH;
-		Constants.QUERY_SERVER_HOST = mVersionEvent.Response.data.APPS_SVR;//[0].serviceURL;
-		Constants.GAME_SERVER_HOST = mVersionEvent.Response.data.GAME_SVR;
-		Constants.GAME_SERVER_PORT = int.Parse(mVersionEvent.Response.data.GAME_PORT);
+			Constants.AUTH_SERVER_HOST = mVersionEvent.Response.data.AUTH_SVR;
+			Constants.IMAGE_SERVER_HOST = mVersionEvent.Response.data.FILE_PATH;
+			Constants.QUERY_SERVER_HOST = mVersionEvent.Response.data.APPS_SVR;//[0].serviceURL;
+			Constants.GAME_SERVER_HOST = mVersionEvent.Response.data.GAME_SVR;
+			Constants.GAME_SERVER_PORT = int.Parse(mVersionEvent.Response.data.GAME_PORT);
 		} catch{
 			Debug.Log("catch!!!!");
 		}

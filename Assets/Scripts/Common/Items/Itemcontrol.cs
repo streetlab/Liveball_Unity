@@ -365,13 +365,13 @@ public class Itemcontrol : MonoBehaviour {
 	
 	void mComsumeIAP(){
 		if(ComsumeIAP.Response.message.Equals("200")){
-			DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 영수증 정보에 오류가 있습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		} else{
 			#if(UNITY_ANDROID)
 			GoogleIAB.consumeProduct (itemcode);
 			#else
 			RequestDone();
 			#endif
+		} else{
+			DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 영수증 정보에 오류가 있습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		}
 	}
 

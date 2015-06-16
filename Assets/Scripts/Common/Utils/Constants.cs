@@ -56,9 +56,10 @@ public class Constants {
 	public static string CHECK_SERVER_HOST2				= 	"http://" + HOST + ":600/webTuby/query.frz";
 
 	public static int GAME_SERVER_PORT = 0;
+	public static string AUTH_SERVER_HOST = "";
 	public static string GAME_SERVER_HOST = "";
 	public static string QUERY_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
-	public static string UPLOAD_TEST_SERVER_HOST 				= 	"http://" + HOST + ":4002/webTuby/query.frz";
+//	public static string UPLOAD_TEST_SERVER_HOST 				= 	"http://" + HOST + ":4002/webTuby/query.frz";
 	public static string UPLOAD_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
 	public static string IMAGE_SERVER_HOST 				= 	"http://" + HOST + ":6002/tuby_file/";
 

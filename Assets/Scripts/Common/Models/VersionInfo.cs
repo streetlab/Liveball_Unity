@@ -3,6 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class VersionInfo {
+
+	int _osType;
+
+	public int osType {
+		get {
+			return _osType;
+		}
+		set {
+			_osType = value;
+		}
+	}
+
+	string _verDesc;
+
+	public string verDesc {
+		get {
+			return _verDesc;
+		}
+		set {
+			_verDesc = value;
+		}
+	}
+
+	string _appMessage;
+
+	public string appMessage {
+		get {
+			return _appMessage;
+		}
+		set {
+			_appMessage = value;
+		}
+	}
+
 	string _recentVer;
 
 	public string recentVer {
@@ -49,28 +83,6 @@ public class VersionInfo {
 		}
 	}
 
-//	List<ServiceInfo> _FILE_SVR;
-//
-//	public List<ServiceInfo> FILE_SVR {
-//		get {
-//			return _FILE_SVR;
-//		}
-//		set {
-//			_FILE_SVR = value;
-//		}
-//	}
-//
-//	List<ServiceInfo> _APPS_SVR;
-//
-//	public List<ServiceInfo> APPS_SVR {
-//		get {
-//			return _APPS_SVR;
-//		}
-//		set {
-//			_APPS_SVR = value;
-//		}
-//	}
-
 	public string FILE_SVR {
 		get {
 			return _FILE_SVR;
@@ -80,7 +92,7 @@ public class VersionInfo {
 		}
 	}
 
-	public string _GAME_SVR;
+	string _GAME_SVR;
 
 	public string GAME_SVR {
 		get {
@@ -91,7 +103,7 @@ public class VersionInfo {
 		}
 	}
 
-	public string _GAME_PORT;
+	string _GAME_PORT;
 
 	public string GAME_PORT {
 		get {
@@ -99,6 +111,17 @@ public class VersionInfo {
 		}
 		set {
 			_GAME_PORT = value;
+		}
+	}
+
+	string _AUTH_SVR;
+
+	public string AUTH_SVR {
+		get {
+			return _AUTH_SVR;
+		}
+		set {
+			_AUTH_SVR = value;
 		}
 	}
 }
