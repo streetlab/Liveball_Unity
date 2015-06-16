@@ -75,7 +75,7 @@ public class RankingManager : MonoBehaviour {
 							
 					}
 					WWW www = new WWW (Imagewww);
-					StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
+					StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 				}
 			}
 		}
@@ -145,7 +145,7 @@ public class RankingManager : MonoBehaviour {
 							
 					}
 					WWW www = new WWW (Imagewww);
-					StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
+					StartCoroutine (GetImage (www, W.transform.FindChild ("List").FindChild ("BG 1").GetChild (i + 1).FindChild ("BG").FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 				}
 			}
 		}

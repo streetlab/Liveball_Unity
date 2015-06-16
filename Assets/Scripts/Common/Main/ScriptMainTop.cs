@@ -107,12 +107,13 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 
 	void CheckFirst(){
-
-		if(UserMgr.UserInfo.IsFirstLanding){
-			UserMgr.UserInfo.IsFirstLanding = false;
-			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioWelcome);
+		if (UserMgr.UserInfo != null) {
+			if (UserMgr.UserInfo.IsFirstLanding) {
+				UserMgr.UserInfo.IsFirstLanding = false;
+				transform.root.GetComponent<AudioSource> ().PlayOneShot (mAudioWelcome);
 			
-			CheckAttendance();
+				CheckAttendance ();
+			}
 		}
 	}
 	
@@ -145,54 +146,55 @@ public class ScriptMainTop : MonoBehaviour {
 		
 		
 		//bool chek = false;
+		if (mScheduleEvent.Response.data != null) {
+		
+			List<string> ch = new List<string> ();
 		
 		
-		List<string> ch = new List<string> ();
-		
-		
-		for (int p = 0; p < 7; p++) {
+			for (int p = 0; p < 7; p++) {
 			
-			for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
-				char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
-				for (int z = 6; z<array.Length; z++) {
-					ch.Add (array [z].ToString ());
-				}
-				string result = string.Join ("", ch.ToArray ());
-				
-				
-				ch.Clear ();
-				int num = p;
-				if (System.DateTime.Now.Day+num>31) {
-					num = System.DateTime.Now.Day+num-31;
-					num = num-System.DateTime.Now.Day;
-				}
-				if (System.DateTime.Now.Day+num == int.Parse(result)) {
-				//	Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
-					//chek = true;
-					if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
-						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-						
-						gameobj.SetActive (true);
-						mHighlight.SetActive (true);
-						
-						InitTopInfo();
-						return;
-					} else if (mScheduleEvent.Response.data [i].extend [1].teamName == UtilMgr.SelectTeam) {
-						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-						
-						gameobj.SetActive (true);
-						mHighlight.SetActive (true);
-						
-						InitTopInfo();
-						return;
+				for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
+					char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+					for (int z = 6; z<array.Length; z++) {
+						ch.Add (array [z].ToString ());
 					}
-				}
+					string result = string.Join ("", ch.ToArray ());
 				
+				
+					ch.Clear ();
+					int num = p;
+					if (System.DateTime.Now.Day + num > 31) {
+						num = System.DateTime.Now.Day + num - 31;
+						num = num - System.DateTime.Now.Day;
+					}
+					if (System.DateTime.Now.Day + num == int.Parse (result)) {
+						//	Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
+						//chek = true;
+						if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
+							UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						
+							gameobj.SetActive (true);
+							mHighlight.SetActive (true);
+						
+							InitTopInfo ();
+							return;
+						} else if (mScheduleEvent.Response.data [i].extend [1].teamName == UtilMgr.SelectTeam) {
+							UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						
+							gameobj.SetActive (true);
+							mHighlight.SetActive (true);
+						
+							InitTopInfo ();
+							return;
+						}
+					}
+				
+				}
 			}
+		
+		
+		
 		}
-		
-		
-		
 		QuizMgr.EnterMain(this);
 		gameobj.SetActive (true);
 		mHighlight.SetActive (true);
@@ -205,64 +207,64 @@ public class ScriptMainTop : MonoBehaviour {
 
 		//bool chek = false;
 		
+		if (mScheduleEvent.Response.data != null) {
+			List<string> ch = new List<string> ();
 		
-		List<string> ch = new List<string> ();
 		
-		
-		for (int p = 0; p < 7; p++) {
+			for (int p = 0; p < 7; p++) {
 			
-			for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
-				char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
-				for (int z = 6; z<array.Length; z++) {
-					ch.Add (array [z].ToString ());
-				}
-				string result = string.Join ("", ch.ToArray ());
+				for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
+					char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+					for (int z = 6; z<array.Length; z++) {
+						ch.Add (array [z].ToString ());
+					}
+					string result = string.Join ("", ch.ToArray ());
 				
 				
-				ch.Clear ();
-				int num = p;
-				if (System.DateTime.Now.Day+num>31) {
-					num = System.DateTime.Now.Day+num-31;
-					num = num-System.DateTime.Now.Day;
-				}
-				if (System.DateTime.Now.Day+num == int.Parse(result)) {
+					ch.Clear ();
+					int num = p;
+					if (System.DateTime.Now.Day + num > 31) {
+						num = System.DateTime.Now.Day + num - 31;
+						num = num - System.DateTime.Now.Day;
+					}
+					if (System.DateTime.Now.Day + num == int.Parse (result)) {
 				
 						//chek = true;
-					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode()) {
-						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-						if(mScheduleEvent.Response.data [i].gameStatus == 1){
+						if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
+							UserMgr.Schedule = mScheduleEvent.Response.data [i];
+							if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
-							LandingState = 2;
-						}else if(mScheduleEvent.Response.data [i].gameStatus == 2){
-							LandingState = 3;
-						}
+								LandingState = 2;
+							} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
+								LandingState = 3;
+							}
 				
-						gameobj.SetActive (true);
-						mHighlight.SetActive (true);
+							gameobj.SetActive (true);
+							mHighlight.SetActive (true);
 						
-						InitTopInfo();
-						return;
-					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == UserMgr.UserInfo.GetTeamCode()) {
-						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-						if(mScheduleEvent.Response.data [i].gameStatus == 1){
+							InitTopInfo ();
+							return;
+						} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
+							UserMgr.Schedule = mScheduleEvent.Response.data [i];
+							if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
-							LandingState = 2;
-						}else if(mScheduleEvent.Response.data [i].gameStatus == 2){
-							LandingState = 3;
-						}
+								LandingState = 2;
+							} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
+								LandingState = 3;
+							}
 					
-						gameobj.SetActive (true);
-						mHighlight.SetActive (true);
+							gameobj.SetActive (true);
+							mHighlight.SetActive (true);
 						
-						InitTopInfo();
-						return;
+							InitTopInfo ();
+							return;
+						}
 					}
-				}
 				
+				}
 			}
+
 		}
-
-
 
 		QuizMgr.EnterMain(this);
 		gameobj.SetActive (true);
@@ -309,9 +311,12 @@ public class ScriptMainTop : MonoBehaviour {
 							//non
 							LandingState =1;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
-						} else {
+						} else if(int.Parse(GameS) == 1) {
 							//Startgame();
 							LandingState =2;
+							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+						} else{
+							LandingState =3;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
 						}
 						return;
@@ -321,14 +326,16 @@ public class ScriptMainTop : MonoBehaviour {
 					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
 					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 						
-						if (UserMgr.Schedule.gameStatus == 0) {
+						if (int.Parse(GameS) == 0) {
 							//non
-							//Nongame();
 							LandingState =1;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
-						} else {
+						} else if(int.Parse(GameS) == 1) {
 							//Startgame();
-							LandingState =1;
+							LandingState =2;
+							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
+						} else{
+							LandingState =3;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
 						}
 						return;
@@ -563,11 +570,15 @@ public class ScriptMainTop : MonoBehaviour {
 			mBetting.SetActive (true);
 		} 
 		if (mLivetalk.activeSelf) {
-	
+			if(mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().isSelected)
 			mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().CloseKeboard ();
 		}
 	
 			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
+
+
+
+	
 		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
 			transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
 			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);

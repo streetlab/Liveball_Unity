@@ -116,7 +116,7 @@ public class LandingManager : MonoBehaviour {
 		if (ScriptMainTop.LandingState == 3) {
 			LandingScroll.transform.FindChild ("Playing").FindChild("Ground").FindChild("END").gameObject.SetActive (true);
 		}
-
+		transform.parent.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.SetActive (false);
 		//StartCoroutine (view());
 	}
 
@@ -285,6 +285,7 @@ public class LandingManager : MonoBehaviour {
 	}
 
 	public void Start () {
+		Debug.Log ("ScriptMainTop.LandingState : " + ScriptMainTop.LandingState);
 	
 		PathSettings ();
 		if (TeamColor != null) {

@@ -113,8 +113,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (sec < -15) {
 			mTimeOut = true;
 			if(mSprBetting.activeSelf){
-				//UtilMgr.OnBackPressed ();
-				UtilMgr.RunAllBackEvents();
+				UtilMgr.OnBackPressed ();
+				UtilMgr.OnBackPressed ();
+				//UtilMgr.RunAllBackEvents();
 			}else{
 				UtilMgr.OnBackPressed ();
 			}
@@ -178,9 +179,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 
 			if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
+			transform.parent.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label").gameObject.SetActive(false);
 				ScriptMainTop.LandingState = 2;
 				transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().Start ();
-			transform.parent.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label").gameObject.SetActive(false);
+
 			}
 			Debug.Log ("Init");
 			mListJoin.Clear ();
@@ -342,6 +344,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (ScriptMainTop.DetailBoard.player.Count < 2) {
 			Debug.Log("No Pitcher");
 		}
+		Landing.GetComponent<LandingManager> ().SetPitcher ();
 		Transform tfPitcher = mSprComb.transform.FindChild ("SprPitcher");
 		string playerInfo = ScriptMainTop.DetailBoard.player [0].playerName + " No." + ScriptMainTop.DetailBoard.player [0].playerNumber;
 		tfPitcher.FindChild ("LblName").GetComponent<UILabel> ().text = playerInfo;
