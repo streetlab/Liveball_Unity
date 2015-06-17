@@ -112,6 +112,7 @@ public class Constants {
 	public const string PrefMy_total_diamond = "my_total_diamond";
 	public const string PrefEmail = "email";
 	public const string PrefPwd = "pwd";
+	public const string PrefGuest = "guest";
 	public const string PrefNotice = "notice";
 	public const string PrefTutorial = "tutorial";
 	public const string PrefEvents = "events";

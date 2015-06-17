@@ -6,7 +6,7 @@ public class BaseResponse {
 	int _result;
 	string _message;
 	string _queryId;
-	string _queryString;
+	string _queryType;
 
 	public int code
 	{
@@ -26,15 +26,15 @@ public class BaseResponse {
 		set{ _message = value;}
 	}
 
-	public string queryId
+	public string query_id
 	{
 		get{return _queryId;}
 		set{ _queryId = value;}
 	}
 
-	public string queryString
+	public string query_type
 	{
-		get{return _queryString;}
-		set{ _queryString = value;}
+		get{return _queryType;}
+		set{ _queryType = value;}
 	}
 }

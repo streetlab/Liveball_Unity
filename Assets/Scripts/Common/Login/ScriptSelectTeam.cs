@@ -7,6 +7,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public GameObject mBGBtnConfirm;
 	bool mSelected;
 	string mTeamCode;
+	bool IsGuest;
 
 	public string mStrJoinError;
 	public string mErrorTitle;
@@ -16,6 +17,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 	string mToken;
 
 	JoinMemberInfo mMemInfo;
+	LoginEvent mLoginEvent;
 
 	static Color SELECTED = new Color (67f / 255f, 169f / 255f, 230f / 255f);
 	static Color UNSELECTED = new Color (136f / 255f, 143f / 255f, 157f / 255f);
@@ -29,6 +31,13 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public void Init(JoinMemberInfo memInfo){
 		gameObject.SetActive (true);
 		mMemInfo = memInfo;
+		IsGuest = false;
+	}
+
+	public void InitGuest(LoginEvent loginEvent){
+		gameObject.SetActive (true);
+		IsGuest = true;
+		mLoginEvent = loginEvent;
 	}
 
 	public void SetTeam(string teamCode)
@@ -40,7 +49,9 @@ public class ScriptSelectTeam : MonoBehaviour {
 
 	public void GoNext()
 	{
-		if (mSelected) {
+		if (mSelected && IsGuest) {
+			GetUID();
+		} else if(mSelected){
 			mMemInfo.FavoBB = mTeamCode;
 			#if(UNITY_EDITOR)
 			mMemInfo.OsType = 1;
@@ -62,8 +73,25 @@ public class ScriptSelectTeam : MonoBehaviour {
 				mErrorTitle, mErrorBody, DialogueMgr.DIALOGUE_TYPE.Alert,
 			                          null, null, null, null);
 		}
+	}
 
+	void GetUID(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer)
+			IOSMgr.GetUID("", new EventDelegate(this, "GotUID"));
+		else{
+			GotUID();
+		}
+	}
+	
+	public void GotUID(){
+		LoginInfo loginInfo = new LoginInfo();
+		loginInfo.teamCode = mTeamCode;
+		if(Application.platform == RuntimePlatform.IPhonePlayer)
+			loginInfo.DeviceID = IOSMgr.GetMsg();
+		else
+			loginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
 
+		NetMgr.LoginGuest(loginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}
 
 	public void CompleteGCM()

@@ -77,6 +77,7 @@ public class NetMgr : MonoBehaviour{
 		}
 		else
 		{
+			Debug.Log(www.error);
 //			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
 			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "타이틀로 가기", ConnectHandlerForHttp);
@@ -152,7 +153,7 @@ public class NetMgr : MonoBehaviour{
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
 
-	private void webAPIProcessEventForIAP(BaseRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
+	private void webAPIProcessEventToAuth(BaseRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
 	{		
 		string reqParam = "";
 		string httpUrl = "";
@@ -290,6 +291,11 @@ public class NetMgr : MonoBehaviour{
 	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new LoginRequest(loginInfo), baseEvent);
+	}
+
+	public static void LoginGuest(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool showLoading)
+	{
+		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
 	}
 
 	public static void GetScheduleAll(BaseEvent baseEvent)
@@ -447,22 +453,22 @@ public class NetMgr : MonoBehaviour{
 
 	public static void RequestIAP(int productId, string productCode, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForIAP(new RequestIAPRequest(0, productCode), baseEvent, isTest, true);
+		Instance.webAPIProcessEventToAuth(new RequestIAPRequest(0, productCode), baseEvent, isTest, true);
 	}
 
 	public static void ComsumeIAP(int orderNo, string token, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForIAP(new ComsumeIAPRequest(orderNo, token), baseEvent, isTest, true);
+		Instance.webAPIProcessEventToAuth(new ComsumeIAPRequest(orderNo, token), baseEvent, isTest, true);
 	}
 
 	public static void DoneIAP(int orderNo, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForIAP(new DoneIAPRequest(orderNo), baseEvent, isTest, true);
+		Instance.webAPIProcessEventToAuth(new DoneIAPRequest(orderNo), baseEvent, isTest, true);
 	}
 
 	public static void CancelIAP(int orderNo, bool isTest, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEventForIAP(new CancelIAPRequest(orderNo), baseEvent, isTest, true);
+		Instance.webAPIProcessEventToAuth(new CancelIAPRequest(orderNo), baseEvent, isTest, true);
 	}
 
 	public static void PurchaseGold(int productId, BaseEvent baseEvent)

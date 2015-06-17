@@ -23,6 +23,7 @@ public class ScriptTitle : MonoBehaviour {
 	public string mStrBtnExit;
 	public string mStrBtnContinue;
 
+
 	void Start()
 	{
 		#if(UNITY_EDITOR)
@@ -82,7 +83,16 @@ public class ScriptTitle : MonoBehaviour {
 
 	public void Init()
 	{
-		transform.FindChild ("ContainerBtns").localPosition = new Vector3(0, UtilMgr.GetScaledPositionY()*2, 0);
+		if(Application.platform == RuntimePlatform.Android){
+			transform.FindChild ("ContainerBtns").FindChild("BtnEmail").localPosition
+				= new Vector3(0, -450f, 0);
+			transform.FindChild ("ContainerBtns").FindChild("BtnKakao").gameObject.SetActive(false);
+		} else{
+			transform.FindChild ("ContainerBtns").FindChild("BtnEmail").localPosition
+				= new Vector3(-150f, -450f, 0);
+			transform.FindChild ("ContainerBtns").FindChild("BtnKakao").gameObject.SetActive(true);
+		}
+
 		
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
@@ -188,7 +198,11 @@ public class ScriptTitle : MonoBehaviour {
 
 		string email = PlayerPrefs.GetString (Constants.PrefEmail);
 		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
+		string guest = PlayerPrefs.GetString (Constants.PrefGuest);
 
+		if(guest != null && guest.Equals("1")){
+			GetUID();
+		} else
 		if (email == null || email.Length < 1 || pwd == null || pwd.Length < 1) {
 			StopLogin();
 		}
@@ -356,6 +370,43 @@ public class ScriptTitle : MonoBehaviour {
 
 	}
 
+	public void OpenGuest(){
+		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
+		transform.FindChild ("SprLogo").gameObject.SetActive (false);	
+		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("Certification").gameObject.SetActive (false);		
+		transform.FindChild ("SprLogo").gameObject.SetActive (false);		
+		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
+		
+		transform.FindChild ("SelectTeam").gameObject.SetActive (true);
+
+		mLoginEvent = new LoginEvent(new EventDelegate(this, "LoginComplete"));
+		transform.FindChild ("SelectTeam").GetComponent<ScriptSelectTeam>().InitGuest(mLoginEvent);
+	}
+
+	void GetUID(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer)
+			IOSMgr.GetUID("", new EventDelegate(this, "GotUID"));
+		else{
+			GotUID();
+		}
+	}
+
+	public void GotUID(){
+		LoginInfo loginInfo = new LoginInfo();
+		if(Application.platform == RuntimePlatform.IPhonePlayer)
+			loginInfo.DeviceID = IOSMgr.GetMsg();
+		else
+			loginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+
+		mLoginEvent = new LoginEvent(new EventDelegate(this, "LoginComplete"));
+		NetMgr.LoginGuest(loginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
+	}
+
+	public void GuestCompelte(){
+		Login (mLoginEvent.Response.data.memberEmail, mLoginEvent.Response.data.memberPwd);
+	}
+
 	public void SetGCMId()
 	{
 		#if(UNITY_EDITOR)
@@ -393,6 +444,10 @@ public class ScriptTitle : MonoBehaviour {
 			return;
 		}
 		mLoginInfo = mLoginEvent.Response.data;
+		Debug.Log("query id is " + mLoginEvent.Response.query_id);
+		if(mLoginEvent.Response.query_id.Equals("tubyLoginDeviceID")){
+			PlayerPrefs.SetString(Constants.PrefGuest, "1");
+		}
 
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
 
@@ -516,6 +571,10 @@ public class ScriptTitle : MonoBehaviour {
 
 	public void FacebookClicked(){
 		OpenFacebook();
+	}
+
+	public void GuestClicked(){
+		OpenGuest();
 	}
 
 //	public void BtnClicked(string name)
