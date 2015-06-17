@@ -53,10 +53,14 @@ public class ScriptSuperRoot : MonoBehaviour {
 			DialogueMgr.DismissDialogue();
 		} else {
 			UtilMgr.OnBackPressed ();
-			if(Application.loadedLevelName.Equals("SceneMain")||transform.FindChild("TF_Livetalk").gameObject.activeSelf){
+			if(Application.loadedLevelName.Equals("SceneMain")){
+
+				if(transform.FindChild("TF_Livetalk").gameObject.activeSelf){
 				transform.FindChild("TF_Livetalk").FindChild("Panel").FindChild("Input").GetComponent<UIInput>().OpenKeboard();
 			}
 		}
+			}
+
 //		if (!UtilMgr.OnBackPressed ()) {
 //			UtilMgr.SetBackEvent (new EventDelegate (this, "DismissDialogue"));
 //		}
