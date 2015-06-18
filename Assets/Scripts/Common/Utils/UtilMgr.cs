@@ -358,4 +358,13 @@ public class UtilMgr : MonoBehaviour {
 		
 		return isTest;
 	}
+
+	public static bool IsGuestAccount(){
+		bool value = false;
+		string strTest = PlayerPrefs.GetString (Constants.PrefGuest);
+		if(strTest != null && strTest.Equals("1"))
+			value = true;
+		
+		return value;
+	}
 }

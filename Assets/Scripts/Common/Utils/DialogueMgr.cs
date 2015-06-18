@@ -191,4 +191,27 @@ public class DialogueMgr : MonoBehaviour {
 			Instance.OnClickHandler(BTNS.Cancel);
 	}
 
+	public static void ShowGuestDialogue()
+	{
+		GameObject prefab = Resources.Load ("GuestDialogue") as GameObject;
+		GameObject dialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+				
+		dialogueBox.transform.parent = GameObject.Find ("UI Root").transform;
+		dialogueBox.transform.localScale = new Vector3(1f, 1f, 1f);
+		dialogueBox.transform.localPosition = new Vector3(0, 0, 0);
+		dialogueBox.SetActive (true);
+	}
+
+	public void BtnJoinClicked()
+	{
+		if(Instance.OnClickHandler != null)
+			Instance.OnClickHandler(BTNS.Cancel);
+	}
+
+	public void BtnContinueClicked()
+	{
+		if(Instance.OnClickHandler != null)
+			Instance.OnClickHandler(BTNS.Cancel);
+	}
+
 }

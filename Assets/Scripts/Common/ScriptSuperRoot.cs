@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ScriptSuperRoot : MonoBehaviour {
 	string mSceneName;
+	string mContentNum;
+
 
 	void Start () {
 		transform.FindChild ("Camera").transform.localPosition = new Vector3(0, UtilMgr.GetScaledPositionY(), 0);

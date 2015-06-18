@@ -3,16 +3,19 @@ using System.Collections;
 
 public class ScriptNanoo : MonoBehaviour {
 
-	const string SAMSUNG_URL = "https://game.nanoo.so/liveball/board?cd=185";
-	const string NEXEN_URL = "https://game.nanoo.so/liveball/board?cd=186";
-	const string NC_URL = "https://game.nanoo.so/liveball/board?cd=187";
-	const string LG_URL = "https://game.nanoo.so/liveball/board?cd=188";
-	const string SK_URL = "https://game.nanoo.so/liveball/board?cd=189";
-	const string DOOSAN_URL = "https://game.nanoo.so/liveball/board?cd=190";
-	const string LOTTE_URL = "https://game.nanoo.so/liveball/board?cd=191";
-	const string KIA_URL = "https://game.nanoo.so/liveball/board?cd=192";
-	const string HANHWA_URL = "https://game.nanoo.so/liveball/board?cd=193";
-	const string KT_URL = "https://game.nanoo.so/liveball/board?cd=194";
+	const string BASE_URL = "https://game.nanoo.so/liveball/board?cd=";
+	const string SAMSUNG_URL = "185";
+	const string NEXEN_URL = "186";
+	const string NC_URL = "187";
+	const string LG_URL = "188";
+	const string SK_URL = "189";
+	const string DOOSAN_URL = "190";
+	const string LOTTE_URL = "191";
+	const string KIA_URL = "192";
+	const string HANHWA_URL = "193";
+	const string KT_URL = "194";
+
+	string mContentNum;
 
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
@@ -64,7 +67,7 @@ public class ScriptNanoo : MonoBehaviour {
 	void CheckVisible(){
 		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().
 			FsmVariables.FindFsmString("StatusAnimation").Value;
-		Debug.Log ("menuStatus : " + menuStatus + " ?? " + mMainMenu);
+//		Debug.Log ("menuStatus : " + menuStatus + " ?? " + mMainMenu);
 		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 		
 		if (menuStatus.Equals ("Closed") 
@@ -79,7 +82,7 @@ public class ScriptNanoo : MonoBehaviour {
 
 	void InitNanoo(){
 		mStateWebview = STATE_WEBVIEW.INVISIBLE;
-		string url = GetTeamURL ();
+		string url = BASE_URL + GetTeamURL ();
 
 		mWebView = GetComponent<UniWebView>();
 		if (mWebView == null) {
@@ -112,6 +115,17 @@ public class ScriptNanoo : MonoBehaviour {
 	}	
 
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
+		Debug.Log("OnLoadBegin : "+loadingUrl);
+		if(loadingUrl.Contains("liveball/board/")){
+//			Debug.Log("index : " + loadingUrl.IndexOf("/board/"));
+			// switch menu btn to back btn
+			// show accusation btn
+			int startNum = loadingUrl.IndexOf("/board/")+7;
+			int endNum = loadingUrl.IndexOf("?cd=");
+			mContentNum = loadingUrl.Substring(startNum, endNum-startNum);
+			Debug.Log("mContentNum : "+mContentNum);
+		}
+
 		UtilMgr.ShowLoading (true);
 	}
 
@@ -151,7 +165,7 @@ public class ScriptNanoo : MonoBehaviour {
 	}
 	
 	void OnLoadComplete(UniWebView webView, bool success, string errorMessage) {
-		Debug.Log ("OnLoadComplete");
+		Debug.Log ("OnLoadComplete : "+webView.url);
 
 		UtilMgr.DismissLoading ();
 
