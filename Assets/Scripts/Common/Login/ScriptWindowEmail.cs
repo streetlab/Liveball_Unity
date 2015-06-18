@@ -114,16 +114,20 @@ public class ScriptWindowEmail : MonoBehaviour {
 
 	public void NextClicked()
 	{
+
+		//Debug.Log ("id : " + transform.FindChild ("InputEmail").GetComponent<UIInput> ().value);
+		//Debug.Log ("pw : " + transform.FindChild ("InputPwd").GetComponent<UIInput> ().value);
 		string eMail = transform.FindChild ("InputEmail").GetComponent<UIInput> ().value;
 		string pwd = transform.FindChild ("InputPwd").GetComponent<UIInput> ().value;
 		if (mState == SELECTION_STATE.LOGIN) {
+			if(eMail!=null){
 			if(eMail.Equals("admin@.")
 			   && pwd.Equals("test")){
 				PlayerPrefs.SetString(Constants.PrefServerTest, "1");
 				AutoFade.LoadLevel("SceneLogin");
 				return;
 			}
-
+			}
 
 			GetComponentInParent<ScriptTitle>().Login(eMail, pwd);
 		} else {
@@ -144,7 +148,10 @@ public class ScriptWindowEmail : MonoBehaviour {
 	}
 
 	public void ConfirmedEmail(){
+		Debug.Log ("ConfirmedEmail");
 		transform.FindChild ("InputPwd").GetComponent<UIInput>().isSelected = true;
+
+
 	}
 
 	public void ConfirmedPwd(){

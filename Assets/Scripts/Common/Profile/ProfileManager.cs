@@ -20,7 +20,7 @@ public class ProfileManager : MonoBehaviour {
 	
 	public byte[] Setimagebyte;
 	public Texture2D Setimage;
-	
+	public Texture2D Default;
  
 	GetProfileEvent mProfileEvent;
 	public bool Sett = false;
@@ -67,6 +67,8 @@ public class ProfileManager : MonoBehaviour {
 		if (UserImageName != "") {
 			WWW www = new WWW (images);
 			StartCoroutine (GetImage (www));
+		}else if(UserImageName==UserEmail||UserImageName==""){
+			Profile.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = Default;
 		}
 
 		//if (UserImageName != "") {
@@ -92,6 +94,8 @@ public class ProfileManager : MonoBehaviour {
 			UserImage.LoadImage(UserImagebyte);
 			Profile.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = UserImage;
 		
+		}else if(UserImageName==UserEmail||UserImageName==""){
+			Profile.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = Default;
 		}
 		Profile.SetActive (B);
 
@@ -109,6 +113,8 @@ public class ProfileManager : MonoBehaviour {
 
 		
 			SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = UserImage;
+		}else if(UserImageName==UserEmail||UserImageName==""){
+			Profile.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = Default;
 		}
 		SettingPage.SetActive (B);
 	}

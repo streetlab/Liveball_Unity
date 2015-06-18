@@ -381,11 +381,13 @@ public class ScriptMainTop : MonoBehaviour {
 //	}
 	
 	void OnApplicationPause(bool pause){
-		if(pause){
-			NetMgr.ExitGame(null);
-		} else{
-			if(!transform.parent.FindChild ("TF_Items").gameObject.activeSelf){
-				AutoFade.LoadLevel(Application.loadedLevelName);
+		if (pause) {
+			NetMgr.ExitGame (null);
+		} else {
+			if (Application.loadedLevelName.Equals ("SceneMain")) {
+				if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+					AutoFade.LoadLevel (Application.loadedLevelName);
+				}
 			}
 		}
 	}

@@ -19,14 +19,14 @@ public class RankingManager : MonoBehaviour {
 		M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallW").FindChild ("W").FindChild ("Rank").GetComponent<UILabel> ().text = 
 			mGetRankEvent.Response.data.rank + "위";
 		M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallW").FindChild ("W").FindChild ("Gold").GetComponent<UILabel> ().text = 
-			"("+UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.rankValue) + "Gold)";
+			"("+UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.rankValue) + "G)";
 		for (int i = 0; i < mGetRankEvent.Response.data.ranking.Count; i++) {
 			W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("rank").GetComponent<UILabel> ().text = 
 				mGetRankEvent.Response.data.ranking [i].rank.ToString ();
 			W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Name").GetComponent<UILabel> ().text = 
 				mGetRankEvent.Response.data.ranking [i].memberName;
 			W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
-				UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " Gold";
+				UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " G";
 			if (mGetRankEvent.Response.data != null) {
 			
 				if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
@@ -88,7 +88,7 @@ public class RankingManager : MonoBehaviour {
 		M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallD").FindChild ("D").FindChild ("Rank").GetComponent<UILabel> ().text = 
 			mGetRankEvent.Response.data.rank + "위";
 		M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallD").FindChild ("D").FindChild ("Gold").GetComponent<UILabel> ().text = 
-			"("+UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.rankValue) + "Gold)";
+			"("+UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.rankValue) + "G)";
 		Debug.Log (mGetRankEvent.Response.data.ranking.Count);
 		D.transform.FindChild("List").gameObject.SetActive (true);
 		for (int i = 0; i < mGetRankEvent.Response.data.ranking.Count; i++) {
@@ -97,7 +97,7 @@ public class RankingManager : MonoBehaviour {
 			D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Name").GetComponent<UILabel> ().text = 
 				mGetRankEvent.Response.data.ranking [i].memberName;
 			D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
-				UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " Gold";
+				UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " G";
 			if (mGetRankEvent.Response.data != null) {
 				
 				if (mGetRankEvent.Response.data.ranking [i].imageName != "") {

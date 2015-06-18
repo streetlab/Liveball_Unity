@@ -22,6 +22,7 @@ public class ScriptTitle : MonoBehaviour {
 	public string mStrBtnUpdate;
 	public string mStrBtnExit;
 	public string mStrBtnContinue;
+	public Texture2D Default;
 
 
 	void Start()
@@ -491,6 +492,9 @@ public class ScriptTitle : MonoBehaviour {
 		if (UserMgr.UserInfo.imageName != "") {
 			WWW www = new WWW (images);
 			StartCoroutine (GetImage (www));
+		} else if (UserMgr.UserInfo.imageName == UserMgr.UserInfo.memberEmail ||
+			UserMgr.UserInfo.imageName == "") {
+			UserMgr.UserInfo.Textures = Default;
 		}
 
 		if(mProfileEvent.Response.message != null

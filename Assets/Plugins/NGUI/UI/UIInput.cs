@@ -433,7 +433,8 @@ public class UIInput : MonoBehaviour
 
 	public string Validate (string val)
 	{
-		if (string.IsNullOrEmpty(val)) return "";
+		//Debug.Log ("Validate");
+		if (string.IsNullOrEmpty(val)) return val;
 
 		StringBuilder sb = new StringBuilder(val.Length);
 
@@ -447,7 +448,7 @@ public class UIInput : MonoBehaviour
 
 		if (characterLimit > 0 && sb.Length > characterLimit)
 			return sb.ToString(0, characterLimit);
-		return sb.ToString();
+		return val;
 	}
 
 	/// <summary>
@@ -479,6 +480,7 @@ public class UIInput : MonoBehaviour
 
 	protected void Init ()
 	{
+		//Debug.Log ("Init");
 		if (mDoInit && label != null)
 		{
 			mDoInit = false;
@@ -504,6 +506,7 @@ public class UIInput : MonoBehaviour
 
 	protected void SaveToPlayerPrefs (string val)
 	{
+		//Debug.Log ("SaveToPlayerPrefs");
 		if (!string.IsNullOrEmpty(savedAs))
 		{
 			if (string.IsNullOrEmpty(val)) PlayerPrefs.DeleteKey(savedAs);
@@ -520,6 +523,7 @@ public class UIInput : MonoBehaviour
 
 	protected virtual void OnSelect (bool isSelected)
 	{
+		//Debug.Log ("OnSelect");
 		if (isSelected)
 		{
 #if !MOBILE
@@ -547,6 +551,7 @@ public class UIInput : MonoBehaviour
 
 	protected void OnSelectEvent ()
 	{
+		//Debug.Log ("OnSelectEvent");
 		selection = this;
 		if (mDoInit) Init();
 
@@ -561,18 +566,23 @@ public class UIInput : MonoBehaviour
 
 	protected void OnDeselectEvent ()
 	{
+		SList.Clear ();
+		//Debug.Log ("OnDeselectEvent");
 		if (mDoInit) Init();
 
 		if (label != null && NGUITools.GetActive(this))
 		{
-			mValue = value;
+		
 #if MOBILE
+			mValue = LiveValue;
 			if (mKeyboard != null)
 			{
 				mWaitForKeyboard = false;
 				mKeyboard.active = false;
 				mKeyboard = null;
 			}
+#else
+			mValue = value;
 #endif
 			if (string.IsNullOrEmpty(mValue))
 			{
@@ -580,7 +590,7 @@ public class UIInput : MonoBehaviour
 				label.color = mDefaultColor;
 			}
 			else label.text = mValue;
-
+			//value = mValue;
 			Input.imeCompositionMode = IMECompositionMode.Auto;
 			RestoreLabelPivot();
 		}
@@ -592,17 +602,23 @@ public class UIInput : MonoBehaviour
 	/// <summary>
 	/// Update the text based on input.
 	/// </summary>
-	
+	string LiveValue;
+	string OldValues;
+	List<string> SList = new List<string>();
 	protected virtual void Update ()
 	{
 #if UNITY_EDITOR
+	//	Debug.Log ("!Application.isPlaying : " + (!Application.isPlaying));
 		if (!Application.isPlaying) return;
 #endif
+		//Debug.Log ("isSelected : " + isSelected);
 		if (isSelected)
 		{
+			//Debug.Log ("mDoInit : " + isSelected);
 			if (mDoInit) Init();
 #if MOBILE
 			// Wait for the keyboard to open. Apparently mKeyboard.active will return 'false' for a while in some cases.
+			//Debug.Log("mWaitForKeyboard : " + mWaitForKeyboard);
 			if (mWaitForKeyboard)
 			{
 				if (mKeyboard != null && !mKeyboard.active) return;
@@ -664,6 +680,7 @@ public class UIInput : MonoBehaviour
 						OldValueUse = false;
 					}
 					mWaitForKeyboard = true;
+					Debug.Log("Come");
 					mKeyboard = (inputType == InputType.Password) ?
 						TouchScreenKeyboard.Open(val, kt, false, false, true) :
 						TouchScreenKeyboard.Open(val, kt, !inputShouldBeHidden && inputType == InputType.AutoCorrect,
@@ -708,12 +725,43 @@ public class UIInput : MonoBehaviour
 						mKeyboard.text = "|";
 					}
 				}
-				else if (mCached != text)
+				else 
+					if (mCached != text)
 				{
 					mCached = text;
+					//Debug.Log("A value : " + value + " text : " + text);
+					if(text!=""){
+						LiveValue = text;
+					}
+				
+					if(value == ""&&text == ""){
+						LiveValue = text;
+					
+						label.text = LiveValue;
+
+					}
 					value = text;
+					;
+					//Debug.Log("B value : " + value + " text : " + text);
 				}
+				if(SList.Count>2){
+					//Debug.Log("OldValues : " + OldValues + " text : " + text + " : " +(OldValues == ""&&text == ""));
+					if(SList[SList.Count-2] == ""&&text == ""){
+				
+						LiveValue = text;
+						value = text;
+					
+						//Debug.Log("LiveValue" + LiveValue);
+					}
+					label.text = LiveValue;
+					if(SList.Count>10000){
+						SList.Clear();
+					}
+				}
+				SList.Add(text);
+			
  #endif // UNITY_METRO
+	
 				if (mKeyboard.done || !mKeyboard.active)
 				{
 					if (!mKeyboard.wasCanceled) Submit();
@@ -725,6 +773,7 @@ public class UIInput : MonoBehaviour
 			else
 #endif // MOBILE
 			{
+			
 				string ime = Input.compositionString;
 
 				// There seems to be an inconsistency between IME on Windows, and IME on OSX.
@@ -781,6 +830,7 @@ public class UIInput : MonoBehaviour
 
 	protected void DoBackspace ()
 	{
+		//Debug.Log ("DoBackspace");
 		if (!string.IsNullOrEmpty(mValue))
 		{
 			if (mSelectionStart == mSelectionEnd)
@@ -799,6 +849,7 @@ public class UIInput : MonoBehaviour
 
 	public virtual bool ProcessEvent (Event ev)
 	{
+		//Debug.Log ("ProcessEvent");
 		if (label == null) return false;
 
 		RuntimePlatform rp = Application.platform;
@@ -1042,6 +1093,7 @@ public class UIInput : MonoBehaviour
 
 	protected virtual void Insert (string text)
 	{
+		//Debug.Log ("Insert");
 		string left = GetLeftText();
 		string right = GetRightText();
 		int rl = right.Length;
@@ -1115,6 +1167,7 @@ public class UIInput : MonoBehaviour
 
 	protected string GetSelection ()
 	{
+	//	Debug.Log ("GetSelection");
 		if (string.IsNullOrEmpty(mValue) || mSelectionStart == mSelectionEnd)
 		{
 			return "";
@@ -1146,6 +1199,7 @@ public class UIInput : MonoBehaviour
 
 	protected virtual void OnPress (bool isPressed)
 	{
+		//Debug.Log ("OnPress");
 		if (isPressed && isSelected && label != null &&
 			(UICamera.currentScheme == UICamera.ControlScheme.Mouse ||
 			 UICamera.currentScheme == UICamera.ControlScheme.Touch))
@@ -1182,6 +1236,7 @@ public class UIInput : MonoBehaviour
 
 	protected virtual void Cleanup ()
 	{
+		//Debug.Log ("Cleanup");
 		if (mHighlight) mHighlight.enabled = false;
 		if (mCaret) mCaret.enabled = false;
 
@@ -1198,9 +1253,15 @@ public class UIInput : MonoBehaviour
 
 	public void Submit ()
 	{
+		//Debug.Log ("Submit");
 		if (NGUITools.GetActive(this))
 		{
+			#if MOBILE
+			mValue = LiveValue;
+			#else
 			mValue = value;
+			#endif
+
 
 			if (current == null)
 			{
@@ -1218,6 +1279,7 @@ public class UIInput : MonoBehaviour
 
 	public void UpdateLabel ()
 	{
+		//Debug.Log ("UpdateLabel");
 		if (label != null)
 		{
 			if (mDoInit) Init();
@@ -1299,9 +1361,16 @@ public class UIInput : MonoBehaviour
 					RestoreLabelPivot();
 				}
 			}
-
+			#if MOBILE
+			if(processed!=""){
 			label.text = processed;
+			}
+			#else
+			label.text = processed;
+			#endif
+
 #if MOBILE
+			//Debug.Log(selected + " : " + (mKeyboard == null) + " : " + inputShouldBeHidden);
 			if (selected && (mKeyboard == null || inputShouldBeHidden))
 #else
 			if (selected)
