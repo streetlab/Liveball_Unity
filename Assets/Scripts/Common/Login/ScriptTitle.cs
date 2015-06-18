@@ -84,13 +84,17 @@ public class ScriptTitle : MonoBehaviour {
 	public void Init()
 	{
 		if(Application.platform == RuntimePlatform.Android){
-			transform.FindChild ("ContainerBtns").FindChild("BtnEmail").localPosition
-				= new Vector3(0, -450f, 0);
-			transform.FindChild ("ContainerBtns").FindChild("BtnKakao").gameObject.SetActive(false);
+			transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
+				= new Vector3(-160f, -450f, 0);
+			transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
+				= new Vector3(160f, -450f, 0);
+			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
 		} else{
-			transform.FindChild ("ContainerBtns").FindChild("BtnEmail").localPosition
-				= new Vector3(-150f, -450f, 0);
-			transform.FindChild ("ContainerBtns").FindChild("BtnKakao").gameObject.SetActive(true);
+			transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
+				= new Vector3(-220f, -450f, 0);
+			transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
+				= new Vector3(0, -450f, 0);
+			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
 		}
 
 		
@@ -359,6 +363,7 @@ public class ScriptTitle : MonoBehaviour {
 
 	public void OpenEmail()
 	{
+		UtilMgr.AddBackEvent (new EventDelegate (this, "Init"));
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);	
 		transform.FindChild ("FormJoin").gameObject.SetActive (false);
@@ -368,6 +373,16 @@ public class ScriptTitle : MonoBehaviour {
 
 		transform.FindChild ("WindowEmail").gameObject.SetActive (true);
 
+	}
+
+	public void OpenEmailToLogin(){
+		OpenEmail();
+		transform.FindChild ("WindowEmail").GetComponent<ScriptWindowEmail>().SetStateLogin();
+	}
+
+	public void OpenEmailToJoin(){
+		OpenEmail();
+		transform.FindChild ("WindowEmail").GetComponent<ScriptWindowEmail>().SetStateJoin();
 	}
 
 	public void OpenGuest(){

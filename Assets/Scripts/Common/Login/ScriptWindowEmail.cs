@@ -35,10 +35,10 @@ public class ScriptWindowEmail : MonoBehaviour {
 
 	void Start()
 	{
-		SetStateLogin ();
+//		SetStateLogin ();
 	}
 
-	void SetStateLogin()
+	public void SetStateLogin()
 	{
 		mBtnLogin.transform.FindChild ("SprUnderline").GetComponent<UISprite> ().color = WHITE;
 		mBtnLogin.transform.FindChild ("SprUnderline").GetComponent<UISprite> ().height = 4;
@@ -60,7 +60,7 @@ public class ScriptWindowEmail : MonoBehaviour {
 		mState = SELECTION_STATE.LOGIN;
 	}
 
-	void SetStateJoin()
+	public void SetStateJoin()
 	{
 		mBtnJoin.transform.FindChild ("SprUnderline").GetComponent<UISprite> ().color = WHITE;
 		mBtnJoin.transform.FindChild ("SprUnderline").GetComponent<UISprite> ().height = 4;

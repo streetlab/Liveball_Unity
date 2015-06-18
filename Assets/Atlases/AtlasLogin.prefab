@@ -67,20 +67,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_login_email_press
-    x: 600
-    y: 1717
-    width: 100
-    height: 100
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: btn_login_email_release
+  - name: btn_guest
     x: 701
     y: 1717
     width: 100
@@ -93,8 +80,8 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_login_face_press
-    x: 802
+  - name: btn_login
+    x: 600
     y: 1717
     width: 100
     height: 100
@@ -106,7 +93,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_login_face_release
+  - name: btn_login_email_press
     x: 903
     y: 1717
     width: 100
@@ -119,7 +106,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_login_talk_press
+  - name: btn_login_email_release
     x: 600
     y: 1616
     width: 100
@@ -132,7 +119,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_login_talk_release
+  - name: btn_login_face_press
     x: 701
     y: 1616
     width: 100
@@ -145,11 +132,63 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_member_photo
+  - name: btn_login_face_release
     x: 802
-    y: 1636
+    y: 1616
+    width: 100
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: btn_login_talk_press
+    x: 903
+    y: 1616
+    width: 100
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: btn_login_talk_release
+    x: 600
+    y: 1515
+    width: 100
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: btn_member_photo
+    x: 701
+    y: 1535
     width: 80
     height: 80
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: btn_membership
+    x: 802
+    y: 1717
+    width: 100
+    height: 100
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -176,6 +215,19 @@ MonoBehaviour:
     y: 1880
     width: 150
     height: 168
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: pop_em
+    x: 807
+    y: 1835
+    width: 50
+    height: 44
     borderLeft: 0
     borderRight: 0
     borderTop: 0
