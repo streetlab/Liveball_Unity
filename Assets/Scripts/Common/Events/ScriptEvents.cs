@@ -11,6 +11,7 @@ public class ScriptEvents : MonoBehaviour {
 	STATE_WEBVIEW mStateWebview;
 
 	public GameObject mLblTitle;
+	public GameObject mEventTop;
 	bool StatusBarIsHidden;
 
 	GetEventsEvent mEvent;
@@ -43,6 +44,12 @@ public class ScriptEvents : MonoBehaviour {
 //		Debug.Log("GotEvents");
 		Page = 1;
 		MAX_PAGE = mEvent.Response.result.count;
+
+		if(MAX_PAGE < 1){
+			mEventTop.GetComponent<ScriptEventsTop>().CloseClicked();
+			return;
+		}
+
 		GoToNext();
 	}
 
