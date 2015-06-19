@@ -5,13 +5,26 @@ using System.Collections.Generic;
 public class ScriptItemMiddle : MonoBehaviour {
 	//public string grade,maxlv,posi,team,num,name,nowlv,add;
 	public static bool Delete;
+	public static bool UseItem;
 	public GameObject mainItem;
 	GetInvenItemEvent mEvent;
+	GetProfileEvent mProfileEvent;
+
 	List<UIListItem> ItemList = new List<UIListItem>();
+	void ActiveCount(){
+		UserMgr.UserInfo = mProfileEvent.Response.data;
+	}
+
 	void Start(){
+
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
 		if (Delete) {
 			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			Delete = false;
+		} else if (UseItem) {
+			DialogueMgr.ShowDialogue ("사용 성공", "상품권 사용 안내 팝업.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			UseItem = false;
 		}
 		mEvent = new GetInvenItemEvent (new EventDelegate (this, "GotItemsInven"));
 		NetMgr.GetInvenItem (mEvent);
@@ -45,8 +58,8 @@ public class ScriptItemMiddle : MonoBehaviour {
 			}
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemid").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemId.ToString();
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemNo").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemNo.ToString();
-			if(mEvent.Response.data[UseItems[index]].limitDateTime!=null){
-				string limit = mEvent.Response.data[UseItems[index]].limitDateTime;
+			if(mEvent.Response.data[UseItems[index]].registTime!=null){
+				string limit = mEvent.Response.data[UseItems[index]].registTime;
 				char [] limitlist;
 				List<string> result = new List<string>();
 				if(limit.Length>10){
@@ -67,7 +80,15 @@ public class ScriptItemMiddle : MonoBehaviour {
 					}
 				}
 					limit = string.Join("",result.ToArray());
-				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("value").GetComponent<UILabel>().text = "삭제일 : "+ limit;
+				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("value").GetComponent<UILabel>().text = "수신일 : "+ limit;
+				if(mEvent.Response.data[UseItems[index]].itemUseYn>0){
+					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("use button").GetChild(0).GetComponent<UILabel>().text = 
+						mEvent.Response.data[UseItems[index]].statusMsg;
+					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("use button").GetComponent<UIButton>().isEnabled = false;
+				}else{
+					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("use button").GetChild(0).GetComponent<UILabel>().text ="사용";
+					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("use button").GetComponent<UIButton>().isEnabled = true;
+				}
 			}
 			item.Target.gameObject.SetActive(true);
 			ItemList.Add(item);

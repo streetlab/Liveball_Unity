@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Text;
 
-public class DeleteInvenItemInfoRequest : BaseRequest {
-
-	public DeleteInvenItemInfoRequest(long itemNo,long itemid)
-	{		
+public class GetDoneInvenItemRequest : BaseRequest {
+	
+	public GetDoneInvenItemRequest(long itemNo, long itemId)
+	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("itemNo", itemNo);
-		Add ("itemId", itemid);
+		Add ("itemId", itemId);
 		//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
 		mDic = this;
+		
 	}
 	
 	public override string GetType ()
@@ -20,8 +21,7 @@ public class DeleteInvenItemInfoRequest : BaseRequest {
 	
 	public override string GetQueryId()
 	{
-		return "tubyDeleteInvenItem";
+		return "tubyDoneInvenItem";
 	}
-
-
+	
 }

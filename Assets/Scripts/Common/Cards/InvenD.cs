@@ -20,8 +20,8 @@ public class InvenD : MonoBehaviour {
 	void MileageDialogueHandler(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Btn1) {
 			mEvent = new DeleteInvenItemInfoEvent(new EventDelegate(this, "D"));
-			NetMgr.DeleteInvenItem (int.Parse(transform.parent.FindChild("itemNo").GetComponent<UILabel>().text)
-			                        ,int.Parse(transform.parent.FindChild("itemid").GetComponent<UILabel>().text),mEvent);
+			NetMgr.DeleteInvenItem (long.Parse(transform.parent.FindChild("itemNo").GetComponent<UILabel>().text)
+			                        ,long.Parse(transform.parent.FindChild("itemid").GetComponent<UILabel>().text),mEvent);
 		}
 		
 	}

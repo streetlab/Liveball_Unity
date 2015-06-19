@@ -5,6 +5,7 @@ public class ScriptCertification : MonoBehaviour {
 
 	public GameObject UniWebViewObject;
 	UniWebView mWebView;
+	GameObject UseItem;
 
 	public string mSucceedTitle;
 	public string mSucceedBody;
@@ -12,6 +13,7 @@ public class ScriptCertification : MonoBehaviour {
 	public string mFailedBody;
 
 	public void BtnClicked(){
+		gameObject.SetActive (true);
 		UniWebViewObject.SetActive(true);
 		string url = Constants.URL_CERT + "?mem=" + UserMgr.UserInfo.memSeq;
 		
@@ -25,7 +27,7 @@ public class ScriptCertification : MonoBehaviour {
 //			mWebView.OnLoadComplete += OnLoadComplete;
 //			mWebView.OnWebViewShouldClose += OnWebViewShouldClose;
 //			mWebView.OnEvalJavaScriptFinished += OnEvalJavaScriptFinished;			
-//			mWebView.InsetsForScreenOreitation += InsetsForScreenOreitation;
+			mWebView.InsetsForScreenOreitation += InsetsForScreenOreitation;
 //			mWebView.OnReceivedKeyCode += OnReceivedKeyCode;
 			
 			mWebView.backButtonEnable = false;
@@ -35,6 +37,17 @@ public class ScriptCertification : MonoBehaviour {
 		mWebView.url = url;
 		
 		mWebView.Load ();
+	}
+	UniWebViewEdgeInsets InsetsForScreenOreitation(UniWebView webView, UniWebViewOrientation orientation) {
+		Debug.Log ("InsetsForScreenOreitation");
+		
+		float myRatio = Screen.width / 720f;
+		
+		//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
+		return new UniWebViewEdgeInsets((int)(Constants.WEBVIEW_GAB_TOP*myRatio),0,0,0);
+		//		} else {
+		//			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
+		//		}
 	}
 
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
@@ -75,6 +88,9 @@ public class ScriptCertification : MonoBehaviour {
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
 		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
+		if (UseItem != null && (Application.loadedLevelName.Equals ("SecenCaards"))) {
+			UseItem.GetComponent<GiftUse>().temp();
+		}
 
 	}
 
@@ -84,13 +100,25 @@ public class ScriptCertification : MonoBehaviour {
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
 		DialogueMgr.ShowDialogue(mFailedTitle, mFailedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
+		//gameObject.SetActive (false);
 
 //		DialogueMgr.SetEvent(OnClicked);
 	}
-
+	public void OnActive(){
+		gameObject.transform.parent.gameObject.SetActive (true);
+	}
+	public void OffActive(){
+		if (mWebView != null) {
+			FailedCert ();
+		}
+		gameObject.transform.parent.gameObject.SetActive (false);
+	}
 	public void OnDialogClicked(DialogueMgr.BTNS type){
-		string email = PlayerPrefs.GetString (Constants.PrefEmail);
-		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
-		transform.parent.GetComponent<ScriptTitle>().Login(email, pwd);
+		//string email = PlayerPrefs.GetString (Constants.PrefEmail);
+		//string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
+		//transform.parent.GetComponent<ScriptTitle>().Login(email, pwd);
+	}
+	public void GetItemObj(GameObject obj){
+		UseItem = obj;
 	}
 }

@@ -9,7 +9,8 @@ public class DialogueMgr : MonoBehaviour {
 	{
 		Alert,
 		YesNo,
-		Choose
+		Choose,
+		EventAlert_NonBg
 	}
 
 	public enum BTNS
@@ -116,6 +117,7 @@ public class DialogueMgr : MonoBehaviour {
 		GameObject btn1 = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("Btn1").gameObject;
 		GameObject btn2 = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("Btn2").gameObject;
 		GameObject btnCancel = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("BtnCancel").gameObject;
+		GameObject SprBG = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("SprBG").gameObject;
 		HutongGames.PlayMaker.FsmVariables fsmVariables = Instance.mDialogueBox.GetComponent<PlayMakerFSM> ().FsmVariables;
 
 		if (strBtn1 == null
@@ -131,36 +133,46 @@ public class DialogueMgr : MonoBehaviour {
 			strCancel = fsmVariables.FindFsmString ("strCancel").Value;
 
 		if (type == DIALOGUE_TYPE.Alert) {
-			btn1.SetActive(false);
-			btn2.SetActive(false);
-			btnCancel.SetActive(true);
+			btn1.SetActive (false);
+			btn2.SetActive (false);
+			btnCancel.SetActive (true);
 
 			strCancel = fsmVariables.FindFsmString ("strAlert").Value;
 
-			btnCancel.transform.FindChild("Label").GetComponent<UILabel>().text = strCancel;
-			btnCancel.transform.localPosition = new Vector3(0, -100f, 0);
-		} else if(type == DIALOGUE_TYPE.YesNo){
-			btn1.SetActive(true);
-			btn2.SetActive(false);
-			btnCancel.SetActive(true);
+			btnCancel.transform.FindChild ("Label").GetComponent<UILabel> ().text = strCancel;
+			btnCancel.transform.localPosition = new Vector3 (0, -100f, 0);
+		} else if (type == DIALOGUE_TYPE.YesNo) {
+			btn1.SetActive (true);
+			btn2.SetActive (false);
+			btnCancel.SetActive (true);
 
-			btn1.transform.FindChild("Label").GetComponent<UILabel>().text = strBtn1;
-			btnCancel.transform.FindChild("Label").GetComponent<UILabel>().text = strCancel;
+			btn1.transform.FindChild ("Label").GetComponent<UILabel> ().text = strBtn1;
+			btnCancel.transform.FindChild ("Label").GetComponent<UILabel> ().text = strCancel;
 
-			btn1.transform.localPosition = new Vector3(-110f, -100f, 0);
-			btnCancel.transform.localPosition = new Vector3(110f, -100f, 0);
-		} else if(type == DIALOGUE_TYPE.Choose){
-			btn1.SetActive(true);
-			btn2.SetActive(true);
-			btnCancel.SetActive(true);
+			btn1.transform.localPosition = new Vector3 (-110f, -100f, 0);
+			btnCancel.transform.localPosition = new Vector3 (110f, -100f, 0);
+		} else if (type == DIALOGUE_TYPE.Choose) {
+			btn1.SetActive (true);
+			btn2.SetActive (true);
+			btnCancel.SetActive (true);
 
-			btn1.transform.FindChild("Label").GetComponent<UILabel>().text = strBtn1;
-			btn2.transform.FindChild("Label").GetComponent<UILabel>().text = strBtn2;
-			btnCancel.transform.FindChild("Label").GetComponent<UILabel>().text = strCancel;
+			btn1.transform.FindChild ("Label").GetComponent<UILabel> ().text = strBtn1;
+			btn2.transform.FindChild ("Label").GetComponent<UILabel> ().text = strBtn2;
+			btnCancel.transform.FindChild ("Label").GetComponent<UILabel> ().text = strCancel;
 
-			btn2.transform.localPosition = new Vector3(0, -100f, 0);
-			btn1.transform.localPosition = new Vector3(-190f, -100f, 0);
-			btnCancel.transform.localPosition = new Vector3(190f, -100f, 0);
+			btn2.transform.localPosition = new Vector3 (0, -100f, 0);
+			btn1.transform.localPosition = new Vector3 (-190f, -100f, 0);
+			btnCancel.transform.localPosition = new Vector3 (190f, -100f, 0);
+		} else if(type == DIALOGUE_TYPE.EventAlert_NonBg) {
+			SprBG.SetActive(false);
+			btn1.SetActive (true);
+			btn2.SetActive (false);
+			btnCancel.SetActive (false);
+			
+			strCancel = fsmVariables.FindFsmString ("strAlert").Value;
+			
+			btn1.transform.FindChild ("Label").GetComponent<UILabel> ().text = strCancel;
+			btn1.transform.localPosition = new Vector3 (0, -100f, 0);
 		}
 	}
 

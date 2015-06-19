@@ -4,7 +4,9 @@ using System.Collections;
 public class Swing : MonoBehaviour {
 	public void Fireball(){
 		transform.FindChild("Fireball").gameObject.SetActive (true);
-		transform.parent.parent.FindChild ("PostDialogue").gameObject.SetActive (true);
+		//transform.parent.parent.FindChild ("PostDialogue").gameObject.SetActive (true);
+		transform.parent.parent.GetComponent<PostButton> ().GachaOK ();
+		//
 	}
 	public void spark(){
 		transform.FindChild("spark 08s").gameObject.SetActive (true);

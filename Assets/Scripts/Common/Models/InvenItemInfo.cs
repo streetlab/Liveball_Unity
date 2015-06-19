@@ -26,9 +26,9 @@ public class InvenItemInfo {
 		}
 	}
 
-	int _itemNo;
+	long _itemNo;
 
-	public int itemNo {
+	public long itemNo {
 		get {
 			return _itemNo;
 		}
@@ -93,9 +93,31 @@ public class InvenItemInfo {
 		}
 	}
 
-	int _itemId;
+	int _itemStatus;
+	
+	public int itemStatus {
+		get {
+			return _itemStatus;
+		}
+		set {
+			_itemStatus = value;
+		}
+	}
+	string _statusMsg;
+	
+	public string statusMsg {
+		get {
+			return _statusMsg;
+		}
+		set {
+			_statusMsg = value;
+		}
+	}
 
-	public int itemId {
+
+	long _itemId;
+
+	public long itemId {
 		get {
 			return _itemId;
 		}
@@ -159,6 +181,16 @@ public class InvenItemInfo {
 		}
 	}
 
+	private string _registTime;
+	public string registTime {
+		get {
+			return _registTime;
+		}
+		set {
+			_registTime = value;
+		}
+	}
+
 	string _itemCode;
 
 	public string itemCode {
@@ -169,14 +201,6 @@ public class InvenItemInfo {
 			_itemCode = value;
 		}
 	}
-	private string _limitDateTime;
-	public string limitDateTime {
-		get {
-			return _limitDateTime;
-		}
-		set {
-			_limitDateTime = value;
-		}
-	}
+
 
 }

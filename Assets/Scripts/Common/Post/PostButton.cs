@@ -12,7 +12,7 @@ public class PostButton : MonoBehaviour {
 	public void getitem (int mailseq,int attachseq){
 	
 	}
-	void Start(){
+	public void Start(){
 		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 	}
@@ -154,16 +154,21 @@ public class PostButton : MonoBehaviour {
 		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
 
 	}
+	void DialogueHandler(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			//transform.FindChild ("PostDialogue").gameObject.SetActive (false);
+			PostgetButton.anim.SetActive (false);
+			//transform.FindChild ("PostDialogue").FindChild ("Panel").FindChild ("Sprite").GetComponent<BoxCollider2D> ().enabled = false;
+			Destroy (PostgetButton.anim);
+		}
+		
+	}
 	public void GachaOK(){
-	
-		transform.FindChild ("PostDialogue").gameObject.SetActive (false);
-		PostgetButton.anim.SetActive (false);
-		transform.FindChild ("PostDialogue").FindChild ("Panel").FindChild ("Sprite").GetComponent<BoxCollider2D> ().enabled = false;
-		Destroy (PostgetButton.anim);
+
 		if (CheckMail.gacha.itemType >= 6) {
-			DialogueMgr.ShowDialogue ("경품 확인", CheckMail.gacha.itemName+ " 지급 완료 되었습니다.\n인벤토리를 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue ("경품 확인", CheckMail.gacha.itemName+ " 지급 완료 되었습니다.\n인벤토리를 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.EventAlert_NonBg, DialogueHandler);
 		} else {
-			DialogueMgr.ShowDialogue ("경품 확인", CheckMail.gacha.itemName + " 지급 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue ("경품 확인", CheckMail.gacha.itemName + " 지급 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.EventAlert_NonBg, DialogueHandler);
 		}
 	}
 

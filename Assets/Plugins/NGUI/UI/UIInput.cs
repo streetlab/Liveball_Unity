@@ -680,7 +680,7 @@ public class UIInput : MonoBehaviour
 						OldValueUse = false;
 					}
 					mWaitForKeyboard = true;
-					Debug.Log("Come");
+				//	Debug.Log("Come");
 					mKeyboard = (inputType == InputType.Password) ?
 						TouchScreenKeyboard.Open(val, kt, false, false, true) :
 						TouchScreenKeyboard.Open(val, kt, !inputShouldBeHidden && inputType == InputType.AutoCorrect,

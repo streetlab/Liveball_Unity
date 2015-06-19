@@ -64575,6 +64575,10 @@ MonoBehaviour:
     mMethodName: CloseAttendance
     mParameters: []
     oneShot: 0
+  - mTarget: {fileID: 1900526320}
+    mMethodName: Start
+    mParameters: []
+    oneShot: 0
 --- !u!61 &975305737
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -67006,7 +67010,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3021
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -71481,7 +71485,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3022
+  startingRenderQueue: 3024
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -74563,6 +74567,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &1172393200
 GameObject:
   m_ObjectHideFlags: 0
@@ -90817,7 +90822,7 @@ Transform:
   m_GameObject: {fileID: 1465707728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
+  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
   m_Children:
   - {fileID: 1171594848}
   - {fileID: 654317284}
@@ -108259,7 +108264,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3025
+  startingRenderQueue: 3027
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -117323,22 +117328,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 11433284, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
-      propertyPath: mDepth
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
-      propertyPath: m_Size.x
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6104620, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
-      propertyPath: m_Size.y
-      value: 80
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11458206, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b13028b441fbc41d58c9949f4137f223, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1900526320 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11494560, guid: b13028b441fbc41d58c9949f4137f223,
+    type: 2}
+  m_PrefabInternal: {fileID: 1900526319}
+  m_Script: {fileID: 11500000, guid: 3294d59daf2ab46bf936115b957d5582, type: 3}
 --- !u!1 &1901180148
 GameObject:
   m_ObjectHideFlags: 0
@@ -129279,7 +129277,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3021
+  startingRenderQueue: 3023
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

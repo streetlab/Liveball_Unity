@@ -333,7 +333,12 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetInvenItemRequest (), baseEvent);
 	}
 
-	public static void DeleteInvenItem(int itemNo,int itemid, BaseEvent baseEvent)
+	public static void DoneInvenItem(long itemNo,long itemid, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetDoneInvenItemRequest (itemNo,itemid), baseEvent);
+	}
+	
+	public static void DeleteInvenItem(long itemNo,long itemid, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new DeleteInvenItemInfoRequest (itemNo,itemid), baseEvent);
 	}
