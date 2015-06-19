@@ -64,14 +64,15 @@ public class Constants {
 	public static string UPLOAD_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
 	public static string IMAGE_SERVER_HOST 				= 	"http://" + HOST + ":6002/tuby_file/";
 
-	public static string WITHDRAW_URL 				= 	"http://auth.liveball.kr/m/withdraw.php";
-	public static string EVENT_URL 						= 	"http://test.streetlab.co.kr/events";
+	public static string WITHDRAW_URL 					= 	"http://auth.liveball.kr/m/withdraw.php";
+	public static string TEST_EVENT_URL 				= 	"http://test.streetlab.co.kr/events";
+	public static string EVENT_URL 						= 	"http://tuby10.friize.com/events";
 	public static string EVENT_ATTENDANCE_URL 			= 	"http://test.streetlab.co.kr/events/attendance/";
 	public static string EVENT_ATTENDANCE_CONFIRM_URL 	= 	"http://test.streetlab.co.kr/events/attendance_confirm/";
-	public static string EVENT_NOTI_URL 					= 	"http://test.streetlab.co.kr/events/t/";
-	public static string EVENT_NOTI_CONFIRM_URL 			= 	"http://test.streetlab.co.kr/events/noti";
+	public static string EVENT_NOTI_URL 				= 	"http://test.streetlab.co.kr/events/t/";
+	public static string EVENT_NOTI_CONFIRM_URL 		= 	"http://test.streetlab.co.kr/events/noti";
 	public static string MAIL_BOX_URL 					= 	"http://auth.liveball.kr/mailbox/";
-	public static string MAIL_BOX_RECEIVE_REWARD_URL 		= 	"http://auth.liveball.kr/mailbox/receive.php";
+	public static string MAIL_BOX_RECEIVE_REWARD_URL	= 	"http://auth.liveball.kr/mailbox/receive.php";
 	//*/
 	
 	//	static string QUERY_SERVER_HOST_R 	= 	"http://" + HOST + ":5002/gameServer/query.frz";

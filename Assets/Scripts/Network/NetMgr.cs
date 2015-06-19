@@ -491,6 +491,10 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent(new GetSposTeamInfoRequest(teamCode), baseEvent);
 	}
 
+	public static void AccuseContent(AccusationInfo accuInfo , BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent(new AccuseContentRequest(accuInfo), baseEvent);
+	}
 
 	public static void GetEvents(BaseEvent baseEvent)
 	{
