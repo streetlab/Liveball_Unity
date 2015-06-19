@@ -126,7 +126,7 @@ public class ScriptEvents : MonoBehaviour {
 	
 	bool OnWebViewShouldClose(UniWebView webView) {
 		Debug.Log ("OnWebViewShouldClose");
-		
+		mEventTop.GetComponent<ScriptEventsTop>().CloseClicked();
 		return false;
 		
 		if (webView == mWebView) {

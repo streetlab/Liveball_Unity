@@ -55,6 +55,7 @@ public class Constants {
 	public static string CHECK_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
 	public static string CHECK_SERVER_HOST2				= 	"http://" + HOST + ":600/webTuby/query.frz";
 
+	public const string EULA_URL = "https://game.nanoo.so/liveball/notice/1714";
 	public static int GAME_SERVER_PORT = 0;
 	public static string EXT_SERVER_HOST = "";
 	public static string AUTH_SERVER_HOST = "";

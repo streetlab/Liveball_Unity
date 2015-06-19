@@ -112,9 +112,9 @@ public class ScriptLove : MonoBehaviour {
 		Debug.Log("OnLoadBegin : "+loadingUrl);
 		if(loadingUrl.Contains("liveball/board?cd=")){//in board
 			mBtnMenu.SetActive(true);
-			//			mBtnNotice.SetActive(true);
+			mBtnNotice.SetActive(true);
 			
-			//			mBtnAccusation.SetActive(false);
+			mBtnAccusation.SetActive(false);
 			mBtnBack.SetActive(false);
 			
 			int startNum = loadingUrl.IndexOf("/board?")+10;
@@ -125,10 +125,10 @@ public class ScriptLove : MonoBehaviour {
 			//			Debug.Log("index : " + loadingUrl.IndexOf("/board/"));
 			// switch menu btn to back btn
 			mBtnBack.SetActive(true);
-			//			mBtnAccusation.SetActive(true);
+			mBtnAccusation.SetActive(true);
 			
 			mBtnMenu.SetActive(false);
-			//			mBtnNotice.SetActive(false);
+			mBtnNotice.SetActive(false);
 			// show accusation btn
 			int startNum = loadingUrl.IndexOf("/board/")+7;
 			int endNum = loadingUrl.IndexOf("?cd=");
@@ -138,16 +138,32 @@ public class ScriptLove : MonoBehaviour {
 			//turn off accusation
 			mBtnBack.SetActive(true);
 			
-			//			mBtnNotice.SetActive(false);
+			mBtnNotice.SetActive(false);
 			mBtnMenu.SetActive(false);
-			//			mBtnAccusation.setActive(false);
-			
+			mBtnAccusation.SetActive(false);			
 		}
 	}
 
 	public void BackClicked(){
 		if(mWebView != null){
 			mWebView.url = LOVE_URL;
+			mWebView.Load();
+		}
+	}
+
+	public void AccuseClicked(){
+		
+	}
+	
+	public void NoticeClicked(){
+		mBtnBack.SetActive(true);
+		
+		mBtnNotice.SetActive(false);
+		mBtnMenu.SetActive(false);
+		mBtnAccusation.SetActive(false);
+		
+		if(mWebView != null){
+			mWebView.url = Constants.EULA_URL;
 			mWebView.Load();
 		}
 	}
