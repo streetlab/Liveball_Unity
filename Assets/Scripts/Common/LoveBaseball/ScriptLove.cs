@@ -25,6 +25,7 @@ public class ScriptLove : MonoBehaviour {
 
 	string mBoardNum;
 	string mContentNum;
+	AccuseContentEvent mAccuEvent;
 
 	bool StatusBarIsHidden;
 	
@@ -70,7 +71,8 @@ public class ScriptLove : MonoBehaviour {
 		if (menuStatus.Equals ("Closed") 
 		    && !isOpen
 		    && !DialogueMgr.IsShown
-		    && !TF_Post.activeSelf) {
+		    && !TF_Post.activeSelf
+		    && !DialogueMgr.IsAccusing) {
 			ShowWebView();
 		} else {
 			HideWebView();
@@ -152,6 +154,16 @@ public class ScriptLove : MonoBehaviour {
 	}
 
 	public void AccuseClicked(){
+		AccusationInfo accuInfo = new AccusationInfo();
+		accuInfo.BoardNum = mBoardNum;
+		accuInfo.ContentNum = mContentNum;
+		mAccuEvent = new AccuseContentEvent(new EventDelegate(this, "DoneAccusation"));
+		DialogueMgr.ShowAccusationDialog(accuInfo, mAccuEvent);
+	}
+	
+	public void DoneAccusation(){
+		DialogueMgr.DismissAccusationDialog();
+		DialogueMgr.ShowDialogue("신고 완료", mAccuEvent.Response.data.outMessage, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		
 	}
 	

@@ -23,6 +23,9 @@ public class DialogueMgr : MonoBehaviour {
 	bool mIsExit;
 	static DialogueMgr _instance;
 	GameObject mDialogueBox;
+	GameObject mAccusationBox;
+	AccusationInfo mAccuInfo;
+	AccuseContentEvent mAccuEvent;
 //	EventDelegate mEvent;
 	public delegate void DialogClickHandler(BTNS BtnType);
 	public event DialogClickHandler OnClickHandler;
@@ -32,6 +35,7 @@ public class DialogueMgr : MonoBehaviour {
 	}
 
 	public static bool IsShown;
+	public static bool IsAccusing;
 
 	public static DialogueMgr Instance
 	{
@@ -224,6 +228,91 @@ public class DialogueMgr : MonoBehaviour {
 	{
 		if(Instance.OnClickHandler != null)
 			Instance.OnClickHandler(BTNS.Cancel);
+	}
+
+	public static void ShowAccusationDialog(AccusationInfo accuInfo, AccuseContentEvent baseEvent)
+	{
+		IsAccusing = true;
+		Instance.mAccuEvent = baseEvent;
+		Instance.mAccuInfo = accuInfo;
+		Instance.mAccuInfo.Type = "5";
+		GameObject prefab = Resources.Load ("AccusationDialogue") as GameObject;
+		Instance.mAccusationBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+
+		Instance.mAccusationBox.transform.FindChild("Panel").FindChild("LblBodyContent").
+			GetComponent<UILabel>().text = accuInfo.ContentNum;
+		Instance.mAccusationBox.transform.parent = GameObject.Find ("UI Root").transform;
+		Instance.mAccusationBox.transform.localScale = new Vector3(1f, 1f, 1f);
+		Instance.mAccusationBox.transform.localPosition = new Vector3(0, 0, 0);
+		Instance.mAccusationBox.SetActive (true);
+	}
+
+	public static void DismissAccusationDialog(){
+		Instance.BtnAccusationCancelClicked();
+	}
+
+	public void BtnAccuseClicked()
+	{
+		if(CheckReason()){
+			ShowDialogue("신고 오류", "기타를 선택한 경우에는 사유가 입력되어야 합니다.", DIALOGUE_TYPE.Alert, null);
+			return;
+		}
+
+		NetMgr.AccuseContent(Instance.mAccuInfo, Instance.mAccuEvent);
+	}
+
+	public void Test(Transform t){
+//		string v = Instance.mAccusationBox.transform.FindChild("Panel").FindChild("Input").
+//			GetComponent<UIInput>().value;
+		string v = t.GetComponent<UIInput>().value;
+		Debug.Log("value is "+v);
+	}
+
+	public void ResizeCollider(){
+		int height = Instance.mAccusationBox.transform.FindChild("Panel")
+			.FindChild("Scroll View").FindChild("Input").FindChild("Label")
+				.GetComponent<UILabel>().height;
+		Instance.mAccusationBox.transform.FindChild("Panel")
+			.FindChild("Scroll View").FindChild("Input")
+				.GetComponent<BoxCollider2D>().size = new Vector2(456f, (float)height);
+
+	}
+
+	bool CheckReason(){
+		if(Instance.mAccuInfo == null)
+			return false;
+
+		Instance.mAccuInfo.Msg = Instance.mAccusationBox.transform.FindChild("Panel")
+			.FindChild("Scroll View").FindChild("Input").
+			GetComponent<UIInput>().value;
+		if(Instance.mAccuInfo.Msg == null)
+			Instance.mAccuInfo.Msg = "";
+
+		if(Instance.mAccuInfo.Type.Equals("5")){
+			if(Instance.mAccuInfo.Msg.Length < 1){
+				return true;
+			} else
+				return false;
+
+		}
+		return false;
+	}
+	
+	public void BtnAccusationCancelClicked()
+	{
+		IsAccusing = false;
+		if(Instance.mAccusationBox == null)
+			return;
+
+		Instance.mAccusationBox.SetActive(false);
+		Instance.mAccusationBox = null;
+	}
+
+	public void ToggleChanged(Transform target){
+		if(Instance.mAccuInfo != null){
+			Instance.mAccuInfo.Type = target.name;
+		}
+		Debug.Log("Type is "+target.name);
 	}
 
 }

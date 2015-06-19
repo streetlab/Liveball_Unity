@@ -264,8 +264,15 @@ public class Itemcontrol : MonoBehaviour {
 	}
 
 	void InitRubyList(){
-		if(mResPP != null && mResPP.pointpark.Equals("on")){
-			SetBanner();
+		if(mResPP != null){
+			if(Application.platform == RuntimePlatform.Android
+			   && mResPP.pointpark.android.Equals("on")){
+				SetBanner();
+			} else if(Application.platform == RuntimePlatform.IPhonePlayer
+			          && mResPP.pointpark.ios.Equals("on")){
+				SetBanner();
+			} else
+				SetBanner();
 		}
 		for (int i = 1; i<getruby.Response.data.Count+1; i++) {
 			
@@ -544,10 +551,34 @@ public class Itemcontrol : MonoBehaviour {
 		eventd.Execute();
 	}
 
-	class PointParkResponse{
-		string _pointpark;
+	class PointParkDeviceResponse{
+		string _android;
 
-		public string pointpark {
+		public string android {
+			get {
+				return _android;
+			}
+			set {
+				_android = value;
+			}
+		}
+
+		string _ios;
+
+		public string ios {
+			get {
+				return _ios;
+			}
+			set {
+				_ios = value;
+			}
+		}
+	}
+
+	class PointParkResponse{
+		PointParkDeviceResponse _pointpark;
+
+		public PointParkDeviceResponse pointpark {
 			get {
 				return _pointpark;
 			}

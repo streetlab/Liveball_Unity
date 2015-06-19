@@ -105,7 +105,7 @@ public class ScriptTutorial : MonoBehaviour {
 	
 	bool OnWebViewShouldClose(UniWebView webView) {
 		Debug.Log ("OnWebViewShouldClose");
-		
+		mTop.GetComponent<ScriptTutorialTop>().CloseClicked();
 		return false;
 		
 		if (webView == mWebView) {

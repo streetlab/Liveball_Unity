@@ -20,4 +20,8 @@ public class AccuseContentEvent : BaseEvent {
 		eventDelegate.Execute ();
 	}
 
+	public AccuseContentResponse Response{
+		get {return response as AccuseContentResponse;}
+	}
+
 }
