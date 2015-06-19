@@ -10,7 +10,8 @@ public class DialogueMgr : MonoBehaviour {
 		Alert,
 		YesNo,
 		Choose,
-		EventAlert_NonBg
+		EventAlert_NonBg,
+		EventAlert
 	}
 
 	public enum BTNS
@@ -167,8 +168,17 @@ public class DialogueMgr : MonoBehaviour {
 			btn2.transform.localPosition = new Vector3 (0, -100f, 0);
 			btn1.transform.localPosition = new Vector3 (-190f, -100f, 0);
 			btnCancel.transform.localPosition = new Vector3 (190f, -100f, 0);
-		} else if(type == DIALOGUE_TYPE.EventAlert_NonBg) {
-			SprBG.SetActive(false);
+		} else if (type == DIALOGUE_TYPE.EventAlert_NonBg) {
+			SprBG.SetActive (false);
+			btn1.SetActive (true);
+			btn2.SetActive (false);
+			btnCancel.SetActive (false);
+			
+			strCancel = fsmVariables.FindFsmString ("strAlert").Value;
+			
+			btn1.transform.FindChild ("Label").GetComponent<UILabel> ().text = strCancel;
+			btn1.transform.localPosition = new Vector3 (0, -100f, 0);
+		} else if (type == DIALOGUE_TYPE.EventAlert) {
 			btn1.SetActive (true);
 			btn2.SetActive (false);
 			btnCancel.SetActive (false);

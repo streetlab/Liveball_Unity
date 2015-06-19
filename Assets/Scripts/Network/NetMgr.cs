@@ -491,6 +491,12 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIUploadProcessEvent(new UpdateMemberInfoRequest(memInfo), baseEvent, isTest, bShowLoading);
 	}
 
+	public static void ChangGestInfo(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool bShowLoading)
+	{
+		Instance.webAPIUploadProcessEvent(new ChangeGestRequest(loginInfo), baseEvent, isTest, bShowLoading);
+	}
+
+
 	public static void GetSposTeamInfo(string teamCode , BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent(new GetSposTeamInfoRequest(teamCode), baseEvent);
