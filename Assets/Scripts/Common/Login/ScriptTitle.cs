@@ -495,7 +495,7 @@ public class ScriptTitle : MonoBehaviour {
 			StartCoroutine (GetImage (www));
 		} else if (UserMgr.UserInfo.imageName == UserMgr.UserInfo.memberEmail ||
 			UserMgr.UserInfo.imageName == "") {
-			UserMgr.UserInfo.Textures = Default;
+			UserMgr.UserInfo.Textures = null;
 		}
 
 		if(mProfileEvent.Response.message != null

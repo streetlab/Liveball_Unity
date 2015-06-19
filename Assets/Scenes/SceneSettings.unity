@@ -2911,7 +2911,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3015
+  startingRenderQueue: 3013
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -3073,7 +3073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &720339524
 Transform:
   m_ObjectHideFlags: 0
@@ -3167,7 +3167,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3001
+  startingRenderQueue: 3005
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -3577,6 +3577,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &909688694
 GameObject:
   m_ObjectHideFlags: 0
@@ -4254,7 +4255,7 @@ GameObject:
   - 114: {fileID: 1127839258}
   - 61: {fileID: 1127839257}
   m_Layer: 0
-  m_Name: InputPwd
+  m_Name: InputPwd 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4649,7 +4650,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 2115969602}
+    mMethodName: ChangeGestButton
+    mParameters: []
+    oneShot: 0
 --- !u!61 &1170866671
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4674,7 +4679,7 @@ GameObject:
   - 114: {fileID: 1211918305}
   - 61: {fileID: 1211918304}
   m_Layer: 0
-  m_Name: InputPwd 1
+  m_Name: InputPwd 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8973,13 +8978,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2115969601}
+  - 114: {fileID: 2115969602}
   m_Layer: 0
   m_Name: Change Member
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2115969601
 Transform:
   m_ObjectHideFlags: 0
@@ -8996,6 +9002,20 @@ Transform:
   - {fileID: 1170866668}
   m_Father: {fileID: 982264399}
   m_RootOrder: 6
+--- !u!114 &2115969602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2115969600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8673883841f042d3a61efdc5f4886fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Email: {fileID: 1982514817}
+  Pwd1: {fileID: 1127839258}
+  Pwd2: {fileID: 1211918305}
 --- !u!1 &2123556533
 GameObject:
   m_ObjectHideFlags: 0
