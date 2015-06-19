@@ -31,7 +31,12 @@ public class Button4 : MonoBehaviour {
 			StartCoroutine(Up(UiRoot.transform.FindChild("TF_Items").gameObject));
 			break;
 		case "Community":		
+			if(UserMgr.Schedule!=null){
 			StartCoroutine(Up(UiRoot.transform.FindChild("TF_Livetalk").gameObject));
+			}else{
+				DialogueMgr.ShowDialogue("경기 채팅", "금일 예정된 경기가 없습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+
+			}
 			//UiRoot.transform.FindChild("TF_Livetalk").transform.localPosition= new Vector3(0,25,0);
 			break;
 

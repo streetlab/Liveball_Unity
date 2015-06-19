@@ -271,18 +271,18 @@ public class LandingManager : MonoBehaviour {
 		Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
 		if (UtilMgr.SelectTeam.Length > 0) {
 			Debug.Log ("GetDate");
-			if (UserMgr.Schedule != null) {
+			//if (UserMgr.Schedule != null) {
 				Debug.Log ("GetDate");
 				TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetData"));
 				NetMgr.GetSposTeamInfo (GetTeamCode (UtilMgr.SelectTeam), TeamMain);
-			}
+			//}
 		} else {
 			Debug.Log ("GetDate1");
-			if (UserMgr.Schedule != null) {
+			//if (UserMgr.Schedule != null) {
 				Debug.Log ("GetDate1");
 				TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetData1"));
 				NetMgr.GetSposTeamInfo (UserMgr.UserInfo.GetTeamCode(), TeamMain);
-			}
+			//}
 		}
 
 

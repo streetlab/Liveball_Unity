@@ -212,7 +212,7 @@ public class ScriptMainTop : MonoBehaviour {
 			List<string> ch = new List<string> ();
 		
 		
-			for (int p = 0; p < 7; p++) {
+			//for (int p = 0; p < 7; p++) {
 			
 				for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
 					char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
@@ -223,13 +223,13 @@ public class ScriptMainTop : MonoBehaviour {
 				
 				
 					ch.Clear ();
-					int num = p;
-					if (System.DateTime.Now.Day + num > 31) {
-						num = System.DateTime.Now.Day + num - 31;
-						num = num - System.DateTime.Now.Day;
-					}
-					if (System.DateTime.Now.Day + num == int.Parse (result)) {
-				
+//					int num = p;
+//					if (System.DateTime.Now.Day + num > 31) {
+//						num = System.DateTime.Now.Day + num - 31;
+//						num = num - System.DateTime.Now.Day;
+//					}
+					if (System.DateTime.Now.Day == int.Parse (result)) {
+						//if (System.DateTime.Now.Day + num == int.Parse (result)) {
 						//chek = true;
 						if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
 							UserMgr.Schedule = mScheduleEvent.Response.data [i];
@@ -262,7 +262,7 @@ public class ScriptMainTop : MonoBehaviour {
 						}
 					}
 				
-				}
+				//}
 			}
 
 		}

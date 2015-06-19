@@ -29,28 +29,30 @@ public class ScriptTF_Livetalk : MonoBehaviour {
 	}
 
 	void ConnectToJiver(){
-		Debug.Log("Connecting");
-		ClearList();
-		Debug.Log("Cleared");
-		string appId = "1C0C2894-E73D-4711-B9A0-A55C2C4DEBF6";
-		//		string userId = SystemInfo.deviceUniqueIdentifier;
-		string userName = UserMgr.UserInfo.memberName;
-		string userId = userName;
-		//		string channelUrl = DEFAULT_CHANNEL;
+		if (UserMgr.Schedule != null) {
+			Debug.Log ("Connecting");
+			ClearList ();
+			Debug.Log ("Cleared");
+			string appId = "1C0C2894-E73D-4711-B9A0-A55C2C4DEBF6";
+			//		string userId = SystemInfo.deviceUniqueIdentifier;
+			string userName = UserMgr.UserInfo.memberName;
+			string userId = userName;
+			//		string channelUrl = DEFAULT_CHANNEL;
 		
-		Jiver.Init (appId);
-		Debug.Log("Init");
-		Jiver.Login (userId, userName);
-		Debug.Log("Login");
-		string channelUrl1 = DEFAULT_CHANNEL
-			+UserMgr.Schedule.extend [0].teamCode+UserMgr.Schedule.extend [1].teamCode;
-		string channelUrl2 = DEFAULT_CHANNEL
-			+UserMgr.Schedule.extend [1].teamCode+UserMgr.Schedule.extend [0].teamCode;
-		Debug.Log(channelUrl1+","+channelUrl2);
-		Jiver.Join (channelUrl1, channelUrl2);
-		Debug.Log("Join");
-		Jiver.QueryChannelList (false);
-		Debug.Log("List");
+			Jiver.Init (appId);
+			Debug.Log ("Init");
+			Jiver.Login (userId, userName);
+			Debug.Log ("Login");
+			string channelUrl1 = DEFAULT_CHANNEL
+				+ UserMgr.Schedule.extend [0].teamCode + UserMgr.Schedule.extend [1].teamCode;
+			string channelUrl2 = DEFAULT_CHANNEL
+				+ UserMgr.Schedule.extend [1].teamCode + UserMgr.Schedule.extend [0].teamCode;
+			Debug.Log (channelUrl1 + "," + channelUrl2);
+			Jiver.Join (channelUrl1, channelUrl2);
+			Debug.Log ("Join");
+			Jiver.QueryChannelList (false);
+			Debug.Log ("List");
+		}
 	}
 
 	void Update(){
