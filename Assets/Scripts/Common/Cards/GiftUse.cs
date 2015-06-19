@@ -14,6 +14,7 @@ public class GiftUse : MonoBehaviour {
 	} 
 	void D(){
 		ScriptItemMiddle.UseItem = true;
+		ScriptItemMiddle.name = transform.parent.FindChild ("name").GetComponent<UILabel> ().text;
 		AutoFade.LoadLevel("SceneCards", 0f, 1f);
 	
 	}
@@ -29,7 +30,7 @@ public class GiftUse : MonoBehaviour {
 				//Use Item
 				temp ();
 			}else{
-			DialogueMgr.ShowDialogue ("사용 확인","본인인증 동의 팝업.", DialogueMgr.DIALOGUE_TYPE.YesNo , OpenCertification);
+				DialogueMgr.ShowDialogue ("사용 확인","[본인인증]을 진행하시겠습니까?", DialogueMgr.DIALOGUE_TYPE.YesNo , OpenCertification);
 			}
 				}
 		

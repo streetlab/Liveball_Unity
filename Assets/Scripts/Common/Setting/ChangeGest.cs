@@ -8,9 +8,9 @@ public class ChangeGest : MonoBehaviour {
 
 
 	public void ChangeGestButton(){
-	
-		Debug.Log ("Pwd1 : " + Pwd1.value);
-		Debug.Log ("Pwd2 : " + Pwd2.value);
+		//Debug.Log ("Email : " + Email.value);
+		//Debug.Log ("Pwd1 : " + Pwd1.value);
+		//Debug.Log ("Pwd2 : " + Pwd2.value);
 		if (Pwd1.value.Length < 4 || Pwd2.value.Length < 4) {
 			DialogueMgr.ShowDialogue ("가입정보오류", "비밀번호는 4자리 이상 입려해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		}else if(Pwd1.value.Length != Pwd2.value.Length){
@@ -31,7 +31,7 @@ public class ChangeGest : MonoBehaviour {
 
 
 			event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
-		NetMgr.UpdateMemberInfo (loginInfo, event1, UtilMgr.IsTestServer (), false);
+		NetMgr.ChangGestInfo (loginInfo, event1, UtilMgr.IsTestServer (), false);
 
 	}
 	void Set(){
@@ -41,7 +41,7 @@ public class ChangeGest : MonoBehaviour {
 	void MileageDialogueHandler(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Btn1) {
 			PlayerPrefs.SetString (Constants.PrefGuest,"1");
-			AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			AutoFade.LoadLevel("SceneSettings", 0f, 1f);
 		}
 		
 	}

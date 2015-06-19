@@ -123,6 +123,7 @@ public class DialogueMgr : MonoBehaviour {
 		GameObject btn2 = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("Btn2").gameObject;
 		GameObject btnCancel = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("BtnCancel").gameObject;
 		GameObject SprBG = Instance.mDialogueBox.transform.FindChild("Panel").FindChild("SprBG").gameObject;
+		SprBG.SetActive (true);
 		HutongGames.PlayMaker.FsmVariables fsmVariables = Instance.mDialogueBox.GetComponent<PlayMakerFSM> ().FsmVariables;
 
 		if (strBtn1 == null

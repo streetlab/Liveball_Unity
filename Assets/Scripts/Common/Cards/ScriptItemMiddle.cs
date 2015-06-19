@@ -6,6 +6,7 @@ public class ScriptItemMiddle : MonoBehaviour {
 	//public string grade,maxlv,posi,team,num,name,nowlv,add;
 	public static bool Delete;
 	public static bool UseItem;
+	public static string name;
 	public GameObject mainItem;
 	GetInvenItemEvent mEvent;
 	GetProfileEvent mProfileEvent;
@@ -23,7 +24,7 @@ public class ScriptItemMiddle : MonoBehaviour {
 			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			Delete = false;
 		} else if (UseItem) {
-			DialogueMgr.ShowDialogue ("사용 성공", "상품권 사용 안내 팝업.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue ("사용 성공", "["+mainItem+"]이 사용되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			UseItem = false;
 		}
 		mEvent = new GetInvenItemEvent (new EventDelegate (this, "GotItemsInven"));
