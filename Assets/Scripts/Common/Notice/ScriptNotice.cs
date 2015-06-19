@@ -14,6 +14,9 @@ public class ScriptNotice : MonoBehaviour {
 	
 	public GameObject mMainMenu;
 	public GameObject mTop;
+	public GameObject mBtnBack;
+
+
 	bool StatusBarIsHidden;
 	
 	// Use this for initialization
@@ -92,7 +95,19 @@ public class ScriptNotice : MonoBehaviour {
 	}	
 	
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
-		UtilMgr.ShowLoading (true);
+		Debug.Log("OnLoadBegin : "+loadingUrl);
+		if(!loadingUrl.Equals(LOVE_URL)){
+			mBtnBack.SetActive(true);
+		} else{
+			mBtnBack.SetActive(false);
+		}
+	}
+
+	public void BackClicked(){
+		if(mWebView != null){
+			mWebView.url = LOVE_URL;
+			mWebView.Load();
+		}
 	}
 	
 	bool OnWebViewShouldClose(UniWebView webView) {

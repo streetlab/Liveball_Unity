@@ -15,6 +15,12 @@ public class ScriptNanoo : MonoBehaviour {
 	const string HANHWA_URL = "193";
 	const string KT_URL = "194";
 
+	public GameObject mBtnMenu;
+	public GameObject mBtnBack;
+	public GameObject mBtnAccusation;
+	public GameObject mBtnNotice;
+
+	string mBoardNum;
 	string mContentNum;
 
 	private UniWebView mWebView;
@@ -81,6 +87,9 @@ public class ScriptNanoo : MonoBehaviour {
 	}
 
 	void InitNanoo(){
+		mBtnBack.SetActive(false);
+		mBtnMenu.SetActive(true);
+
 		mStateWebview = STATE_WEBVIEW.INVISIBLE;
 		string url = BASE_URL + GetTeamURL ();
 
@@ -116,14 +125,38 @@ public class ScriptNanoo : MonoBehaviour {
 
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
 		Debug.Log("OnLoadBegin : "+loadingUrl);
-		if(loadingUrl.Contains("liveball/board/")){
+		if(loadingUrl.Contains("liveball/board?cd=")){//in board
+			mBtnMenu.SetActive(true);
+//			mBtnNotice.SetActive(true);
+
+//			mBtnAccusation.SetActive(false);
+			mBtnBack.SetActive(false);
+
+			int startNum = loadingUrl.IndexOf("/board?")+10;
+			mBoardNum = loadingUrl.Substring(startNum);
+			Debug.Log("mBoardNum : "+mBoardNum);
+		} else
+		if(loadingUrl.Contains("liveball/board/")){//in content
 //			Debug.Log("index : " + loadingUrl.IndexOf("/board/"));
 			// switch menu btn to back btn
+			mBtnBack.SetActive(true);
+//			mBtnAccusation.SetActive(true);
+
+			mBtnMenu.SetActive(false);
+//			mBtnNotice.SetActive(false);
 			// show accusation btn
 			int startNum = loadingUrl.IndexOf("/board/")+7;
 			int endNum = loadingUrl.IndexOf("?cd=");
 			mContentNum = loadingUrl.Substring(startNum, endNum-startNum);
 			Debug.Log("mContentNum : "+mContentNum);
+		} else{
+			//turn off accusation
+			mBtnBack.SetActive(true);
+
+//			mBtnNotice.SetActive(false);
+			mBtnMenu.SetActive(false);
+//			mBtnAccusation.setActive(false);
+
 		}
 
 		UtilMgr.ShowLoading (true);
@@ -140,6 +173,13 @@ public class ScriptNanoo : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	public void BackClicked(){
+		if(mWebView != null){
+			mWebView.url = BASE_URL+mBoardNum;
+			mWebView.Load();
+		}
 	}
 
 	void OnEvalJavaScriptFinished(UniWebView webView, string result) {

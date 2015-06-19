@@ -17,6 +17,15 @@ public class ScriptLove : MonoBehaviour {
 	public GameObject mTop;
 	public GameObject TF_Post;
 	public GameObject mRight;
+
+	public GameObject mBtnMenu;
+	public GameObject mBtnBack;
+	public GameObject mBtnAccusation;
+	public GameObject mBtnNotice;
+
+	string mBoardNum;
+	string mContentNum;
+
 	bool StatusBarIsHidden;
 	
 	// Use this for initialization
@@ -55,7 +64,7 @@ public class ScriptLove : MonoBehaviour {
 	void CheckVisible(){
 		string menuStatus = mMainMenu.GetComponent<PlayMakerFSM>().
 			FsmVariables.FindFsmString("StatusAnimation").Value;
-		Debug.Log ("menuStatus : " + menuStatus + " ?? " + mMainMenu);
+//		Debug.Log ("menuStatus : " + menuStatus + " ?? " + mMainMenu);
 		bool isOpen = mRight.GetComponent<ScriptMainMenuRight>().IsOpen;
 		
 		if (menuStatus.Equals ("Closed") 
@@ -82,8 +91,7 @@ public class ScriptLove : MonoBehaviour {
 			mWebView.OnWebViewShouldClose += OnWebViewShouldClose;
 			mWebView.OnEvalJavaScriptFinished += OnEvalJavaScriptFinished;			
 			mWebView.InsetsForScreenOreitation += InsetsForScreenOreitation;
-			mWebView.OnReceivedKeyCode += OnReceivedKeyCode;
-			
+			mWebView.OnReceivedKeyCode += OnReceivedKeyCode;		
 			
 			//			mWebView.SetTransparentBackground(true);
 			//			mWebView.toolBarShow = true;
@@ -101,7 +109,47 @@ public class ScriptLove : MonoBehaviour {
 	}	
 	
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
-		UtilMgr.ShowLoading (true);
+		Debug.Log("OnLoadBegin : "+loadingUrl);
+		if(loadingUrl.Contains("liveball/board?cd=")){//in board
+			mBtnMenu.SetActive(true);
+			//			mBtnNotice.SetActive(true);
+			
+			//			mBtnAccusation.SetActive(false);
+			mBtnBack.SetActive(false);
+			
+			int startNum = loadingUrl.IndexOf("/board?")+10;
+			mBoardNum = loadingUrl.Substring(startNum);
+			Debug.Log("mBoardNum : "+mBoardNum);
+		} else
+		if(loadingUrl.Contains("liveball/board/")){//in content
+			//			Debug.Log("index : " + loadingUrl.IndexOf("/board/"));
+			// switch menu btn to back btn
+			mBtnBack.SetActive(true);
+			//			mBtnAccusation.SetActive(true);
+			
+			mBtnMenu.SetActive(false);
+			//			mBtnNotice.SetActive(false);
+			// show accusation btn
+			int startNum = loadingUrl.IndexOf("/board/")+7;
+			int endNum = loadingUrl.IndexOf("?cd=");
+			mContentNum = loadingUrl.Substring(startNum, endNum-startNum);
+			Debug.Log("mContentNum : "+mContentNum);
+		} else{
+			//turn off accusation
+			mBtnBack.SetActive(true);
+			
+			//			mBtnNotice.SetActive(false);
+			mBtnMenu.SetActive(false);
+			//			mBtnAccusation.setActive(false);
+			
+		}
+	}
+
+	public void BackClicked(){
+		if(mWebView != null){
+			mWebView.url = LOVE_URL;
+			mWebView.Load();
+		}
 	}
 	
 	bool OnWebViewShouldClose(UniWebView webView) {
