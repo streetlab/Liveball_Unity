@@ -118,8 +118,8 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 	
 	void CheckAttendance(){
-		WWW www = new WWW(Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
-		Debug.Log ("Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq : " + Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
+		WWW www = new WWW(Constants.EXT_SERVER_HOST+Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
+//		Debug.Log ("Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq : " + Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
 		StartCoroutine(RunAttendance(www));
 		UtilMgr.ShowLoading(true);
 	}
@@ -151,7 +151,7 @@ public class ScriptMainTop : MonoBehaviour {
 			List<string> ch = new List<string> ();
 		
 		
-			for (int p = 0; p < 7; p++) {
+		//	for (int p = 0; p < 7; p++) {
 			
 				for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
 					char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
@@ -162,12 +162,13 @@ public class ScriptMainTop : MonoBehaviour {
 				
 				
 					ch.Clear ();
-					int num = p;
-					if (System.DateTime.Now.Day + num > 31) {
-						num = System.DateTime.Now.Day + num - 31;
-						num = num - System.DateTime.Now.Day;
-					}
-					if (System.DateTime.Now.Day + num == int.Parse (result)) {
+//					int num = p;
+//					if (System.DateTime.Now.Day + num > 31) {
+//						num = System.DateTime.Now.Day + num - 31;
+//						num = num - System.DateTime.Now.Day;
+//					}
+					//if (System.DateTime.Now.Day + num == int.Parse (result)) {
+						if (System.DateTime.Now.Day == int.Parse (result)) {
 						//	Debug.Log("SelectTeam : " + UtilMgr.SelectTeam);
 						//chek = true;
 						if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
@@ -189,7 +190,7 @@ public class ScriptMainTop : MonoBehaviour {
 						}
 					}
 				
-				}
+				//}
 			}
 		
 		

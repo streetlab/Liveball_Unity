@@ -124,4 +124,15 @@ public class VersionInfo {
 			_AUTH_SVR = value;
 		}
 	}
+
+	string _EXT_SVR;
+
+	public string EXT_SVR {
+		get {
+			return _EXT_SVR;
+		}
+		set {
+			_EXT_SVR = value;
+		}
+	}
 }

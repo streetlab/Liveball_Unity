@@ -26,7 +26,7 @@ public class Constants {
 	public static int HEIGHT_STATUS_BAR = 0;
 
 	public const string URL_CERT = "http://auth.friize.com/m/user_auth.php";
-	public const string URL_ATTENDANCE = "http://tuby10.friize.com/events/attendance_confirm/";
+	public const string URL_ATTENDANCE = "events/attendance_confirm/";
 
 	public const string STORE_GOOGLE ="market://details?id=com.streetlab.tuby";
 	public const string STORE_IPHONE ="https://itunes.apple.com/kr/app/id1000138413?mt=8";
@@ -56,6 +56,7 @@ public class Constants {
 	public static string CHECK_SERVER_HOST2				= 	"http://" + HOST + ":600/webTuby/query.frz";
 
 	public static int GAME_SERVER_PORT = 0;
+	public static string EXT_SERVER_HOST = "";
 	public static string AUTH_SERVER_HOST = "";
 	public static string GAME_SERVER_HOST = "";
 	public static string QUERY_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
