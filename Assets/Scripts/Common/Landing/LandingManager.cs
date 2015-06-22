@@ -143,12 +143,7 @@ public class LandingManager : MonoBehaviour {
 			P_RBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Batting").GetComponent<UILabel> ();		
 			P_RPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
 				int num;
-				if(ScriptMainTop.DetailBoard.play.playInningType==1){
-					num = 0;
-				}else{
-					num = 1;
-				}
-
+		
 				num = 0;
 
 
@@ -204,12 +199,13 @@ public class LandingManager : MonoBehaviour {
 						P_B4.text = nextPlayer[i].hitBB.ToString()+"%";
 						P_VS.text = "VS 시즌타율 " + nextPlayer[i].hitAvg;
 
-
+						Debug.Log("nextPlayer[i].hitAvg : " + nextPlayer[i].hitAvg);
+						if(nextPlayer[i].hitAvg!=""){
 						MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(nextPlayer[i].hitAvg)));
-					
+						
 						MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString()+"%";
 						MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(nextPlayer[i].hitAvg))*100f).ToString()+"% 아웃";
-
+						}
 			if(Holdname!=strImage){
 							if (nextPlayer[i].imagePath != null && nextPlayer[i].imagePath.Length > 0){
 								strImage =nextPlayer[i] .imagePath + nextPlayer[i].imageName;
@@ -556,6 +552,7 @@ public class LandingManager : MonoBehaviour {
 		//TeamImage.spriteName = "";	
 	}
 	public void SetTeamColor(string teamcolor){
+		Debug.Log ("TeamColor is : " + teamcolor);
 		if (teamcolor.Length > 5) {
 			int R = int.Parse( teamcolor.Substring (0, 2), System.Globalization.NumberStyles.HexNumber);
 			int G = int.Parse( teamcolor.Substring (2, 2), System.Globalization.NumberStyles.HexNumber);
