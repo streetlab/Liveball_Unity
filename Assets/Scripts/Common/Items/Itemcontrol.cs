@@ -107,16 +107,16 @@ public class Itemcontrol : MonoBehaviour {
 
 	void ruby(){
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
-			EventDelegate eventd = new EventDelegate(this, "purchaseInit");
-			string prodList = "";
-			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
-				prodList += rubyInfo.productCode + ";";
-			}
-			IOSMgr.InAppInit(prodList, eventd);
-		} else{
-//			InitRubyList();
-			GetAblePP();
+//			EventDelegate eventd = new EventDelegate(this, "purchaseInit");
+//			string prodList = "";
+//			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
+//				prodList += rubyInfo.productCode + ";";
+//			}
+			IOSMgr.InAppInit();
 		}
+//		} else{
+			GetAblePP();
+//		}
 	}
 
 	void gold(){		
@@ -283,7 +283,7 @@ public class Itemcontrol : MonoBehaviour {
 			temp1.transform.FindChild ("LblBody").GetComponent<UILabel> ().text = "루비 " + getruby.Response.data [i-1].productValue+"개";
 			temp1.transform.FindChild ("LblDescription").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productDesc;
 			if(Application.platform == RuntimePlatform.IPhonePlayer)
-				temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : $ " + getruby.Response.data [i-1].productPriceIOS;
+				temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : $ " + getruby.Response.data [i-1].priceDesc;
 			else
 				temp1.transform.FindChild ("LblPrice").GetComponent<UILabel> ().text = "가격 : " + UtilMgr.AddsThousandsSeparator (getruby.Response.data [i-1].productPrice.ToString ())+"원";
 			temp1.transform.FindChild ("code").GetComponent<UILabel> ().text = getruby.Response.data [i-1].productCode;
@@ -467,31 +467,31 @@ public class Itemcontrol : MonoBehaviour {
 	
 	#else
 
-	public void purchaseInit(){
-		string msg = IOSMgr.GetMsg();
-		if(msg.Equals("NO")){
-			billingNotSupportedEvent("");
-		} else{
-			billingSupportedEvent();
-			IOSProducts products = Newtonsoft.Json.JsonConvert.DeserializeObject<IOSProducts>(msg);
-			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
-				switch(rubyInfo.productCode){
-				case "ruby_50" : rubyInfo.productPriceIOS = products.ruby_50;
-					break;
-				case "ruby_100" : rubyInfo.productPriceIOS = products.ruby_100;
-					break;
-				case "ruby_200" : rubyInfo.productPriceIOS = products.ruby_200;
-					break;
-				case "ruby_300" : rubyInfo.productPriceIOS = products.ruby_300;
-					break;
-				case "ruby_500" : rubyInfo.productPriceIOS = products.ruby_500;
-					break;
-				}
-			}
-		}
-//		InitRubyList();
-		GetAblePP();
-	}
+//	public void purchaseInit(){
+//		string msg = IOSMgr.GetMsg();
+//		if(msg.Equals("NO")){
+//			billingNotSupportedEvent("");
+//		} else{
+//			billingSupportedEvent();
+//			IOSProducts products = Newtonsoft.Json.JsonConvert.DeserializeObject<IOSProducts>(msg);
+//			foreach(ItemShopRubyInfo rubyInfo in getruby.Response.data){
+//				switch(rubyInfo.productCode){
+//				case "ruby_50" : rubyInfo.productPriceIOS = products.ruby_50;
+//					break;
+//				case "ruby_100" : rubyInfo.productPriceIOS = products.ruby_100;
+//					break;
+//				case "ruby_200" : rubyInfo.productPriceIOS = products.ruby_200;
+//					break;
+//				case "ruby_300" : rubyInfo.productPriceIOS = products.ruby_300;
+//					break;
+//				case "ruby_500" : rubyInfo.productPriceIOS = products.ruby_500;
+//					break;
+//				}
+//			}
+//		}
+////		InitRubyList();
+//		GetAblePP();
+//	}
 
 	void purchaseSucceededEvent(string receipt)
 	{	

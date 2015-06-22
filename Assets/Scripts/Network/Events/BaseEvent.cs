@@ -13,7 +13,8 @@ public class BaseEvent {
 	{
 		if (response.code > 0) {
 			if(response.code == 100){
-				AutoFade.LoadLevel("SceneLogin");
+//				AutoFade.LoadLevel("SceneLogin");
+				DialogueMgr.ShowDialogue("서버점검", response.message, DialogueMgr.DIALOGUE_TYPE.Alert, DialogueHandler);
 				return true;
 			}
 
@@ -23,6 +24,11 @@ public class BaseEvent {
 		} 
 		return false;
 	}
+
+	void DialogueHandler(DialogueMgr.BTNS btn){
+		Application.Quit();		
+	}
+
 
 	protected EventDelegate eventDelegate
 	{

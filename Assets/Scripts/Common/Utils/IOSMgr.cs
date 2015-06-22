@@ -203,6 +203,10 @@ public class IOSMgr : MonoBehaviour
 		iOSInAppInit(prodList);
 	}
 
+	public static void InAppInit(){
+		iOSInAppInit("");
+	}
+
 	public static void BuyItem(string strProductId){
 		iOSBuyItem(strProductId);
 	}

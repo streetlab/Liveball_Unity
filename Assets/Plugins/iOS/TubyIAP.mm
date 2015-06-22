@@ -40,17 +40,17 @@ extern "C"
         return NO;
     }
     
-    isInit = true;
+//    isInit = true;
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
     NSLog(@"InAppPurchase init OK");
 //    UnitySendMessage("IOSMgr", "MsgReceived", "OK");
-    NSArray *prodList = [strProductIds componentsSeparatedByString:@";"];
-    NSSet* productIdentifiers = [NSSet setWithArray:prodList];
-    SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
-    request.delegate = self;
-    [request start];
+//    NSArray *prodList = [strProductIds componentsSeparatedByString:@";"];
+//    NSSet* productIdentifiers = [NSSet setWithArray:prodList];
+//    SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIdentifiers];
+//    request.delegate = self;
+//    [request start];
     
     return true;
 }
