@@ -90,7 +90,7 @@ public class ScriptCertification : MonoBehaviour {
 		mWebView.Hide();
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
-		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
+		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.EventAlert, OnDialogClicked);
 	
 
 	}
@@ -116,10 +116,10 @@ public class ScriptCertification : MonoBehaviour {
 	}
 	public void OnDialogClicked(DialogueMgr.BTNS type){
 		if (type == DialogueMgr.BTNS.Btn1){ 
-			if (UseItem != null) {
+
 				gameObject.transform.parent.gameObject.SetActive (false);
+				AutoFade.LoadLevel("SceneCards", 0f, 1f);
 			
-			}
 		}
 		//string email = PlayerPrefs.GetString (Constants.PrefEmail);
 		//string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
