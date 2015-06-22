@@ -165,76 +165,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
   mSpriteName: default_white
   mFillCenter: 1
---- !u!1001 &16955509
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1923999747}
-    m_Modifications:
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11492620, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: aspectRatio
-      value: 14.5333338
-      objectReference: {fileID: 0}
-    - target: {fileID: 11410064, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: mClipRange.z
-      value: 456
-      objectReference: {fileID: 0}
-    - target: {fileID: 11410064, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: mClipRange.w
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 11495846, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: movement
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11495846, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: dragEffect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 401056, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 415798, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -28
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &26358139
 GameObject:
   m_ObjectHideFlags: 0
@@ -17241,10 +17171,6 @@ MonoBehaviour:
     mMethodName: OpenTerms
     mParameters: []
     oneShot: 0
---- !u!4 &1636096087 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 477556, guid: 7b18f9d848c2940adbbc4efdc3794d09, type: 2}
-  m_PrefabInternal: {fileID: 16955509}
 --- !u!1 &1642728925
 GameObject:
   m_ObjectHideFlags: 0
@@ -19179,11 +19105,10 @@ Transform:
   m_GameObject: {fileID: 1923999746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0015600624, y: .0015600624, z: .0015600624}
+  m_LocalScale: {x: .00156494521, y: .00156494521, z: .00156494521}
   m_Children:
   - {fileID: 1807303497}
   - {fileID: 2143914080}
-  - {fileID: 1636096087}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!54 &1923999748

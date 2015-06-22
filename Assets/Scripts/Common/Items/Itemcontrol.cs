@@ -265,12 +265,12 @@ public class Itemcontrol : MonoBehaviour {
 
 	void InitRubyList(){
 		if(mResPP != null){
-			if(Application.platform == RuntimePlatform.Android
-			   && mResPP.pointpark.android.Equals("on")){
-				SetBanner();
-			} else if(Application.platform == RuntimePlatform.IPhonePlayer
-			          && mResPP.pointpark.ios.Equals("on")){
-				SetBanner();
+			if(Application.platform == RuntimePlatform.Android){
+				if(mResPP.pointpark.android.Equals("on"))
+					SetBanner();
+			} else if(Application.platform == RuntimePlatform.IPhonePlayer){
+	        	if(mResPP.pointpark.ios.Equals("on"))
+					SetBanner();
 			} else
 				SetBanner();
 		}
@@ -494,9 +494,10 @@ public class Itemcontrol : MonoBehaviour {
 	}
 
 	void purchaseSucceededEvent(string receipt)
-	{		
+	{	
+		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(receipt);
 		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
-		NetMgr.ComsumeIAP (orderNo,receipt,IsTest,ComsumeIAP);
+		NetMgr.ComsumeIAP (orderNo,System.Convert.ToBase64String(bytes),IsTest,ComsumeIAP);
 //		orderNo = ComsumeIAP.Response.data.orderNo;
 	}
 	
