@@ -41,8 +41,8 @@ public class ScriptGameTop : MonoBehaviour {
 	}
 
 	void CheckFirst(){
-		if(UserMgr.UserInfo.IsFirstLanding){
-			UserMgr.UserInfo.IsFirstLanding = false;
+		if(UtilMgr.IsFirstLanding){
+			UtilMgr.IsFirstLanding = false;
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioWelcome);
 
 			CheckAttendance();

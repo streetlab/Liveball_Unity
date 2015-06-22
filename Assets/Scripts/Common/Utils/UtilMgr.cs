@@ -13,6 +13,7 @@ public class UtilMgr : MonoBehaviour {
 	public static bool IsUntouchable;
 	public static bool IsShowLoading;
 	public static WWW mWWW;
+	public static bool IsFirstLanding = true;
 
 	public static string SelectTeam = "";
 	public static string SelectTeamSeq = "";

@@ -12,7 +12,7 @@ public class InvenD : MonoBehaviour {
 	
 	} 
 	void D(){
-		ScriptItemMiddle.Delete = true;
+	//	ScriptItemMiddle.Delete = true;
 		AutoFade.LoadLevel("SceneCards", 0f, 1f);
 	
 	}

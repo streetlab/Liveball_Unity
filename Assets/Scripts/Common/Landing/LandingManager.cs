@@ -273,6 +273,15 @@ public class LandingManager : MonoBehaviour {
 			Debug.Log ("GetDate");
 			//if (UserMgr.Schedule != null) {
 				Debug.Log ("GetDate");
+
+			TeamColor = Getteamcolor(GetTeamFullName(UtilMgr.SelectTeam));
+			
+			TeamColor = TeamColor.Replace ("#", "");
+			Is_TeamName = GetTeamFullName(UtilMgr.SelectTeam);
+			I_BigLogo.color = new Color (1,1,1,1);
+			I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
+			I_TeamImage.color = new Color (1,1,1,1);
+			I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(GetTeamCode(UtilMgr.SelectTeam));
 				TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetData"));
 				NetMgr.GetSposTeamInfo (GetTeamCode (UtilMgr.SelectTeam), TeamMain);
 			//}
@@ -280,6 +289,14 @@ public class LandingManager : MonoBehaviour {
 			Debug.Log ("GetDate1");
 			//if (UserMgr.Schedule != null) {
 				Debug.Log ("GetDate1");
+			TeamColor = UserMgr.UserInfo.favoBB.teamColor.ToString();
+			
+			TeamColor = TeamColor.Replace ("#", "");
+			Is_TeamName = UserMgr.UserInfo.GetTeamFullName();
+			I_BigLogo.color = new Color (1,1,1,1);
+			I_BigLogo.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
+			I_TeamImage.color = new Color (1,1,1,1);
+			I_TeamImage.spriteName = UtilMgr.GetTeamEmblem(UserMgr.UserInfo.GetTeamCode());
 				TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetData1"));
 				NetMgr.GetSposTeamInfo (UserMgr.UserInfo.GetTeamCode(), TeamMain);
 			//}
@@ -480,7 +497,7 @@ public class LandingManager : MonoBehaviour {
 		if (T.myTeam != null) {
 			TeamColor = T.myTeam.teamColor;
 		
-		TeamColor = TeamColor.Replace("#","");
+			TeamColor = TeamColor.Replace ("#", "");
 		}
 		//		UserMgr.Schedule.
 		//			TeamInfo
@@ -670,5 +687,65 @@ public class LandingManager : MonoBehaviour {
 			return "kt wiz";
 		}
 		return "ic_liveball";
+	}
+
+	string Getteamcolor(string teamname){
+
+	
+
+		switch (teamname) {
+			case "삼성 라이온즈":
+				
+			return "005bac";
+				break;
+				
+			case "두산 베어스":
+
+			return "211c3d";
+				break;
+				
+			case "SK 와이번스":
+
+			return "e0002a";
+				break;
+				
+			case "넥센 히어로즈":
+
+			return "9b134e";
+				break;
+				
+			case "NC 다이노스":
+				
+			return "0c274a";
+				break;
+				
+			case "한화 이글스":
+				
+			return "ea5415";
+				break;
+				
+			case "기아 타이거즈":
+				
+			return "e60014";
+				break;
+				
+			case "롯데 자이언츠":
+
+			return "e8410d";
+				break;
+				
+			case "LG 트윈스":
+		
+			return "c8004c";
+				break;
+			case "KT 위즈":
+			case "kt wiz":
+			return "1f2021";
+				break;
+			};
+			
+		return "c1c1c1";
+
+
 	}
 }

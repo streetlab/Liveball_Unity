@@ -344,11 +344,11 @@ public class UserInfo {
 		}
 	}
 
-	bool isFirstLanding = true;
-	public bool IsFirstLanding{
-		get{return isFirstLanding;}
-		set{isFirstLanding = value;}
-	}
+//	bool isFirstLanding = true;
+//	public bool IsFirstLanding{
+//		get{return isFirstLanding;}
+//		set{isFirstLanding = value;}
+//	}
 
 
 }

@@ -41,7 +41,7 @@ public class OnWeb : MonoBehaviour {
 		case "LG 트윈스":
 			Application.OpenURL("http://www.lgtwins.com/"); 
 			break;
-
+		case "KT 위즈":
 		case "kt wiz":
 			Application.OpenURL("http://www.ktwiz.co.kr/"); 
 			break;

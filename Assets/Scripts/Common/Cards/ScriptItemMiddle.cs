@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ScriptItemMiddle : MonoBehaviour {
 	//public string grade,maxlv,posi,team,num,name,nowlv,add;
-	public static bool Delete;
+	//public static bool Delete;
 	public static bool UseItem;
 	public static string name;
 	public GameObject mainItem;
@@ -17,23 +17,38 @@ public class ScriptItemMiddle : MonoBehaviour {
 	}
 
 	void Start(){
-
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
-		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
-		if (Delete) {
-			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-			Delete = false;
-		} else if (UseItem) {
-			DialogueMgr.ShowDialogue ("사용 성공", "["+mainItem+"]이 사용되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		if (UseItem) {
+			DialogueMgr.ShowDialogue ("사용 성공", "["+name+"]이 사용되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			UseItem = false;
 		}
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
+		//		if (Delete) {
+		//			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		//			Delete = false;
+		//		} else 
+	
 		mEvent = new GetInvenItemEvent (new EventDelegate (this, "GotItemsInven"));
 		NetMgr.GetInvenItem (mEvent);
 	}
 	public void Reset(){
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
+		//		if (Delete) {
+		//			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		//			Delete = false;
+		//		} else 
+		if (UseItem) {
+			DialogueMgr.ShowDialogue ("사용 성공", "["+name+"]이 사용되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			UseItem = false;
+		}
+
+
+
 		transform.FindChild ("ListCards").GetComponent<UIDraggablePanel2> ().RemoveAll ();
 		mEvent = new GetInvenItemEvent (new EventDelegate (this, "GotItemsInven"));
 		NetMgr.GetInvenItem (mEvent);
+
 
 	}
 	void GotItemsInven(){
@@ -101,4 +116,5 @@ public class ScriptItemMiddle : MonoBehaviour {
 		transform.FindChild ("ListCards").GetComponent<UIDraggablePanel2> ().RemoveItem (ItemList[int.Parse(index)]);
 
 	}
+
 }

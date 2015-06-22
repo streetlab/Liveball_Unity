@@ -16,7 +16,7 @@ public class ScriptCertification : MonoBehaviour {
 		gameObject.SetActive (true);
 		UniWebViewObject.SetActive(true);
 		string url = Constants.URL_CERT + "?mem=" + UserMgr.UserInfo.memSeq;
-		
+		mStateWebview = STATE_WEBVIEW.INVISIBLE;
 		mWebView = UniWebViewObject.GetComponent<UniWebView>();
 		if (mWebView == null) {
 			mWebView = UniWebViewObject.AddComponent<UniWebView>();
@@ -24,8 +24,8 @@ public class ScriptCertification : MonoBehaviour {
 			mWebView.autoShowWhenLoadComplete = true;
 			mWebView.OnLoadBegin += OnLoadBegin;
 //			mWebView.OnReceivedMessage += OnReceivedMessage;
-//			mWebView.OnLoadComplete += OnLoadComplete;
-//			mWebView.OnWebViewShouldClose += OnWebViewShouldClose;
+			mWebView.OnLoadComplete += OnLoadComplete;
+			mWebView.OnWebViewShouldClose += OnWebViewShouldClose;
 //			mWebView.OnEvalJavaScriptFinished += OnEvalJavaScriptFinished;			
 			mWebView.InsetsForScreenOreitation += InsetsForScreenOreitation;
 //			mWebView.OnReceivedKeyCode += OnReceivedKeyCode;
@@ -73,7 +73,7 @@ public class ScriptCertification : MonoBehaviour {
 		
 		if (success) {
 //			webView.Show();
-//			mStateWebview = STATE_WEBVIEW.VISIBLE;
+			mStateWebview = STATE_WEBVIEW.VISIBLE;
 		}
 		
 		//		UniWebViewEdgeInsets insets = new UniWebViewEdgeInsets (100, 0, 1130, 720);//top, left, btm, right
@@ -83,14 +83,15 @@ public class ScriptCertification : MonoBehaviour {
 	}
 
 	public void CompleteCert(){
+
+
+		Debug.Log ("UseItem name : " + UseItem.name);
 		mWebView.Stop();
 		mWebView.Hide();
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
 		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
-		if (UseItem != null && (Application.loadedLevelName.Equals ("SecenCaards"))) {
-			UseItem.GetComponent<GiftUse>().temp();
-		}
+	
 
 	}
 
@@ -99,9 +100,9 @@ public class ScriptCertification : MonoBehaviour {
 		mWebView.Hide();
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
-		DialogueMgr.ShowDialogue(mFailedTitle, mFailedBody, DialogueMgr.DIALOGUE_TYPE.Alert, OnDialogClicked);
+		DialogueMgr.ShowDialogue(mFailedTitle, mFailedBody, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		//gameObject.SetActive (false);
-
+	
 //		DialogueMgr.SetEvent(OnClicked);
 	}
 	public void OnActive(){
@@ -114,11 +115,61 @@ public class ScriptCertification : MonoBehaviour {
 		gameObject.transform.parent.gameObject.SetActive (false);
 	}
 	public void OnDialogClicked(DialogueMgr.BTNS type){
+		if (type == DialogueMgr.BTNS.Btn1){ 
+			if (UseItem != null) {
+				gameObject.transform.parent.gameObject.SetActive (false);
+			
+			}
+		}
 		//string email = PlayerPrefs.GetString (Constants.PrefEmail);
 		//string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
 		//transform.parent.GetComponent<ScriptTitle>().Login(email, pwd);
 	}
 	public void GetItemObj(GameObject obj){
 		UseItem = obj;
+	}
+	enum STATE_WEBVIEW{
+		VISIBLE,
+		INVISIBLE
+	}
+
+	STATE_WEBVIEW mStateWebview;
+	void OnApplicationPause(bool pause){
+				Debug.Log("pause is "+pause);
+		if(pause){
+			HideWebView();
+		} else{
+			ShowWebView();
+		}
+	}
+
+	public void HideWebView(){
+		Debug.Log ("mStateWebview : " + mStateWebview);
+		Debug.Log ("STATE_WEBVIEW.VISIBLE : " + STATE_WEBVIEW.VISIBLE);
+		if (mStateWebview == STATE_WEBVIEW.VISIBLE) {
+			Debug.Log("Hide");
+			mWebView.Hide ();
+			mStateWebview = STATE_WEBVIEW.INVISIBLE;
+		}
+	}
+	
+	public void ShowWebView(){
+		if (mStateWebview == STATE_WEBVIEW.INVISIBLE) {
+			Debug.Log("Show");
+			mWebView.Show ();
+			mStateWebview = STATE_WEBVIEW.VISIBLE;
+		}
+	}
+	bool OnWebViewShouldClose(UniWebView webView) {
+		Debug.Log ("OnWebViewShouldClose");
+		UtilMgr.OnBackPressed();
+		
+		return false;
+		
+		if (webView == mWebView) {
+			mWebView = null;
+			return true;
+		}
+		return false;
 	}
 }
