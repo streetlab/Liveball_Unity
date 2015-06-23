@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 7
   AndroidProfiler: 0
   defaultScreenOrientation: 0
-  targetDevice: 2
+  targetDevice: 0
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: StreetLab
@@ -92,7 +92,7 @@ PlayerSettings:
   preloadShaders: 0
   StripUnusedMeshComponents: 0
   iPhoneSdkVersion: 988
-  iPhoneTargetOSVersion: 24
+  iPhoneTargetOSVersion: 28
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIStatusBarHidden: 1
@@ -152,21 +152,21 @@ PlayerSettings:
       m_Size: 36
   - m_BuildTarget: iPhone
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: f086bcfc7618e4c4898b55ac5d3c3bb0, type: 3}
       m_Size: 180
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 7bfc620bcc9954a99bee5112c119dcb4, type: 3}
       m_Size: 152
     - m_Icon: {fileID: 2800000, guid: a507fcb18e1d1426d9e54f5d2dadaeb5, type: 3}
       m_Size: 144
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: aad14e9c2f5b642de9753d18df81199a, type: 3}
       m_Size: 120
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: f3e12a073ecfa4f279bddc50a67f933e, type: 3}
       m_Size: 114
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 70f669e7984be41879b5eef847f36459, type: 3}
       m_Size: 76
     - m_Icon: {fileID: 2800000, guid: bfafc58a16b3f43afb7468363633c0c1, type: 3}
       m_Size: 72
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: df0b2b0822d524e59b4c2d188f8d4c99, type: 3}
       m_Size: 57
   m_BuildTargetBatching:
   - m_BuildTarget: Android
@@ -428,8 +428,8 @@ PlayerSettings:
   WebGL::audioCompressionFormat: 4
   WebGL::exceptionSupport: 0
   WebGL::memorySize: 256
-  iOS::Architecture: 0
-  iOS::ScriptingBackend: 0
+  iOS::Architecture: 2
+  iOS::ScriptingBackend: 1
   boolPropertyNames:
   - WebGL::analyzeBuildSize
   - WebGL::dataCaching
