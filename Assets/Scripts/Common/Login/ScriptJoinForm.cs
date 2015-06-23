@@ -56,8 +56,9 @@ public class ScriptJoinForm : MonoBehaviour {
 		tDynamicTx = UtilMgr.ScaleTexture (tDynamicTx, 206, 230);
 		//transform.FindChild("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
 		//Save (tDynamicTx);
-		ImageBate = tDynamicTx.EncodeToPNG();
 		transform.FindChild("PanelPhoto").FindChild("TexPhoto").GetComponent<UITexture>().mainTexture = tDynamicTx;
+
+		ImageBate = tDynamicTx.EncodeToPNG();
 		}
 
 	public void BackClicked()

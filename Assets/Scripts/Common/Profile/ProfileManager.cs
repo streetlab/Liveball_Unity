@@ -158,12 +158,20 @@ public class ProfileManager : MonoBehaviour {
 		if (!SettingPage.activeSelf) {
 			SettingPage.SetActive (true);
 		}
+		if (Photo == null) {
+			Debug.Log ("Photo Null");
+		} else {
+			Debug.Log ("Photo not Null");
+		}
+		Debug.Log ("Photo.l" + Photo.Length);
 		Setimagebyte = Photo;
-		Setimage.LoadImage (Setimagebyte);
+		Debug.Log ("LoadImage");
+		Setimage.LoadImage (Photo);
 	//	if (Setimage != null) {
-			SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = Setimage;
+		Debug.Log ("mainTexture");
+			
 
-
+	
 		//}
 		SettingPage.SetActive (false);
 		SettingPage.SetActive (true);
@@ -281,6 +289,7 @@ public class ProfileManager : MonoBehaviour {
 		//transform.FindChild("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
 		//Save (tDynamicTx);
 		Debug.Log("Image name : " + images);
+		SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
 		byte[] bytes = tDynamicTx.EncodeToPNG();
 		SetMemberPhoto (bytes);
 //		SetMemberPhoto(tDynamicTx);

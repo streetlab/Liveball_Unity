@@ -436,7 +436,7 @@ public class Itemcontrol : MonoBehaviour {
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
 		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
 
-		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.\n우편함을 확인해 주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 
 		Debug.Log ("All PurchaseSucceeded");
 

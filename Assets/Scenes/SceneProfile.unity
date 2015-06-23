@@ -3797,7 +3797,7 @@ Transform:
   m_GameObject: {fileID: 256027209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156250002, y: .00156250002, z: .00156250002}
   m_Children:
   - {fileID: 1795951650}
   - {fileID: 1515130933}
@@ -13373,7 +13373,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3015
+  startingRenderQueue: 3014
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -13783,9 +13783,9 @@ MonoBehaviour:
   SetTeamCode: 
   Setimagebyte: 
   Setimage: {fileID: 0}
+  Default: {fileID: 2800000, guid: a4f76ec8da3c74f3faf3c8c15b9545a5, type: 3}
   Sett: 0
   LeftProfileImg: {fileID: 606533734}
-  Default: {fileID: 2800000, guid: a4f76ec8da3c74f3faf3c8c15b9545a5, type: 3}
 --- !u!4 &935131056
 Transform:
   m_ObjectHideFlags: 0
@@ -19030,7 +19030,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3011
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -30008,7 +30008,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: f79abc22c89594b27868e5c708e860eb, type: 3}
+  mTexture: {fileID: 2800000, guid: a4f76ec8da3c74f3faf3c8c15b9545a5, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -30211,6 +30211,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1 &1805739576
 GameObject:
   m_ObjectHideFlags: 0

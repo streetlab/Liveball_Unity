@@ -67,6 +67,9 @@ public class ScriptMainTop : MonoBehaviour {
 	void Start () {
 		QuizMgr.EnterMain(this);
 		if (LandingState == 4) {
+			string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
+			TeamColor = TeamColor.Replace("#","");
+			gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().SetTeamColor(TeamColor);
 			LandingState = 0;
 		
 			transform.FindChild ("TopInfoItem").FindChild ("BtnMenu 1").gameObject.SetActive (false);

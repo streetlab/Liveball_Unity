@@ -84,7 +84,7 @@ public class Rankcontrol : MonoBehaviour {
 			rankswitch(i);
 			bars.transform.GetChild(i).GetChild(8).GetComponent<UILabel>().text = Seq[i];
 		}
-
+		gameObject.transform.FindChild("Scroll View").gameObject.SetActive (true);
 	}
 	float vgap(int i){
 		vgaps = ((float.Parse (bars.transform.GetChild (0).GetChild (2).GetComponent<UILabel> ().text)
@@ -102,11 +102,12 @@ public class Rankcontrol : MonoBehaviour {
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "bg_circle";
 			bars.transform.GetChild(i).GetChild(7).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
 		}else if(float.Parse(rank [i])  < float.Parse(prevRanking [i])){
-			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.88f,0.23f,0.255f,1);
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "ic_arrow";
 			bars.transform.GetChild(i).GetChild(7).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,0));
 		}else if(float.Parse(rank [i])  > float.Parse(prevRanking [i])){
-			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.88f,0.23f,0.255f,1);
+			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().color = new Color(0.145f,0.68f,0.88f,1);
+
 			bars.transform.GetChild(i).GetChild(7).GetComponent<UISprite>().spriteName = "ic_arrow";
 			bars.transform.GetChild(i).GetChild(7).transform.localRotation = Quaternion.Euler(new Vector3 (0,0,180));
 		}
