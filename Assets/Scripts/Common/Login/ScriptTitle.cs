@@ -63,12 +63,13 @@ public class ScriptTitle : MonoBehaviour {
 //		Debug.Log("height : "+Screen.height+", width : "+Screen.width);
 //		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
 		Debug.Log("SystemInfo.deviceModel is "+SystemInfo.deviceModel);
-		if(SystemInfo.deviceModel.Contains("iPhone7,1")){
-			Constants.WEBVIEW_GAB_TOP = 34f;
-		} else
-		if(SystemInfo.deviceModel.Contains("iPhone")){
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			Constants.WEBVIEW_GAB_TOP = 48f;
+			if(SystemInfo.deviceModel.Contains("iPhone7,1")){
+				Constants.WEBVIEW_GAB_TOP = 34f;
+			}
 		}
+
 
 		try{
 //		Constants.UPLOAD_SERVER_HOST = mVersionEvent.Response.data.FILE_SVR;//[0].serviceURL;

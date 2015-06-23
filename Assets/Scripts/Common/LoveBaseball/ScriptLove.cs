@@ -118,9 +118,13 @@ public class ScriptLove : MonoBehaviour {
 			
 			mBtnAccusation.SetActive(false);
 			mBtnBack.SetActive(false);
-			
-			int startNum = loadingUrl.IndexOf("/board?")+10;
-			mBoardNum = loadingUrl.Substring(startNum);
+
+			try{
+				int startNum = loadingUrl.IndexOf("/board?")+10;
+				mBoardNum = loadingUrl.Substring(startNum);
+			} catch{
+				mBoardNum = "0";
+			}
 			Debug.Log("mBoardNum : "+mBoardNum);
 		} else
 		if(loadingUrl.Contains("liveball/board/")){//in content
@@ -132,15 +136,19 @@ public class ScriptLove : MonoBehaviour {
 			mBtnMenu.SetActive(false);
 			mBtnNotice.SetActive(false);
 			// show accusation btn
-			int startNum = loadingUrl.IndexOf("/board/")+7;
-			int endNum = loadingUrl.IndexOf("?cd=");
-			mContentNum = loadingUrl.Substring(startNum, endNum-startNum);
+			try{
+				int startNum = loadingUrl.IndexOf("/board/")+7;
+				int endNum = loadingUrl.IndexOf("?cd=");
+				mContentNum = loadingUrl.Substring(startNum, endNum-startNum);
+			} catch{
+				mContentNum = "0";
+			}
 			Debug.Log("mContentNum : "+mContentNum);
 		} else{
 			//turn off accusation
-			mBtnBack.SetActive(true);
-			
-			mBtnNotice.SetActive(false);
+			mBtnBack.SetActive(true);			
+			mBtnNotice.SetActive(true);
+
 			mBtnMenu.SetActive(false);
 			mBtnAccusation.SetActive(false);			
 		}
