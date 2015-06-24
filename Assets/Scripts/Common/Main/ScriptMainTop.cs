@@ -745,23 +745,19 @@ public class ScriptMainTop : MonoBehaviour {
 			return;
 		}
 
-//		if(QuizMgr.SequenceQuiz < 1){
-//			RefreshQuizList();
-//
-//			if(!QuizMgr.IsBettingOpended)
-//				OpenBetting (mEventQuiz.Response.data.quiz[0]);
-//		} else{
-			if (mEventQuiz.Response.data.quiz.Count > 1) {
-				QuizMgr.MoreQuiz = true;
-			}
-			AddQuizIntoList ();
-			if (!QuizMgr.IsBettingOpended)
+		if (mEventQuiz.Response.data.quiz.Count > 1) {
+			QuizMgr.MoreQuiz = true;
+		}
+
+		AddQuizIntoList ();
+		if (!QuizMgr.IsBettingOpended)
 			QuizMgr.NextPlayerInfo = mEventQuiz.Response.data.nextPlayer;
 
-				OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
-//		}
-
-
+		if(mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1].closeYN < 1){
+			OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
+		} else{
+			Debug.Log("Quiz Closed");
+		}
 
 	}
 
