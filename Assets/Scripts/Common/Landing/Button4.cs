@@ -96,9 +96,9 @@ public class Button4 : MonoBehaviour {
 			if(G.transform.localPosition.y!=-1275){
 				G.transform.localPosition -= new Vector3(0,1300/5,0);
 
-				if(G.name == "TF_Items" && i == 3){
-					AutoFade.LoadLevel(Application.loadedLevelName);
-				}
+//				if(G.name == "TF_Items" && i == 3){
+//					AutoFade.LoadLevel(Application.loadedLevelName);
+//				}
 				yield return new WaitForSeconds(0.02f);
 			}else{
 				break;

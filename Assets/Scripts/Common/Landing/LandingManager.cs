@@ -64,10 +64,7 @@ public class LandingManager : MonoBehaviour {
 			UserMgr.Schedule.extend [1].teamName;
 		V_BroadCasting.text = 
 			UserMgr.Schedule.bcastChannel;
-//		V_Location.text = 
-//			getarea();
-//		V_time.text = 
-//			gettime();
+
 		if (UserMgr.Schedule != null) {
 
 			TeamMain = new GetSposTeamInfoEvent (new EventDelegate (this, "GetNonGameData"));
@@ -92,7 +89,12 @@ public class LandingManager : MonoBehaviour {
 
 			V_LBatting.text = TeamMain.Response.data.other.pitcher.ERA;
 			
-
+					V_Location.text="";
+					V_time.text ="";
+							V_Location.text = 
+						getarea(TeamMain.Response.data);
+							V_time.text = 
+						gettime(TeamMain.Response.data);
 			
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + TeamMain.Response.data.other.pitcher.imagePath + TeamMain.Response.data.other.pitcher.imageName);
 			StartCoroutine (GetImage (www, V_LPlayerImage));
@@ -200,7 +202,7 @@ public class LandingManager : MonoBehaviour {
 						P_VS.text = "VS 시즌타율 " + nextPlayer[i].hitAvg;
 
 						Debug.Log("nextPlayer[i].hitAvg : " + nextPlayer[i].hitAvg);
-						if(nextPlayer[i].hitAvg!=""){
+						if(nextPlayer[i].hitAvg!=""&&nextPlayer[i].hitAvg!=null){
 						MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(nextPlayer[i].hitAvg)));
 						
 						MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString()+"%";
@@ -552,6 +554,7 @@ public class LandingManager : MonoBehaviour {
 		//TeamImage.spriteName = "";	
 	}
 	public void SetTeamColor(string teamcolor){
+		TeamColor = teamcolor;
 		Debug.Log ("TeamColor is : " + teamcolor);
 		if (teamcolor.Length > 5) {
 			int R = int.Parse( teamcolor.Substring (0, 2), System.Globalization.NumberStyles.HexNumber);
@@ -607,7 +610,7 @@ public class LandingManager : MonoBehaviour {
 	string getarea(SposTeamInfo T){
 		ch.Clear ();
 		array = T.schedule.scheduleName.ToCharArray ();
-		
+		//Debug.Log ("ScheduleName : " + T.schedule.scheduleName);
 		for(int z = array.Length-2; z<array.Length;z++){
 				ch.Add (array[z].ToString());
 			}
@@ -631,7 +634,7 @@ public class LandingManager : MonoBehaviour {
 		return result;
 	}
 
-	string GetTeamCode(string imgName)
+	public string GetTeamCode(string imgName)
 	{
 		switch(imgName)
 		{
@@ -658,7 +661,7 @@ public class LandingManager : MonoBehaviour {
 		}
 		return "ic_liveball";
 	}
-	string GetTeamFullName(string imgName)
+	public string GetTeamFullName(string imgName)
 	{
 		switch(imgName)
 		{
@@ -686,7 +689,7 @@ public class LandingManager : MonoBehaviour {
 		return "ic_liveball";
 	}
 
-	string Getteamcolor(string teamname){
+	public string Getteamcolor(string teamname){
 
 	
 

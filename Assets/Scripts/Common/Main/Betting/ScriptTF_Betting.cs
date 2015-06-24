@@ -176,10 +176,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	public void Init(QuizInfo quizInfo)
 	{
-
-
+		if (quizInfo != null) {
+			transform.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.SetActive (false);
 			if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
-			transform.parent.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label").gameObject.SetActive(false);
+
 				ScriptMainTop.LandingState = 2;
 				transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().Start ();
 
@@ -199,7 +199,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 			mStartTime = System.DateTime.Now.ToFileTime ();
 			mTimeOut = false;
-		backCheck = true;
+			backCheck = true;
 //		mStartSec = System.DateTime.Now.Second;
 //		mStartMilSec = System.DateTime.Now.Millisecond / 10;
 			TweenAlpha.Begin (mSprComb, 0f, 0f);
@@ -217,7 +217,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			mScrollView.GetComponent<UIPanel> ().clipOffset = new Vector2 (0, UtilMgr.GetScaledPositionY ());
 
 
-
+		}
 	}
 
 	void SetBtns()
@@ -226,7 +226,14 @@ public class ScriptTF_Betting : MonoBehaviour {
 			mSprHit.SetActive(true);
 			mSprOut.SetActive(true);
 			mSprLoaded.SetActive(false);
+			if(QuizMgr.QuizInfo.order==null){
+				Debug.Log("order is nul");
+			} else{
+				Debug.Log("order count is " + QuizMgr.QuizInfo.order.Count);
+			}
+			if(QuizMgr.QuizInfo.order!=null){
 
+				if(QuizMgr.QuizInfo.order.Count>7){
 			mSprHit.transform.FindChild ("BtnHit1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio+"x";
 			mSprHit.transform.FindChild ("BtnHit2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio+"x";
 			mSprHit.transform.FindChild ("BtnHit3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio+"x";
@@ -235,7 +242,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 			mSprOut.transform.FindChild ("BtnOut2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [5].ratio+"x";
 			mSprOut.transform.FindChild ("BtnOut3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [6].ratio+"x";
 			mSprOut.transform.FindChild ("BtnOut4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [7].ratio+"x";
-			Debug.Log ("Checking");
+			}
+			}
+				Debug.Log ("Checking");
 			mSprHit.transform.FindChild ("BtnHit1").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprHit.transform.FindChild ("BtnHit2").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprHit.transform.FindChild ("BtnHit3").GetComponent<BoxCollider2D> ().enabled = true;
@@ -284,11 +293,15 @@ public class ScriptTF_Betting : MonoBehaviour {
 		mSprLoaded.transform.FindChild ("BtnLoaded2").localPosition = new Vector3 (-86f, -210f, 0);
 		mSprLoaded.transform.FindChild ("BtnLoaded3").localPosition = new Vector3 (86f, -210f, 0);
 		mSprLoaded.transform.FindChild ("BtnLoaded4").localPosition = new Vector3 (260f, -210f, 0);
-
-		mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio+"x";
-		mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio+"x";
-		mSprLoaded.transform.FindChild ("BtnLoaded3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio+"x";
-		mSprLoaded.transform.FindChild ("BtnLoaded4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio+"x";
+		if (QuizMgr.QuizInfo.order != null) {
+			
+			if (QuizMgr.QuizInfo.order.Count > 7) {
+				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio + "x";
+				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio + "x";
+				mSprLoaded.transform.FindChild ("BtnLoaded3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio + "x";
+				mSprLoaded.transform.FindChild ("BtnLoaded4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio + "x";
+			}
+		}
 	}
 
 	void Set2Btns()
@@ -297,9 +310,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 		mSprLoaded.transform.FindChild ("BtnLoaded2").localPosition = new Vector3 (164f, -210f, 0);
 		mSprLoaded.transform.FindChild ("BtnLoaded3").gameObject.SetActive (false);
 		mSprLoaded.transform.FindChild ("BtnLoaded4").gameObject.SetActive (false);
-
-		mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio+"x";
-		mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio+"x";
+		if (QuizMgr.QuizInfo.order != null) {
+			
+			if (QuizMgr.QuizInfo.order.Count > 7) {
+				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio + "x";
+				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio + "x";
+			}
+		}
 	}
 
 	void SetBases()

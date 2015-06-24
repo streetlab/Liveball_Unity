@@ -128,7 +128,7 @@ public class Rankcontrol : MonoBehaviour {
 //		}
 }
 	public void GoMainScens(string teamname,string temeseq){
-		ScriptMainTop.LandingState = 0;
+		ScriptMainTop.LandingState = 5;
 		UtilMgr.SelectTeam = teamname;
 		UtilMgr.SelectTeamSeq = temeseq;
 		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	

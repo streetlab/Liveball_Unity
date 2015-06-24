@@ -104,6 +104,21 @@ public class ScriptMainTop : MonoBehaviour {
 			
 			mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "SetSchedule1"));
 			NetMgr.GetScheduleAll (mScheduleEvent);
+		}else if(LandingState == 5){
+			transform.FindChild ("TopInfoItem").FindChild ("BtnMenu 1").gameObject.SetActive (false);
+			mBtnHighlight.GetComponent<UIButton> ().isEnabled = false;
+			mHighlight.SetActive (false);
+			mLineup.SetActive (false);
+			mBingo.SetActive (false);
+			mLivetalk.SetActive (false);
+			mBetting.SetActive (false);
+			gameobj.SetActive (false);
+			QuizMgr.EnterMain (this);
+			
+			
+			
+			mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "SetSchedule2"));
+			NetMgr.GetScheduleAll (mScheduleEvent);
 		}
 
 		CheckFirst();
@@ -206,74 +221,149 @@ public class ScriptMainTop : MonoBehaviour {
 		InitTopInfo();
 	}
 	void SetSchedule(){
-	
-
-
+		
+		
+		
 		//bool chek = false;
 		
 		if (mScheduleEvent.Response.data != null) {
 			List<string> ch = new List<string> ();
-		
-		
+			
+			
 			//for (int p = 0; p < 7; p++) {
 			
-				for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
-					char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
-					for (int z = 6; z<array.Length; z++) {
-						ch.Add (array [z].ToString ());
-					}
-					string result = string.Join ("", ch.ToArray ());
+			for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
+				char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+				for (int z = 6; z<array.Length; z++) {
+					ch.Add (array [z].ToString ());
+				}
+				string result = string.Join ("", ch.ToArray ());
 				
 				
-					ch.Clear ();
-//					int num = p;
-//					if (System.DateTime.Now.Day + num > 31) {
-//						num = System.DateTime.Now.Day + num - 31;
-//						num = num - System.DateTime.Now.Day;
-//					}
-					if (System.DateTime.Now.Day == int.Parse (result)) {
-						//if (System.DateTime.Now.Day + num == int.Parse (result)) {
-						//chek = true;
-						if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
-							UserMgr.Schedule = mScheduleEvent.Response.data [i];
-							if (mScheduleEvent.Response.data [i].gameStatus == 1) {
+				ch.Clear ();
+				//					int num = p;
+				//					if (System.DateTime.Now.Day + num > 31) {
+				//						num = System.DateTime.Now.Day + num - 31;
+				//						num = num - System.DateTime.Now.Day;
+				//					}
+				if (System.DateTime.Now.Day == int.Parse (result)) {
+					//if (System.DateTime.Now.Day + num == int.Parse (result)) {
+					//chek = true;
+					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
+						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
-								LandingState = 2;
-							} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
-								LandingState = 3;
-							}
-				
-							gameobj.SetActive (true);
-							mHighlight.SetActive (true);
-						
-							InitTopInfo ();
-							return;
-						} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
-							UserMgr.Schedule = mScheduleEvent.Response.data [i];
-							if (mScheduleEvent.Response.data [i].gameStatus == 1) {
-							
-								LandingState = 2;
-							} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
-								LandingState = 3;
-							}
-					
-							gameobj.SetActive (true);
-							mHighlight.SetActive (true);
-						
-							InitTopInfo ();
-							return;
+							LandingState = 2;
+						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
+							LandingState = 3;
 						}
+						
+						gameobj.SetActive (true);
+						mHighlight.SetActive (true);
+						
+						InitTopInfo ();
+						return;
+					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
+						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
+							
+							LandingState = 2;
+						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
+							LandingState = 3;
+						}
+						
+						gameobj.SetActive (true);
+						mHighlight.SetActive (true);
+						
+						InitTopInfo ();
+						return;
 					}
+				}
 				
 				//}
 			}
-
+			
 		}
-
+		
 		QuizMgr.EnterMain(this);
 		gameobj.SetActive (true);
 		mHighlight.SetActive (true);
-
+		
+		InitTopInfo();
+	}
+	void SetSchedule2(){
+		
+		
+		
+		//bool chek = false;
+		
+		if (mScheduleEvent.Response.data != null) {
+			List<string> ch = new List<string> ();
+			
+			
+			//for (int p = 0; p < 7; p++) {
+			
+			for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
+				char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
+				for (int z = 6; z<array.Length; z++) {
+					ch.Add (array [z].ToString ());
+				}
+				string result = string.Join ("", ch.ToArray ());
+				
+				
+				ch.Clear ();
+				//					int num = p;
+				//					if (System.DateTime.Now.Day + num > 31) {
+				//						num = System.DateTime.Now.Day + num - 31;
+				//						num = num - System.DateTime.Now.Day;
+				//					}
+				if (System.DateTime.Now.Day == int.Parse (result)) {
+					//if (System.DateTime.Now.Day + num == int.Parse (result)) {
+					//chek = true;
+					if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
+						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
+							
+							LandingState = 2;
+						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
+							LandingState = 3;
+						}else{
+							LandingState = 0;
+						}
+						
+						gameobj.SetActive (true);
+						mHighlight.SetActive (true);
+						
+						InitTopInfo ();
+						return;
+					} else if (mScheduleEvent.Response.data [i].extend [1].teamName == UtilMgr.SelectTeam) {
+						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
+							
+							LandingState = 2;
+						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
+							LandingState = 3;
+						}else{
+							LandingState = 0;
+						}
+						
+						gameobj.SetActive (true);
+						mHighlight.SetActive (true);
+						
+						InitTopInfo ();
+						return;
+					}
+				}
+				
+				//}
+			}
+			
+		}
+		
+		QuizMgr.EnterMain(this);
+		gameobj.SetActive (true);
+		mHighlight.SetActive (true);
+		
 		InitTopInfo();
 	}
 
@@ -550,45 +640,48 @@ public class ScriptMainTop : MonoBehaviour {
 
 	public void OpenBetting(QuizInfo quizInfo)
 	{
-		#if(UNITY_EDITOR)
+		if (quizInfo != null) {
+			Debug.Log ("OpenBetting");
+			#if(UNITY_EDITOR)
 
-		#elif(UNITY_ANDROID)
+			#elif(UNITY_ANDROID)
 
-		#else
+			#else
 
-		#endif
+			#endif
 
 //		if (UtilMgr.HasBackEvent ()) {
 //			UtilMgr.RunAllBackEvents ();
 //		}
-		QuizMgr.QuizInfo = quizInfo;
-		QuizMgr.IsBettingOpended = true;
-		QuizMgr.JoinCount = 0;
+			QuizMgr.QuizInfo = quizInfo;
+			QuizMgr.IsBettingOpended = true;
+			QuizMgr.JoinCount = 0;
 		
-		UtilMgr.AddBackEvent (new EventDelegate (this, "AnimateClosing"));
+			UtilMgr.AddBackEvent (new EventDelegate (this, "AnimateClosing"));
 		
 		
 
 
 			//mLivetalk.SetActive(false);
 
-		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
-			mBetting.SetActive (true);
-		} 
-		if (mLivetalk.activeSelf) {
-			if(mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().isSelected)
-			mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().CloseKeboard ();
-		}
+			if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+				mBetting.SetActive (true);
+			} 
+			if (mLivetalk.activeSelf) {
+				if (mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().isSelected)
+					mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().CloseKeboard ();
+			}
 	
+			Debug.Log ("Init ScriptTF_Betting");
 			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
 
 
 
 	
-		if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
-			transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
-			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
-		}
+			if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+				transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
+				transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
+			}
 
 			transform.FindChild ("TopInfoItem").GetComponent<ScriptTopInfoItem> ().SetGoldInfo ();
 //		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);
@@ -596,7 +689,7 @@ public class ScriptMainTop : MonoBehaviour {
 			transform.FindChild ("TopInfoItem").FindChild ("BtnVS").gameObject.SetActive (false);
 			transform.FindChild ("TopInfoItem").FindChild ("BtnCancel").gameObject.SetActive (true);
 
-	
+		}
 	}
 
 

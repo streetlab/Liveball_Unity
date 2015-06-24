@@ -57,8 +57,9 @@ public class ScriptBettingItem : MonoBehaviour {
 		Init ();
 
 		int index = mSprBetting.GetComponent<ScriptBetting> ().GetIndex (transform.name);
-		transform.FindChild ("LblBody").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [index].description;
-		
+		if (QuizMgr.QuizInfo.order.Count > index) {
+			transform.FindChild ("LblBody").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [index].description;
+		}
 
 
 
