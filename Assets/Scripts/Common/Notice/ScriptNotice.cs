@@ -101,6 +101,7 @@ public class ScriptNotice : MonoBehaviour {
 		} else{
 			mBtnBack.SetActive(false);
 		}
+		UtilMgr.ShowLoading(true);
 	}
 
 	public void BackClicked(){

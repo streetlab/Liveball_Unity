@@ -64,9 +64,12 @@ public class ScriptTitle : MonoBehaviour {
 //		Debug.Log("GetScaledPositionY : "+UtilMgr.GetScaledPositionY());
 		Debug.Log("SystemInfo.deviceModel is "+SystemInfo.deviceModel);
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
-			Constants.WEBVIEW_GAB_TOP = 48f;
 			if(SystemInfo.deviceModel.Contains("iPhone7,1")){
 				Constants.WEBVIEW_GAB_TOP = 34f;
+			} else if(SystemInfo.deviceModel.Contains("iPad2,1")){
+
+			} else{
+				Constants.WEBVIEW_GAB_TOP = 48f;
 			}
 		}
 

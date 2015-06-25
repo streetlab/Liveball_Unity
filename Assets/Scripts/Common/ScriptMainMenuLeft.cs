@@ -100,9 +100,14 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 		{
 		case "BtnTeamHome":
 
-			if(!Application.loadedLevelName.Equals("SceneTeamHome"))
-				AutoFade.LoadLevel("SceneTeamHome", 0f, 1f);
-			else
+			if(!Application.loadedLevelName.Equals("SceneTeamHome")){
+//				if(Application.platform == RuntimePlatform.IPhonePlayer){
+//					Application.OpenURL("");
+//				} else{
+					AutoFade.LoadLevel("SceneTeamHome", 0f, 1f);
+//				}
+
+			} else
 				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
 			break;
 		case "BtnGameHome":

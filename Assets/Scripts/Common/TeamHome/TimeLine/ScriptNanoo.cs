@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScriptNanoo : MonoBehaviour {
+public class ScriptNanoo : ScriptSuperNanoo {
 
 	const string BASE_URL = "https://game.nanoo.so/liveball/board?cd=";
 	const string SAMSUNG_URL = "185";
@@ -14,17 +14,7 @@ public class ScriptNanoo : MonoBehaviour {
 	const string KIA_URL = "192";
 	const string HANHWA_URL = "193";
 	const string KT_URL = "194";
-
-	public GameObject mBtnMenu;
-	public GameObject mBtnBack;
-	public GameObject mBtnAccusation;
-	public GameObject mBtnNotice;
-
-	string mBoardNum;
-	string mContentNum;
-	AccuseContentEvent mAccuEvent;
-
-	private UniWebView mWebView;
+	
 	enum STATE_WEBVIEW{
 		VISIBLE,
 		INVISIBLE
@@ -123,53 +113,6 @@ public class ScriptNanoo : MonoBehaviour {
 	void OnReceivedKeyCode (UniWebView webView, int keyCode)
 	{
 		Debug.Log ("OnRecievedKeyCode : " + keyCode);
-	}	
-
-	void OnLoadBegin(UniWebView webView, string loadingUrl){
-		Debug.Log("OnLoadBegin : "+loadingUrl);
-		if(loadingUrl.Contains("liveball/board?cd=")){//in board
-			mBtnMenu.SetActive(true);
-			mBtnNotice.SetActive(true);
-
-			mBtnAccusation.SetActive(false);
-			mBtnBack.SetActive(false);
-
-			try{
-				int startNum = loadingUrl.IndexOf("/board?")+10;
-				mBoardNum = loadingUrl.Substring(startNum);
-			} catch{
-				mBoardNum = "0";
-			}
-			Debug.Log("mBoardNum : "+mBoardNum);
-		} else
-		if(loadingUrl.Contains("liveball/board/")){//in content
-//			Debug.Log("index : " + loadingUrl.IndexOf("/board/"));
-			// switch menu btn to back btn
-			mBtnBack.SetActive(true);
-			mBtnAccusation.SetActive(true);
-
-			mBtnMenu.SetActive(false);
-			mBtnNotice.SetActive(false);
-			// show accusation btn
-			try{
-				int startNum = loadingUrl.IndexOf("/board/")+7;
-				int endNum = loadingUrl.IndexOf("?cd=");
-				mContentNum = loadingUrl.Substring(startNum, endNum-startNum);
-			} catch{
-				mContentNum = "0";
-			}
-			Debug.Log("mContentNum : "+mContentNum);
-		} else{
-			//turn off accusation
-			mBtnBack.SetActive(true);
-			mBtnNotice.SetActive(true);
-
-			mBtnMenu.SetActive(false);
-			mBtnAccusation.SetActive(false);
-
-		}
-
-		UtilMgr.ShowLoading (true);
 	}
 
 	bool OnWebViewShouldClose(UniWebView webView) {
@@ -188,33 +131,6 @@ public class ScriptNanoo : MonoBehaviour {
 	public void BackClicked(){
 		if(mWebView != null){
 			mWebView.url = BASE_URL+mBoardNum;
-			mWebView.Load();
-		}
-	}
-
-	public void AccuseClicked(){
-		AccusationInfo accuInfo = new AccusationInfo();
-		accuInfo.BoardNum = mBoardNum;
-		accuInfo.ContentNum = mContentNum;
-		mAccuEvent = new AccuseContentEvent(new EventDelegate(this, "DoneAccusation"));
-		DialogueMgr.ShowAccusationDialog(accuInfo, mAccuEvent);
-	}
-
-	public void DoneAccusation(){
-		DialogueMgr.DismissAccusationDialog();
-		DialogueMgr.ShowDialogue("신고 완료", mAccuEvent.Response.data.outMessage, DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		
-	}
-
-	public void NoticeClicked(){
-		mBtnBack.SetActive(true);
-		
-		mBtnNotice.SetActive(false);
-		mBtnMenu.SetActive(false);
-		mBtnAccusation.SetActive(false);
-
-		if(mWebView != null){
-			mWebView.url = Constants.EULA_URL;
 			mWebView.Load();
 		}
 	}
