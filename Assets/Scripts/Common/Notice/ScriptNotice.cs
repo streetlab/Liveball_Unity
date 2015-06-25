@@ -18,11 +18,14 @@ public class ScriptNotice : MonoBehaviour {
 
 
 	bool StatusBarIsHidden;
+	GetEventsEvent mEvent;
 	
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Love Start!");
 		InitNanoo ();
+		mEvent = new GetEventsEvent(new EventDelegate(this, "GotEvents"));
+		NetMgr.GetEvents(BaseNanooRequest.API_TYPE.NOTICE, mEvent);
 	}
 	
 	void Update(){
@@ -37,6 +40,17 @@ public class ScriptNotice : MonoBehaviour {
 		} else{
 			ShowWebView();
 		}
+	}
+
+	public void GotEvents(){		
+		if(mEvent.Response.result.count < 1){
+			mTop.GetComponent<ScriptNoticeTop>().CloseClicked(0);
+			return;
+		}
+		
+		mWebView.url = LOVE_URL;
+		
+		mWebView.Load ();
 	}
 	
 	void CheckStatusBar(){
@@ -84,9 +98,9 @@ public class ScriptNotice : MonoBehaviour {
 			
 		}
 		
-		mWebView.url = LOVE_URL;
+//		mWebView.url = LOVE_URL;
 		
-		mWebView.Load ();
+//		mWebView.Load ();
 	}
 	
 	void OnReceivedKeyCode (UniWebView webView, int keyCode)
@@ -113,7 +127,7 @@ public class ScriptNotice : MonoBehaviour {
 	
 	bool OnWebViewShouldClose(UniWebView webView) {
 		Debug.Log ("OnWebViewShouldClose");
-		mTop.GetComponent<ScriptNoticeTop>().CloseClicked();
+		mTop.GetComponent<ScriptNoticeTop>().CloseClicked(1);
 		return false;
 		
 		if (webView == mWebView) {

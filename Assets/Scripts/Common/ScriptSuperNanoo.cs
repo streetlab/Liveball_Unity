@@ -17,12 +17,14 @@ public class ScriptSuperNanoo : MonoBehaviour {
 	protected void OnLoadBegin(UniWebView webView, string loadingUrl){
 		Debug.Log("OnLoadBegin : "+loadingUrl);
 
-		if(loadingUrl.Contains("youtube.com/embed")){
+		if(loadingUrl.Contains("youtube.com/embed")
+		   || loadingUrl.Contains("about:blank")){
 
 		} else
 		if(loadingUrl.Contains("liveball/board?cd=")
 		   || loadingUrl.Equals("https://game.nanoo.so/liveball/board")){//in board
-			mBtnMenu.SetActive(true);
+
+			if(mBtnMenu != null) mBtnMenu.SetActive(true);
 			mBtnNotice.SetActive(true);
 			
 			mBtnAccusation.SetActive(false);
@@ -46,7 +48,7 @@ public class ScriptSuperNanoo : MonoBehaviour {
 			mBtnBack.SetActive(true);
 			mBtnAccusation.SetActive(true);
 			
-			mBtnMenu.SetActive(false);
+			if(mBtnMenu != null) mBtnMenu.SetActive(false);
 			mBtnNotice.SetActive(false);
 			// show accusation btn
 			try{
@@ -66,7 +68,7 @@ public class ScriptSuperNanoo : MonoBehaviour {
 			mBtnBack.SetActive(true);
 			mBtnNotice.SetActive(true);
 			
-			mBtnMenu.SetActive(false);
+			if(mBtnMenu != null) mBtnMenu.SetActive(false);
 			mBtnAccusation.SetActive(false);
 			
 		}
@@ -92,7 +94,7 @@ public class ScriptSuperNanoo : MonoBehaviour {
 		mBtnBack.SetActive(true);
 		
 		mBtnNotice.SetActive(false);
-		mBtnMenu.SetActive(false);
+		if(mBtnMenu != null) mBtnMenu.SetActive(false);
 		mBtnAccusation.SetActive(false);
 		
 		if(mWebView != null){

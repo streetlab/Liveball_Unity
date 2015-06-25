@@ -507,9 +507,9 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent(new AccuseContentRequest(accuInfo), baseEvent);
 	}
 
-	public static void GetEvents(BaseEvent baseEvent)
+	public static void GetEvents(BaseNanooRequest.API_TYPE apiType, BaseEvent baseEvent)
 	{
-		Instance.webAPINanooEvent(new GetEventsRequest(), baseEvent, true);
+		Instance.webAPINanooEvent(new GetEventsRequest(apiType), baseEvent, true);
 	}
 
 	public static void SendSocketMsg(String msg) {

@@ -4,8 +4,7 @@ using System.Collections;
 public class ScriptLove : ScriptSuperNanoo {	
 	
 	const string LOVE_URL = "https://game.nanoo.so/liveball/board?cd=221";
-	
-	private UniWebView mWebView;
+
 	enum STATE_WEBVIEW{
 		VISIBLE,
 		INVISIBLE
@@ -70,6 +69,9 @@ public class ScriptLove : ScriptSuperNanoo {
 	}
 	
 	void InitNanoo(){
+		mBtnBack.SetActive(false);
+		mBtnMenu.SetActive(true);
+
 		mStateWebview = STATE_WEBVIEW.INVISIBLE;
 		
 		mWebView = GetComponent<UniWebView>();

@@ -68,6 +68,8 @@ public class Constants {
 	public static string WITHDRAW_URL 					= 	"http://auth.liveball.kr/m/withdraw.php";
 	public static string TEST_EVENT_URL 				= 	"http://test.streetlab.co.kr/events";
 	public static string EVENT_URL 						= 	"http://tuby10.friize.com/events";
+	public static string TEST_NOTICE_URL 				= 	"http://test.streetlab.co.kr/notice";
+	public static string NOTICE_URL 						= 	"http://tuby10.friize.com/notice";
 	public static string EVENT_ATTENDANCE_URL 			= 	"http://test.streetlab.co.kr/events/attendance/";
 	public static string EVENT_ATTENDANCE_CONFIRM_URL 	= 	"http://test.streetlab.co.kr/events/attendance_confirm/";
 	public static string EVENT_NOTI_URL 				= 	"http://test.streetlab.co.kr/events/t/";

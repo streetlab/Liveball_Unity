@@ -23,7 +23,7 @@ public class ScriptEvents : MonoBehaviour {
 		Debug.Log("Events Start!");
 		InitNanoo ();
 		mEvent = new GetEventsEvent(new EventDelegate(this, "GotEvents"));
-		NetMgr.GetEvents(mEvent);
+		NetMgr.GetEvents(BaseNanooRequest.API_TYPE.EVENT, mEvent);
 	}
 	
 	void Update(){
