@@ -26,6 +26,8 @@ public class ProfileManager : MonoBehaviour {
 	public bool Sett = false;
 
 	public UITexture LeftProfileImg;
+	public UILabel LeftTeamName;
+	public UILabel LeftUserName;
 	void Start(){
 		UsetPhotoSize = new Vector2 (206, 230);
 		Set ();
@@ -51,10 +53,13 @@ public class ProfileManager : MonoBehaviour {
 		UserTeamCode = imgName;
 
 		//Debug.Log ("UserMgr.UserInfo.teamCode be : " + UserMgr.UserInfo.GetTeamCode());
+		LeftUserName.text = UserName;
+		LeftTeamName.text = mProfileEvent.Response.data.GetTeamName ();
 		UserMgr.UserInfo.memberName = UserName;
 		UserMgr.UserInfo.memberEmail = UserEmail;
 		UserMgr.UserInfo.favoBB.teamCode = mProfileEvent.Response.data.GetTeamCode();
 		UserMgr.UserInfo.favoBB.teamFullName = mProfileEvent.Response.data.GetTeamFullName();
+		UserMgr.UserInfo.favoBB.teamName = mProfileEvent.Response.data.GetTeamName ();
 	//	Debug.Log ("mProfileEvent.Response.data.GetTeamCode(): " + mProfileEvent.Response.data.GetTeamCode());
 	//	Debug.Log ("UserMgr.UserInfo.teamCode af: " + UserMgr.UserInfo.GetTeamCode());
 		SetName = UserName;
@@ -221,10 +226,14 @@ public class ProfileManager : MonoBehaviour {
 		//memInfo.MemberID
 		memInfo.MemberName = SetName;
 		memInfo.MemberEmail = UserMgr.UserInfo.memberEmail;
-		memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+
 		Debug.Log("send Team code : " + SetTeamCode);
 		memInfo.FavoBB = SetTeamCode;
-		memInfo.PhotoBytes = Setimagebyte;
+		if(GalleryCheck){
+			memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+			memInfo.PhotoBytes = Setimagebyte;
+			GalleryCheck = false;
+		}
 		event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
 		NetMgr.UpdateMemberInfo (memInfo, event1, UtilMgr.IsTestServer (), false);
 	}
@@ -238,10 +247,14 @@ public class ProfileManager : MonoBehaviour {
 			//memInfo.MemberID
 			memInfo.MemberName = SetName;
 			memInfo.MemberEmail = UserMgr.UserInfo.memberEmail;
-			memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+
 			Debug.Log("send Team code : " + SetTeamCode);
 			memInfo.FavoBB = SetTeamCode;
+			if(GalleryCheck){
+				memInfo.MemImage = UserMgr.UserInfo.memberEmail;
 			memInfo.PhotoBytes = Setimagebyte;
+				GalleryCheck = false;
+			}
 			event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
 			NetMgr.UpdateMemberInfo (memInfo, event1, UtilMgr.IsTestServer (), false);
 			SettingPage.GetComponent<ProfileSetting>().Save();
@@ -253,8 +266,10 @@ public class ProfileManager : MonoBehaviour {
 	 Texture2D tDynamicTx;
 	 WWW tLoad;
 	 string images;
-	
+	bool GalleryCheck = false;
+	bool CheckInGallery = false;
 	public void SetPhoto(){
+
 		Debug.Log("OpenGallery!!!");
 		#if(UNITY_ANDROID)
 		AndroidMgr.OpenGallery(new EventDelegate(this, "OpenGallery"));
@@ -263,6 +278,7 @@ public class ProfileManager : MonoBehaviour {
 		#endif
 	}
 	void OpenGallery(){
+		CheckInGallery = true;
 		Debug.Log("OpenGallery");
 		#if(UNITY_ANDROID)
 		images = "file://"+ AndroidMgr.GetMsg();
@@ -291,6 +307,10 @@ public class ProfileManager : MonoBehaviour {
 		Debug.Log("Image name : " + images);
 		SettingPage.transform.FindChild ("Panel").FindChild ("Photo").GetComponent<UITexture> ().mainTexture = tDynamicTx;
 		byte[] bytes = tDynamicTx.EncodeToPNG();
+		if (CheckInGallery) {
+			GalleryCheck = true;
+			CheckInGallery = false;
+		}
 		SetMemberPhoto (bytes);
 //		SetMemberPhoto(tDynamicTx);
 	}

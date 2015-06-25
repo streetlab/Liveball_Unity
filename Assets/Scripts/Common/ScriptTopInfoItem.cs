@@ -107,11 +107,13 @@ public class ScriptTopInfoItem : MonoBehaviour {
 			//tfInfo.FindChild("LblScoreRight").GetComponent<UILabel>().text = scheduleInfo.extend[1].score+"";
 			tfInfo.FindChild ("Score").GetComponent<UILabel> ().text = scheduleInfo.extend [0].score + ":" + scheduleInfo.extend [1].score;
 
+			if(ScriptMainTop.LandingState!=0&&ScriptMainTop.LandingState!=4&&ScriptMainTop.LandingState!=5){
 			Ground.transform.parent.parent.parent.GetComponent<LandingManager>().SetTeamColor(
 				Ground.transform.parent.parent.parent.GetComponent<LandingManager>().Getteamcolor(
 				Ground.transform.parent.parent.parent.GetComponent<LandingManager>().GetTeamFullName(scheduleInfo.extend [1].teamName
 				)
 				));
+			}
 		}
 	}
 	

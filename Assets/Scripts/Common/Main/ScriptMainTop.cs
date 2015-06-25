@@ -79,7 +79,10 @@ public class ScriptMainTop : MonoBehaviour {
 			mBingo.SetActive (false);
 			mLivetalk.SetActive (false);
 			mBetting.SetActive (false);
-			gameobj.SetActive (false);
+		
+			gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().nonstart = true;
+
+			gameobj.SetActive (true);
 			QuizMgr.EnterMain (this);
 
 
@@ -257,8 +260,9 @@ public class ScriptMainTop : MonoBehaviour {
 						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
 							LandingState = 3;
 						}
-						
-						gameobj.SetActive (true);
+						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().nonstart = false;
+						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().Start();
+
 						mHighlight.SetActive (true);
 						
 						InitTopInfo ();
@@ -271,8 +275,9 @@ public class ScriptMainTop : MonoBehaviour {
 						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
 							LandingState = 3;
 						}
-						
-						gameobj.SetActive (true);
+						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().nonstart = false;
+						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().Start();
+
 						mHighlight.SetActive (true);
 						
 						InitTopInfo ();
@@ -284,9 +289,10 @@ public class ScriptMainTop : MonoBehaviour {
 			}
 			
 		}
-		
+		gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().nonstart = false;
+		gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().Start();
 		QuizMgr.EnterMain(this);
-		gameobj.SetActive (true);
+	
 		mHighlight.SetActive (true);
 		
 		InitTopInfo();

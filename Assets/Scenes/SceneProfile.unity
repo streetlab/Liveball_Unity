@@ -9476,6 +9476,18 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 606533733}
   m_Script: {fileID: 11500000, guid: d5c5ca47aa5c01740810b7c66662099f, type: 3}
+--- !u!114 &606533735 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11465836, guid: cf6baed3bcc614296babf94e152953b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 606533733}
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+--- !u!114 &606533736 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11445532, guid: cf6baed3bcc614296babf94e152953b1,
+    type: 2}
+  m_PrefabInternal: {fileID: 606533733}
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
 --- !u!1 &617196682
 GameObject:
   m_ObjectHideFlags: 0
@@ -13373,7 +13385,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3014
+  startingRenderQueue: 3015
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -13786,6 +13798,8 @@ MonoBehaviour:
   Default: {fileID: 2800000, guid: a4f76ec8da3c74f3faf3c8c15b9545a5, type: 3}
   Sett: 0
   LeftProfileImg: {fileID: 606533734}
+  LeftTeamName: {fileID: 606533736}
+  LeftUserName: {fileID: 606533735}
 --- !u!4 &935131056
 Transform:
   m_ObjectHideFlags: 0

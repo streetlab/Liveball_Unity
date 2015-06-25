@@ -7,6 +7,7 @@ public class ScriptSuperRoot : MonoBehaviour {
 
 
 	void Start () {
+	
 		transform.FindChild ("Camera").transform.localPosition = new Vector3(0, UtilMgr.GetScaledPositionY(), 0);
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		#if(UNITY_EDITOR)
@@ -20,7 +21,15 @@ public class ScriptSuperRoot : MonoBehaviour {
 
 	void Awake(){
 //		DontDestroyOnLoad(this);
-
+		if (Application.loadedLevelName.Equals ("SceneMain")) {
+			if(ScriptMainTop.LandingState==4){
+				string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
+				TeamColor = TeamColor.Replace("#","");
+				transform.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().SetTeamColor(TeamColor);
+				Debug.Log("SetTeamColor!");
+			}
+		}
+	
 		if(GetComponent<AudioSource>() == null){
 			gameObject.AddComponent<AudioSource>();
 		}
