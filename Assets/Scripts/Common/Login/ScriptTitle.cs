@@ -492,47 +492,49 @@ public class ScriptTitle : MonoBehaviour {
 	{
 		UserMgr.UserInfo = mProfileEvent.Response.data;
 
-		string images = Constants.IMAGE_SERVER_HOST+ UserMgr.UserInfo.imagePath +  UserMgr.UserInfo.imageName;
+	//	if (UserMgr.UserInfo!= null) {
+			string images = Constants.IMAGE_SERVER_HOST + UserMgr.UserInfo.imagePath + UserMgr.UserInfo.imageName;
 
-		if (UserMgr.UserInfo.imageName != "") {
-			WWW www = new WWW (images);
-			StartCoroutine (GetImage (www));
-		} else if (UserMgr.UserInfo.imageName == UserMgr.UserInfo.memberEmail ||
-			UserMgr.UserInfo.imageName == "") {
-			UserMgr.UserInfo.Textures = null;
-		}
+			if (UserMgr.UserInfo.imageName != "") {
+				WWW www = new WWW (images);
+				StartCoroutine (GetImage (www));
+			} else if (UserMgr.UserInfo.imageName == UserMgr.UserInfo.memberEmail ||
+				UserMgr.UserInfo.imageName == "") {
+				UserMgr.UserInfo.Textures = null;
+			}
 
-		if(mProfileEvent.Response.message != null
-		   && mProfileEvent.Response.message.Length > 0){
-			//			UtilMgr.OnBackPressed();
+			if (mProfileEvent.Response.message != null
+				&& mProfileEvent.Response.message.Length > 0) {
+				//			UtilMgr.OnBackPressed();
 			
-			DialogueMgr.ShowDialogue(mJoinError, mProfileEvent.Response.message,
+				DialogueMgr.ShowDialogue (mJoinError, mProfileEvent.Response.message,
 			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
 			
-			return;
-		}
+				return;
+			}
 		
-		Debug.Log("UserMgr.UserInfo.activeAuth is "+UserMgr.UserInfo.activeAuth);
-		//Check Auth
-		//		if(UserMgr.UserInfo.activeAuth < 1){
-		//			OpenCert();
-		//			return;
-		//		}
+			Debug.Log ("UserMgr.UserInfo.activeAuth is " + UserMgr.UserInfo.activeAuth);
+			//Check Auth
+			//		if(UserMgr.UserInfo.activeAuth < 1){
+			//			OpenCert();
+			//			return;
+			//		}
 		
-		Debug.Log("UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
+			Debug.Log ("UserMgr.UserInfo.GetTeamCode() : " + UserMgr.UserInfo.GetTeamCode ());
 		
-		//		if (mLoginInfo != null) {
-		//			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
-		//			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
-		//
-		//			Debug.Log("2 UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
-		//		}
+			//		if (mLoginInfo != null) {
+			//			UserMgr.UserInfo.teamCode = mLoginInfo.teamCode;
+			//			UserMgr.UserInfo.teamSeq = mLoginInfo.teamSeq;
+			//
+			//			Debug.Log("2 UserMgr.UserInfo.GetTeamCode() : "+UserMgr.UserInfo.GetTeamCode());
+			//		}
 		
-		Debug.Log ("GotProfile");
-		mCardEvent = new GetCardInvenEvent (new EventDelegate (this, "GotCardInven"));
-		NetMgr.GetCardInven (mCardEvent);
+			Debug.Log ("GotProfile");
+			mCardEvent = new GetCardInvenEvent (new EventDelegate (this, "GotCardInven"));
+			NetMgr.GetCardInven (mCardEvent);
 		
 
+		//}
 	}
 
 	

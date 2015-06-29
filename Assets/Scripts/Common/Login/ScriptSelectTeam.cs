@@ -154,7 +154,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 	public ProfileManager PM;
 	public void GoChangeTeam(){
 		if (TeamCode != "") {
-		
+			Debug.Log("Change Team Code : " + TeamCode);
 			PM.SetMemberTeam(TeamCode,TeamFullName);
 			transform.parent.FindChild("TF_Profile").gameObject.SetActive(true);
 			transform.parent.FindChild("Top").gameObject.SetActive(true);

@@ -77,8 +77,9 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
+  virtualRealitySupported: 0
   productGUID: c615ee150cad342a3ba822c1fa700164
-  AndroidBundleVersionCode: 308
+  AndroidBundleVersionCode: 311
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -292,13 +293,12 @@ PlayerSettings:
   psp2InfoBarOnStartup: 0
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
-  virtualRealitySupported: 0
   spritePackerPolicy: 
   scriptingDefineSymbols:
     1: CROSS_PLATFORM_INPUT
     2: 
-    4: detail
-    7: detail
+    4: Label
+    7: Label
     14: MOBILE_INPUT
     15: CROSS_PLATFORM_INPUT;MOBILE_INPUT
     16: CROSS_PLATFORM_INPUT;MOBILE_INPUT

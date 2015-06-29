@@ -35171,7 +35171,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3022
+  startingRenderQueue: 3024
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -60868,7 +60868,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3025
+  startingRenderQueue: 3027
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -63521,7 +63521,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
+  startingRenderQueue: 3017
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -67011,7 +67011,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3022
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -71486,7 +71486,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3022
+  startingRenderQueue: 3032
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -82930,7 +82930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1327744432
 Transform:
   m_ObjectHideFlags: 0
@@ -90685,7 +90685,7 @@ Transform:
   m_GameObject: {fileID: 1465707728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00156372169, y: .00156372169, z: .00156372169}
+  m_LocalScale: {x: .00156128022, y: .00156128022, z: .00156128022}
   m_Children:
   - {fileID: 1171594848}
   - {fileID: 654317284}
@@ -97611,7 +97611,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 0
   renderQueue: 0
-  startingRenderQueue: 3022
+  startingRenderQueue: 3024
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -108127,7 +108127,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3025
+  startingRenderQueue: 3035
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -112339,6 +112339,10 @@ MonoBehaviour:
   onClick:
   - mTarget: {fileID: 1824493443}
     mMethodName: OnLoad
+    mParameters: []
+    oneShot: 0
+  - mTarget: {fileID: 1900526320}
+    mMethodName: CheckNewMail
     mParameters: []
     oneShot: 0
 --- !u!1 &1832012248
@@ -129140,7 +129144,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3021
+  startingRenderQueue: 3031
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0

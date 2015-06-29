@@ -37,7 +37,7 @@ public class PostgetButton : MonoBehaviour {
 
 		//getprofile
 
-
+		UserMgr.UserMailCount -= 1;
 		DialogueMgr.ShowDialogue ("지급 완료", transform.parent.FindChild("Name").GetComponent<UILabel>().text+" 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		
 
@@ -112,10 +112,13 @@ public class PostgetButton : MonoBehaviour {
 		
 	}
 	IEnumerator AnimStart(){
-		yield return new WaitForSeconds (1f);
+		UserMgr.UserMailCount -= 1;
 		anim.SetActive (true);
 		transform.parent.FindChild ("get").gameObject.SetActive (false);
 		transform.parent.FindChild ("com").gameObject.SetActive (true);
+		yield return new WaitForSeconds (0f);
+
+	
 	}
 
 

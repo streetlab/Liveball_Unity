@@ -72,8 +72,17 @@ public class UserMgr : MonoBehaviour {
 		get{return Instance._awayLineup;}
 		set{Instance._awayLineup = value;}
 	}
-	
-	
+
+	int userMailCount;
+	public static int UserMailCount{
+		get {
+			return Instance.userMailCount;
+		}
+		set {
+			Instance.userMailCount = value;
+		}
+	}
+
 	
 	public static LineupInfo HomeLineup {
 		get {

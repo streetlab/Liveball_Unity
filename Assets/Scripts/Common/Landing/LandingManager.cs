@@ -736,7 +736,7 @@ public class LandingManager : MonoBehaviour {
 			
 			return "ea5415";
 			break;
-			
+		case "KIA 타이거즈":
 		case "기아 타이거즈":
 			
 			return "e60014";

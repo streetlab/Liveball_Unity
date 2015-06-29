@@ -16,12 +16,12 @@ public class PostButton : MonoBehaviour {
 		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 	}
+
 	public void on(){
 		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
-		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
+		Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
-		transform.FindChild ("TF_Post").gameObject.SetActive (true);
-		Setdata();	
+	
 
 
 	}
@@ -29,23 +29,31 @@ public class PostButton : MonoBehaviour {
 	
 //		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 //		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
+
 		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
-	
+		CheckNewMail ();
 
 			
 	
 	}
+	public void CheckNewMail(){
+		if (UserMgr.UserMailCount > 0) {
+			transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (true);
+		} else {
+			transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (false);
+		}
+	}
 	void getdata(){
 		Mails = Mail.Response.data;
 		if (Mail.Response.data != null) {
-			if (Mail.Response.data.Count > 0) {
-				transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (true);
-			} else {
-				transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (false);
-			}
+			UserMgr.UserMailCount = Mail.Response.data.Count;
+			CheckNewMail();
 		}
 	}
 	void Setdata(){
+	
+		Mails = Mail.Response.data;
+		UserMgr.UserMailCount = Mail.Response.data.Count;
 		Debug.Log (transform.FindChild ("TF_Post").FindChild ("List").childCount);
 		if (transform.FindChild ("TF_Post").FindChild ("List").childCount > 1) {
 			for(int i = 1; i < transform.FindChild ("TF_Post").FindChild ("List").childCount;i++){
@@ -106,6 +114,7 @@ public class PostButton : MonoBehaviour {
 			}
 			}
 	}
+		transform.FindChild ("TF_Post").gameObject.SetActive (true);
 		StartCoroutine (Up(transform.FindChild ("TF_Post").gameObject));
 	}
 	IEnumerator Up(GameObject G){

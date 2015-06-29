@@ -23,10 +23,12 @@ public class ScriptSuperRoot : MonoBehaviour {
 //		DontDestroyOnLoad(this);
 		if (Application.loadedLevelName.Equals ("SceneMain")) {
 			if(ScriptMainTop.LandingState==4){
+				if(UserMgr.UserInfo!=null){
 				string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
 				TeamColor = TeamColor.Replace("#","");
 				transform.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().SetTeamColor(TeamColor);
 				Debug.Log("SetTeamColor!");
+				}
 			}
 		}
 	

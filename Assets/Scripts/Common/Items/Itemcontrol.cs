@@ -205,6 +205,7 @@ public class Itemcontrol : MonoBehaviour {
 	void addgold(){
 		UserMgr.UserInfo.userGoldenBall = mProfileEvent.Response.data.userGoldenBall;
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
+		//UserMgr.UserMailCount += 1;
 		DialogueMgr.ShowDialogue ("구매 성공", Sgold+" 완료.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 
@@ -326,6 +327,7 @@ public class Itemcontrol : MonoBehaviour {
 		UserMgr.UserInfo.item = mProfileEvent.Response.data.item;
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
 		UserMgr.UserInfo.userDiamond = mProfileEvent.Response.data.userDiamond;
+		UserMgr.UserMailCount += 1;
 		DialogueMgr.ShowDialogue ("구매 성공", "["+Sgold+"] 구매 완료.\n[우편함]을 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 	public void prime31(string id,string code,string product,string buyruby,string addruby,string addgold){
@@ -435,7 +437,7 @@ public class Itemcontrol : MonoBehaviour {
 	void mDoneIAP(){
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
 		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
-
+		UserMgr.UserMailCount += 1;
 		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.\n우편함을 확인해 주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 
 		Debug.Log ("All PurchaseSucceeded");
@@ -510,7 +512,7 @@ public class Itemcontrol : MonoBehaviour {
 	void mDoneIAP(){
 		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
 		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
-		
+		UserMgr.UserMailCount += 1;
 		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		
 		Debug.Log ("All PurchaseSucceeded");
