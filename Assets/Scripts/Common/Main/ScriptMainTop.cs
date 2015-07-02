@@ -144,6 +144,30 @@ public class ScriptMainTop : MonoBehaviour {
 		StartCoroutine(RunAttendance(www));
 		UtilMgr.ShowLoading(true);
 	}
+
+	class DailyReward{
+		int _result;
+
+		public int result {
+			get {
+				return _result;
+			}
+			set {
+				_result = value;
+			}
+		}
+
+		string _message;
+
+		public string message {
+			get {
+				return _message;
+			}
+			set {
+				_message = value;
+			}
+		}
+	}
 	
 	IEnumerator RunAttendance(WWW www){
 		yield return www;
@@ -153,11 +177,14 @@ public class ScriptMainTop : MonoBehaviour {
 			DialogueMgr.ShowDialogue("attendance error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		} else{
 			if(www.text != null && www.text.Length > 0){
-				//popup webview
-				mWebview.SetActive(true);
-				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
+//				mWebview.SetActive(true);
+//				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
+				DailyReward dReward = Newtonsoft.Json.JsonConvert.DeserializeObject<DailyReward>(www.text);
+				if(dReward.result == 200){
+					DialogueMgr.ShowDialogue("접속보상", dReward.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+				}
 			} else{
-				Debug.Log("Attendance is already done");
+//				Debug.Log("Attendance is already done");
 			}
 		}
 	}
