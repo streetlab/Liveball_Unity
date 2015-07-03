@@ -241,6 +241,10 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = "경기 없음";
 		
 		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
+//			Debug.Log("day : " 
+//			          +mScheduleEvent.Response.data [i].subTitle);
+//			Debug.Log("Count : " 
+//			          +mScheduleEvent.Response.data [i].extend.Count);
 			LImage.Add (mScheduleEvent.Response.data [i].extend [0].imageName);
 			RImage.Add (mScheduleEvent.Response.data [i].extend [1].imageName);
 			interActive.Add (mScheduleEvent.Response.data [i].interActive);

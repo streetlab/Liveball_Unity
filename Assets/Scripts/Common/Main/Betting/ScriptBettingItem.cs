@@ -35,19 +35,19 @@ public class ScriptBettingItem : MonoBehaviour {
 
 	void Init(){
 		mSb = mBetting.GetComponent<ScriptTF_Betting> ();
-		mSprSelected = transform.FindChild ("SprSelected").gameObject;
+//		mSprSelected = transform.FindChild ("SprSelected").gameObject;
 		
-		if(mType == TYPE.Batter)
-		{
-			mSprSilhouette = transform.FindChild ("SprSilhouette").GetComponent<UISprite>();
-			mSprCombos = new UISprite[3];
-			mSprCombos [0] = transform.FindChild ("SprCombo1").GetComponent<UISprite> ();
-			mSprCombos [1] = transform.FindChild ("SprCombo2").GetComponent<UISprite> ();
-			mSprCombos [2] = transform.FindChild ("SprCombo3").GetComponent<UISprite> ();
-			mSprCombos [0].color = ColorComboDisable;
-			mSprCombos [1].color = ColorComboDisable;
-			mSprCombos [2].color = ColorComboDisable;
-		}
+//		if(mType == TYPE.Batter)
+//		{
+//			mSprSilhouette = transform.FindChild ("SprSilhouette").GetComponent<UISprite>();
+//			mSprCombos = new UISprite[3];
+//			mSprCombos [0] = transform.FindChild ("SprCombo1").GetComponent<UISprite> ();
+//			mSprCombos [1] = transform.FindChild ("SprCombo2").GetComponent<UISprite> ();
+//			mSprCombos [2] = transform.FindChild ("SprCombo3").GetComponent<UISprite> ();
+//			mSprCombos [0].color = ColorComboDisable;
+//			mSprCombos [1].color = ColorComboDisable;
+//			mSprCombos [2].color = ColorComboDisable;
+//		}
 
 		SetUnselected ();
 	}
@@ -56,10 +56,10 @@ public class ScriptBettingItem : MonoBehaviour {
 	{
 		Init ();
 
-		int index = mSprBetting.GetComponent<ScriptBetting> ().GetIndex (transform.name);
-		if (QuizMgr.QuizInfo.order.Count > index) {
-			transform.FindChild ("LblBody").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [index].description;
-		}
+//		int index = mSprBetting.GetComponent<ScriptBetting> ().GetIndex (transform.name);
+//		if (QuizMgr.QuizInfo.order.Count > index) {
+//			transform.FindChild ("LblBody").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [index].description;
+//		}
 
 
 
@@ -91,21 +91,21 @@ public class ScriptBettingItem : MonoBehaviour {
 	public void SetSelected()
 	{
 		IsSelected = true;
-		mSprSelected.SetActive (true);
+		//mSprSelected.SetActive (true);
 
 		if(mType == TYPE.Loaded)
 		{
 			return;
 		}
 
-		mSprSilhouette.color = ColorSilhouetteEnable;
-		SetCombo (3);
+		//mSprSilhouette.color = ColorSilhouetteEnable;
+		//SetCombo (3);
 	}
 
 	public void SetUnselected()
 	{
 		IsSelected = false;
-		mSprSelected.SetActive (false);
+		//mSprSelected.SetActive (false);
 
 		if(mCardInfo != null){
 			Debug.Log ("mCardInfo.position : "+mCardInfo.position);
@@ -126,12 +126,14 @@ public class ScriptBettingItem : MonoBehaviour {
 			return;
 		}
 
-		mSprSilhouette.color = ColorSilhouetteDisable;
+		//mSprSilhouette.color = ColorSilhouetteDisable;
 	}
 
-	public void OnClicked(string name)
+	public void OnClicked()
 	{
-		OpenBetWindow (name);
+		ClickButton ();
+		GetComponent<UIButton> ().isEnabled = false;
+		OpenBetWindow (this.name);
 	}
 
 	void OpenBetWindow(string name)
@@ -141,13 +143,30 @@ public class ScriptBettingItem : MonoBehaviour {
 			return;
 		}
 
-		mSprBetting.SetActive (true);
-
-		UtilMgr.AddBackEvent(
-			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),
-		                   "CloseWindow"));
+//		mSprBetting.SetActive (true);
+//
+//		UtilMgr.AddBackEvent(
+//			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),
+//		                   "CloseWindow"));
 	}
+	void ClickButton(){
+		if (transform.parent.name == "SprHit") {
+			transform.parent.FindChild ("BtnHit1").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.FindChild ("BtnHit2").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.FindChild ("BtnHit3").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.parent.FindChild ("SprOut").FindChild ("BtnOut1").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.parent.FindChild ("SprOut").FindChild ("BtnOut2").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.parent.FindChild ("SprOut").FindChild ("BtnOut3").GetComponent<UIButton> ().isEnabled = true;
+		} else {
+			transform.parent.FindChild ("BtnOut1").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.FindChild ("BtnOut2").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.FindChild ("BtnOut3").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.parent.FindChild ("SprHit").FindChild ("BtnHit1").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.parent.FindChild ("SprHit").FindChild ("BtnHit2").GetComponent<UIButton> ().isEnabled = true;
+			transform.parent.parent.FindChild ("SprHit").FindChild ("BtnHit3").GetComponent<UIButton> ().isEnabled = true;
 
+		}
+	}
 	public void ClearCombos()
 	{
 		transform.FindChild("SprCombo3").GetComponent<UISprite>().color = ColorComboDisable;

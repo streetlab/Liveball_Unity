@@ -87,75 +87,76 @@ public class ScriptBetting : MonoBehaviour {
 	public void DialogueHandler(DialogueMgr.BTNS btn){
 		DialogueMgr.DismissDialogue();
 	}
-
+	string BtnName = "";
 	bool Init(string btnName)
 	{
-		if(double.Parse(UserMgr.UserInfo.userGoldenBall) < 1){
-			DialogueMgr.ShowDialogue(mNoMoreGoldTitle, mNoMoreGoldBody,
-			                         DialogueMgr.DIALOGUE_TYPE.Alert,
-			                         DialogueHandler);
-			return true;
-		}
+		BtnName = btnName;
+//		if(double.Parse(UserMgr.UserInfo.userGoldenBall) < 1){
+//			DialogueMgr.ShowDialogue(mNoMoreGoldTitle, mNoMoreGoldBody,
+//			                         DialogueMgr.DIALOGUE_TYPE.Alert,
+//			                         DialogueHandler);
+//			return true;
+//		}
 
 		mNameSelectedBtn = btnName;
 		mSbi = GetBettingItem ();
-
-		Transform panel = transform.FindChild ("Panel").transform;
-		mBtnCancel = panel.FindChild ("Btns").FindChild ("BtnCancel").GetComponent<UIButton> ();
-		mBtnConfirm = panel.FindChild ("Btns").FindChild ("BtnConfirm").GetComponent<UIButton> ();
-		mBtnConfirm2 = panel.FindChild ("Btns").FindChild ("BtnConfirm2").GetComponent<UIButton> ();
-		mLblGot = mLblGold1.GetComponent<UILabel> ();
-		mLblUse = mLblGold2.GetComponent<UILabel> ();
-		mLblExpect = mLblGold3.GetComponent<UILabel> ();
-		mLblSelectedBase = mLblReward1_1.GetComponent<UILabel> ();
-		mLblSelectedRatio = mLblReward1_2.GetComponent<UILabel> ();
-		mLblCardName = mLblReward2_1.GetComponent<UILabel> ();
-		mLblCardRatio = mLblReward2_2.GetComponent<UILabel> ();
-		mLblTotalRatio = mLblReward3_2.GetComponent<UILabel> ();
-
-		if(mSbi.IsSelected)
-		{
-			mBtnCancel.gameObject.SetActive(true);
-			mBtnConfirm.gameObject.SetActive(true);
-			mBtnConfirm2.gameObject.SetActive(false);
-		}
-		else
-		{
-			mBtnCancel.gameObject.SetActive(false);
-			mBtnConfirm.gameObject.SetActive(false);
-			mBtnConfirm2.gameObject.SetActive(true);
-		}
-
-
-		mLblGot.text = UtilMgr.AddsThousandsSeparator (UserMgr.UserInfo.userGoldenBall);
-		mLblUse.text = UtilMgr.AddsThousandsSeparator (mAmountUse);
-		mLblExpect.text = UtilMgr.AddsThousandsSeparator (GetExpectGold());
-
-		mLblSelectedBase.text = QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].description;
-		mLblSelectedRatio.text = QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio+"x";
-				
-		float total = 0;
-		if(mCardInfo != null){
-			mSbi.SetCardInfo(mCardInfo);
-			mLblCardName.text = mCardInfo.cardName;
-			mLblCardRatio.text = "+"+mCardInfo.rewardRate+"x";
-			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
-				+ mCardInfo.rewardRate;
-		} else if(mStrategyInfo != null){
-			mSbi.SetStrategyInfo(mStrategyInfo);
-			mLblCardName.text = mStrategyInfo.itemName;
-			mLblCardRatio.text = "*"+mStrategyInfo.multipleRatio+"x";
-			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
-				* mStrategyInfo.multipleRatio;
-		} else{
-			mLblCardName.text = mStrNoCard;
-			mLblCardRatio.text = "-";
-			total = float.Parse (QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio) * 1f;
-		}
-
-		mLblTotalRatio.text = total+"x";
-
-		InitAmountUse();
+//
+//		Transform panel = transform.FindChild ("Panel").transform;
+//		mBtnCancel = panel.FindChild ("Btns").FindChild ("BtnCancel").GetComponent<UIButton> ();
+//		mBtnConfirm = panel.FindChild ("Btns").FindChild ("BtnConfirm").GetComponent<UIButton> ();
+//		mBtnConfirm2 = panel.FindChild ("Btns").FindChild ("BtnConfirm2").GetComponent<UIButton> ();
+//		mLblGot = mLblGold1.GetComponent<UILabel> ();
+//		mLblUse = mLblGold2.GetComponent<UILabel> ();
+//		mLblExpect = mLblGold3.GetComponent<UILabel> ();
+//		mLblSelectedBase = mLblReward1_1.GetComponent<UILabel> ();
+//		mLblSelectedRatio = mLblReward1_2.GetComponent<UILabel> ();
+//		mLblCardName = mLblReward2_1.GetComponent<UILabel> ();
+//		mLblCardRatio = mLblReward2_2.GetComponent<UILabel> ();
+//		mLblTotalRatio = mLblReward3_2.GetComponent<UILabel> ();
+//
+	//	if (mSbi.IsSelected)
+//		{
+//			mBtnCancel.gameObject.SetActive(true);
+//			mBtnConfirm.gameObject.SetActive(true);
+//			mBtnConfirm2.gameObject.SetActive(false);
+//		}
+//		else
+//		{
+//			mBtnCancel.gameObject.SetActive(false);
+//			mBtnConfirm.gameObject.SetActive(false);
+//			mBtnConfirm2.gameObject.SetActive(true);
+//		}
+//
+//
+//		mLblGot.text = UtilMgr.AddsThousandsSeparator (UserMgr.UserInfo.userGoldenBall);
+//		mLblUse.text = UtilMgr.AddsThousandsSeparator (mAmountUse);
+//		mLblExpect.text = UtilMgr.AddsThousandsSeparator (GetExpectGold());
+//
+//		mLblSelectedBase.text = QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].description;
+//		mLblSelectedRatio.text = QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio+"x";
+//				
+//		float total = 0;
+//		if(mCardInfo != null){
+//			mSbi.SetCardInfo(mCardInfo);
+//			mLblCardName.text = mCardInfo.cardName;
+//			mLblCardRatio.text = "+"+mCardInfo.rewardRate+"x";
+//			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
+//				+ mCardInfo.rewardRate;
+//		} else if(mStrategyInfo != null){
+//			mSbi.SetStrategyInfo(mStrategyInfo);
+//			mLblCardName.text = mStrategyInfo.itemName;
+//			mLblCardRatio.text = "*"+mStrategyInfo.multipleRatio+"x";
+//			total = float.Parse(QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].ratio)
+//				* mStrategyInfo.multipleRatio;
+//		} else{
+//			mLblCardName.text = mStrNoCard;
+//			mLblCardRatio.text = "-";
+//			total = float.Parse (QuizMgr.QuizInfo.order [GetIndex (mNameSelectedBtn)].ratio) * 1f;
+//		}
+//
+//		mLblTotalRatio.text = total+"x";
+//
+//		InitAmountUse();
 		
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioOpenBet);
 
@@ -194,11 +195,13 @@ public class ScriptBetting : MonoBehaviour {
 		joinInfo.MemSeq = UserMgr.UserInfo.memSeq;
 		joinInfo.QuizListSeq = QuizMgr.QuizInfo.quizListSeq;
 		joinInfo.QzType = GetQzType ();
-		double betPoint = double.Parse(UtilMgr.RemoveThousandSeperator(mLblUse.text));
-		joinInfo.BetPoint = betPoint < 0 ? "0" : betPoint+"";
+		//double betPoint = 0;//double.Parse(UtilMgr.RemoveThousandSeperator(mLblUse.text));
+		joinInfo.BetPoint = "0";
 
 //		Debug.Log("QuizMgr.QuizInfo.order size is "+QuizMgr.QuizInfo.order.Count);
 		joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
+		Debug.Log ("mNameSelectedBtn : " + mNameSelectedBtn);
+		Debug.Log ("joinInfo.SelectValue : " + joinInfo.SelectValue);
 		joinInfo.ExtendValue = "0";
 //		mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteSending"));
 //		NetMgr.JoinQuiz (joinInfo, mJoinQuizEvent);
@@ -213,22 +216,22 @@ public class ScriptBetting : MonoBehaviour {
 			joinInfo.Item = 1000;
 //			mSbi.SetSelected ();
 		}
-		mSbi.SetSelected();
+		//mSbi.SetSelected();
 
 		mTFBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Add (joinInfo);
-		double userGoldenBall = double.Parse (UserMgr.UserInfo.userGoldenBall)
-						- double.Parse (joinInfo.BetPoint);
-		UserMgr.UserInfo.userGoldenBall = "" + userGoldenBall;
+//		double userGoldenBall = double.Parse (UserMgr.UserInfo.userGoldenBall)
+//						- double.Parse (joinInfo.BetPoint);
+	//	UserMgr.UserInfo.userGoldenBall = "" + userGoldenBall;
 
 		ClearCardData();
 
-		SetBtnsDisable();
+		//SetBtnsDisable();
 
 		InitAmountUse();
 		
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioConfirm);
 
-		UtilMgr.OnBackPressed();
+		//UtilMgr.OnBackPressed();
 
 	}
 
@@ -301,12 +304,12 @@ public class ScriptBetting : MonoBehaviour {
 			mBtnOut1.GetComponent<BoxCollider2D>().enabled = false;
 			mBtnOut2.GetComponent<BoxCollider2D>().enabled = false;
 			mBtnOut3.GetComponent<BoxCollider2D>().enabled = false;
-			mBtnOut4.GetComponent<BoxCollider2D>().enabled = false;
+			//mBtnOut4.GetComponent<BoxCollider2D>().enabled = false;
 
 			mBtnHit1.GetComponent<BoxCollider2D>().enabled = false;
 			mBtnHit2.GetComponent<BoxCollider2D>().enabled = false;
 			mBtnHit3.GetComponent<BoxCollider2D>().enabled = false;
-			mBtnHit4.GetComponent<BoxCollider2D>().enabled = false;
+			//mBtnHit4.GetComponent<BoxCollider2D>().enabled = false;
 			Debug.Log("Out Disabled");
 			break;
 		}
@@ -345,11 +348,11 @@ public class ScriptBetting : MonoBehaviour {
 		case "BtnHit4":
 			return 3;
 		case "BtnOut1":
-			return 4;
+			return 3;
 		case "BtnOut2":
-			return 5;
+			return 4;
 		case "BtnOut3":
-			return 6;
+			return 5;
 		case "BtnOut4":
 			return 7;
 		case "BtnLoaded1":
@@ -481,6 +484,12 @@ public class ScriptBetting : MonoBehaviour {
 			transform.root.GetComponent<AudioSource>().PlayOneShot (mAudioClick);
 			BetMin();
 			break;
+		}
+	}
+	public void BtnConfirm(){
+		if (BtnName != "") {
+			BtnName ="";
+			SetConfirm ();
 		}
 	}
 }

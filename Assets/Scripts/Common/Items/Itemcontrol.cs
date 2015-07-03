@@ -52,13 +52,13 @@ public class Itemcontrol : MonoBehaviour {
 		getruby = new GetItemShopRubyEvent (new EventDelegate (this, "ruby"));
 		NetMgr.GetItemShopRubyList (getruby);
 
-		transform.FindChild ("category 2").gameObject.SetActive (true);
-		origin2 = transform.FindChild("category 2").GetChild(0).FindChild("origin").gameObject;
-
-		originV2 = new Vector3(origin2.transform.localPosition.x,235,origin2.transform.localPosition.z);
-		origin2.gameObject.SetActive (false);	
-		getgold = new GetItemShopGoldEvent (new EventDelegate (this, "gold"));
-		NetMgr.GetItemShopGoldList (getgold);
+//		transform.FindChild ("category 2").gameObject.SetActive (true);
+//		origin2 = transform.FindChild("category 2").GetChild(0).FindChild("origin").gameObject;
+//
+//		originV2 = new Vector3(origin2.transform.localPosition.x,235,origin2.transform.localPosition.z);
+//		origin2.gameObject.SetActive (false);	
+//		getgold = new GetItemShopGoldEvent (new EventDelegate (this, "gold"));
+//		NetMgr.GetItemShopGoldList (getgold);
 
 		transform.FindChild ("category 3").gameObject.SetActive (true);
 		origin3 = transform.FindChild("category 3").GetChild(0).FindChild("origin").gameObject;

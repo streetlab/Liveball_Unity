@@ -44,9 +44,19 @@ public class ScriptSuperRoot : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Escape)) {
-			OnBackPressed();
-		}
+
+
+
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+			if(Application.loadedLevelName.Equals("SceneMain")){
+				if(!transform.FindChild("TF_Betting").gameObject.activeSelf){
+					OnBackPressed ();
+				}
+			}else{
+				OnBackPressed ();
+			}
+			}
+
 	}
 
 	void OnApplicationFocus(bool focus){

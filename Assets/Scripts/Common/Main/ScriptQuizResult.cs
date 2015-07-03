@@ -63,10 +63,10 @@ public class ScriptQuizResult : MonoBehaviour {
 				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Correct"+rand).Value;
 			mLblBtmRight.GetComponent<UILabel>().text = "+"+rewardPoint;
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 0);
-			mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)betPoint) * 0.005f);
+			//mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)rewardPoint) * 0.005f);
 
-			double userGoldenBall = double.Parse (UserMgr.UserInfo.userGoldenBall) + rewardPoint;
-			UserMgr.UserInfo.userGoldenBall = ""+userGoldenBall;
+			double userDia = double.Parse (UserMgr.UserInfo.userGoldenBall) + rewardPoint;
+			UserMgr.UserInfo.userGoldenBall = ""+ UtilMgr.AddsThousandsSeparator(userDia);
 
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioSuccess);
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioGold);

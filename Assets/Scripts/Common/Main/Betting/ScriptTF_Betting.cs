@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ScriptTF_Betting : MonoBehaviour {
 
 	public GameObject mTop;
-	public GameObject mSprComb;
+	public GameObject mBatting;
 	public GameObject mSprHit;
 	public GameObject mSprOut;
 	public GameObject mSprCard;
@@ -36,13 +36,14 @@ public class ScriptTF_Betting : MonoBehaviour {
 	long mStartTime;
 	bool mTimeOut;
 	bool backCheck;
+	bool first = true;
 
 	static Color YELLOW = new Color(1f, 1f, 0f);
 	static Color WHITE = new Color(1f, 1f, 1f);
 	static Color RED = new Color(1f, 0f, 0f);
 
 	const float MAX_TIME = 1600f;
-	const float BAR_WIDTH = 132f;
+	const float BAR_WIDTH = 321f;
 
 	bool isDragging;
 
@@ -50,8 +51,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 	{
 //		transform.FindChild ("Lightning Spark").GetComponent<ScriptParticleResizer> ().ResizeRatio (0.5f);
 
-		mSpark1.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 10010;
-		mSpark2.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 10010;
+	//	mSpark1.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 10010;
+	//	mSpark2.GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 10010;
 //		transform.FindChild ("Lightning Spark").FindChild("Lightning").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Spakles").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
 //		transform.FindChild ("Lightning Spark").FindChild("Ring").GetComponent<ParticleSystem> ().GetComponent<Renderer>().material.renderQueue = 3100;
@@ -59,6 +60,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 //		mScrollView.GetComponent<UIScrollView>().onDragStarted += OnDragStarted;
 //		mScrollView.GetComponent<UIScrollView>().onDragFinished += OnDragFinished;
+		//mScrollView.transform.localPosition = new Vector3 (0,-72,0);
+//		mScrollView.GetComponent<UIPanel> ().clipOffset = new Vector2 (0,-221.5f);
+//		mScrollView.GetComponent<UIPanel> ().clipRange = new Vector4 (0,-72,720,747);
 	}
 
 //	void OnDragStarted(){
@@ -112,13 +116,14 @@ public class ScriptTF_Betting : MonoBehaviour {
 		
 		if (sec < -15) {
 			mTimeOut = true;
-			if(mSprBetting.activeSelf){
-				UtilMgr.OnBackPressed ();
-				UtilMgr.OnBackPressed ();
-				//UtilMgr.RunAllBackEvents();
-			}else{
-				UtilMgr.OnBackPressed ();
-			}
+//			if(mSprBetting.activeSelf){
+//				//UtilMgr.OnBackPressed ();
+//				//UtilMgr.OnBackPressed ();
+//				//UtilMgr.RunAllBackEvents();
+//			}else{
+//			//	UtilMgr.OnBackPressed ();
+//			}
+			CloseAnimation();
 		
 
 //			UtilMgr.RunAllBackEvents();
@@ -128,6 +133,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			sec = 0;
 			milSec = 0;
 		} else{
+			//Debug.Log("sec : " + sec);
 			sec = (15 + sec);
 
 			milSec = milSec / 100000;//
@@ -148,7 +154,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (milSec < 10)
 			strMilSec = "0" + milSec;
 				
-		mSprComb.transform.FindChild("Timer").FindChild ("LblTimer").GetComponent<UILabel> ().text
+		mBatting.transform.FindChild("Timer").FindChild("Sprite").FindChild ("LblTimer").GetComponent<UILabel> ().text
 			= strSec + " : " + strMilSec;
 
 		float now = float.Parse (strSec + strMilSec);
@@ -157,18 +163,18 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		Debug.Log ("width : " + width);
 //		Debug.Log ("width to int : " + (int)width); 
 
-		if (sec < 6) {
-			mSprComb.transform.FindChild("Timer").FindChild ("LblTimer").GetComponent<UILabel> ().color = RED;
-			mSprComb.transform.FindChild ("Timer").FindChild ("Progress").FindChild ("SprBar")
-				.GetComponent<UISprite> ().color = RED;
-		} else {
-			mSprComb.transform.FindChild("Timer").FindChild ("LblTimer").GetComponent<UILabel> ().color = YELLOW;
-			mSprComb.transform.FindChild ("Timer").FindChild ("Progress").FindChild ("SprBar")
-				.GetComponent<UISprite> ().color = YELLOW;
-		}
+//		if (sec < 6) {
+//			mSprComb.transform.FindChild("Timer").FindChild ("LblTimer").GetComponent<UILabel> ().color = RED;
+//			mSprComb.transform.FindChild ("Timer").FindChild ("Progress").FindChild ("SprBar")
+//				.GetComponent<UISprite> ().color = RED;
+//		} else {
+//			mSprComb.transform.FindChild("Timer").FindChild ("LblTimer").GetComponent<UILabel> ().color = YELLOW;
+//			mSprComb.transform.FindChild ("Timer").FindChild ("Progress").FindChild ("SprBar")
+//				.GetComponent<UISprite> ().color = YELLOW;
+//		}
 
-		mSprComb.transform.FindChild ("Timer").FindChild ("Progress").FindChild ("SprBar")
-			.GetComponent<UISprite> ().width = (int)width;
+		mBatting.transform.FindChild ("Timer").FindChild ("SprBar")
+			.GetComponent<UIPanel> ().clipOffset = new Vector2 (-(BAR_WIDTH-(width)),0);
 
 
 
@@ -191,7 +197,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			Debug.Log ("Hitter");
 			SetPitcher ();
 			Debug.Log ("Pitcher");
-			SetBases ();
+			//SetBases ();
 			Debug.Log ("Bases");
 			SetBtns ();
 			Debug.Log ("Btns");
@@ -202,8 +208,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 			backCheck = true;
 //		mStartSec = System.DateTime.Now.Second;
 //		mStartMilSec = System.DateTime.Now.Millisecond / 10;
-			TweenAlpha.Begin (mSprComb, 0f, 0f);
-			TweenAlpha.Begin (mSprComb, 1f, 1.0f);
+			TweenAlpha.Begin (mBatting, 0f, 0f);
+			TweenAlpha.Begin (mBatting, 1f, 1.0f);
 
 			mSpark1.SetActive (false);
 			mSpark2.SetActive (false);
@@ -233,35 +239,35 @@ public class ScriptTF_Betting : MonoBehaviour {
 			}
 			if(QuizMgr.QuizInfo.order!=null){
 
-				if(QuizMgr.QuizInfo.order.Count>7){
+				if(QuizMgr.QuizInfo.order.Count>5){
 			mSprHit.transform.FindChild ("BtnHit1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio+"x";
 			mSprHit.transform.FindChild ("BtnHit2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio+"x";
 			mSprHit.transform.FindChild ("BtnHit3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio+"x";
-			mSprHit.transform.FindChild ("BtnHit4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [4].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [5].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [6].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [7].ratio+"x";
+		//	mSprHit.transform.FindChild ("BtnHit4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio+"x";
+			mSprOut.transform.FindChild ("BtnOut1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio+"x";
+			mSprOut.transform.FindChild ("BtnOut2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [4].ratio+"x";
+			mSprOut.transform.FindChild ("BtnOut3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [5].ratio+"x";
+		//	mSprOut.transform.FindChild ("BtnOut4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [7].ratio+"x";
 			}
 			}
 				Debug.Log ("Checking");
 			mSprHit.transform.FindChild ("BtnHit1").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprHit.transform.FindChild ("BtnHit2").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprHit.transform.FindChild ("BtnHit3").GetComponent<BoxCollider2D> ().enabled = true;
-			mSprHit.transform.FindChild ("BtnHit4").GetComponent<BoxCollider2D> ().enabled = true;
+			//mSprHit.transform.FindChild ("BtnHit4").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprOut.transform.FindChild ("BtnOut1").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprOut.transform.FindChild ("BtnOut2").GetComponent<BoxCollider2D> ().enabled = true;
 			mSprOut.transform.FindChild ("BtnOut3").GetComponent<BoxCollider2D> ().enabled = true;
-			mSprOut.transform.FindChild ("BtnOut4").GetComponent<BoxCollider2D> ().enabled = true;
+			//mSprOut.transform.FindChild ("BtnOut4").GetComponent<BoxCollider2D> ().enabled = true;
 
 			mSprHit.transform.FindChild ("BtnHit1").GetComponent<ScriptBettingItem>().Reset();
 			mSprHit.transform.FindChild ("BtnHit2").GetComponent<ScriptBettingItem>().Reset();
 			mSprHit.transform.FindChild ("BtnHit3").GetComponent<ScriptBettingItem>().Reset();
-			mSprHit.transform.FindChild ("BtnHit4").GetComponent<ScriptBettingItem>().Reset();
+			//mSprHit.transform.FindChild ("BtnHit4").GetComponent<ScriptBettingItem>().Reset();
 			mSprOut.transform.FindChild ("BtnOut1").GetComponent<ScriptBettingItem>().Reset();
 			mSprOut.transform.FindChild ("BtnOut2").GetComponent<ScriptBettingItem>().Reset();
 			mSprOut.transform.FindChild ("BtnOut3").GetComponent<ScriptBettingItem>().Reset();
-			mSprOut.transform.FindChild ("BtnOut4").GetComponent<ScriptBettingItem>().Reset();
+			//mSprOut.transform.FindChild ("BtnOut4").GetComponent<ScriptBettingItem>().Reset();
 		} else if (QuizMgr.QuizInfo.typeCode.Contains ("_QZC_")) {
 			mSprHit.SetActive(false);
 			mSprOut.SetActive(false);
@@ -295,7 +301,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		mSprLoaded.transform.FindChild ("BtnLoaded4").localPosition = new Vector3 (260f, -210f, 0);
 		if (QuizMgr.QuizInfo.order != null) {
 			
-			if (QuizMgr.QuizInfo.order.Count > 7) {
+			if (QuizMgr.QuizInfo.order.Count > 5) {
 				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio + "x";
 				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio + "x";
 				mSprLoaded.transform.FindChild ("BtnLoaded3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio + "x";
@@ -312,7 +318,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		mSprLoaded.transform.FindChild ("BtnLoaded4").gameObject.SetActive (false);
 		if (QuizMgr.QuizInfo.order != null) {
 			
-			if (QuizMgr.QuizInfo.order.Count > 7) {
+			if (QuizMgr.QuizInfo.order.Count > 5) {
 				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio + "x";
 				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio + "x";
 			}
@@ -325,7 +331,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (playInfo == null)
 			return;
 
-		Transform tfStatus = mSprComb.transform.FindChild("SprPitcher").FindChild ("StatusInfo");
+		Transform tfStatus = mBatting.transform.FindChild("SprPitcher").FindChild ("StatusInfo");
 		tfStatus.FindChild ("LblNum").GetComponent<UILabel> ().text = string.Format("{0}",playInfo.playRound);
 		tfStatus.FindChild ("LblRound").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (playInfo.playRound);
 		tfStatus.FindChild ("SprUp").GetComponent<UISprite> ().color = WHITE;
@@ -362,35 +368,103 @@ public class ScriptTF_Betting : MonoBehaviour {
 			Debug.Log("No Pitcher");
 		}
 		Landing.GetComponent<LandingManager> ().SetPitcher ();
-		Transform tfPitcher = mSprComb.transform.FindChild ("SprPitcher");
-		string playerInfo = ScriptMainTop.DetailBoard.player [0].playerName + " No." + ScriptMainTop.DetailBoard.player [0].playerNumber;
-		tfPitcher.FindChild ("LblName").GetComponent<UILabel> ().text = playerInfo;
-		string playerAVG = ScriptMainTop.DetailBoard.player [0].ERA;
-		tfPitcher.FindChild ("LblSave").GetComponent<UILabel> ().text = playerAVG;
-		string strImage = ScriptMainTop.DetailBoard.player [0].imageName;
-		if (ScriptMainTop.DetailBoard.player [0].imagePath != null 
-		    && ScriptMainTop.DetailBoard.player [0].imagePath.Length > 0)
-			strImage = ScriptMainTop.DetailBoard.player [0].imagePath
-				+ ScriptMainTop.DetailBoard.player [0].imageName;
-		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
-		StartCoroutine (GetImage(www, tfPitcher.FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
+		Transform tfPitcher = mBatting.transform.FindChild ("SprPitcher");
+//		string playerInfo = ScriptMainTop.DetailBoard.player [0].playerName + " No." + ScriptMainTop.DetailBoard.player [0].playerNumber;
+//		tfPitcher.FindChild ("LblName").GetComponent<UILabel> ().text = playerInfo;
+//		string playerAVG = ScriptMainTop.DetailBoard.player [0].ERA;
+//		tfPitcher.FindChild ("LblSave").GetComponent<UILabel> ().text = playerAVG;
+//		string strImage = ScriptMainTop.DetailBoard.player [0].imageName;
+//		if (ScriptMainTop.DetailBoard.player [0].imagePath != null 
+//		    && ScriptMainTop.DetailBoard.player [0].imagePath.Length > 0)
+//			strImage = ScriptMainTop.DetailBoard.player [0].imagePath
+//				+ ScriptMainTop.DetailBoard.player [0].imageName;
+//		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+//		StartCoroutine (GetImage(www, tfPitcher.FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 	}
-
+	string Holdname;
 	void SetHitter()
 	{ 
+
+
+		if(LandingManager.N==null){
+			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");
+			string playerInfo = QuizMgr.QuizInfo.playerName + "#"+ QuizMgr.QuizInfo.playerNumber;
+			mBatting.transform.FindChild("Sprite").FindChild("Current hitter").FindChild("Players Name")
+				.GetComponent<UILabel>().text = playerInfo;
+
+			string playerAVG = ScriptMainTop.DetailBoard.player [ScriptMainTop.DetailBoard.player.Count - 1].AVG;
+			mBatting.transform.FindChild("Sprite").FindChild("Current hitter").FindChild("Batting")
+				.GetComponent<UILabel>().text = playerAVG;
+		
+			string strImage = QuizMgr.QuizInfo.imageName;
+			if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0)
+				strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
+			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+			StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
+			                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
+			                          GetComponent<UITexture>()));
+			first = false;
+			Holdname = strImage;
+		} else {
+		
+
+
+				List<nextPlayerInfo> nowPlayer = LandingManager.N;
+				LandingManager.Old = nowPlayer;
+				string strImage = "";
+				Debug.Log("SetHitter0");
+			
+					//            P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
+					//            P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
+					//            P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
+					//            
+				for(int i = 0; i <nowPlayer.Count;i++ ){
+					if(nowPlayer[i].type == 1){
+						string playerInfo = nowPlayer[i].playerName + "#" + nowPlayer[i].playerNumber;
+						mBatting.transform.FindChild("Sprite").FindChild("Current hitter").FindChild("Players Name")
+							.GetComponent<UILabel>().text = playerInfo;
+			
+						string playerAVG = nowPlayer[i].hitAvg;
+
+						mBatting.transform.FindChild("Sprite").FindChild("Current hitter").FindChild("Batting")
+							.GetComponent<UILabel>().text = playerAVG;
+
+							
+							strImage = nowPlayer[i].imageName;
+						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
+							.GetComponent<UILabel>().text = nowPlayer[i].hitAvg;
+						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 1")
+							.GetComponent<UILabel>().text = nowPlayer[i].hitH.ToString()+"%";
+						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
+							.GetComponent<UILabel>().text = nowPlayer[i].hit2B.ToString()+"%";
+						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
+							.GetComponent<UILabel>().text = nowPlayer[i].hitBB.ToString()+"%";
+						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
+							.GetComponent<UILabel>().text = nowPlayer[i].hitAvg;
+			
+							
+						Debug.Log("nextPlayer[i].hitAvg : " + nowPlayer[i].hitAvg);
+			
+							if(Holdname!=strImage){
+								if (nowPlayer[i].imagePath != null && nowPlayer[i].imagePath.Length > 0){
+									strImage =nowPlayer[i] .imagePath + nowPlayer[i].imageName;
+									WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+									Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+								StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
+								                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
+								                          GetComponent<UITexture>()));
+								
+								
+							}
+						}
+					}
+					Holdname = strImage;
+				
+			}
+
+		}
 		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.NextPlayerInfo);
-		Transform tfHitter = mSprComb.transform.FindChild ("SprHitter");
-		string playerInfo = QuizMgr.QuizInfo.playerName + " No." + QuizMgr.QuizInfo.playerNumber;
-		tfHitter.FindChild ("LblName").GetComponent<UILabel> ().text = playerInfo;
-		string playerAVG = ScriptMainTop.DetailBoard.player [ScriptMainTop.DetailBoard.player.Count-1].AVG;
-		tfHitter.FindChild("LblHit").GetComponent<UILabel>().text = playerAVG;
-		tfHitter.FindChild ("LblTeam").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.teamName;
-		string strImage = QuizMgr.QuizInfo.imageName;
-		if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0)
-			strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
-		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
-		Debug.Log("url : "+Constants.IMAGE_SERVER_HOST + strImage);
-		StartCoroutine (GetImage(www, tfHitter.FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 	}
 
 	IEnumerator GetImage(WWW www, UITexture texture)
@@ -434,7 +508,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		mSpark2.GetComponent<ParticleSystem> ().Play ();
 //		transform.root.GetComponent<AudioSource>().PlayOneShot (mBoom);
 
-		GameObject go = mSprComb.transform.FindChild("Panel").FindChild("SprVS").gameObject;
+		GameObject go = mBatting.transform.FindChild("Panel").FindChild("SprVS").gameObject;
 		TweenAlpha.Begin (go, 0f, 0f);
 		TweenScale.Begin (go, 0f, new Vector3(1f, 1f, 1f));
 		TweenAlpha.Begin (go, 0.5f, 1f);
@@ -445,10 +519,56 @@ public class ScriptTF_Betting : MonoBehaviour {
 		TweenScale.Begin(go, 0.5f, new Vector3(1.5f, 1.5f, 1.5f));
 
 	}
+	IEnumerator OpenAnimations(){
+		QuizMgr.IsBettingOpended = true;
+		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
+		for (int i = 0; i<5; i++) {
+			Menu.transform.localPosition+=new Vector3(0,655f/5f,0);
+			if(Menu.transform.localPosition.y==1){
+				break;
+			}
+			yield return new WaitForSeconds(0.05f);
+		}
 
+	}
+	IEnumerator CloseAnimations(){
+
+		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
+		for (int i = 0; i<5; i++) {
+			Menu.transform.localPosition-=new Vector3(0,655f/5f,0);
+			if(Menu.transform.localPosition.y==-655){
+				break;
+			}
+			yield return new WaitForSeconds(0.05f);
+		}
+
+		for (int i = 0; i <3; i++) {
+			transform.FindChild ("Scroll View").FindChild ("GameObject").FindChild("Batting").FindChild("SprHit")
+				.FindChild("BtnHit"+(i+1).ToString()).GetComponent<UIButton>().isEnabled = true;
+		}
+		for (int i = 0; i <3; i++) {
+			transform.FindChild ("Scroll View").FindChild ("GameObject").FindChild("Batting").FindChild("SprOut")
+				.FindChild("BtnOut"+(i+1).ToString()).GetComponent<UIButton>().isEnabled = true;
+		}
+		transform.FindChild ("Scroll View").FindChild ("GameObject").FindChild("SprBetting").GetComponent<ScriptBetting> ().BtnConfirm ();
+		transform.parent.FindChild ("Top").GetComponent<ScriptMainTop> ().PostData ();
+		QuizMgr.IsBettingOpended = false;
+		gameObject.SetActive (false);
+	
+		
+	}
+	public void OpenAnimation()
+	{
+		StartCoroutine (OpenAnimations());
+	}
+	public void CloseAnimation()
+	{
+		StartCoroutine (CloseAnimations());
+	}
 	public void CloseBetting()
 	{
 	//	gameObject.SetActive(false);
 		Debug.Log ("CloseBetting");
 	}
+
 }

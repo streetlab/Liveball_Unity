@@ -83,6 +83,9 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 		if(quizInfo.quizValue.Length > 0){
 			Debug.Log("quizValue : "+quizInfo.quizValue);
 			int idx = int.Parse(quizInfo.quizValue) -1;
+			if(idx>5){
+				idx = 0;
+			}
 			mLblResult.GetComponent<UILabel>().text = quizInfo.order[idx].description;
 
 			bool isCorrect = false;

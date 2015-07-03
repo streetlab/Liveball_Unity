@@ -173,9 +173,11 @@ public class ScriptMainTop : MonoBehaviour {
 		yield return www;
 		
 		UtilMgr.DismissLoading();
+
 		if(www.error != null){
 			DialogueMgr.ShowDialogue("attendance error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		} else{
+			Debug.Log("www : " + www.text);
 			if(www.text != null && www.text.Length > 0){
 //				mWebview.SetActive(true);
 //				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
@@ -491,12 +493,12 @@ public class ScriptMainTop : MonoBehaviour {
 		if(UserMgr.UserInfo == null)
 			return;
 
-		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
-		mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
-		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
+//		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
+//		mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
+//		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
 
-		mLblNewGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
 
+		//mLblNewGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
 		mLblNewDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
 		mLblNewRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
 	}
@@ -527,12 +529,16 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(false);
 
 		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
-		transform.GetComponent<PlayMakerFSM> ().SendEvent ("CloseBetting");
-		TweenAlpha.Begin (mBetting.GetComponent<ScriptTF_Betting>().mSprComb, 1f, 0f);
-
+		//transform.GetComponent<PlayMakerFSM> ().SendEvent ("CloseBetting");
+		//TweenAlpha.Begin (mBetting.GetComponent<ScriptTF_Betting>().mSprComb, 1f, 0f);
+		transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().CloseAnimation();
+		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
 		CheckAndJoinQuiz();
 	}
-
+	public void PostData(){
+		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
+		CheckAndJoinQuiz();
+	}
 	void CheckAndJoinQuiz(){
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
 
@@ -712,7 +718,8 @@ public class ScriptMainTop : MonoBehaviour {
 
 	
 			if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
-				transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
+				//transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
+				transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation();
 				transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
 			}
 

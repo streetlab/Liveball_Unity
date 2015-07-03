@@ -35,22 +35,22 @@ public class LandingMidButten : MonoBehaviour {
 		transform.FindChild (">").GetComponent<UIButton> ().isEnabled = false;
 	}
 	public void M1(){
-		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M1 ();
+		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M1 (null);
 		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
 		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
-
+		
 		G_M1.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
 		G_M2.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
 		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
-	
+		
 	}
 	public void M2(){
-		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M2 ();
+		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M2 (null);
 		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
 		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
-
+		
 		G_M1.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
 		G_M2.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
 		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
@@ -59,7 +59,37 @@ public class LandingMidButten : MonoBehaviour {
 		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
-
+		
+		G_M1.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+		G_M2.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
+	}
+	public void MN1(){
+		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M1 (Bot);
+		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
+		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+		
+		G_M1.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
+		G_M2.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+		
+	}
+	public void MN2(){
+		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M2 (Bot);
+		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
+		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+		
+		G_M1.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+		G_M2.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
+		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+	}
+	public void MN3(){
+		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
+		
 		G_M1.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
 		G_M2.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
 		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
