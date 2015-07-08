@@ -87,12 +87,14 @@ public class ScriptTHTop : MonoBehaviour {
 	}
 
 	void OpenNanoo(){
-		mNanoo.SetActive (true);
+		if (mNanoo != null) {
+			mNanoo.SetActive (true);
 
-		mTimeline.SetActive (false);		
-		mAlbum.SetActive (false);
+			mTimeline.SetActive (false);		
+			mAlbum.SetActive (false);
 //		mSeason.SetActive (false);
-		mSquad.SetActive (false);
+			mSquad.SetActive (false);
+		}
 	}
 
 	void OpenTimeline(){
