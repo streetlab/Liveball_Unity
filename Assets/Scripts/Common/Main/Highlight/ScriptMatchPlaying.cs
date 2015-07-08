@@ -239,7 +239,9 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //		for (int i=0; i<mEventProgQuiz.Response.data.quiz.Count; i++) {
 //			Debug.Log ("mEventProgQuiz.Response.data.quiz [0].gameRound  : "+mEventProgQuiz.Response.data.quiz [i].gameRound);
 //		}
-		if (UtilMgr.gameround == 0) {
+		if (UtilMgr.gameround == 0&&mEventProgQuiz.Response.data.quiz!=null) {
+			if(mEventProgQuiz.Response.data.quiz.Count>0){
+			
 			UtilMgr.gameround = (((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1));
 			if (
 			UtilMgr.gameround > 1) {
@@ -249,6 +251,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 						TF_Landing.GetComponent<LandingManager> ().GetRank ();
 					}
 				}
+			}
 			}
 		} else {
 				
