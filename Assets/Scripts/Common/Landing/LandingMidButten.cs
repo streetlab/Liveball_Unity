@@ -65,7 +65,7 @@ public class LandingMidButten : MonoBehaviour {
 		//G_M3.transform.FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
 	}
 	public void MN1(){
-		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M1 (Bot);
+		transform.root.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager> ().M1 (Bot);
 		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
 		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
@@ -76,7 +76,7 @@ public class LandingMidButten : MonoBehaviour {
 		
 	}
 	public void MN2(){
-		transform.parent.parent.parent.parent.GetComponent<LandingManager> ().M2 (Bot);
+		transform.root.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager> ().M2 (Bot);
 		G_M1.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 		G_M2.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
 		//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;

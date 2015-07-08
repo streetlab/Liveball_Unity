@@ -343,4 +343,54 @@ public class ScheduleInfo {
 			_bettingTotal = value;
 		}
 	}
+	private string _entryFee;
+	
+	public string entryFee {
+		get {
+			return _entryFee;
+		}
+		set {
+			_entryFee = value;
+		}
+	}
+	private string _rewardType;
+	
+	public string rewardType {
+		get {
+			return _rewardType;
+		}
+		set {
+			_rewardType = value;
+		}
+	}
+	private string _rewardValue;
+	
+	public string rewardValue {
+		get {
+			return _rewardValue;
+		}
+		set {
+			_rewardValue = value;
+		}
+	}
+	private string _rewardRate;
+	
+	public string rewardRate {
+		get {
+			return _rewardRate;
+		}
+		set {
+			_rewardRate = value;
+		}
+	}
+	private string _myEntryFee;
+	
+	public string myEntryFee {
+		get {
+			return _myEntryFee;
+		}
+		set {
+			_myEntryFee = value;
+		}
+	}
 }

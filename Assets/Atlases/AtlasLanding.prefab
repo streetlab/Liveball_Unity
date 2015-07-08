@@ -42,8 +42,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: ed9cd0ffcadd249ea97cea6561e45925, type: 2}
   mSprites:
   - name: banner
-    x: 1190
-    y: 1380
+    x: 0
+    y: 1518
     width: 680
     height: 172
     borderLeft: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: base
-    x: 661
-    y: 1571
+    x: 970
+    y: 3482
     width: 20
     height: 10
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: base_bg
-    x: 1324
-    y: 1294
+    x: 856
+    y: 3516
     width: 154
     height: 84
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: base_off
-    x: 551
-    y: 1555
+    x: 880
+    y: 3387
     width: 52
     height: 26
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: base_on
-    x: 497
-    y: 1555
+    x: 934
+    y: 3387
     width: 52
     height: 26
     borderLeft: 0
@@ -106,9 +106,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: bg
+    x: 0
+    y: 2912
+    width: 720
+    height: 1184
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: btn_bg
-    x: 1324
-    y: 1242
+    x: 1000
+    y: 3422
     width: 50
     height: 50
     borderLeft: 6
@@ -120,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_bg1
-    x: 1728
-    y: 1561
+    x: 828
+    y: 3383
     width: 50
     height: 30
     borderLeft: 6
@@ -133,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_bg2
-    x: 1676
-    y: 1561
+    x: 776
+    y: 3383
     width: 50
     height: 30
     borderLeft: 6
@@ -146,8 +159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_center
-    x: 1508
-    y: 1559
+    x: 856
+    y: 3482
     width: 112
     height: 32
     borderLeft: 0
@@ -159,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_mail
-    x: 1788
-    y: 1322
+    x: 1158
+    y: 3486
     width: 56
     height: 56
     borderLeft: 0
@@ -172,8 +185,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: edge
-    x: 661
-    y: 1563
+    x: 856
+    y: 3474
     width: 6
     height: 6
     borderLeft: 0
@@ -185,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_chatting
-    x: 1730
-    y: 1322
+    x: 1100
+    y: 3486
     width: 56
     height: 56
     borderLeft: 0
@@ -198,8 +211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_doosan
-    x: 0
-    y: 1115
+    x: 507
+    y: 2473
     width: 506
     height: 437
     borderLeft: 0
@@ -211,8 +224,8 @@ MonoBehaviour:
     paddingTop: 46
     paddingBottom: 29
   - name: ic_hanwha
-    x: 0
-    y: 9
+    x: 1014
+    y: 1729
     width: 505
     height: 330
     borderLeft: 0
@@ -224,8 +237,8 @@ MonoBehaviour:
     paddingTop: 100
     paddingBottom: 82
   - name: ic_info
-    x: 1568
-    y: 1263
+    x: 1158
+    y: 3544
     width: 56
     height: 56
     borderLeft: 0
@@ -237,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_item
-    x: 1626
-    y: 1263
+    x: 1100
+    y: 3544
     width: 56
     height: 56
     borderLeft: 0
@@ -250,8 +263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_kia
-    x: 508
-    y: 527
+    x: 0
+    y: 1692
     width: 505
     height: 367
     borderLeft: 0
@@ -263,8 +276,8 @@ MonoBehaviour:
     paddingTop: 81
     paddingBottom: 64
   - name: ic_kt
-    x: 1003
-    y: 1585
+    x: 1219
+    y: 3166
     width: 503
     height: 463
     borderLeft: 0
@@ -276,8 +289,8 @@ MonoBehaviour:
     paddingTop: 32
     paddingBottom: 17
   - name: ic_lg
-    x: 1508
-    y: 1593
+    x: 0
+    y: 2455
     width: 505
     height: 455
     borderLeft: 0
@@ -289,8 +302,8 @@ MonoBehaviour:
     paddingTop: 39
     paddingBottom: 18
   - name: ic_lotte
-    x: 497
-    y: 1583
+    x: 1219
+    y: 3631
     width: 504
     height: 465
     borderLeft: 0
@@ -302,8 +315,8 @@ MonoBehaviour:
     paddingTop: 32
     paddingBottom: 15
   - name: ic_m
-    x: 1872
-    y: 1506
+    x: 1052
+    y: 3426
     width: 45
     height: 46
     borderLeft: 0
@@ -315,8 +328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_nc
-    x: 508
-    y: 169
+    x: 507
+    y: 1703
     width: 505
     height: 356
     borderLeft: 0
@@ -328,8 +341,8 @@ MonoBehaviour:
     paddingTop: 86
     paddingBottom: 70
   - name: ic_new
-    x: 639
-    y: 1561
+    x: 1193
+    y: 3420
     width: 20
     height: 20
     borderLeft: 0
@@ -341,8 +354,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_nexen
-    x: 0
-    y: 341
+    x: 506
+    y: 2075
     width: 505
     height: 378
     borderLeft: 0
@@ -354,8 +367,8 @@ MonoBehaviour:
     paddingTop: 75
     paddingBottom: 59
   - name: ic_ruby
-    x: 1423
-    y: 1246
+    x: 1099
+    y: 3426
     width: 45
     height: 46
     borderLeft: 0
@@ -368,7 +381,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: ic_samsung
     x: 0
-    y: 721
+    y: 2061
     width: 504
     height: 392
     borderLeft: 0
@@ -380,8 +393,8 @@ MonoBehaviour:
     paddingTop: 69
     paddingBottom: 51
   - name: ic_sk
-    x: 0
-    y: 1554
+    x: 722
+    y: 3602
     width: 495
     height: 494
     borderLeft: 0
@@ -393,8 +406,8 @@ MonoBehaviour:
     paddingTop: 18
     paddingBottom: 0
   - name: ic_store
-    x: 1730
-    y: 1264
+    x: 884
+    y: 3416
     width: 56
     height: 56
     borderLeft: 0
@@ -406,8 +419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_strengthen
-    x: 1788
-    y: 1264
+    x: 942
+    y: 3416
     width: 56
     height: 56
     borderLeft: 0
@@ -419,8 +432,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_top_gold
-    x: 1376
-    y: 1246
+    x: 1146
+    y: 3426
     width: 45
     height: 46
     borderLeft: 0
@@ -432,8 +445,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: main_bg
-    x: 508
-    y: 1242
+    x: 1015
+    y: 2600
     width: 680
     height: 310
     borderLeft: 0
@@ -445,8 +458,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: menu_banner
-    x: 508
-    y: 896
+    x: 1013
+    y: 2109
     width: 540
     height: 344
     borderLeft: 0
@@ -458,8 +471,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: shadow_01
-    x: 1190
-    y: 1252
+    x: 722
+    y: 3474
     width: 132
     height: 126
     borderLeft: 10
@@ -471,8 +484,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: shadow_02
-    x: 1480
-    y: 1269
+    x: 1012
+    y: 3491
     width: 86
     height: 109
     borderLeft: 6
@@ -484,8 +497,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: top_gold_bg
-    x: 1568
-    y: 1321
+    x: 722
+    y: 3415
     width: 160
     height: 57
     borderLeft: 28
@@ -497,8 +510,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: triangle
-    x: 605
-    y: 1561
+    x: 970
+    y: 3494
     width: 32
     height: 20
     borderLeft: 0
@@ -510,8 +523,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: triangle_02
-    x: 1622
-    y: 1559
+    x: 722
+    y: 3381
     width: 52
     height: 32
     borderLeft: 0
@@ -523,8 +536,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: triangle_03
-    x: 2015
-    y: 2018
+    x: 1193
+    y: 3442
     width: 16
     height: 30
     borderLeft: 0

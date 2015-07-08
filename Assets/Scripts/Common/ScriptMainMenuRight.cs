@@ -74,6 +74,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 
 	}
 	void Start () {
+		transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(false);
 		ING = true;
 		//mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "getdata"));
 		//    NetMgr.GetScheduleMore (null,
@@ -215,6 +216,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 	}
 	void getdata(){
+		transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(false);
 		c = 1;
 		Count.Clear ();
 		chacktoday ();
@@ -312,6 +314,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		
 		
 		if (transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel> ().text == "경기 없음") {
+			transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(true);
 			c = 0;
 		}
 	}

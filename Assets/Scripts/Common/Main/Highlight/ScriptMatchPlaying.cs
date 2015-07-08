@@ -187,6 +187,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public void SetList(QuizInfo quiz){
 		mSelectedQuiz = quiz;
 		mList.GetComponent<UIDraggablePanel2>().Init(1, delegate(UIListItem item, int index){
+		
 			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
 			sItem.Init (this, mSelectedQuiz, transform.FindChild ("ItemDetail").gameObject);				
 			item.Target.transform.FindChild("Round").gameObject.SetActive(false);
@@ -219,12 +220,50 @@ public class ScriptMatchPlaying : MonoBehaviour {
 				}
 			}
 		}
+		ScriptMainTop.MyPoint = 0;
+		Debug.Log ("MyPoint Reset");
+		QuizRespInfo resp = null;
+		for(int i = 0; i < mEventProgQuiz.Response.data.quiz.Count; i++){
+			QuizInfo quizInfo2 = mEventProgQuiz.Response.data.quiz[i];
+			for(int a = 0; a < quizInfo2.resp.Count;a++){
 
+				resp = quizInfo2.resp[a];
+				if(resp.respValue.Equals(quizInfo2.quizValue)){
+					ScriptMainTop.MyPoint+=resp.expectRewardPoint;
+					break;
+				}
+			}
+		
+		}
+	
+//		for (int i=0; i<mEventProgQuiz.Response.data.quiz.Count; i++) {
+//			Debug.Log ("mEventProgQuiz.Response.data.quiz [0].gameRound  : "+mEventProgQuiz.Response.data.quiz [i].gameRound);
+//		}
+		if (UtilMgr.gameround == 0) {
+			UtilMgr.gameround = (((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1));
+			if (
+			UtilMgr.gameround > 1) {
+
+				if (UserMgr.Schedule.myEntryFee != null) {
+					if (int.Parse (UserMgr.Schedule.myEntryFee) > 0) {
+						TF_Landing.GetComponent<LandingManager> ().GetRank ();
+					}
+				}
+			}
+		} else {
+				
+			if (UtilMgr.gameround < ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>1) {
+				TF_Landing.GetComponent<LandingManager> ().GetRank();
+					}
+			UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);
+		
+		}
 		mList.GetComponent<UIDraggablePanel2> ().Init (QuizMgr.QuizList.Count,
 		                                               delegate(UIListItem item, int index) {
-			
+		
 			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
 			QuizInfo quizInfo = mEventProgQuiz.Response.data.quiz[index];
+		
 			sItem.Init (this, quizInfo, transform.FindChild ("ItemDetail").gameObject);				
 			item.Target.transform.FindChild("Round").gameObject.SetActive(false);
 			if(quizInfo.mShowInningFlag){

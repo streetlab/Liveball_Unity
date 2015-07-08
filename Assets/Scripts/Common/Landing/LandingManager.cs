@@ -123,6 +123,15 @@ public class LandingManager : MonoBehaviour {
 			LandingScroll.transform.FindChild ("Playing").FindChild("Ground").FindChild("END").gameObject.SetActive (true);
 		}
 		transform.parent.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.SetActive (false);
+		Debug.Log ("UserMgr.UserInfo.myEntryFee : : " + UserMgr.Schedule.myEntryFee);
+		transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (true);
+		if (UserMgr.Schedule.myEntryFee != null) {
+			if (int.Parse (UserMgr.Schedule.myEntryFee) > 0) {
+				transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RankJoinButton").gameObject.SetActive (false);
+				transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").gameObject.SetActive (true);
+		
+			}
+		}
 		//StartCoroutine (view());
 	}
 	
@@ -245,6 +254,24 @@ public class LandingManager : MonoBehaviour {
 			}
 		} else {
 			bot.transform.parent.FindChild("Top").GetComponent<UILabel>().text = "시즌타율";
+			bot.GetComponent<UILabel>().text = "";
+			bot.transform.FindChild("Top 1").GetComponent<UILabel>().text = "";
+			bot.transform.FindChild("Top 2").GetComponent<UILabel>().text = "";
+			bot.transform.FindChild("Top 3").GetComponent<UILabel>().text = "";
+			bot.transform.FindChild("Top 4").GetComponent<UILabel>().text = "";
+			if (Old != null) {
+				for (int i = 0; i <Old.Count; i++) {
+					if (Old [i].type == 1) {
+						
+						bot.GetComponent<UILabel>().text = Old [i].title;
+						bot.transform.FindChild("Top 1").GetComponent<UILabel>().text = Old [i].hitH.ToString () + "%";
+						bot.transform.FindChild("Top 2").GetComponent<UILabel>().text = Old [i].hit2B.ToString () + "%";
+						bot.transform.FindChild("Top 3").GetComponent<UILabel>().text = Old [i].hitHr.ToString () + "%";
+						bot.transform.FindChild("Top 4").GetComponent<UILabel>().text = Old [i].hitBB.ToString () + "%";
+					}
+				}
+			}
+
 		}
 	}
 	public void M2(GameObject bot){
@@ -329,9 +356,10 @@ public class LandingManager : MonoBehaviour {
 	}
 	public bool nonstart = false;
 	
-	
+
 	
 	public void Start () {
+		UtilMgr.gameround = 0;
 		Debug.Log ("ScriptMainTop.LandingState : " + ScriptMainTop.LandingState);
 		N = null;
 		Old = null;
@@ -786,5 +814,65 @@ public class LandingManager : MonoBehaviour {
 		return "c1c1c1";
 		
 		
+	}
+	GameJoinNEntryFeeEvent gje;
+	public void joingame(){
+		DialogueMgr.ShowDialogue ("랭킹전 입장", "[루비"+UserMgr.Schedule.entryFee+"개] 를 사용하여 입장\n하시겠습니까?" , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
+
+	}
+	void ex(){
+		Debug.Log ("UserMgr.Schedule.myEntryFee : " + UserMgr.Schedule.myEntryFee);
+		if(
+		UserMgr.Schedule.myEntryFee==null||int.Parse(UserMgr.Schedule.myEntryFee)==0
+			){
+			UserMgr.Schedule.myEntryFee =UserMgr.Schedule.entryFee.ToString();
+			UserMgr.UserInfo.userRuby=(int.Parse(UserMgr.UserInfo.userRuby)-int.Parse(UserMgr.Schedule.entryFee)).ToString();
+			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RankJoinButton").gameObject.SetActive(false);
+			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").gameObject.SetActive(true);
+
+		}
+	}
+
+
+void DialogueHandler(DialogueMgr.BTNS btn){
+	if (btn == DialogueMgr.BTNS.Btn1) {
+			if (int.Parse (UserMgr.UserInfo.userRuby) < int.Parse(UserMgr.Schedule.entryFee)) {
+				DialogueMgr.ShowDialogue ("입장 실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else {
+				gje = new GameJoinNEntryFeeEvent (new EventDelegate (this, "ex"));
+				NetMgr.GameJoinNEntryFee (gje);
+		}
+	}
+	
+}
+	GameSposGameEvent GSG;
+	public void GetRank(){
+		GSG = new GameSposGameEvent (new EventDelegate (this, "SetRank"));
+		NetMgr.GameSposGame (GSG);
+	}
+	void SetRank(){
+		float num;
+		Debug.Log ("GSG.Response.data.myRank : " + GSG.Response.data.myRank);
+		Debug.Log ("GSG.Response.data.joinerCount : " + GSG.Response.data.joinerCount);
+		num = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount);
+		num = (float)getnum (num);
+		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
+			GetComponent<UILabel>().text = "0";
+		if (num <= 50) {
+			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
+				GetComponent<UILabel>().text = UserMgr.Schedule.rewardValue;
+		}
+		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Rank").
+			GetComponent<UILabel>().text = num.ToString()+"%";
+	}
+	int getnum(float num){
+		int number = (int)num;
+		if ((float)number < num) {
+			number+=1;
+		}
+		if (number > 100) {
+			number = 100;
+		}
+		return number;
 	}
 }

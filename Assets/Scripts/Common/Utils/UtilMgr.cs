@@ -15,6 +15,7 @@ public class UtilMgr : MonoBehaviour {
 	public static WWW mWWW;
 	public static bool IsFirstLanding = true;
 
+	public static int gameround=0;
 	public static string SelectTeam = "";
 	public static string SelectTeamSeq = "";
 	public static bool OnPause;

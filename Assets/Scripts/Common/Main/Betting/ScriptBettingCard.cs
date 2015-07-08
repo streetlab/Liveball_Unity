@@ -92,7 +92,7 @@ public class ScriptBettingCard : UIDragDropItem {
 		mRatio.GetComponent<UILabel>().text = mCardInfo.rewardRate+"";
 		string path = Constants.IMAGE_SERVER_HOST+mCardInfo.cardImagePath+mCardInfo.cardImageName;
 		WWW www = new WWW(path);
-		StartCoroutine(GetFace(www));
+		//StartCoroutine(GetFace(www));
 	}
 
 	IEnumerator GetFace(WWW www){
@@ -204,9 +204,9 @@ public class ScriptBettingCard : UIDragDropItem {
 		}
 		mSprBetting.SetActive (true);
 		
-		UtilMgr.AddBackEvent(
-			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),
-		                   "CloseWindow"));
+//		UtilMgr.AddBackEvent(
+//			new EventDelegate (mSprBetting.GetComponent<ScriptBetting> (),
+//		                   "CloseWindow"));
 	}
 
 	protected override void OnDragDropMove (Vector2 delta)

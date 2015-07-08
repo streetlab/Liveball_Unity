@@ -61,6 +61,7 @@ public class ScriptQuizResult : MonoBehaviour {
 
 			mLblLeft.GetComponent<UILabel>().text =
 				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Correct"+rand).Value;
+			ScriptMainTop.MyPoint+= (float)rewardPoint;
 			mLblBtmRight.GetComponent<UILabel>().text = "+"+rewardPoint;
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 0);
 			//mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)rewardPoint) * 0.005f);
@@ -81,9 +82,10 @@ public class ScriptQuizResult : MonoBehaviour {
 			mCurtainRight.GetComponent<UISprite>().spriteName = "bg_result_02_02";
 
 			mLblLeft.GetComponent<UILabel>().text =
-				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
+			transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
 			mLblBtmRight.GetComponent<UILabel>().text = "-"+betPoint;
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 1f);
+			ScriptMainTop.MyPoint+= (float)betPoint;
 			mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)betPoint) * 0.005f);
 
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioFail);

@@ -190,7 +190,7 @@ public class NetMgr : MonoBehaviour{
 		} else {
 //			httpUrl = Constants.QUERY_SERVER_HOST;
 		}
-
+		//AUTH_SERVER_HOST
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 
 		Debug.Log (reqParam);
@@ -199,6 +199,29 @@ public class NetMgr : MonoBehaviour{
 //			return;
 		}
 
+		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
+	}
+	private void webAPIProcessGetScheduleEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
+	{
+		Debug.Log("webAPIProcessEvent2");
+		string reqParam = "";
+		string httpUrl = "";
+		if (request != null) {
+			reqParam = request.ToRequestString();
+			//			httpUrl = (Constants.QUERY_SERVER_HOST + reqParam);
+			//			httpUrl = reqParam;
+		} else {
+			//			httpUrl = Constants.QUERY_SERVER_HOST;
+		}
+		//AUTH_SERVER_HOST
+		WWW www = new WWW (Constants.AUTH_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		
+		Debug.Log (reqParam);
+		if(UtilMgr.OnPause){
+			Debug.Log("Request is Canceled cause OnPause");
+			//			return;
+		}
+		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
 
@@ -300,13 +323,18 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetScheduleAll(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetScheduleAllRequest (), baseEvent);
+		Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
 	}
 
 	public static void GetScheduleMore(string teamCode, int teamSeq, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetScheduleMoreRequest(teamCode, teamSeq), baseEvent);
 	}
+	public static void GameSposGame(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GameSposGameRequest(), baseEvent);
+	}
+
 
 	public static void GetUserRankingDailyForecast(int memSeq, BaseEvent baseEvent)
 	{
@@ -331,6 +359,11 @@ public class NetMgr : MonoBehaviour{
 	public static void GetInvenItem(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetInvenItemRequest (), baseEvent);
+	}
+
+	public static void GameJoinNEntryFee(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GameJoinNEntryFee (), baseEvent);
 	}
 
 	public static void DoneInvenItem(long itemNo,long itemid, BaseEvent baseEvent)

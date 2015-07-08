@@ -42,6 +42,32 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 041f428ba972247a7811dc6e4387b43e, type: 2}
   mSprites:
   - name: 01_01
+    x: 1446
+    y: 1068
+    width: 216
+    height: 172
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 01_02
+    x: 1446
+    y: 893
+    width: 216
+    height: 172
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 02_01
     x: 1010
     y: 545
     width: 216
@@ -54,20 +80,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 01_02
-    x: 1010
-    y: 719
-    width: 216
-    height: 172
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: 02_01
+  - name: 02_02
     x: 1228
     y: 893
     width: 216
@@ -80,7 +93,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 02_02
+  - name: 03_01
     x: 1010
     y: 893
     width: 216
@@ -93,22 +106,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 03_01
-    x: 1664
-    y: 1068
-    width: 216
-    height: 172
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: 03_02
-    x: 1446
-    y: 1068
+    x: 1010
+    y: 719
     width: 216
     height: 172
     borderLeft: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 04_02
-    x: 1446
-    y: 893
+    x: 1664
+    y: 1068
     width: 216
     height: 172
     borderLeft: 0
@@ -471,8 +471,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_bet_hun_release
-    x: 1917
-    y: 1648
+    x: 1321
+    y: 1263
     width: 100
     height: 100
     borderLeft: 0
@@ -484,7 +484,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_bet_max_release
-    x: 1015
+    x: 1219
     y: 1263
     width: 100
     height: 100
@@ -510,7 +510,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_bet_ten_release
-    x: 1219
+    x: 1015
     y: 1263
     width: 100
     height: 100
@@ -523,8 +523,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_bet_tho_release
-    x: 1321
-    y: 1263
+    x: 1917
+    y: 1648
     width: 100
     height: 100
     borderLeft: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
     paddingBottom: 2
   - name: btn_hexagon_off
     x: 802
-    y: 464
+    y: 648
     width: 164
     height: 182
     borderLeft: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: btn_hexagon_on
     x: 802
-    y: 648
+    y: 464
     width: 164
     height: 182
     borderLeft: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_bingo_off
-    x: 1975
+    x: 1903
     y: 1424
     width: 70
     height: 70
@@ -822,7 +822,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_bingo_on
-    x: 1903
+    x: 1975
     y: 1424
     width: 70
     height: 70
@@ -1160,8 +1160,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_5x
-    x: 802
-    y: 1034
+    x: 582
+    y: 18
     width: 206
     height: 206
     borderLeft: 0
@@ -1173,8 +1173,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_bs
-    x: 582
-    y: 18
+    x: 802
+    y: 1034
     width: 206
     height: 206
     borderLeft: 0

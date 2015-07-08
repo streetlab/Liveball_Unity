@@ -193,7 +193,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			Debug.Log ("Init");
 			mListJoin.Clear ();
 //		quizInfo = quizInfo;
-			SetHitter ();
+			SetHitter (quizInfo);
 			Debug.Log ("Hitter");
 			SetPitcher ();
 			Debug.Log ("Pitcher");
@@ -240,13 +240,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 			if(QuizMgr.QuizInfo.order!=null){
 
 				if(QuizMgr.QuizInfo.order.Count>5){
-			mSprHit.transform.FindChild ("BtnHit1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio+"x";
-			mSprHit.transform.FindChild ("BtnHit2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio+"x";
-			mSprHit.transform.FindChild ("BtnHit3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio+"x";
+					mSprHit.transform.FindChild ("BtnHit1").FindChild ("LblGP").GetComponent<UILabel> ().text = "［"+QuizMgr.QuizInfo.order [0].ratio+"］";
+					mSprHit.transform.FindChild ("BtnHit2").FindChild ("LblGP").GetComponent<UILabel> ().text = "［"+QuizMgr.QuizInfo.order [1].ratio+"］";
+					mSprHit.transform.FindChild ("BtnHit3").FindChild ("LblGP").GetComponent<UILabel> ().text = "［"+QuizMgr.QuizInfo.order [2].ratio+"］";
 		//	mSprHit.transform.FindChild ("BtnHit4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [4].ratio+"x";
-			mSprOut.transform.FindChild ("BtnOut3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [5].ratio+"x";
+					mSprOut.transform.FindChild ("BtnOut1").FindChild ("LblGP").GetComponent<UILabel> ().text = "［"+QuizMgr.QuizInfo.order [3].ratio+"］";
+					mSprOut.transform.FindChild ("BtnOut2").FindChild ("LblGP").GetComponent<UILabel> ().text = "［"+QuizMgr.QuizInfo.order [4].ratio+"］";
+					mSprOut.transform.FindChild ("BtnOut3").FindChild ("LblGP").GetComponent<UILabel> ().text = "［"+QuizMgr.QuizInfo.order [5].ratio+"］";
 		//	mSprOut.transform.FindChild ("BtnOut4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [7].ratio+"x";
 			}
 			}
@@ -302,10 +302,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (QuizMgr.QuizInfo.order != null) {
 			
 			if (QuizMgr.QuizInfo.order.Count > 5) {
-				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio + "x";
-				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio + "x";
-				mSprLoaded.transform.FindChild ("BtnLoaded3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio + "x";
-				mSprLoaded.transform.FindChild ("BtnLoaded4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio + "x";
+				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio ;
+				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio ;
+				mSprLoaded.transform.FindChild ("BtnLoaded3").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [2].ratio ;
+				mSprLoaded.transform.FindChild ("BtnLoaded4").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [3].ratio ;
 			}
 		}
 	}
@@ -319,8 +319,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if (QuizMgr.QuizInfo.order != null) {
 			
 			if (QuizMgr.QuizInfo.order.Count > 5) {
-				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio + "x";
-				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio + "x";
+				mSprLoaded.transform.FindChild ("BtnLoaded1").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [0].ratio ;
+				mSprLoaded.transform.FindChild ("BtnLoaded2").FindChild ("LblGP").GetComponent<UILabel> ().text = QuizMgr.QuizInfo.order [1].ratio ;
 			}
 		}
 	}
@@ -382,7 +382,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		StartCoroutine (GetImage(www, tfPitcher.FindChild ("Panel").FindChild ("Texture").GetComponent<UITexture> ()));
 	}
 	string Holdname;
-	void SetHitter()
+	void SetHitter(QuizInfo quiz)
 	{ 
 
 
@@ -401,6 +401,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 				strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+			gameObject.SetActive(true);
 			StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
 			                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
 			                          GetComponent<UITexture>()));
@@ -451,6 +452,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 									strImage =nowPlayer[i] .imagePath + nowPlayer[i].imageName;
 									WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 									Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+							gameObject.SetActive(true);
 								StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
 								                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
 								                          GetComponent<UITexture>()));
@@ -464,6 +466,13 @@ public class ScriptTF_Betting : MonoBehaviour {
 			}
 
 		}
+//		Debug.Log ("quiz.gameRound : " + quiz.gameRound);
+//		int round = (2 * quiz.gameSeq) + (quiz.inningType - 1);
+//		if (UtilMgr.gameround < round&&UtilMgr.gameround>1) {
+//			Landing.GetComponent<LandingManager> ().GetRank();
+//		}
+//			UtilMgr.gameround = round;
+		//if(quiz.gameRound)
 		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.NextPlayerInfo);
 	}
 

@@ -39,9 +39,10 @@ public class ScriptMainTop : MonoBehaviour {
 	public string mStrLive;
 	public GameObject gameobj;
 	public GameObject mWebview;
+	public GameObject Point;
 
 	public static int LandingState=4;
-
+	public static float MyPoint = 0;
 
 	GetQuizEvent mEventQuiz;
 	GetGameSposDetailBoardEvent mBoardEvent;
@@ -65,6 +66,9 @@ public class ScriptMainTop : MonoBehaviour {
 	STATE mState = STATE.Highlight;
 	static GetScheduleEvent mScheduleEvent;
 	void Start () {
+	//	Point.GetComponent<UILabel> ().text 
+
+
 		QuizMgr.EnterMain(this);
 		if (LandingState == 4) {
 			string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
@@ -485,6 +489,7 @@ public class ScriptMainTop : MonoBehaviour {
 
 	void Update(){
 		SetTopInfo ();
+		Point.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(MyPoint.ToString ()); 
 //		Debug.Log("delta time is "+Time.deltaTime);
 	}
 
@@ -493,9 +498,9 @@ public class ScriptMainTop : MonoBehaviour {
 		if(UserMgr.UserInfo == null)
 			return;
 
-//		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
-//		mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
-//		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
+		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
+		//mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
+		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
 
 
 		//mLblNewGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
@@ -703,9 +708,7 @@ public class ScriptMainTop : MonoBehaviour {
 
 			//mLivetalk.SetActive(false);
 
-			if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
-				mBetting.SetActive (true);
-			} 
+		
 			if (mLivetalk.activeSelf) {
 				if (mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().isSelected)
 					mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().CloseKeboard ();
@@ -718,9 +721,15 @@ public class ScriptMainTop : MonoBehaviour {
 
 	
 			if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+				if(UserMgr.Schedule.myEntryFee!=null){
+					if(
+					   int.Parse(UserMgr.Schedule.myEntryFee)>0){
+				mBetting.SetActive (true);
 				//transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
 				transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation();
 				transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
+					}
+				}
 			}
 
 			transform.FindChild ("TopInfoItem").GetComponent<ScriptTopInfoItem> ().SetGoldInfo ();

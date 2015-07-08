@@ -343,6 +343,16 @@ public class UserInfo {
 			_Textures = value;
 		}
 	}
+	string _myEntryFee;
+	public string myEntryFee {
+		get {
+			return _myEntryFee;
+		}
+		set {
+			_myEntryFee = value;
+		}
+	}
+
 
 //	bool isFirstLanding = true;
 //	public bool IsFirstLanding{
