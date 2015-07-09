@@ -24,6 +24,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	public GameObject Landing;
 	public GameObject mLivetalk;
+	public GameObject shadow;
 	public List<JoinQuizInfo> mListJoin = new List<JoinQuizInfo>();
 
 //	QuizInfo quizInfo;
@@ -401,12 +402,15 @@ public class ScriptTF_Betting : MonoBehaviour {
 				strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
-			gameObject.SetActive(true);
+		if(gameObject.transform.FindChild("Scroll View").gameObject.activeSelf){
 			StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
 			                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
 			                          GetComponent<UITexture>()));
+
+			}
 			first = false;
 			Holdname = strImage;
+
 		} else {
 		
 
@@ -452,11 +456,12 @@ public class ScriptTF_Betting : MonoBehaviour {
 									strImage =nowPlayer[i] .imagePath + nowPlayer[i].imageName;
 									WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 									Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
-							gameObject.SetActive(true);
+								if(gameObject.transform.FindChild("Scroll View").gameObject.activeSelf){
 								StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
 								                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
 								                          GetComponent<UITexture>()));
-								
+
+							}
 								
 							}
 						}
@@ -529,8 +534,14 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	}
 	IEnumerator OpenAnimations(){
+
+		transform.FindChild ("SprBG").gameObject.SetActive (true);
+
+		shadow.SetActive (true);
 		QuizMgr.IsBettingOpended = true;
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
+		Menu.transform.localPosition=new Vector3(0,-655f,0);
+		transform.FindChild ("Scroll View").gameObject.SetActive (true);
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition+=new Vector3(0,655f/5f,0);
 			if(Menu.transform.localPosition.y==1){
@@ -562,6 +573,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 		transform.FindChild ("Scroll View").FindChild ("GameObject").FindChild("SprBetting").GetComponent<ScriptBetting> ().BtnConfirm ();
 		transform.parent.FindChild ("Top").GetComponent<ScriptMainTop> ().PostData ();
 		QuizMgr.IsBettingOpended = false;
+		transform.FindChild ("SprBG").gameObject.SetActive (false);
+		shadow.SetActive (false);
+		transform.FindChild ("Scroll View").gameObject.SetActive (false);
 		gameObject.SetActive (false);
 	
 		

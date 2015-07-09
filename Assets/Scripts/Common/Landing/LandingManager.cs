@@ -854,8 +854,10 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		float num;
 		Debug.Log ("GSG.Response.data.myRank : " + GSG.Response.data.myRank);
 		Debug.Log ("GSG.Response.data.joinerCount : " + GSG.Response.data.joinerCount);
-		num = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount);
+		num = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount)*100f;
+		Debug.Log ("num : " + num);
 		num = (float)getnum (num);
+		Debug.Log ("num2 : " + num);
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
 			GetComponent<UILabel>().text = "0";
 		if (num <= 50) {

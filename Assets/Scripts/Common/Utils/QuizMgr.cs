@@ -192,7 +192,7 @@ public class QuizMgr : MonoBehaviour {
 
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_CLOSE)){
 
-
+			Debug.Log("Game Close");
 
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
 			if(Instance.mMainTop != null){

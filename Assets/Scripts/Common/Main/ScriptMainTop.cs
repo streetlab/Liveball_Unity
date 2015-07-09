@@ -188,6 +188,12 @@ public class ScriptMainTop : MonoBehaviour {
 				DailyReward dReward = Newtonsoft.Json.JsonConvert.DeserializeObject<DailyReward>(www.text);
 				if(dReward.result == 200){
 					DialogueMgr.ShowDialogue("접속보상", dReward.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+					Debug.Log("add");
+					if (Application.loadedLevelName.Equals ("SceneMain")) {
+						Debug.Log("add Main");
+						transform.root.FindChild("GameObject").FindChild("Top").FindChild("Panel").FindChild("BtnPost").GetComponent<PostButton>().YellowOn();
+					}
+
 				}
 			} else{
 //				Debug.Log("Attendance is already done");
@@ -685,6 +691,14 @@ public class ScriptMainTop : MonoBehaviour {
 	public void OpenBetting(QuizInfo quizInfo)
 	{
 		if (quizInfo != null) {
+			if(
+			transform.root.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label")
+				.gameObject.activeSelf){
+				transform.root.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label")
+					.gameObject.SetActive(false);
+				Debug.Log("Nonstart off");
+			}
+	
 			Debug.Log ("OpenBetting");
 			#if(UNITY_EDITOR)
 
@@ -708,29 +722,30 @@ public class ScriptMainTop : MonoBehaviour {
 
 			//mLivetalk.SetActive(false);
 
-		
+			mBetting.SetActive (true);
 			if (mLivetalk.activeSelf) {
 				if (mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().isSelected)
 					mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().CloseKeboard ();
 			}
 	
 			Debug.Log ("Init ScriptTF_Betting");
+			//QuizMgr.HasQuiz = true;
 			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
 
 
 
 	
-			if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+			//if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
 				if(UserMgr.Schedule.myEntryFee!=null){
 					if(
 					   int.Parse(UserMgr.Schedule.myEntryFee)>0){
-				mBetting.SetActive (true);
+				
 				//transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
 				transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation();
 				transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
 					}
 				}
-			}
+			//}
 
 			transform.FindChild ("TopInfoItem").GetComponent<ScriptTopInfoItem> ().SetGoldInfo ();
 //		transform.FindChild("TopInfoItem").FindChild("BtnMenu 1").gameObject.SetActive(false);

@@ -356,6 +356,12 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetUserRankingWeeklyGold (memSeq), baseEvent);
 	}
 
+	public static void GetGameParticipantRanking(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetGameParticipantRankingRequest (), baseEvent);
+	}
+
+
 	public static void GetInvenItem(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetInvenItemRequest (), baseEvent);

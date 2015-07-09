@@ -43,6 +43,9 @@ public class PostButton : MonoBehaviour {
 			transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (false);
 		}
 	}
+	public void YellowOn(){
+		transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (true);
+	}
 	void getdata(){
 		Mails = Mail.Response.data;
 		if (Mail.Response.data != null) {
