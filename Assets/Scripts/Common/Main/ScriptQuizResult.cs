@@ -82,8 +82,8 @@ public class ScriptQuizResult : MonoBehaviour {
 			mCurtainRight.GetComponent<UISprite>().spriteName = "bg_result_02_02";
 
 			mLblLeft.GetComponent<UILabel>().text =
-			transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
-			mLblBtmRight.GetComponent<UILabel>().text = "-"+betPoint;
+				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
+			mLblBtmRight.GetComponent<UILabel>().text = "예측 실패";//"-"+betPoint;
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 1f);
 			ScriptMainTop.MyPoint+= (float)betPoint;
 			mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)betPoint) * 0.005f);
