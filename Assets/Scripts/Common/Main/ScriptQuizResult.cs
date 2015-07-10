@@ -51,6 +51,27 @@ public class ScriptQuizResult : MonoBehaviour {
 
 		int rand = UnityEngine.Random.Range (1, 3);
 
+		if(listResult[0].isCancel > 0){
+			mSprLeft.GetComponent<UISprite>().spriteName = "bg_result_06";
+			mSprBtmRight.GetComponent<UISprite>().spriteName = "bg_result_06";
+			mCurtainLeft.GetComponent<UISprite>().spriteName = "bg_result_05";
+			mCurtainRight.GetComponent<UISprite>().spriteName = "bg_result_05";
+			
+			mLblLeft.GetComponent<UILabel>().text = "선택지에 없는 결과 발생!";
+//				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
+			mLblTopRight.GetComponent<UILabel>().text = quizInfo.resultMsg;
+			mLblBtmRight.GetComponent<UILabel>().text = "";
+			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 1f);
+
+//			ScriptMainTop.MyPoint+= (float)betPoint;
+//			mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)betPoint) * 0.005f);
+
+			if (UserMgr.Schedule.myEntryFee!="0") {
+				transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioFail);
+			}
+			
+			return false;
+		} else
 		if (rewardPoint > 0) {
 //			mSprLeft.GetComponent<UISprite>().color = COLOR_CORRECT;
 //			mSprBtmRight.GetComponent<UISprite>().color = COLOR_CORRECT;

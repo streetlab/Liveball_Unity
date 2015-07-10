@@ -160,7 +160,10 @@ public class QuizMgr : MonoBehaviour {
 			tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[0].rewardPoint);
 			quiz.resp.Insert(0, tmpInfo);
 
-			if(simpleEvent.Response.data[0].isCancel < 1){
+			if(simpleEvent.Response.data[0].isCancel > 0){
+				ShowQuizResult (quiz, simpleEvent, scriptQuizResult);
+			} else{
+//			if(simpleEvent.Response.data[0].isCancel < 1){
 				if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
 					scriptQuizResult.InitParticle();
 				}
