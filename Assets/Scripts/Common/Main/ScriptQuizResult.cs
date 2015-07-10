@@ -62,7 +62,7 @@ public class ScriptQuizResult : MonoBehaviour {
 			mLblLeft.GetComponent<UILabel>().text = "선택지에 없는 결과 발생!";
 //				transform.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("Wrong"+rand).Value;
 			mLblTopRight.GetComponent<UILabel>().text = quizInfo.resultMsg;
-			mLblBtmRight.GetComponent<UILabel>().text = "";
+			mLblBtmRight.GetComponent<UILabel>().text = "예측 무효";
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 1f);
 
 //			ScriptMainTop.MyPoint+= (float)betPoint;
