@@ -293,11 +293,15 @@ public class ScriptMainTop : MonoBehaviour {
 					//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if(mScheduleEvent.Response.data [i].gameStatus==null){
+							LandingState = 0;
+						}else{
 						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
 							LandingState = 2;
 						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
 							LandingState = 3;
+						}
 						}
 						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().nonstart = false;
 						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().Start();
@@ -308,11 +312,15 @@ public class ScriptMainTop : MonoBehaviour {
 						return;
 					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == UserMgr.UserInfo.GetTeamCode ()) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if(mScheduleEvent.Response.data [i].gameStatus==null){
+							LandingState = 0;
+						}else{
 						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
 							LandingState = 2;
 						} else if (mScheduleEvent.Response.data [i].gameStatus == 2) {
 							LandingState = 3;
+						}
 						}
 						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().nonstart = false;
 						gameobj.transform.FindChild("TF_Landing").GetComponent<LandingManager>().Start();
@@ -367,6 +375,9 @@ public class ScriptMainTop : MonoBehaviour {
 					//chek = true;
 					if (mScheduleEvent.Response.data [i].extend [0].teamName == UtilMgr.SelectTeam) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if(mScheduleEvent.Response.data [i].gameStatus==null){
+							LandingState = 0;
+						}else{
 						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
 							LandingState = 2;
@@ -375,7 +386,7 @@ public class ScriptMainTop : MonoBehaviour {
 						}else{
 							LandingState = 0;
 						}
-						
+						}
 						gameobj.SetActive (true);
 						mHighlight.SetActive (true);
 						
@@ -383,6 +394,9 @@ public class ScriptMainTop : MonoBehaviour {
 						return;
 					} else if (mScheduleEvent.Response.data [i].extend [1].teamName == UtilMgr.SelectTeam) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
+						if(mScheduleEvent.Response.data [i].gameStatus==null){
+							LandingState = 0;
+						}else{
 						if (mScheduleEvent.Response.data [i].gameStatus == 1) {
 							
 							LandingState = 2;
@@ -391,7 +405,7 @@ public class ScriptMainTop : MonoBehaviour {
 						}else{
 							LandingState = 0;
 						}
-						
+						}
 						gameobj.SetActive (true);
 						mHighlight.SetActive (true);
 						
@@ -539,15 +553,19 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.FindChild("TopInfoItem").FindChild("BtnVS").gameObject.SetActive(true);
 		transform.FindChild("TopInfoItem").FindChild("BtnCancel").gameObject.SetActive(false);
 
-		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
+		//transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
 		//transform.GetComponent<PlayMakerFSM> ().SendEvent ("CloseBetting");
 		//TweenAlpha.Begin (mBetting.GetComponent<ScriptTF_Betting>().mSprComb, 1f, 0f);
 		transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().CloseAnimation();
-		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
+		if (UserMgr.Schedule.myEntryFee!="0") {
+			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundCloseBet);
+		}
 		CheckAndJoinQuiz();
 	}
 	public void PostData(){
-		transform.root.GetComponent<AudioSource>().PlayOneShot (mSoundCloseBet);
+		if (UserMgr.Schedule.myEntryFee!="0") {
+			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundCloseBet);
+		}
 		CheckAndJoinQuiz();
 	}
 	void CheckAndJoinQuiz(){
@@ -715,13 +733,17 @@ public class ScriptMainTop : MonoBehaviour {
 			QuizMgr.IsBettingOpended = true;
 			QuizMgr.JoinCount = 0;
 		
-			UtilMgr.AddBackEvent (new EventDelegate (this, "AnimateClosing"));
+			//UtilMgr.AddBackEvent (new EventDelegate (this, "AnimateClosing"));
 		
 		
 
 
 			//mLivetalk.SetActive(false);
-
+			if(UserMgr.Schedule.myEntryFee=="0"){
+				mBetting.transform.FindChild("Scroll View").gameObject.SetActive(false);
+			}else{
+				mBetting.transform.FindChild("Scroll View").gameObject.SetActive(true);
+			}
 			mBetting.SetActive (true);
 			if (mLivetalk.activeSelf) {
 				if (mLivetalk.transform.FindChild ("Panel").FindChild ("Input").GetComponent<UIInput> ().isSelected)
@@ -729,7 +751,8 @@ public class ScriptMainTop : MonoBehaviour {
 			}
 	
 			Debug.Log ("Init ScriptTF_Betting");
-			//QuizMgr.HasQuiz = true;
+			QuizMgr.HasQuiz = true;
+			QuizMgr.MoreQuiz = true;
 			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
 
 
@@ -768,7 +791,7 @@ public class ScriptMainTop : MonoBehaviour {
 	public void RequestBoardInfo()
 	{
 		mBoardEvent = new  GetGameSposDetailBoardEvent(new EventDelegate (this, "GotBoard"));
-
+		Debug.Log ("QuizMgr.NeedsDetailInfo : " + QuizMgr.NeedsDetailInfo);
 		if (QuizMgr.NeedsDetailInfo) {
 			NetMgr.GetGameSposDetailBoard (mBoardEvent);
 			QuizMgr.NeedsDetailInfo = false;
@@ -787,10 +810,10 @@ public class ScriptMainTop : MonoBehaviour {
 
 		Debug.Log("HasQuiz is "+QuizMgr.HasQuiz);
 		
-		if(QuizMgr.HasQuiz){
+		//if(QuizMgr.HasQuiz){
 			QuizMgr.HasQuiz = false;
 			RequestQuiz();
-		}
+		//}
 	}
 
 	public void RequestQuiz()
@@ -814,8 +837,9 @@ public class ScriptMainTop : MonoBehaviour {
 		}
 
 		AddQuizIntoList ();
+		QuizMgr.NextPlayerInfo = mEventQuiz.Response.data.nextPlayer;
 		if (!QuizMgr.IsBettingOpended)
-			QuizMgr.NextPlayerInfo = mEventQuiz.Response.data.nextPlayer;
+
 
 		if(mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1].closeYN < 1){
 			OpenBetting (mEventQuiz.Response.data.quiz[mEventQuiz.Response.data.quiz.Count-1]);
@@ -901,5 +925,15 @@ public class ScriptMainTop : MonoBehaviour {
 			OpenLivetalk();
 			break;
 		}
+	}
+	public void StartGame(){
+		ScriptMainTop.LandingState = 3;
+	
+		
+		AutoFade.LoadLevel("SceneMain", 0f, 1f);
+	}	
+	public void GameReslut(){
+		transform.root.FindChild ("Ranking Reward").gameObject.SetActive (true);
+
 	}
 }

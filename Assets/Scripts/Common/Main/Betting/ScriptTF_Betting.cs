@@ -456,11 +456,11 @@ public class ScriptTF_Betting : MonoBehaviour {
 									strImage =nowPlayer[i] .imagePath + nowPlayer[i].imageName;
 									WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 									Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+						//	gameObject.transform.FindChild("Scroll View").gameObject.SetActive(true);
 								if(gameObject.transform.FindChild("Scroll View").gameObject.activeSelf){
-								StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
-								                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
-								                          GetComponent<UITexture>()));
-
+									StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
+		                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
+		                          GetComponent<UITexture>()));
 							}
 								
 							}
@@ -478,8 +478,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		}
 //			UtilMgr.gameround = round;
 		//if(quiz.gameRound)
+
 		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.NextPlayerInfo);
 	}
+
 
 	IEnumerator GetImage(WWW www, UITexture texture)
 	{
@@ -540,11 +542,11 @@ public class ScriptTF_Betting : MonoBehaviour {
 		shadow.SetActive (true);
 		QuizMgr.IsBettingOpended = true;
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
-		Menu.transform.localPosition=new Vector3(0,-655f,0);
+		Menu.transform.localPosition=new Vector3(0,-651f,0);
 		transform.FindChild ("Scroll View").gameObject.SetActive (true);
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition+=new Vector3(0,655f/5f,0);
-			if(Menu.transform.localPosition.y==1){
+			if(Menu.transform.localPosition.y==3){
 				break;
 			}
 			yield return new WaitForSeconds(0.05f);
@@ -554,9 +556,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 	IEnumerator CloseAnimations(){
 
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
+		Menu.transform.localPosition=new Vector3(0,3,0);
 		for (int i = 0; i<5; i++) {
-			Menu.transform.localPosition-=new Vector3(0,655f/5f,0);
-			if(Menu.transform.localPosition.y==-655){
+			Menu.transform.localPosition-=new Vector3(0,651f/5f,0);
+			if(Menu.transform.localPosition.y==-651){
 				break;
 			}
 			yield return new WaitForSeconds(0.05f);

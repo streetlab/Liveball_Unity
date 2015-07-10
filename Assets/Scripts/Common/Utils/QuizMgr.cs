@@ -188,10 +188,10 @@ public class QuizMgr : MonoBehaviour {
 			}
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_START)){
 
-
+			Instance.mMainTop.StartGame();
 
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_CLOSE)){
-
+			Instance.mMainTop.GameReslut();
 			Debug.Log("Game Close");
 
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){

@@ -153,4 +153,24 @@ public class GetGameParticipantRankingInfo {
 			_rank = value;
 		}
 	}
+	string _rewardType;
+	
+	public string rewardType {
+		get {
+			return _rewardType;
+		}
+		set {
+			_rewardType = value;
+		}
+	}
+	string _rewardValue;
+	
+	public string rewardValue {
+		get {
+			return _rewardValue;
+		}
+		set {
+			_rewardValue = value;
+		}
+	}
 }

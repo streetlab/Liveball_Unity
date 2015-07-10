@@ -29,6 +29,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	List<string> Day = new List<string>();
 	List<int> Count = new List<int>();
 	List<string> ch = new List<string> ();
+	List<string> myentry = new List<string> ();
 	List<GameObject> News = new List<GameObject> ();
 	// Use this for initialization
 	GetScheduleEvent mScheduleEvent;
@@ -169,6 +170,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		char [] array;
 		string aa;
 		Count.Clear ();
+		transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(false);
 		transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = "경기 없음";
 		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
@@ -214,6 +216,11 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				setposition ();
 			}
 		}
+		if (transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel> ().text == "경기 없음") {
+			Debug.Log("Nogame");
+			transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(true);
+
+		}
 	}
 	void getdata(){
 		transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(false);
@@ -235,13 +242,14 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		Code.Clear ();
 		Day.Clear ();
 		Statue.Clear ();
+		myentry.Clear ();
 		
 		string aa;
 		
 		
 		
 		transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = "경기 없음";
-		
+	
 		for (int i =0; i<mScheduleEvent.Response.data.Count; i++) {
 //			Debug.Log("day : " 
 //			          +mScheduleEvent.Response.data [i].subTitle);
@@ -255,6 +263,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			Statue.Add(mScheduleEvent.Response.data[i].gameStatus.ToString());
 			//Debug.Log("Schedule : " + mScheduleEvent.Response.data [i].startTime+ " i : " + i +"\n" + mScheduleEvent.Response.data [i].subTitle);
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
+			myentry.Add(mScheduleEvent.Response.data [i].myEntryFee);
 			ch.Clear ();
 			for (int z = 0; z<8; z++) {
 				
@@ -288,17 +297,18 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				//ALL.Clear ();
 				
 				transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = aa + " 경기";
+				transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(false);
 			}
 		}
 		//Debug.Log(" ALL.Count! :  " + ALL.Count);
 		
 		
 		D = transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject;
-		Debug.Log ("Count.Count" + Count.Count);
-		Debug.Log ("Starts" + Starts);
+		//Debug.Log ("Count.Count" + Count.Count);
+		//Debug.Log ("Starts" + Starts);
 		if (0<Count.Count) {
 			//if(Starts){
-				Debug.Log("ononononononon");
+				//Debug.Log("ononononononon");
 				setposition ();
 			//}
 			
@@ -314,6 +324,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		
 		
 		if (transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel> ().text == "경기 없음") {
+			Debug.Log("Nogame");
 			transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(true);
 			c = 0;
 		}
@@ -344,6 +355,11 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			NEW.transform.GetChild (6).GetComponent<UILabel> ().text = Statue [Count[i]];
 				//NEW.transform.GetChild(2).GetChild(0).GetComponent<UILabel>().text = "19:34";
 				NEW.gameObject.SetActive (true);
+			if(int.Parse(myentry[Count[i]])>0){
+				NEW.transform.FindChild("YellowBG").gameObject.SetActive(true);
+			}else{
+				NEW.transform.FindChild("YellowBG").gameObject.SetActive(false);
+			}
 				//Debug.Log(NEW);
 				//Debug.Log(NEW.transform.parent);
 			News.Add(NEW);

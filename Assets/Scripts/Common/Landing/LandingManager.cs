@@ -186,8 +186,10 @@ public class LandingManager : MonoBehaviour {
 	string strImage;
 	public void SetHitter(List<nextPlayerInfo> nextPlayer)
 	{ 
+		//Debug.Log ("ScriptMainTop.LandingState : " + ScriptMainTop.LandingState);
+		//Debug.Log ("nextPlayer : " + nextPlayer.Count);
 		
-		if(ScriptMainTop.LandingState==2&&nextPlayer!=null){
+		if((ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3)&&nextPlayer!=null){
 			N = nextPlayer;
 			strImage = "";
 			Debug.Log("SetHitter0");
@@ -200,6 +202,7 @@ public class LandingManager : MonoBehaviour {
 					if(nextPlayer[i].type == 1){
 						string playerInfo = nextPlayer[i].playerName + "#" + nextPlayer[i].playerNumber;
 						P_LPlayersName.text = playerInfo;
+						Debug.Log("playerInfo : " + playerInfo);
 						string playerAVG = nextPlayer[i].hitAvg;
 						P_LBatting.text = playerAVG;
 						
@@ -212,7 +215,7 @@ public class LandingManager : MonoBehaviour {
 						P_VS.text = "VS 시즌타율 " + nextPlayer[i].hitAvg;
 						
 						Debug.Log("nextPlayer[i].hitAvg : " + nextPlayer[i].hitAvg);
-						if(nextPlayer[i].hitAvg!=""&&nextPlayer[i].hitAvg!=null){
+						if(nextPlayer[i].hitAvg!=""&&nextPlayer[i].hitAvg!=null&&nextPlayer[i].hitAvg!="-"){
 							MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(nextPlayer[i].hitAvg)));
 							
 							MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString()+"%";
@@ -851,6 +854,7 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		NetMgr.GameSposGame (GSG);
 	}
 	void SetRank(){
+
 		float num;
 		Debug.Log ("GSG.Response.data.myRank : " + GSG.Response.data.myRank);
 		Debug.Log ("GSG.Response.data.joinerCount : " + GSG.Response.data.joinerCount);

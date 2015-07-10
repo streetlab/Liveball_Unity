@@ -240,8 +240,10 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //			Debug.Log ("mEventProgQuiz.Response.data.quiz [0].gameRound  : "+mEventProgQuiz.Response.data.quiz [i].gameRound);
 //		}
 		if (UtilMgr.gameround == 0&&mEventProgQuiz.Response.data.quiz!=null) {
+			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
 			if(mEventProgQuiz.Response.data.quiz.Count>0){
-			
+				Debug.Log("(mEventProgQuiz.Response.data.quiz [0].gameRound) : " + (mEventProgQuiz.Response.data.quiz [0].gameRound));
+				Debug.Log("(mEventProgQuiz.Response.data.quiz [0].inningType) : " + (mEventProgQuiz.Response.data.quiz [0].inningType));
 			UtilMgr.gameround = (((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1));
 			if (
 			UtilMgr.gameround > 1) {
@@ -253,13 +255,14 @@ public class ScriptMatchPlaying : MonoBehaviour {
 				}
 			}
 			}
+			}
 		} else {
-				
+			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
 			if (UtilMgr.gameround < ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>1) {
 				TF_Landing.GetComponent<LandingManager> ().GetRank();
 					}
 			UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);
-		
+			}
 		}
 		mList.GetComponent<UIDraggablePanel2> ().Init (QuizMgr.QuizList.Count,
 		                                               delegate(UIListItem item, int index) {
