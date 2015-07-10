@@ -45,9 +45,11 @@ public class ScriptQuizResult : MonoBehaviour {
 		}
 
 		string info = quizInfo.playerName + "  ";
-		int quizValue = int.Parse (listResult [0].quizValue);
-		info += quizInfo.order [quizValue - 1].description + "!!!";
-		mLblTopRight.GetComponent<UILabel>().text = info;
+		if(listResult [0].quizValue != null && listResult [0].quizValue.Length > 0){
+			int quizValue = int.Parse (listResult [0].quizValue);
+			info += quizInfo.order [quizValue - 1].description + "!!!";
+			mLblTopRight.GetComponent<UILabel>().text = info;
+		}
 
 		int rand = UnityEngine.Random.Range (1, 3);
 
