@@ -855,13 +855,13 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 	}
 	void SetRank(){
 
-		float num;
 		Debug.Log ("GSG.Response.data.myRank : " + GSG.Response.data.myRank);
 		Debug.Log ("GSG.Response.data.joinerCount : " + GSG.Response.data.joinerCount);
-		num = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount)*100f;
+		float numF = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount)*100f;
+		Debug.Log ("numF : " + numF);
+		int num = Mathf.Ceil(numF);
+//		num = (float)getnum (num);
 		Debug.Log ("num : " + num);
-		num = (float)getnum (num);
-		Debug.Log ("num2 : " + num);
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
 			GetComponent<UILabel>().text = "0";
 		if (num <= 50) {
@@ -869,16 +869,17 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 				GetComponent<UILabel>().text = UserMgr.Schedule.rewardValue;
 		}
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Rank").
-			GetComponent<UILabel>().text = num.ToString()+"%";
+			GetComponent<UILabel>().text = num+"%";
 	}
-	int getnum(float num){
-		int number = (int)num;
-		if ((float)number < num) {
-			number+=1;
-		}
-		if (number > 100) {
-			number = 100;
-		}
-		return number;
-	}
+
+//	int getnum(float num){
+//		int number = (int)num;
+//		if ((float)number < num) {
+//			number+=1;
+//		}
+//		if (number > 100) {
+//			number = 100;
+//		}
+//		return number;
+//	}
 }
