@@ -859,7 +859,7 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		Debug.Log ("GSG.Response.data.joinerCount : " + GSG.Response.data.joinerCount);
 		float numF = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount)*100f;
 		Debug.Log ("numF : " + numF);
-		int num = Mathf.Ceil(numF);
+		int num = Mathf.CeilToInt(numF);
 //		num = (float)getnum (num);
 		Debug.Log ("num : " + num);
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
