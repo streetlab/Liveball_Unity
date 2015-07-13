@@ -126,18 +126,20 @@ public class LandingManager : MonoBehaviour {
 			if(int.Parse(UserMgr.Schedule.myEntryFee)>0){
 				if(UserMgr.Schedule.doneGame!=null){
 					if(UserMgr.Schedule.doneGame=="0"){
-						DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+						DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
 					}else{
 						transform.root.FindChild("Ranking Reward").gameObject.SetActive(true);
 					}
 				}else{
-					DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+					DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
 				}
 				//DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
 			//	transform.root.FindChild("Ranking Reward").gameObject.SetActive(true);
 			}
 		}
+		Debug.Log (		transform.parent.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.activeSelf);
 		transform.parent.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.SetActive (false);
+		Debug.Log (		transform.parent.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.activeSelf);
 		Debug.Log ("UserMgr.UserInfo.myEntryFee : : " + UserMgr.Schedule.myEntryFee);
 		
 		if (UserMgr.Schedule.myEntryFee != null) {

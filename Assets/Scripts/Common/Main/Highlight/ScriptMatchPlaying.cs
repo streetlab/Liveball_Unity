@@ -243,6 +243,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		if (UtilMgr.gameround == 0&&mEventProgQuiz.Response.data.quiz!=null) {
 			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
 			if(mEventProgQuiz.Response.data.quiz.Count>0){
+					transform.root.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label").gameObject.SetActive(false);
 				Debug.Log("(mEventProgQuiz.Response.data.quiz [0].gameRound) : " + (mEventProgQuiz.Response.data.quiz [0].gameRound));
 				Debug.Log("(mEventProgQuiz.Response.data.quiz [0].inningType) : " + (mEventProgQuiz.Response.data.quiz [0].inningType));
 			UtilMgr.gameround = (((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1));

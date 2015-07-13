@@ -198,7 +198,7 @@ public class QuizMgr : MonoBehaviour {
 //			Debug.Log("Game Close");
 			if(UserMgr.Schedule.doneGame!=null){
 				if(UserMgr.Schedule.doneGame=="0"){
-			DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+					DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
 				}else{
 					Instance.mMainTop.GameReslut();
 				}
