@@ -59,6 +59,7 @@ public class UtilMgr : MonoBehaviour {
 
 	public static void AddBackEvent(EventDelegate eventDel)
 	{
+		Debug.Log("AddBackEvent");
 		mListBackEvent.Add (eventDel);
 	}
 
@@ -93,6 +94,7 @@ public class UtilMgr : MonoBehaviour {
 
 	public static bool OnBackPressed()
 	{
+		Debug.Log("OnBackPressed");
 		if (UtilMgr.IsUntouchable)
 			return false;
 

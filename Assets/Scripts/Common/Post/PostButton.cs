@@ -177,15 +177,22 @@ public class PostButton : MonoBehaviour {
 		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
 
 	}
+
 	void DialogueHandler(DialogueMgr.BTNS btn){
-		if (btn == DialogueMgr.BTNS.Btn1) {
-			//transform.FindChild ("PostDialogue").gameObject.SetActive (false);
-			PostgetButton.anim.SetActive (false);
-			//transform.FindChild ("PostDialogue").FindChild ("Panel").FindChild ("Sprite").GetComponent<BoxCollider2D> ().enabled = false;
-			Destroy (PostgetButton.anim);
-		}
-		
+//		if (btn == DialogueMgr.BTNS.Btn1) {
+//			CloseGachaAnim();
+			UtilMgr.OnBackPressed();
+//		}	
 	}
+
+	public void CloseGachaAnim(){
+		//transform.FindChild ("PostDialogue").gameObject.SetActive (false);
+		PostgetButton.anim.SetActive (false);
+		//transform.FindChild ("PostDialogue").FindChild ("Panel").FindChild ("Sprite").GetComponent<BoxCollider2D> ().enabled = false;
+		Destroy (PostgetButton.anim);
+		DialogueMgr.DismissDialogue();
+	}
+
 	public void GachaOK(){
 
 		if (CheckMail.gacha.itemType >= 6) {

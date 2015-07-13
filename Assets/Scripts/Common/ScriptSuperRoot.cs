@@ -73,7 +73,7 @@ public class ScriptSuperRoot : MonoBehaviour {
 	{
 //		Debug.Log ("DialogueMgr.IsShown : " + DialogueMgr.IsShown);
 		if (DialogueMgr.IsShown) {
-			DialogueMgr.DismissDialogue();
+			DialogueMgr.Instance.BtnCancelClicked();
 		} else {
 			UtilMgr.OnBackPressed ();
 			if(Application.loadedLevelName.Equals("SceneMain")){
