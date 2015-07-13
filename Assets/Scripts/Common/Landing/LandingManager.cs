@@ -931,13 +931,22 @@ public class LandingManager : MonoBehaviour {
 		if (num <= 50&&float.Parse (GSG.Response.data.myRank) != 0) {
 			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
 				GetComponent<UILabel>().text = UserMgr.Schedule.rewardValue;
+		
+
+
 		}
 		if (float.Parse (GSG.Response.data.myRank) == 0) {
 			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").FindChild ("Rank").
-				GetComponent<UILabel> ().text = "100%";
+				GetComponent<UILabel> ().text = "[ff0000]100%[-]";
 		} else {
+			if (num <= 50){
 			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").FindChild ("Rank").
-			GetComponent<UILabel> ().text = num + "%";
+			GetComponent<UILabel> ().text = "[00ff00]"+num + "%[-]";
+			}else{
+				transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").FindChild ("Rank").
+					GetComponent<UILabel> ().text = "[ff0000]"+num + "%[-]";
+			}
+
 		}
 //			GetComponent<UILabel>().text = num.ToString()+"%";
 //	}
