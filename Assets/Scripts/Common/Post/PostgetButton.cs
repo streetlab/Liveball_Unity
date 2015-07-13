@@ -16,8 +16,6 @@ public class PostgetButton : MonoBehaviour {
 
 			UtilMgr.AddBackEvent(new EventDelegate(
 				transform.parent.parent.parent.parent.GetComponent<PostButton> (), "CloseGachaAnim"));
-			DialogueMgr.DismissDialogue();
-
 		} else {
 			getdone = new GetDoneMailEvent (new EventDelegate (this, "getdonedata"));
 			NetMgr.GetUserDoneMailBox (UserMgr.UserInfo.memSeq, int.Parse (transform.parent.FindChild ("mailseq").GetComponent<UILabel> ().text)
