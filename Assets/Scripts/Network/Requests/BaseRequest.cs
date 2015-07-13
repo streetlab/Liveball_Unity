@@ -11,7 +11,8 @@ public class BaseRequest : Dictionary<string, object>{
 
 		#if(UNITY_EDITOR)
 		mDic.Add("osType", 1);
-		mDic.Add("version", "3.1.1");
+//		mDic.Add("version", "3.1.1");
+		mDic.Add("version", UnityEditor.PlayerSettings.bundleVersion);
 		#elif(UNITY_ANDROID)
 		mDic.Add("osType", 1);
 		mDic.Add("version", Application.version);

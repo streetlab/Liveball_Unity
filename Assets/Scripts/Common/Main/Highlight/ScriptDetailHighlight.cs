@@ -24,8 +24,11 @@ public class ScriptDetailHighlight : MonoBehaviour {
 	}
 
 	public void ClearList(){
-		foreach (GameObject go in mListFriendItems)
-			NGUITools.DestroyImmediate (go);
+		foreach (GameObject go in mListFriendItems){
+			go.transform.parent = null;
+			go.SetActive(false);
+			NGUITools.Destroy (go);
+		}
 	}
 
 	void SetResultGraph(){
