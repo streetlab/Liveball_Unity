@@ -411,11 +411,27 @@ public class ScriptTF_Betting : MonoBehaviour {
 			}
 			first = false;
 			Holdname = strImage;
+			if(UtilMgr.gameround>1){
+				Debug.Log("ONONONON");
+				if(Landing.GetComponent<LandingManager>().Lineup2!=null){
+				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
+					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitAvg;
+				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 1")
+					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitH.ToString()+"%";
+				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
+					.GetComponent<UILabel>().text =Landing.GetComponent<LandingManager>().Lineup2.hit2B.ToString()+"%";
+				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
+					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitHr.ToString()+"%";
+				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
+					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitBB.ToString()+"%";
+				Landing.GetComponent<LandingManager>().FirstLinup = true;
+			}
+			}
 
 		} else {
 		
 
-
+			//Landing.GetComponent<LandingManager>().FirstLinup = true;
 				List<nextPlayerInfo> nowPlayer = LandingManager.N;
 				LandingManager.Old = nowPlayer;
 				string strImage = "";
@@ -477,7 +493,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		}
 //			UtilMgr.gameround = round;
 		//if(quiz.gameRound)
-
+		Landing.GetComponent<LandingManager>().FirstLinup = false;
 		Landing.GetComponent<LandingManager> ().SetHitter (QuizMgr.NextPlayerInfo);
 	}
 
