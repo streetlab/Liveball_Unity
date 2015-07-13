@@ -163,6 +163,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	{
 		if (mEventProgQuiz.Response.data != null) {
 			if(mEventProgQuiz.Response.data.quiz.Count>0){
+				UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);
 				Debug.Log("InitQuizFirst");
 				Debug.Log("mEventProgQuiz.Response.data.quiz[0] : " + mEventProgQuiz.Response.data.quiz[0].playerName);
 				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().

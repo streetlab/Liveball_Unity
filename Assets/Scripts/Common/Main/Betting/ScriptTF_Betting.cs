@@ -390,6 +390,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if(LandingManager.N==null){
 			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");
 			string playerInfo = QuizMgr.QuizInfo.playerName + "#"+ QuizMgr.QuizInfo.playerNumber;
+	
 			mBatting.transform.FindChild("Sprite").FindChild("Current hitter").FindChild("Players Name")
 				.GetComponent<UILabel>().text = playerInfo;
 

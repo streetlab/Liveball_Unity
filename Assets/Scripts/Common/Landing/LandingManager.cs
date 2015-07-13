@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class LandingManager : MonoBehaviour {
 	public GameObject LandingScroll;
 	public GameObject Pitcher;
+	public GameObject Mid_BG;
 	int a = 0;
 	UILabel I_Gold,I_TeamName,I_RankScore,I_TodayDealWith,I_TodayInfo,I_Memo,I_PlayersName,I_Batting;
 	UITexture I_PlayersImage;
@@ -211,6 +212,7 @@ public class LandingManager : MonoBehaviour {
 		
 		if((ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3)&&nextPlayer!=null){
 			N = nextPlayer.nextPlayer;
+			Debug.Log("UtilMgr.gameround : : " + UtilMgr.gameround);
 			if(UtilMgr.gameround%2==0){
 				
 				save1=nextPlayer.nextPlayer;
@@ -986,34 +988,46 @@ public class LandingManager : MonoBehaviour {
 	bool FirstLinup = false;
 	GetLineupEvent mlineupEvent;
 	PlayerInfo Lineup;
+	public PlayerInfo Lineup2;
 	public void GetLineUp(){
 		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "sethitter"));
 		NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
 	}
 	void sethitter(){
-		Lineup = mlineupEvent.Response.data.hit[0];
-		FirstLinup= true;
-		P_LPlayersName.text = mlineupEvent.Response.data.hit [0].playerName+"#"+mlineupEvent.Response.data.hit[0].playerNumber;
-		P_LBatting.text = mlineupEvent.Response.data.hit [0].hitAvg;
+		if (mlineupEvent.Response.data != null) {
+			if (mlineupEvent.Response.data.hit.Count > 0) {
+				Lineup = mlineupEvent.Response.data.hit [0];
+				FirstLinup = true;
+				P_LPlayersName.text = mlineupEvent.Response.data.hit [0].playerName + "#" + mlineupEvent.Response.data.hit [0].playerNumber;
+				P_LBatting.text = mlineupEvent.Response.data.hit [0].hitAvg;
 
-		P_B.text = mlineupEvent.Response.data.hit [0].hitAvg;
-		P_B1.text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
-		P_B2.text = mlineupEvent.Response.data.hit [0].hit2B.ToString () + "%";
-		P_B3.text = mlineupEvent.Response.data.hit [0].hitHr.ToString () + "%";
-		P_B4.text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
-		P_VS.text = "VS 시즌타율 " + mlineupEvent.Response.data.hit [0].hitAvg;
-		MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)));
+				P_B.text = mlineupEvent.Response.data.hit [0].hitAvg;
+				P_B1.text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
+				P_B2.text = mlineupEvent.Response.data.hit [0].hit2B.ToString () + "%";
+				P_B3.text = mlineupEvent.Response.data.hit [0].hitHr.ToString () + "%";
+				P_B4.text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
+				P_VS.text = "VS 시즌타율 " + mlineupEvent.Response.data.hit [0].hitAvg;
+
+				Mid_BG.transform.FindChild ("Bot").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitAvg;
+				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 1").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
+				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 2").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hit2B.ToString () + "%";
+				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 3").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitHr.ToString () + "%";
+				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 4").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
+
+				MidBar.transform.FindChild ("Gauge").FindChild ("Hits").GetComponent<UISprite> ().width = (int)Mathf.Round (340f * (float.Parse (mlineupEvent.Response.data.hit [0].hitAvg)));
 		
-		MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)*100f).ToString()+"%";
-		MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(mlineupEvent.Response.data.hit [0].hitAvg))*100f).ToString()+"% 아웃";
+				MidBar.transform.FindChild ("Gauge").FindChild ("L").GetComponent<UILabel> ().text = "안타 " + (float.Parse (mlineupEvent.Response.data.hit [0].hitAvg) * 100f).ToString () + "%";
+				MidBar.transform.FindChild ("Gauge").FindChild ("R").GetComponent<UILabel> ().text = ((1 - float.Parse (mlineupEvent.Response.data.hit [0].hitAvg)) * 100f).ToString () + "% 아웃";
 
-		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit[0].imagePath + mlineupEvent.Response.data.hit[0].imageName);
-		StartCoroutine (GetImage (www, P_LPlayerImage));
-		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setPitcher"));
-		NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit [0].imagePath + mlineupEvent.Response.data.hit [0].imageName);
+				StartCoroutine (GetImage (www, P_LPlayerImage));
+				mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setPitcher"));
+				NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
+			}
+		}
 	}
 	void setPitcher(){
-
+		Lineup2 = mlineupEvent.Response.data.hit [0];
 		P_RPlayersName.text = mlineupEvent.Response.data.pit [0].playerName+"#"+mlineupEvent.Response.data.pit[0].playerNumber;
 		if (mlineupEvent.Response.data.pit [0].ERA ==null||mlineupEvent.Response.data.pit [0].ERA == "") {
 			P_RBatting.text = "0.000";
