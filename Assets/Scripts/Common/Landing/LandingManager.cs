@@ -922,19 +922,23 @@ public class LandingManager : MonoBehaviour {
 		Debug.Log ("numF : " + numF);
 		int num = Mathf.CeilToInt(numF);
 		//		num = (float)getnum (num);
-
+	
 		Debug.Log ("num : " + num);
 		//num = (float)getnum (num);
 		//Debug.Log ("num2 : " + num);
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
 			GetComponent<UILabel>().text = "0";
-		if (num <= 50) {
+		if (num <= 50&&float.Parse (GSG.Response.data.myRank) != 0) {
 			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
 				GetComponent<UILabel>().text = UserMgr.Schedule.rewardValue;
 		}
-		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Rank").
-			GetComponent<UILabel>().text = num+"%";
-
+		if (float.Parse (GSG.Response.data.myRank) == 0) {
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").FindChild ("Rank").
+				GetComponent<UILabel> ().text = "100%";
+		} else {
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").FindChild ("Rank").
+			GetComponent<UILabel> ().text = num + "%";
+		}
 //			GetComponent<UILabel>().text = num.ToString()+"%";
 //	}
 //	int getnum(float num){

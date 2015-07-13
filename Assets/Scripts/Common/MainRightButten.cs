@@ -5,10 +5,19 @@ public class MainRightButten : MonoBehaviour {
 GameObject Top;
 	//char [] array;
 	public void Onhit(){
+
+
 		if (UserMgr.Schedule!=null) {
 			if(UserMgr.Schedule.myEntryFee!="0"){
 				if(ScriptMainTop.LandingState!=3){
-			DialogueMgr.ShowDialogue ("게임 종료", "현 랭킹전을 나간 동안에는\n[ff0000]문제를 받을 수 없습니다.[-] 동의하십니까?", DialogueMgr.DIALOGUE_TYPE.YesNo , MileageDialogueHandler);
+					if (Application.loadedLevelName.Equals ("SceneMain")) {
+						if(UserMgr.Schedule.gameSeq!=int.Parse(transform.FindChild("GameSeq").GetComponent<UILabel>().text)){
+						DialogueMgr.ShowDialogue ("게임 종료", "현 랭킹전을 나간 동안에는\n[ff0000]문제를 받을 수 없습니다.[-] 동의하십니까?", DialogueMgr.DIALOGUE_TYPE.YesNo , MileageDialogueHandler);
+						}
+					}else{
+						click();
+					}
+			
 				}else{
 					click();
 				}

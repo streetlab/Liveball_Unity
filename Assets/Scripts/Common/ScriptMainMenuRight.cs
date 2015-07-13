@@ -31,6 +31,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 	List<int> Count = new List<int>();
 	List<string> ch = new List<string> ();
 	List<string> myentry = new List<string> ();
+	List<string> gameseq = new List<string> ();
 	List<GameObject> News = new List<GameObject> ();
 	// Use this for initialization
 	GetScheduleEvent mScheduleEvent;
@@ -246,7 +247,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		Day.Clear ();
 		Statue.Clear ();
 		myentry.Clear ();
-		
+		gameseq.Clear ();
 		string aa;
 		
 	
@@ -267,6 +268,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			//Debug.Log("Schedule : " + mScheduleEvent.Response.data [i].startTime+ " i : " + i +"\n" + mScheduleEvent.Response.data [i].subTitle);
 			array = mScheduleEvent.Response.data [i].startTime.ToCharArray ();
 			myentry.Add(mScheduleEvent.Response.data [i].myEntryFee);
+			gameseq.Add(mScheduleEvent.Response.data [i].gameSeq.ToString());
 			ch.Clear ();
 			for (int z = 0; z<8; z++) {
 				
@@ -366,6 +368,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 			}else{
 				NEW.transform.FindChild("YellowBG").gameObject.SetActive(false);
 			}
+			NEW.transform.FindChild("GameSeq").GetComponent<UILabel> ().text = gameseq [Count[i]];
 				//Debug.Log(NEW);
 				//Debug.Log(NEW.transform.parent);
 			News.Add(NEW);

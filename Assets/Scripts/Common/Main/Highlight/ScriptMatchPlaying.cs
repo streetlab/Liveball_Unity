@@ -260,7 +260,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 			}
 		} else {
 			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
-			if (UtilMgr.gameround <= ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>0) {
+			if (UtilMgr.gameround < ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>0) {
 				TF_Landing.GetComponent<LandingManager> ().GetRank();
 					}
 			UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);

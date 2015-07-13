@@ -444,12 +444,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
 							.GetComponent<UILabel>().text = nowPlayer[i].hit2B.ToString()+"%";
 						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
-							.GetComponent<UILabel>().text = nowPlayer[i].hitBB.ToString()+"%";
+						.GetComponent<UILabel>().text = nowPlayer[i].hitHr.ToString()+"%";
 						mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
-							.GetComponent<UILabel>().text = nowPlayer[i].hitAvg;
-			
-							
-						Debug.Log("nextPlayer[i].hitAvg : " + nowPlayer[i].hitAvg);
+						.GetComponent<UILabel>().text = nowPlayer[i].hitBB.ToString()+"%";
+
 			
 							if(Holdname!=strImage){
 								if (nowPlayer[i].imagePath != null && nowPlayer[i].imagePath.Length > 0){
