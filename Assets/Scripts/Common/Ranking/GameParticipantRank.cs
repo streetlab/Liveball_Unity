@@ -35,7 +35,7 @@ public class GameParticipantRank : MonoBehaviour {
 			StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>()));
 			}
 			});
-	//	transform.FindChild ("BG_W").FindChild("Scroll View")
+		transform.FindChild ("BG_W").FindChild ("Scroll View").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 }
 	IEnumerator GetImage(WWW www, UITexture texture)
 	{
