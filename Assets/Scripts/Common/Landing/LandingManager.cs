@@ -296,82 +296,104 @@ public class LandingManager : MonoBehaviour {
 		}
 	}
 	public void M1(GameObject bot){
-		if (bot == null) {
-			P_T.text = "시즌타율";
-			P_B.text = "";
-			P_B1.text = "";
-			P_B2.text = "";
-			P_B3.text = "";
-			P_B4.text = "";
-			if (N != null) {
-				for (int i = 0; i <N.Count; i++) {
-					if (N [i].type == 1) {
-						P_B.text = N [i].hitAvg;
-						P_B1.text = N [i].hitH.ToString () + "%";
-						P_B2.text = N [i].hit2B.ToString () + "%";
-						P_B3.text = N [i].hitHr.ToString () + "%";
-						P_B4.text = N [i].hitBB.ToString () + "%";
-					}
-				}
-			}
+		if (FirstLinup) {
+		
+			P_T.text = "타율";
+			P_B.text = Lineup.hitAvg;
+			P_B1.text = Lineup.hitH.ToString () + "%";
+			P_B2.text = Lineup.hit2B.ToString () + "%";
+			P_B3.text = Lineup.hitHr.ToString () + "%";
+			P_B4.text = Lineup.hitBB.ToString () + "%";
+
 		} else {
-			bot.transform.parent.FindChild("Top").GetComponent<UILabel>().text = "시즌타율";
-			bot.GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 1").GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 2").GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 3").GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 4").GetComponent<UILabel>().text = "";
-			if (Old != null) {
-				for (int i = 0; i <Old.Count; i++) {
-					if (Old [i].type == 1) {
-						
-						bot.GetComponent<UILabel>().text = Old [i].title;
-						bot.transform.FindChild("Top 1").GetComponent<UILabel>().text = Old [i].hitH.ToString () + "%";
-						bot.transform.FindChild("Top 2").GetComponent<UILabel>().text = Old [i].hit2B.ToString () + "%";
-						bot.transform.FindChild("Top 3").GetComponent<UILabel>().text = Old [i].hitHr.ToString () + "%";
-						bot.transform.FindChild("Top 4").GetComponent<UILabel>().text = Old [i].hitBB.ToString () + "%";
+		
+		
+			if (bot == null) {
+				P_T.text = "타율";
+				P_B.text = "";
+				P_B1.text = "";
+				P_B2.text = "";
+				P_B3.text = "";
+				P_B4.text = "";
+				if (N != null) {
+					for (int i = 0; i <N.Count; i++) {
+						if (N [i].type == 1) {
+							P_B.text = N [i].hitAvg;
+							P_B1.text = N [i].hitH.ToString () + "%";
+							P_B2.text = N [i].hit2B.ToString () + "%";
+							P_B3.text = N [i].hitHr.ToString () + "%";
+							P_B4.text = N [i].hitBB.ToString () + "%";
+						}
 					}
 				}
-			}
+			} else {
+				bot.transform.parent.FindChild ("Top").GetComponent<UILabel> ().text = "타율";
+				bot.GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = "";
+				if (Old != null) {
+					for (int i = 0; i <Old.Count; i++) {
+						if (Old [i].type == 1) {
+						
+							bot.GetComponent<UILabel> ().text = Old [i].title;
+							bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = Old [i].hitH.ToString () + "%";
+							bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = Old [i].hit2B.ToString () + "%";
+							bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = Old [i].hitHr.ToString () + "%";
+							bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = Old [i].hitBB.ToString () + "%";
+						}
+					}
+				}
 			
+			}
 		}
 	}
 	public void M2(GameObject bot){
-		if (bot == null) {
+		if (FirstLinup) {
 			P_T.text = "기준";
 			P_B.text = "";
 			P_B1.text = "";
 			P_B2.text = "";
 			P_B3.text = "";
 			P_B4.text = "";
-			if (Old != null) {
-				for (int i = 0; i <Old.Count; i++) {
-					if (Old [i].type == 2) {
+		} else {
+			if (bot == null) {
+				P_T.text = "기준";
+				P_B.text = "";
+				P_B1.text = "";
+				P_B2.text = "";
+				P_B3.text = "";
+				P_B4.text = "";
+				if (Old != null) {
+					for (int i = 0; i <Old.Count; i++) {
+						if (Old [i].type == 2) {
 						
-						P_B.text = Old [i].title;
-						P_B1.text = Old [i].hitH.ToString () + "%";
-						P_B2.text = Old [i].hit2B.ToString () + "%";
-						P_B3.text = Old [i].hitHr.ToString () + "%";
-						P_B4.text = Old [i].hitBB.ToString () + "%";
+							P_B.text = Old [i].title;
+							P_B1.text = Old [i].hitH.ToString () + "%";
+							P_B2.text = Old [i].hit2B.ToString () + "%";
+							P_B3.text = Old [i].hitHr.ToString () + "%";
+							P_B4.text = Old [i].hitBB.ToString () + "%";
+						}
 					}
 				}
-			}
-		} else {
-			bot.transform.parent.FindChild("Top").GetComponent<UILabel>().text = "기준";
-			bot.GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 1").GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 2").GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 3").GetComponent<UILabel>().text = "";
-			bot.transform.FindChild("Top 4").GetComponent<UILabel>().text = "";
-			if (Old != null) {
-				for (int i = 0; i <Old.Count; i++) {
-					if (Old [i].type == 2) {
+			} else {
+				bot.transform.parent.FindChild ("Top").GetComponent<UILabel> ().text = "기준";
+				bot.GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = "";
+				bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = "";
+				if (Old != null) {
+					for (int i = 0; i <Old.Count; i++) {
+						if (Old [i].type == 2) {
 						
-						bot.GetComponent<UILabel>().text = Old [i].title;
-						bot.transform.FindChild("Top 1").GetComponent<UILabel>().text = Old [i].hitH.ToString () + "%";
-						bot.transform.FindChild("Top 2").GetComponent<UILabel>().text = Old [i].hit2B.ToString () + "%";
-						bot.transform.FindChild("Top 3").GetComponent<UILabel>().text = Old [i].hitHr.ToString () + "%";
-						bot.transform.FindChild("Top 4").GetComponent<UILabel>().text = Old [i].hitBB.ToString () + "%";
+							bot.GetComponent<UILabel> ().text = Old [i].title;
+							bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = Old [i].hitH.ToString () + "%";
+							bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = Old [i].hit2B.ToString () + "%";
+							bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = Old [i].hitHr.ToString () + "%";
+							bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = Old [i].hitBB.ToString () + "%";
+						}
 					}
 				}
 			}
@@ -959,5 +981,46 @@ public class LandingManager : MonoBehaviour {
 //			number = 100;
 //		}
 //		return number;
+	
+	}
+	bool FirstLinup = false;
+	GetLineupEvent mlineupEvent;
+	PlayerInfo Lineup;
+	public void GetLineUp(){
+		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "sethitter"));
+		NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
+	}
+	void sethitter(){
+		Lineup = mlineupEvent.Response.data.hit[0];
+		FirstLinup= true;
+		P_LPlayersName.text = mlineupEvent.Response.data.hit [0].playerName+"#"+mlineupEvent.Response.data.hit[0].playerNumber;
+		P_LBatting.text = mlineupEvent.Response.data.hit [0].hitAvg;
+
+		P_B.text = mlineupEvent.Response.data.hit [0].hitAvg;
+		P_B1.text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
+		P_B2.text = mlineupEvent.Response.data.hit [0].hit2B.ToString () + "%";
+		P_B3.text = mlineupEvent.Response.data.hit [0].hitHr.ToString () + "%";
+		P_B4.text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
+		P_VS.text = "VS 시즌타율 " + mlineupEvent.Response.data.hit [0].hitAvg;
+		MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)));
+		
+		MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)*100f).ToString()+"%";
+		MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(mlineupEvent.Response.data.hit [0].hitAvg))*100f).ToString()+"% 아웃";
+
+		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit[0].imagePath + mlineupEvent.Response.data.hit[0].imageName);
+		StartCoroutine (GetImage (www, P_LPlayerImage));
+		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setPitcher"));
+		NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
+	}
+	void setPitcher(){
+
+		P_RPlayersName.text = mlineupEvent.Response.data.pit [0].playerName+"#"+mlineupEvent.Response.data.pit[0].playerNumber;
+		if (mlineupEvent.Response.data.pit [0].ERA ==null||mlineupEvent.Response.data.pit [0].ERA == "") {
+			P_RBatting.text = "0.000";
+		} else {
+			P_RBatting.text = mlineupEvent.Response.data.pit [0].ERA;
+		}
+		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit[0].imagePath + mlineupEvent.Response.data.pit[0].imageName);
+		StartCoroutine (GetImage (www, P_RPlayerImage));
 	}
 }

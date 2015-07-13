@@ -225,7 +225,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		}
 	}
 	void getdata(){
-		Debug.Log ("System.DateTime.MaxValue : " + System.DateTime.UtcNow);
+		//Debug.Log ("System.DateTime.MaxValue : " + System.DateTime.UtcNow);
 
 		transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("NoGame").gameObject.SetActive(false);
 		c = 1;

@@ -425,46 +425,42 @@ public class ScriptMainTop : MonoBehaviour {
 		
 		InitTopInfo();
 	}
+	void SetGame(){
 
-	public void GoGame(string teamC,string GameS,string nowday){
-		
-		//bool chek = false;
-		
-		
 		List<string> ch = new List<string> ();
-
-
+		
+		
 		for (int p = 0; p < 7; p++) {
-
+			
 			for (int i = 0; i<mScheduleEvent.Response.data.Count; i++) {
 				char [] array = mScheduleEvent.Response.data [i].startDate.ToCharArray ();
 				for (int z = 6; z<array.Length; z++) {
 					ch.Add (array [z].ToString ());
 				}
 				string result = string.Join ("", ch.ToArray ());
-			
-			
+				
+				
 				ch.Clear ();
-		
+				
 				int num = p;
 				if (System.DateTime.Now.Day+num>31) {
 					num = System.DateTime.Now.Day+num-31;
 					num = num-System.DateTime.Now.Day;
 				}
-				if (int.Parse(nowday) == int.Parse(result)) {
-				//	chek = true;
-				
-					if (mScheduleEvent.Response.data [i].extend [0].teamCode == teamC) {
+				if (int.Parse(nowdays) == int.Parse(result)) {
+					//	chek = true;
+					
+					if (mScheduleEvent.Response.data [i].extend [0].teamCode == teamCs) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-					//	Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
-					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
-					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
-
-						if (int.Parse(GameS) == 0) {
+						//	Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
+						//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
+						//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
+						
+						if (int.Parse(GameSs) == 0) {
 							//non
 							LandingState =1;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
-						} else if(int.Parse(GameS) == 1) {
+						} else if(int.Parse(GameSs) == 1) {
 							//Startgame();
 							LandingState =2;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
@@ -473,17 +469,17 @@ public class ScriptMainTop : MonoBehaviour {
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
 						}
 						return;
-					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == teamC) {
+					} else if (mScheduleEvent.Response.data [i].extend [1].teamCode == teamCs) {
 						UserMgr.Schedule = mScheduleEvent.Response.data [i];
-					//	Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
-					//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
-					//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
+						//	Debug.Log("UserMgr.Schedule.extend [0].teamCode : " + UserMgr.Schedule.extend [0].teamCode );
+						//	Debug.Log("UserMgr.Schedule.gameStatus : " + UserMgr.Schedule.gameStatus );
+						//	Debug.Log("UserMgr.Schedule.startDate : " + UserMgr.Schedule.startDate );
 						
-						if (int.Parse(GameS) == 0) {
+						if (int.Parse(GameSs) == 0) {
 							//non
 							LandingState =1;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
-						} else if(int.Parse(GameS) == 1) {
+						} else if(int.Parse(GameSs) == 1) {
 							//Startgame();
 							LandingState =2;
 							AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);	
@@ -494,9 +490,20 @@ public class ScriptMainTop : MonoBehaviour {
 						return;
 					}
 				}
-
+				
 			}
 		}
+	}
+	string teamCs,GameSs,nowdays;
+	public void GoGame(string teamC,string GameS,string nowday){
+		teamCs = teamC;
+		GameSs = GameS;
+		nowdays = nowday;
+		//bool chek = false;
+		mScheduleEvent = new GetScheduleEvent (new EventDelegate (this, "SetGame"));
+		NetMgr.GetScheduleAll (mScheduleEvent);
+		
+
 	}
 	void InitTopInfo(){
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);

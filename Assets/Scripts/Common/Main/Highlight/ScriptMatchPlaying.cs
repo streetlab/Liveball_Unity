@@ -239,6 +239,12 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //		for (int i=0; i<mEventProgQuiz.Response.data.quiz.Count; i++) {
 //			Debug.Log ("mEventProgQuiz.Response.data.quiz [0].gameRound  : "+mEventProgQuiz.Response.data.quiz [i].gameRound);
 //		}
+
+	
+		Debug.Log ("mEventProgQuiz.Response.data.quiz : "+mEventProgQuiz.Response.data.quiz.Count);
+		if (mEventProgQuiz.Response.data.quiz.Count <= 0) {
+			TF_Landing.GetComponent<LandingManager>().GetLineUp();
+		}
 		Debug.Log ("UtilMgr.gameround is " + UtilMgr.gameround);
 		if (UtilMgr.gameround == 0&&mEventProgQuiz.Response.data.quiz!=null) {
 			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){

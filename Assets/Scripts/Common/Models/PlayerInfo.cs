@@ -232,4 +232,56 @@ public class PlayerInfo {
 			_lineup = value;
 		}
 	}
+	string _hitAvg;
+	
+	public string hitAvg {
+		get {
+			return _hitAvg;
+		}
+		set {
+			_hitAvg = value;
+		}
+	}
+	
+	float _hitHr;
+	
+	public float hitHr {
+		get {
+			return _hitHr;
+		}
+		set {
+			_hitHr = value;
+		}
+	}
+	
+	float _hitBB;
+	
+	public float hitBB {
+		get {
+			return _hitBB;
+		}
+		set {
+			_hitBB = value;
+		}
+	}
+	float _hit2B;
+	
+	public float hit2B {
+		get {
+			return _hit2B;
+		}
+		set {
+			_hit2B = value;
+		}
+	}
+	float _hitH;
+	
+	public float hitH {
+		get {
+			return _hitH;
+		}
+		set {
+			_hitH = value;
+		}
+	}
 }

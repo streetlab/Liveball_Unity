@@ -7,7 +7,7 @@ public class QuizMgr : MonoBehaviour {
 
 	ScriptMainTop mMainTop;
 	ScriptMatchPlaying mMatchPlaying;
-
+	//public static int QuizCount = 0;
 	int sequenceQuiz;
 	public static int SequenceQuiz {
 		get {	return Instance.sequenceQuiz;}

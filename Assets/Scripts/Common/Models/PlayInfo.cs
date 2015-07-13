@@ -155,4 +155,5 @@ public class PlayInfo {
 			_base3rd = value;
 		}
 	}
+
 }

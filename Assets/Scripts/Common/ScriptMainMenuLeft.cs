@@ -92,88 +92,120 @@ public class ScriptMainMenuLeft : MonoBehaviour {
 
 	}
 
+	string ButtonName;
 	public void BtnClicked(string name)
 	{
+		ButtonName = name;
+		check ();
+
+ 	
+
+	}
+	void check(){
+		bool On = true;
+		if (UserMgr.Schedule != null) {
+			if (UserMgr.Schedule.myEntryFee != "0") {
+				if (ScriptMainTop.LandingState != 3) {
+					if (Application.loadedLevelName.Equals ("SceneMain")) {
+						On = false;
+						DialogueMgr.ShowDialogue ("게임 종료", "현 랭킹전을 나간 동안에는\n[ff0000]문제를 받을 수 없습니다.[-] 동의하십니까?", DialogueMgr.DIALOGUE_TYPE.YesNo, MileageDialogueHandler);
+
+					}
+					
+				}
+			}
+		}
+		if (On) {
+			GoSenen();
+		}
+	}
+	void MileageDialogueHandler(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			GoSenen();
+	}
+}
+	void GoSenen(){
+		
+		
 		SetBtnsEnable ();
 		Debug.Log (Application.loadedLevelName);
-		switch(name)
-		{
+		switch (ButtonName) {
 		case "BtnTeamHome":
-
-			if(!Application.loadedLevelName.Equals("SceneTeamHome")){
-//				if(Application.platform == RuntimePlatform.IPhonePlayer){
-//					Application.OpenURL("");
-//				} else{
-					AutoFade.LoadLevel("SceneTeamHome", 0f, 1f);
-//				}
-
+			
+			if (!Application.loadedLevelName.Equals ("SceneTeamHome")) {
+				//				if(Application.platform == RuntimePlatform.IPhonePlayer){
+				//					Application.OpenURL("");
+				//				} else{
+				AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
+				//				}
+				
 			} else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
 		case "BtnGameHome":
 			//if(!Application.loadedLevelName.Equals("SceneMain"))
-	
-				ScriptMainTop.LandingState = 4;
+			
+			ScriptMainTop.LandingState = 4;
 			UtilMgr.SelectTeam = "";
-		
-				AutoFade.LoadLevel("SceneMain", 0f, 1f);
+			
+			AutoFade.LoadLevel ("SceneMain", 0f, 1f);
 			
 			break;
 		case "BtnCards":
-			if(!Application.loadedLevelName.Equals("SceneCards"))
-				AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneCards"))
+				AutoFade.LoadLevel ("SceneCards", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			//DialogueMgr.ShowDialogue("준비중", "추후 업데이트 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			break;
 		case "BtnIloveBaseball":
-			if(!Application.loadedLevelName.Equals("SceneLoveBaseball"))
-				AutoFade.LoadLevel("SceneLoveBaseball", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneLoveBaseball"))
+				AutoFade.LoadLevel ("SceneLoveBaseball", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
 		case "BtnRanking":
-			if(!Application.loadedLevelName.Equals("SceneRanking"))
-				AutoFade.LoadLevel("SceneRanking", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneRanking"))
+				AutoFade.LoadLevel ("SceneRanking", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
 		case "BtnProfile":
-			if(!Application.loadedLevelName.Equals("SceneProfile"))
-				AutoFade.LoadLevel("SceneProfile", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneProfile"))
+				AutoFade.LoadLevel ("SceneProfile", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
 		case "BtnItem":
-			if(!Application.loadedLevelName.Equals("SceneItems"))
-				AutoFade.LoadLevel("SceneItems", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneItems"))
+				AutoFade.LoadLevel ("SceneItems", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
 		case "BtnNotice":
-
+			
 			break;
 		case "BtnSettings":
-			if(!Application.loadedLevelName.Equals("SceneSettings"))
-				AutoFade.LoadLevel("SceneSettings", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneSettings"))
+				AutoFade.LoadLevel ("SceneSettings", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			
 			break;
 		case "BtnTeamRanking":
-			if(!Application.loadedLevelName.Equals("SceneTeamRanking"))
-				AutoFade.LoadLevel("SceneTeamRanking", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneTeamRanking"))
+				AutoFade.LoadLevel ("SceneTeamRanking", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
 		case "BtnRecord":
-			if(!Application.loadedLevelName.Equals("SceneRecord"))
-				AutoFade.LoadLevel("SceneRecord", 0f, 1f);
+			if (!Application.loadedLevelName.Equals ("SceneRecord"))
+				AutoFade.LoadLevel ("SceneRecord", 0f, 1f);
 			else
-				transform.parent.FindChild("Right").GetComponent<ScriptMainMenuRight>().ALLBack();
+				transform.parent.FindChild ("Right").GetComponent<ScriptMainMenuRight> ().ALLBack ();
 			break;
+			
 		}
+
 	}
-
-
 }
