@@ -196,6 +196,7 @@ public class QuizMgr : MonoBehaviour {
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_CLOSE)){
 //			Instance.mMainTop.GameReslut();
 //			Debug.Log("Game Close");
+			if(UserMgr.Schedule.myEntryFee!="0"){
 			if(UserMgr.Schedule.doneGame!=null){
 				if(UserMgr.Schedule.doneGame=="0"){
 					DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
@@ -203,6 +204,8 @@ public class QuizMgr : MonoBehaviour {
 					Instance.mMainTop.GameReslut();
 				}
 			}
+			}
+			Instance.mMainTop.GameEnd();
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
 			if(Instance.mMainTop != null){
 //				bool hasQuiz = false;

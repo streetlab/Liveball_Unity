@@ -321,9 +321,13 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
 	}
 
+//	public static void GetScheduleAll(BaseEvent baseEvent)
+//	{
+//		Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
+//	}
 	public static void GetScheduleAll(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
+		Instance.webAPIProcessEvent (new GetScheduleAllRequest (), baseEvent);
 	}
 
 	public static void GetScheduleMore(string teamCode, int teamSeq, BaseEvent baseEvent)
