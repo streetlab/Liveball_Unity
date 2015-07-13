@@ -246,7 +246,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 		
 		string aa;
 		
-		
+	
 		
 		transform.FindChild ("BtnRight").FindChild("Panel").FindChild("Label").GetComponent<UILabel> ().text = "경기 없음";
 	
@@ -321,7 +321,7 @@ public class ScriptMainMenuRight : MonoBehaviour {
 //				
 //			}
 		}
-		
+
 		
 		if (transform.FindChild ("BtnRight").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel> ().text == "경기 없음") {
 			Debug.Log("Nogame");
@@ -357,6 +357,9 @@ public class ScriptMainMenuRight : MonoBehaviour {
 				NEW.gameObject.SetActive (true);
 			if(int.Parse(myentry[Count[i]])>0){
 				NEW.transform.FindChild("YellowBG").gameObject.SetActive(true);
+				if(Application.loadedLevelName.Equals ("SceneMain")) {
+					NEW.transform.FindChild("myEntryFee").GetComponent<UILabel> ().text = myentry[Count[i]];
+				}
 			}else{
 				NEW.transform.FindChild("YellowBG").gameObject.SetActive(false);
 			}

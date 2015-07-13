@@ -1056,7 +1056,7 @@ public class UIAtlasMaker : EditorWindow
 				}
 				else if (update || replace)
 				{
-					NGUIEditorTools.UpgradeTexturesToSprites(NGUISettings.atlas);
+			//		NGUIEditorTools.UpgradeTexturesToSprites(NGUISettings.atlas);
 					NGUIEditorTools.RepaintSprites();
 				}
 			}

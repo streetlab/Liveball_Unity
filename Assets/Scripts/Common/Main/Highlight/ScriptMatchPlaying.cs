@@ -166,7 +166,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 				Debug.Log("InitQuizFirst");
 				Debug.Log("mEventProgQuiz.Response.data.quiz[0] : " + mEventProgQuiz.Response.data.quiz[0].playerName);
 				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
-					SetHitter(mEventProgQuiz.Response.data.nextPlayer);
+					SetHitter(mEventProgQuiz.Response.data);
 				if(ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3){
 //				string TeamColor = mEventProgQuiz.Response.data.team[1].teamColor;
 //				TeamColor = TeamColor.Replace("#","");
@@ -239,6 +239,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //		for (int i=0; i<mEventProgQuiz.Response.data.quiz.Count; i++) {
 //			Debug.Log ("mEventProgQuiz.Response.data.quiz [0].gameRound  : "+mEventProgQuiz.Response.data.quiz [i].gameRound);
 //		}
+		Debug.Log ("UtilMgr.gameround is " + UtilMgr.gameround);
 		if (UtilMgr.gameround == 0&&mEventProgQuiz.Response.data.quiz!=null) {
 			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
 			if(mEventProgQuiz.Response.data.quiz.Count>0){
@@ -258,7 +259,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 			}
 		} else {
 			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
-			if (UtilMgr.gameround < ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>1) {
+			if (UtilMgr.gameround <= ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>0) {
 				TF_Landing.GetComponent<LandingManager> ().GetRank();
 					}
 			UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);

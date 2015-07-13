@@ -837,7 +837,8 @@ public class ScriptMainTop : MonoBehaviour {
 		}
 
 		AddQuizIntoList ();
-		QuizMgr.NextPlayerInfo = mEventQuiz.Response.data.nextPlayer;
+		QuizMgr.NextPlayerInfo = mEventQuiz.Response.data;
+		QuizMgr.IsBettingOpended = false;
 		if (!QuizMgr.IsBettingOpended)
 
 
@@ -927,7 +928,7 @@ public class ScriptMainTop : MonoBehaviour {
 		}
 	}
 	public void StartGame(){
-		ScriptMainTop.LandingState = 3;
+		ScriptMainTop.LandingState = 2;
 	
 		
 		AutoFade.LoadLevel("SceneMain", 0f, 1f);

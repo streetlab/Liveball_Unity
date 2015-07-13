@@ -393,4 +393,18 @@ public class ScheduleInfo {
 			_myEntryFee = value;
 		}
 	}
+
+	private string _doneGame;
+	
+	public string doneGame {
+		get {
+			return _doneGame;
+		}
+		set {
+			_doneGame = value;
+		}
+	}
+
+	
+
 }

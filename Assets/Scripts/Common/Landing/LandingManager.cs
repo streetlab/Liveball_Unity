@@ -119,17 +119,32 @@ public class LandingManager : MonoBehaviour {
 		LandingScroll.transform.FindChild ("Info").gameObject.SetActive (false);
 		LandingScroll.transform.FindChild ("VS").gameObject.SetActive (false);
 		LandingScroll.transform.FindChild ("Playing").gameObject.SetActive (true);
+		transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (true);
 		if (ScriptMainTop.LandingState == 3) {
 			LandingScroll.transform.FindChild ("Playing").FindChild("Ground").FindChild("END").gameObject.SetActive (true);
+			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (false);
+			if(int.Parse(UserMgr.Schedule.myEntryFee)>0){
+				if(UserMgr.Schedule.doneGame!=null){
+					if(UserMgr.Schedule.doneGame=="0"){
+						DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+					}else{
+						transform.root.FindChild("Ranking Reward").gameObject.SetActive(true);
+					}
+				}else{
+					DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+				}
+				//DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+			//	transform.root.FindChild("Ranking Reward").gameObject.SetActive(true);
+			}
 		}
 		transform.parent.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.SetActive (false);
 		Debug.Log ("UserMgr.UserInfo.myEntryFee : : " + UserMgr.Schedule.myEntryFee);
-		transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (true);
+		
 		if (UserMgr.Schedule.myEntryFee != null) {
 			if (int.Parse (UserMgr.Schedule.myEntryFee) > 0) {
 				transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RankJoinButton").gameObject.SetActive (false);
 				transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").FindChild ("RakingInfo").gameObject.SetActive (true);
-		
+				
 			}
 		}
 		//StartCoroutine (view());
@@ -182,48 +197,65 @@ public class LandingManager : MonoBehaviour {
 	
 	
 	static public List<nextPlayerInfo> N;
+	List<nextPlayerInfo> save1 = null;
+	List<nextPlayerInfo> save2 = null;
+	int gameround;
 	static public List<nextPlayerInfo> Old;
 	string strImage;
-	public void SetHitter(List<nextPlayerInfo> nextPlayer)
-	{ 
+	public void SetHitter(QuizListInfo nextPlayer)
+	{
 		//Debug.Log ("ScriptMainTop.LandingState : " + ScriptMainTop.LandingState);
 		//Debug.Log ("nextPlayer : " + nextPlayer.Count);
 		
 		if((ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3)&&nextPlayer!=null){
-			N = nextPlayer;
+			N = nextPlayer.nextPlayer;
+			if(UtilMgr.gameround%2==0){
+				
+				save1=nextPlayer.nextPlayer;
+				Debug.Log("save1 . playerName : " + save1[0].playerName);
+			}else{
+				
+				save2=nextPlayer.nextPlayer;
+				Debug.Log("save2 . playerName : " + save2[0].playerName);
+			}
+			
+			
+			
+			//N[i].
 			strImage = "";
 			Debug.Log("SetHitter0");
-			if (nextPlayer!=null) {
+			if (N!=null) {
 				//            P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
 				//            P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();
 				//            P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
-				//            
-				for(int i = 0; i <nextPlayer.Count;i++ ){
-					if(nextPlayer[i].type == 1){
-						string playerInfo = nextPlayer[i].playerName + "#" + nextPlayer[i].playerNumber;
+				//  
+				Debug.Log("N.Count : " + N.Count);
+				for(int i = 0; i <N.Count;i++ ){
+					if(N[i].type == 1){
+						string playerInfo = N[i].playerName + "#" + N[i].playerNumber;
 						P_LPlayersName.text = playerInfo;
 						Debug.Log("playerInfo : " + playerInfo);
-						string playerAVG = nextPlayer[i].hitAvg;
+						string playerAVG = N[i].hitAvg;
 						P_LBatting.text = playerAVG;
 						
-						strImage = nextPlayer[i].imageName;
-						P_B.text = nextPlayer[i].hitAvg;
-						P_B1.text = nextPlayer[i].hitH.ToString()+"%";
-						P_B2.text = nextPlayer[i].hit2B.ToString()+"%";
-						P_B3.text = nextPlayer[i].hitHr.ToString()+"%";
-						P_B4.text = nextPlayer[i].hitBB.ToString()+"%";
-						P_VS.text = "VS 시즌타율 " + nextPlayer[i].hitAvg;
+						strImage = N[i].imageName;
+						P_B.text = N[i].hitAvg;
+						P_B1.text = N[i].hitH.ToString()+"%";
+						P_B2.text = N[i].hit2B.ToString()+"%";
+						P_B3.text = N[i].hitHr.ToString()+"%";
+						P_B4.text = N[i].hitBB.ToString()+"%";
+						P_VS.text = "VS 시즌타율 " + N[i].hitAvg;
 						
-						Debug.Log("nextPlayer[i].hitAvg : " + nextPlayer[i].hitAvg);
-						if(nextPlayer[i].hitAvg!=""&&nextPlayer[i].hitAvg!=null&&nextPlayer[i].hitAvg!="-"){
-							MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(nextPlayer[i].hitAvg)));
+						Debug.Log("nextPlayer[i].hitAvg : " + N[i].hitAvg);
+						if(N[i].hitAvg!=""&&N[i].hitAvg!=null&&N[i].hitAvg!="-"){
+							MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(N[i].hitAvg)));
 							
-							MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(nextPlayer[i].hitAvg)*100f).ToString()+"%";
-							MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(nextPlayer[i].hitAvg))*100f).ToString()+"% 아웃";
+							MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(N[i].hitAvg)*100f).ToString()+"%";
+							MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(N[i].hitAvg))*100f).ToString()+"% 아웃";
 						}
 						if(Holdname!=strImage){
-							if (nextPlayer[i].imagePath != null && nextPlayer[i].imagePath.Length > 0){
-								strImage =nextPlayer[i] .imagePath + nextPlayer[i].imageName;
+							if (N[i].imagePath != null && N[i].imagePath.Length > 0){
+								strImage =N[i] .imagePath + N[i].imageName;
 								WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 								Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
 								StartCoroutine (GetImage (www, P_LPlayerImage));
@@ -233,6 +265,31 @@ public class LandingManager : MonoBehaviour {
 					}
 				}
 				Holdname = strImage;
+			}
+			
+			
+		}
+		gameround = UtilMgr.gameround;
+	}
+	public void CheckGameRound(){
+		Debug.Log("UtilMgr.gameround : " + UtilMgr.gameround);
+		Debug.Log("gameround : " + gameround);
+		if(UtilMgr.gameround!=gameround){
+			Debug.Log("UtilMgr.gameround!=gameround!!");
+			if(UtilMgr.gameround%2==0){
+				if(save1!=null){
+					Debug.Log("save1 . playerName re : " + save1[0].playerName);
+				}else{
+					Debug.Log("save1 is null");
+				}
+				N =save1;
+			}else{
+				if(save2!=null){
+					Debug.Log("save2 . playerName re : " + save2[0].playerName);
+				}else{
+					Debug.Log("save2 is null");
+				}
+				N =save2;
 			}
 		}
 	}
@@ -274,7 +331,7 @@ public class LandingManager : MonoBehaviour {
 					}
 				}
 			}
-
+			
 		}
 	}
 	public void M2(GameObject bot){
@@ -288,7 +345,7 @@ public class LandingManager : MonoBehaviour {
 			if (Old != null) {
 				for (int i = 0; i <Old.Count; i++) {
 					if (Old [i].type == 2) {
-					
+						
 						P_B.text = Old [i].title;
 						P_B1.text = Old [i].hitH.ToString () + "%";
 						P_B2.text = Old [i].hit2B.ToString () + "%";
@@ -359,7 +416,7 @@ public class LandingManager : MonoBehaviour {
 	}
 	public bool nonstart = false;
 	
-
+	
 	
 	public void Start () {
 		UtilMgr.gameround = 0;
@@ -372,7 +429,7 @@ public class LandingManager : MonoBehaviour {
 				TeamColor = TeamColor.Replace ("#", "");
 				SetTeamColor (TeamColor);
 			}
-		
+			
 			
 			//if (!test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf && !test.transform.FindChild ("Info").gameObject.activeSelf) {
 			//Debug.Log ("ScriptMainTop.LandingState == 0 : " + ScriptMainTop.LandingState);
@@ -821,47 +878,52 @@ public class LandingManager : MonoBehaviour {
 	GameJoinNEntryFeeEvent gje;
 	public void joingame(){
 		DialogueMgr.ShowDialogue ("랭킹전 입장", "[루비"+UserMgr.Schedule.entryFee+"개] 를 사용하여 입장\n하시겠습니까?" , DialogueMgr.DIALOGUE_TYPE.YesNo , DialogueHandler);
-
+		
 	}
 	void ex(){
 		Debug.Log ("UserMgr.Schedule.myEntryFee : " + UserMgr.Schedule.myEntryFee);
 		if(
-		UserMgr.Schedule.myEntryFee==null||int.Parse(UserMgr.Schedule.myEntryFee)==0
+			UserMgr.Schedule.myEntryFee==null||int.Parse(UserMgr.Schedule.myEntryFee)==0
 			){
 			UserMgr.Schedule.myEntryFee =UserMgr.Schedule.entryFee.ToString();
 			UserMgr.UserInfo.userRuby=(int.Parse(UserMgr.UserInfo.userRuby)-int.Parse(UserMgr.Schedule.entryFee)).ToString();
 			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RankJoinButton").gameObject.SetActive(false);
 			transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").gameObject.SetActive(true);
-
-		}
-	}
-
-
-void DialogueHandler(DialogueMgr.BTNS btn){
-	if (btn == DialogueMgr.BTNS.Btn1) {
-			if (int.Parse (UserMgr.UserInfo.userRuby) < int.Parse(UserMgr.Schedule.entryFee)) {
-				DialogueMgr.ShowDialogue ("입장 실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		} else {
-				gje = new GameJoinNEntryFeeEvent (new EventDelegate (this, "ex"));
-				NetMgr.GameJoinNEntryFee (gje);
+			
 		}
 	}
 	
-}
+	
+	void DialogueHandler(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			if (int.Parse (UserMgr.UserInfo.userRuby) < int.Parse(UserMgr.Schedule.entryFee)) {
+				DialogueMgr.ShowDialogue ("입장 실패", "루비가 부족합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			} else {
+				gje = new GameJoinNEntryFeeEvent (new EventDelegate (this, "ex"));
+				NetMgr.GameJoinNEntryFee (gje);
+			}
+		}
+		
+	}
 	GameSposGameEvent GSG;
 	public void GetRank(){
 		GSG = new GameSposGameEvent (new EventDelegate (this, "SetRank"));
 		NetMgr.GameSposGame (GSG);
 	}
 	void SetRank(){
-
+		
+		//float num;
 		Debug.Log ("GSG.Response.data.myRank : " + GSG.Response.data.myRank);
 		Debug.Log ("GSG.Response.data.joinerCount : " + GSG.Response.data.joinerCount);
+	//	num = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount)*100f;
 		float numF = float.Parse(GSG.Response.data.myRank)/float.Parse(GSG.Response.data.joinerCount)*100f;
 		Debug.Log ("numF : " + numF);
 		int num = Mathf.CeilToInt(numF);
-//		num = (float)getnum (num);
+		//		num = (float)getnum (num);
+
 		Debug.Log ("num : " + num);
+		//num = (float)getnum (num);
+		//Debug.Log ("num2 : " + num);
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Dia").
 			GetComponent<UILabel>().text = "0";
 		if (num <= 50) {
@@ -870,8 +932,9 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		}
 		transform.parent.FindChild("Top").FindChild("Panel").FindChild("RankBG").FindChild("RakingInfo").FindChild("Rank").
 			GetComponent<UILabel>().text = num+"%";
-	}
 
+//			GetComponent<UILabel>().text = num.ToString()+"%";
+//	}
 //	int getnum(float num){
 //		int number = (int)num;
 //		if ((float)number < num) {
@@ -881,5 +944,5 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 //			number = 100;
 //		}
 //		return number;
-//	}
+	}
 }

@@ -51,8 +51,8 @@ public class QuizMgr : MonoBehaviour {
 		get{return Instance.quizInfo;}
 		set{Instance.quizInfo = value;}
 	}
-	List<nextPlayerInfo> nextPlayerInfo;
-	public static List<nextPlayerInfo> NextPlayerInfo
+	QuizListInfo nextPlayerInfo;
+	public static QuizListInfo NextPlayerInfo
 	{
 		get{return Instance.nextPlayerInfo;}
 		set{Instance.nextPlayerInfo = value;}
@@ -194,9 +194,15 @@ public class QuizMgr : MonoBehaviour {
 			Instance.mMainTop.StartGame();
 
 		} else if(msgInfo.type.Equals(ConstantsSocketType.RES.TYPE_CLOSE)){
-			Instance.mMainTop.GameReslut();
-			Debug.Log("Game Close");
-
+//			Instance.mMainTop.GameReslut();
+//			Debug.Log("Game Close");
+			if(UserMgr.Schedule.doneGame!=null){
+				if(UserMgr.Schedule.doneGame=="0"){
+			DialogueMgr.ShowDialogue ("정산중", "모든 경기 종료 후\n집계 뒤 보상이 지급됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+				}else{
+					Instance.mMainTop.GameReslut();
+				}
+			}
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
 			if(Instance.mMainTop != null){
 //				bool hasQuiz = false;

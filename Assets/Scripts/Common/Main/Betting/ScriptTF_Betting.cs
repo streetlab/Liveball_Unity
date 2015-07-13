@@ -182,7 +182,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 	}
 
 	public void Init(QuizInfo quizInfo)
-	{
+	{Debug.Log ("Init");
 		if (quizInfo != null) {
 			transform.parent.FindChild ("TF_Highlight").FindChild ("MatchPlaying").FindChild ("ListHighlight").FindChild ("Label").gameObject.SetActive (false);
 			if (!transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Scroll View").FindChild ("Playing").gameObject.activeSelf) {
@@ -191,7 +191,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 				transform.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().Start ();
 
 			}
-			Debug.Log ("Init");
+
 			mListJoin.Clear ();
 //		quizInfo = quizInfo;
 			SetHitter (quizInfo);
@@ -385,7 +385,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 	string Holdname;
 	void SetHitter(QuizInfo quiz)
 	{ 
-
+		Landing.GetComponent<LandingManager> ().CheckGameRound ();
 
 		if(LandingManager.N==null){
 			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");

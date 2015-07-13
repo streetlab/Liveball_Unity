@@ -7,8 +7,8 @@ public class GetGameParticipantRankingRequest : BaseRequest {
 	public GetGameParticipantRankingRequest()
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
-	//	Add ("gameSeq", UserMgr.Schedule.gameSeq);
-		Add ("gameSeq", 1622);
+		Add ("gameSeq", UserMgr.Schedule.gameSeq);
+	//	Add ("gameSeq", 1622);
 
 
 //		mParams = JsonFx.Json.JsonWriter.Serialize (this);

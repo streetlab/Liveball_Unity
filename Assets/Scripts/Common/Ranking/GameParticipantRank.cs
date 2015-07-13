@@ -15,6 +15,8 @@ public class GameParticipantRank : MonoBehaviour {
 			Rank.Response.data.rankValue.ToString();
 		transform.FindChild ("BG_W").FindChild("BG_BOT").FindChild ("MyRank").FindChild ("Reward").GetComponent<UILabel> ().text = 
 			Rank.Response.data.rewardValue.ToString();
+		transform.FindChild ("BG_W").FindChild("BG_BOT").FindChild ("MyRank").FindChild ("Bule Left").FindChild("GameObject").FindChild("Rank").GetComponent<UILabel> ().text = 
+			Rank.Response.data.myRank.ToString();
 		if (UserMgr.UserInfo.Textures != null) {
 			transform.FindChild ("BG_W").FindChild ("BG_BOT").FindChild ("MyRank").FindChild ("photo").FindChild ("Sprite").FindChild ("Texture").GetComponent<UITexture> ().mainTexture = 
 			UserMgr.UserInfo.Textures;
@@ -33,6 +35,7 @@ public class GameParticipantRank : MonoBehaviour {
 			StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>()));
 			}
 			});
+	//	transform.FindChild ("BG_W").FindChild("Scroll View")
 }
 	IEnumerator GetImage(WWW www, UITexture texture)
 	{

@@ -54,7 +54,8 @@ public class PostButton : MonoBehaviour {
 		}
 	}
 	void Setdata(){
-	
+		transform.FindChild ("TF_Post").FindChild ("NonPost").gameObject.SetActive (true);
+
 		Mails = Mail.Response.data;
 		UserMgr.UserMailCount = Mail.Response.data.Count;
 		Debug.Log (transform.FindChild ("TF_Post").FindChild ("List").childCount);
@@ -112,6 +113,7 @@ public class PostButton : MonoBehaviour {
 						temp.transform.FindChild("attachseq").GetComponent<UILabel>().text = Mails[i].attach[0].attachSeq.ToString();
 						temp.transform.FindChild("Code").GetComponent<UILabel>().text = Mails[i].attach[0].attachCode.ToString();
 						temp.gameObject.SetActive(true);
+						transform.FindChild ("TF_Post").FindChild ("NonPost").gameObject.SetActive (false);
 
 					}
 			}
@@ -127,12 +129,17 @@ public class PostButton : MonoBehaviour {
 			G.transform.FindChild("Scroll View").GetComponent<UIScrollView>().ResetPosition();
 		}
 		for (int i =0; i<5; i++) {
-			if(G.transform.localPosition.y!=-565.5){
+			if(G.transform.localPosition.y>-565.5f){
+				G.transform.localPosition=new Vector3(G.transform.localPosition.x, -565.5f,G.transform.localPosition.z);
+				//UiRoot.transform.FindChild("TF_Items").FindChild("TF_Items").FindChild("category 1").GetComponent<UIScrollView>().ResetPosition();
+				break;
 				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
 				
+
+			}else if(G.transform.localPosition.y!=-565.5f){
+				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
 				yield return new WaitForSeconds(0.01f);
 			}else{
-				//UiRoot.transform.FindChild("TF_Items").FindChild("TF_Items").FindChild("category 1").GetComponent<UIScrollView>().ResetPosition();
 				break;
 			}
 		}
@@ -143,7 +150,11 @@ public class PostButton : MonoBehaviour {
 			G.transform.FindChild("Scroll View 1").gameObject.SetActive(false);
 		}
 		for (int i =0; i<5; i++) {
-			if(G.transform.localPosition.y!=-1900){
+			if(G.transform.localPosition.y<-1900f){
+				G.transform.localPosition=new Vector3(G.transform.localPosition.x, -1900f,G.transform.localPosition.z);
+				break;
+			
+			}else if(G.transform.localPosition.y!=-1900f){
 				G.transform.localPosition -= new Vector3(0,1334.5f/5f,0);
 				yield return new WaitForSeconds(0.02f);
 			}else{

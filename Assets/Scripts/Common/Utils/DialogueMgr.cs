@@ -109,7 +109,7 @@ public class DialogueMgr : MonoBehaviour {
 		Instance.mDialogueBox.transform.FindChild("Panel").FindChild("LblTitle")
 			.GetComponent<UILabel> ().text = strTitle;
 		Instance.mDialogueBox.transform.FindChild("Panel").FindChild("LblBody")
-			.GetComponent<UILabel> ().text = strBody;
+			.GetComponent<UILabel> ().text = "[565656]"+strBody+"[-]";
 
 		Instance.SetTypeDialogue (type, strBtn1, strBtn2, strCancel);
 //		Instance.mIsExit = false;
