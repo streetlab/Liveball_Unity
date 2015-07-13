@@ -985,7 +985,7 @@ public class LandingManager : MonoBehaviour {
 //		return number;
 	
 	}
-	bool FirstLinup = false;
+	public bool FirstLinup = false;
 	GetLineupEvent mlineupEvent;
 	PlayerInfo Lineup;
 	public PlayerInfo Lineup2;
@@ -997,7 +997,7 @@ public class LandingManager : MonoBehaviour {
 		if (mlineupEvent.Response.data != null) {
 			if (mlineupEvent.Response.data.hit.Count > 0) {
 				Lineup = mlineupEvent.Response.data.hit [0];
-				FirstLinup = true;
+
 				P_LPlayersName.text = mlineupEvent.Response.data.hit [0].playerName + "#" + mlineupEvent.Response.data.hit [0].playerNumber;
 				P_LBatting.text = mlineupEvent.Response.data.hit [0].hitAvg;
 

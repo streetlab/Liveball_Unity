@@ -946,6 +946,6 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 	public void GameEnd(){
 		transform.root.FindChild ("GameObject").FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (false);
-		transform.root.FindChild ("GameObject").FindChild ("TF_Landing").FindChild ("Playing").FindChild ("Ground").FindChild("END").gameObject.SetActive (true);;
+		transform.root.FindChild ("GameObject").FindChild ("TF_Landing").FindChild("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("END").gameObject.SetActive (true);;
 	}
 }
