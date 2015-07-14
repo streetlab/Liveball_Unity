@@ -388,6 +388,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		Landing.GetComponent<LandingManager> ().CheckGameRound ();
 
 		if(LandingManager.N==null){
+			Debug.Log("SetHitter 0");
 			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");
 			string playerInfo = QuizMgr.QuizInfo.playerName + "#"+ QuizMgr.QuizInfo.playerNumber;
 	
@@ -411,8 +412,18 @@ public class ScriptTF_Betting : MonoBehaviour {
 			}
 			first = false;
 			Holdname = strImage;
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
+				.GetComponent<UILabel>().text = "0.000";
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 1")
+				.GetComponent<UILabel>().text = "0%";
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
+				.GetComponent<UILabel>().text = "0%";
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
+				.GetComponent<UILabel>().text = "0%";
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
+				.GetComponent<UILabel>().text = "0%";
 			if(UtilMgr.gameround>1){
-				Debug.Log("ONONONON");
+				Debug.Log("SetHitter 0 Set Avg");
 				if(Landing.GetComponent<LandingManager>().Lineup2!=null){
 				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
 					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitAvg;
@@ -435,7 +446,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 				List<nextPlayerInfo> nowPlayer = LandingManager.N;
 				LandingManager.Old = nowPlayer;
 				string strImage = "";
-				Debug.Log("SetHitter0");
+				Debug.Log("SetHitter 1");
 			
 					//            P_LPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Name").GetComponent<UILabel> ();
 					//            P_LBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Batting").GetComponent<UILabel> ();

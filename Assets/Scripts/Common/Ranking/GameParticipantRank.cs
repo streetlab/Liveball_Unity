@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameParticipantRank : MonoBehaviour {
 	GetGameParticipantRankingEvent Rank;
+	public Texture2D texures;
 	public void Start(){
 		Rank = new GetGameParticipantRankingEvent (new EventDelegate (this, "SetRank"));
 		NetMgr.GetGameParticipantRanking (Rank);
@@ -30,6 +31,7 @@ public class GameParticipantRank : MonoBehaviour {
 			item.Target.gameObject.transform.FindChild("Reward").GetComponent<UILabel>().text = Rank.Response.data.rank[index].rewardValue.ToString();
 			item.Target.gameObject.name = "Player_"+index.ToString();
 			item.Target.gameObject.SetActive(true);
+			item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
 			if(Rank.Response.data.rank[index].imageName!=""){
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + Rank.Response.data.rank[index].imagePath + Rank.Response.data.rank[index].imageName);
 			StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>()));

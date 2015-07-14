@@ -1037,4 +1037,6 @@ public class LandingManager : MonoBehaviour {
 		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit[0].imagePath + mlineupEvent.Response.data.pit[0].imageName);
 		StartCoroutine (GetImage (www, P_RPlayerImage));
 	}
+//	void OnApplicationPause(bool pause){
+//	}
 }
