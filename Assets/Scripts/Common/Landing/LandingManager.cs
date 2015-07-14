@@ -298,6 +298,7 @@ public class LandingManager : MonoBehaviour {
 		}
 	}
 	public void M1(GameObject bot){
+		Debug.Log ("FirstLinup : " + FirstLinup);
 		if (FirstLinup) {
 		
 			P_T.text = "타율";
@@ -996,6 +997,7 @@ public class LandingManager : MonoBehaviour {
 	void sethitter(){
 		if (mlineupEvent.Response.data != null) {
 			if (mlineupEvent.Response.data.hit.Count > 0) {
+				FirstLinup = true;
 				Lineup = mlineupEvent.Response.data.hit [0];
 
 				P_LPlayersName.text = mlineupEvent.Response.data.hit [0].playerName + "#" + mlineupEvent.Response.data.hit [0].playerNumber;

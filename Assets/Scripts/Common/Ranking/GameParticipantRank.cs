@@ -5,10 +5,15 @@ public class GameParticipantRank : MonoBehaviour {
 	GetGameParticipantRankingEvent Rank;
 	public Texture2D texures;
 	public void Start(){
+		Vector3 pos = transform.localPosition;
+		pos.y += UtilMgr.GetScaledPositionY();
+		transform.localPosition = pos;
+	
 		Rank = new GetGameParticipantRankingEvent (new EventDelegate (this, "SetRank"));
 		NetMgr.GetGameParticipantRanking (Rank);
 	}
 	void SetRank(){
+
 		Debug.Log ("SetRank");
 		transform.FindChild ("BG_W").FindChild("BG_BOT").FindChild ("MyRank").FindChild ("Name").GetComponent<UILabel> ().text = 
 			UserMgr.UserInfo.memberName;
@@ -45,6 +50,7 @@ public class GameParticipantRank : MonoBehaviour {
 		Texture2D tmpTex = new Texture2D (0, 0);
 		www.LoadImageIntoTexture (tmpTex);
 		texture.mainTexture = tmpTex;
+		//Sprite a = Sprite.Create(tmpTex,new Rect(0,0,tmpTex.width,tmpTex.y),new Vector2(0.5f,0.5f));
 	}
 	public void close(){
 		gameObject.SetActive (false);
