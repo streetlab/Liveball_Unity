@@ -89,19 +89,19 @@ public class ScriptTitle : MonoBehaviour {
 
 	public void Init()
 	{
-		if(Application.platform == RuntimePlatform.Android){
-			transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
-				= new Vector3(-160f, -450f, 0);
-			transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
-				= new Vector3(160f, -450f, 0);
-			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
-		} else{
+//		if(Application.platform == RuntimePlatform.Android){
+//			transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
+//				= new Vector3(-160f, -450f, 0);
+//			transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
+//				= new Vector3(160f, -450f, 0);
+//			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
+//		} else{
 			transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
 				= new Vector3(-220f, -450f, 0);
 			transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
 				= new Vector3(0, -450f, 0);
 			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
-		}
+//		}
 
 		
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
