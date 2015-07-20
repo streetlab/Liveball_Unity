@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameParticipantRank : MonoBehaviour {
+	Dictionary<int,Texture2D> List = new Dictionary<int, Texture2D> ();
+
+	List<Texture2D> TextureList = new List<Texture2D> ();
+	List<int> IndexList = new List<int> ();
 	GetGameParticipantRankingEvent Rank;
 	public Texture2D texures;
 	public void Start(){
@@ -27,9 +32,22 @@ public class GameParticipantRank : MonoBehaviour {
 			transform.FindChild ("BG_W").FindChild ("BG_BOT").FindChild ("MyRank").FindChild ("photo").FindChild ("Sprite").FindChild ("Texture").GetComponent<UITexture> ().mainTexture = 
 			UserMgr.UserInfo.Textures;
 		}
-		transform.FindChild ("BG_W").FindChild("Scroll View"). GetComponent<UIDraggablePanel2>().Init(Rank.Response.data.rank.Count, 
+		transform.FindChild ("BG_W").FindChild("Scroll View"). GetComponent<UIDraggablePanel2>().Init(Rank.Response.data.rank.Count+1, 
 		                                                                         delegate(UIListItem item, int index) {
+			if(Rank.Response.data.rank.Count==index){
+				for(int i = 0; i<item.Target.gameObject.transform.childCount;i++){
+					item.Target.gameObject.transform.GetChild(i).gameObject.SetActive(false);
 
+				}
+				item.Target.gameObject.GetComponent<UISprite>().color = new Color(1,1,1,1);
+				item.Target.gameObject.SetActive(true);
+			}
+			else{
+				for(int i = 0; i<item.Target.gameObject.transform.childCount;i++){
+					item.Target.gameObject.transform.GetChild(i).gameObject.SetActive(true);
+					
+				}
+				item.Target.gameObject.GetComponent<UISprite>().color = new Color(218f/255,220f/255f,222f/255f,1);
 			item.Target.gameObject.transform.FindChild("Rank").GetComponent<UILabel>().text = Rank.Response.data.rank[index].rank.ToString();
 			item.Target.gameObject.transform.FindChild("Name").GetComponent<UILabel>().text = Rank.Response.data.rank[index].memberName;
 			item.Target.gameObject.transform.FindChild("Score").GetComponent<UILabel>().text = Rank.Response.data.rank[index].rankValue.ToString();
@@ -37,19 +55,35 @@ public class GameParticipantRank : MonoBehaviour {
 			item.Target.gameObject.name = "Player_"+index.ToString();
 			item.Target.gameObject.SetActive(true);
 			item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
-			if(Rank.Response.data.rank[index].imageName!=""){
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + Rank.Response.data.rank[index].imagePath + Rank.Response.data.rank[index].imageName);
-			StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>()));
+			try{
+			Texture2D ex = List[index];
+				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
+					= ex;
+			}catch{
+
+				if(Rank.Response.data.rank[index].imageName!=""){
+					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + Rank.Response.data.rank[index].imagePath + Rank.Response.data.rank[index].imageName);
+					StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+				}
 			}
+
+			}
+
 			});
 		transform.FindChild ("BG_W").FindChild ("Scroll View").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 }
-	IEnumerator GetImage(WWW www, UITexture texture)
+	IEnumerator GetImage(WWW www, UITexture texture,int index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
 		www.LoadImageIntoTexture (tmpTex);
+		try{
+		List.Add (index, tmpTex);
+		}catch{
+			Debug.Log("Same key : " + index.ToString());
+		}
 		texture.mainTexture = tmpTex;
+
 		//Sprite a = Sprite.Create(tmpTex,new Rect(0,0,tmpTex.width,tmpTex.y),new Vector2(0.5f,0.5f));
 	}
 	public void close(){

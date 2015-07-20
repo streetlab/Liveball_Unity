@@ -376,7 +376,7 @@ public class Itemcontrol : MonoBehaviour {
 	
 	void billingNotSupportedEvent( string error )
 	{
-		//DialogueMgr.ShowDialogue("billing", error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		DialogueMgr.ShowDialogue("초기화 오류", "결제 초기화에 실패하여\n상품을 구매할 수 없습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		Debug.Log( "billingNotSupportedEvent: " + error );
 	}
 	

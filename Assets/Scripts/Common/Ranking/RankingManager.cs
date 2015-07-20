@@ -6,6 +6,7 @@ public class RankingManager : MonoBehaviour {
 
 	bool Wcheck = false;
 	bool Dcheck = false;
+	string Dstring;
 	Color B = new Color(37f/255f,170f/255f,225f/255f);
 	Color G = new Color(147f/255f,147f/255f,147f/255f);
 	// Use this for initialization
@@ -23,7 +24,7 @@ public class RankingManager : MonoBehaviour {
 			M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallW").FindChild ("W").FindChild ("Rank").GetComponent<UILabel> ().text = 
 			mGetRankEvent.Response.data.rank + "위";
 			M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallW").FindChild ("W").FindChild ("Gold").GetComponent<UILabel> ().text = 
-			"(" + UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.rankValue) + "G)";
+			"(" + UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.rankValue) + "점)";
 			if (mGetRankEvent.Response.data.ranking.Count > 0 && mGetRankEvent.Response.data.ranking != null) {
 			W.transform.FindChild ("BG_W").gameObject.SetActive(false);
 			W.transform.FindChild ("List").gameObject.SetActive(true);
@@ -33,7 +34,7 @@ public class RankingManager : MonoBehaviour {
 					W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Name").GetComponent<UILabel> ().text = 
 				mGetRankEvent.Response.data.ranking [i].memberName;
 					W.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
-				UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " G";
+					UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " 점";
 					if (mGetRankEvent.Response.data != null) {
 			
 						if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
@@ -43,6 +44,7 @@ public class RankingManager : MonoBehaviour {
 								mGetRankEvent.Response.data.ranking [i].imageName [2] == 't' &&
 								mGetRankEvent.Response.data.ranking [i].imageName [3] == 'p') {
 								Imagewww = mGetRankEvent.Response.data.ranking [i].imageName;
+					
 							} else {
 								Imagewww = Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking [i].imagePath + mGetRankEvent.Response.data.ranking [i].imageName;
 					
@@ -57,6 +59,8 @@ public class RankingManager : MonoBehaviour {
 		}else {
 			W.transform.FindChild ("BG_W").gameObject.SetActive(false);
 			Wcheck = true;
+			W.transform.FindChild("NoGame").FindChild("todaynogame").GetComponent<UILabel>().text = 
+				mGetRankEvent.Response.data.rankDesc;
 			W.transform.FindChild("NoGame").gameObject.SetActive(true);
 			W.transform.FindChild ("List").gameObject.SetActive(false);
 			W.transform.FindChild ("BG").FindChild("BG 1").GetComponent<BoxCollider2D>().enabled = false;
@@ -107,7 +111,7 @@ public class RankingManager : MonoBehaviour {
 		M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallD").FindChild ("D").FindChild ("Rank").GetComponent<UILabel> ().text = 
 			mGetRankEvent.Response.data.rank + "위";
 		M.transform.FindChild ("List").FindChild ("BG").FindChild ("GetGold").FindChild ("BallD").FindChild ("D").FindChild ("Gold").GetComponent<UILabel> ().text = 
-			"("+UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.rankValue) + "G)";
+			"("+UtilMgr.AddsThousandsSeparator(mGetRankEvent.Response.data.rankValue) + "점)";
 		Debug.Log (mGetRankEvent.Response.data.ranking.Count);
 		D.transform.FindChild("List").gameObject.SetActive (true);
 		if (mGetRankEvent.Response.data.ranking.Count > 0 && mGetRankEvent.Response.data.ranking != null) {
@@ -117,7 +121,7 @@ public class RankingManager : MonoBehaviour {
 				D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Name").GetComponent<UILabel> ().text = 
 				mGetRankEvent.Response.data.ranking [i].memberName;
 				D.transform.FindChild ("List").FindChild ("BG").GetChild (i + 1).FindChild ("Gold").GetComponent<UILabel> ().text = 
-				UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " G";
+					UtilMgr.AddsThousandsSeparator (mGetRankEvent.Response.data.ranking [i].rankValue) + " 점";
 				if (mGetRankEvent.Response.data != null) {
 				
 					if (mGetRankEvent.Response.data.ranking [i].imageName != "") {
@@ -138,6 +142,7 @@ public class RankingManager : MonoBehaviour {
 			}
 		} else {
 			Dcheck = true;
+			Dstring = mGetRankEvent.Response.data.rankDesc;
 			D.transform.FindChild ("List").gameObject.SetActive(false);
 			D.transform.FindChild ("BG").FindChild("BG 1").GetComponent<BoxCollider2D>().enabled = false;
 		}
@@ -257,6 +262,7 @@ public class RankingManager : MonoBehaviour {
 			M.transform.FindChild ("List").gameObject.SetActive (false);
 			W.transform.FindChild("NoGame").gameObject.SetActive (false);
 			D.transform.FindChild("NoGame").gameObject.SetActive (true);
+			D.transform.FindChild("NoGame").FindChild("todaynogame").GetComponent<UILabel>().text = Dstring;
 		}
 	}
 	public void My(){

@@ -404,6 +404,26 @@ public class ScheduleInfo {
 			_doneGame = value;
 		}
 	}
+	private int _playRound;
+	
+	public int playRound {
+		get {
+			return _playRound;
+		}
+		set {
+			_playRound = value;
+		}
+	}
+	private string _inningType;
+	
+	public string inningType {
+		get {
+			return _inningType;
+		}
+		set {
+			_inningType = value;
+		}
+	}
 
 	
 

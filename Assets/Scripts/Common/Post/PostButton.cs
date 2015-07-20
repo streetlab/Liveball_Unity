@@ -13,6 +13,7 @@ public class PostButton : MonoBehaviour {
 	
 	}
 	public void Start(){
+		transform.FindChild ("TF_Post").gameObject.SetActive (false);
 		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));
 		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
 	}
@@ -54,6 +55,7 @@ public class PostButton : MonoBehaviour {
 		}
 	}
 	void Setdata(){
+		transform.FindChild ("TF_Post").gameObject.SetActive (true);
 		transform.FindChild ("TF_Post").FindChild ("NonPost").gameObject.SetActive (true);
 
 		Mails = Mail.Response.data;

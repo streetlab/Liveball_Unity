@@ -53,5 +53,14 @@ public class Rankinfo {
 			_code = value;
 		}
 	}
+	private string _rankDesc;
+	public string rankDesc {
+		get {
+			return _rankDesc;
+		}
+		set {
+			_rankDesc = value;
+		}
+	}
 
 }

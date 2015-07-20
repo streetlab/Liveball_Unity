@@ -17,7 +17,7 @@ public class LandingManager : MonoBehaviour {
 	List<UISprite> I_SpriteList = new List<UISprite>();
 	
 	
-	
+
 	UILabel V_LTeamName,V_RTeamName,V_BroadCasting,V_Location,V_time,V_LBatting,V_LPlayerName,V_RBatting,V_RPlayerName,V_Memo;
 	UISprite V_LeftTeamImage,V_RightTeamImage;
 	UITexture V_LPlayerImage,V_RPlayerImage;
@@ -446,6 +446,25 @@ public class LandingManager : MonoBehaviour {
 	
 	
 	public void Start () {
+		UtilMgr.gameround = 0;
+		if (UserMgr.Schedule != null) {
+			int inning;
+			UtilMgr.gameround = UserMgr.Schedule.playRound*2;
+
+				for(int i = 0;i<UserMgr.Schedule.inningType.Length;i++){
+					if(UserMgr.Schedule.inningType[i]=='초'){
+						UtilMgr.gameround-=1;
+					}
+				}
+
+			if(UtilMgr.gameround>1){
+				if (UserMgr.Schedule.myEntryFee != null) {
+					if (int.Parse (UserMgr.Schedule.myEntryFee) > 0) {
+						GetRank ();
+					}
+				}
+			}
+		}
 		UtilMgr.gameround = 0;
 		Debug.Log ("ScriptMainTop.LandingState : " + ScriptMainTop.LandingState);
 		N = null;
