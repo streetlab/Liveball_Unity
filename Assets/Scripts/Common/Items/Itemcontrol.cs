@@ -4,11 +4,16 @@ using System.Collections.Generic;
 
 public class Itemcontrol : MonoBehaviour {
 
+
+
 	GetItemShopRubyEvent getruby;
 	GetItemShopGoldEvent getgold;
 	GetItemShopItemEvent getitem;
 
 	GetProfileEvent mProfileEvent;
+
+	GetInAppHistoryEvent mHistoryEvent;
+	InAppPurchaseEvent mIAPEvent;
 
 	IAPEvent RequestIAP,ComsumeIAP,DoneIAP,CancelIAP,golds,items;
 	int itemid,orderNo;
@@ -22,6 +27,9 @@ public class Itemcontrol : MonoBehaviour {
 	string Sgold;
 	bool IsTest = false;
 	static PointParkResponse mResPP;
+	#if(UNITY_ANDROID)
+	GooglePurchase mPurchase;
+	#endif
 
 	// Use this for initialization
 
@@ -39,7 +47,7 @@ public class Itemcontrol : MonoBehaviour {
 		UtilMgr.ShowLoading(true);
 		SetDelegates();
 
-		#if(UNITY_ANDROID || UNITY_EDITOR)
+		#if(UNITY_ANDROID)			
 		#else
 		#endif
 		
@@ -113,7 +121,12 @@ public class Itemcontrol : MonoBehaviour {
 //				prodList += rubyInfo.productCode + ";";
 //			}
 			IOSMgr.InAppInit();
+		} else if(Application.platform == RuntimePlatform.Android){
+			#if(UNITY_ANDROID)
+			GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
+			#endif
 		}
+
 //		} else{
 			GetAblePP();
 //		}
@@ -276,7 +289,7 @@ public class Itemcontrol : MonoBehaviour {
 				SetBanner();
 		}
 		for (int i = 1; i<getruby.Response.data.Count+1; i++) {
-			
+
 			temp1 = (GameObject)Instantiate (origin1, new Vector3 (0, 0, 0), origin1.transform.localRotation);
 			temp1.transform.parent = origin1.transform.parent;
 			temp1.transform.localScale = new Vector3 (1, 1, 1);
@@ -332,6 +345,15 @@ public class Itemcontrol : MonoBehaviour {
 		//
 		DialogueMgr.ShowDialogue ("구매 성공", "["+Sgold+"] 구매 완료.\n[우편함]을 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
+
+	void RetryPurchase(int id,string code,string product){
+		itemid = id;
+		itemcode = code;
+		itemproduct = product;
+		RequestIAP  = new IAPEvent (new EventDelegate (this, "RetryIAP"));
+		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);
+	}
+
 	public void prime31(string id,string code,string product,string buyruby,string addruby,string addgold){
 		Debug.Log ("id : " + id + " code : " + code);
 		itemid = int.Parse(id);
@@ -340,22 +362,28 @@ public class Itemcontrol : MonoBehaviour {
 		Bruby = float.Parse(buyruby);
 		Aruby = float.Parse(addruby);
 		Agold = float.Parse(addgold);
-		RequestIAP  = new IAPEvent (new EventDelegate (this, "mRequestIAP"));
-		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);
+//		RequestIAP  = new IAPEvent (new EventDelegate (this, "mRequestIAP"));
+//		NetMgr.RequestIAP (itemid,itemcode,IsTest,RequestIAP);
+		mRequestIAP();
 	}
+
+//	void RetryIAP(){
+//		orderNo = RequestIAP.Response.data.orderNo;
+//		purchaseSucceededEvent(mPurchase);
+//	}
 
 	void mRequestIAP(){
 		#if(UNITY_ANDROID)
 		//if (RequestIAP.Response.data != null) {
 			//if(RequestIAP.Response.data.productId==itemid&&RequestIAP.Response.data.productCode==itemcode){
-				orderNo = RequestIAP.Response.data.orderNo;
+//				orderNo = RequestIAP.Response.data.orderNo;
 				//RequestIAP.Response.data.
-				GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
-		GoogleIAB.purchaseProduct(itemcode, RequestIAP.Response.data.purchaseKey );
+//				GoogleIAB.init(Constants.GOOGLE_PUBLIC_KEY);
+		GoogleIAB.purchaseProduct(itemcode);//, RequestIAP.Response.data.purchaseKey );
 			//}
 		//}
 		#else
-		orderNo = RequestIAP.Response.data.orderNo;
+//		orderNo = RequestIAP.Response.data.orderNo;
 		IOSMgr.BuyItem(itemcode);
 		#endif
 	}
@@ -371,6 +399,16 @@ public class Itemcontrol : MonoBehaviour {
 	{
 		//DialogueMgr.ShowDialogue("billing", "this device can be purchasement", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		Debug.Log( "billingSupportedEvent" );
+		//Try to Get Item Inven
+		#if(UNITY_ANDROID)
+		string[] skus = new string[getruby.Response.data.Count];
+		int i = 0;
+		foreach(ItemShopRubyInfo info in getruby.Response.data){
+			skus[i++] = info.productCode;
+		}			
+		
+		GoogleIAB.queryInventory(skus);
+		#endif
 	}
 	
 	
@@ -380,22 +418,22 @@ public class Itemcontrol : MonoBehaviour {
 		Debug.Log( "billingNotSupportedEvent: " + error );
 	}
 	
-	void mComsumeIAP(){
-		if(ComsumeIAP.Response.message.Equals("200")){
-			#if(UNITY_ANDROID)
-			GoogleIAB.consumeProduct (itemcode);
-			#else
-			RequestDone();
-			#endif
-		} else{
-			DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 영수증 정보에 오류가 있습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		}
-	}
+//	void mComsumeIAP(){
+//		if(ComsumeIAP.Response.message.Equals("200")){
+//			#if(UNITY_ANDROID)
+//			GoogleIAB.consumeProduct (itemcode);
+//			#else
+//			RequestDone();
+//			#endif
+//		} else{
+//			DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 영수증 정보에 오류가 있습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+//		}
+//	}
 
-	void RequestDone(){
-		DoneIAP  = new IAPEvent (new EventDelegate (this, "mDoneIAP"));
-		NetMgr.DoneIAP (orderNo,IsTest,DoneIAP);
-	}
+//	void RequestDone(){
+//		DoneIAP  = new IAPEvent (new EventDelegate (this, "mDoneIAP"));
+//		NetMgr.DoneIAP (orderNo,IsTest,DoneIAP);
+//	}
 
 	#if(UNITY_ANDROID)
 	void queryInventorySucceededEvent( List<GooglePurchase> purchases, List<GoogleSkuInfo> skus )
@@ -403,6 +441,36 @@ public class Itemcontrol : MonoBehaviour {
 		Debug.Log( string.Format( "queryInventorySucceededEvent. total purchases: {0}, total skus: {1}", purchases.Count, skus.Count ) );
 		Prime31.Utils.logObject( purchases );
 		Prime31.Utils.logObject( skus );
+		if(purchases.Count > 0){
+//			purchaseSucceededEvent (purchases[0]);
+			mPurchase = purchases[0];
+			//			mHistoryEvent = new GetInAppHistoryEvent(new EventDelegate(this, "CheckOrderNo"));
+//			NetMgr.GetInAppHistory(IsTest, mHistoryEvent);
+			foreach(ItemShopRubyInfo info in getruby.Response.data){
+				if(info.productCode.Equals(mPurchase.productId)){
+////					RetryPurchase(info.productId, info.productCode, "루비 " + info.productValue+"개");
+					itemcode = info.productCode;
+					itemproduct = "루비 " + info.productValue+"개";
+					purchaseSucceededEvent(mPurchase);
+					break;
+				}
+			}			
+
+		}
+	}
+
+	public void CheckOrderNo(){
+		Debug.Log("DeveloperPayload Status : "+mPurchase.developerPayload);
+		foreach(InAppHistoryInfo info in mHistoryEvent.Response.data){
+			Debug.Log("purchase key : "+info.purchaseKey+", Status : "+info.purchaseStatus);
+			if(info.purchaseKey.Equals(mPurchase.developerPayload)){
+				orderNo = info.orderNo;
+				itemcode = info.productCode;
+				itemproduct = "루비 " + info.productValue+"개";
+				purchaseSucceededEvent(mPurchase);
+				break;
+			}
+		}
 	}
 	
 	
@@ -419,10 +487,19 @@ public class Itemcontrol : MonoBehaviour {
 
 	void purchaseSucceededEvent( GooglePurchase purchase )
 	{
-
-		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
-		NetMgr.ComsumeIAP (orderNo,purchase.purchaseToken,IsTest,ComsumeIAP);
+//		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
+//		NetMgr.ComsumeIAP (orderNo,purchase.purchaseToken,IsTest,ComsumeIAP);
 //		orderNo = ComsumeIAP.Response.data.orderNo;
+
+		mIAPEvent = new InAppPurchaseEvent(new EventDelegate(this, "FinishIAP"));
+//		Debug.Log("purchase : "+Newtonsoft.Json.JsonConvert.SerializeObject(purchase));
+
+		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(purchase.originalJson);
+		string basedJson = System.Convert.ToBase64String(bytes);
+		Debug.Log("purchase.signature : "+purchase.signature);
+		bytes = System.Text.Encoding.UTF8.GetBytes(purchase.signature);
+		string basedSign = System.Convert.ToBase64String(bytes);
+		NetMgr.InAppPurchase(IsTest, purchase.productId, basedJson, basedSign, mIAPEvent);
 
 		Debug.Log( "purchaseSucceededEvent: " + purchase );
 	}
@@ -430,20 +507,10 @@ public class Itemcontrol : MonoBehaviour {
 	void purchaseFailedEvent( string error, int response )
 	{
 
-		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
-		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
+//		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
+//		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
 
 		Debug.Log( "purchaseFailedEvent: " + error + ", response: " + response );
-	}
-
-	void mDoneIAP(){
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
-		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
-		UserMgr.UserMailCount += 1;
-		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.\n우편함을 확인해 주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-
-		Debug.Log ("All PurchaseSucceeded");
-
 	}
 
 	void mCancelIAP(){
@@ -455,7 +522,8 @@ public class Itemcontrol : MonoBehaviour {
 
 	void consumePurchaseSucceededEvent( GooglePurchase purchase )
 	{
-		RequestDone();
+//		RequestDone();
+		mDoneIAP();
 	}
 	
 	
@@ -500,25 +568,17 @@ public class Itemcontrol : MonoBehaviour {
 	void purchaseSucceededEvent(string receipt)
 	{	
 		byte[] bytes = System.Text.Encoding.UTF8.GetBytes(receipt);
-		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
-		NetMgr.ComsumeIAP (orderNo,System.Convert.ToBase64String(bytes),IsTest,ComsumeIAP);
+//		ComsumeIAP  = new IAPEvent (new EventDelegate (this, "mComsumeIAP"));
+//		NetMgr.ComsumeIAP (orderNo,System.Convert.ToBase64String(bytes),IsTest,ComsumeIAP);
 //		orderNo = ComsumeIAP.Response.data.orderNo;
+		mIAPEvent = new InAppPurchaseEvent(new EventDelegate(this, "FinishIAP"));
+		NetMgr.InAppPurchase(IsTest, itemcode, System.Convert.ToBase64String(bytes), "", mIAPEvent);
 	}
 	
 	void purchaseFailedEvent(string receipt)
 	{		
-		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
-		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
-	}
-	
-	void mDoneIAP(){
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
-		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
-		UserMgr.UserMailCount += 1;
-		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		
-		Debug.Log ("All PurchaseSucceeded");
-		
+//		CancelIAP  = new IAPEvent (new EventDelegate (this, "mCancelIAP"));
+//		NetMgr.CancelIAP (orderNo,IsTest,CancelIAP);
 	}
 	
 	void mCancelIAP(){
@@ -529,6 +589,30 @@ public class Itemcontrol : MonoBehaviour {
 	}
 
 	#endif
+
+	public void mDoneIAP(){
+		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "addruby"));
+		NetMgr.GetProfile (UserMgr.UserInfo.memSeq,mProfileEvent);
+		UserMgr.UserMailCount += 1;
+		DialogueMgr.ShowDialogue("구매 성공", itemproduct + " 구매가 완료 되었습니다.\n우편함을 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		
+		Debug.Log ("All PurchaseSucceeded");
+		
+	}
+
+	public void FinishIAP(){
+		if(mIAPEvent.Response.code == 0){
+			#if(UNITY_ANDROID)
+			GoogleIAB.consumeProduct (itemcode);
+			#else
+			mDoneIAP();
+			#endif
+
+		} else{
+			//failed
+			DialogueMgr.ShowDialogue("구매 실패", itemproduct + " 구매를 실패 했습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
+	}
 
 	void GetAblePP(){
 		EventDelegate eventd = new EventDelegate(this, "InitRubyList");

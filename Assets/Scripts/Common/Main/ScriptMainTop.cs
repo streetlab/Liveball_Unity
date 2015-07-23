@@ -201,10 +201,7 @@ public class ScriptMainTop : MonoBehaviour {
 		}
 	}
 
-	void SetSchedule1(){
-		
-		
-		
+	void SetSchedule1(){		
 		//bool chek = false;
 		if (mScheduleEvent.Response.data != null) {
 		

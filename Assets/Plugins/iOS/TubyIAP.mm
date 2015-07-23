@@ -139,13 +139,12 @@ extern "C"
 {
     NSLog(@"InAppPurchase completeTransaction");
     NSLog(@"InAppPurchase Transaction Identifier : %@", transaction.transactionIdentifier );
-    NSLog(@"InAppPurchase Transaction Data : %@", transaction.transactionDate );
+    NSLog(@"InAppPurchase Transaction Date : %@", transaction.transactionDate );
     ///< 구매 완료 후 아이템 인벤등 게임쪽 후 처리 진행
     /* 빌트 인 모델
      const char* pszProductId = [[[transaction payment] productIdentifier] UTF8String];
      UnitySendMessage("IOSMgr", "ResultBuyItem", pszProductId);
      */
-    
     NSString* strReceipt = [[NSString alloc] initWithBytes:transaction.transactionReceipt.bytes length:transaction.transactionReceipt.length encoding:NSUTF8StringEncoding];
     
     UnitySendMessage("IOSMgr", "PurchaseSucceeded", [strReceipt UTF8String]);

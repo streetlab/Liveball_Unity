@@ -519,6 +519,14 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEventToAuth(new CancelIAPRequest(orderNo), baseEvent, isTest, true);
 	}
 
+	public static void GetInAppHistory(bool isTest, BaseEvent baseEvent){
+		Instance.webAPIProcessEventToAuth(new GetInAppHistoryRequest(), baseEvent, isTest, true);
+	}
+
+	public static void InAppPurchase(bool isTest, string productCode, string token, string purchaseKey, BaseEvent baseEvent){
+		Instance.webAPIProcessEventToAuth(new InAppPurchaseRequest(productCode, token, purchaseKey), baseEvent, isTest, true);
+	}
+
 	public static void PurchaseGold(int productId, BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent(new PurchaseGoldRequest(productId), baseEvent);
