@@ -275,6 +275,26 @@ public class NetMgr : MonoBehaviour{
 		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
+	IEnumerator webProcess(WWW www, EventDelegate eventd){
+		Debug.Log ("Com");
+		float timeSum = 0f;
+		while(!www.isDone && 
+		      string.IsNullOrEmpty(www.error) && 
+		      timeSum < 10f) { 
+			timeSum += Time.deltaTime; 
+			yield return 0; 
+		} 
+		
+		
+		if(www.error == null && www.isDone)
+		{
+			Debug.Log(www.text);
+			LobbyGiftCommander.mGift = Newtonsoft.Json.JsonConvert.DeserializeObject<LobbyGiftCommander.GiftListResponse>(www.text);
+		}
+
+
+		eventd.Execute();
+	}
 
 	private void socketJoinEvent(){
 		if(mSocket != null)
@@ -325,6 +345,11 @@ public class NetMgr : MonoBehaviour{
 //	{
 //		Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
 //	}
+	public static void GetGift(WWW www, EventDelegate E)
+	{
+		Debug.Log ("GetGift");
+		Instance.webProcess (www, E);
+	}
 	public static void GetScheduleAll(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new GetScheduleAllRequest (), baseEvent);

@@ -46,4 +46,11 @@ public class LobbyAddSub : MonoBehaviour {
 			
 		}
 	}
+	public void ResetAddSub(){
+		for(int i = 0; i < SubMenuName.Length;i++){
+		transform.FindChild("Top").FindChild("Sub").FindChild(SubMenuName[i]).FindChild("Label").GetComponent<UILabel>()
+				.text = SubMenuValue[i];
+		}
+
+	}
 }

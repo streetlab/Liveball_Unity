@@ -18,6 +18,7 @@ public class LobbyBotCommander : MonoBehaviour {
 		if (transform.FindChild("Bot")==null) {
 			GameObject Bot = new GameObject ("Bot");
 			Bot.transform.parent = transform;
+			Bot.AddComponent<UIPanel>().depth = 5;
 			Bot.transform.localScale = new Vector3 (1, 1, 1);
 			Bot.transform.localPosition = new Vector2 (-360, 640-GetComponent<LobbyTopCommander>().TopHight-
 			                                           GetComponent<LobbyFCCommander>().FCHight-

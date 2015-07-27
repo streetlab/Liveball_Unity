@@ -27,6 +27,8 @@ public class TopMenu : MonoBehaviour {
 		} else {
 			transform.parent.FindChild ("Sub").gameObject.SetActive (true);
 			transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
+			transform.root.FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
+			transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
 		}
 	}
 	void AllBarDisable(){
@@ -38,5 +40,6 @@ public class TopMenu : MonoBehaviour {
 			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Num").
 				GetComponent<UILabel>().color = new Color(1f,1f,1f,0.5f);
 		} 
+	
 	}
 }

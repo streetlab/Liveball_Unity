@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 public class LobbyGiftCommander : MonoBehaviour {
-	static GiftListResponse mGift;
+	//static GiftListResponse _mGift;
+
+	public static GiftListResponse mGift ;
+
 	public UITexture T;
 	void Getdata(){
 		Debug.Log ("mGift.imageurl : " + mGift.imageurl);
@@ -53,13 +56,15 @@ public class LobbyGiftCommander : MonoBehaviour {
 //	}
 
 	void Start(){
-	WWW www2 = new WWW ("file://"+Application.persistentDataPath + "/image.png");
-		StartCoroutine (GetImage (www2));
+		Debug.Log ("Comon");
+	//WWW www2 = new WWW ("file://"+Application.persistentDataPath + "/image.png");
+	//	StartCoroutine (GetImage (www2));
 		EventDelegate eventd = new EventDelegate(this, "Getdata");
-		//WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");
+		WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");
 		//StartCoroutine(webProcess(www, eventd));
+		NetMgr.GetGift (www,eventd);
 	}
-	
+
 	IEnumerator webProcess(WWW www, EventDelegate eventd){
 		float timeSum = 0f;
 		while(!www.isDone && 
@@ -78,7 +83,7 @@ public class LobbyGiftCommander : MonoBehaviour {
 		
 		eventd.Execute();
 	}
-	class GiftListResponse{
+	public class GiftListResponse{
 
 		string _imageurl;
 		
@@ -104,7 +109,7 @@ public class LobbyGiftCommander : MonoBehaviour {
 
 	}
 	
-	class gift{
+	public class gift{
 		string _imagename;
 		
 		public string imagename {

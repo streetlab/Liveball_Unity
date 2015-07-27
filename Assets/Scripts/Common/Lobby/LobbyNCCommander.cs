@@ -20,7 +20,7 @@ public class LobbyNCCommander : MonoBehaviour {
 			NC.transform.parent = transform;
 			NC.transform.localScale = new Vector3 (1, 1, 1);
 			NC.transform.localPosition = new Vector3 (-360f, (1280f / 2f) - GetComponent<LobbyTopCommander> ().TopHight-GetComponent<LobbyFCCommander>().FCHight);
-			NC.transform.FindChild ("BackGround").GetComponent<UISprite> ().SetRect (GetComponent<LobbyTopCommander> ().Gap.x, -NCHight, GetComponent<LobbyTopCommander> ().Width - (GetComponent<LobbyTopCommander> ().Gap.x * 2), NCHight-(FCNCGap/2));
+			NC.transform.FindChild("BackGround Panel").FindChild ("BackGround").GetComponent<UISprite> ().SetRect (GetComponent<LobbyTopCommander> ().Width - (GetComponent<LobbyTopCommander> ().Gap.x * 2), NCHight-(FCNCGap/2));
 			Debug.Log ("Nomal Contest Create Complete");
 		} else {
 			Debug.Log("The \"Nomal Contest\" already exists.");

@@ -25,6 +25,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		}
 		transform.FindChild ("Top").FindChild ("Sub").FindChild("BG_B").gameObject.SetActive (false);
 		transform.FindChild ("Top").FindChild ("Sub").gameObject.SetActive (false);
+		transform.FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
 
 	}
 	public void Ratio () {

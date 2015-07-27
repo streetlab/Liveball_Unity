@@ -29,6 +29,7 @@ public class LobbyTopCommander : MonoBehaviour {
 			Top.transform.parent = transform;
 			Top.transform.localScale = new Vector3 (1, 1, 1);
 			Top.transform.localPosition = new Vector2 (-360, 640);
+			Top.AddComponent<UIPanel>().depth = 4;
 			for (int i = 0; i<mTopMenuName.Length; i++) {
 				GameObject Temp = (GameObject)Instantiate (mTopTemp, new Vector3 (0, 0, 0), new Quaternion (0, 0, 0, 0));
 				Temp.transform.parent = Top.transform;
