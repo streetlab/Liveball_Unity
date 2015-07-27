@@ -60,9 +60,8 @@ public class LobbyGiftCommander : MonoBehaviour {
 	//WWW www2 = new WWW ("file://"+Application.persistentDataPath + "/image.png");
 	//	StartCoroutine (GetImage (www2));
 		EventDelegate eventd = new EventDelegate(this, "Getdata");
-		WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");
 		//StartCoroutine(webProcess(www, eventd));
-		NetMgr.GetGift (www,eventd);
+		NetMgr.GetGift (eventd);
 	}
 
 	IEnumerator webProcess(WWW www, EventDelegate eventd){

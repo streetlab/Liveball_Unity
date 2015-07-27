@@ -345,10 +345,11 @@ public class NetMgr : MonoBehaviour{
 //	{
 //		Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
 //	}
-	public static void GetGift(WWW www, EventDelegate E)
+	public static void GetGift(EventDelegate E)
 	{
+		WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");
 		Debug.Log ("GetGift");
-		Instance.webProcess (www, E);
+		StartCoroutine (Instance.webProcess (www, E));
 	}
 	public static void GetScheduleAll(BaseEvent baseEvent)
 	{
