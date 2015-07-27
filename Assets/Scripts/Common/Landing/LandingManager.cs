@@ -6,6 +6,10 @@ public class LandingManager : MonoBehaviour {
 	public GameObject LandingScroll;
 	public GameObject Pitcher;
 	public GameObject Mid_BG;
+	Color S_Abled = new Color(242f/255f,242f/255f,242f/255f);
+	Color S_Disabled = new Color(217f/255f,217f/255f,217f/255f);
+	Color L_Abled = new Color(0,0,0);
+	Color L_Disabled = new Color(157f/255f,157f/255f,157f/255f);
 	int a = 0;
 	UILabel I_Gold,I_TeamName,I_RankScore,I_TodayDealWith,I_TodayInfo,I_Memo,I_PlayersName,I_Batting;
 	UITexture I_PlayersImage;
@@ -200,10 +204,12 @@ public class LandingManager : MonoBehaviour {
 	
 	
 	static public List<nextPlayerInfo> N;
+	static public List<nowPlayerInfo> Now;
 	List<nextPlayerInfo> save1 = null;
 	List<nextPlayerInfo> save2 = null;
 	int gameround;
 	static public List<nextPlayerInfo> Old;
+	static public List<nowPlayerInfo> NowOld;
 	string strImage;
 	public void SetHitter(QuizListInfo nextPlayer)
 	{
@@ -212,16 +218,17 @@ public class LandingManager : MonoBehaviour {
 		
 		if((ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3)&&nextPlayer!=null){
 			N = nextPlayer.nextPlayer;
+			Now = nextPlayer.nowPlayer;
 			Debug.Log("UtilMgr.gameround : : " + UtilMgr.gameround);
-			if(UtilMgr.gameround%2==0){
-				
-				save1=nextPlayer.nextPlayer;
-				Debug.Log("save1 . playerName : " + save1[0].playerName);
-			}else{
-				
-				save2=nextPlayer.nextPlayer;
-				Debug.Log("save2 . playerName : " + save2[0].playerName);
-			}
+//			if(UtilMgr.gameround%2==0){
+//				
+//				save1=nextPlayer.nextPlayer;
+//				Debug.Log("save1 . playerName : " + save1[0].playerName);
+//			}else{
+//				
+//				save2=nextPlayer.nextPlayer;
+//				Debug.Log("save2 . playerName : " + save2[0].playerName);
+//			}
 			
 			
 			
@@ -241,7 +248,13 @@ public class LandingManager : MonoBehaviour {
 						Debug.Log("playerInfo : " + playerInfo);
 						string playerAVG = N[i].hitAvg;
 						P_LBatting.text = playerAVG;
+						P_T.text = "타율";
+						P_T.transform.parent.FindChild("M1").FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
+						P_T.transform.parent.FindChild("M2").FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+						//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
 						
+						P_T.transform.parent.FindChild("M1").FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
+						P_T.transform.parent.FindChild("M2").FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
 						strImage = N[i].imageName;
 						P_B.text = N[i].hitAvg;
 						P_B1.text = N[i].hitH.ToString()+"%";
@@ -336,15 +349,15 @@ public class LandingManager : MonoBehaviour {
 				bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = "";
 				bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = "";
 				bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = "";
-				if (Old != null) {
-					for (int i = 0; i <Old.Count; i++) {
-						if (Old [i].type == 1) {
+				if (Now != null) {
+					for (int i = 0; i <Now.Count; i++) {
+						if (Now [i].type == 1) {
 						
-							bot.GetComponent<UILabel> ().text = Old [i].title;
-							bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = Old [i].hitH.ToString () + "%";
-							bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = Old [i].hit2B.ToString () + "%";
-							bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = Old [i].hitHr.ToString () + "%";
-							bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = Old [i].hitBB.ToString () + "%";
+							bot.GetComponent<UILabel> ().text = Now [i].title;
+							bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = Now [i].hitH.ToString () + "%";
+							bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = Now [i].hit2B.ToString () + "%";
+							bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = Now [i].hitHr.ToString () + "%";
+							bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = Now [i].hitBB.ToString () + "%";
 						}
 					}
 				}
@@ -368,15 +381,15 @@ public class LandingManager : MonoBehaviour {
 				P_B2.text = "";
 				P_B3.text = "";
 				P_B4.text = "";
-				if (Old != null) {
-					for (int i = 0; i <Old.Count; i++) {
-						if (Old [i].type == 2) {
+				if (N != null) {
+					for (int i = 0; i <N.Count; i++) {
+						if (N [i].type == 2) {
 						
-							P_B.text = Old [i].title;
-							P_B1.text = Old [i].hitH.ToString () + "%";
-							P_B2.text = Old [i].hit2B.ToString () + "%";
-							P_B3.text = Old [i].hitHr.ToString () + "%";
-							P_B4.text = Old [i].hitBB.ToString () + "%";
+							P_B.text = N [i].title;
+							P_B1.text = N [i].hitH.ToString () + "%";
+							P_B2.text = N [i].hit2B.ToString () + "%";
+							P_B3.text = N [i].hitHr.ToString () + "%";
+							P_B4.text = N [i].hitBB.ToString () + "%";
 						}
 					}
 				}
@@ -387,15 +400,15 @@ public class LandingManager : MonoBehaviour {
 				bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = "";
 				bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = "";
 				bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = "";
-				if (Old != null) {
-					for (int i = 0; i <Old.Count; i++) {
-						if (Old [i].type == 2) {
+				if (Now != null) {
+					for (int i = 0; i <Now.Count; i++) {
+						if (Now [i].type == 2) {
 						
-							bot.GetComponent<UILabel> ().text = Old [i].title;
-							bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = Old [i].hitH.ToString () + "%";
-							bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = Old [i].hit2B.ToString () + "%";
-							bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = Old [i].hitHr.ToString () + "%";
-							bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = Old [i].hitBB.ToString () + "%";
+							bot.GetComponent<UILabel> ().text = Now [i].title;
+							bot.transform.FindChild ("Top 1").GetComponent<UILabel> ().text = Now [i].hitH.ToString () + "%";
+							bot.transform.FindChild ("Top 2").GetComponent<UILabel> ().text = Now [i].hit2B.ToString () + "%";
+							bot.transform.FindChild ("Top 3").GetComponent<UILabel> ().text = Now [i].hitHr.ToString () + "%";
+							bot.transform.FindChild ("Top 4").GetComponent<UILabel> ().text = Now [i].hitBB.ToString () + "%";
 						}
 					}
 				}
@@ -446,6 +459,7 @@ public class LandingManager : MonoBehaviour {
 	
 	
 	public void Start () {
+		transform.root.FindChild("Ranking Reward").gameObject.SetActive(false);
 		UtilMgr.gameround = 0;
 		if (UserMgr.Schedule != null) {
 			int inning;
@@ -1008,7 +1022,7 @@ public class LandingManager : MonoBehaviour {
 	public bool FirstLinup = false;
 	GetLineupEvent mlineupEvent;
 	PlayerInfo Lineup;
-	public PlayerInfo Lineup2;
+	//public PlayerInfo Lineup2;
 	public void GetLineUp(){
 		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "sethitter"));
 		NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
@@ -1021,6 +1035,14 @@ public class LandingManager : MonoBehaviour {
 
 				P_LPlayersName.text = mlineupEvent.Response.data.hit [0].playerName + "#" + mlineupEvent.Response.data.hit [0].playerNumber;
 				P_LBatting.text = mlineupEvent.Response.data.hit [0].hitAvg;
+				P_T.text = "타율";
+				P_T.transform.parent.FindChild("M1").FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
+				P_T.transform.parent.FindChild("M2").FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+				//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+				
+				P_T.transform.parent.FindChild("M1").FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
+				P_T.transform.parent.FindChild("M2").FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+
 
 				P_B.text = mlineupEvent.Response.data.hit [0].hitAvg;
 				P_B1.text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
@@ -1029,11 +1051,11 @@ public class LandingManager : MonoBehaviour {
 				P_B4.text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
 				P_VS.text = "VS 시즌타율 " + mlineupEvent.Response.data.hit [0].hitAvg;
 
-				Mid_BG.transform.FindChild ("Bot").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitAvg;
-				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 1").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
-				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 2").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hit2B.ToString () + "%";
-				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 3").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitHr.ToString () + "%";
-				Mid_BG.transform.FindChild ("Bot").FindChild ("Top 4").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
+				//Mid_BG.transform.FindChild ("Bot").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitAvg;
+				//Mid_BG.transform.FindChild ("Bot").FindChild ("Top 1").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitH.ToString () + "%";
+				//Mid_BG.transform.FindChild ("Bot").FindChild ("Top 2").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hit2B.ToString () + "%";
+				//Mid_BG.transform.FindChild ("Bot").FindChild ("Top 3").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitHr.ToString () + "%";
+				//Mid_BG.transform.FindChild ("Bot").FindChild ("Top 4").GetComponent<UILabel> ().text = mlineupEvent.Response.data.hit [0].hitBB.ToString () + "%";
 
 				MidBar.transform.FindChild ("Gauge").FindChild ("Hits").GetComponent<UISprite> ().width = (int)Mathf.Round (340f * (float.Parse (mlineupEvent.Response.data.hit [0].hitAvg)));
 		
@@ -1048,7 +1070,7 @@ public class LandingManager : MonoBehaviour {
 		}
 	}
 	void setPitcher(){
-		Lineup2 = mlineupEvent.Response.data.hit [0];
+		//Lineup2 = mlineupEvent.Response.data.hit [0];
 		P_RPlayersName.text = mlineupEvent.Response.data.pit [0].playerName+"#"+mlineupEvent.Response.data.pit[0].playerNumber;
 		if (mlineupEvent.Response.data.pit [0].ERA ==null||mlineupEvent.Response.data.pit [0].ERA == "") {
 			P_RBatting.text = "0.000";

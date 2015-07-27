@@ -26,7 +26,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 	public GameObject mLivetalk;
 	public GameObject shadow;
 	public List<JoinQuizInfo> mListJoin = new List<JoinQuizInfo>();
-
+	Color S_Abled = new Color(242f/255f,242f/255f,242f/255f);
+	Color S_Disabled = new Color(217f/255f,217f/255f,217f/255f);
+	Color L_Abled = new Color(0,0,0);
+	Color L_Disabled = new Color(157f/255f,157f/255f,157f/255f);
 //	QuizInfo quizInfo;
 //	public QuizInfo QuizInfo
 //	{
@@ -385,9 +388,10 @@ public class ScriptTF_Betting : MonoBehaviour {
 	string Holdname;
 	void SetHitter(QuizInfo quiz)
 	{ 
-		Landing.GetComponent<LandingManager> ().CheckGameRound ();
+		//Landing.GetComponent<LandingManager> ().CheckGameRound ();
 
-		if(LandingManager.N==null){
+	//	if(LandingManager.N==null){
+		if(true){
 			Debug.Log("SetHitter 0");
 			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");
 			string playerInfo = QuizMgr.QuizInfo.playerName + "#"+ QuizMgr.QuizInfo.playerNumber;
@@ -400,7 +404,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 				.GetComponent<UILabel>().text = playerAVG;
 		
 			string strImage = QuizMgr.QuizInfo.imageName;
-			if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0)
+			if (QuizMgr.QuizInfo.imagePath != null && QuizMgr.QuizInfo.imagePath.Length > 0){
 				strImage = QuizMgr.QuizInfo.imagePath + QuizMgr.QuizInfo.imageName;
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
@@ -410,34 +414,45 @@ public class ScriptTF_Betting : MonoBehaviour {
 			                          GetComponent<UITexture>()));
 
 			}
+			}
 			first = false;
 			Holdname = strImage;
-			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
-				.GetComponent<UILabel>().text = "0.000";
-			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 1")
-				.GetComponent<UILabel>().text = "0%";
-			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
-				.GetComponent<UILabel>().text = "0%";
-			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
-				.GetComponent<UILabel>().text = "0%";
-			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
-				.GetComponent<UILabel>().text = "0%";
-			if(UtilMgr.gameround>1){
+//			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
+//				.GetComponent<UILabel>().text = "0.000";
+//			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 1")
+//				.GetComponent<UILabel>().text = "0%";
+//			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
+//				.GetComponent<UILabel>().text = "0%";
+//			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
+//				.GetComponent<UILabel>().text = "0%";
+//			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
+//				.GetComponent<UILabel>().text = "0%";
+//			if(UtilMgr.gameround>1){
 				Debug.Log("SetHitter 0 Set Avg");
-				if(Landing.GetComponent<LandingManager>().Lineup2!=null){
-				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
-					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitAvg;
+			//"타율";
+				//if(Landing.GetComponent<LandingManager>().Lineup2!=null){
+		//	mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("M1").GetComponent<UIButton>().onClick();
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("M1").FindChild ("S").GetComponent<UISprite> ().color = S_Abled;
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("M2").FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+			//G_M3.transform.FindChild ("S").GetComponent<UISprite> ().color = S_Disabled;
+			
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("M1").FindChild ("L").GetComponent<UILabel> ().color = L_Abled;
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("M2").FindChild ("L").GetComponent<UILabel> ().color = L_Disabled;
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Top")
+				.GetComponent<UILabel>().text = "타율";
+			mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot")
+				.GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitAvg;
 				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 1")
-					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitH.ToString()+"%";
+				.GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitH.ToString()+"%";
 				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 2")
-					.GetComponent<UILabel>().text =Landing.GetComponent<LandingManager>().Lineup2.hit2B.ToString()+"%";
+				.GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hit2B.ToString()+"%";
 				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 3")
-					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitHr.ToString()+"%";
+				.GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitHr.ToString()+"%";
 				mBatting.transform.FindChild("Sprite").FindChild("Mid_BG").FindChild("Bot").FindChild("Top 4")
-					.GetComponent<UILabel>().text = Landing.GetComponent<LandingManager>().Lineup2.hitBB.ToString()+"%";
+				.GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitBB.ToString()+"%";
 				Landing.GetComponent<LandingManager>().FirstLinup = true;
-			}
-			}
+			//}
+			//}
 
 		} else {
 		
@@ -445,6 +460,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			//Landing.GetComponent<LandingManager>().FirstLinup = true;
 				List<nextPlayerInfo> nowPlayer = LandingManager.N;
 				LandingManager.Old = nowPlayer;
+			LandingManager.NowOld = LandingManager.Now;
 				string strImage = "";
 				Debug.Log("SetHitter 1");
 			

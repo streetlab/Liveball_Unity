@@ -35,7 +35,7 @@ public class UIScrollViewEditor : Editor
 		}
 
 		NGUIEditorTools.SetLabelWidth(130f);
-
+	
 		NGUIEditorTools.DrawProperty("Drag Effect", serializedObject, "dragEffect");
 		NGUIEditorTools.DrawProperty("Scroll Wheel Factor", serializedObject, "scrollWheelFactor");
 		NGUIEditorTools.DrawProperty("Momentum Amount", serializedObject, "momentumAmount");
@@ -44,6 +44,28 @@ public class UIScrollViewEditor : Editor
 		NGUIEditorTools.DrawProperty("Cancel Drag If Fits", serializedObject, "disableDragIfFits");
 		NGUIEditorTools.DrawProperty("Smooth Drag Start", serializedObject, "smoothDragStart");
 		NGUIEditorTools.DrawProperty("IOS Drag Emulation", serializedObject, "iOSDragEmulation");
+		UIScrollView _this = target as UIScrollView;
+
+		NGUIEditorTools.DrawProperty("CoverFlow", serializedObject, "CoverFlow");
+		if (_this.CoverFlow) {
+			NGUIEditorTools.SetLabelWidth(100f);
+			
+			if (NGUIEditorTools.DrawHeader("CoverFlow"))
+			{
+				NGUIEditorTools.BeginContents();
+			NGUIEditorTools.DrawProperty ("CoverFlowItem", serializedObject, "CoverFlowItem");
+			NGUIEditorTools.DrawProperty ("CoverFlowCount", serializedObject, "CoverFlowCount");
+				NGUIEditorTools.DrawProperty ("ItemSize", serializedObject, "Size");
+				NGUIEditorTools.DrawProperty ("BenchmarkSize", serializedObject, "BenchmarkSize");
+				NGUIEditorTools.DrawProperty ("Alwaysreset", serializedObject, "Alwaysreset");
+				NGUIEditorTools.DrawProperty ("ItemDefaultSize", serializedObject, "DefaultSize");
+				NGUIEditorTools.DrawProperty ("ItemMaxSize", serializedObject, "MaxSize");
+
+				NGUIEditorTools.EndContents();
+			}
+		
+		}
+
 
 		NGUIEditorTools.SetLabelWidth(100f);
 

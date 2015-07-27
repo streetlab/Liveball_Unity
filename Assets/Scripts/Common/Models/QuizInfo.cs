@@ -511,6 +511,60 @@ public class QuizInfo {
 	}
 
 // 0,				// 베팅풀방식
+	string _hitAvg;
+	public string hitAvg {
+		get {
+			return _hitAvg;
+		}
+		set {
+			_hitAvg = value;
+		}
+	}
+	string _hitH;
+	public string hitH {
+		get {
+			return _hitH;
+		}
+		set {
+			_hitH = value;
+		}
+	}
+	string _hit2B;
+	public string hit2B {
+		get {
+			return _hit2B;
+		}
+		set {
+			_hit2B = value;
+		}
+	}
+	string _hitHr;
+	public string hitHr {
+		get {
+			return _hitHr;
+		}
+		set {
+			_hitHr = value;
+		}
+	}
+	string _hitBB;
+	public string hitBB {
+		get {
+			return _hitBB;
+		}
+		set {
+			_hitBB = value;
+		}
+	}
+	string _hitSO;
+	public string hitSO {
+		get {
+			return _hitSO;
+		}
+		set {
+			_hitSO = value;
+		}
+	}
 	List<OrderInfo> _order;
 
 	public List<OrderInfo> order {

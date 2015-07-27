@@ -80,6 +80,15 @@ public class UIScrollView : MonoBehaviour
 	/// <summary>
 	/// Effect the scroll wheel will have on the momentum.
 	/// </summary>
+	/// 
+	public bool CoverFlow = false;
+	public GameObject CoverFlowItem;
+	public int CoverFlowCount;
+	public Vector2 Size;
+	public float BenchmarkSize;
+	public Vector2 DefaultSize;
+	public Vector2 MaxSize;
+	public bool Alwaysreset = false;
 
 	public float scrollWheelFactor = 0.25f;
 
@@ -310,6 +319,64 @@ public class UIScrollView : MonoBehaviour
 
 	public virtual void Awake ()
 	{
+		if (CoverFlow) {
+	
+			if(transform.childCount<CoverFlowCount+2||Alwaysreset){
+		
+				int count = transform.childCount;
+				for(int i = 0; i<count;i++){
+					DestroyImmediate(transform.GetChild(0).gameObject);
+				}
+				if(transform.parent.FindChild("Benchmark")==null){
+					GameObject Benchmark = Instantiate<GameObject>(Resources.Load ("Benchmark") as GameObject); 
+					Benchmark.transform.name = "Benchmark";
+					Benchmark.transform.parent = transform.parent;
+					Benchmark.transform.localScale = new Vector3(1,1,1);
+					Benchmark.transform.localPosition = transform.localPosition;
+					
+				}
+				if(transform.FindChild("Front")==null){
+					GameObject Front =  Instantiate<GameObject>(Resources.Load ("FrontBack") as GameObject);
+					Front.transform.name = "Front";
+					Front.transform.parent = transform;
+					Front.transform.localScale = new Vector3(1,1,1);
+				}
+				if(transform.FindChild("Back")==null){
+					GameObject Back =  Instantiate<GameObject>(Resources.Load ("FrontBack") as GameObject);
+					Back.transform.name = "Back";
+					Back.transform.parent = transform;
+					Back.transform.localScale = new Vector3(1,1,1);
+				}
+				transform.FindChild("Front").localPosition = new Vector3(-(360-((360-(Size.x/2))/2)),0);
+				transform.FindChild("Front").GetComponent<BoxCollider2D>().size = new Vector2(360-(Size.x/2),Size.y);
+				transform.FindChild("Front").GetComponent<UISprite>().SetRect(360-(Size.x/2),Size.y);
+				transform.FindChild("Back").localPosition = new Vector3((Size.x*(CoverFlowCount-1))+(360-((360-(Size.x/2))/2)),0);
+				transform.FindChild("Back").GetComponent<BoxCollider2D>().size = new Vector2(360-(Size.x/2),Size.y);
+				transform.FindChild("Back").GetComponent<UISprite>().SetRect(360-(Size.x/2),Size.y);
+				transform.parent.FindChild("Benchmark").GetComponent<BoxCollider2D>().size = new Vector2(BenchmarkSize,Size.y);
+				transform.parent.FindChild("Benchmark").GetComponent<CoverFlowOndrag>().BenchmarkSize = BenchmarkSize;
+				transform.parent.FindChild("Benchmark").GetComponent<CoverFlowOndrag>().DefaultSize = DefaultSize;
+				transform.parent.FindChild("Benchmark").GetComponent<CoverFlowOndrag>().MaxSize = MaxSize;
+				transform.parent.FindChild("Benchmark").GetComponent<CoverFlowOndrag>().Size = Size;
+				for(int i = 0; i<CoverFlowCount;i++){
+					GameObject Temp = (GameObject)Instantiate(CoverFlowItem);
+					Temp.tag = "item";
+					Temp.transform.name = "Item " + i.ToString();
+					Temp.transform.parent = transform;
+					Temp.transform.localScale = new Vector3(1,1,1);
+					Temp.transform.localPosition = new Vector3(Size.x*i,0);
+					if(Temp.GetComponent<UIDragScrollView>()==null){
+						Temp.AddComponent<UIDragScrollView>();
+					}
+					if(Temp.GetComponent<BoxCollider2D>()==null){
+						Temp.AddComponent<BoxCollider2D>();
+					}
+					Temp.GetComponent<BoxCollider2D>().size = Size;
+				}
+			}
+		
+		}
+
 		mTrans = transform;
 		mPanel = GetComponent<UIPanel>();
 
@@ -885,6 +952,7 @@ public class UIScrollView : MonoBehaviour
 
 	void LateUpdate ()
 	{
+		//Debug.Log ("LateUpdate!!");
 		if (!Application.isPlaying) return;
 		float delta = RealTime.deltaTime;
 

@@ -44,6 +44,16 @@ public class QuizListInfo {
 			_nextPlayer = value;
 		}
 	}
+	List<nowPlayerInfo> _nowPlayer;
+	
+	public List<nowPlayerInfo> nowPlayer {
+		get {
+			return _nowPlayer;
+		}
+		set {
+			_nowPlayer = value;
+		}
+	}
 	List<QuizInfo> _quiz;
 
 	public List<QuizInfo> quiz {
