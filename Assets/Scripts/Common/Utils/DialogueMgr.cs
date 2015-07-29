@@ -69,8 +69,14 @@ public class DialogueMgr : MonoBehaviour {
 	public static void ShowExitDialogue(DialogClickHandler handler){
 //		Debug.Log("ShowExitDialogue");
 		if (Instance.mDialogueBox == null) {
-			GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
-			Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+			if(Application.loadedLevelName.Equals("SceneLobby")){
+				GameObject prefab = Resources.Load ("CommonDialogue2") as GameObject;
+				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+			}else{
+				GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
+				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+			}
+		
 		}
 
 		string strTitle = Instance.mDialogueBox.GetComponent<PlayMakerFSM> ().FsmVariables.FindFsmString ("exitTitle").Value;
@@ -93,15 +99,20 @@ public class DialogueMgr : MonoBehaviour {
 		Instance.SetHandler(handler);
 //		Debug.Log("ShowDialogue2");
 		if (Instance.mDialogueBox == null) {
-			GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
-			Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+			if(Application.loadedLevelName.Equals("SceneLobby")){
+				GameObject prefab = Resources.Load ("CommonDialogue2") as GameObject;
+				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+			}else{
+				GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
+				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+			}
 		}
 
 		if (IsShown) {
 			DialogueMgr.DismissDialogue();		
 		}
 
-		Instance.mDialogueBox.transform.parent = GameObject.Find ("UI Root").transform;
+		Instance.mDialogueBox.transform.parent = GameObject.Find ("Camera").transform;
 		Instance.mDialogueBox.transform.localScale = new Vector3(1f, 1f, 1f);
 		Instance.mDialogueBox.transform.localPosition = new Vector3(0, 0, 0);
 		Instance.mDialogueBox.SetActive (true);
@@ -116,6 +127,7 @@ public class DialogueMgr : MonoBehaviour {
 //		UtilMgr.SetBackEvent(new EventDelegate(Instance.GetComponent<DialogueMgr>(), "DismissDialogue"));
      	IsShown = true;
 	}
+
 
 	void SetTypeDialogue(DIALOGUE_TYPE type, string strBtn1, string strBtn2, string strCancel)
 	{

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.IO;
 public class ScriptTitle : MonoBehaviour {
 
 	LoginEvent mLoginEvent;
@@ -470,10 +470,85 @@ public class ScriptTitle : MonoBehaviour {
 			PlayerPrefs.SetString(Constants.PrefGuest, "1");
 		}
 
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
+	
+		EventDelegate eventd = new EventDelegate(this, "Getdata");
 
-		NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
+		NetMgr.GetGift (eventd);
 	}
+	int Count = 0;
+	bool TwoCheck = true;
+	void Getdata(){
+		Debug.Log ("In Gift");
+		bool Check = false;
+		for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+			Debug.Log(PlayerPrefs.GetString(i.ToString()) + " : " + LobbyGiftCommander.mGift.gift[i].imagename);
+			if(PlayerPrefs.GetString(i.ToString())!=LobbyGiftCommander.mGift.gift[i].imagename){
+
+				Check = true;
+				break;
+			}
+		}
+		//TwoCheck = true;
+		if (Check) {
+			Debug.Log ("Different, Save to Local");
+			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].imagename);
+				Count = i;
+				StartCoroutine (SaveImage (www, i));
+			}
+		} else {
+			Debug.Log ("Same, Load to Local");
+			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+				WWW www2 = new WWW ("file://"+Application.persistentDataPath + "/"+i.ToString()+".png");
+				Count = i;
+			StartCoroutine (GetImage (www2,i));
+			}
+		}
+	}
+	IEnumerator SaveImage(WWW www,int i)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (200, 200);
+		www.LoadImageIntoTexture (tmpTex);
+		Save (tmpTex,i);
+		if (Count + 1 == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+			Debug.Log("Save Finish");
+			TwoCheck = false;
+			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
+			
+			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
+		}
+		
+	}
+	IEnumerator GetImage(WWW www,int i)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (0, 0);
+		www.LoadImageIntoTexture (tmpTex);
+		LobbyGiftCommander.mGift.image.Add (i,tmpTex);
+		if (Count + 1 == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+			Debug.Log("Load Finish");
+			TwoCheck = false;
+			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
+			
+			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
+		}
+	}
+
+	public void Save(Texture2D t,int i) {
+		
+		LobbyGiftCommander.mGift.image.Add (i,t);
+		PlayerPrefs.SetString (i.ToString(),LobbyGiftCommander.mGift.gift[i].imagename);
+		byte[] bytes = t.EncodeToPNG();
+		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+i.ToString()+".png");
+		
+		
+		File.WriteAllBytes(Application.persistentDataPath + "/"+i.ToString()+".png", bytes);
+		
+		Debug.Log ("End Save");
+	
+		
+	}    
 
 	void LoginFailed()
 	{
@@ -566,9 +641,11 @@ public class ScriptTitle : MonoBehaviour {
 		if(value != null && value.Equals("1")){
 			value = PlayerPrefs.GetString(Constants.PrefNotice);
 			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
-				AutoFade.LoadLevel ("SceneMain");
+				//AutoFade.LoadLevel ("SceneMain");
+				AutoFade.LoadLevel ("SceneLobby");
 			} else{
-				AutoFade.LoadLevel ("SceneNotice");
+			//	AutoFade.LoadLevel ("SceneNotice");
+				AutoFade.LoadLevel ("SceneLobby");
 			}
 		}
 		else{

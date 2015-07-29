@@ -266,7 +266,7 @@ public class NetMgr : MonoBehaviour{
 		
 		//		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		WWW www = new WWW(reqParam);
-		
+
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
@@ -275,8 +275,10 @@ public class NetMgr : MonoBehaviour{
 		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
+	private void webProcess2(WWW www, EventDelegate eventd){
+		StartCoroutine (webProcess(www,eventd));
+	}
 	IEnumerator webProcess(WWW www, EventDelegate eventd){
-		Debug.Log ("Com");
 		float timeSum = 0f;
 		while(!www.isDone && 
 		      string.IsNullOrEmpty(www.error) && 
@@ -348,8 +350,7 @@ public class NetMgr : MonoBehaviour{
 	public static void GetGift(EventDelegate E)
 	{
 		WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");
-		Debug.Log ("GetGift");
-		StartCoroutine (Instance.webProcess (www, E));
+		Instance.webProcess2 (www,E);
 	}
 	public static void GetScheduleAll(BaseEvent baseEvent)
 	{

@@ -60,6 +60,7 @@ public class UIScrollViewEditor : Editor
 				NGUIEditorTools.DrawProperty ("Alwaysreset", serializedObject, "Alwaysreset");
 				NGUIEditorTools.DrawProperty ("ItemDefaultSize", serializedObject, "DefaultSize");
 				NGUIEditorTools.DrawProperty ("ItemMaxSize", serializedObject, "MaxSize");
+				NGUIEditorTools.DrawProperty ("Gap", serializedObject, "Gap");
 
 				NGUIEditorTools.EndContents();
 			}

@@ -9,5 +9,6 @@ public class Sub_BG_G : MonoBehaviour {
 			
 			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName [i]).FindChild(transform.root.FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName [i] + "Box").gameObject.SetActive(false);
 		}
+		this.gameObject.SetActive (false);
 	}
 }

@@ -21,14 +21,18 @@ public class TopMenu : MonoBehaviour {
 		if (MenuStatus == LobbyMainCommander.MenuStatus) {
 			if (transform.parent.FindChild ("Sub").gameObject.activeSelf) {
 				transform.root.FindChild ("Main").GetComponent<LobbyAddSub> ().DisableSub ();
+				transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 			} else {
 				transform.parent.FindChild ("Sub").gameObject.SetActive (true);
+				transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
 			}
 		} else {
 			transform.parent.FindChild ("Sub").gameObject.SetActive (true);
 			transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
 			transform.root.FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
 			transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
+			transform.root.FindChild ("Main").FindChild("Top").FindChild("Sub").FindChild("BG_B").gameObject.SetActive(false);
+			transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
 		}
 	}
 	void AllBarDisable(){
@@ -40,6 +44,6 @@ public class TopMenu : MonoBehaviour {
 			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Num").
 				GetComponent<UILabel>().color = new Color(1f,1f,1f,0.5f);
 		} 
-	
+		transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 	}
 }
