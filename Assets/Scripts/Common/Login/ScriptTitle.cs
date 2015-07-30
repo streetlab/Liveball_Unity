@@ -31,9 +31,11 @@ public class ScriptTitle : MonoBehaviour {
 		CheckPrefsForEditor();
 		#else
 		Init ();
+
 		#endif
 //		Debug.Log("uid : "+SystemInfo.deviceUniqueIdentifier);
-	}
+
+	}	
 
 	void CheckPrefsForEditor(){
 		#if(UNITY_EDITOR)

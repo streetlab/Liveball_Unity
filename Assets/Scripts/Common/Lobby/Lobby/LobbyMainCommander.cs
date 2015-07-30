@@ -44,7 +44,15 @@ public class LobbyMainCommander : MonoBehaviour {
 		//GetComponent<LobbyNCCommander> ().CreatCItem ();
 		transform.FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Button ();
 
+//		CSGetListEvent eee = new CSGetListEvent(new EventDelegate(this, "CSComplete"));
+//		NetMgr.CSGetList(eee);
+
 	}
+
+	void CSComplete(){
+		Debug.Log("CSComplete");
+	}
+
 	public void Ratio () {
 		try{
 		HightList.Add ("Top",GetComponent<LobbyTopCommander>().TopHight);

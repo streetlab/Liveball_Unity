@@ -43,6 +43,48 @@ public class NetMgr : MonoBehaviour{
 		}
 	}
 
+	IEnumerator webCSAPIProcess(WWW www, BaseCSEvent baseEvent, bool showLoading)
+	{
+		if(www == null){
+			Debug.Log("www is null");
+			yield break;
+		}
+		
+		float timeSum = 0f;
+
+		if(showLoading)
+			UtilMgr.ShowLoading (showLoading);
+		
+		while(!www.isDone && 
+		      string.IsNullOrEmpty(www.error) && 
+		      timeSum < TIMEOUT) { 
+			timeSum += Time.deltaTime; 
+			yield return 0; 
+		} 
+
+		
+		if(www.error == null && www.isDone)
+		{
+			Debug.Log(www.text);
+
+			if(baseEvent != null)
+				baseEvent.Init(www.text);
+		}
+		else
+		{
+			Debug.Log(www.error);
+//			//			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+//			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
+//			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "타이틀로 가기", ConnectHandlerForHttp);
+//			mWWW = www;
+//			mBaseEvent = baseEvent;
+//			mIsUpload = isUpload;
+//			mIsLoading = showLoading;
+		}
+		
+		UtilMgr.DismissLoading ();
+	}
+
 	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading, bool isUpload)
 	{
 		if(www == null){
@@ -126,6 +168,15 @@ public class NetMgr : MonoBehaviour{
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent){
 		Debug.Log("webAPIProcessEvent");
 		webAPIProcessEvent (request, baseEvent, true);
+	}
+
+	void webAPIProcessEventForCS(BaseCSRequest request, BaseCSEvent baseEvent, bool showLoading){
+		WWW www = new WWW (Constants.CS_SERVER_HOST+request.GetQueryId(),
+		                   System.Text.Encoding.UTF8.GetBytes(request.ToRequestString()));
+		
+		Debug.Log (request.ToRequestString());
+		
+		StartCoroutine (webCSAPIProcess(www, baseEvent, showLoading));
 	}
 
 	private void webAPIProcessEventForCheckVersion(BaseRequest request, BaseEvent baseEvent, bool isTest, bool showLoading)
@@ -588,6 +639,10 @@ public class NetMgr : MonoBehaviour{
 	public static void GetEvents(BaseNanooRequest.API_TYPE apiType, BaseEvent baseEvent)
 	{
 		Instance.webAPINanooEvent(new GetEventsRequest(apiType), baseEvent, true);
+	}
+
+	public static void CSGetList(BaseCSEvent baseEvent){
+		Instance.webAPIProcessEventForCS(new CSGetListRequest(), baseEvent, true);
 	}
 
 	public static void SendSocketMsg(String msg) {

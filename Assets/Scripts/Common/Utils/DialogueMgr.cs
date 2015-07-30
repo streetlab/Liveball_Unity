@@ -206,7 +206,8 @@ public class DialogueMgr : MonoBehaviour {
 	public static void DismissDialogue()
 	{
 		Debug.Log("DismissDialogue");
-		Instance.mDialogueBox.SetActive (false);
+		if(Instance.mDialogueBox != null)
+			Instance.mDialogueBox.SetActive (false);
 		IsShown = false;
 	}
 

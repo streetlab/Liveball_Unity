@@ -5,6 +5,7 @@ public class Constants {
 	public const float DEFAULT_SCR_RATIO = 1280f / 720f;
 	public const string APPTAG = "StreetLab_Tuby";	
 	public const bool IS_DEBUGGABLE = false;
+	public const string CS_APP_KEY = "2gv515iiuby";	
 	
 	public const bool	IS_TSTORE = false;
 	public const string	MARKET_URI_TSTORE = "PRODUCT_VIEW/0000308300/0";
@@ -51,6 +52,9 @@ public class Constants {
 //	public const string QUERY_SERVER_HOST 				= 	"http://" + TEST_HOST + ":5002/gameServer/query.frz";
 	public static string NANOO_API_KEY					= 	"El1VRQgMG464OF0LRd1vPWGmRadCpfwyITK5ZpuNKLCBTIGSZE";
 	public static string QUERY_SERVER_NANOO				= 	"https://api.nanoo.so";
+
+	public static string CS_SERVER_HOST			 		= 	"http://www.crossshock.com:9696/Client/";
+	public static string CS_ICON_HOST			 		= 	"http://www.crossshock.com/Icon/";
 
 	public static string CHECK_TEST_SERVER_HOST 		= 	"http://" + HOST + ":4002/webTuby/query.frz";
 	public static string CHECK_SERVER_HOST 				= 	"http://" + HOST + ":6002/webTuby/query.frz";
