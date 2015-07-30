@@ -151,6 +151,7 @@ public class ScriptLove : ScriptSuperNanoo {
 		if (success) {
 			//			webView.Show();
 			mStateWebview = STATE_WEBVIEW.VISIBLE;
+//			mWebView.EvaluatingJavaScript("nanooGlobal.openMenu()");
 		}
 		
 		//		UniWebViewEdgeInsets insets = new UniWebViewEdgeInsets (100, 0, 1130, 720);//top, left, btm, right

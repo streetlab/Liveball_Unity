@@ -50,6 +50,7 @@ public class AutoFade : MonoBehaviour
 	
 	public static void LoadLevel(string aLevelName,float aFadeOutTime, float aFadeInTime)
 	{
+		DialogueMgr.DismissDialogue();
 		Instance.m_LevelName = aLevelName;
 		Instance.StartFade(aFadeOutTime, aFadeInTime);
 	}
