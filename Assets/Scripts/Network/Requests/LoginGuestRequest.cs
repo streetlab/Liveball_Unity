@@ -9,7 +9,7 @@ public class LoginGuestRequest : BaseRequest {
 	{
 		Add ("memberEmail", "");
 		Add ("favoBB", loginInfo.teamCode);
-		Add ("memUID", "");
+		Add ("memUID", loginInfo.memUID == null ? "" : loginInfo.memUID);
 		Add ("deviceID", loginInfo.DeviceID);
 
 //		mParams = JsonFx.Json.JsonWriter.Serialize (this);

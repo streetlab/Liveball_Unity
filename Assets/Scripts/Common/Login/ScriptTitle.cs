@@ -12,6 +12,7 @@ public class ScriptTitle : MonoBehaviour {
 	ContestListEvent ContestEvent;
 	bool mFBInitialized;
 	bool mMustUpdate;
+	int mClickedCnt;
 	
 	//    public bool mServerIsTest = false;
 	
@@ -48,6 +49,13 @@ public class ScriptTitle : MonoBehaviour {
 		} else
 			Init ();
 		#endif
+	}
+
+	public void LogoClicked(){
+		if(mClickedCnt++ == 20){
+			PlayerPrefs.SetString(Constants.PrefServerTest, "1");
+			AutoFade.LoadLevel("SceneLogin");
+		}
 	}
 	
 	void InitConstants(){
@@ -96,10 +104,10 @@ public class ScriptTitle : MonoBehaviour {
 		//                = new Vector3(160f, -450f, 0);
 		//            transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
 		//        } else{
-		transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
-			= new Vector3(-220f, -450f, 0);
-		transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
-			= new Vector3(0, -450f, 0);
+//		transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
+//			= new Vector3(-220f, -450f, 0);
+//		transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
+//			= new Vector3(0, -450f, 0);
 		transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
 		//        }
 		
@@ -107,8 +115,10 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
 		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("FormJoin2").gameObject.SetActive (false);
 		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
 		transform.FindChild ("Certification").gameObject.SetActive (false);
+		transform.FindChild ("Terms").gameObject.SetActive (false);
 		
 		transform.FindChild ("SprLogo").gameObject.SetActive (true);
 		
@@ -116,6 +126,18 @@ public class ScriptTitle : MonoBehaviour {
 		
 		mVersionEvent = new CheckVersionEvent(new EventDelegate(this, "ReceivedVersion"));
 		NetMgr.CheckVersion(mVersionEvent, UtilMgr.IsTestServer());
+
+		if(UtilMgr.IsTestServer()){
+			transform.FindChild ("SprLogo").FindChild("LblTest").gameObject.SetActive(true);
+			transform.FindChild ("SprLogo").FindChild("LblTest").GetComponent<UILabel>().text += 
+			#if(UNITY_EDITOR)
+				UnityEditor.PlayerSettings.bundleVersion;
+			#elif(UNITY_ANDROID)
+				Application.version;
+			#else
+				Application.version;
+			#endif
+		}
 	}
 	
 	public void ReceivedVersion(){
@@ -373,12 +395,36 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);    
 		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("FormJoin2").gameObject.SetActive (false);
 		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
 		transform.FindChild ("Certification").gameObject.SetActive (false);        
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);
 		
 		transform.FindChild ("WindowEmail").gameObject.SetActive (true);
 		
+	}
+
+	public void MemberClicked(){
+		OpenTerms(false);
+	}
+
+	public void GuestClicked(){
+		OpenTerms(true);
+	}
+
+	void OpenTerms(bool isGuest){
+		UtilMgr.AddBackEvent (new EventDelegate (this, "Init"));
+		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
+		transform.FindChild ("SprLogo").gameObject.SetActive (false);    
+		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("FormJoin2").gameObject.SetActive (false);
+		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
+		transform.FindChild ("Certification").gameObject.SetActive (false);        
+		transform.FindChild ("SprLogo").gameObject.SetActive (false);
+		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
+
+		transform.FindChild ("Terms").gameObject.SetActive (true);
+		transform.FindChild ("Terms").GetComponent<ScriptTerms>().Init(isGuest);
 	}
 	
 	public void OpenEmailToLogin(){
@@ -395,11 +441,12 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);    
 		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("FormJoin2").gameObject.SetActive (false);
 		transform.FindChild ("Certification").gameObject.SetActive (false);        
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);        
-		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
-		
-		transform.FindChild ("SelectTeam").gameObject.SetActive (true);
+		transform.FindChild ("WindowEmail").gameObject.SetActive (false);		
+		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
+		transform.FindChild ("Terms").gameObject.SetActive (false);
 		
 		mLoginEvent = new LoginEvent(new EventDelegate(this, "LoginComplete"));
 		transform.FindChild ("SelectTeam").GetComponent<ScriptSelectTeam>().InitGuest(mLoginEvent);
@@ -450,7 +497,7 @@ public class ScriptTitle : MonoBehaviour {
 			mLoginInfo.DeviceID = IOSMgr.GetMsg();
 		}
 		Debug.Log("ID is "+mLoginInfo.DeviceID);
-		NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+		NetMgr.DoLogin (mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}
 	
 	void LoginComplete()
@@ -669,6 +716,7 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
 		transform.FindChild ("FormJoin").gameObject.SetActive (false);
+		transform.FindChild ("FormJoin2").gameObject.SetActive (false);
 		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);
 		
@@ -688,9 +736,9 @@ public class ScriptTitle : MonoBehaviour {
 		OpenFacebook();
 	}
 	
-	public void GuestClicked(){
-		OpenGuest();
-	}
+//	public void GuestClicked(){
+//		OpenGuest();
+//	}
 	
 	//    public void BtnClicked(string name)
 	//    {

@@ -29,13 +29,13 @@ public class ScriptSelectTeam : MonoBehaviour {
 	}
 
 	public void Init(JoinMemberInfo memInfo){
-		gameObject.SetActive (true);
+//		gameObject.SetActive (true);
 		mMemInfo = memInfo;
 		IsGuest = false;
 	}
 
 	public void InitGuest(LoginEvent loginEvent){
-		gameObject.SetActive (true);
+//		gameObject.SetActive (true);
 		IsGuest = true;
 		mLoginEvent = loginEvent;
 	}
@@ -119,24 +119,25 @@ public class ScriptSelectTeam : MonoBehaviour {
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			mMemInfo.DeviceID = IOSMgr.GetMsg();
 		}
-		GetComponentInParent<ScriptTitle>().mProfileEvent = 
-			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
-		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
-	}
-
-	public void CompletedJoin(){
-		if(GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message != null
-		   && GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message.Length > 0){
-			DialogueMgr.ShowDialogue(GetComponentInParent<ScriptTitle>().mJoinError,
-			                         GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message,
-			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
-			return;
-		}
-		PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
-		PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
-
+//		GetComponentInParent<ScriptTitle>().mProfileEvent = 
+//			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
+//		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
 		GetComponentInParent<ScriptTitle>().Login(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
 	}
+
+//	public void CompletedJoin(){
+//		if(GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message != null
+//		   && GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message.Length > 0){
+//			DialogueMgr.ShowDialogue(GetComponentInParent<ScriptTitle>().mJoinError,
+//			                         GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message,
+//			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
+//			return;
+//		}
+//		PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
+//		PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
+//
+//		GetComponentInParent<ScriptTitle>().Login(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
+//	}
 
 	public void BackClicked()
 	{

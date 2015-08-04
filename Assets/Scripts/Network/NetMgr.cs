@@ -384,13 +384,16 @@ public class NetMgr : MonoBehaviour{
 		mSocket = null;
 	}
 
-	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent)
+	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool showLoading)
 	{
-		Instance.webAPIProcessEvent (new LoginRequest(loginInfo), baseEvent);
+		Debug.Log("DoLogin");
+//		Instance.webAPIProcessEvent (new LoginRequest(loginInfo), baseEvent);
+		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
 	}
 
 	public static void LoginGuest(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool showLoading)
 	{
+		Debug.Log("LoginGuest");
 		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
 	}
 
