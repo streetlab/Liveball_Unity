@@ -20,13 +20,13 @@ public class LobbyMainCommander : MonoBehaviour {
 		transform.FindChild("Top").FindChild(GetComponent<LobbyTopCommander>().mTopMenuName[0]).FindChild("Label").GetComponent<UILabel>().color = new Color(1,1,1,1);
 		transform.FindChild("Top").FindChild(GetComponent<LobbyTopCommander>().mTopMenuName[0]).FindChild("Num").GetComponent<UILabel>().color = new Color(1,1,1,1);
 		for (int i = 0; i<GetComponent<LobbyAddSub>().SubMenuName.Length; i++) {
-//						transform.FindChild("Top").FindChild("Sub").FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]).FindChild("Label")
-//							.FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]+"Box").FindChild("Menu 0").
-//								gameObject.SetActive(true);
-//			transform.FindChild("Top").FindChild("Sub").FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]).FindChild("Label")
-//				.FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]+"Box").FindChild("Menu 0").
-//					gameObject.SetActive(false);
-
+			//                        transform.FindChild("Top").FindChild("Sub").FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]).FindChild("Label")
+			//                            .FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]+"Box").FindChild("Menu 0").
+			//                                gameObject.SetActive(true);
+			//            transform.FindChild("Top").FindChild("Sub").FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]).FindChild("Label")
+			//                .FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]+"Box").FindChild("Menu 0").
+			//                    gameObject.SetActive(false);
+			
 			transform.FindChild("Top").FindChild("Sub").FindChild(GetComponent<LobbyAddSub>().SubMenuName[i]).FindChild(
 				GetComponent<LobbyAddSub>().SubMenuName[i]+"Box").gameObject.SetActive(false);
 		}
@@ -40,25 +40,24 @@ public class LobbyMainCommander : MonoBehaviour {
 		}
 		transform.FindChild ("Top").FindChild ("Sub").FindChild("BG_B").gameObject.SetActive (false);
 		transform.FindChild ("Top").FindChild ("Sub").gameObject.SetActive (false);
+		transform.FindChild ("Gift").gameObject.SetActive (true);
 		transform.FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
-		//GetComponent<LobbyNCCommander> ().CreatCItem ();
 		transform.FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Button ();
-
-//		CSGetListEvent eee = new CSGetListEvent(new EventDelegate(this, "CSComplete"));
-//		NetMgr.CSGetList(eee);
-
+		GetComponent<LobbyNCCommander> ().CreatCItem ();
+		transform.FindChild ("Nomal Contest").gameObject.SetActive (true);
+		transform.FindChild ("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem ();
+		transform.FindChild ("PreSet Contest").gameObject.SetActive (false);
+		
 	}
-
 	void CSComplete(){
 		Debug.Log("CSComplete");
 	}
-
 	public void Ratio () {
 		try{
-		HightList.Add ("Top",GetComponent<LobbyTopCommander>().TopHight);
-		HightList.Add ("FC",GetComponent<LobbyFCCommander>().FCHight);
-		HightList.Add ("NC",GetComponent<LobbyNCCommander>().NCHight);
-		HightList.Add ("Bot",GetComponent<LobbyBotCommander>().BotHight);
+			HightList.Add ("Top",GetComponent<LobbyTopCommander>().TopHight);
+			HightList.Add ("FC",GetComponent<LobbyFCCommander>().FCHight);
+			HightList.Add ("NC",GetComponent<LobbyNCCommander>().NCHight);
+			HightList.Add ("Bot",GetComponent<LobbyBotCommander>().BotHight);
 		}catch{
 			Debug.Log("The \"HightList\" already exists.");
 		}
@@ -68,7 +67,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		GetComponent<LobbyNCCommander>().NCHight = (RatioNC / Sum)*1280f;
 		GetComponent<LobbyBotCommander>().BotHight = (RatioBot / Sum)*1280f;
 		Debug.Log ("Ratio Setting complete");
-	
+		
 	}
 	public void HightListClear(){
 		HightList.Clear ();
@@ -85,8 +84,8 @@ public class LobbyMainCommander : MonoBehaviour {
 			Debug.Log("HightList is empty");
 		}
 	}
-
-
+	
+	
 	public void AllCreate(){
 		GetComponent<LobbyTopCommander> ().CreateTop ();
 		GetComponent<LobbyFCCommander> ().CreateFC ();
@@ -94,13 +93,13 @@ public class LobbyMainCommander : MonoBehaviour {
 		GetComponent<LobbyBotCommander> ().CreateBot ();
 		Debug.Log ("ALL Create Complete");
 	}
-
+	
 	public void AllReset(){
 		Init ();
-
+		
 	}
 	// Update is called once per frame
-
+	
 	void Init() {
 		#if UNITY_EDITOR_OSX 
 		bool option = UnityEditor.EditorUtility.DisplayDialog(
@@ -115,11 +114,11 @@ public class LobbyMainCommander : MonoBehaviour {
 				Debug.Log("Destroy Top");
 			}
 			if(transform.FindChild("Featured Contest")!=null){
-				DestroyImmediate(transform.FindChild("Featured Contest").gameObject);	
+				DestroyImmediate(transform.FindChild("Featured Contest").gameObject);    
 				Debug.Log("Destroy Featured Contest");
 			}
 			if(transform.FindChild("Nomal Contest")!=null){
-				DestroyImmediate(transform.FindChild("Nomal Contest").gameObject);	
+				DestroyImmediate(transform.FindChild("Nomal Contest").gameObject);    
 				Debug.Log("Destroy Nomal Contest");
 			}
 			if(transform.FindChild("Bot")!=null){
@@ -133,5 +132,5 @@ public class LobbyMainCommander : MonoBehaviour {
 		}
 		#endif 
 	}
-
+	
 }

@@ -9,9 +9,9 @@ public class Sub : MonoBehaviour {
 		if (transform.FindChild (name + "Box").gameObject.activeSelf) {
 			Check = true;
 		}
-		for(int i = 0; i < transform.root.FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName.Length; i++){
+		for(int i = 0; i < transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName.Length; i++){
 		
-			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName [i]).FindChild(transform.root.FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName [i] + "Box").gameObject.SetActive(false);
+			transform.parent.FindChild(transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName [i]).FindChild(transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyAddSub> ().SubMenuName [i] + "Box").gameObject.SetActive(false);
 		}
 		if (Check) {
 			transform.FindChild (name + "Box").gameObject.SetActive (false);

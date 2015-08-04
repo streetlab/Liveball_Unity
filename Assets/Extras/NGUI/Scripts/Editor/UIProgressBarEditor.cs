@@ -46,7 +46,26 @@ public class UIProgressBarEditor : UIWidgetContainerEditor
 			OnDrawAppearance();
 			NGUIEditorTools.EndContents();
 		}
+		NGUIEditorTools.DrawProperty("Division", serializedObject, "Division");
+		UISlider _this = target as UISlider;
+		if (_this != null) {
+			if(_this.Division){
+			
+					NGUIEditorTools.SetLabelWidth(100f);
+					
+				if (NGUIEditorTools.DrawHeader("Division"))
+					{
+						NGUIEditorTools.BeginContents();
+					NGUIEditorTools.DrawProperty ("DivisionCount", serializedObject, "DivisionCount");
+			
+						
+						NGUIEditorTools.EndContents();
+					}
+					
 
+
+			}
+		}
 		UIProgressBar sb = target as UIProgressBar;
 		NGUIEditorTools.DrawEvents("On Value Change", sb, sb.onChange);
 		serializedObject.ApplyModifiedProperties();

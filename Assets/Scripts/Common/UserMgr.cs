@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class UserMgr : MonoBehaviour {
 
 	
@@ -11,7 +11,11 @@ public class UserMgr : MonoBehaviour {
 	ScheduleInfo _schedule;
 	LineupInfo _awayLineup;
 	LineupInfo _homeLineup;
-	
+
+	List<ContestListInfo> _contestListInfo;
+	List<PresetListInfo> _presetListInfo;
+
+	public static int CurrentContestSeq;
 	
 	static UserMgr Instance
 	{
@@ -72,7 +76,16 @@ public class UserMgr : MonoBehaviour {
 		get{return Instance._awayLineup;}
 		set{Instance._awayLineup = value;}
 	}
-
+	public static List<ContestListInfo> ContestList
+	{
+		get{return Instance._contestListInfo;}
+		set{Instance._contestListInfo = value;}
+	}
+	public static List<PresetListInfo> PresetList
+	{
+		get{return Instance._presetListInfo;}
+		set{Instance._presetListInfo = value;}
+	}
 	int userMailCount;
 	public static int UserMailCount{
 		get {

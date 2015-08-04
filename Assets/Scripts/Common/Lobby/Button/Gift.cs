@@ -12,7 +12,7 @@ public class Gift : MonoBehaviour {
 			transform.parent.FindChild("Scroll View").gameObject.SetActive(false);
 			transform.parent.FindChild("Shadow").gameObject.SetActive(false);
 			SubOnoff(true);
-			transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
 		} else {
 			Check = true;
 			transform.localPosition = new Vector2(transform.localPosition.x,248f+55f);
@@ -22,7 +22,7 @@ public class Gift : MonoBehaviour {
 			transform.parent.FindChild("Scroll View").gameObject.SetActive(true);
 			transform.parent.FindChild("Shadow").gameObject.SetActive(true);
 			SubOnoff(false);
-			transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 				}
 	}
 	public void Off(){
@@ -35,11 +35,11 @@ public class Gift : MonoBehaviour {
 		transform.parent.FindChild("Shadow").gameObject.SetActive(false);
 	}
 	public void SubOnoff(bool b){
-		transform.root.FindChild ("Main").FindChild ("Top").FindChild ("Sub").gameObject.SetActive (b);
-		transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
-		transform.root.FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
-		transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
-		transform.root.FindChild ("Main").FindChild("Top").FindChild("Sub").FindChild("BG_B").gameObject.SetActive(false);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Sub").gameObject.SetActive (b);
+		transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
+		transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
+		transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Top").FindChild("Sub").FindChild("BG_B").gameObject.SetActive(false);
 
 		
 	}

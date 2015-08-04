@@ -84,6 +84,7 @@ public class UIScrollView : MonoBehaviour
 	public bool CoverFlow = false;
 	public GameObject CoverFlowItem;
 	public int CoverFlowCount;
+	public static int _CoverFlowCount;
 	public Vector2 Size;
 	public float BenchmarkSize;
 	public Vector2 DefaultSize;
@@ -321,7 +322,9 @@ public class UIScrollView : MonoBehaviour
 	public virtual void Awake ()
 	{
 		if (CoverFlow) {
-	
+			if(_CoverFlowCount!=0){
+				CoverFlowCount =_CoverFlowCount;
+			}
 			if(transform.childCount<CoverFlowCount+1||Alwaysreset){
 		
 				int count = transform.childCount;
@@ -355,7 +358,7 @@ public class UIScrollView : MonoBehaviour
 				transform.parent.FindChild("Benchmark").GetComponent<CoverFlowOndrag>().Size = Size;
 				transform.parent.FindChild("Benchmark").GetComponent<CoverFlowOndrag>().Gap = Gap;
 				for(int i = 0; i<CoverFlowCount;i++){
-					Debug.Log(CoverFlowCount);
+					//Debug.Log(CoverFlowCount);
 					GameObject Temp = (GameObject)Instantiate(CoverFlowItem);
 					Temp.tag = "item";
 					Temp.transform.name = "Item " + i.ToString();

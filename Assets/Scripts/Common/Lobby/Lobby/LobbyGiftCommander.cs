@@ -7,14 +7,15 @@ public class LobbyGiftCommander : MonoBehaviour {
 
 	public static GiftListResponse mGift ;
 
-	void Awake(){
-		if (mGift != null) {
-			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount =
-				mGift.gift.Count;
-		} else {
-			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount = 7;
-		}
-	}
+//	void Awake(){
+//		if (mGift != null) {
+//			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount =
+//				mGift.gift.Count;
+//			Debug.Log(mGift.gift.Count);
+//		} else {
+//			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount = 7;
+//		}
+//	}
 	void Start(){
 
 		//	Debug.Log (transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ()==null);

@@ -40,6 +40,9 @@ public class LobbyTopEditor : Editor
 		if (GUILayout.Button ("ResetTopMenu")) {
 			_this.ResetTop();
 		}
+//		if (GUILayout.Button ("ResetTop2Menu")) {
+//			_this.CreateTop2();
+//		}
 	//	SubMenu = EditorGUILayout.BeginToggleGroup ("SubMenu", SubMenu);
 
 	}

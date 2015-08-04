@@ -28,7 +28,10 @@ public class UISlider : UIProgressBar
 	[HideInInspector][SerializeField] float rawValue = 1f; // Use 'value'
 	[HideInInspector][SerializeField] Direction direction = Direction.Upgraded; // Use 'fillDirection'
 	[HideInInspector][SerializeField] protected bool mInverted = false;
-
+	public bool Division = false;
+	public int DivisionCount = 10;
+	public bool P = false;
+	public bool M = false;
 	[System.Obsolete("Use 'value' instead")]
 	public float sliderValue { get { return this.value; } set { this.value = value; } }
 
@@ -61,6 +64,7 @@ public class UISlider : UIProgressBar
 			NGUITools.SetDirty(this);
 #endif
 		}
+
 	}
 
 	/// <summary>
@@ -89,6 +93,7 @@ public class UISlider : UIProgressBar
 			fgl.onPress += OnPressForeground;
 			fgl.onDrag += OnDragForeground;
 		}
+
 	}
 
 	/// <summary>
@@ -97,10 +102,10 @@ public class UISlider : UIProgressBar
 
 	protected void OnPressBackground (GameObject go, bool isPressed)
 	{
-		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
-		mCam = UICamera.currentCamera;
-		value = ScreenToValue(UICamera.lastTouchPosition);
-		if (!isPressed && onDragFinished != null) onDragFinished();
+//		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
+//		mCam = UICamera.currentCamera;
+//		value = ScreenToValue(UICamera.lastTouchPosition);
+//		if (!isPressed && onDragFinished != null) onDragFinished();
 	}
 
 	/// <summary>
@@ -109,9 +114,9 @@ public class UISlider : UIProgressBar
 
 	protected void OnDragBackground (GameObject go, Vector2 delta)
 	{
-		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
-		mCam = UICamera.currentCamera;
-		value = ScreenToValue(UICamera.lastTouchPosition);
+//		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
+//		mCam = UICamera.currentCamera;
+//		value = ScreenToValue(UICamera.lastTouchPosition);
 	}
 
 	/// <summary>
@@ -134,12 +139,46 @@ public class UISlider : UIProgressBar
 	/// <summary>
 	/// Drag the scroll bar in the specified direction.
 	/// </summary>
-
+	float OldValue= 0;
+	int  Pnum = 0;
+//	int  Nnum = 0;
 	protected void OnDragForeground (GameObject go, Vector2 delta)
 	{
 		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
 		mCam = UICamera.currentCamera;
 		value = mOffset + ScreenToValue(UICamera.lastTouchPosition);
+		//Debug.Log(M + " : " + value + " : " + OldValue);
+		if (P) {
+		
+			if (OldValue < value) {
+				if (Pnum > 0) {
+					value = OldValue;
+				}
+				Pnum++;
+			}
+		} else {
+			Pnum = 0;
+		}
+//		if (M) {
+//			if (OldValue > value) {
+//				if (Nnum > 0) {
+//					value = OldValue;
+//				}
+//				Nnum++;
+//			}
+//		} else {
+//			Nnum = 0;
+//		}
+		if (Division) {
+	
+			if(DivisionCount!=0){
+			float Num = value*(float)DivisionCount;
+
+			value = Mathf.Round(Num) * 1f / (float)DivisionCount;
+			}
+		}
+		OldValue = value;
+		
 	}
 
 	/// <summary>

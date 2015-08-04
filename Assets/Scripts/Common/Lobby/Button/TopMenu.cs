@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class TopMenu : MonoBehaviour {
-
+	public GameObject BlackBuleBar;
+	PresetListEvent presetListEvent;
 	public void Button(){
 		int MenuStatus = LobbyMainCommander.MenuStatus;
 		AllBarDisable ();
-		for (int i = 0; i<transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName.Length; i++) {
+		for (int i = 0; i<transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName.Length; i++) {
 
-			if(name == transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]){
+			if(name == transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]){
 				LobbyMainCommander.MenuStatus = i+1;
 				transform.FindChild("Bar").gameObject.SetActive(true);
 				transform.FindChild("Label").GetComponent<UILabel>().color = new Color(1,1,1,1);
@@ -20,30 +21,76 @@ public class TopMenu : MonoBehaviour {
 
 		if (MenuStatus == LobbyMainCommander.MenuStatus) {
 			if (transform.parent.FindChild ("Sub").gameObject.activeSelf) {
-				transform.root.FindChild ("Main").GetComponent<LobbyAddSub> ().DisableSub ();
-				transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
+				transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSub> ().DisableSub ();
+				transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 			} else {
 				transform.parent.FindChild ("Sub").gameObject.SetActive (true);
-				transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
+				transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
+				transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").gameObject.SetActive (false);
+				transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
 			}
 		} else {
+	
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").gameObject.SetActive (false);
+
 			transform.parent.FindChild ("Sub").gameObject.SetActive (true);
-			transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
-			transform.root.FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
-			transform.root.FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
-			transform.root.FindChild ("Main").FindChild("Top").FindChild("Sub").FindChild("BG_B").gameObject.SetActive(false);
-			transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Top").FindChild("Sub").FindChild("BG_B").gameObject.SetActive(false);
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
+		}
+		if (LobbyMainCommander.MenuStatus > 1) {
+			transform.parent.FindChild ("Sub").gameObject.SetActive (false);
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").gameObject.SetActive (false);
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
+			if(LobbyMainCommander.MenuStatus == 2){
+
+				if(UserMgr.UserInfo.memSeq!=null){
+				presetListEvent = new PresetListEvent(new EventDelegate(this, "GetPresetList"));
+				NetMgr.GetPresetList(presetListEvent);
+				}else{
+					transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
+					transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(true);
+
+				}
+				//transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
+				//transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(true);
+
+			}else if(LobbyMainCommander.MenuStatus == 3){
+
+			}
+		} else {
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Gift").gameObject.SetActive(true);
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(true);
+			transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(false);
 		}
 	}
 	void AllBarDisable(){
-		for (int i = 0; i<transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName.Length; i++) {
-			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Bar").
+		for (int i = 0; i<transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName.Length; i++) {
+			transform.parent.FindChild(transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Bar").
 				gameObject.SetActive(false);
-			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Label").
+			transform.parent.FindChild(transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Label").
 				GetComponent<UILabel>().color = new Color(1f,1f,1f,0.5f);
-			transform.parent.FindChild(transform.root.FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Num").
+			transform.parent.FindChild(transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyTopCommander>().mTopMenuName[i]).FindChild("Num").
 				GetComponent<UILabel>().color = new Color(1f,1f,1f,0.5f);
 		} 
-		transform.root.FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
+		if (BlackBuleBar != null) {
+			BlackBuleBar.GetComponent<UISlider>().value = 0;
+			BlackBuleBar.transform.FindChild("InSlider").GetComponent<UISlider>().value = 0;
+			BlackBuleBar.transform.parent.FindChild("Menu 0").GetComponent<UILabel>().text = "모든 입장료";
+				 
+		}
+		transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
+	}
+	void GetPresetList(){
+		List<PresetListInfo> presetlist;
+		presetlist = presetListEvent.Response.data;
+		//Load PresetList
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem (presetlist);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(true);
 	}
 }

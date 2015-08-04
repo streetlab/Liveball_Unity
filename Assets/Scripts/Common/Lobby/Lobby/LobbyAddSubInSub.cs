@@ -57,11 +57,11 @@ public class LobbyAddSubInSub : MonoBehaviour {
 					Bar.transform.localScale = new Vector3 (1, 1, 1);
 					if (a == 0) {
 						
-						Bar.transform.localPosition = new Vector3 (0,-35);
+						Bar.transform.localPosition = new Vector3 (-122,-35);
 						//Label.GetComponent<UILabel>().color = Color.white;
 				
 					} else {
-						Bar.transform.localPosition = new Vector3 (0,-(90f+((a-1)*60f)));
+						Bar.transform.localPosition = new Vector3 (-122,-(90f+((a-1)*60f)));
 					}
 
 					Bar.transform.name = "Menu " + a.ToString();
@@ -188,16 +188,26 @@ public class LobbyAddSubInSub : MonoBehaviour {
 										FindChild("Menu " + i.ToString()).FindChild("Arrow").
 										GetComponent<UISprite>().color = Color.yellow;
 							}
+							if(	transform.FindChild ("Top").FindChild ("Sub").
+							   FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a]).
+							   FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a] + "Box").
+							   FindChild("Menu " + i.ToString()).GetComponent<UIButton>()!=null){
 							transform.FindChild ("Top").FindChild ("Sub").
 								FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a]).
 									FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a] + "Box").
 									FindChild("Menu " + i.ToString()).GetComponent<UIButton>().isEnabled = true;
+							}
 						}
 					}else{
+						if(	transform.FindChild ("Top").FindChild ("Sub").
+						   FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a]).
+						   FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a] + "Box").
+						   FindChild("Menu " + i.ToString()).GetComponent<UIButton>()!=null){
 				transform.FindChild ("Top").FindChild ("Sub").
 				FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a]).
 					FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a] + "Box").
 						FindChild("Menu " + i.ToString()).GetComponent<UIButton>().isEnabled = true;
+						}
 						if(GetComponent<LobbyAddSub> ().SubMenuName [a] == "People"){
 							if(transform.FindChild ("Top").FindChild ("Sub").
 							   FindChild (GetComponent<LobbyAddSub> ().SubMenuName [a]).

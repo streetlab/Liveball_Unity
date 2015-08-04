@@ -398,6 +398,33 @@ public class NetMgr : MonoBehaviour{
 //	{
 //		Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
 //	}
+
+	public static void GetContestList(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ContestListRequest (), baseEvent);
+	}
+
+	public static void GetContestData(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ContestDataRequest (), baseEvent);
+	}
+
+	public static void GetPresetList(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new PresetListRequest (), baseEvent);
+	}
+
+	public static void GetPresetData(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new PresetDataRequest (), baseEvent);
+	}
+
+	public static void PresetAdd(int ContestSeq,List<int> ChoseList,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new PresetAddRequest (ContestSeq,ChoseList), baseEvent);
+	}
+
+
 	public static void GetGift(EventDelegate E)
 	{
 		WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");

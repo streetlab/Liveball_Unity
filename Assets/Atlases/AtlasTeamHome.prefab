@@ -42,8 +42,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: d2973988f021f4ad2b0c23810d81a8c4, type: 2}
   mSprites:
   - name: btn_face001_press
-    x: 252
-    y: 109
+    x: 458
+    y: 4
     width: 100
     height: 100
     borderLeft: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face001_release
-    x: 0
-    y: 9
+    x: 458
+    y: 106
     width: 100
     height: 100
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face002_press
-    x: 353
-    y: 210
+    x: 458
+    y: 208
     width: 100
     height: 100
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face002_release
-    x: 353
-    y: 8
+    x: 458
+    y: 310
     width: 100
     height: 100
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face003_press
-    x: 353
-    y: 311
+    x: 458
+    y: 412
     width: 100
     height: 100
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face003_release
-    x: 353
-    y: 412
+    x: 356
+    y: 4
     width: 100
     height: 100
     borderLeft: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face004_press
-    x: 151
-    y: 8
+    x: 356
+    y: 106
     width: 100
     height: 100
     borderLeft: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face004_release
-    x: 252
-    y: 412
+    x: 356
+    y: 208
     width: 100
     height: 100
     borderLeft: 0
@@ -146,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face005_press
-    x: 454
-    y: 109
+    x: 356
+    y: 310
     width: 100
     height: 100
     borderLeft: 0
@@ -159,20 +159,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_face005_release
-    x: 151
-    y: 109
-    width: 100
-    height: 100
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: btn_face006_press
-    x: 151
+    x: 356
     y: 412
     width: 100
     height: 100
@@ -184,9 +171,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: btn_face006_press
+    x: 254
+    y: 4
+    width: 100
+    height: 100
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: btn_face006_release
-    x: 454
-    y: 210
+    x: 254
+    y: 106
     width: 100
     height: 100
     borderLeft: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_link_press
-    x: 840
+    x: 966
     y: 456
     width: 56
     height: 56
@@ -211,7 +211,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_link_release
-    x: 669
+    x: 908
     y: 456
     width: 56
     height: 56
@@ -224,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_close_press
-    x: 454
-    y: 412
+    x: 254
+    y: 208
     width: 100
     height: 100
     borderLeft: 0
@@ -237,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_close_release
-    x: 252
-    y: 210
+    x: 254
+    y: 310
     width: 100
     height: 100
     borderLeft: 0
@@ -250,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_link_press
-    x: 0
-    y: 110
+    x: 254
+    y: 412
     width: 100
     height: 100
     borderLeft: 0
@@ -263,8 +263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_link_release
-    x: 454
-    y: 311
+    x: 152
+    y: 4
     width: 100
     height: 100
     borderLeft: 0
@@ -276,8 +276,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_photo_press
-    x: 454
-    y: 8
+    x: 152
+    y: 106
     width: 100
     height: 100
     borderLeft: 0
@@ -289,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_photo_release
-    x: 252
-    y: 8
+    x: 152
+    y: 208
     width: 100
     height: 100
     borderLeft: 0
@@ -302,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_press
-    x: 353
-    y: 109
+    x: 152
+    y: 310
     width: 100
     height: 100
     borderLeft: 0
@@ -315,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_release
-    x: 252
-    y: 311
+    x: 152
+    y: 412
     width: 100
     height: 100
     borderLeft: 0
@@ -328,8 +328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_write_press
-    x: 151
-    y: 210
+    x: 0
+    y: 6
     width: 100
     height: 100
     borderLeft: 0
@@ -341,8 +341,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_make_write_release
-    x: 151
-    y: 311
+    x: 0
+    y: 108
     width: 100
     height: 100
     borderLeft: 0
@@ -355,7 +355,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: btn_photo_add_press
     x: 0
-    y: 211
+    y: 362
     width: 150
     height: 150
     borderLeft: 0
@@ -368,7 +368,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: btn_photo_add_release
     x: 0
-    y: 362
+    y: 210
     width: 150
     height: 150
     borderLeft: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_photo_check_off
-    x: 612
+    x: 850
     y: 456
     width: 56
     height: 56
@@ -393,7 +393,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_photo_check_on
-    x: 555
+    x: 792
     y: 456
     width: 56
     height: 56
@@ -406,8 +406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_photo_close_press
-    x: 555
-    y: 405
+    x: 560
+    y: 404
     width: 50
     height: 50
     borderLeft: 0
@@ -419,8 +419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_photo_close_release
-    x: 555
-    y: 354
+    x: 560
+    y: 352
     width: 50
     height: 50
     borderLeft: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_photo_press
-    x: 783
+    x: 560
     y: 456
     width: 56
     height: 56
@@ -445,7 +445,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_photo_release
-    x: 954
+    x: 618
     y: 456
     width: 56
     height: 56
@@ -458,7 +458,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_upload_press
-    x: 726
+    x: 676
     y: 456
     width: 56
     height: 56
@@ -471,7 +471,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_upload_release
-    x: 897
+    x: 734
     y: 456
     width: 56
     height: 56
@@ -484,8 +484,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_comment
-    x: 101
-    y: 79
+    x: 560
+    y: 320
     width: 30
     height: 30
     borderLeft: 0
@@ -497,8 +497,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_comment_color
-    x: 101
-    y: 118
+    x: 102
+    y: 12
     width: 30
     height: 30
     borderLeft: 0
@@ -510,8 +510,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_face
-    x: 101
-    y: 149
+    x: 102
+    y: 44
     width: 30
     height: 30
     borderLeft: 0
@@ -523,8 +523,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_face_color
-    x: 101
-    y: 180
+    x: 102
+    y: 146
     width: 30
     height: 30
     borderLeft: 0
@@ -536,8 +536,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_menu_album
-    x: 101
-    y: 48
+    x: 102
+    y: 178
     width: 30
     height: 30
     borderLeft: 0
@@ -549,8 +549,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_menu_player
-    x: 101
-    y: 17
+    x: 102
+    y: 114
     width: 30
     height: 30
     borderLeft: 0
@@ -562,8 +562,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_menu_season
-    x: 555
-    y: 323
+    x: 102
+    y: 76
     width: 30
     height: 30
     borderLeft: 0
@@ -575,8 +575,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_menu_timeline
-    x: 555
-    y: 292
+    x: 560
+    y: 288
     width: 30
     height: 30
     borderLeft: 0
@@ -602,4 +602,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

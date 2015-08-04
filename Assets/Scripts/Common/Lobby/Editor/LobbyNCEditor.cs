@@ -26,6 +26,11 @@ public class LobbyNCEditor : Editor
 	
 	public override void OnInspectorGUI(){
 		base.DrawDefaultInspector ();
+		if (GUILayout.Button ("CreateNCItem")) {
+			
+			
+			_this.CreatCItem();
+		}
 		if (GUILayout.Button ("CreateNC")) {
 			
 			

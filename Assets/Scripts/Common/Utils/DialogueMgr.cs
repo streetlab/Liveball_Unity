@@ -9,9 +9,10 @@ public class DialogueMgr : MonoBehaviour {
 	{
 		Alert,
 		YesNo,
+		YesNoSetValue,
 		Choose,
 		EventAlert_NonBg,
-		EventAlert
+		EventAlert,
 	}
 
 	public enum BTNS
