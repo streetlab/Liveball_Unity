@@ -80,7 +80,7 @@ public class PresetContestCommander : MonoBehaviour {
 				Item1.transform.FindChild ("LTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [SeqList [i] [0]].aTeamName;
 				Item1.transform.FindChild ("RTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [SeqList [i] [0]].hTeamName;
 				Item1.transform.FindChild ("Score").FindChild ("Label").GetComponent<UILabel> ().text = List [SeqList [i] [0]].aTeamScore + " : " + List [SeqList [i] [0]].hTeamScore;
-				Item1.transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text = List [SeqList [i] [0]].contestSeq.ToString ();
+				Item1.transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text = List [SeqList [i] [0]].gameSeq.ToString ();
 				float Y = -((float)i * PCGap) + 556f - (PCGap * 0.5f) - 14f;
 				if (i == 0) {
 					Item1.transform.localPosition = new Vector3 (0, Y);
@@ -156,7 +156,7 @@ return a;
 	}
 	IEnumerator Resets(){
 		while (true) {
-			yield return new WaitForSeconds (5f);
+			yield return new WaitForSeconds (60f);
 			Reset();
 		}
 	}

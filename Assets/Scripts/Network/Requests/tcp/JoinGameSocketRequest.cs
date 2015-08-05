@@ -12,7 +12,7 @@ public class JoinGameSocketRequest : BaseSocketRequest {
 		Add ("memberName", UserMgr.UserInfo.memberName);
 		Add ("imagePath", "");
 		Add ("imageName", "");
-		Add ("gameSeq", UserMgr.Schedule.gameSeq);
+		Add ("gameSeq", UserMgr.GameSeq);
 		mDic = this;
 	}
 }

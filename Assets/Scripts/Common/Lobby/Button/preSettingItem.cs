@@ -6,8 +6,8 @@ public class preSettingItem : MonoBehaviour {
 	public void Button(){
 		//Key is this.name
 		if (!CheckPreset ()) {
-			if (int.Parse (transform.parent.name [5].ToString ()) > 3) {
-				transform.parent.parent.transform.localPosition = new Vector3 (0, (int.Parse (transform.parent.name [5].ToString ()) - 3) * 95);
+			if (int.Parse (transform.parent.name [5].ToString ()) > 4) {
+				transform.parent.parent.transform.localPosition = new Vector3 (0, (int.Parse (transform.parent.name [5].ToString ()) - 4) * 95);
 			}
 
 			transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Batting").GetComponent<BattingCommander> ().SetBatting (this.gameObject);

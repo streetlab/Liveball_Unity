@@ -16,7 +16,7 @@ public class ScriptMatchInfo : MonoBehaviour {
 	Color NewBaseYellow = new Color (1,1,1,1);
 	Color NewBaseDISABLE = new Color (1,1,1,0);
 	public GameObject Ground;
-
+	public GameObject Info;
 
 	Transform mStrike;
 	Transform mRound;
@@ -100,27 +100,34 @@ public class ScriptMatchInfo : MonoBehaviour {
 
 
 
-		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
-		GameObject Left = Ground.transform.FindChild ("LeftTeam").FindChild ("Sprite").gameObject;
-		GameObject Right = Ground.transform.FindChild ("RightTeam").FindChild ("Sprite").gameObject;
-		Left.SetActive(false);
-		Right.SetActive(false);
+//		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
+//		GameObject Left = Ground.transform.FindChild ("LeftTeam").FindChild ("Sprite").gameObject;
+//		GameObject Right = Ground.transform.FindChild ("RightTeam").FindChild ("Sprite").gameObject;
+		GameObject Up = Info.transform.FindChild("Inning").FindChild("Up").gameObject;
+		GameObject Down = Info.transform.FindChild("Inning").FindChild("Down").gameObject;
+//		Left.SetActive(false);
+//		Right.SetActive(false);
 		
 		
 		
 		if(value == 0)
 		{
-			Halftime.text = RoundNum + "회초";
-			
-			Left.SetActive(true);
-			Right.SetActive(false);
+//			Halftime.text = RoundNum + "회초";
+//			
+//			Left.SetActive(true);
+//			Right.SetActive(false);
+			Up.transform.FindChild("UpOn").gameObject.SetActive(true);
+			Down.transform.FindChild("DownOn").gameObject.SetActive(false);
 		}
 		else if(value == 1)
 		{
-			Halftime.text = RoundNum + "회말";
+//			Halftime.text = RoundNum + "회말";
+//
+//			Left.SetActive(false);
+//			Right.SetActive(true);
 
-			Left.SetActive(false);
-			Right.SetActive(true);
+			Up.transform.FindChild("UpOn").gameObject.SetActive(false);
+			Down.transform.FindChild("DownOn").gameObject.SetActive(true);
 		}
 
 	}
@@ -144,21 +151,24 @@ public class ScriptMatchInfo : MonoBehaviour {
 //		}
 
 
-		UISprite sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("1").GetComponent<UISprite> ();
-		UISprite sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("2").GetComponent<UISprite> ();
-		
-		sprite1.color = NewDISABLE;
-		sprite2.color = NewDISABLE;
-		
+//		UISprite sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("1").GetComponent<UISprite> ();
+//		UISprite sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Straight").FindChild ("2").GetComponent<UISprite> ();
+		GameObject S = Info.transform.FindChild("BallCount").FindChild("S").gameObject;
+//		sprite1.color = NewDISABLE;
+//		sprite2.color = NewDISABLE;
+		S.transform.FindChild ("S2").FindChild ("S2On").gameObject.SetActive (false);
+		S.transform.FindChild ("S1").FindChild ("S1On").gameObject.SetActive(false);
 		switch(cnt)
 		{
 		case 2:
-			sprite2.color = YELLOW;
+//			sprite2.color = YELLOW;
+			S.transform.FindChild("S2").FindChild("S2On").gameObject.SetActive(true);
 			goto case 1;
 		case 1:
-			sprite1.color = YELLOW;
+//			sprite1.color = YELLOW;
+			S.transform.FindChild("S1").FindChild("S1On").gameObject.SetActive(true);
 			break;
 		}
 	}
@@ -183,21 +193,29 @@ public class ScriptMatchInfo : MonoBehaviour {
 
 
 
-		UISprite  sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Out").FindChild ("1").GetComponent<UISprite> ();
-		UISprite  sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Out").FindChild ("2").GetComponent<UISprite> ();
-		
-		sprite1.color = NewDISABLE;
-		sprite2.color = NewDISABLE;
-		
+//		UISprite  sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Out").FindChild ("1").GetComponent<UISprite> ();
+//		UISprite  sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Out").FindChild ("2").GetComponent<UISprite> ();
+//		
+//		sprite1.color = NewDISABLE;
+//		sprite2.color = NewDISABLE;
+
+
+		GameObject S = Info.transform.FindChild("BallCount").FindChild("O").gameObject;
+		//		sprite1.color = NewDISABLE;
+		//		sprite2.color = NewDISABLE;
+		S.transform.FindChild ("O2").FindChild ("O2On").gameObject.SetActive (false);
+		S.transform.FindChild ("O1").FindChild ("O1On").gameObject.SetActive(false);
 		switch(cnt)
 		{
 		case 2:
-			sprite2.color = RED;
+		//	sprite2.color = RED;
+			S.transform.FindChild("O2").FindChild("O2On").gameObject.SetActive(true);
 			goto case 1;
 		case 1:
-			sprite1.color = RED;
+			//sprite1.color = RED;
+			S.transform.FindChild("O1").FindChild("O1On").gameObject.SetActive(true);
 			break;
 		}
 
@@ -229,27 +247,38 @@ public class ScriptMatchInfo : MonoBehaviour {
 
 
 
-		UISprite sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("1").GetComponent<UISprite> ();
-		UISprite sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("2").GetComponent<UISprite> ();
-		UISprite sprite3 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
-			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("3").GetComponent<UISprite> ();
-		
-		sprite1.color = NewDISABLE;
-		sprite2.color = NewDISABLE;
-		sprite3.color = NewDISABLE;
-		
+//		UISprite sprite1 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("1").GetComponent<UISprite> ();
+//		UISprite sprite2 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("2").GetComponent<UISprite> ();
+//		UISprite sprite3 = Ground.transform.parent.FindChild ("BG_W Panel").FindChild ("BG_W 1").FindChild ("BG_G").
+//			FindChild ("BallCountBox").FindChild ("Ball").FindChild ("3").GetComponent<UISprite> ();
+//		
+//		sprite1.color = NewDISABLE;
+//		sprite2.color = NewDISABLE;
+//		sprite3.color = NewDISABLE;
+
+
+
+		GameObject S = Info.transform.FindChild("BallCount").FindChild("B").gameObject;
+		//		sprite1.color = NewDISABLE;
+		//		sprite2.color = NewDISABLE;
+		S.transform.FindChild ("B3").FindChild ("B3On").gameObject.SetActive (false);
+		S.transform.FindChild ("B2").FindChild ("B2On").gameObject.SetActive (false);
+		S.transform.FindChild ("B1").FindChild ("B1On").gameObject.SetActive(false);
 		switch(cnt)
 		{
 		case 3:
-			sprite3.color = GREEN;
+			//sprite3.color = GREEN;
+			S.transform.FindChild("B3").FindChild("B3On").gameObject.SetActive(true);
 			goto case 2;
 		case 2:
-			sprite2.color = GREEN;
+			//sprite2.color = GREEN;
+			S.transform.FindChild("B2").FindChild("B2On").gameObject.SetActive(true);
 			goto case 1;
 		case 1:
-			sprite1.color = GREEN;
+			//sprite1.color = GREEN;
+			S.transform.FindChild("B1").FindChild("B1On").gameObject.SetActive(true);
 			break;
 		}
 
@@ -287,15 +316,20 @@ public class ScriptMatchInfo : MonoBehaviour {
 //			}
 //		}
 
+		GameObject S = Info.transform.FindChild("Base").gameObject;
+		//		sprite1.color = NewDISABLE;
+		//		sprite2.color = NewDISABLE;
+		S.transform.FindChild ("Base 1").FindChild("BaseOn").gameObject.SetActive (false);
+		S.transform.FindChild ("Base 2").FindChild("BaseOn").gameObject.SetActive (false);
+		S.transform.FindChild ("Base 3").FindChild("BaseOn").gameObject.SetActive(false);
 
-
-		UISprite sprite1 = Ground.transform.FindChild ("Base").FindChild("1").GetComponent<UISprite> ();
-		UISprite sprite2 = Ground.transform.FindChild ("Base").FindChild ("2").GetComponent<UISprite> ();
-		UISprite sprite3 = Ground.transform.FindChild ("Base").FindChild ("3").GetComponent <UISprite> ();
-		
-		sprite1.spriteName = "base_off";
-		sprite2.spriteName = "base_off";
-		sprite3.spriteName = "base_off";
+//		UISprite sprite1 = Ground.transform.FindChild ("Base").FindChild("1").GetComponent<UISprite> ();
+//		UISprite sprite2 = Ground.transform.FindChild ("Base").FindChild ("2").GetComponent<UISprite> ();
+//		UISprite sprite3 = Ground.transform.FindChild ("Base").FindChild ("3").GetComponent <UISprite> ();
+//		
+//		sprite1.spriteName = "base_off";
+//		sprite2.spriteName = "base_off";
+//		sprite3.spriteName = "base_off";
 		Debug.Log ("baseoff");
 		if (bases == null || bases.Count < 1)
 			return;
@@ -304,16 +338,19 @@ public class ScriptMatchInfo : MonoBehaviour {
 		{
 			if(value == 1)
 			{
-				sprite1.spriteName = "base_on";
+				//sprite1.spriteName = "base_on";
+				S.transform.FindChild ("Base 1").FindChild("BaseOn").gameObject.SetActive (true);
 				Debug.Log ("baseon");
 			}
 			else if(value == 2)
 			{
-				sprite2.spriteName = "base_on";
+			//	sprite2.spriteName = "base_on";
+				S.transform.FindChild ("Base 2").FindChild("BaseOn").gameObject.SetActive (true);
 			}
 			else if(value == 3)
 			{
-				sprite3.spriteName = "base_on";
+			//	sprite3.spriteName = "base_on";
+				S.transform.FindChild ("Base 3").FindChild("BaseOn").gameObject.SetActive (true);
 			}
 		}
 
@@ -326,22 +363,22 @@ public class ScriptMatchInfo : MonoBehaviour {
 	
 	public void SetRound(int round)
 	{
-		mRound.GetComponent<UILabel> ().text = round.ToString ();
-		mRound.FindChild ("Label").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (round);
-	
-
-		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
-		
+//		mRound.GetComponent<UILabel> ().text = round.ToString ();
+//		mRound.FindChild ("Label").GetComponent<UILabel> ().text = UtilMgr.GetRoundString (round);
+//	
+//
+//		UILabel Halftime = Ground.transform.FindChild ("Base").FindChild ("BlueButten").FindChild ("Label").GetComponent<UILabel> ();
+		GameObject S = Info.transform.FindChild("Inning").FindChild("Label").gameObject;
 		RoundNum = round;
-		
-		if (Halftime.text [0] == '초') {
-			Halftime.text = RoundNum + "회초";
-		
-		}
-		else if(Halftime.text [0] == '말'){
-			
-			Halftime.text = RoundNum + "회말";
-		
-		}
+		S.GetComponent<UILabel> ().text = RoundNum.ToString ();
+//		if (Halftime.text [0] == '초') {
+//			Halftime.text = RoundNum + "회초";
+//		
+//		}
+//		else if(Halftime.text [0] == '말'){
+//			
+//			Halftime.text = RoundNum + "회말";
+//		
+//		}
 	}
 }

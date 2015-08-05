@@ -16,7 +16,7 @@ public class UserMgr : MonoBehaviour {
 	List<PresetListInfo> _presetListInfo;
 
 	public static int CurrentContestSeq;
-	
+	public static int GameSeq;
 	static UserMgr Instance
 	{
 		get

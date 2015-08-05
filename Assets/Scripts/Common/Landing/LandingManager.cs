@@ -6,6 +6,10 @@ public class LandingManager : MonoBehaviour {
 	public GameObject LandingScroll;
 	public GameObject Pitcher;
 	public GameObject Mid_BG;
+
+	public GameObject NewP;
+	public GameObject NewH;
+	public GameObject PlayerInfos;
 	Color S_Abled = new Color(242f/255f,242f/255f,242f/255f);
 	Color S_Disabled = new Color(217f/255f,217f/255f,217f/255f);
 	Color L_Abled = new Color(0,0,0);
@@ -170,8 +174,7 @@ public class LandingManager : MonoBehaviour {
 	{
 		if (ScriptMainTop.DetailBoard != null) {
 			if (ScriptMainTop.DetailBoard.player.Count > 0) {
-				
-				
+
 				P_RPlayersName = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Name").GetComponent<UILabel> ();
 				P_RBatting = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Batting").GetComponent<UILabel> ();        
 				P_RPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current pitchers").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
@@ -179,19 +182,34 @@ public class LandingManager : MonoBehaviour {
 				
 				num = 0;
 				
-				
+				NewP.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + ScriptMainTop.DetailBoard.player [num].playerName;
+				NewP.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + ScriptMainTop.DetailBoard.player [num].playerNumber;
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("ERA").FindChild("Label").GetComponent<UILabel>().text = "[b]" + ScriptMainTop.DetailBoard.player [num].ERA;
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("FIP").FindChild("Label").GetComponent<UILabel>().text = "[b]" +"NoneData";
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("K").FindChild("Label").GetComponent<UILabel>().text = "[b]" +"NoneData";
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +ScriptMainTop.DetailBoard.player [num].hitBB;
+
 				string playerInfo = ScriptMainTop.DetailBoard.player [num].playerName + "#" + ScriptMainTop.DetailBoard.player [num].playerNumber;
 				P_RPlayersName.text = playerInfo;
 				string playerAVG = ScriptMainTop.DetailBoard.player [num].ERA;
 				P_RBatting.text = playerAVG;
 				string strImage = ScriptMainTop.DetailBoard.player [num].imageName;
+//				if (Poldname != playerInfo) {
+//					if (ScriptMainTop.DetailBoard.player [num].imagePath != null 
+//					    && ScriptMainTop.DetailBoard.player [num].imagePath.Length > 0)
+//						strImage = ScriptMainTop.DetailBoard.player [num].imagePath
+//							+ ScriptMainTop.DetailBoard.player [num].imageName;
+//					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+//					StartCoroutine (GetImage (www, P_RPlayerImage));
+//				}
 				if (Poldname != playerInfo) {
 					if (ScriptMainTop.DetailBoard.player [num].imagePath != null 
 					    && ScriptMainTop.DetailBoard.player [num].imagePath.Length > 0)
 						strImage = ScriptMainTop.DetailBoard.player [num].imagePath
 							+ ScriptMainTop.DetailBoard.player [num].imageName;
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
-					StartCoroutine (GetImage (www, P_RPlayerImage));
+					StartCoroutine (GetImage (www, NewP.transform.FindChild("BG")
+					                          .FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo").GetComponent<UITexture>()));
 				}
 				Poldname = playerInfo;
 			}
@@ -241,8 +259,29 @@ public class LandingManager : MonoBehaviour {
 				//            P_LPlayerImage = transform.FindChild ("Scroll View").FindChild ("Playing").FindChild ("BG_W").FindChild ("Current hitter").FindChild ("Players Image BackGround").FindChild ("Players Image Mask").FindChild ("Players Image Texture").GetComponent<UITexture> ();
 				//  
 				Debug.Log("N.Count : " + N.Count);
+				ResetPlayerInfos();
 				for(int i = 0; i <N.Count;i++ ){
 					if(N[i].type == 1){
+
+						NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + N[i].playerName;
+						NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + N[i].playerNumber;
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitAvg;
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + "0%";
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + "0%";
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + "0%";
+
+
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitAvg;
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitH.ToString()+"%";
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hit2B.ToString()+"%";
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitHr.ToString()+"%";
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitBB.ToString()+"%";
+
 						string playerInfo = N[i].playerName + "#" + N[i].playerNumber;
 						P_LPlayersName.text = playerInfo;
 						Debug.Log("playerInfo : " + playerInfo);
@@ -262,7 +301,9 @@ public class LandingManager : MonoBehaviour {
 						P_B3.text = N[i].hitHr.ToString()+"%";
 						P_B4.text = N[i].hitBB.ToString()+"%";
 						P_VS.text = "VS 시즌타율 " + N[i].hitAvg;
-						
+
+
+						//this is midbar
 						Debug.Log("nextPlayer[i].hitAvg : " + N[i].hitAvg);
 						if(N[i].hitAvg!=""&&N[i].hitAvg!=null&&N[i].hitAvg!="-"){
 							MidBar.transform.FindChild("Gauge").FindChild("Hits").GetComponent<UISprite>().width =  (int)Mathf.Round(340f*(float.Parse(N[i].hitAvg)));
@@ -270,15 +311,40 @@ public class LandingManager : MonoBehaviour {
 							MidBar.transform.FindChild("Gauge").FindChild("L").GetComponent<UILabel>().text = "안타 " + (float.Parse(N[i].hitAvg)*100f).ToString()+"%";
 							MidBar.transform.FindChild("Gauge").FindChild("R").GetComponent<UILabel>().text = ((1-float.Parse(N[i].hitAvg))*100f).ToString()+"% 아웃";
 						}
+						//midbar end
+
+//						if(Holdname!=strImage){
+//							if (N[i].imagePath != null && N[i].imagePath.Length > 0){
+//								strImage =N[i] .imagePath + N[i].imageName;
+//								WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
+//								Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
+//								StartCoroutine (GetImage (www, P_LPlayerImage));
+//							}
+//							
+//						}
 						if(Holdname!=strImage){
 							if (N[i].imagePath != null && N[i].imagePath.Length > 0){
 								strImage =N[i] .imagePath + N[i].imageName;
 								WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 								Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
-								StartCoroutine (GetImage (www, P_LPlayerImage));
+								StartCoroutine (GetImage (www, NewH.transform.FindChild("BG")
+								                          .FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo").GetComponent<UITexture>()));
 							}
 							
 						}
+					}else if(N[i].type == 2){
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Label").GetComponent<UILabel>().text = "[b]" +  N [i].title;
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hitH.ToString () + "%";
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+								FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hit2B.ToString () + "%";
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hitHr.ToString () + "%";
+						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+							FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hitBB.ToString () + "%";
+						
+					
 					}
 				}
 				Holdname = strImage;
@@ -287,6 +353,31 @@ public class LandingManager : MonoBehaviour {
 			
 		}
 		gameround = UtilMgr.gameround;
+	}
+	void ResetPlayerInfos(){
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Label").GetComponent<UILabel>().text = "[b]0";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Label").GetComponent<UILabel>().text = "[b]0";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+		PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+			FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]0%";
+
+
 	}
 	public void CheckGameRound(){
 		Debug.Log("UtilMgr.gameround : " + UtilMgr.gameround);

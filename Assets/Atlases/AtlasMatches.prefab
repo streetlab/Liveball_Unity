@@ -42,10 +42,10 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 041f428ba972247a7811dc6e4387b43e, type: 2}
   mSprites:
   - name: 01_01
-    x: 1716
-    y: 686
-    width: 216
-    height: 172
+    x: 1522
+    y: 900
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -55,10 +55,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 01_02
-    x: 1498
-    y: 686
-    width: 216
-    height: 172
+    x: 1062
+    y: 900
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -68,10 +68,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 02_01
-    x: 1280
-    y: 686
-    width: 216
-    height: 172
+    x: 1522
+    y: 766
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -81,10 +81,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 02_02
-    x: 1062
-    y: 164
-    width: 216
-    height: 172
+    x: 1292
+    y: 900
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -95,9 +95,9 @@ MonoBehaviour:
     paddingBottom: 0
   - name: 03_01
     x: 1062
-    y: 338
-    width: 216
-    height: 172
+    y: 766
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -107,10 +107,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 03_02
-    x: 1062
-    y: 512
-    width: 216
-    height: 172
+    x: 1752
+    y: 766
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -120,10 +120,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 04_01
-    x: 1062
-    y: 686
-    width: 216
-    height: 172
+    x: 1624
+    y: 1274
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -133,10 +133,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 04_02
-    x: 1716
-    y: 860
-    width: 216
-    height: 172
+    x: 1292
+    y: 766
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -146,10 +146,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 05_01
-    x: 1680
-    y: 1067
-    width: 216
-    height: 173
+    x: 1752
+    y: 900
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -159,10 +159,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 05_02
-    x: 1498
-    y: 860
-    width: 216
-    height: 172
+    x: 1680
+    y: 1108
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -172,10 +172,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 06_01
-    x: 1280
-    y: 860
-    width: 216
-    height: 172
+    x: 1062
+    y: 632
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -186,9 +186,9 @@ MonoBehaviour:
     paddingBottom: 0
   - name: 06_02
     x: 1062
-    y: 860
-    width: 216
-    height: 172
+    y: 498
+    width: 228
+    height: 132
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -367,8 +367,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_result 1
-    x: 0
-    y: 192
+    x: 362
+    y: 719
     width: 277
     height: 238
     borderLeft: 0
@@ -406,8 +406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_result_04
-    x: 362
-    y: 719
+    x: 0
+    y: 192
     width: 277
     height: 238
     borderLeft: 0
@@ -575,8 +575,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 2
   - name: btn_hexagon_off
-    x: 1280
-    y: 502
+    x: 1062
+    y: 314
     width: 164
     height: 182
     borderLeft: 0
@@ -588,8 +588,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_hexagon_on
-    x: 1280
-    y: 318
+    x: 1062
+    y: 130
     width: 164
     height: 182
     borderLeft: 0
@@ -614,7 +614,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_victory_press
-    x: 1847
+    x: 1854
     y: 1256
     width: 134
     height: 150
@@ -666,19 +666,6 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: cd_game_bg02_special
-    x: 1784
-    y: 1750
-    width: 218
-    height: 298
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 1
-    paddingTop: 1
-    paddingBottom: 1
-  - name: cd_game_bg03_rare
     x: 362
     y: 119
     width: 218
@@ -691,8 +678,21 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 1
     paddingBottom: 1
-  - name: cd_game_bg04_platinum
+  - name: cd_game_bg03_rare
     x: 582
+    y: 419
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
+  - name: cd_game_bg04_platinum
+    x: 802
     y: 419
     width: 218
     height: 298
@@ -705,19 +705,6 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: cd_game_bg05_elite
-    x: 802
-    y: 419
-    width: 218
-    height: 298
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 1
-    paddingTop: 1
-    paddingBottom: 1
-  - name: cd_game_bg06_legend
     x: 582
     y: 119
     width: 218
@@ -730,7 +717,7 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 1
     paddingBottom: 1
-  - name: cd_game_bg07_plan
+  - name: cd_game_bg06_legend
     x: 802
     y: 119
     width: 218
@@ -743,9 +730,22 @@ MonoBehaviour:
     paddingRight: 1
     paddingTop: 1
     paddingBottom: 1
+  - name: cd_game_bg07_plan
+    x: 1784
+    y: 1750
+    width: 218
+    height: 298
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
   - name: cd_no_bg
-    x: 1624
-    y: 1274
+    x: 1292
+    y: 632
     width: 221
     height: 132
     borderLeft: 0
@@ -796,7 +796,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_advance_001
-    x: 1898
+    x: 1910
     y: 1112
     width: 128
     height: 128
@@ -939,8 +939,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: ic_player
-    x: 1983
-    y: 1242
+    x: 426
+    y: 15
     width: 60
     height: 44
     borderLeft: 0
@@ -1069,7 +1069,7 @@ MonoBehaviour:
     paddingTop: 34
     paddingBottom: 43
   - name: img_silhouette_hit_03
-    x: 1983
+    x: 1990
     y: 1288
     width: 51
     height: 118
@@ -1083,7 +1083,7 @@ MonoBehaviour:
     paddingBottom: 33
   - name: img_silhouette_hit_04
     x: 1062
-    y: 38
+    y: 4
     width: 68
     height: 124
     borderLeft: 0
@@ -1108,8 +1108,8 @@ MonoBehaviour:
     paddingTop: 32
     paddingBottom: 42
   - name: img_silhouette_out_02
-    x: 1934
-    y: 902
+    x: 1515
+    y: 634
     width: 66
     height: 130
     borderLeft: 0
@@ -1160,32 +1160,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: item_2x
-    x: 1062
-    y: 1034
-    width: 206
-    height: 206
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: item_3x
-    x: 1270
-    y: 1034
-    width: 206
-    height: 206
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: item_5x
     x: 641
     y: 751
     width: 206
@@ -1198,9 +1172,35 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: item_bs
+  - name: item_3x
     x: 849
     y: 751
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_5x
+    x: 1062
+    y: 1034
+    width: 206
+    height: 206
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: item_bs
+    x: 1270
+    y: 1034
     width: 206
     height: 206
     borderLeft: 0

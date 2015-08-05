@@ -11,6 +11,12 @@ public class BotMenu : MonoBehaviour {
 		case 1:
 			break;
 		case 2:
+			if(transform.FindChild("Scroll View").gameObject.activeSelf){
+				transform.FindChild("Scroll View").gameObject.SetActive(false);
+			}else{
+				transform.FindChild("Scroll View").gameObject.SetActive(true);
+			}
+
 			break;
 		case 3:
 			break;
@@ -25,6 +31,9 @@ public class BotMenu : MonoBehaviour {
 
 			break;
 		}
+	}
+	public void ChallengeClose(){
+		transform.FindChild("Scroll View").gameObject.SetActive(false);
 	}
 	int GetIndex(string name){
 		int i;
@@ -51,6 +60,7 @@ public class BotMenu : MonoBehaviour {
 	int num = 5;
 	float WatiTime = 0.02f;
 	IEnumerator RightMoveCamera(){
+		float Y = transform.root.FindChild ("Camera").localPosition.y;
 		transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = true;
 		for (int i = 0; i<num; i++) {
 			transform.root.FindChild("Camera").localPosition+= new Vector3(550f/num,0);
@@ -60,9 +70,10 @@ public class BotMenu : MonoBehaviour {
 				break;
 			}
 		}
-		transform.root.FindChild("Camera").localPosition = new Vector3(550,0);
+		transform.root.FindChild("Camera").localPosition = new Vector3(550,Y);
 	}
 	IEnumerator LeftMoveCamera(){ 
+		float Y = transform.root.FindChild ("Camera").localPosition.y;
 		transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
 		for (int i = 0; i<num; i++) {
 			transform.root.FindChild("Camera").localPosition-= new Vector3(550f/num,0);
@@ -72,6 +83,6 @@ public class BotMenu : MonoBehaviour {
 				break;
 			}
 		}
-		transform.root.FindChild("Camera").localPosition = new Vector3(0,0);
+		transform.root.FindChild("Camera").localPosition = new Vector3(0,Y);
 	}
 }

@@ -19,9 +19,13 @@ public class PostButton : MonoBehaviour {
 	}
 
 	public void on(){
-		UtilMgr.AddBackEvent(new EventDelegate(this, "BackPressed"));
-		Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
-		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq,Mail);
+		if (transform.FindChild ("TF_Post").gameObject.activeSelf) {
+			transform.FindChild ("TF_Post").gameObject.SetActive (false);
+		} else {
+			UtilMgr.AddBackEvent (new EventDelegate (this, "BackPressed"));
+			Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
+			NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq, Mail);
+		}
 	
 
 
@@ -78,7 +82,7 @@ public class PostButton : MonoBehaviour {
 				{
 
 				GameObject temp = (GameObject)Instantiate(origin,new Vector2(1,1),origin.transform.localRotation);
-				po = new Vector3(0,i*(110),0);
+				po = new Vector3(0,i*(132),0);
 				temp.transform.parent = origin.transform.parent;
 	        	temp.transform.localScale = new Vector3(1,1,1);
 				temp.transform.localPosition = origin.transform.localPosition;
@@ -130,39 +134,40 @@ public class PostButton : MonoBehaviour {
 			G.transform.FindChild("Scroll View").gameObject.SetActive(true);
 			G.transform.FindChild("Scroll View").GetComponent<UIScrollView>().ResetPosition();
 		}
-		for (int i =0; i<5; i++) {
-			if(G.transform.localPosition.y>-565.5f){
-				G.transform.localPosition=new Vector3(G.transform.localPosition.x, -565.5f,G.transform.localPosition.z);
-				//UiRoot.transform.FindChild("TF_Items").FindChild("TF_Items").FindChild("category 1").GetComponent<UIScrollView>().ResetPosition();
-				break;
-				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
-				
-
-			}else if(G.transform.localPosition.y!=-565.5f){
-				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
-				yield return new WaitForSeconds(0.01f);
-			}else{
-				break;
-			}
-		}
+//		for (int i =0; i<5; i++) {
+//			if(G.transform.localPosition.y>-565.5f){
+//				G.transform.localPosition=new Vector3(G.transform.localPosition.x, -565.5f,G.transform.localPosition.z);
+//				//UiRoot.transform.FindChild("TF_Items").FindChild("TF_Items").FindChild("category 1").GetComponent<UIScrollView>().ResetPosition();
+//				break;
+//				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
+//				
+//
+//			}else if(G.transform.localPosition.y!=-565.5f){
+//				G.transform.localPosition += new Vector3(0,1334.5f/5f,0);
+//				yield return new WaitForSeconds(0.01f);
+//			}else{
+//				break;
+//			}
+//		}
+		yield return new WaitForSeconds(0f);
 	}
 	IEnumerator Down(GameObject G){
 		if(G.name == "TF_Lineup"){
 			G.transform.FindChild("Scroll View").gameObject.SetActive(false);
 			G.transform.FindChild("Scroll View 1").gameObject.SetActive(false);
 		}
-		for (int i =0; i<5; i++) {
-			if(G.transform.localPosition.y<-1900f){
-				G.transform.localPosition=new Vector3(G.transform.localPosition.x, -1900f,G.transform.localPosition.z);
-				break;
-			
-			}else if(G.transform.localPosition.y!=-1900f){
-				G.transform.localPosition -= new Vector3(0,1334.5f/5f,0);
-				yield return new WaitForSeconds(0.02f);
-			}else{
-				break;
-			}
-		}
+//		for (int i =0; i<5; i++) {
+//			if(G.transform.localPosition.y<-1900f){
+//				G.transform.localPosition=new Vector3(G.transform.localPosition.x, -1900f,G.transform.localPosition.z);
+//				break;
+//			
+//			}else if(G.transform.localPosition.y!=-1900f){
+//				G.transform.localPosition -= new Vector3(0,1334.5f/5f,0);
+//				yield return new WaitForSeconds(0.02f);
+//			}else{
+//				break;
+//			}
+//		}
 
 			G.SetActive(false);
 		Debug.Log (GachaCount);
@@ -170,13 +175,13 @@ public class PostButton : MonoBehaviour {
 			AutoFade.LoadLevel("SceneCards", 0f, 1f);
 			
 		}
-
+		yield return new WaitForSeconds(0f);
 	}
 
 
 	public void BackPressed(){
 		UtilMgr.RemoveAllBackEvents();
-		StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
+		//StartCoroutine(Down (transform.FindChild ("TF_Post").gameObject));
 
 	}
 
