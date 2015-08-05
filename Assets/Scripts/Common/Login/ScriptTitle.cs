@@ -473,6 +473,7 @@ public class ScriptTitle : MonoBehaviour {
 		   && mDeviceEvent.Response.data.memberName != null
 		   && mDeviceEvent.Response.data.memberName.Length > 0){
 			PlayerPrefs.SetString(Constants.PrefNick, mDeviceEvent.Response.data.memberName);
+			Init();
 		} else
 			OpenTerms(true);
 	}
