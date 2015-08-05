@@ -219,4 +219,26 @@ public class LoginInfo {
 			_tutorialYn = value;
 		}
 	}
+
+	string photo;
+	
+	public string Photo {
+		get {
+			return photo;
+		}
+		set {
+			photo = value;
+		}
+	}
+
+	byte[] photoBytes;
+	
+	public byte[] PhotoBytes {
+		get {
+			return photoBytes;
+		}
+		set {
+			photoBytes = value;
+		}
+	}
 }

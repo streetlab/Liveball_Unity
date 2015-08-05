@@ -384,17 +384,18 @@ public class NetMgr : MonoBehaviour{
 		mSocket = null;
 	}
 
-	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool showLoading)
-	{
-		Debug.Log("DoLogin");
+//	public static void DoLogin(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool showLoading)
+//	{
+//		Debug.Log("DoLogin");
 //		Instance.webAPIProcessEvent (new LoginRequest(loginInfo), baseEvent);
-		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
-	}
+//		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
+//	}
 
 	public static void LoginGuest(LoginInfo loginInfo, BaseEvent baseEvent, bool isTest, bool showLoading)
 	{
 		Debug.Log("LoginGuest");
-		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
+//		Instance.webAPIProcessEventToAuth (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
+		Instance.webAPIUploadProcessEvent (new LoginGuestRequest(loginInfo), baseEvent, isTest, showLoading);
 	}
 
 //	public static void GetScheduleAll(BaseEvent baseEvent)
@@ -426,7 +427,6 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent (new PresetAddRequest (ContestSeq,ChoseList), baseEvent);
 	}
-
 
 	public static void GetGift(EventDelegate E)
 	{
@@ -585,6 +585,15 @@ public class NetMgr : MonoBehaviour{
 	public static void CheckVersion(BaseEvent baseEvent, bool isTest)
 	{
 		Instance.webAPIProcessEventForCheckVersion (new CheckVersionRequest (), baseEvent, isTest, true);
+	}
+
+	public static void CheckMemberDevice(string deviceId, BaseEvent baseEvent){
+		Instance.webAPIProcessEventToAuth(new CheckMemberDeviceRequest(deviceId), baseEvent, false, true);
+	}
+
+	public static void CheckNickname(string name, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new CheckNickRequest (name), baseEvent);
 	}
 
 	public static void GetLineup(string teamCode, BaseEvent baseEvent)

@@ -122,7 +122,13 @@ public class ScriptSelectTeam : MonoBehaviour {
 //		GetComponentInParent<ScriptTitle>().mProfileEvent = 
 //			new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
 //		NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
-		GetComponentInParent<ScriptTitle>().Login(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
+		Debug.Log("memName is "+mMemInfo.MemberName);
+		LoginInfo loginInfo = new LoginInfo();
+		loginInfo.memberName = mMemInfo.MemberName;
+		loginInfo.Photo = mMemInfo.Photo;
+		loginInfo.PhotoBytes = mMemInfo.PhotoBytes;
+		GetComponentInParent<ScriptTitle>().Login(loginInfo);
+//		GetComponentInParent<ScriptTitle>().Login(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
 	}
 
 //	public void CompletedJoin(){

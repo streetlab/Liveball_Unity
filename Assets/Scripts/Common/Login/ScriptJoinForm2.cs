@@ -10,6 +10,9 @@ public class ScriptJoinForm2 : MonoBehaviour {
 	byte[] ImageBate;
 	public string mJoinError;
 
+	CheckNickEvent mNickEvent;
+	string mConfirmedNick;
+
 //	public void Init(string eMail, string pwd, bool pwdEnable)
 //	{
 //		transform.FindChild ("InputEmail").GetComponent<UIInput> ().value = eMail;
@@ -66,10 +69,18 @@ public class ScriptJoinForm2 : MonoBehaviour {
 		UtilMgr.OnBackPressed ();
 	}
 
+	bool CheckNickConfirmed(){
+		string value = transform.FindChild("InputNick").GetComponent<UIInput> ().value;
+		if(value.Equals(mConfirmedNick)){
+			return true;
+		} else{
+			return false;
+		}
+	}
+
 	public void NextClicked()
 	{
-		string value = CheckValidation ();
-		if (value == null) {
+		if (CheckNickConfirmed ()) {
 			mMemInfo = new JoinMemberInfo();
 			mMemInfo.MemberEmail = "";//transform.FindChild ("InputEmail").GetComponent<UIInput> ().value;
 			mMemInfo.MemberName = transform.FindChild ("InputNick").GetComponent<UIInput> ().value;
@@ -86,25 +97,26 @@ public class ScriptJoinForm2 : MonoBehaviour {
 //			PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
 //			PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
 
-			GetComponentInParent<ScriptTitle>().mProfileEvent = 
-				new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
-			NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
+//			GetComponentInParent<ScriptTitle>().mProfileEvent = 
+//				new GetProfileEvent(new EventDelegate(this, "CompletedJoin"));
+//			NetMgr.JoinMember(mMemInfo, GetComponentInParent<ScriptTitle>().mProfileEvent, UtilMgr.IsTestServer(), true);
+			CompletedJoin();
 		} else
 		{
-			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+			DialogueMgr.ShowDialogue(mJoinError, "닉네임 중복 체크가 필요합니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
 		}
 	}
 
 	public void CompletedJoin(){
-		if(GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message != null
-		   && GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message.Length > 0){
-			DialogueMgr.ShowDialogue(GetComponentInParent<ScriptTitle>().mJoinError,
-			                         GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message,
-			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
-			return;
-		}
-		PlayerPrefs.SetString(Constants.PrefEmail, "1");
-		PlayerPrefs.SetString(Constants.PrefPwd, "1");
+//		if(GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message != null
+//		   && GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message.Length > 0){
+//			DialogueMgr.ShowDialogue(GetComponentInParent<ScriptTitle>().mJoinError,
+//			                         GetComponentInParent<ScriptTitle>().mProfileEvent.Response.message,
+//			                         DialogueMgr.DIALOGUE_TYPE.Alert, "", "", "", null);
+//			return;
+//		}
+//		PlayerPrefs.SetString(Constants.PrefEmail, "1");
+//		PlayerPrefs.SetString(Constants.PrefPwd, "1");
 
 		gameObject.SetActive(false);
 		mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
@@ -193,5 +205,26 @@ public class ScriptJoinForm2 : MonoBehaviour {
 
 	public void ConfirmedInvitation(){
 		NextClicked();
+	}
+
+	public void CheckDuplication(){
+		string value = CheckValidation ();
+		if (value == null) {
+			mNickEvent = new CheckNickEvent(new EventDelegate(this, "CheckComplete"));
+			string name = transform.FindChild("InputNick").GetComponent<UIInput> ().value;
+			NetMgr.CheckNickname(name, mNickEvent);
+		} else
+		{
+			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+		}
+	}
+
+	void CheckComplete(){
+		if(mNickEvent.Response.code == 0){//duplicated
+			DialogueMgr.ShowDialogue(mJoinError, "이미 등록된 닉네임 입니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+		} else{
+			DialogueMgr.ShowDialogue(mJoinError, "사용할 수 있는 닉네임 입니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+			mConfirmedNick = transform.FindChild("InputNick").GetComponent<UIInput> ().value;
+		}
 	}
 }

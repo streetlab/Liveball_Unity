@@ -2,29 +2,54 @@
 using System.Collections;
 using System.Text;
 using System.Collections.Generic;
+using System.IO;
 
-public class LoginGuestRequest : BaseRequest {
-
+public class LoginGuestRequest : BaseUploadRequest {
+		
 	public LoginGuestRequest(LoginInfo loginInfo)
 	{
-		Add ("memberEmail", "");
-		Add ("favoBB", loginInfo.teamCode);
-		Add ("memUID", loginInfo.memUID == null ? "" : loginInfo.memUID);
-		Add ("deviceID", loginInfo.DeviceID);
-
-//		mParams = JsonFx.Json.JsonWriter.Serialize (this);
-		mDic = this;
+		Dictionary<string, object> dic = new Dictionary<string, object> ();
+		dic.Add ("memberName", loginInfo.memberName == null ? "" : loginInfo.memberName);
+		dic.Add ("memUID", loginInfo.memUID == null ? "" : loginInfo.memUID);
+		dic.Add ("deviceID", loginInfo.DeviceID);
+		
+		
+		//		AddField ("param", JsonFx.Json.JsonWriter.Serialize (dic));
+		AddField("param", Newtonsoft.Json.JsonConvert.SerializeObject(dic));
+		
+		if (loginInfo.Photo != null && loginInfo.Photo.Length > 0) {
+			if(File.Exists(loginInfo.Photo)){
+				Debug.Log("a file exists : "+loginInfo.Photo);
+				byte[] bytes = File.ReadAllBytes(loginInfo.Photo);
+				AddBinaryData("file", bytes, "profile.png", "image/png");
+			} else{
+				Debug.Log("a file not found : "+loginInfo.Photo);
+			}
+			
+		}
+		
+		if (loginInfo.PhotoBytes != null && loginInfo.PhotoBytes.Length > 0) {
+			
+			Debug.Log("a file exists : "+loginInfo.PhotoBytes);
+			byte[] bytes = loginInfo.PhotoBytes;
+			
+			AddBinaryData("file", bytes, "profile.png", "image/png");
+		} else{
+			Debug.Log("a file not found : "+loginInfo.PhotoBytes);
+		}
+		
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+//	public LoginGuestRequest(LoginInfo loginInfo)
+//	{
+//		Add ("memberName", loginInfo.memberName == null ? "" : loginInfo.memberName);
+////		Add ("favoBB", loginInfo.teamCode);
+//		Add ("memUID", loginInfo.memUID == null ? "" : loginInfo.memUID);
+//		Add ("deviceID", loginInfo.DeviceID);
+//
+////		mParams = JsonFx.Json.JsonWriter.Serialize (this);
+//		mDic = this;
+//	}
 
 	public override string GetType ()
 	{

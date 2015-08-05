@@ -120,9 +120,10 @@ public class Constants {
 	public const string PrefMy_temp_golden_ball = "my_temp_golden_ball";
 	public const string PrefMy_total_ruby = "my_total_ruby";
 	public const string PrefMy_total_diamond = "my_total_diamond";
-	public const string PrefEmail = "email";
-	public const string PrefPwd = "pwd";
-	public const string PrefGuest = "guest";
+//	public const string PrefEmail = "email";
+//	public const string PrefPwd = "pwd";
+//	public const string PrefGuest = "guest";
+	public const string PrefNick = "nick";
 	public const string PrefNotice = "notice";
 	public const string PrefTutorial = "tutorial";
 	public const string PrefEvents = "events";

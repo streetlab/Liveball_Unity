@@ -129,7 +129,8 @@ public class ScriptWindowEmail : MonoBehaviour {
 			}
 			}
 
-			GetComponentInParent<ScriptTitle>().Login(eMail, pwd);
+//			GetComponentInParent<ScriptTitle>().Login(eMail, pwd);
+
 		} else {
 			if(CheckAgreement())
 				return;

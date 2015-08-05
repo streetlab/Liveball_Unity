@@ -68,25 +68,25 @@ public class ScriptJoinForm : MonoBehaviour {
 
 	public void NextClicked()
 	{
-		string value = CheckValidation ();
-		if (value == null) {
-			mMemInfo = new JoinMemberInfo();
-			mMemInfo.MemberEmail = transform.FindChild ("InputEmail").GetComponent<UIInput> ().value;
-			mMemInfo.MemberName = transform.FindChild ("InputNick").GetComponent<UIInput> ().value;
-			mMemInfo.MemberPwd = transform.FindChild ("InputPwd").GetComponent<UIInput> ().value;
-			mMemInfo.MemImage = "";//preprocess
-			mMemInfo.Photo = mImgPath;
-			mMemInfo.PhotoBytes = ImageBate;
-
-			gameObject.SetActive(false);
-			mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
-
-			PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
-			PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
-		} else
-		{
-			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
-		}
+//		string value = CheckValidation ();
+//		if (value == null) {
+//			mMemInfo = new JoinMemberInfo();
+//			mMemInfo.MemberEmail = transform.FindChild ("InputEmail").GetComponent<UIInput> ().value;
+//			mMemInfo.MemberName = transform.FindChild ("InputNick").GetComponent<UIInput> ().value;
+//			mMemInfo.MemberPwd = transform.FindChild ("InputPwd").GetComponent<UIInput> ().value;
+//			mMemInfo.MemImage = "";//preprocess
+//			mMemInfo.Photo = mImgPath;
+//			mMemInfo.PhotoBytes = ImageBate;
+//
+//			gameObject.SetActive(false);
+//			mSelectTeam.GetComponent<ScriptSelectTeam>().Init(mMemInfo);
+//
+//			PlayerPrefs.SetString(Constants.PrefEmail, mMemInfo.MemberEmail);
+//			PlayerPrefs.SetString(Constants.PrefPwd, mMemInfo.MemberPwd);
+//		} else
+//		{
+//			DialogueMgr.ShowDialogue(mJoinError, value, DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+//		}
 	}
 
 //	public void JoinComplete()

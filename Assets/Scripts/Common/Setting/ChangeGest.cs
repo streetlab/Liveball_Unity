@@ -40,7 +40,7 @@ public class ChangeGest : MonoBehaviour {
 
 	void MileageDialogueHandler(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Btn1) {
-			PlayerPrefs.SetString (Constants.PrefGuest,"1");
+//			PlayerPrefs.SetString (Constants.PrefGuest,"1");
 			AutoFade.LoadLevel("SceneSettings", 0f, 1f);
 		}
 		

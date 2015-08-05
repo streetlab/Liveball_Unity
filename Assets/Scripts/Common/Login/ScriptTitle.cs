@@ -13,6 +13,8 @@ public class ScriptTitle : MonoBehaviour {
 	bool mFBInitialized;
 	bool mMustUpdate;
 	int mClickedCnt;
+
+	CheckMemberDeviceEvent mDeviceEvent;
 	
 	//    public bool mServerIsTest = false;
 	
@@ -228,18 +230,24 @@ public class ScriptTitle : MonoBehaviour {
 		
 		InitConstants();
 		
-		string email = PlayerPrefs.GetString (Constants.PrefEmail);
-		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
-		string guest = PlayerPrefs.GetString (Constants.PrefGuest);
+//		string email = PlayerPrefs.GetString (Constants.PrefEmail);
+//		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
+//		string guest = PlayerPrefs.GetString (Constants.PrefGuest);
 		
-		if(guest != null && guest.Equals("1")){
-			GetUID();
-		} else
-		if (email == null || email.Length < 1 || pwd == null || pwd.Length < 1) {
+//		if(guest != null && guest.Equals("1")){
+//			GetUID();
+//		} else
+//		if (email == null || email.Length < 1 || pwd == null || pwd.Length < 1) {
+//			StopLogin();
+//		}
+		string nick = PlayerPrefs.GetString(Constants.PrefNick);
+		if(nick == null || nick.Length < 1){
 			StopLogin();
 		}
 		else{
-			Login(email, pwd);
+			LoginInfo loginInfo = new LoginInfo();
+			loginInfo.memberName = nick;
+			Login(loginInfo);
 		}
 	}
 	
@@ -248,17 +256,19 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (true);
 	}
 	
-	public void Login(string eMail, string pwd)
+//	public void Login(string eMail, string pwd)
+	public void Login(LoginInfo loginInfo)
 	{
-		mLoginInfo = new LoginInfo ();
-		mLoginInfo.memberEmail = eMail;
-		mLoginInfo.memberName = "";
-		mLoginInfo.memberPwd = pwd;
+//		mLoginInfo = new LoginInfo ();
+		mLoginInfo = loginInfo;
+		mLoginInfo.memberEmail = "";
+//		mLoginInfo.memberName = nick;
+		mLoginInfo.memberPwd = "";
 		mLoginEvent = new LoginEvent(new EventDelegate(this, "LoginComplete"));
 		//        UtilMgr.ShowLoading (true);
 		
-		PlayerPrefs.SetString (Constants.PrefEmail, eMail);
-		PlayerPrefs.SetString (Constants.PrefPwd, pwd);
+		PlayerPrefs.SetString (Constants.PrefNick, loginInfo.memberName);
+//		PlayerPrefs.SetString (Constants.PrefPwd, pwd);
 		
 		if (Application.platform == RuntimePlatform.Android) {
 			mLoginInfo.osType = 1;
@@ -404,12 +414,67 @@ public class ScriptTitle : MonoBehaviour {
 		
 	}
 
+
+
 	public void MemberClicked(){
-		OpenTerms(false);
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			EventDelegate eventd = new EventDelegate(this, "GotUidWithMember");
+			IOSMgr.GetUID("", eventd);
+			Init();
+		} else{
+			GotUidWithMember();
+		}
+	}
+
+	void GotUidWithMember(){
+		string deviceID;
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			deviceID = IOSMgr.GetMsg();
+		} else{
+//			deviceID = SystemInfo.deviceUniqueIdentifier;
+			deviceID = "test3";
+		}
+		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "MemberClicked2"));
+		NetMgr.CheckMemberDevice(deviceID, mDeviceEvent);
+	}
+
+	void MemberClicked2(){
+		if(mDeviceEvent.Response.data != null
+		   && mDeviceEvent.Response.data.memberName != null
+		   && mDeviceEvent.Response.data.memberName.Length > 0){
+			PlayerPrefs.SetString(Constants.PrefNick, mDeviceEvent.Response.data.memberName);
+			Init();
+		} else
+			OpenTerms(false);
 	}
 
 	public void GuestClicked(){
-		OpenTerms(true);
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			EventDelegate eventd = new EventDelegate(this, "GotUidWithGuest");
+			IOSMgr.GetUID("", eventd);
+		} else{
+			GotUidWithGuest();
+		}
+	}
+
+	void GotUidWithGuest(){
+		string deviceID;
+		if(Application.platform == RuntimePlatform.IPhonePlayer){
+			deviceID = IOSMgr.GetMsg();
+		} else{
+			deviceID = SystemInfo.deviceUniqueIdentifier;
+		}
+		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "GuestClicked2"));
+		NetMgr.CheckMemberDevice(deviceID, mDeviceEvent);
+	}
+
+	void GuestClicked2(){
+		if(mDeviceEvent.Response.data != null
+		   && mDeviceEvent.Response.data.memberName != null
+		   && mDeviceEvent.Response.data.memberName.Length > 0){
+			PlayerPrefs.SetString(Constants.PrefNick, mDeviceEvent.Response.data.memberName);
+		} else
+			OpenTerms(true);
 	}
 
 	void OpenTerms(bool isGuest){
@@ -471,9 +536,9 @@ public class ScriptTitle : MonoBehaviour {
 		NetMgr.LoginGuest(loginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}
 	
-	public void GuestCompelte(){
-		Login (mLoginEvent.Response.data.memberEmail, mLoginEvent.Response.data.memberPwd);
-	}
+//	public void GuestCompelte(){
+//		Login (mLoginEvent.Response.data.memberEmail, mLoginEvent.Response.data.memberPwd);
+//	}
 	
 	public void SetGCMId()
 	{
@@ -497,7 +562,8 @@ public class ScriptTitle : MonoBehaviour {
 			mLoginInfo.DeviceID = IOSMgr.GetMsg();
 		}
 		Debug.Log("ID is "+mLoginInfo.DeviceID);
-		NetMgr.DoLogin (mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
+//		NetMgr.DoLogin (mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
+		NetMgr.LoginGuest(mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}
 	
 	void LoginComplete()
@@ -512,11 +578,11 @@ public class ScriptTitle : MonoBehaviour {
 			return;
 		}
 		mLoginInfo = mLoginEvent.Response.data;
-		Debug.Log("query id is " + mLoginEvent.Response.query_id);
-		if(mLoginEvent.Response.query_id.Equals("tubyLoginDeviceID")){
-			PlayerPrefs.SetString(Constants.PrefGuest, "1");
-		}
-		
+//		Debug.Log("query id is " + mLoginEvent.Response.query_id);
+//		if(mLoginEvent.Response.query_id.Equals("tubyLoginDeviceID")){
+//			PlayerPrefs.SetString(Constants.PrefGuest, "1");
+//		}
+		PlayerPrefs.SetString(Constants.PrefNick, mLoginInfo.memberName);		
 		
 		EventDelegate eventd = new EventDelegate(this, "Getdata");
 		
@@ -600,8 +666,9 @@ public class ScriptTitle : MonoBehaviour {
 	
 	void LoginFailed()
 	{
-		PlayerPrefs.SetString(Constants.PrefEmail, "");
-		PlayerPrefs.SetString(Constants.PrefPwd, "");
+//		PlayerPrefs.SetString(Constants.PrefEmail, "");
+//		PlayerPrefs.SetString(Constants.PrefPwd, "");
+		PlayerPrefs.SetString(Constants.PrefNick, "");
 		UtilMgr.RemoveAllBackEvents();
 		Init ();
 		string title = gameObject.GetComponent<PlayMakerFSM>().FsmVariables.FindFsmString("loginFailedTitle").Value;
