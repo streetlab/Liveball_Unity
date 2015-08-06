@@ -142,7 +142,7 @@ public class UISlider : UIProgressBar
 	float OldValue= 0;
 	int  Pnum = 0;
 //	int  Nnum = 0;
-	protected void OnDragForeground (GameObject go, Vector2 delta)
+	public void OnDragForeground (GameObject go, Vector2 delta)
 	{
 		if (UICamera.currentScheme == UICamera.ControlScheme.Controller) return;
 		mCam = UICamera.currentCamera;

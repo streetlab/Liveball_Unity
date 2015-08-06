@@ -432,7 +432,7 @@ public class ScriptTitle : MonoBehaviour {
 			deviceID = IOSMgr.GetMsg();
 		} else{
 //			deviceID = SystemInfo.deviceUniqueIdentifier;
-			deviceID = "test3";
+			deviceID = "test4";
 		}
 		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "MemberClicked2"));
 		NetMgr.CheckMemberDevice(deviceID, mDeviceEvent);
