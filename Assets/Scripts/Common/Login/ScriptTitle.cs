@@ -131,7 +131,8 @@ public class ScriptTitle : MonoBehaviour {
 
 		if(UtilMgr.IsTestServer()){
 			transform.FindChild ("SprLogo").FindChild("LblTest").gameObject.SetActive(true);
-			transform.FindChild ("SprLogo").FindChild("LblTest").GetComponent<UILabel>().text += 
+			transform.FindChild ("SprLogo").FindChild("LblTest").GetComponent<UILabel>().text =
+				"Test Ver. " +
 			#if(UNITY_EDITOR)
 				UnityEditor.PlayerSettings.bundleVersion;
 			#elif(UNITY_ANDROID)
@@ -431,8 +432,8 @@ public class ScriptTitle : MonoBehaviour {
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			deviceID = IOSMgr.GetMsg();
 		} else{
-//			deviceID = SystemInfo.deviceUniqueIdentifier;
-			deviceID = "test4";
+			deviceID = SystemInfo.deviceUniqueIdentifier;
+//			deviceID = "test9";
 		}
 		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "MemberClicked2"));
 		NetMgr.CheckMemberDevice(deviceID, mDeviceEvent);
@@ -606,6 +607,7 @@ public class ScriptTitle : MonoBehaviour {
 		if (Check) {
 			Debug.Log ("Different, Save to Local");
 			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+				Debug.Log("url is "+LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].imagename);
 				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].imagename);
 				Count = i;
 				StartCoroutine (SaveImage (www, i));
@@ -685,7 +687,8 @@ public class ScriptTitle : MonoBehaviour {
 		
 		//    if (UserMgr.UserInfo!= null) {
 		string images = Constants.IMAGE_SERVER_HOST + UserMgr.UserInfo.imagePath + UserMgr.UserInfo.imageName;
-		
+
+		Debug.Log("UserMgr.UserInfo.imageName : "+UserMgr.UserInfo.imageName);
 		if (UserMgr.UserInfo.imageName != "") {
 			WWW www = new WWW (images);
 			StartCoroutine (GetImage (www));

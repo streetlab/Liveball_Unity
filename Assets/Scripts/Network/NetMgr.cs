@@ -689,6 +689,14 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEventForCS(new CSGetListRequest(), baseEvent, true);
 	}
 
+	public static void CheckMemberPincode(string pincode, BaseEvent baseEvent){
+		Instance.webAPIProcessEventToAuth(new CheckMemberPincodeRequest(pincode), baseEvent, false, true);
+	}
+
+	public static void MergeMembership(string pincode, BaseEvent baseEvent){
+		Instance.webAPIProcessEventToAuth(new MergeMembershipRequest(pincode), baseEvent, false, true);
+	}
+
 	public static void SendSocketMsg(String msg) {
 		mSendBuffer = Encoding.UTF8.GetBytes(msg);
 

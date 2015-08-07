@@ -135,7 +135,7 @@ public class Constants {
 			
 	public static void setServerTest(){
 		string flag = PlayerPrefs.GetString (PrefServerTest);
-		Debug.Log ("test flag : " + flag);
+//		Debug.Log ("test flag : " + flag);
 		if(flag.Equals("D")){
 			QUERY_SERVER_HOST = "http://" + TEST_HOST + ":5002/gameServer/query.frz";
 			IMAGE_SERVER_HOST = IMAGE_SERVER_HOST_T;

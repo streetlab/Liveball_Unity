@@ -11,6 +11,8 @@ public class LoginGuestRequest : BaseUploadRequest {
 		Dictionary<string, object> dic = new Dictionary<string, object> ();
 		dic.Add ("memberName", loginInfo.memberName == null ? "" : loginInfo.memberName);
 		dic.Add ("memUID", loginInfo.memUID == null ? "" : loginInfo.memUID);
+//		Debug.Log("deviceID is "+loginInfo.DeviceID);
+//		loginInfo.DeviceID = "test9";
 		dic.Add ("deviceID", loginInfo.DeviceID);
 		
 		

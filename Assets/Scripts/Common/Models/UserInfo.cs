@@ -353,12 +353,36 @@ public class UserInfo {
 		}
 	}
 
+	string _totalRuby;
 
-//	bool isFirstLanding = true;
-//	public bool IsFirstLanding{
-//		get{return isFirstLanding;}
-//		set{isFirstLanding = value;}
-//	}
+	public string totalRuby {
+		get {
+			return _totalRuby;
+		}
+		set {
+			_totalRuby = value;
+		}
+	}
 
+	string _totalMileage;
 
+	public string totalMileage {
+		get {
+			return _totalMileage;
+		}
+		set {
+			_totalMileage = value;
+		}
+	}
+
+	string _memPIN;
+
+	public string memPIN {
+		get {
+			return _memPIN;
+		}
+		set {
+			_memPIN = value;
+		}
+	}
 }

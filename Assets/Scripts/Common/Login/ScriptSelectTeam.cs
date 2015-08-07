@@ -127,6 +127,7 @@ public class ScriptSelectTeam : MonoBehaviour {
 		loginInfo.memberName = mMemInfo.MemberName;
 		loginInfo.Photo = mMemInfo.Photo;
 		loginInfo.PhotoBytes = mMemInfo.PhotoBytes;
+		loginInfo.DeviceID = mMemInfo.DeviceID;
 		GetComponentInParent<ScriptTitle>().Login(loginInfo);
 //		GetComponentInParent<ScriptTitle>().Login(mMemInfo.MemberEmail, mMemInfo.MemberPwd);
 	}

@@ -14,8 +14,8 @@ public class CheckMemberDeviceEvent : BaseEvent {
 	{
 		response = Newtonsoft.Json.JsonConvert.DeserializeObject<CheckMemberDeviceResponse>(data);
 
-		if (checkError ())
-			return;
+//		if (checkError ())
+//			return;
 
 		eventDelegate.Execute ();
 	}
