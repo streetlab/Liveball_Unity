@@ -164,9 +164,10 @@ public class ScriptBetting : MonoBehaviour {
 	}
 
 	void InitAmountUse(){
-		if(mAmountUse > double.Parse(UserMgr.UserInfo.userGoldenBall)){
-			mAmountUse = double.Parse(UserMgr.UserInfo.userGoldenBall);
-		}
+//		Debug.Log (UserMgr.UserInfo.userGoldenBall);
+//		if(mAmountUse > double.Parse(UserMgr.UserInfo.userGoldenBall)){
+//			mAmountUse = double.Parse(UserMgr.UserInfo.userGoldenBall);
+//		}
 	}
 
 	double GetExpectGold(){

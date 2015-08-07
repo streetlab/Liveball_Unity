@@ -42,6 +42,19 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 022c843d1a28b4744bc9e2872881d586, type: 2}
   mSprites:
   - name: btn_set_off
+    x: 246
+    y: 420
+    width: 244
+    height: 92
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: btn_set_on
     x: 0
     y: 326
     width: 244
@@ -54,7 +67,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: btn_set_on
+  - name: btn_set_on 1
     x: 0
     y: 420
     width: 244
@@ -68,6 +81,19 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: set_check_off
+    x: 340
+    y: 326
+    width: 92
+    height: 92
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: set_check_on
     x: 0
     y: 232
     width: 92
@@ -80,9 +106,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: set_check_on
-    x: 94
-    y: 232
+  - name: set_check_on 1
+    x: 246
+    y: 326
     width: 92
     height: 92
     borderLeft: 0

@@ -393,6 +393,19 @@ public class ScriptTF_Betting : MonoBehaviour {
 	//	if(LandingManager.N==null){
 		if(true){
 			Debug.Log("SetHitter 0");
+			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Top").FindChild("Name").
+				GetComponent<UILabel>().text = QuizMgr.QuizInfo.playerName;
+			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Top").FindChild("Number").
+				GetComponent<UILabel>().text = QuizMgr.QuizInfo.playerNumber.ToString();
+
+			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").
+				GetComponent<UILabel>().text = QuizMgr.QuizInfo.hitAvg;
+			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").
+				GetComponent<UILabel>().text = "0";
+			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").
+				GetComponent<UILabel>().text = "0";
+			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").
+				GetComponent<UILabel>().text = "0";
 			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");
 			string playerInfo = QuizMgr.QuizInfo.playerName + "#"+ QuizMgr.QuizInfo.playerNumber;
 	
@@ -409,9 +422,12 @@ public class ScriptTF_Betting : MonoBehaviour {
 			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + strImage);
 			Debug.Log ("url : " + Constants.IMAGE_SERVER_HOST + strImage);
 		if(gameObject.transform.FindChild("Scroll View").gameObject.activeSelf){
-			StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
-			                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
-			                          GetComponent<UITexture>()));
+//					StartCoroutine (GetImage (www, mBatting.transform.FindChild("Sprite").FindChild("Current hitter").
+//					                          FindChild("Players Image BackGround").GetChild(0).GetChild(0).
+//					                          GetComponent<UITexture>()));
+					StartCoroutine (GetImage (www, 	mBatting.transform.FindChild("Hitter").FindChild("BG").
+					                          FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo").
+					                          GetComponent<UITexture>()));
 
 			}
 			}

@@ -44,6 +44,27 @@ public class PresetDataInfo {
 		}
 	}
 
+	int _totalPreset;
+	// preset game have
+	public int totalPreset {
+		get {
+			return _totalPreset;
+		}
+		set {
+			_totalPreset = value;
+		}
+	}
+
+	int _totalEntry;
+	//MaxEntry
+	public int totalEntry {
+		get {
+			return _totalEntry;
+		}
+		set {
+			_totalEntry = value;
+		}
+	}
 	int _contestStatus;
 	// preset game have
 	public int contestStatus {

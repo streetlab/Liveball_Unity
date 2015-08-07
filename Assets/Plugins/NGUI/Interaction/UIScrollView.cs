@@ -360,20 +360,20 @@ public class UIScrollView : MonoBehaviour
 				for(int i = 0; i<CoverFlowCount;i++){
 					//Debug.Log(CoverFlowCount);
 					GameObject Temp = (GameObject)Instantiate(CoverFlowItem);
-					Temp.tag = "item";
+					Temp.transform.FindChild("CoverFlowItem").tag = "item";
 					Temp.transform.name = "Item " + i.ToString();
 					Temp.transform.parent = transform;
 					Temp.transform.localScale = new Vector3(1,1,1);
 					Temp.transform.localPosition = new Vector3(Size.x*i,((MaxSize.y-200)*0.5f)+20f);
-					Temp.GetComponent<UITexture>().SetRect(DefaultSize.x,DefaultSize.y);
+					Temp.transform.FindChild("CoverFlowItem").GetComponent<UITexture>().SetRect(DefaultSize.x,DefaultSize.y);
 			
-					if(Temp.GetComponent<UIDragScrollView>()==null){
-						Temp.AddComponent<UIDragScrollView>();
+					if(Temp.transform.FindChild("CoverFlowItem").GetComponent<UIDragScrollView>()==null){
+						Temp.transform.FindChild("CoverFlowItem").gameObject.AddComponent<UIDragScrollView>();
 					}
-					if(Temp.GetComponent<BoxCollider2D>()==null){
-						Temp.AddComponent<BoxCollider2D>();
+					if(Temp.transform.FindChild("CoverFlowItem").GetComponent<BoxCollider2D>()==null){
+						Temp.transform.FindChild("CoverFlowItem").gameObject.AddComponent<BoxCollider2D>();
 					}
-					Temp.GetComponent<BoxCollider2D>().size = Size;
+					Temp.transform.FindChild("CoverFlowItem").GetComponent<BoxCollider2D>().size = Size;
 				}
 			}
 		

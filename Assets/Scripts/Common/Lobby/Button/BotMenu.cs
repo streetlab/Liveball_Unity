@@ -67,6 +67,7 @@ public class BotMenu : MonoBehaviour {
 			yield return new WaitForSeconds(WatiTime);
 			if(transform.root.FindChild("Camera").localPosition.x>=550){
 
+
 				break;
 			}
 		}

@@ -13,7 +13,7 @@ public class ScriptTitle : MonoBehaviour {
 	bool mFBInitialized;
 	bool mMustUpdate;
 	int mClickedCnt;
-
+	
 	CheckMemberDeviceEvent mDeviceEvent;
 	
 	//    public bool mServerIsTest = false;
@@ -52,7 +52,7 @@ public class ScriptTitle : MonoBehaviour {
 			Init ();
 		#endif
 	}
-
+	
 	public void LogoClicked(){
 		if(mClickedCnt++ == 20){
 			PlayerPrefs.SetString(Constants.PrefServerTest, "1");
@@ -106,10 +106,10 @@ public class ScriptTitle : MonoBehaviour {
 		//                = new Vector3(160f, -450f, 0);
 		//            transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
 		//        } else{
-//		transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
-//			= new Vector3(-220f, -450f, 0);
-//		transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
-//			= new Vector3(0, -450f, 0);
+		//        transform.FindChild ("ContainerBtns").FindChild("BtnLogin").localPosition
+		//            = new Vector3(-220f, -450f, 0);
+		//        transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
+		//            = new Vector3(0, -450f, 0);
 		transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
 		//        }
 		
@@ -128,17 +128,19 @@ public class ScriptTitle : MonoBehaviour {
 		
 		mVersionEvent = new CheckVersionEvent(new EventDelegate(this, "ReceivedVersion"));
 		NetMgr.CheckVersion(mVersionEvent, UtilMgr.IsTestServer());
-
+		
 		if(UtilMgr.IsTestServer()){
 			transform.FindChild ("SprLogo").FindChild("LblTest").gameObject.SetActive(true);
+//			transform.FindChild ("SprLogo").FindChild("LblTest").GetComponent<UILabel>().text += 
 			transform.FindChild ("SprLogo").FindChild("LblTest").GetComponent<UILabel>().text =
 				"Test Ver. " +
-			#if(UNITY_EDITOR)
+
+				#if(UNITY_EDITOR)
 				UnityEditor.PlayerSettings.bundleVersion;
 			#elif(UNITY_ANDROID)
-				Application.version;
+			Application.version;
 			#else
-				Application.version;
+			Application.version;
 			#endif
 		}
 	}
@@ -231,16 +233,16 @@ public class ScriptTitle : MonoBehaviour {
 		
 		InitConstants();
 		
-//		string email = PlayerPrefs.GetString (Constants.PrefEmail);
-//		string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
-//		string guest = PlayerPrefs.GetString (Constants.PrefGuest);
+		//        string email = PlayerPrefs.GetString (Constants.PrefEmail);
+		//        string pwd = PlayerPrefs.GetString (Constants.PrefPwd);
+		//        string guest = PlayerPrefs.GetString (Constants.PrefGuest);
 		
-//		if(guest != null && guest.Equals("1")){
-//			GetUID();
-//		} else
-//		if (email == null || email.Length < 1 || pwd == null || pwd.Length < 1) {
-//			StopLogin();
-//		}
+		//        if(guest != null && guest.Equals("1")){
+		//            GetUID();
+		//        } else
+		//        if (email == null || email.Length < 1 || pwd == null || pwd.Length < 1) {
+		//            StopLogin();
+		//        }
 		string nick = PlayerPrefs.GetString(Constants.PrefNick);
 		if(nick == null || nick.Length < 1){
 			StopLogin();
@@ -257,19 +259,19 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (true);
 	}
 	
-//	public void Login(string eMail, string pwd)
+	//    public void Login(string eMail, string pwd)
 	public void Login(LoginInfo loginInfo)
 	{
-//		mLoginInfo = new LoginInfo ();
+		//        mLoginInfo = new LoginInfo ();
 		mLoginInfo = loginInfo;
 		mLoginInfo.memberEmail = "";
-//		mLoginInfo.memberName = nick;
+		//        mLoginInfo.memberName = nick;
 		mLoginInfo.memberPwd = "";
 		mLoginEvent = new LoginEvent(new EventDelegate(this, "LoginComplete"));
 		//        UtilMgr.ShowLoading (true);
 		
 		PlayerPrefs.SetString (Constants.PrefNick, loginInfo.memberName);
-//		PlayerPrefs.SetString (Constants.PrefPwd, pwd);
+		//        PlayerPrefs.SetString (Constants.PrefPwd, pwd);
 		
 		if (Application.platform == RuntimePlatform.Android) {
 			mLoginInfo.osType = 1;
@@ -414,9 +416,9 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("WindowEmail").gameObject.SetActive (true);
 		
 	}
-
-
-
+	
+	
+	
 	public void MemberClicked(){
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			EventDelegate eventd = new EventDelegate(this, "GotUidWithMember");
@@ -426,19 +428,20 @@ public class ScriptTitle : MonoBehaviour {
 			GotUidWithMember();
 		}
 	}
-
+	
 	void GotUidWithMember(){
 		string deviceID;
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			deviceID = IOSMgr.GetMsg();
 		} else{
 			deviceID = SystemInfo.deviceUniqueIdentifier;
-//			deviceID = "test9";
+			//			deviceID = "test9";
+
 		}
 		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "MemberClicked2"));
 		NetMgr.CheckMemberDevice(deviceID, mDeviceEvent);
 	}
-
+	
 	void MemberClicked2(){
 		if(mDeviceEvent.Response.data != null
 		   && mDeviceEvent.Response.data.memberName != null
@@ -448,7 +451,7 @@ public class ScriptTitle : MonoBehaviour {
 		} else
 			OpenTerms(false);
 	}
-
+	
 	public void GuestClicked(){
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			EventDelegate eventd = new EventDelegate(this, "GotUidWithGuest");
@@ -457,7 +460,7 @@ public class ScriptTitle : MonoBehaviour {
 			GotUidWithGuest();
 		}
 	}
-
+	
 	void GotUidWithGuest(){
 		string deviceID;
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
@@ -468,7 +471,7 @@ public class ScriptTitle : MonoBehaviour {
 		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "GuestClicked2"));
 		NetMgr.CheckMemberDevice(deviceID, mDeviceEvent);
 	}
-
+	
 	void GuestClicked2(){
 		if(mDeviceEvent.Response.data != null
 		   && mDeviceEvent.Response.data.memberName != null
@@ -478,7 +481,7 @@ public class ScriptTitle : MonoBehaviour {
 		} else
 			OpenTerms(true);
 	}
-
+	
 	void OpenTerms(bool isGuest){
 		UtilMgr.AddBackEvent (new EventDelegate (this, "Init"));
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
@@ -489,7 +492,7 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("Certification").gameObject.SetActive (false);        
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
-
+		
 		transform.FindChild ("Terms").gameObject.SetActive (true);
 		transform.FindChild ("Terms").GetComponent<ScriptTerms>().Init(isGuest);
 	}
@@ -511,7 +514,7 @@ public class ScriptTitle : MonoBehaviour {
 		transform.FindChild ("FormJoin2").gameObject.SetActive (false);
 		transform.FindChild ("Certification").gameObject.SetActive (false);        
 		transform.FindChild ("SprLogo").gameObject.SetActive (false);        
-		transform.FindChild ("WindowEmail").gameObject.SetActive (false);		
+		transform.FindChild ("WindowEmail").gameObject.SetActive (false);        
 		transform.FindChild ("SelectTeam").gameObject.SetActive (false);
 		transform.FindChild ("Terms").gameObject.SetActive (false);
 		
@@ -538,9 +541,9 @@ public class ScriptTitle : MonoBehaviour {
 		NetMgr.LoginGuest(loginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}
 	
-//	public void GuestCompelte(){
-//		Login (mLoginEvent.Response.data.memberEmail, mLoginEvent.Response.data.memberPwd);
-//	}
+	//    public void GuestCompelte(){
+	//        Login (mLoginEvent.Response.data.memberEmail, mLoginEvent.Response.data.memberPwd);
+	//    }
 	
 	public void SetGCMId()
 	{
@@ -564,7 +567,7 @@ public class ScriptTitle : MonoBehaviour {
 			mLoginInfo.DeviceID = IOSMgr.GetMsg();
 		}
 		Debug.Log("ID is "+mLoginInfo.DeviceID);
-//		NetMgr.DoLogin (mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
+		//        NetMgr.DoLogin (mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 		NetMgr.LoginGuest(mLoginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}
 	
@@ -580,24 +583,25 @@ public class ScriptTitle : MonoBehaviour {
 			return;
 		}
 		mLoginInfo = mLoginEvent.Response.data;
-//		Debug.Log("query id is " + mLoginEvent.Response.query_id);
-//		if(mLoginEvent.Response.query_id.Equals("tubyLoginDeviceID")){
-//			PlayerPrefs.SetString(Constants.PrefGuest, "1");
-//		}
-		PlayerPrefs.SetString(Constants.PrefNick, mLoginInfo.memberName);		
+		//        Debug.Log("query id is " + mLoginEvent.Response.query_id);
+		//        if(mLoginEvent.Response.query_id.Equals("tubyLoginDeviceID")){
+		//            PlayerPrefs.SetString(Constants.PrefGuest, "1");
+		//        }
+		PlayerPrefs.SetString(Constants.PrefNick, mLoginInfo.memberName);        
 		
 		EventDelegate eventd = new EventDelegate(this, "Getdata");
 		
 		NetMgr.GetGift (eventd);
 	}
 	int Count = 0;
+	
 	bool TwoCheck = true;
 	void Getdata(){
 		Debug.Log ("In Gift");
 		bool Check = false;
 		for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
-			Debug.Log(PlayerPrefs.GetString(i.ToString()) + " : " + LobbyGiftCommander.mGift.gift[i].imagename);
-			if(PlayerPrefs.GetString(i.ToString())!=LobbyGiftCommander.mGift.gift[i].imagename){
+			Debug.Log(PlayerPrefs.GetString(i.ToString()) + " : " + LobbyGiftCommander.mGift.gift[i].image);
+			if(PlayerPrefs.GetString(i.ToString())!=LobbyGiftCommander.mGift.gift[i].image){
 				
 				Check = true;
 				break;
@@ -607,16 +611,17 @@ public class ScriptTitle : MonoBehaviour {
 		if (Check) {
 			Debug.Log ("Different, Save to Local");
 			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
-				Debug.Log("url is "+LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].imagename);
-				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].imagename);
-				Count = i;
+				Debug.Log("url is "+LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
+
+				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
+				//    Count = i;
 				StartCoroutine (SaveImage (www, i));
 			}
 		} else {
 			Debug.Log ("Same, Load to Local");
 			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
 				WWW www2 = new WWW ("file://"+Application.persistentDataPath + "/"+i.ToString()+".png");
-				Count = i;
+				//    Count = i;
 				StartCoroutine (GetImage (www2,i));
 			}
 		}
@@ -624,11 +629,13 @@ public class ScriptTitle : MonoBehaviour {
 	}
 	IEnumerator SaveImage(WWW www,int i)
 	{
+		
 		yield return www;
 		Texture2D tmpTex = new Texture2D (200, 200);
 		www.LoadImageIntoTexture (tmpTex);
+		Count++;
 		Save (tmpTex,i);
-		if (Count + 1 == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
 			Debug.Log("Save Finish");
 			TwoCheck = false;
 			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
@@ -639,11 +646,13 @@ public class ScriptTitle : MonoBehaviour {
 	}
 	IEnumerator GetImage(WWW www,int i)
 	{
+		
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
 		www.LoadImageIntoTexture (tmpTex);
+		Count++;
 		LobbyGiftCommander.mGift.image.Add (i,tmpTex);
-		if (Count + 1 == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
 			Debug.Log("Load Finish");
 			TwoCheck = false;
 			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
@@ -655,7 +664,7 @@ public class ScriptTitle : MonoBehaviour {
 	public void Save(Texture2D t,int i) {
 		
 		LobbyGiftCommander.mGift.image.Add (i,t);
-		PlayerPrefs.SetString (i.ToString(),LobbyGiftCommander.mGift.gift[i].imagename);
+		PlayerPrefs.SetString (i.ToString(),LobbyGiftCommander.mGift.gift[i].image);
 		byte[] bytes = t.EncodeToPNG();
 		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+i.ToString()+".png");
 		
@@ -669,8 +678,8 @@ public class ScriptTitle : MonoBehaviour {
 	
 	void LoginFailed()
 	{
-//		PlayerPrefs.SetString(Constants.PrefEmail, "");
-//		PlayerPrefs.SetString(Constants.PrefPwd, "");
+		//        PlayerPrefs.SetString(Constants.PrefEmail, "");
+		//        PlayerPrefs.SetString(Constants.PrefPwd, "");
 		PlayerPrefs.SetString(Constants.PrefNick, "");
 		UtilMgr.RemoveAllBackEvents();
 		Init ();
@@ -687,8 +696,8 @@ public class ScriptTitle : MonoBehaviour {
 		
 		//    if (UserMgr.UserInfo!= null) {
 		string images = Constants.IMAGE_SERVER_HOST + UserMgr.UserInfo.imagePath + UserMgr.UserInfo.imageName;
-
 		Debug.Log("UserMgr.UserInfo.imageName : "+UserMgr.UserInfo.imageName);
+
 		if (UserMgr.UserInfo.imageName != "") {
 			WWW www = new WWW (images);
 			StartCoroutine (GetImage (www));
@@ -756,33 +765,54 @@ public class ScriptTitle : MonoBehaviour {
 		
 		UtilMgr.RemoveAllBackEvents ();
 		//        AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
-
+		
 		ContestEvent = new ContestListEvent(new EventDelegate(this, "GetContest"));
 		NetMgr.GetContestList(ContestEvent);
-	//	GetContest ();
-
-	
+		//    GetContest ();
+		
+		
 	}
+	PresetListEvent PresetEvent;
 	public void GetContest(){
+		UserMgr.ContestStatus = ContestEvent.Response.data [0].contestStatus;
+		PresetEvent = new PresetListEvent(new EventDelegate(this, "GetPreset"));
+		NetMgr.GetPresetList(PresetEvent);
+		
+		
+		
+		
+		
 		UserMgr.ContestList = ContestEvent.Response.data;
+		
+		
+	}
+	HistoryListEvent HistoryEvent;
+	void GetPreset(){
+		UserMgr.PresetList = PresetEvent.Response.data;
+		HistoryEvent = new HistoryListEvent(new EventDelegate(this, "GetHistory"));
+		NetMgr.GetHistoryList(HistoryEvent);
+	}
+	void GetHistory(){
+		UserMgr.HistoryList = HistoryEvent.Response.data;
 		string value = PlayerPrefs.GetString (Constants.PrefTutorial);
 		if(value != null && value.Equals("1")){
 			value = PlayerPrefs.GetString(Constants.PrefNotice);
 			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
-				//AutoFade.LoadLevel ("SceneMain");
+				//AutoFade.LoadLevel ("SceneMain 1");
 				AutoFade.LoadLevel ("SceneLobby");
 			} else{
-				//    AutoFade.LoadLevel ("SceneNotice");
+				//  AutoFade.LoadLevel ("SceneNotice");
 				AutoFade.LoadLevel ("SceneLobby");
+				
+				//    AutoFade.LoadLevel ("SceneMain 1");
 			}
 		}
 		else{
+			//AutoFade.LoadLevel ("SceneMain 1");
 			AutoFade.LoadLevel ("SceneLobby");
 			//AutoFade.LoadLevel("SceneTutorial");
 		}
-
 	}
-	
 	public void OpenCert(){
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
@@ -807,9 +837,9 @@ public class ScriptTitle : MonoBehaviour {
 		OpenFacebook();
 	}
 	
-//	public void GuestClicked(){
-//		OpenGuest();
-//	}
+	//    public void GuestClicked(){
+	//        OpenGuest();
+	//    }
 	
 	//    public void BtnClicked(string name)
 	//    {

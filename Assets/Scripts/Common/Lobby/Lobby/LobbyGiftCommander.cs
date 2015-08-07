@@ -22,8 +22,11 @@ public class LobbyGiftCommander : MonoBehaviour {
 		if (mGift != null) {
 
 			for(int i = 0; i<mGift.gift.Count;i++){
-				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).GetComponent<UITexture>().mainTexture = 
+				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
 					mGift.image[i];
+				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("openurl").GetComponent<UILabel>().text = 
+					mGift.gift[i].openurl;
+
 			}
 
 		}
@@ -66,14 +69,14 @@ public class LobbyGiftCommander : MonoBehaviour {
 	}
 	
 	public class gift{
-		string _imagename;
+		string _image;
 		
-		public string imagename {
+		public string image {
 			get {
-				return _imagename;
+				return _image;
 			}
 			set {
-				_imagename = value;
+				_image = value;
 			}
 		}
 		string _start;
@@ -107,5 +110,47 @@ public class LobbyGiftCommander : MonoBehaviour {
 			}
 		}
 	
+		string _onoff;
+		
+		public string onoff {
+			get {
+				return _onoff;
+			}
+			set {
+				_onoff = value;
+			}
+		}
+		List<Detail> _detail;
+		
+		public List<Detail> detail {
+			get {
+				return _detail;
+			}
+			set {
+				_detail = value;
+			}
+		}
+	}
+	public class Detail{
+		string _image;
+		
+		public string image {
+			get {
+				return _image;
+			}
+			set {
+				_image = value;
+			}
+		}
+		string _text;
+		
+		public string text {
+			get {
+				return _text;
+			}
+			set {
+				_text = value;
+			}
+		}
 	}
 }

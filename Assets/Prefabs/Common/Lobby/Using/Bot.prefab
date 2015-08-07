@@ -1538,7 +1538,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -143.999969, y: 617, z: 0}
+  m_LocalPosition: {x: -144, y: 617, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 416098}
@@ -3541,7 +3541,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3038
+  startingRenderQueue: 3020
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -6326,8 +6326,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
-  mSpriteName: btn_close_release
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: btn_close_02
   mFillCenter: 1
 --- !u!114 &11467868
 MonoBehaviour:
@@ -6650,12 +6650,12 @@ MonoBehaviour:
   mColor: {r: .952941239, g: .952941239, b: .952941239, a: 1}
   mPivot: 4
   mWidth: 720
-  mHeight: 1280
+  mHeight: 1088
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .5625
+  aspectRatio: .661764681
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -7477,8 +7477,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: a804961df42fc4f7984d2394e4ec5f62, type: 2}
-  mSpriteName: btn_close_release
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: btn_close_02
   mFillCenter: 1
 --- !u!114 &11491184
 MonoBehaviour:

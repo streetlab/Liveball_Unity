@@ -723,31 +723,58 @@ public class UIPanel : UIRect
 	{
 		int finalWidth = Mathf.FloorToInt(width + 0.5f);
 		int finalHeight = Mathf.FloorToInt(height + 0.5f);
-
+		
 		finalWidth = ((finalWidth >> 1) << 1);
 		finalHeight = ((finalHeight >> 1) << 1);
-
+		
 		Transform t = cachedTransform;
 		Vector3 pos = t.localPosition;
 		pos.x = Mathf.Floor(x + 0.5f);
 		pos.y = Mathf.Floor(y + 0.5f);
-
+		
 		if (finalWidth < 2) finalWidth = 2;
 		if (finalHeight < 2) finalHeight = 2;
-
+		
 		baseClipRegion = new Vector4(pos.x, pos.y, finalWidth, finalHeight);
-
+		
 		if (isAnchored)
 		{
 			t = t.parent;
-
+			
 			if (leftAnchor.target) leftAnchor.SetHorizontal(t, x);
 			if (rightAnchor.target) rightAnchor.SetHorizontal(t, x + width);
 			if (bottomAnchor.target) bottomAnchor.SetVertical(t, y);
 			if (topAnchor.target) topAnchor.SetVertical(t, y + height);
-#if UNITY_EDITOR
+			#if UNITY_EDITOR
 			NGUITools.SetDirty(this);
-#endif
+			#endif
+		}
+	}
+	public void SetRect (float width, float height)
+	{
+		int finalWidth = Mathf.FloorToInt(width + 0.5f);
+		int finalHeight = Mathf.FloorToInt(height + 0.5f);
+		
+		finalWidth = ((finalWidth >> 1) << 1);
+		finalHeight = ((finalHeight >> 1) << 1);
+		
+		Transform t = cachedTransform;
+		//Vector3 pos = t.localPosition;
+	
+		
+		if (finalWidth < 2) finalWidth = 2;
+		if (finalHeight < 2) finalHeight = 2;
+		
+		baseClipRegion = new Vector4(0, 0, finalWidth, finalHeight);
+		
+		if (isAnchored)
+		{
+			t = t.parent;
+			
+		
+			#if UNITY_EDITOR
+			NGUITools.SetDirty(this);
+			#endif
 		}
 	}
 

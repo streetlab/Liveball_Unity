@@ -46,6 +46,27 @@ public class PresetListInfo {
 		}
 	}
 
+	int _itemID;
+	
+	public int itemID {
+		get {
+			return _itemID;
+		}
+		set {
+			_itemID = value;
+		}
+	}
+	string _itemName;
+	
+	public string itemName {
+		get {
+			return _itemName;
+		}
+		set {
+			_itemName = value;
+		}
+	}
+
 	int _featured;
 	
 	public int featured {

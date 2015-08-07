@@ -159,12 +159,16 @@ public class RightMenuCommander : MonoBehaviour {
 			//memInfo.MemberID
 			memInfo.MemberName = SetName;
 			memInfo.MemberEmail = UserMgr.UserInfo.memberEmail;
-			
+
 			Debug.Log("send Team code : " + SetTeamCode);
 			memInfo.FavoBB = SetTeamCode;
 			if(GalleryCheck){
 				memInfo.MemImage = UserMgr.UserInfo.memberEmail;
+				if(Setimagebyte == null){
+					Setimagebyte = UserMgr.UserInfo.Textures.EncodeToPNG();
+				}
 				memInfo.PhotoBytes = Setimagebyte;
+				Setimagebyte = null;
 				GalleryCheck = false;
 			}
 			event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
