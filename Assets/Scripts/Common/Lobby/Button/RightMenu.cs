@@ -23,6 +23,11 @@ public class RightMenu : MonoBehaviour {
 			
 			transform.root.FindChild ("TF_Items").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
+		}else if(name == "burger_menu_005"){
+			float Y = transform.root.FindChild ("Camera").localPosition.y;
+			
+			transform.root.FindChild ("Item").gameObject.SetActive(true);
+			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 		}
 	}
 }

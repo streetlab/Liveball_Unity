@@ -110,7 +110,7 @@ public class ScriptItemMiddle : MonoBehaviour {
 			ItemList.Add(item);
 		});
 		if (UseItems.Count < 1) {
-			transform.root.FindChild("NonItem").gameObject.SetActive(true);
+			transform.FindChild("NonItem").gameObject.SetActive(true);
 		}
 	}
 	public void setdelete(string name){

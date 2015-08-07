@@ -8,6 +8,8 @@ public class GetSimpleResultRequest : BaseRequest {
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
+		Add ("contestSeq", UserMgr.CurrentContestSeq);
+		Add ("presetSeq", UserMgr.CurrentPresetSeq);
 		Add ("quizListSeq", quizListSeq);
 
 //		mParams = JsonFx.Json.JsonWriter.Serialize (this);

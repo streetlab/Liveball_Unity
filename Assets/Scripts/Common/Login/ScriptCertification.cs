@@ -91,6 +91,7 @@ public class ScriptCertification : MonoBehaviour {
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
 		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.EventAlert, OnDialogClicked);
+
 	
 
 	}
@@ -115,10 +116,12 @@ public class ScriptCertification : MonoBehaviour {
 		gameObject.transform.parent.gameObject.SetActive (false);
 	}
 	public void OnDialogClicked(DialogueMgr.BTNS type){
-		if (type == DialogueMgr.BTNS.Btn1){ 
+		if (type == DialogueMgr.BTNS.Cancel){ 
 
 				gameObject.transform.parent.gameObject.SetActive (false);
-				AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			transform.root.FindChild("Item").GetComponent<ScriptItemMiddle>().Reset();
+			//	AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			//ResetItemList
 			
 		}
 		//string email = PlayerPrefs.GetString (Constants.PrefEmail);
