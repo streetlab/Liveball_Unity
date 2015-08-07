@@ -23,6 +23,7 @@ public class RightMenuCommander : MonoBehaviour {
 			transform.FindChild("Top").FindChild("UserName").GetComponent<UILabel>().text = UserMgr.UserInfo.memberName;
 			transform.FindChild("Top").FindChild("Ruby").FindChild("RubyValue").GetComponent<UILabel>().text = UserMgr.UserInfo.userRuby;
 			transform.FindChild("Top").FindChild("Mileage").FindChild("MileageValue").GetComponent<UILabel>().text = UserMgr.UserInfo.userDiamond;
+			transform.FindChild("Top").FindChild("PinCode").FindChild("PinCodeValue").GetComponent<UILabel>().text = UserMgr.UserInfo.memPIN;
 		}
 	}
 	// Use this for initialization

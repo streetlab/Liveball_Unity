@@ -472,7 +472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &144114
 GameObject:
   m_ObjectHideFlags: 1
@@ -1567,7 +1567,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -51, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 477486}
@@ -1667,7 +1667,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -51, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 441018}
@@ -3057,7 +3057,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3020
+  startingRenderQueue: 3010
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -3669,7 +3669,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3019
+  startingRenderQueue: 3011
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -4165,7 +4165,11 @@ MonoBehaviour:
   caretColor: {r: 1, g: 1, b: 1, a: .800000012}
   selectionColor: {r: 1, g: .874509811, b: .552941203, a: .5}
   onSubmit: []
-  onChange: []
+  onChange:
+  - mTarget: {fileID: 11480294}
+    mMethodName: Input1Changed
+    mParameters: []
+    oneShot: 0
   mValue: 
 --- !u!114 &11432748
 MonoBehaviour:
@@ -4558,7 +4562,11 @@ MonoBehaviour:
   activeTextColor: {r: 0, g: 0, b: 0, a: 1}
   caretColor: {r: 1, g: 1, b: 1, a: .800000012}
   selectionColor: {r: 1, g: .874509811, b: .552941203, a: .5}
-  onSubmit: []
+  onSubmit:
+  - mTarget: {fileID: 11480294}
+    mMethodName: Input3Commit
+    mParameters: []
+    oneShot: 0
   onChange: []
   mValue: 
 --- !u!114 &11439906
@@ -5024,7 +5032,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3046
+  startingRenderQueue: 3030
   mClipTexture: {fileID: 2800000, guid: 2012a554664b744eda3cb2691d7e9ca2, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -5392,7 +5400,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3039
+  startingRenderQueue: 3023
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -6084,7 +6092,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3030
+  startingRenderQueue: 3015
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -6129,7 +6137,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3018
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 2800000, guid: 18d33645af66c45a7aa832fdb203354d, type: 3}
   mAlpha: 1
   mClipping: 1
@@ -6289,7 +6297,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3003
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
@@ -6603,12 +6611,12 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: .494117647}
   mPivot: 4
   mWidth: 720
-  mHeight: 1280
+  mHeight: 2000
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .5625
+  aspectRatio: .360000014
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -7274,7 +7282,11 @@ MonoBehaviour:
   caretColor: {r: 1, g: 1, b: 1, a: .800000012}
   selectionColor: {r: 1, g: .874509811, b: .552941203, a: .5}
   onSubmit: []
-  onChange: []
+  onChange:
+  - mTarget: {fileID: 11480294}
+    mMethodName: Input2Changed
+    mParameters: []
+    oneShot: 0
   mValue: 
 --- !u!114 &11492780
 MonoBehaviour:
@@ -7500,12 +7512,12 @@ MonoBehaviour:
   mColor: {r: 0, g: 0, b: 0, a: .494117647}
   mPivot: 4
   mWidth: 720
-  mHeight: 1280
+  mHeight: 2000
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .5625
+  aspectRatio: .360000014
   mType: 1
   mFillDirection: 4
   mFillAmount: 1

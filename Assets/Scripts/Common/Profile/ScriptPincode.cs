@@ -112,4 +112,19 @@ public class ScriptPincode : MonoBehaviour {
 		PlayerPrefs.SetString(Constants.PrefNick, mMergeEvent.Response.data.memberName);
 		AutoFade.LoadLevel("SceneLogin");
 	}
+
+	public void Input1Changed(){
+		if(mInput1.GetComponent<UIInput>().value.Length > 2)
+			mInput2.GetComponent<UIInput>().isSelected = true;
+	}
+
+	public void Input2Changed(){
+		if(mInput2.GetComponent<UIInput>().value.Length > 2)
+			mInput3.GetComponent<UIInput>().isSelected = true;
+	}
+
+	public void Input3Commit(){
+		if(mInput2.GetComponent<UIInput>().value.Length > 2)
+			CheckPincode();
+	}
 }
