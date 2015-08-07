@@ -105,7 +105,8 @@ public class ScriptPincode : MonoBehaviour {
 	void CompleteMerge(){
 		if(mMergeEvent.Response.message != null
 		   && mMergeEvent.Response.message.Length > 0){
-			return DialogueMgr.ShowDialogue("오류", mMergeEvent.Response.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue("오류", mMergeEvent.Response.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			return;
 		}
 		//reload App
 		PlayerPrefs.SetString(Constants.PrefNick, mMergeEvent.Response.data.memberName);
