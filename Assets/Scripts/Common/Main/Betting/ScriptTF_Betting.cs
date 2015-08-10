@@ -641,8 +641,11 @@ public class ScriptTF_Betting : MonoBehaviour {
 	
 		
 	}
-	public void OpenAnimation()
+	public void OpenAnimation(QuizInfo quizInfo)
 	{
+		ScriptBettingItem.ClickCheck = false;
+		Mark (quizInfo);
+		//mBatting.transform.FindChild("SprHit")
 		StartCoroutine (OpenAnimations());
 	}
 	public void CloseAnimation()
@@ -654,5 +657,47 @@ public class ScriptTF_Betting : MonoBehaviour {
 	//	gameObject.SetActive(false);
 		Debug.Log ("CloseBetting");
 	}
+	void Mark(QuizInfo quizInfo){
+		Debug.Log ("Mark " + UserMgr.PresetChooseList [(quizInfo.lineUp) * (quizInfo.inningType + 1)-1].ToString());
+		Debug.Log ("Mark " + quizInfo.inningType);
+		int num = UserMgr.PresetChooseList [quizInfo.lineUp-1];
+		if (quizInfo.inningType == 1) {
+			num = UserMgr.PresetChooseList [quizInfo.lineUp-1+9];
+		}
+		switch (
+			num) {
+		case 1:
+			mBatting.transform.FindChild("SprHit").FindChild("BtnHit1").GetComponent<UIButton>().isEnabled = false;
+			QuizMgr.QuizValue = 1;
+			break;
 
+		case 2:
+			mBatting.transform.FindChild("SprHit").FindChild("BtnHit2").GetComponent<UIButton>().isEnabled = false;
+			QuizMgr.QuizValue = 2;
+			break;
+
+		case 3:
+			mBatting.transform.FindChild("SprHit").FindChild("BtnHit3").GetComponent<UIButton>().isEnabled = false;
+			QuizMgr.QuizValue = 3;
+			break;
+
+		case 4:
+			mBatting.transform.FindChild("SprOut").FindChild("BtnOut1").GetComponent<UIButton>().isEnabled = false;
+			QuizMgr.QuizValue = 4;
+			break;
+
+		case 5:
+			mBatting.transform.FindChild("SprOut").FindChild("BtnOut2").GetComponent<UIButton>().isEnabled = false;
+			QuizMgr.QuizValue = 5;
+			break;
+
+		case 6:
+			mBatting.transform.FindChild("SprOut").FindChild("BtnOut3").GetComponent<UIButton>().isEnabled = false;
+			QuizMgr.QuizValue = 6;
+			break;
+
+
+		}
+
+	}
 }

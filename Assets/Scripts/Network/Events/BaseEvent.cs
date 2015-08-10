@@ -44,6 +44,7 @@ public class BaseEvent {
 
 	public void Init(string data)
 	{
+		Debug.Log("InitEvent (data)");
 		InitEvent (data);
 	}
 

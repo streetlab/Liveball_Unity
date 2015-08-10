@@ -66,6 +66,17 @@ public class LobbyGiftCommander : MonoBehaviour {
 				_image = value;
 			}
 		}
+
+		Dictionary<string,Texture2D> _Textures = new Dictionary<string,Texture2D>();
+		public Dictionary<string,Texture2D> Textures{
+			get {
+				return _Textures;
+			}
+			set {
+				_Textures = value;
+			}
+		}
+		
 	}
 	
 	public class gift{
@@ -130,6 +141,7 @@ public class LobbyGiftCommander : MonoBehaviour {
 				_detail = value;
 			}
 		}
+
 	}
 	public class Detail{
 		string _image;
@@ -152,5 +164,6 @@ public class LobbyGiftCommander : MonoBehaviour {
 				_text = value;
 			}
 		}
+	
 	}
 }

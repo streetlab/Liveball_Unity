@@ -187,20 +187,30 @@ public class ScriptBetting : MonoBehaviour {
 
 	}
 
-	void SetConfirm()
+	public void SetConfirm()
 	{	
 		//send to server
 		//param={%22memSeq%22:423%20,%22gameSeq%22:1216%20,%22quizListSeq%22:9%20,%22qzType%22:1%20,%22useCardNo%22:140300988901%20,%22betPoint%22:%22100%22%20,%22item%22:1000%20,%22selectValue%22:%221%22%20,%22extendValue%22:%220%22%20}&type=spos&id=gameSposQuizJoin
 		JoinQuizInfo joinInfo = new JoinQuizInfo ();
 		joinInfo.GameSeq = UserMgr.Schedule.gameSeq;
 		joinInfo.MemSeq = UserMgr.UserInfo.memSeq;
-		joinInfo.QuizListSeq = QuizMgr.QuizInfo.quizListSeq;
+		if (QuizMgr.QuizInfo != null) {
+			joinInfo.QuizListSeq = QuizMgr.QuizInfo.quizListSeq;
+		}
 		joinInfo.QzType = GetQzType ();
 		//double betPoint = 0;//double.Parse(UtilMgr.RemoveThousandSeperator(mLblUse.text));
 		joinInfo.BetPoint = "0";
 
 //		Debug.Log("QuizMgr.QuizInfo.order size is "+QuizMgr.QuizInfo.order.Count);
-		joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
+		Debug.Log ("QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq : " + 
+		           QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq);
+		if (!ScriptBettingItem.ClickCheck) {
+			if(QuizMgr.QuizValue !=0){
+				joinInfo.SelectValue = "" + QuizMgr.QuizValue.ToString();
+			}
+		}
+		//joinInfo.SelectValue = "" + QuizMgr.QuizInfo.order [GetIndex(mNameSelectedBtn)].orderSeq;
+
 		Debug.Log ("mNameSelectedBtn : " + mNameSelectedBtn);
 		Debug.Log ("joinInfo.SelectValue : " + joinInfo.SelectValue);
 		joinInfo.ExtendValue = "0";

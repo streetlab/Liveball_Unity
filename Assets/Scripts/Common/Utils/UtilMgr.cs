@@ -248,6 +248,33 @@ public class UtilMgr : MonoBehaviour {
 		}
 		return "ic_liveball";
 	}
+	public static string GetTeamCode(string imgName)
+	{
+		switch(imgName)
+		{
+		case "LG":
+			return "LG";
+		case "롯데":
+			return "LT";
+		case "한화":
+			return "HH";    
+		case "두산":
+			return "OB";
+		case "기아":
+			return "HT";
+		case "삼성":
+			return "SS";
+		case "넥센":
+			return "WO";        
+		case "SK":
+			return "SK";        
+		case "NC":
+			return "NC";
+		case "KT":
+			return "kt";
+		}
+		return "ic_liveball";
+	}
 
 //	public static string GetTeamEmblem(string teamCode)
 //	{

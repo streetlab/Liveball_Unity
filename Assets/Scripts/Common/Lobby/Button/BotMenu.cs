@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BotMenu : MonoBehaviour {
-
+	string[] S = {"Home","Ball","Challenge","Post","---"};
 	// Use this for initialization
 	public void Button(){
 		switch (GetIndex (this.name)) {
@@ -37,8 +37,8 @@ public class BotMenu : MonoBehaviour {
 	}
 	int GetIndex(string name){
 		int i;
-		for (i = 0; i<transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyBotCommander>().mBotMenuName.Length; i++) {
-			if(name == transform.root.FindChild("Scroll").FindChild("Main").GetComponent<LobbyBotCommander>().mBotMenuName[i]){
+		for (i = 0; i<S.Length; i++) {
+			if(name == S[i]){
 				break;
 			}
 		}
@@ -85,5 +85,9 @@ public class BotMenu : MonoBehaviour {
 			}
 		}
 		transform.root.FindChild("Camera").localPosition = new Vector3(0,Y);
+	}
+	void AllOff(){
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("BtnPost").FindChild ("TF_Post").gameObject.SetActive (false);
 	}
 }

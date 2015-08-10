@@ -65,10 +65,15 @@ public class ScriptMainTop : MonoBehaviour {
 	
 	STATE mState = STATE.Highlight;
 	static GetScheduleEvent mScheduleEvent;
+	ContestRankingEvent CRE;
+	void getRank(){
+
+	}
 	void Start () {
 		//	Point.GetComponent<UILabel> ().text 
 		
-		
+//		CRE = new ContestRankingEvent (new EventDelegate (this,"getRank"));
+//		NetMgr.GetContestRanking (CRE);
 		QuizMgr.EnterMain(this);
 		if (LandingState == 4) {
 			string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
@@ -567,6 +572,8 @@ public class ScriptMainTop : MonoBehaviour {
 		CheckAndJoinQuiz();
 	}
 	public void PostData(){
+		transform.root.FindChild ("TF_Betting").FindChild ("Scroll View").FindChild ("GameObject").FindChild ("SprBetting")
+			.GetComponent<ScriptBetting> ().SetConfirm ();
 		if (UserMgr.Schedule.myEntryFee!="0") {
 			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundCloseBet);
 		}
@@ -574,23 +581,32 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 	void CheckAndJoinQuiz(){
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
-		
+
 		if (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Count > 0) {
-			mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteJoinQuiz"));
-			NetMgr.JoinQuiz (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0], mJoinQuizEvent);
-			mBetting.GetComponent<ScriptTF_Betting>().mSprBetting
-				.GetComponent<ScriptBetting>().UpdateHitterItem(
-					mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0]);
+
+			CPCE = new ContestPresetChangeEvent (new EventDelegate(this,"CompleteJoinQuiz"));
+			
+			NetMgr.ContestPresetChange (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0].QuizListSeq.ToString(),QuizMgr.QuizValue.ToString(),CPCE);
+
+//			mJoinQuizEvent = new JoinQuizEvent(new EventDelegate(this, "CompleteJoinQuiz"));
+//			NetMgr.JoinQuiz (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0], mJoinQuizEvent);
+
+
+//			mBetting.GetComponent<ScriptTF_Betting>().mSprBetting
+//				.GetComponent<ScriptBetting>().UpdateHitterItem(
+//					mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0]);
 		}
 	}
 	
 	public void CompleteJoinQuiz(){
-		mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.RemoveAt (0);
+		if (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Count > 0) {
+			mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.RemoveAt (0);
+		}
 		CheckAndJoinQuiz ();
 		
-		UserMgr.UserInfo.userGoldenBall = mJoinQuizEvent.Response.data.userGoldenBall;
-		UserMgr.UserInfo.userRuby = mJoinQuizEvent.Response.data.userRuby;
-		UserMgr.UserInfo.userDiamond = mJoinQuizEvent.Response.data.userDiamond;
+		//UserMgr.UserInfo.userGoldenBall = mJoinQuizEvent.Response.data.userGoldenBall;
+//		UserMgr.UserInfo.userRuby = mJoinQuizEvent.Response.data.userRuby;
+//		UserMgr.UserInfo.userDiamond = mJoinQuizEvent.Response.data.userDiamond;
 		
 	}
 	
@@ -761,7 +777,7 @@ public class ScriptMainTop : MonoBehaviour {
 			
 			
 			
-			transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation();
+			transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation(quizInfo);
 			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
 			//if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
 			if(UserMgr.Schedule.myEntryFee!=null){
@@ -769,7 +785,7 @@ public class ScriptMainTop : MonoBehaviour {
 					int.Parse(UserMgr.Schedule.myEntryFee)>0){
 					
 					//transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
-					transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation();
+					transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation(quizInfo);
 					transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
 				}
 			}
@@ -878,14 +894,20 @@ public class ScriptMainTop : MonoBehaviour {
 			mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard(mBoardEvent);
 		}
 	}
-	
+	ContestPresetChangeEvent CPCE;
 	public void GetSimpleResult(int quizListSeq){
+		Debug.Log ("GetSimpleResult");
+
+//		CPCE = new ContestPresetChangeEvent (new EventDelegate(this,"GotSimpleResult"));
+//
+//		NetMgr.ContestPresetChange (quizListSeq.ToString(),QuizMgr.QuizValue.ToString(),CPCE);
 		mSimpleEvent = new GetSimpleResultEvent(new EventDelegate(this, "GotSimpleResult"));
 		NetMgr.GetSimpleResult (quizListSeq, mSimpleEvent);
 	}
 	
 	public void GotSimpleResult()
 	{
+		Debug.Log ("GotSimpleResult");
 		//		GetSimpleResultEvent simpleEvent
 		//			, ScriptBetting scriptBetting, ScriptQuizResult scriptQuizResult
 		QuizMgr.InitSimpleResult (mSimpleEvent,

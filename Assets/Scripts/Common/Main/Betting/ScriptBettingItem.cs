@@ -13,6 +13,8 @@ public class ScriptBettingItem : MonoBehaviour {
 	public GameObject mBetting;
 	public GameObject mSprBetting;
 
+	public static bool ClickCheck = false;
+
 	GameObject mSprSelected;
 	UISprite mSprSilhouette;
 	UISprite[] mSprCombos;
@@ -131,6 +133,7 @@ public class ScriptBettingItem : MonoBehaviour {
 
 	public void OnClicked()
 	{
+		ClickCheck = true;
 		ClickButton ();
 		GetComponent<UIButton> ().isEnabled = false;
 		OpenBetWindow (this.name);

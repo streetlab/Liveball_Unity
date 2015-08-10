@@ -8,6 +8,7 @@ public class LobbyMainCommander : MonoBehaviour {
 	public float RatioNC;
 	public float RatioBot;
 	Dictionary<string,float> HightList = new Dictionary<string, float> ();
+
 	// Use this for initialization
 	void Awake(){
 		if (UserMgr.ContestStatus == 2) {

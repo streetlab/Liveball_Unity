@@ -26,7 +26,16 @@ public class QuizInfo {
 			_gameSeq = value;
 		}
 	}
-
+	int _lineUp;
+	
+	public int lineUp {
+		get {
+			return _lineUp;
+		}
+		set {
+			_lineUp = value;
+		}
+	}
 	int _quizListSeq;
 
 	public int quizListSeq {

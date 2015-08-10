@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class LobbyNCCommander : MonoBehaviour {
 	public GameObject NCOrigin;
 	public GameObject CItem;
+	public GameObject HItem;
 	public float NCHight;
 	public float FCNCGap;
 	public int CCount;
@@ -88,8 +89,8 @@ public class LobbyNCCommander : MonoBehaviour {
 				Temp.transform.FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = List[i].aTeamScore  +" : " +List[i].hTeamScore;
 				Temp.transform.FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text = List[i].hTeamName;
 				Temp.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = List[i].contestName;
-				Temp.transform.FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = "660/17,241";
-				Temp.transform.FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = "루비 " + List[i].totalEntry.ToString();
+				Temp.transform.FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = List[i].totalPreset+"/"+List[i].totalEntry;
+				Temp.transform.FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = "루비 " + List[i].entryFee.ToString();
 				if(List[i].rewardItem == 1){
 					Temp.transform.FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = List[i].rewardValue.ToString();
 					Temp.transform.FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = List[i].itemName;
@@ -192,6 +193,7 @@ public class LobbyNCCommander : MonoBehaviour {
 	void ResetNCData(){
 		GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View").gameObject;
 		for (int a = 0; a < CDE.Response.data.Count; a++) {
+
 			for (int i = 0; i<Count.transform.childCount; i++) {
 				if(CDE.Response.data[a].contestSeq == int.Parse(Count.transform.FindChild ("Contest " + i.ToString ()).
 				                                                FindChild("BG").FindChild("ContestSeq").GetComponent<UILabel>().text)){
@@ -199,6 +201,12 @@ public class LobbyNCCommander : MonoBehaviour {
 					Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data[a].aTeamScore+" : "+CDE.Response.data[a].hTeamScore;
 					Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = CDE.Response.data[a].totalPreset+" / "+
 						Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
+//					if(UserMgr.CurrentContestSeq !=2){
+//					if(CDE.Response.data[a].contestStatus == 2){
+//							UserMgr.CurrentContestSeq = CDE.Response.data[a].contestStatus;
+//							transform.FindChild("PreSet Contest").GetComponent<PresetContestCommander>().CreatItem();
+//					}
+//					}
 
 				}
 		

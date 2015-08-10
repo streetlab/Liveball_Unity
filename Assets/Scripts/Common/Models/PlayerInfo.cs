@@ -57,6 +57,37 @@ public class PlayerInfo {
 		}
 	}
 
+	string _BB;
+	
+	public string BB {
+		get {
+			return _BB;
+		}
+		set {
+			_BB = value;
+		}
+	}
+	string _SO;
+	
+	public string SO {
+		get {
+			return _SO;
+		}
+		set {
+			_SO = value;
+		}
+	}
+	string _FIP;
+	
+	public string FIP {
+		get {
+			return _FIP;
+		}
+		set {
+			_FIP = value;
+		}
+	}
+
 	string _playerName;
 
 	public string playerName {

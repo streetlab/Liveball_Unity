@@ -15,7 +15,10 @@ public class PresettingRC : MonoBehaviour {
 		}else if(this.name == "Menu 2"){
 
 		} else {
-			DialogueMgr.ShowDialogue ("정답지 등록", "zzzzz." , DialogueMgr.DIALOGUE_TYPE.YesNo ,DialogueHandler2);
+			DialogueMgr.ShowDialogue ("정답지 등록", "참가비 : " + 
+			                          transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost+
+			                          "\n총 상금 : " +
+			                          transform.parent.parent.parent.GetComponent<PreSettingCommander>().money, DialogueMgr.DIALOGUE_TYPE.YesNo ,DialogueHandler2);
 		}
 	}
 
@@ -132,7 +135,13 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 
 	PresetUpdateEvent presetupdate;
 	void DialogueHandler2(DialogueMgr.BTNS btn){
+		Debug.Log (UserMgr.UserInfo.userRuby);
+		Debug.Log (transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost);
+		Debug.Log (btn);
 		if (btn == DialogueMgr.BTNS.Btn1) {
+			if(int.Parse(UserMgr.UserInfo.userRuby)>=int.Parse(transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost))
+			{
+				UserMgr.UserInfo.userRuby = (int.Parse(UserMgr.UserInfo.userRuby) - int.Parse(transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost)).ToString();
 			Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
 			if(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode == "Update"){
 				Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
@@ -144,6 +153,9 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 			NetMgr.PresetAdd (UserMgr.CurrentContestSeq,GetList(),presetaddevent);
 			}
 
+			}else{
+				DialogueMgr.ShowDialogue ("등록 취소", "루비가 부족합니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
+			}
 		}
 		
 	}

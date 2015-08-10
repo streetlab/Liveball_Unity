@@ -101,7 +101,13 @@ public class TopMenu : MonoBehaviour {
 	void GetPresetList(){
 		List<PresetListInfo> presetlist;
 		presetlist = presetListEvent.Response.data;
-		UserMgr.ContestStatus = presetlist [0].contestStatus;
+		for (int i = 0; i<presetlist.Count; i++) {
+			if(presetlist [i].contestStatus==2){
+				UserMgr.ContestStatus =  presetlist [i].contestStatus;
+				break;
+			}
+		}
+		//UserMgr.ContestStatus = presetlist [0].contestStatus;
 		if (UserMgr.ContestStatus == 2) {
 			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";
 		}

@@ -8,6 +8,7 @@ public class QuizMgr : MonoBehaviour {
 	ScriptMainTop mMainTop;
 	ScriptMatchPlaying mMatchPlaying;
 	//public static int QuizCount = 0;
+	public static int QuizValue = 0;
 	int sequenceQuiz;
 	public static int SequenceQuiz {
 		get {	return Instance.sequenceQuiz;}
@@ -123,10 +124,12 @@ public class QuizMgr : MonoBehaviour {
 
 	public static void InitSimpleResult(GetSimpleResultEvent simpleEvent
 	                                    , ScriptBetting scriptBetting, ScriptQuizResult scriptQuizResult){
-
+		Debug.Log ("InitSimpleResult");
 		if (simpleEvent.Response.data == null
-		    || simpleEvent.Response.data.Count < 1)
+			|| simpleEvent.Response.data.Count < 1) {
+			Debug.Log("return");
 			return;
+		}
 		
 		QuizInfo quiz = null;
 		foreach (QuizInfo quizInfo in QuizMgr.QuizList) {
@@ -135,16 +138,18 @@ public class QuizMgr : MonoBehaviour {
 				break;
 			}
 		}
-		if (quiz == null)
+		if (quiz == null) {
+			Debug.Log("return re");
 			return;
+		}
 
 		quiz.quizValue = simpleEvent.Response.data [0].quizValue;
 
 		if(simpleEvent.Response.data[0].isCancel > 0)
 			quiz.resultMsg = simpleEvent.Response.data[0].resultMsg;
-
+		Debug.Log("simpleEvent.Response.data[0].respStatus > 0");
 		if(simpleEvent.Response.data[0].respStatus > 0){
-		
+			Debug.Log("simpleEvent.Response.data[0].respStatus > 0 On");
 			quiz.resp = new List<QuizRespInfo> ();
 			QuizRespInfo tmpInfo;
 			if (simpleEvent.Response.data.Count > 1) {
@@ -159,7 +164,7 @@ public class QuizMgr : MonoBehaviour {
 			tmpInfo.respValue = simpleEvent.Response.data[0].respValue;
 			tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[0].rewardPoint);
 			quiz.resp.Insert(0, tmpInfo);
-
+			Debug.Log ("simpleEvent.Response.data[0].isCancel : " + simpleEvent.Response.data[0].isCancel);
 			if(simpleEvent.Response.data[0].isCancel > 0){
 				ShowQuizResult (quiz, simpleEvent, scriptQuizResult);
 			} else{
@@ -175,6 +180,7 @@ public class QuizMgr : MonoBehaviour {
 
 	static bool ShowQuizResult(QuizInfo quiz, GetSimpleResultEvent simpleEvent, ScriptQuizResult scriptQuizResult)
 	{
+		Debug.Log ("");
 		scriptQuizResult.GetComponent<PlayMakerFSM>().SendEvent("OpenResultEvent");
 		return scriptQuizResult.GetComponent<ScriptQuizResult> ().Init (simpleEvent.Response.data);
 	}
@@ -184,7 +190,7 @@ public class QuizMgr : MonoBehaviour {
 			Instance.mMatchPlaying.mCntAlive = 0;
 			Instance.mMatchPlaying.mNeedResponse = false;
 		}
-
+		Debug.Log("msgInfo.type" + msgInfo.type);
 		if(msgInfo.type == ConstantsSocketType.RES.TYPE_JOIN){
 			if(Instance.mMatchPlaying != null){
 				Instance.mMatchPlaying.CompleteJoin();
@@ -228,7 +234,9 @@ public class QuizMgr : MonoBehaviour {
 					NeedsDetailInfo = true;
 				} else if(msgInfo.data.result != null
 				          && msgInfo.data.result.Equals("1")){
+					Debug.Log("result");
 					if(Instance.mMainTop != null){
+						Debug.Log("GetSimpleResult");
 						Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.data.quizListSeq));
 					}
 				} else{

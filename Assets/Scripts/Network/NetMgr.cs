@@ -109,13 +109,15 @@ public class NetMgr : MonoBehaviour{
 				yield return 0; 
 			} 
 		}
-		
+		//Debug.Log ();
 		if(www.error == null && www.isDone)
 		{
 			Debug.Log(www.text);
 			//            CommonDialogue.Show (www.text);
-			if(baseEvent != null)
+			if(baseEvent != null){
+				Debug.Log("baseEvent != null");
 				baseEvent.Init(www.text);
+			}
 		}
 		else
 		{
@@ -407,6 +409,11 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent (new ContestListRequest (), baseEvent);
 	}
+
+	public static void GetContestRanking(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ContestRankingeRequest (), baseEvent);
+	}
 	
 	public static void GetContestData(BaseEvent baseEvent)
 	{
@@ -422,11 +429,16 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new PresetListRequest (), baseEvent);
 	}
 	
-	public static void GetPresetData(BaseEvent baseEvent)
+	public static void GetPresetData(int presetSeq,BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new PresetDataRequest (), baseEvent);
+		Instance.webAPIProcessEvent (new PresetDataRequest (presetSeq), baseEvent);
 	}
-	
+
+	public static void ContestPresetChange(string quizSeq,string presetValue,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ContestPresetChangeRequest (quizSeq,presetValue), baseEvent);
+	}
+
 	public static void PresetAdd(int ContestSeq,List<int> ChoseList,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new PresetAddRequest (ContestSeq,ChoseList), baseEvent);

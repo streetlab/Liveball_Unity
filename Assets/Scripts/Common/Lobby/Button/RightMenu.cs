@@ -12,6 +12,7 @@ public class RightMenu : MonoBehaviour {
 		}else 
 
 		if (name == "burger_menu_006") {
+			AllOff();
 			float Y = transform.root.FindChild ("Camera").localPosition.y;
 			
 			transform.root.FindChild ("Setting").gameObject.SetActive(true);
@@ -19,15 +20,24 @@ public class RightMenu : MonoBehaviour {
 			
 			
 		}else if(name == "burger_menu_002"){
+			AllOff();
 			float Y = transform.root.FindChild ("Camera").localPosition.y;
 			
 			transform.root.FindChild ("TF_Items").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 		}else if(name == "burger_menu_005"){
+			AllOff();
+			transform.root.FindChild("Item").GetComponent<ScriptItemMiddle>().Starts();
 			float Y = transform.root.FindChild ("Camera").localPosition.y;
 			
 			transform.root.FindChild ("Item").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
-		}
+
+	}
+	}
+	void AllOff(){
+		transform.root.FindChild ("Setting").gameObject.SetActive(false);
+		transform.root.FindChild ("TF_Items").gameObject.SetActive(false);
+		transform.root.FindChild ("Item").gameObject.SetActive(false);
 	}
 }

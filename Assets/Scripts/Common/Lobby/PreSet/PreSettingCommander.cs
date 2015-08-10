@@ -5,6 +5,8 @@ public class PreSettingCommander : MonoBehaviour {
 	string [] Value = {"1루","2,3루","홈런","땅볼","뜬공","삼진"};
 	public string Mode;
 	public GameObject PreSettingItem;
+	public string cost;
+	public string money;
 	public void CreatItem(){
 		for(int i = 0 ; i<9;i++){
 		GameObject Temp = (GameObject)Instantiate (PreSettingItem);
@@ -40,6 +42,14 @@ public class PreSettingCommander : MonoBehaviour {
 			transform.FindChild("Top").FindChild("Top Menu2").FindChild("Label").GetComponent<UILabel>().text = Title;
 		}
 
+	}
+	public void Ruby(string R,string M){
+		cost = "";
+		for (int i = 3; i<R.Length; i++) {
+			cost+= R[i].ToString();
+		}
+		//cost = R;
+		money = M;
 	}
 	public void SetList(List<string> List){
 		Debug.Log (List.Count);

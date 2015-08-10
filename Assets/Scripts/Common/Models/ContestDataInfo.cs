@@ -56,6 +56,8 @@ public class ContestDataInfo {
 		}
 	}
 
+
+
 	int _contestStatus;
 	// preset game have
 	public int contestStatus {

@@ -607,6 +607,8 @@ public class ScriptTitle : MonoBehaviour {
 				break;
 			}
 		}
+
+
 		//TwoCheck = true;
 		if (Check) {
 			Debug.Log ("Different, Save to Local");
@@ -615,7 +617,17 @@ public class ScriptTitle : MonoBehaviour {
 
 				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
 				//    Count = i;
+				//StartCoroutine (SaveImage (www, i));
 				StartCoroutine (SaveImage (www, i));
+
+				for(int s = 0; s<LobbyGiftCommander.mGift.gift[i].detail.Count;s++){
+
+					www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail[s].image);
+
+					StartCoroutine (SaveImage2 (www, LobbyGiftCommander.mGift.gift [i].detail[s].image));
+
+				}
+
 			}
 		} else {
 			Debug.Log ("Same, Load to Local");
@@ -635,6 +647,23 @@ public class ScriptTitle : MonoBehaviour {
 		www.LoadImageIntoTexture (tmpTex);
 		Count++;
 		Save (tmpTex,i);
+		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+			Debug.Log("Save Finish");
+			TwoCheck = false;
+			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
+			
+			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
+		}
+		
+	}
+	IEnumerator SaveImage2(WWW www,string i)
+	{
+		
+		yield return www;
+		Texture2D tmpTex = new Texture2D (200, 200);
+		www.LoadImageIntoTexture (tmpTex);
+		Count++;
+		Save2 (tmpTex,i);
 		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
 			Debug.Log("Save Finish");
 			TwoCheck = false;
@@ -675,6 +704,20 @@ public class ScriptTitle : MonoBehaviour {
 		
 		
 	}    
+	public void Save2(Texture2D t,string i) {
+		
+		LobbyGiftCommander.mGift.Textures.Add (i,t);
+		PlayerPrefs.SetString (i,i);
+		byte[] bytes = t.EncodeToPNG();
+		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+i.ToString()+".png");
+		
+		
+		File.WriteAllBytes(Application.persistentDataPath + "/"+i.ToString()+".png", bytes);
+		
+		Debug.Log ("End Save");
+		
+		
+	}  
 	
 	void LoginFailed()
 	{
@@ -765,16 +808,26 @@ public class ScriptTitle : MonoBehaviour {
 		
 		UtilMgr.RemoveAllBackEvents ();
 		//        AutoFade.LoadLevel ("SceneTeamHome", 0f, 1f);
-		
+		try{
 		ContestEvent = new ContestListEvent(new EventDelegate(this, "GetContest"));
 		NetMgr.GetContestList(ContestEvent);
+		}catch{
+		HistoryEvent = new HistoryListEvent(new EventDelegate(this, "GetHistory"));
+		NetMgr.GetHistoryList(HistoryEvent);
+		}
 		//    GetContest ();
 		
 		
 	}
 	PresetListEvent PresetEvent;
 	public void GetContest(){
-		UserMgr.ContestStatus = ContestEvent.Response.data [0].contestStatus;
+		for(int i = 0; i<ContestEvent.Response.data.Count;i++){
+			if(ContestEvent.Response.data [i].contestStatus == 2){
+				UserMgr.ContestStatus = ContestEvent.Response.data [i].contestStatus;
+				break;
+			}
+		}
+	
 		PresetEvent = new PresetListEvent(new EventDelegate(this, "GetPreset"));
 		NetMgr.GetPresetList(PresetEvent);
 		

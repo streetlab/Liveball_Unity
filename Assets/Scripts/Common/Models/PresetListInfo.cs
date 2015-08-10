@@ -176,6 +176,39 @@ public class PresetListInfo {
 			_totalReward = value;
 		}
 	}
+
+	int _rewordCount;
+	// preset game have
+	public int rewordCount {
+		get {
+			return _rewordCount;
+		}
+		set {
+			_rewordCount = value;
+		}
+	}
+	
+	int _rewordScore;
+	// preset game have
+	public int rewordScore {
+		get {
+			return _rewordScore;
+		}
+		set {
+			_rewordScore = value;
+		}
+	}
+	int _myRank;
+	// preset game have
+	public int myRank {
+		get {
+			return _myRank;
+		}
+		set {
+			_myRank = value;
+		}
+	}
+
 	string _aTeamScore;
 	
 	public string aTeamScore {

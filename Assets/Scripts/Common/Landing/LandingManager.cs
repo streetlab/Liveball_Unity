@@ -185,8 +185,8 @@ public class LandingManager : MonoBehaviour {
 				NewP.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + ScriptMainTop.DetailBoard.player [num].playerName;
 				NewP.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + ScriptMainTop.DetailBoard.player [num].playerNumber;
 				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("ERA").FindChild("Label").GetComponent<UILabel>().text = "[b]" + ScriptMainTop.DetailBoard.player [num].ERA;
-				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("FIP").FindChild("Label").GetComponent<UILabel>().text = "[b]" +"NoneData";
-				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("K").FindChild("Label").GetComponent<UILabel>().text = "[b]" +"NoneData";
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("FIP").FindChild("Label").GetComponent<UILabel>().text = "[b]" +ScriptMainTop.DetailBoard.player [num].FIP;
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("K").FindChild("Label").GetComponent<UILabel>().text = "[b]"+ScriptMainTop.DetailBoard.player [num].SO;
 				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +ScriptMainTop.DetailBoard.player [num].hitBB;
 
 				string playerInfo = ScriptMainTop.DetailBoard.player [num].playerName + "#" + ScriptMainTop.DetailBoard.player [num].playerNumber;
@@ -266,9 +266,9 @@ public class LandingManager : MonoBehaviour {
 						NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + N[i].playerName;
 						NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + N[i].playerNumber;
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitAvg;
-						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + "0%";
-						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + "0%";
-						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + "0%";
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitHr;
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].RBI;
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitBB;
 
 
 						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
@@ -333,15 +333,16 @@ public class LandingManager : MonoBehaviour {
 							
 						}
 					}else if(N[i].type == 2){
-						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+
+						PlayerInfos.transform.FindChild("Info").FindChild("BG2").FindChild("Bot").
 							FindChild("Label").GetComponent<UILabel>().text = "[b]" +  N [i].title;
-						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+						PlayerInfos.transform.FindChild("Info").FindChild("BG2").FindChild("Bot").
 							FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hitH.ToString () + "%";
-						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+						PlayerInfos.transform.FindChild("Info").FindChild("BG2").FindChild("Bot").
 								FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hit2B.ToString () + "%";
-						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+						PlayerInfos.transform.FindChild("Info").FindChild("BG2").FindChild("Bot").
 							FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hitHr.ToString () + "%";
-						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+						PlayerInfos.transform.FindChild("Info").FindChild("BG2").FindChild("Bot").
 							FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N [i].hitBB.ToString () + "%";
 						
 					
@@ -556,11 +557,15 @@ public class LandingManager : MonoBehaviour {
 			int inning;
 			UtilMgr.gameround = UserMgr.Schedule.playRound*2;
 
+			if(UserMgr.Schedule.inningType!=null){
+				if(UserMgr.Schedule.inningType.Length>0){
 				for(int i = 0;i<UserMgr.Schedule.inningType.Length;i++){
 					if(UserMgr.Schedule.inningType[i]=='초'){
 						UtilMgr.gameround-=1;
 					}
 				}
+				}
+			}
 
 			if(UtilMgr.gameround>1){
 				if (UserMgr.Schedule.myEntryFee != null) {

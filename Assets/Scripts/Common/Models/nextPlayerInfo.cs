@@ -24,7 +24,16 @@ public class nextPlayerInfo {
 		}
 	}
 
-
+	string _RBI;
+	
+	public string RBI {
+		get {
+			return _RBI;
+		}
+		set {
+			_RBI = value;
+		}
+	}
 
 	string _hitAvg;
 

@@ -76,7 +76,27 @@ public class PresetDataInfo {
 		}
 	}
 
-
+	int _rewordCount;
+	// preset game have
+	public int rewordCount {
+		get {
+			return _rewordCount;
+		}
+		set {
+			_rewordCount = value;
+		}
+	}
+	
+	int _rewordScore;
+	// preset game have
+	public int rewordScore {
+		get {
+			return _rewordScore;
+		}
+		set {
+			_rewordScore = value;
+		}
+	}
 	string _aTeamScore;
 	
 	public string aTeamScore {

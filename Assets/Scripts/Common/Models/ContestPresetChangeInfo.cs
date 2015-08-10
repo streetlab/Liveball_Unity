@@ -23,16 +23,26 @@ public class ContestPresetChangeInfo {
 //			_metaSeq = value;
 //		}
 //	}
-//	int _gameSeq;
-//	
-//	public int gameSeq {
-//		get {
-//			return _gameSeq;
-//		}
-//		set {
-//			_gameSeq = value;
-//		}
-//	}
+	int _gameSeq;
+	
+	public int gameSeq {
+		get {
+			return _gameSeq;
+		}
+		set {
+			_gameSeq = value;
+		}
+	}
+	int _gameQuizSeq;
+	
+	public int gameQuizSeq {
+		get {
+			return _gameQuizSeq;
+		}
+		set {
+			_gameQuizSeq = value;
+		}
+	}
 //	
 //	int _totalEntry;
 //	//MaxEntry

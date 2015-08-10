@@ -16,7 +16,7 @@ public class ScriptItemMiddle : MonoBehaviour {
 		UserMgr.UserInfo = mProfileEvent.Response.data;
 	}
 
-	void Start(){
+	 public void Starts(){
 		if (UseItem) {
 			DialogueMgr.ShowDialogue ("사용 성공", "["+name+"]이 사용되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			UseItem = false;

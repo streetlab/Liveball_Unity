@@ -12,6 +12,11 @@ public class Contest : MonoBehaviour {
 		                                                                                                          FindChild("Team").FindChild("LT").GetComponent<UILabel>().text,
 		                                                                                                          transform.
 		                                                                                                          FindChild("Team").FindChild("RT").GetComponent<UILabel>().text,"");
+		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Ruby (transform.
+		                                                                                                          FindChild("Ruby").FindChild("Label").GetComponent<UILabel>().text,
+		                                                                                                   transform.
+		                                                                                                   FindChild("Mileage").FindChild("Label1").GetComponent<UILabel>().text
+		                                                                                                      );
 		transform.parent.parent.parent.FindChild ("Top").FindChild("Sub").gameObject.SetActive (false);
 		transform.parent.parent.parent.FindChild ("Top").FindChild (transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent
 		                                                           <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = false;

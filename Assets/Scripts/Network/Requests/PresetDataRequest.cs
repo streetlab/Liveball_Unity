@@ -4,10 +4,10 @@ using System.Text;
 
 public class PresetDataRequest : BaseRequest {
 
-	public PresetDataRequest()
+	public PresetDataRequest(int presetSeq)
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
-	
+		Add ("presetSeq", presetSeq);
 
 //		mParams = JsonFx.Json.JsonWriter.Serialize (this);
 		mDic = this;
