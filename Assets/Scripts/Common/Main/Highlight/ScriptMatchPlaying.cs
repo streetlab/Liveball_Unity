@@ -51,20 +51,21 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //		mGameRoundCounter = 99;
 		mInningCounter = 0;
 //		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
-		NetMgr.JoinGame();
-		if (UserMgr.Schedule != null) {
-			if (UserMgr.Schedule.gameStatus == 0) {
-				mList.transform.FindChild ("Label").gameObject.SetActive (true);
-				//TF_Landing.GetComponent<LandingManager>().Nongame();
-			} else {
-				mList.transform.FindChild ("Label").gameObject.SetActive (false);
-				//TF_Landing.GetComponent<LandingManager>().Startgame();
-			}
-		} else {
-			mList.transform.FindChild ("Label").gameObject.SetActive (true);
-		}
+//		NetMgr.JoinGame();
+//		if (UserMgr.Schedule != null) {
+//			if (UserMgr.Schedule.gameStatus == 0) {
+//				mList.transform.FindChild ("Label").gameObject.SetActive (true);
+//				//TF_Landing.GetComponent<LandingManager>().Nongame();
+//			} else {
+//				mList.transform.FindChild ("Label").gameObject.SetActive (false);
+//				//TF_Landing.GetComponent<LandingManager>().Startgame();
+//			}
+//		} else {
+//			mList.transform.FindChild ("Label").gameObject.SetActive (true);
+//		}
 		mItemDetail.SetActive(false);
 		mItemHitter.SetActive(false);
+		CompleteJoin();
 	}
 	
 	//	void OnApplicationFocus(bool focus){
@@ -95,19 +96,20 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	void SetScoreBoard()
 	{
-		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (false);
-		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (false);
-		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (false);
-
-		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
-		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
-		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
+//		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (false);
+//		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (false);
+//		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (false);
+//
+//		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
+//		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
+//		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
 	//	Debug.Log("Playing");
 		//transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetHitter ();
 
 		//Progressing
-		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
-		NetMgr.GetGameSposDetailBoard (mEventDetail);
+//		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
+//		NetMgr.GetGameSposDetailBoard (mEventDetail);
+		GotDetailBoard();
 	}
 	
 	public void GotDetailBoard()

@@ -4,17 +4,23 @@ using System.Collections.Generic;
 
 
 public class LobbyBotCommander : MonoBehaviour {
+	public enum BtmState{
+		Main,
+		Info,
+		Challenge,
+		Mail,
+		Menu
+	}
+	public static BtmState mBtnState;
 
 	public GameObject mBotTemp;
 	public Vector2 Gap;
-	public float BotHight;
+	public float BotHeight;
 
 	public string[] mBotMenuName;
 	public string[] mBotMenuValue;
 
 	public void CreateBot(){
-
-
 		if (transform.FindChild("Bot")==null) {
 			GameObject Bot = new GameObject ("Bot");
 			Bot.transform.parent = transform;
@@ -30,7 +36,7 @@ public class LobbyBotCommander : MonoBehaviour {
 				Temp.transform.localScale = new Vector3 (1, 1, 1);
 				float PositionX = GetComponent<LobbyTopCommander>().Width / (float)mBotMenuName.Length;
 				//Temp.transform.localPosition = new Vector3 (((i + 1) * Gap.x) + (Getbuttonsize ().x * i), -TopHight, 1);
-				Vector2 LocalPosition = new Vector3 (((i + 1) * Gap.x) + (Getbuttonsize ().x * i), -BotHight, 0);
+				Vector2 LocalPosition = new Vector3 (((i + 1) * Gap.x) + (Getbuttonsize ().x * i), -BotHeight, 0);
 				Temp.transform.GetComponent<UISprite> ().SetRect (LocalPosition.x, LocalPosition.y+Gap.y, Getbuttonsize ().x, Getbuttonsize ().y);
 				Temp.transform.GetComponent<BoxCollider2D>().size = Getbuttonsize();
 				Temp.name = mBotMenuName [i];
@@ -54,7 +60,7 @@ public class LobbyBotCommander : MonoBehaviour {
 	}
 	Vector2 Getbuttonsize(){
 		float Count = (float)mBotMenuName.Length;
-		Vector2 Result = new Vector2 ((GetComponent<LobbyTopCommander>().Width-((Count+1)*Gap.x))/Count,BotHight-(Gap.y*2));
+		Vector2 Result = new Vector2 ((GetComponent<LobbyTopCommander>().Width-((Count+1)*Gap.x))/Count,BotHeight-(Gap.y*2));
 		return Result;
 	}
 

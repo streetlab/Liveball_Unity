@@ -22,17 +22,17 @@ public class Rankcontrol : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Init();
-
-		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
+//		Init();
 	}
 
-	void Init(){
+	public void Init(){
 		mRankingEvent = new GetTeamRankingEvent(new EventDelegate(this, "GotRanking"));
 		NetMgr.GetTeamRanking(mRankingEvent);
 	}
 
 	public void GotRanking(){
+		gameObject.SetActive(true);
+
 		rank.Clear ();
 		teamname.Clear ();
 		v.Clear ();
@@ -82,9 +82,11 @@ public class Rankcontrol : MonoBehaviour {
 			string imgName = UtilMgr.GetTeamEmblem(image[i]);
 			bars.transform.GetChild(i).GetChild(6).GetComponent<UISprite>().spriteName = imgName;
 			rankswitch(i);
-			bars.transform.GetChild(i).GetChild(8).GetComponent<UILabel>().text = Seq[i];
+//			bars.transform.GetChild(i).GetChild(8).GetComponent<UILabel>().text = Seq[i];
 		}
 		gameObject.transform.FindChild("Scroll View").gameObject.SetActive (true);
+
+		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 	}
 	float vgap(int i){
 		vgaps = ((float.Parse (bars.transform.GetChild (0).GetChild (2).GetComponent<UILabel> ().text)

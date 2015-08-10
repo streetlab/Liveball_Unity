@@ -29,17 +29,19 @@ public class LineupControl : MonoBehaviour {
 	
 	WWW www;
 	void Start(){
-		Reset ();
+//		Reset ();
 	}
 	public void Reset(){
 		T1.GetComponent<UIButton> ().isEnabled = false;
-		T2.GetComponent<UIButton> ().isEnabled = true;
+//		T2.GetComponent<UIButton> ().isEnabled = true;
 		
-		T11.GetComponent<UIButton> ().isEnabled = false;
-		T22.GetComponent<UIButton> ().isEnabled = true;
+//		T11.GetComponent<UIButton> ().isEnabled = false;
+//		T22.GetComponent<UIButton> ().isEnabled = true;
+		T1.SetActive(true);
+		T2.SetActive(false);
 	}
 	// Use this for initialization
-	public void view () {
+	public void view (string teamCode) {
 		transform.FindChild ("Scroll View").gameObject.SetActive(false);
 		transform.FindChild ("Scroll View 1").gameObject.SetActive(false);
 		//if (!transform.FindChild ("Scroll View").gameObject.activeSelf && !transform.FindChild ("Scroll View 1").gameObject.activeSelf) {
@@ -80,20 +82,20 @@ public class LineupControl : MonoBehaviour {
 		Gpit2.Clear ();
 		Ghit2.Clear ();
 		//Debug.Log ("what teamcode : " + UserMgr.Schedule.extend[0].teamCode);
-		if (UserMgr.Schedule != null) {
+//		if (UserMgr.Schedule != null) {
 			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
-			NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
-		
-			T1.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
-			T2.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
-			T11.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
-			T22.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
-		}
+			NetMgr.GetLineup (teamCode, mlineupEvent);
+
+			T1.GetComponent<UILabel> ().text = UtilMgr.GetTeamName(teamCode);
+//			T2.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+//			T11.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
+//			T22.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+//		}
 		
 	}
 	
 	void setarrray(){
-		
+		gameObject.SetActive(true);
 		
 		UserMgr.AwayLineup = mlineupEvent.Response.data;
 		
@@ -104,7 +106,7 @@ public class LineupControl : MonoBehaviour {
 		S = ScrollView.transform.GetChild (0).GetChild (0).FindChild ("S").gameObject;
 		onepit = true;
 		if (UserMgr.AwayLineup.lineup.Count > 0) {
-			transform.FindChild ("non").gameObject.SetActive(false);
+//			transform.FindChild ("non").gameObject.SetActive(false);
 			transform.FindChild ("Scroll View").gameObject.SetActive(true);
 			transform.FindChild ("Scroll View 1").gameObject.SetActive(true);
 //			for (int i = 0; i<S.transform.childCount; i++) {
@@ -243,19 +245,19 @@ public class LineupControl : MonoBehaviour {
 			
 			
 			
-			if (buttens) {
-				buttens = false;
-				
-				ScrollView = transform.FindChild ("Scroll View 1").gameObject;
-				Debug.Log ("what teamcode : " + UserMgr.Schedule.extend [1].teamCode);
-				mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
-				NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
-				
-			}
+//			if (buttens) {
+//				buttens = false;
+//				
+//				ScrollView = transform.FindChild ("Scroll View 1").gameObject;
+//				Debug.Log ("what teamcode : " + UserMgr.Schedule.extend [1].teamCode);
+//				mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
+//				NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
+//				
+//			}
 			transform.FindChild ("Scroll View 1").gameObject.SetActive (false);
 			P.gameObject.SetActive (false);
 		} else {
-			transform.FindChild ("non").gameObject.SetActive(true);
+//			transform.FindChild ("non").gameObject.SetActive(true);
 			transform.FindChild ("Scroll View").gameObject.SetActive(false);
 			transform.FindChild ("Scroll View 1").gameObject.SetActive(false);
 		}

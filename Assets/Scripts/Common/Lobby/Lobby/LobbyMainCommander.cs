@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 public class LobbyMainCommander : MonoBehaviour {
@@ -51,7 +51,8 @@ public class LobbyMainCommander : MonoBehaviour {
 		transform.FindChild ("Nomal Contest").gameObject.SetActive (true);
 		transform.FindChild ("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem ();
 		transform.FindChild ("PreSet Contest").gameObject.SetActive (false);
-		
+
+		LobbyBotCommander.mBtnState = LobbyBotCommander.BtmState.Main;
 	}
 	void CSComplete(){
 		Debug.Log("CSComplete");
@@ -61,7 +62,7 @@ public class LobbyMainCommander : MonoBehaviour {
 			HightList.Add ("Top",GetComponent<LobbyTopCommander>().TopHight);
 			HightList.Add ("FC",GetComponent<LobbyFCCommander>().FCHight);
 			HightList.Add ("NC",GetComponent<LobbyNCCommander>().NCHight);
-			HightList.Add ("Bot",GetComponent<LobbyBotCommander>().BotHight);
+			HightList.Add ("Bot",GetComponent<LobbyBotCommander>().BotHeight);
 		}catch{
 			Debug.Log("The \"HightList\" already exists.");
 		}
@@ -69,7 +70,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		GetComponent<LobbyTopCommander>().TopHight = (RatioTop / Sum)*1280f;
 		GetComponent<LobbyFCCommander>().FCHight = (RatioFC / Sum)*1280f;
 		GetComponent<LobbyNCCommander>().NCHight = (RatioNC / Sum)*1280f;
-		GetComponent<LobbyBotCommander>().BotHight = (RatioBot / Sum)*1280f;
+		GetComponent<LobbyBotCommander>().BotHeight = (RatioBot / Sum)*1280f;
 		Debug.Log ("Ratio Setting complete");
 		
 	}
@@ -82,7 +83,7 @@ public class LobbyMainCommander : MonoBehaviour {
 			GetComponent<LobbyTopCommander>().TopHight = HightList["Top"];
 			GetComponent<LobbyFCCommander>().FCHight = HightList["FC"];
 			GetComponent<LobbyNCCommander>().NCHight = HightList["NC"];
-			GetComponent<LobbyBotCommander>().BotHight = HightList["Bot"];
+			GetComponent<LobbyBotCommander>().BotHeight = HightList["Bot"];
 			Debug.Log("HightList Load");
 		} else {
 			Debug.Log("HightList is empty");

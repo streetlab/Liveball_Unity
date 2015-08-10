@@ -3,9 +3,9 @@ using System.Collections;
 
 public class ScriptTF_Highlight : MonoBehaviour {
 
-	public GameObject mMatchReady;
+//	public GameObject mMatchReady;
 	public GameObject mMatchPlaying;
-	public GameObject mMatchEnded;
+//	public GameObject mMatchEnded;
 
 	void Start()
 	{
@@ -27,23 +27,23 @@ public class ScriptTF_Highlight : MonoBehaviour {
 
 	void OpenMatchReady()
 	{
-		mMatchReady.SetActive (true);
+//		mMatchReady.SetActive (true);
 		mMatchPlaying.SetActive (false);
-		mMatchEnded.SetActive (false);
+//		mMatchEnded.SetActive (false);
 	}
 
 	void OpenMatchPlaying()
 	{
-		mMatchReady.SetActive (false);
+//		mMatchReady.SetActive (false);
 		mMatchPlaying.SetActive (true);
-		mMatchEnded.SetActive (false);
+//		mMatchEnded.SetActive (false);
 	}
 
 	void OpenMatchEnded()
 	{
-		mMatchReady.SetActive (false);
+//		mMatchReady.SetActive (false);
 		mMatchPlaying.SetActive (false);
-		mMatchEnded.SetActive (true);
+//		mMatchEnded.SetActive (true);
 	}
 
 }

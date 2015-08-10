@@ -665,7 +665,7 @@ public class ScriptMainTop : MonoBehaviour {
 		
 		mState = STATE.Lineup;
 		
-		mLineup.GetComponent<LineupControl> ().view ();
+//		mLineup.GetComponent<LineupControl> ().view ();
 	}
 	
 	void OpenBingo()

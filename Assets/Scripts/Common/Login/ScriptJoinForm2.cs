@@ -221,9 +221,9 @@ public class ScriptJoinForm2 : MonoBehaviour {
 
 	void CheckComplete(){
 		if(mNickEvent.Response.code == 0){//duplicated
-			DialogueMgr.ShowDialogue(mJoinError, "이미 등록된 닉네임 입니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+			DialogueMgr.ShowDialogue("닉네임 중복 확인", "이미 등록된 닉네임 입니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
 		} else{
-			DialogueMgr.ShowDialogue(mJoinError, "사용할 수 있는 닉네임 입니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
+			DialogueMgr.ShowDialogue("닉네임 중복 확인", "사용할 수 있는 닉네임 입니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null, null, null, null);
 			mConfirmedNick = transform.FindChild("InputNick").GetComponent<UIInput> ().value;
 		}
 	}
