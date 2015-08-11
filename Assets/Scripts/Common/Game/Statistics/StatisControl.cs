@@ -26,12 +26,12 @@ public class StatisControl : MonoBehaviour {
 	}
 	void Start(){
 	
-		Init();
-
-		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
+//		Init();
+//
+//		transform.FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 	}
 
-	void Init(){
+	public void Init(){
 		mStatisticsEvent = new GetPlayerStatisticsEvent(new EventDelegate(this, "GotStatistics"));
 		NetMgr.GetPlayerStatistics(mStatisticsEvent);
 	}
@@ -175,22 +175,22 @@ public class StatisControl : MonoBehaviour {
 		transform.GetChild (i + 2).gameObject.SetActive (true);
 		transform.GetChild (0).gameObject.SetActive (false);
 	
-		switch (i) {
-		case 0:
-			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "타율";
-			break;
-		case 1:
-			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "방어율";
-			break;
-		case 2:
-			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "홈런";
-			break;
-		case 3:
-			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "다승";
-			break;
-		}
-		MenuButton.SetActive (false);
-		BackButton.SetActive (true);
+//		switch (i) {
+//		case 0:
+//			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "타율";
+//			break;
+//		case 1:
+//			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "방어율";
+//			break;
+//		case 2:
+//			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "홈런";
+//			break;
+//		case 3:
+//			transform.parent.FindChild ("Top").FindChild ("Panel").FindChild ("Label").GetComponent<UILabel>().text = "다승";
+//			break;
+//		}
+//		MenuButton.SetActive (false);
+//		BackButton.SetActive (true);
 	//back button on
 	}
 

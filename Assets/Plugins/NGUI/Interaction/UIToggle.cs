@@ -180,7 +180,7 @@ public class UIToggle : UIWidgetContainer
 	/// Fade out or fade in the active sprite and notify the OnChange event listener.
 	/// </summary>
 
-	void Set (bool state)
+	public void Set (bool state)
 	{
 		if (!mStarted)
 		{

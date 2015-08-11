@@ -52,6 +52,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		transform.FindChild ("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem ();
 		transform.FindChild ("PreSet Contest").gameObject.SetActive (false);
 
+		transform.parent.FindChild("GameInfo").gameObject.SetActive(false);
 		LobbyBotCommander.mBtnState = LobbyBotCommander.BtmState.Main;
 	}
 	void CSComplete(){

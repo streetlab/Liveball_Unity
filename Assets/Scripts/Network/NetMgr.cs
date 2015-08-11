@@ -557,6 +557,11 @@ public class NetMgr : MonoBehaviour{
 	{
 		Instance.webAPIProcessEvent (new GetProgressQuizRequest (quizListSeq), baseEvent);
 	}
+
+	public static void GetTeamQuiz(string teamCode, BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetTeamQuizRequest (teamCode), baseEvent);
+	}
 	
 	public static void GetProfile(int memSeq, BaseEvent baseEvent)
 	{

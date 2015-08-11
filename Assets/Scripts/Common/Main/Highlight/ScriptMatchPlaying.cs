@@ -14,30 +14,30 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public GameObject mItemDetail;
 	public GameObject TF_Landing;
 	
-	float mPreItemSize;
-	float mPosGuide;
-	float mAccumulatedY;
+	protected float mPreItemSize;
+	protected float mPosGuide;
+	protected float mAccumulatedY;
 	//	int mSequenceQuiz;
-	bool mPreGame;
-	bool mFirstLoading;
-	int mGameRoundCounter;
-	int mGameRound;
-	int mInningType;
-	int mInningCounter;
-	bool mIsJoined;
+	protected bool mPreGame;
+	protected bool mFirstLoading;
+	protected int mGameRoundCounter;
+	protected int mGameRound;
+	protected int mInningType;
+	protected int mInningCounter;
+	protected bool mIsJoined;
 	public bool mNeedResponse;
 	public int mCntAlive;
 	public const int TIME_MAX_ALIVE = 1200;// 20 frame per second * minute
-	const float TIMEOUT = 10f;
+	protected const float TIMEOUT = 10f;
 
-	QuizInfo mSelectedQuiz;
+	protected QuizInfo mSelectedQuiz;
 	public bool mDetailOpened;
 	public Vector3 mLocalPosList;
 	public Vector2 mClipOffsetPanel;
 	
-	GetGameSposDetailBoardEvent mEventDetail;
+	protected GetGameSposDetailBoardEvent mEventDetail;
 	//	GetQuizEvent mEventPreQuiz;
-	GetQuizEvent mEventProgQuiz;
+	protected GetQuizEvent mEventProgQuiz;
 	
 //	public List<GameObject> mQuizListItems = new List<GameObject>();
 	
@@ -51,21 +51,20 @@ public class ScriptMatchPlaying : MonoBehaviour {
 //		mGameRoundCounter = 99;
 		mInningCounter = 0;
 //		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
-//		NetMgr.JoinGame();
-//		if (UserMgr.Schedule != null) {
-//			if (UserMgr.Schedule.gameStatus == 0) {
-//				mList.transform.FindChild ("Label").gameObject.SetActive (true);
-//				//TF_Landing.GetComponent<LandingManager>().Nongame();
-//			} else {
-//				mList.transform.FindChild ("Label").gameObject.SetActive (false);
-//				//TF_Landing.GetComponent<LandingManager>().Startgame();
-//			}
-//		} else {
-//			mList.transform.FindChild ("Label").gameObject.SetActive (true);
-//		}
+		NetMgr.JoinGame();
+		if (UserMgr.Schedule != null) {
+			if (UserMgr.Schedule.gameStatus == 0) {
+				mList.transform.FindChild ("Label").gameObject.SetActive (true);
+				//TF_Landing.GetComponent<LandingManager>().Nongame();
+			} else {
+				mList.transform.FindChild ("Label").gameObject.SetActive (false);
+				//TF_Landing.GetComponent<LandingManager>().Startgame();
+			}
+		} else {
+			mList.transform.FindChild ("Label").gameObject.SetActive (true);
+		}
 		mItemDetail.SetActive(false);
 		mItemHitter.SetActive(false);
-		CompleteJoin();
 	}
 	
 	//	void OnApplicationFocus(bool focus){
@@ -96,20 +95,19 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	void SetScoreBoard()
 	{
-//		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (false);
-//		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (false);
-//		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (false);
-//
-//		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
-//		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
-//		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
+		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (false);
+		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (false);
+		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (false);
+
+		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
+		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
+		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
 	//	Debug.Log("Playing");
 		//transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetHitter ();
 
 		//Progressing
-//		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
-//		NetMgr.GetGameSposDetailBoard (mEventDetail);
-		GotDetailBoard();
+		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
+		NetMgr.GetGameSposDetailBoard (mEventDetail);
 	}
 	
 	public void GotDetailBoard()

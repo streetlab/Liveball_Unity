@@ -1,0 +1,395 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class ScriptHighlightPlaying : ScriptMatchPlaying {
+
+	public GameObject mListNoGame;
+	
+	public void Start () {
+		//		UtilMgr.ResizeList (mList);
+		mFirstLoading = true;
+//		QuizMgr.IsBettingOpended = false;
+//		QuizMgr.SequenceQuiz = 0;
+		//		mPosGuide = 0f;
+		mPreGame = true;
+//		mGameRoundCounter = 99;
+		mInningCounter = 0;
+//		NetMgr.JoinGame (new JoinGameEvent (new EventDelegate (this, "CompleteJoin")));
+//		NetMgr.JoinGame();
+//		if (UserMgr.Schedule != null) {
+//			if (UserMgr.Schedule.gameStatus == 0) {
+//				mList.transform.FindChild ("Label").gameObject.SetActive (true);
+//				//TF_Landing.GetComponent<LandingManager>().Nongame();
+//			} else {
+//				mList.transform.FindChild ("Label").gameObject.SetActive (false);
+//				//TF_Landing.GetComponent<LandingManager>().Startgame();
+//			}
+//		} else {
+//			mList.transform.FindChild ("Label").gameObject.SetActive (true);
+//		}
+		mItemDetail.SetActive(false);
+		mItemHitter.SetActive(false);
+		mListNoGame.SetActive(false);
+		transform.parent.FindChild("Waiting").gameObject.SetActive(true);
+	}
+
+	public void Init(string teamCode){
+		mFirstLoading = true;
+		mInningCounter = 0;
+		mPreGame = true;
+		mList.GetComponent<UIDraggablePanel2>().RemoveAll();
+		mList.SetActive(false);
+		mListNoGame.SetActive(false);
+		SetProgQuiz(teamCode);
+	}
+	
+	public void CompleteJoin()
+	{
+		Debug.Log("CompleteJoin");
+		mIsJoined = true;
+		SetScoreBoard ();
+	}
+	
+	void SetScoreBoard()
+	{
+		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (false);
+		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (false);
+		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (false);
+
+		BG_G.transform.FindChild ("Num").gameObject.SetActive (false);
+		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (false);
+		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (false);
+	//	Debug.Log("Playing");
+		//transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetHitter ();
+
+		//Progressing
+		mEventDetail = new GetGameSposDetailBoardEvent (new EventDelegate (this, "GotDetailBoard"));
+		NetMgr.GetGameSposDetailBoard (mEventDetail);
+	}
+	
+	public void GotDetailBoard()
+	{
+		InitScoreBoard (mEventDetail);
+		
+		if (mFirstLoading) {
+//			SetProgQuiz (0);
+			//			UtilMgr.ShowLoading (true);
+		}
+		
+		mTop.GetComponent<ScriptMainTop> ().SetBoardInfo ();
+	}
+	
+	public void InitScoreBoard(GetGameSposDetailBoardEvent eventDetail)
+	{
+		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (true);
+		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (true);
+		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (true);
+
+		BG_G.transform.FindChild ("Num").gameObject.SetActive (true);
+		BG_G.transform.FindChild ("TopTeam").gameObject.SetActive (true);
+		BG_G.transform.FindChild ("BotTeam").gameObject.SetActive (true);
+
+	
+		ScriptMainTop.DetailBoard = eventDetail.Response.data;
+		if (ScriptMainTop.DetailBoard.player != null) {
+			if (ScriptMainTop.DetailBoard.player.Count > 0) {
+				for(int i = 0 ; i < ScriptMainTop.DetailBoard.player.Count;i++){
+				Debug.Log ("ScriptMainTop.DetailBoard : " + ScriptMainTop.DetailBoard.player[i].playerName);
+				}
+				transform.parent.parent.FindChild ("GameObject").FindChild ("TF_Landing").GetComponent<LandingManager> ().SetPitcher ();
+
+			}
+		}
+
+		SetAwayScore (ScriptMainTop.DetailBoard.awayScore);
+		SetHomeScore (ScriptMainTop.DetailBoard.homeScore);
+		SetAwayRHEB (ScriptMainTop.DetailBoard.infoBoard[0]);
+		SetHomeRHEB (ScriptMainTop.DetailBoard.infoBoard[1]);
+		
+		mTop.transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
+	}
+	
+	void SetProgQuiz(string teamCode)
+	{
+//		Debug.Log ("quizListSeq : " + quizListSeq);
+		mEventProgQuiz = new GetQuizEvent (new EventDelegate (this, "InitQuizFirst"));
+		NetMgr.GetTeamQuiz (teamCode, mEventProgQuiz);
+	}
+	
+	public void InitQuizFirst()
+	{
+		UtilMgr.DismissLoading ();
+		transform.parent.FindChild("Waiting").gameObject.SetActive(false);
+		if (mEventProgQuiz.Response.data != null) {
+			if(mEventProgQuiz.Response.data.quiz.Count>0){
+				UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);
+//				Debug.Log("InitQuizFirst");
+//				Debug.Log("mEventProgQuiz.Response.data.quiz[0] : " + mEventProgQuiz.Response.data.quiz[0].playerName);
+//				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
+//					SetHitter(mEventProgQuiz.Response.data);
+//				if(ScriptMainTop.LandingState==2||ScriptMainTop.LandingState==3){
+//				string TeamColor = mEventProgQuiz.Response.data.team[1].teamColor;
+//				TeamColor = TeamColor.Replace("#","");
+//					LandingManager.TeamColor = TeamColor;
+//				transform.parent.parent.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().
+//		
+//					SetTeamColor(TeamColor);
+//				}
+			} else{
+				Debug.Log("quizList size is zero");
+				ShowNoGame();
+				return;
+			}
+		} else{
+			Debug.Log("quizList data is null");
+			ShowNoGame();
+			return;
+		}
+
+		mList.SetActive(true);
+		QuizMgr.SetQuizList (mEventProgQuiz.Response.data.quiz);
+		ResetList();
+		mFirstLoading = false;
+	}
+
+	void ShowNoGame(){
+		mListNoGame.SetActive(true);
+		mListNoGame.GetComponent<UIScrollView>().ResetPosition();
+	}
+
+	public void SetList(QuizInfo quiz){
+		mSelectedQuiz = quiz;
+		mList.GetComponent<UIDraggablePanel2>().Init(1, delegate(UIListItem item, int index){
+		
+			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
+			sItem.Init (this, mSelectedQuiz, transform.FindChild ("ItemDetail").gameObject);
+			item.Target.transform.FindChild("Round").gameObject.SetActive(false);
+		});
+		mList.GetComponent<UIDraggablePanel2>().ResetPosition();
+	}
+
+	public void ResetList(){
+		ResetList(Vector3.zero, Vector2.zero);
+	}
+
+	public void ResetList(Vector3 vector3, Vector2 vector2){		
+		Debug.Log("list Cnt : "+QuizMgr.QuizList.Count);
+		mGameRoundCounter = 99;
+		foreach(QuizInfo quizInfo in QuizMgr.QuizList){
+			quizInfo.mShowInningFlag = false;
+			if(quizInfo.typeCode.Contains("_QZD_")){
+				if(mGameRoundCounter > quizInfo.gameRound){
+					if(mGameRoundCounter < 99){
+					} else{
+						mGameRound = quizInfo.gameRound;
+						mInningType = quizInfo.inningType;
+					}					
+					mGameRoundCounter = quizInfo.gameRound;
+					mInningCounter = quizInfo.inningType;
+					quizInfo.mShowInningFlag = true;
+				} else if(mInningCounter != quizInfo.inningType){
+					mInningCounter = quizInfo.inningType;
+					quizInfo.mShowInningFlag = true;
+				}
+			}
+		}
+		ScriptMainTop.MyPoint = 0;
+		Debug.Log ("MyPoint Reset");
+		QuizRespInfo resp = null;
+		for(int i = 0; i < mEventProgQuiz.Response.data.quiz.Count; i++){
+			QuizInfo quizInfo2 = mEventProgQuiz.Response.data.quiz[i];
+			for(int a = 0; a < quizInfo2.resp.Count;a++){
+
+				resp = quizInfo2.resp[a];
+				if(resp.respValue.Equals(quizInfo2.quizValue)){
+					ScriptMainTop.MyPoint+=resp.expectRewardPoint;
+					break;
+				}
+			}
+		
+		}
+	
+//		for (int i=0; i<mEventProgQuiz.Response.data.quiz.Count; i++) {
+//			Debug.Log ("mEventProgQuiz.Response.data.quiz [0].gameRound  : "+mEventProgQuiz.Response.data.quiz [i].gameRound);
+//		}
+
+	
+		Debug.Log ("mEventProgQuiz.Response.data.quiz : "+mEventProgQuiz.Response.data.quiz.Count);
+//		if (mEventProgQuiz.Response.data.quiz.Count <= 0) {
+//			TF_Landing.GetComponent<LandingManager>().GetLineUp();
+//		}
+		Debug.Log ("UtilMgr.gameround is " + UtilMgr.gameround);
+		if (UtilMgr.gameround == 0&&mEventProgQuiz.Response.data.quiz!=null) {
+			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
+				if(mEventProgQuiz.Response.data.quiz.Count>0){
+	//					transform.root.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label").gameObject.SetActive(false);
+	//				Debug.Log("(mEventProgQuiz.Response.data.quiz [0].gameRound) : " + (mEventProgQuiz.Response.data.quiz [0].gameRound));
+	//				Debug.Log("(mEventProgQuiz.Response.data.quiz [0].inningType) : " + (mEventProgQuiz.Response.data.quiz [0].inningType));
+					UtilMgr.gameround = (((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1));
+					if (UtilMgr.gameround > 1) {
+
+						if (UserMgr.Schedule.myEntryFee != null) {
+							if (int.Parse (UserMgr.Schedule.myEntryFee) > 0) {
+								TF_Landing.GetComponent<LandingManager> ().GetRank ();
+							}
+						}
+					}
+				}
+			}
+		} else {
+			if(mEventProgQuiz.Response.data.quiz [0].gameRound!=null){
+			if (UtilMgr.gameround < ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1)&&UtilMgr.gameround>0) {
+				TF_Landing.GetComponent<LandingManager> ().GetRank();
+					}
+			UtilMgr.gameround = ((mEventProgQuiz.Response.data.quiz [0].gameRound) * 2) + (mEventProgQuiz.Response.data.quiz [0].inningType - 1);
+			}
+		}
+		mList.GetComponent<UIDraggablePanel2> ().Init (QuizMgr.QuizList.Count,
+		                                               delegate(UIListItem item, int index) {
+		
+			ScriptItemHitterHighlight sItem = item.Target.GetComponent<ScriptItemHitterHighlight>();
+			QuizInfo quizInfo = mEventProgQuiz.Response.data.quiz[index];
+		
+			sItem.Init (this, quizInfo, transform.FindChild ("ItemDetail").gameObject);				
+			item.Target.transform.FindChild("Round").gameObject.SetActive(false);
+			if(quizInfo.mShowInningFlag){
+				item.Target.transform.FindChild("Round").gameObject.SetActive(true);
+				item.Target.transform.FindChild("Round").FindChild("LblRound")
+					.GetComponent<UILabel>().text = ""+quizInfo.gameRound;
+				if(quizInfo.inningType == 0){
+					item.Target.transform.FindChild("Round").FindChild("SprArrow")
+						.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Nothing;
+				} else{
+					item.Target.transform.FindChild("Round").FindChild("SprArrow")
+						.GetComponent<UISprite>().flip = UIBasicSprite.Flip.Vertically;
+				}
+			}
+			
+		});
+		mList.GetComponent<UIDraggablePanel2> ().ResetPosition();
+//		if(vector3 == Vector3.zero){
+//			Debug.Log("no vector");
+//		} else{
+//			Debug.Log("vector : "+vector3.y);
+//			mList.transform.localPosition = vector3;
+//			mList.GetComponent<UIPanel>().clipOffset = vector2;
+//		}
+	}
+	
+	public void AddQuizList(QuizInfo quizInfo)
+	{	
+		Debug.Log("AddQuizList");		
+		QuizMgr.AddQuizList (quizInfo);
+		ResetList();
+		
+		mGameRound = quizInfo.gameRound;
+		mInningType = quizInfo.inningType;
+	}
+	
+//	void RepositionItems(float size)
+//	{
+//		foreach(GameObject tmp in mQuizListItems){
+//			Vector3 vector = tmp.transform.localPosition;
+//			vector.y -= size;
+//			tmp.transform.localPosition = vector;
+//			if(tmp.GetComponent<ScriptItemHitterHighlight>() != null)		
+//				tmp.GetComponent<ScriptItemHitterHighlight>().mPositionY += size;
+//		}
+//	}
+	
+	void SetAwayScore(List<ScoreInfo> listScore)
+	{
+		Transform team = mScoreBoard.transform.FindChild ("TeamTop");
+		team.FindChild ("LblName").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
+		
+		string strRnd = "LblRnd";
+		for(int i = 0; i < listScore.Count; i++)
+		{
+			ScoreInfo info = listScore[i];
+			team.FindChild (strRnd + info.playRound).GetComponent<UILabel> ().text = info.score;
+		}
+
+
+		team = BG_G.transform.FindChild ("TopTeam");
+		team.FindChild ("Name").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
+		
+		//string strRnd = "LblRnd";
+		for(int i = 0; i < listScore.Count; i++)
+		{
+			ScoreInfo info = listScore[i];
+			team.FindChild("ScoreBar").FindChild (info.playRound.ToString()).GetComponent<UILabel> ().text = info.score;
+		}
+	}
+	
+	void SetHomeScore(List<ScoreInfo> listScore)
+	{
+		Transform team = mScoreBoard.transform.FindChild ("TeamBottom");
+		team.FindChild ("LblName").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+		
+		string strRnd = "LblRnd";
+		for(int i = 0; i < listScore.Count; i++)
+		{
+			ScoreInfo info = listScore[i];
+			team.FindChild (strRnd + info.playRound).GetComponent<UILabel> ().text = info.score;
+		}
+
+
+		team = BG_G.transform.FindChild ("BotTeam");
+		team.FindChild ("Name").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+		
+		//string strRnd = "LblRnd";
+		for(int i = 0; i < listScore.Count; i++)
+		{
+			ScoreInfo info = listScore[i];
+			team.FindChild("ScoreBar").FindChild (info.playRound.ToString()).GetComponent<UILabel> ().text = info.score;
+		}
+	}
+	
+	void SetAwayRHEB(HEBInfo info)
+	{
+		Transform team = mScoreBoard.transform.FindChild ("TeamTop");
+		team.FindChild ("LblR").GetComponent<UILabel> ().text = info.score;
+		team.FindChild ("LblH").GetComponent<UILabel> ().text = info.countOfH;
+		team.FindChild ("LblE").GetComponent<UILabel> ().text = info.countOfE;
+		team.FindChild ("LblB").GetComponent<UILabel> ().text = info.countOfB;
+		UserMgr.Schedule.extend[0].score = int.Parse(info.score);
+	}
+	
+	void SetHomeRHEB(HEBInfo info)
+	{
+		Transform team = mScoreBoard.transform.FindChild ("TeamBottom");
+		team.FindChild ("LblR").GetComponent<UILabel> ().text = info.score;
+		team.FindChild ("LblH").GetComponent<UILabel> ().text = info.countOfH;
+		team.FindChild ("LblE").GetComponent<UILabel> ().text = info.countOfE;
+		team.FindChild ("LblB").GetComponent<UILabel> ().text = info.countOfB;
+		UserMgr.Schedule.extend[1].score = int.Parse(info.score);
+	}
+
+	void Update(){
+		if(mIsJoined){
+			if(mCntAlive++ >= TIME_MAX_ALIVE){
+				mCntAlive = 0;
+				NetMgr.SendSocketMsg(new AliveRequest().ToRequestString());
+				mNeedResponse = true;
+				StartCoroutine("WaitingForResponse");
+			}
+		}
+	}
+
+	IEnumerator WaitingForResponse()
+	{		
+		float timeSum = 0f;
+
+		while(mNeedResponse && 
+			      timeSum < TIMEOUT) { 
+				timeSum += Time.deltaTime; 
+				yield return 0; 
+		}
+		
+		if(mNeedResponse)
+		{
+			NetMgr.JoinGame();
+		}
+	}
+}

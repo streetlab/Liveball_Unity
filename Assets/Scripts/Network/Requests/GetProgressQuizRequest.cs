@@ -8,6 +8,7 @@ public class GetProgressQuizRequest : BaseRequest {
 	{
 		Add ("memSeq", UserMgr.UserInfo.memSeq);
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
+		Add ("teamCode", "");
 		Add ("quizListSeq", quizListSeq);
 
 //		mParams = JsonFx.Json.JsonWriter.Serialize (this);

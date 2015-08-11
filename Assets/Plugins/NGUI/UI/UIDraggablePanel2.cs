@@ -348,7 +348,6 @@ public class UIDraggablePanel2 : UIScrollView
             mLastTemplate = lastTemplate.transform;
             mLastTemplate.name = "last rect";
         }
-
 		float firstX = panel.baseClipRegion.x - ((panel.baseClipRegion.z - CellWidth) * 0.5f);
 		float firstY = panel.baseClipRegion.y + ((panel.baseClipRegion.w - CellHeight + panel.clipSoftness.y) * 0.5f);
 		if( Arrangement == EArrangement.Vertical )

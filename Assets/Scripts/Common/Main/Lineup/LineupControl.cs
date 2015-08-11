@@ -30,6 +30,7 @@ public class LineupControl : MonoBehaviour {
 	WWW www;
 	void Start(){
 //		Reset ();
+		transform.FindChild("Waiting").gameObject.SetActive(true);
 	}
 	public void Reset(){
 		T1.GetComponent<UIButton> ().isEnabled = false;
@@ -95,6 +96,7 @@ public class LineupControl : MonoBehaviour {
 	}
 	
 	void setarrray(){
+		transform.FindChild("Waiting").gameObject.SetActive(false);
 		gameObject.SetActive(true);
 		
 		UserMgr.AwayLineup = mlineupEvent.Response.data;
@@ -106,7 +108,7 @@ public class LineupControl : MonoBehaviour {
 		S = ScrollView.transform.GetChild (0).GetChild (0).FindChild ("S").gameObject;
 		onepit = true;
 		if (UserMgr.AwayLineup.lineup.Count > 0) {
-//			transform.FindChild ("non").gameObject.SetActive(false);
+			transform.FindChild ("non").gameObject.SetActive(false);
 			transform.FindChild ("Scroll View").gameObject.SetActive(true);
 			transform.FindChild ("Scroll View 1").gameObject.SetActive(true);
 //			for (int i = 0; i<S.transform.childCount; i++) {
@@ -257,7 +259,7 @@ public class LineupControl : MonoBehaviour {
 			transform.FindChild ("Scroll View 1").gameObject.SetActive (false);
 			P.gameObject.SetActive (false);
 		} else {
-//			transform.FindChild ("non").gameObject.SetActive(true);
+			transform.FindChild ("non").gameObject.SetActive(true);
 			transform.FindChild ("Scroll View").gameObject.SetActive(false);
 			transform.FindChild ("Scroll View 1").gameObject.SetActive(false);
 		}
