@@ -135,8 +135,8 @@ public class ScriptTitle : MonoBehaviour {
 			transform.FindChild ("SprLogo").FindChild("LblTest").GetComponent<UILabel>().text =
 				"Test Ver. " +
 
-				#if(UNITY_EDITOR)
-				UnityEditor.PlayerSettings.bundleVersion;
+			#if(UNITY_EDITOR)
+			UnityEditor.PlayerSettings.bundleVersion;
 			#elif(UNITY_ANDROID)
 			Application.version;
 			#else
@@ -925,16 +925,14 @@ public class ScriptTitle : MonoBehaviour {
 				//AutoFade.LoadLevel ("SceneMain 1");
 				AutoFade.LoadLevel ("SceneLobby");
 			} else{
-				//  AutoFade.LoadLevel ("SceneNotice");
-				AutoFade.LoadLevel ("SceneLobby");
-				
-				//    AutoFade.LoadLevel ("SceneMain 1");
+				AutoFade.LoadLevel ("SceneNotice");
+//				AutoFade.LoadLevel ("SceneLobby");
 			}
 		}
 		else{
 			//AutoFade.LoadLevel ("SceneMain 1");
-			AutoFade.LoadLevel ("SceneLobby");
-			//AutoFade.LoadLevel("SceneTutorial");
+//			AutoFade.LoadLevel ("SceneLobby");
+			AutoFade.LoadLevel("SceneTutorial");
 		}
 	}
 	public void OpenCert(){

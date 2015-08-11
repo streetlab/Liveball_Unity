@@ -20,7 +20,7 @@ public class ScriptNoticeTop : MonoBehaviour {
 			if(cnt < 1){
 				DialogueMgr.ShowDialogue("공지사항", "공지사항이 없습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, DialogHandler);
 			} else
-				AutoFade.LoadLevel("SceneMain");
+				AutoFade.LoadLevel("SceneLobby");
 		} else{
 			AutoFade.LoadLevel("SceneEvents");
 		}

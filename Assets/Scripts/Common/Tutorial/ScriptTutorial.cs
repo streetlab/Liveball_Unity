@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class ScriptTutorial : MonoBehaviour {	
-	const string LOVE_URL = "http://service.liveball.kr/lb_tutorial.html";
+//	const string LOVE_URL = "http://service.liveball.kr/lb_tutorial.html";
+	const string LOVE_URL = "http://liveball.friize.com/tutorial";
 	
 	private UniWebView mWebView;
 	enum STATE_WEBVIEW{
@@ -100,6 +101,15 @@ public class ScriptTutorial : MonoBehaviour {
 	}	
 	
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
+		if(loadingUrl.Equals("http://liveball.friize.com/webview/close")){
+			string value = PlayerPrefs.GetString(Constants.PrefNotice);
+			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
+				AutoFade.LoadLevel("SceneLobby");
+			} else{
+				AutoFade.LoadLevel("SceneNotice");
+			}
+		}
+
 		UtilMgr.ShowLoading (true);
 	}
 	
@@ -130,7 +140,8 @@ public class ScriptTutorial : MonoBehaviour {
 		float myRatio = Screen.width / 720f;
 		
 		//		if(Screen.height > Constants.SCREEN_HEIGHT_ORIGINAL){		
-		return new UniWebViewEdgeInsets((int)(Constants.WEBVIEW_GAB_TOP*myRatio),0,0,0);
+//		return new UniWebViewEdgeInsets((int)(Constants.WEBVIEW_GAB_TOP*myRatio),0,0,0);
+		return new UniWebViewEdgeInsets(0,0,0,0);
 		//		} else {
 		//			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
 		//		}
