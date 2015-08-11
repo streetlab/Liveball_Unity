@@ -14,6 +14,8 @@ public class JoinGameSocketRequest : BaseSocketRequest {
 		Add ("imageName", "");
 //		Add ("gameSeq", UserMgr.GameSeq);
 		Add ("gameSeq", UserMgr.Schedule.gameSeq);
+		Debug.Log ("JoinGameSocketRequest");
+		Debug.Log (UserMgr.Schedule.gameSeq);
 		mDic = this;
 	}
 }

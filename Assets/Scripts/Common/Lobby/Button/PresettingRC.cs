@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PresettingRC : MonoBehaviour {
-	string [] Value = {"1루","2,3루","홈런","땅볼","뜬공","삼진"};
+	string [] Value = {"1루타","2,3루타","홈런","땅볼","뜬공","삼진"};
 	PresetAddEvent presetaddevent;
 	public void Button(){
 		if (this.name == "Close") {
@@ -129,7 +129,8 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 				                                                                   <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = true;
 
 			}
-	}
+			transform.root.FindChild ("Scroll").FindChild("Main").FindChild ("Gift").gameObject.SetActive (true);
+		}
 	
 }
 
@@ -177,7 +178,7 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 	}
 	PresetListEvent presetListEvent;
 	void PresetUpdate(){
-		Debug.Log ("PresetUpdate");
+		//Debug.Log ("PresetUpdate");
 
 
 		presetListEvent = new PresetListEvent(new EventDelegate(this, "GetPresetList"));

@@ -573,7 +573,12 @@ public class NetMgr : MonoBehaviour{
 		//        Instance.webAPIProcessEvent (new ExitGameRequest (), baseEvent);
 		Instance.socketExitEvent(baseEvent);
 	}
-	
+
+	public static void ProcStoreGacha(long product,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new procStoreGachaRequest (product), baseEvent);
+	}
+
 	public static void JoinGame()
 	{
 		//        Instance.webAPIProcessEvent (new JoinGameRequest (), baseEvent);

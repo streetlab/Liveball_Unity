@@ -13,6 +13,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	public GameObject mTop;
 	public GameObject mItemDetail;
 	public GameObject TF_Landing;
+	public GameObject GameInfo;
 	
 	protected float mPreItemSize;
 	protected float mPosGuide;
@@ -341,13 +342,17 @@ public class ScriptMatchPlaying : MonoBehaviour {
 
 		team = BG_G.transform.FindChild ("TopTeam");
 		team.FindChild ("Name").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
-		
+		int Scores = 0;
 		//string strRnd = "LblRnd";
 		for(int i = 0; i < listScore.Count; i++)
 		{
 			ScoreInfo info = listScore[i];
 			team.FindChild("ScoreBar").FindChild (info.playRound.ToString()).GetComponent<UILabel> ().text = info.score;
+			Scores += int.Parse(info.score);
 		}
+
+		GameInfo.transform.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamScore").FindChild ("Label").GetComponent<UILabel> ().text
+			= Scores.ToString ();
 	}
 	
 	void SetHomeScore(List<ScoreInfo> listScore)
@@ -365,13 +370,16 @@ public class ScriptMatchPlaying : MonoBehaviour {
 
 		team = BG_G.transform.FindChild ("BotTeam");
 		team.FindChild ("Name").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
-		
+		int Scores = 0;
 		//string strRnd = "LblRnd";
 		for(int i = 0; i < listScore.Count; i++)
 		{
 			ScoreInfo info = listScore[i];
 			team.FindChild("ScoreBar").FindChild (info.playRound.ToString()).GetComponent<UILabel> ().text = info.score;
+			Scores += int.Parse(info.score);
 		}
+		GameInfo.transform.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamScore").FindChild ("Label").GetComponent<UILabel> ().text
+			= Scores.ToString ();
 	}
 	
 	void SetAwayRHEB(HEBInfo info)

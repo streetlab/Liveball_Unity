@@ -289,6 +289,11 @@ public class RightMenuCommander : MonoBehaviour {
 	void Set2(){
 		UserMgr.UserInfo.memberName = SetName;
 	}
-
+	void Update(){
+		transform.FindChild ("Top").FindChild ("Ruby").FindChild ("RubyValue").GetComponent<UILabel> ().text
+			= UtilMgr.AddsThousandsSeparator (UserMgr.UserInfo.userRuby);
+		transform.FindChild ("Top").FindChild ("Mileage").FindChild ("MileageValue").GetComponent<UILabel> ().text
+			= UtilMgr.AddsThousandsSeparator (UserMgr.UserInfo.userDiamond);
+	}
 
 }

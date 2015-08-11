@@ -63,11 +63,15 @@ public class PostgetButton : MonoBehaviour {
 		if (getCheck.Response.data.userRuby != null) {
 			UserMgr.UserInfo.userRuby = getCheck.Response.data.userRuby;}
 		//anim
+		if (transform.parent.parent.parent.parent.FindChild ("Gacha") != null) {
+			Destroy(transform.parent.parent.parent.parent.FindChild ("Gacha").gameObject);
+		}
 		GameObject Anim = transform.parent.parent.parent.parent.GetComponent<PostButton> ().GachaAnim;
 		anim = (GameObject)Instantiate (Anim,new Vector3 (0.0390625f,-0.0078125f,0),Anim.transform.localRotation);
 		anim.transform.parent = transform.parent.parent.parent.parent;
-		anim.transform.localPosition = new Vector3 (-195f, -595f, 0);
+		anim.transform.localPosition = new Vector3 (-119f,  588f, 0);
 		anim.transform.localScale = new Vector3 (100f,100f,1f);
+		anim.name = "Gacha";
 		Debug.Log ("getCheck.Response.data.gacha.itemCode" + getCheck.Response.data.gacha.itemCode);
 		switch (getCheck.Response.data.gacha.itemCode) {
 		case "ITEM_RUBY":

@@ -51,7 +51,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	bool isDragging;
 
-	void Start()
+	void Start() 
 	{
 //		transform.FindChild ("Lightning Spark").GetComponent<ScriptParticleResizer> ().ResizeRatio (0.5f);
 

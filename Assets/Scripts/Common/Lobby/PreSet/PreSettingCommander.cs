@@ -41,7 +41,10 @@ public class PreSettingCommander : MonoBehaviour {
 			transform.FindChild("Top").FindChild("Top Menu").gameObject.SetActive(false);
 			transform.FindChild("Top").FindChild("Top Menu2").FindChild("Label").GetComponent<UILabel>().text = Title;
 		}
-
+		transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 1").FindChild ("Label").GetComponent<UILabel> ().text
+			= L;
+		transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 2").FindChild ("Label").GetComponent<UILabel> ().text
+			= R; 
 	}
 	public void Ruby(string R,string M){
 		cost = "";

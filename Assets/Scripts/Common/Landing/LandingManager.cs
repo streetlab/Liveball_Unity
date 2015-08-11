@@ -10,6 +10,7 @@ public class LandingManager : MonoBehaviour {
 	public GameObject NewP;
 	public GameObject NewH;
 	public GameObject PlayerInfos;
+	public GameObject GameInfos;
 	Color S_Abled = new Color(242f/255f,242f/255f,242f/255f);
 	Color S_Disabled = new Color(217f/255f,217f/255f,217f/255f);
 	Color L_Abled = new Color(0,0,0);
@@ -282,6 +283,10 @@ public class LandingManager : MonoBehaviour {
 						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
 							FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitBB.ToString()+"%";
 
+						PlayerInfos.transform.FindChild("MidGageBar").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
+						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
+						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("OutLabel").GetComponent<UILabel>().text = (100f-(float.Parse(N[i].hitAvg)*100f)).ToString()+"% 아웃";
+						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").GetComponent<UIPanel>().clipOffset = new Vector2(float.Parse(N[i].hitAvg)*640f,0);
 						string playerInfo = N[i].playerName + "#" + N[i].playerNumber;
 						P_LPlayersName.text = playerInfo;
 						Debug.Log("playerInfo : " + playerInfo);
@@ -548,9 +553,39 @@ public class LandingManager : MonoBehaviour {
 	}
 	public bool nonstart = false;
 	
-	
-	
+	PresetDataEvent PDE;
+	IEnumerator RTRanking(){
+		while (true) {
+			PDE = new PresetDataEvent(new EventDelegate(this,"SetRanking"));
+			NetMgr.GetPresetData(UserMgr.CurrentPresetSeq,PDE);
+			yield return new WaitForSeconds (60f);
+		}
+	}
+	void SetRanking(){
+		GameObject RankGage = transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("Top").FindChild ("RankGage").FindChild("BGIn").gameObject;
+		
+		
+		
+		RankGage.transform.FindChild("BG").FindChild("Maker").localPosition = new Vector3(
+			-316+( PDE.Response.data[a].myRank/ PDE.Response.data[a].totalPreset)*632,23);
+		RankGage.transform.FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
+			-316+( PDE.Response.data[a].myRank/ PDE.Response.data[a].totalPreset)*632,-35);
+		
+		RankGage.transform.FindChild("BG").FindChild("rewordScore").GetComponent<UILabel>().text = PDE.Response.data[a].rewordScore.ToString();
+		RankGage.transform.FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2((PDE.Response.data[a].rewordCount/PDE.Response.data[a].totalPreset)*632,0);
+		
+		
+
+	}
+
+
+
 	public void Start () {
+		GameInfos.transform.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamName").FindChild ("Label")
+			.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
+		GameInfos.transform.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamName").FindChild ("Label")
+			.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
+		StartCoroutine (RTRanking());
 		transform.root.FindChild("Ranking Reward").gameObject.SetActive(false);
 		UtilMgr.gameround = 0;
 		if (UserMgr.Schedule != null) {
@@ -1126,6 +1161,46 @@ public class LandingManager : MonoBehaviour {
 	void sethitter(){
 		if (mlineupEvent.Response.data != null) {
 			if (mlineupEvent.Response.data.hit.Count > 0) {
+			
+
+
+//
+//				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + N[i].playerName;
+//				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + N[i].playerNumber;
+//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitAvg;
+//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitHr;
+//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].RBI;
+//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitBB;
+//				
+//				
+//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+//					FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitAvg;
+//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+//					FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitH.ToString()+"%";
+//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+//					FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hit2B.ToString()+"%";
+//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+//					FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitHr.ToString()+"%";
+//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+//					FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitBB.ToString()+"%";
+//				
+//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
+//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
+//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("OutLabel").GetComponent<UILabel>().text = (100f-(float.Parse(N[i].hitAvg)*100f)).ToString()+"% 아웃";
+//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").GetComponent<UIPanel>().clipOffset = new Vector2(float.Parse(N[i].hitAvg)*640f,0);
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
 				FirstLinup = true;
 				Lineup = mlineupEvent.Response.data.hit [0];
 

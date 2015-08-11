@@ -4,6 +4,7 @@ using System.Collections;
 public class Contest : MonoBehaviour {
 
 	public void button(){
+		transform.root.FindChild ("Scroll").FindChild("Main").FindChild ("Gift").gameObject.SetActive (false);
 		UserMgr.CurrentContestSeq = int.Parse(transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text);
 		transform.parent.parent.parent.FindChild ("Nomal Contest").gameObject.SetActive (false);
 		transform.parent.parent.parent.FindChild ("PreSetting").gameObject.SetActive (true);

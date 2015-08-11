@@ -16,8 +16,10 @@ public class BotMenu : MonoBehaviour {
 
 		GetComponent<UIButton>().enabled = false;
 
+		Debug.Log (GetIndex (this.name));
 		switch (GetIndex (this.name)) {
 		case 0:
+			Debug.Log("Main On");
 			mScroll.transform.FindChild("Main").gameObject.SetActive(true);
 			break;
 		case 1:
@@ -38,6 +40,7 @@ public class BotMenu : MonoBehaviour {
 
 			//Debug.Log("4");
 			PositionCheck();
+			GetComponent<UIButton>().enabled = true;
 			break;
 		case 5:
 		//	Debug.Log("NON");

@@ -70,13 +70,13 @@ public class DialogueMgr : MonoBehaviour {
 	public static void ShowExitDialogue(DialogClickHandler handler){
 //		Debug.Log("ShowExitDialogue");
 		if (Instance.mDialogueBox == null) {
-			if(Application.loadedLevelName.Equals("SceneLobby")){
+			//if(Application.loadedLevelName.Equals("SceneLobby")){
 				GameObject prefab = Resources.Load ("CommonDialogue2") as GameObject;
 				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
-			}else{
-				GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
-				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
-			}
+//			}else{
+//				GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
+//				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+//			}
 		
 		}
 
@@ -100,13 +100,13 @@ public class DialogueMgr : MonoBehaviour {
 		Instance.SetHandler(handler);
 //		Debug.Log("ShowDialogue2");
 		if (Instance.mDialogueBox == null) {
-			if(Application.loadedLevelName.Equals("SceneLobby")){
+			//if(Application.loadedLevelName.Equals("SceneLobby")){
 				GameObject prefab = Resources.Load ("CommonDialogue2") as GameObject;
 				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
-			}else{
-				GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
-				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
-			}
+//			}else{
+//				GameObject prefab = Resources.Load ("CommonDialogue") as GameObject;
+//				Instance.mDialogueBox = Instantiate (prefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
+//			}
 		}
 
 		if (IsShown) {

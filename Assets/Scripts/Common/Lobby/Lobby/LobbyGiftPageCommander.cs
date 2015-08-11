@@ -4,9 +4,5 @@ using System.Collections;
 public class LobbyGiftPageCommander : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
 
 }

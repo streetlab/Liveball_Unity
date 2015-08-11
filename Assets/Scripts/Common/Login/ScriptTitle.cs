@@ -594,10 +594,13 @@ public class ScriptTitle : MonoBehaviour {
 		NetMgr.GetGift (eventd);
 	}
 	int Count = 0;
-	
+	int count = 0;
 	bool TwoCheck = true;
 	void Getdata(){
-		Debug.Log ("In Gift");
+		count = LobbyGiftCommander.mGift.gift.Count;
+		for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+			count += LobbyGiftCommander.mGift.gift[i].detail.Count;
+		}
 		bool Check = false;
 		for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
 			Debug.Log(PlayerPrefs.GetString(i.ToString()) + " : " + LobbyGiftCommander.mGift.gift[i].image);
@@ -607,47 +610,96 @@ public class ScriptTitle : MonoBehaviour {
 				break;
 			}
 		}
-
-
-		//TwoCheck = true;
+#if UNITY_EDITOR
 		if (Check) {
 			Debug.Log ("Different, Save to Local");
 			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
-				Debug.Log("url is "+LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
-
 				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
-				//    Count = i;
-				//StartCoroutine (SaveImage (www, i));
-				StartCoroutine (SaveImage (www, i));
-
-				for(int s = 0; s<LobbyGiftCommander.mGift.gift[i].detail.Count;s++){
-
-					www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail[s].image);
-
-					StartCoroutine (SaveImage2 (www, LobbyGiftCommander.mGift.gift [i].detail[s].image));
-
+				Debug.Log(LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
+				StartCoroutine (SaveImage2 (www, LobbyGiftCommander.mGift.gift [i].image));
+				PlayerPrefs.SetString (i.ToString (), LobbyGiftCommander.mGift.gift [i].image);
+				for (int a = 0; a<LobbyGiftCommander.mGift.gift[i].detail.Count; a++) {
+					www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail [a].image);
+					Debug.Log(LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail [a].image);
+					StartCoroutine (SaveImage2 (www, LobbyGiftCommander.mGift.gift [i].detail [a].image));				
 				}
-
 			}
+	
 		} else {
 			Debug.Log ("Same, Load to Local");
 			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
-				WWW www2 = new WWW ("file://"+Application.persistentDataPath + "/"+i.ToString()+".png");
-				//    Count = i;
-				StartCoroutine (GetImage (www2,i));
+				WWW www = new WWW ("file://"+Application.dataPath + "/"+LobbyGiftCommander.mGift.gift [i].image);
+				StartCoroutine (GetImage2 (www, LobbyGiftCommander.mGift.gift [i].image));
+				PlayerPrefs.SetString (i.ToString (), LobbyGiftCommander.mGift.gift [i].image);
+				for (int a = 0; a<LobbyGiftCommander.mGift.gift[i].detail.Count; a++) {
+					www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail [a].image);
+					StartCoroutine (GetImage2 (www, LobbyGiftCommander.mGift.gift [i].detail [a].image));				
+				}
 			}
 		}
+#else
+		if (Check) {
+			Debug.Log ("Different, Save to Local");
+			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+				WWW www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].image);
+				StartCoroutine (SaveImage2 (www, LobbyGiftCommander.mGift.gift [i].image));
+				PlayerPrefs.SetString (i.ToString (), LobbyGiftCommander.mGift.gift [i].image);
+				for (int a = 0; a<LobbyGiftCommander.mGift.gift[i].detail.Count; a++) {
+					www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail [a].image);
+					StartCoroutine (SaveImage2 (www, LobbyGiftCommander.mGift.gift [i].detail [a].image));				
+				}
+			}
+			
+		} else {
+			Debug.Log ("Same, Load to Local");
+			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
+				WWW www = new WWW ("file://"+Application.persistentDataPath + "/"+LobbyGiftCommander.mGift.gift [i].image);
+				StartCoroutine (GetImage2 (www, LobbyGiftCommander.mGift.gift [i].image));
+				PlayerPrefs.SetString (i.ToString (), LobbyGiftCommander.mGift.gift [i].image);
+				for (int a = 0; a<LobbyGiftCommander.mGift.gift[i].detail.Count; a++) {
+					www = new WWW (LobbyGiftCommander.mGift.imageurl + "/" + LobbyGiftCommander.mGift.gift [i].detail [a].image);
+					StartCoroutine (GetImage2 (www, LobbyGiftCommander.mGift.gift [i].detail [a].image));				
+				}
+			}
+		}
+#endif
 		UIScrollView._CoverFlowCount = LobbyGiftCommander.mGift.gift.Count;
 	}
-	IEnumerator SaveImage(WWW www,int i)
+//	IEnumerator SaveImage(WWW www,int i)
+//	{
+//		
+//		yield return www;
+//		Texture2D tmpTex = new Texture2D (200, 200);
+//		www.LoadImageIntoTexture (tmpTex);
+//		Count++;
+//		Save (tmpTex,i);
+//		if (Count  == count&&TwoCheck) {
+//			Debug.Log("Save Finish");
+//			TwoCheck = false;
+//			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
+//			
+//			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
+//		}
+//		
+//	}
+	IEnumerator SaveImage2(WWW www,string ImageName)
 	{
 		
 		yield return www;
 		Texture2D tmpTex = new Texture2D (200, 200);
-		www.LoadImageIntoTexture (tmpTex);
+		Debug.Log ("ImageName : " + ImageName);
+		if (ImageName != "") {
+			www.LoadImageIntoTexture (tmpTex);
+		}
 		Count++;
-		Save (tmpTex,i);
-		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+	try{
+
+			Save2 (tmpTex,ImageName);
+	}catch{
+		Debug.Log("Same!!!");
+	}
+	
+	if (Count == count&&TwoCheck) {
 			Debug.Log("Save Finish");
 			TwoCheck = false;
 			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
@@ -656,32 +708,41 @@ public class ScriptTitle : MonoBehaviour {
 		}
 		
 	}
-	IEnumerator SaveImage2(WWW www,string i)
-	{
-		
-		yield return www;
-		Texture2D tmpTex = new Texture2D (200, 200);
-		www.LoadImageIntoTexture (tmpTex);
-		Count++;
-		Save2 (tmpTex,i);
-		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
-			Debug.Log("Save Finish");
-			TwoCheck = false;
-			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
-			
-			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
-		}
-		
-	}
-	IEnumerator GetImage(WWW www,int i)
+//	IEnumerator GetImage(WWW www,int i)
+//	{
+//		
+//		yield return www;
+//		Texture2D tmpTex = new Texture2D (0, 0);
+//		www.LoadImageIntoTexture (tmpTex);
+//		Count++;
+//		LobbyGiftCommander.mGift.image.Add (i,tmpTex);
+//		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+//			Debug.Log("Load Finish");
+//			TwoCheck = false;
+//			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
+//			
+//			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
+//		}
+//	}
+	IEnumerator GetImage2(WWW www,string Image)
 	{
 		
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
-		www.LoadImageIntoTexture (tmpTex);
+		if (Image != "") {
+			www.LoadImageIntoTexture (tmpTex);
+		}
 		Count++;
-		LobbyGiftCommander.mGift.image.Add (i,tmpTex);
-		if (Count  == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
+		try{
+
+		LobbyGiftCommander.mGift.Textures.Add (Image,tmpTex);
+		
+		}catch{
+
+			//Debug.Log("Same Image");
+
+		}
+		if (Count == LobbyGiftCommander.mGift.gift.Count&&TwoCheck) {
 			Debug.Log("Load Finish");
 			TwoCheck = false;
 			mProfileEvent = new GetProfileEvent (new EventDelegate (this, "GotProfile"));
@@ -689,31 +750,41 @@ public class ScriptTitle : MonoBehaviour {
 			NetMgr.GetProfile (mLoginInfo.memSeq, mProfileEvent);
 		}
 	}
+//	public void Save(Texture2D t,int i) {
+//		
+//		LobbyGiftCommander.mGift.image.Add (i,t);
+//		PlayerPrefs.SetString (i.ToString(),LobbyGiftCommander.mGift.gift[i].image);
+//		byte[] bytes = t.EncodeToPNG();
+//		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+i.ToString()+".png");
+//		
+//		
+//		File.WriteAllBytes(Application.persistentDataPath + "/"+i.ToString()+".png", bytes);
+//		
+//		Debug.Log ("End Save");
+//		
+//		
+//	}    
+	public void Save2(Texture2D t,string ImageName) {
 	
-	public void Save(Texture2D t,int i) {
+		//	Debug.Log("Image Name : "+ImageName);
+			LobbyGiftCommander.mGift.Textures.Add (ImageName,t);
 		
-		LobbyGiftCommander.mGift.image.Add (i,t);
-		PlayerPrefs.SetString (i.ToString(),LobbyGiftCommander.mGift.gift[i].image);
+		//Debug.Log ("ImageName : " + ImageName);
 		byte[] bytes = t.EncodeToPNG();
-		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+i.ToString()+".png");
+
 		
+#if UNITY_EDITOR
+
+
+		Debug.Log ("Start Save : " + Application.dataPath + "/"+ImageName);
+		File.WriteAllBytes(Application.dataPath + "/"+ImageName, bytes);
+
+#else
+		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+ImageName);
+		File.WriteAllBytes(Application.persistentDataPath + "/"+ImageName, bytes);
 		
-		File.WriteAllBytes(Application.persistentDataPath + "/"+i.ToString()+".png", bytes);
-		
-		Debug.Log ("End Save");
-		
-		
-	}    
-	public void Save2(Texture2D t,string i) {
-		
-		LobbyGiftCommander.mGift.Textures.Add (i,t);
-		PlayerPrefs.SetString (i,i);
-		byte[] bytes = t.EncodeToPNG();
-		Debug.Log ("Start Save : " + Application.persistentDataPath + "/"+i.ToString()+".png");
-		
-		
-		File.WriteAllBytes(Application.persistentDataPath + "/"+i.ToString()+".png", bytes);
-		
+#endif
+
 		Debug.Log ("End Save");
 		
 		

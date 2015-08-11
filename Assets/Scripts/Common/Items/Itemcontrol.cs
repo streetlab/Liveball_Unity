@@ -341,8 +341,11 @@ public class Itemcontrol : MonoBehaviour {
 		UserMgr.UserInfo.userRuby = mProfileEvent.Response.data.userRuby;
 		UserMgr.UserInfo.userDiamond = mProfileEvent.Response.data.userDiamond;
 		UserMgr.UserMailCount += 1;
-		transform.root.FindChild ("GameObject").FindChild ("Top").FindChild("Panel").FindChild ("BtnPost").GetComponent<PostButton> ().YellowOn ();
-		//
+//		if (transform.root.FindChild ("GameObject").FindChild ("Top").FindChild ("Panel").FindChild ("BtnPost") != null) {
+//			transform.root.FindChild ("GameObject").FindChild ("Top").FindChild ("Panel").FindChild ("BtnPost").GetComponent<PostButton> ().YellowOn ();
+//		} else {
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("BtnPost").GetComponent<PostButton> ().YellowOn ();
+	//	}
 		DialogueMgr.ShowDialogue ("구매 성공", "["+Sgold+"] 구매 완료.\n[우편함]을 확인해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 	}
 

@@ -445,7 +445,7 @@ return a;
 	}
 	IEnumerator Resets(){
 		while (true) {
-			yield return new WaitForSeconds (5f);
+			yield return new WaitForSeconds (60f);
 			Reset();
 		}
 	}

@@ -6,7 +6,7 @@ public class LobbyGiftCommander : MonoBehaviour {
 	//static GiftListResponse _mGift;
 
 	public static GiftListResponse mGift ;
-
+	//public static List<GiftListResponse> mGifts ;
 //	void Awake(){
 //		if (mGift != null) {
 //			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount =
@@ -23,9 +23,12 @@ public class LobbyGiftCommander : MonoBehaviour {
 
 			for(int i = 0; i<mGift.gift.Count;i++){
 				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
-					mGift.image[i];
+					mGift.Textures[mGift.gift[i].image];
 				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("openurl").GetComponent<UILabel>().text = 
-					mGift.gift[i].openurl;
+					mGift.gift[i].image;
+
+				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("product").GetComponent<UILabel>().text = 
+					mGift.gift[i].product;
 
 			}
 
@@ -57,15 +60,15 @@ public class LobbyGiftCommander : MonoBehaviour {
 			}
 		}
 
-		Dictionary<int,Texture2D> _image = new Dictionary<int,Texture2D>();
-		public Dictionary<int,Texture2D> image{
-			get {
-				return _image;
-			}
-			set {
-				_image = value;
-			}
-		}
+//		Dictionary<int,Texture2D> _image = new Dictionary<int,Texture2D>();
+//		public Dictionary<int,Texture2D> image{
+//			get {
+//				return _image;
+//			}
+//			set {
+//				_image = value;
+//			}
+//		}
 
 		Dictionary<string,Texture2D> _Textures = new Dictionary<string,Texture2D>();
 		public Dictionary<string,Texture2D> Textures{
@@ -90,37 +93,27 @@ public class LobbyGiftCommander : MonoBehaviour {
 				_image = value;
 			}
 		}
-		string _start;
+		string _mileage;
 		
-		public string start {
+		public string mileage {
 			get {
-				return _start;
+				return _mileage;
 			}
 			set {
-				_start = value;
+				_mileage = value;
 			}
 		}
-		string _end;
+
+		string _product;
 		
-		public string end {
+		public string product {
 			get {
-				return _end;
+				return _product;
 			}
 			set {
-				_end = value;
+				_product = value;
 			}
 		}
-		string _openurl;
-		
-		public string openurl {
-			get {
-				return _openurl;
-			}
-			set {
-				_openurl = value;
-			}
-		}
-	
 		string _onoff;
 		
 		public string onoff {
