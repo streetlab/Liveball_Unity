@@ -185,6 +185,18 @@ public class PresetContestCommander : MonoBehaviour {
 						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").GetComponent<UILabel>().text = List [SeqList [i] [a]].rewordScore.ToString();
 						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").localPosition = new Vector3(-316+(List [SeqList [i] [a]].rewordCount/List [SeqList [i] [a]].totalPreset)*632,-35);
 						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("Maker").localPosition = new Vector3(-316+(List [SeqList [i] [a]].myRank/List [SeqList [i] [a]].totalPreset)*632,23);
+
+						
+						Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
+						Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
+						if(List [SeqList [i] [a]].guaranteed == 1){
+							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+						}
+//						if(List [SeqList [i] [a]].multiEntry > 1){
+//							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+//						}
+
+
 					}
 				}
 			}

@@ -14,7 +14,7 @@ public class UserMgr : MonoBehaviour {
 
 	List<ContestListInfo> _contestListInfo;
 	List<PresetListInfo> _presetListInfo;
-	List<ContestListInfo> _historyListInfo;
+	List<PresetListInfo> _historyListInfo;
 	public static int CurrentContestSeq;
 	public static int CurrentPresetSeq;
 	public static int GameSeq;
@@ -89,7 +89,7 @@ public class UserMgr : MonoBehaviour {
 		get{return Instance._presetListInfo;}
 		set{Instance._presetListInfo = value;}
 	}
-	public static List<ContestListInfo> HistoryList
+	public static List<PresetListInfo> HistoryList
 	{
 		get{return Instance._historyListInfo;}
 		set{Instance._historyListInfo = value;}

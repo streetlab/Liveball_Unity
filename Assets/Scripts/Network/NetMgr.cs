@@ -412,7 +412,11 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetContestRanking(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new ContestRankingeRequest (), baseEvent);
+		Instance.webAPIProcessEvent (new ContestRankingeRequest (0), baseEvent);
+	}
+	public static void GetHistoryContestRanking(int GameSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ContestRankingeRequest (GameSeq), baseEvent);
 	}
 	
 	public static void GetContestData(BaseEvent baseEvent)

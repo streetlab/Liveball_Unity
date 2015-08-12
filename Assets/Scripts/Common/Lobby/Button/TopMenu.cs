@@ -62,10 +62,17 @@ public class TopMenu : MonoBehaviour {
 
 			}else if(LobbyMainCommander.MenuStatus == 3){
 
-				transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Gift").gameObject.SetActive(false);
-				transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
-				transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(false);
-				transform.root.FindChild("Scroll").FindChild ("Main").FindChild("History Contest").gameObject.SetActive(true);
+
+				if(UserMgr.UserInfo.memSeq!=null){
+					HistoryEvent = new HistoryListEvent(new EventDelegate(this, "GetHistoryList"));
+					NetMgr.GetHistoryList(HistoryEvent);
+				}else{
+					transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Gift").gameObject.SetActive(false);
+					transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
+					transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(false);
+					transform.root.FindChild("Scroll").FindChild ("Main").FindChild("History Contest").gameObject.SetActive(true);
+				}
+
 
 
 
@@ -98,6 +105,20 @@ public class TopMenu : MonoBehaviour {
 		transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 	}
 
+	void GetHistoryList(){
+		List<PresetListInfo> historylist;
+		historylist = HistoryEvent.Response.data;
+	
+		//Load PresetList
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild("History Contest").GetComponent<HistoryContestCommander> ().CreatItem (historylist);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(false);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("History Contest").gameObject.SetActive(true);
+	}
+
+
+
+
 	void GetPresetList(){
 		List<PresetListInfo> presetlist;
 		presetlist = presetListEvent.Response.data;
@@ -115,5 +136,6 @@ public class TopMenu : MonoBehaviour {
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem (presetlist);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(true);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("History Contest").gameObject.SetActive(false);
 	}
 }

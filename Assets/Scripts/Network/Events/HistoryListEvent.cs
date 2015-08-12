@@ -12,7 +12,7 @@ public class HistoryListEvent : BaseEvent {
 
 	public void InitResponse(string data)
 	{
-		response = Newtonsoft.Json.JsonConvert.DeserializeObject<ContestListResponse>(data);
+		response = Newtonsoft.Json.JsonConvert.DeserializeObject<PresetListResponse>(data);
 
 		if (checkError ())
 			return;
@@ -20,9 +20,9 @@ public class HistoryListEvent : BaseEvent {
 		eventDelegate.Execute ();
 	}
 
-	public ContestListResponse Response
+	public PresetListResponse Response
 	{
-		get{ return response as ContestListResponse;}
+		get{ return response as PresetListResponse;}
 	}
 
 }

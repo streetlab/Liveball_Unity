@@ -1164,34 +1164,34 @@ public class LandingManager : MonoBehaviour {
 			
 
 
-//
-//				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + N[i].playerName;
-//				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + N[i].playerNumber;
-//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitAvg;
-//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitHr;
-//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].RBI;
-//				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitBB;
-//				
-//				
-//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
-//					FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitAvg;
-//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
-//					FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitH.ToString()+"%";
-//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
-//					FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hit2B.ToString()+"%";
-//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
-//					FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitHr.ToString()+"%";
-//				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
-//					FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitBB.ToString()+"%";
-//				
-//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
-//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
-//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("OutLabel").GetComponent<UILabel>().text = (100f-(float.Parse(N[i].hitAvg)*100f)).ToString()+"% 아웃";
-//				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").GetComponent<UIPanel>().clipOffset = new Vector2(float.Parse(N[i].hitAvg)*640f,0);
-//
-//
-//
-//
+
+				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].playerName;
+				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].playerNumber;
+				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].hitAvg;
+				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" +mlineupEvent.Response.data.hit [0].hitHr;
+				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].RBI;
+				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].hitBB;
+				
+				
+				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+					FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.hit [0].hitAvg;
+				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+					FindChild("Bot 1").FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.hit [0].hitH.ToString()+"%";
+				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+					FindChild("Bot 2").FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.hit [0].hit2B.ToString()+"%";
+				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+					FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.hit [0].hitHr.ToString()+"%";
+				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
+					FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.hit [0].hitBB.ToString()+"%";
+				
+				PlayerInfos.transform.FindChild("MidGageBar").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)*100f).ToString()+"% 안타";
+				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)*100f).ToString()+"% 안타";
+				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("OutLabel").GetComponent<UILabel>().text = (100f-(float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)*100f)).ToString()+"% 아웃";
+				PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").GetComponent<UIPanel>().clipOffset = new Vector2(float.Parse(mlineupEvent.Response.data.hit [0].hitAvg)*640f,0);
+
+
+
+
 
 
 

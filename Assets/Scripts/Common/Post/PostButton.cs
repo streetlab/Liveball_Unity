@@ -59,6 +59,8 @@ public class PostButton : MonoBehaviour {
 		}
 	}
 	void Setdata(){
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
+
 		transform.FindChild ("TF_Post").gameObject.SetActive (true);
 		transform.FindChild ("TF_Post").FindChild ("NonPost").gameObject.SetActive (true);
 

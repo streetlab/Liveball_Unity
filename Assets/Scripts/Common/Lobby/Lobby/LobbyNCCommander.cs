@@ -74,48 +74,7 @@ public class LobbyNCCommander : MonoBehaviour {
 					= UserMgr.HistoryList.Count.ToString();
 			}
 			
-			List = UserMgr.HistoryList;
-			Debug.Log(List.Count);
-			for (int i = 0; i<List.Count; i++) {
-				GameObject Temp = (GameObject)Instantiate (CItem);
-				Temp.transform.parent = transform.FindChild ("History Contest").FindChild ("Scroll View");
-				Temp.transform.localScale = new Vector3 (1, 1, 1);
-				Temp.transform.localPosition = new Vector3 (0, -(float)i * CGap, 0);
-				//                if (i < 3) {
-				//                    for (int a = 0; a<Temp.transform.childCount; a++) {
-				//                        if (Temp.transform.GetChild (a).name != "BG") {
-				//                            Temp.transform.GetChild (a).GetComponent<UISprite> ().color = new Color (1f, 238f / 255f, 253f / 255f, 1f);
-				//                        }
-				//                    }
-				//                }
-				Temp.transform.FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text = List[i].aTeamName;
-				Temp.transform.FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = List[i].aTeamScore  +" : " +List[i].hTeamScore;
-				Temp.transform.FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text = List[i].hTeamName;
-				Temp.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = List[i].contestName;
-				Temp.transform.FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = "660/17,241";
-				Temp.transform.FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = "루비 " + List[i].totalEntry.ToString();
-				if(List[i].rewardItem == 1){
-					Temp.transform.FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = List[i].rewardValue.ToString();
-					Temp.transform.FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = List[i].itemName;
-				}else if(List[i].rewardItem == 2){
-					Temp.transform.FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = List[i].itemName;
-					Temp.transform.FindChild ("Mileage").FindChild ("Label1").transform.localPosition = new Vector3(0,0,0);
-					Temp.transform.FindChild ("Mileage").FindChild ("Label2").gameObject.SetActive(false);
-				}
-				if(List[i].contestStatus == 2){
-					Temp.transform.FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "50 / 50s";
-				}
-				Temp.transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel>().text = List[i].contestSeq.ToString();
-				Temp.transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel>().text = List[i].gameSeq.ToString();
-				Temp.transform.FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel>().text = List[i].totalEntry.ToString();
-				Temp.transform.FindChild ("BG").FindChild ("status").GetComponent<UILabel>().text = List[i].contestStatus.ToString();
-
-				Temp.name = "Contest " + i.ToString ();
-			}
-			
-			
-			
-			
+		
 
 			
 			transform.FindChild("Nomal Contest").FindChild("Scroll View2").GetComponent<UIDraggablePanel2>().Init(UserMgr.ContestList.Count, 

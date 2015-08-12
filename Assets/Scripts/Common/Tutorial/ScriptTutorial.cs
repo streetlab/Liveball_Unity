@@ -104,6 +104,7 @@ public class ScriptTutorial : MonoBehaviour {
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
 		if(loadingUrl.Equals("http://liveball.friize.com/webview/close")){
 			string value = PlayerPrefs.GetString(Constants.PrefNotice);
+			webView.Stop();
 			webView.Hide();
 			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
 				AutoFade.LoadLevel("SceneLobby");

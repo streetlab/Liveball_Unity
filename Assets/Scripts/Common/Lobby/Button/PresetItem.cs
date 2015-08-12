@@ -45,7 +45,11 @@ public class PresetItem : MonoBehaviour {
 	}
 	void GET(){
 
-
+//		UserMgr.Schedule = GSE.Response.data[0];
+//		UserMgr.Schedule.gameSeq = 1743;
+//		UtilMgr.SelectTeam = "NC";
+//		ScriptMainTop.LandingState = 2 ;
+//		AutoFade.LoadLevel ("SceneMain 1", 0f, 1f);
 		UserMgr.PresetChooseList = List;
 		for (int i = 0; i<GSE.Response.data.Count; i++) {
 			Debug.Log("GSE.Response.data [i].gameSeq : " +GSE.Response.data [i].gameSeq);

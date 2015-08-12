@@ -8,6 +8,9 @@ public class Contest : MonoBehaviour {
 		UserMgr.CurrentContestSeq = int.Parse(transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text);
 		transform.parent.parent.parent.FindChild ("Nomal Contest").gameObject.SetActive (false);
 		transform.parent.parent.parent.FindChild ("PreSetting").gameObject.SetActive (true);
+		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Bot").FindChild ("Batting").gameObject.SetActive (false);
+		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Bot").FindChild ("Sumit").gameObject.SetActive (false);
+		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Mid").FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Mode ="Add";
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().SetTeamName (transform.
 		                                                                                                          FindChild("Team").FindChild("LT").GetComponent<UILabel>().text,

@@ -4,10 +4,14 @@ using System.Text;
 
 public class ContestRankingeRequest : BaseRequest {
 
-	public ContestRankingeRequest()
+	public ContestRankingeRequest(int GameSeq)
 	{		
 		Add("memSeq", UserMgr.UserInfo.memSeq);
-		Add("gameSeq", UserMgr.Schedule.gameSeq);
+		if (GameSeq == 0) {
+			Add ("gameSeq", UserMgr.Schedule.gameSeq);
+		} else {
+			Add ("gameSeq", GameSeq);
+		}
 		Add("contestSeq", UserMgr.CurrentContestSeq);
 
 		mDic = this;

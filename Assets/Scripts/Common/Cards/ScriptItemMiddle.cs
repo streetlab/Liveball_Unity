@@ -68,9 +68,20 @@ public class ScriptItemMiddle : MonoBehaviour {
 	
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("name").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemName;
 			if(mEvent.Response.data[UseItems[index]].itemType==6){
+				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").gameObject.SetActive(false);
 				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image").GetComponent<UISprite>().spriteName = "gift_c";
-			}else{
+			}else if(mEvent.Response.data[UseItems[index]].itemType==7){
+				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").gameObject.SetActive(false);
 				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image").GetComponent<UISprite>().spriteName = "gift_p";
+			}else{
+				try{
+				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").GetComponent<UITexture>().mainTexture = 
+					LobbyGiftCommander.mGift.Textures[mEvent.Response.data[UseItems[index]].imageName];
+				}catch{
+					Debug.Log("mEvent.Response.data[UseItems[index]].itemName : " + mEvent.Response.data[UseItems[index]].imageName);
+				}
+				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image").gameObject.SetActive(false);
+
 			}
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemid").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemId.ToString();
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemNo").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemNo.ToString();
@@ -112,6 +123,7 @@ public class ScriptItemMiddle : MonoBehaviour {
 		if (UseItems.Count < 1) {
 			transform.FindChild("NonItem").gameObject.SetActive(true);
 		}
+		transform.FindChild ("ListCards").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 	}
 	public void setdelete(string name){
 		char [] Name = name.ToCharArray ();
