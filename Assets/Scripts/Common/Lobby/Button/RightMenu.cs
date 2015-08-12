@@ -33,7 +33,9 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild ("Item").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 
-	}
+		} else if(name == "burger_menu_004"){
+			Application.OpenURL("https://game.nanoo.so/liveball");
+		}
 	}
 	void AllOff(){
 		transform.root.FindChild ("Setting").gameObject.SetActive(false);
