@@ -7,78 +7,10 @@ public class LobbyMainCommander : MonoBehaviour {
 	public float RatioFC;
 	public float RatioNC;
 	public float RatioBot;
-	public AudioClip mAudioWelcome;
 	Dictionary<string,float> HightList = new Dictionary<string, float> ();
-	void CheckFirst(){
-		if (UserMgr.UserInfo != null) {
-			if (UtilMgr.IsFirstLanding) {
-				UtilMgr.IsFirstLanding = false;
-				transform.root.GetComponent<AudioSource> ().PlayOneShot (mAudioWelcome);
-				
-				CheckAttendance ();
-			}
-		}
-	}
-	
-	void CheckAttendance(){
-		WWW www = new WWW(Constants.EXT_SERVER_HOST+Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
-		//		Debug.Log ("Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq : " + Constants.URL_ATTENDANCE+UserMgr.UserInfo.memSeq);
-		StartCoroutine(RunAttendance(www));
-		UtilMgr.ShowLoading(true);
-	}
-	IEnumerator RunAttendance(WWW www){
-		yield return www;
-		
-		UtilMgr.DismissLoading();
-		
-		if(www.error != null){
-			DialogueMgr.ShowDialogue("attendance error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		} else{
-			Debug.Log("www : " + www.text);
-			if(www.text != null && www.text.Length > 0){
-				//				mWebview.SetActive(true);
-				//				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
-				DailyReward dReward = Newtonsoft.Json.JsonConvert.DeserializeObject<DailyReward>(www.text);
-				if(dReward.result == 200){
-					DialogueMgr.ShowDialogue("접속보상", dReward.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
-					Debug.Log("add");
-					if (Application.loadedLevelName.Equals ("SceneMain")) {
-						Debug.Log("add Main");
-						transform.root.FindChild("GameObject").FindChild("Top").FindChild("Panel").FindChild("BtnPost").GetComponent<PostButton>().YellowOn();
-					}
-					
-				}
-			} else{
-				//				Debug.Log("Attendance is already done");
-			}
-		}
-	}
-	class DailyReward{
-		int _result;
-		
-		public int result {
-			get {
-				return _result;
-			}
-			set {
-				_result = value;
-			}
-		}
-		
-		string _message;
-		
-		public string message {
-			get {
-				return _message;
-			}
-			set {
-				_message = value;
-			}
-		}
-	}
+
 	// Use this for initialization
 	void Awake(){
-
 		if (UserMgr.ContestStatus == 2) {
 			transform.FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";
 		}
@@ -122,8 +54,6 @@ public class LobbyMainCommander : MonoBehaviour {
 
 		transform.parent.FindChild("GameInfo").gameObject.SetActive(false);
 		LobbyBotCommander.mBtnState = LobbyBotCommander.BtmState.Main;
-
-		CheckFirst ();
 	}
 	void CSComplete(){
 		Debug.Log("CSComplete");

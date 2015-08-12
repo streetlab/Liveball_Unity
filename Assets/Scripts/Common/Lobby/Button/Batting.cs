@@ -2,22 +2,6 @@
 using System.Collections;
 
 public class Batting : MonoBehaviour {
-	public void PlayingButton(){
-		//	BattingCommander.ChoseGameObject.transform.FindChild("Label").GetComponent<UILabel>().text = "Non";
-		//BattingCommander.ChoseGameObject.transform.FindChild("")FindChild("Label").GetComponent<UILabel>().text = "Non";
-		BattingCommander.ChoseGameObject.transform.FindChild (BattingCommander.ChoseGameObject.name
-		                                                      + "_pre").FindChild ("use").gameObject.SetActive (true);
-		BattingCommander.ChoseGameObject.transform.FindChild (BattingCommander.ChoseGameObject.name
-		                                                      + "_pre").FindChild ("non").gameObject.SetActive (false);
-		BattingCommander.ChoseGameObject.transform.FindChild(BattingCommander.ChoseGameObject.name
-		                                                     +"_pre").FindChild("use").FindChild("Label").GetComponent<UILabel>().text = 
-			transform.FindChild("Label").GetComponent<UILabel>().text;
-		BattingCommander.ChoseGameObject.transform.parent.parent.localPosition = new Vector3 (0,0,0);
-		transform.parent.parent.gameObject.SetActive (false);
-		transform.parent.parent.parent.parent.GetComponent<Presetplaying> ().Button ();
-		
-	}
-
 
 	public void Button(){
 	//	BattingCommander.ChoseGameObject.transform.FindChild("Label").GetComponent<UILabel>().text = "Non";

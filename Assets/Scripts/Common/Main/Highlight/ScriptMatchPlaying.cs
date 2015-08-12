@@ -348,9 +348,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		{
 			ScoreInfo info = listScore[i];
 			team.FindChild("ScoreBar").FindChild (info.playRound.ToString()).GetComponent<UILabel> ().text = info.score;
-			if(info.score!=""){
 			Scores += int.Parse(info.score);
-			}
 		}
 
 		GameInfo.transform.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamScore").FindChild ("Label").GetComponent<UILabel> ().text
@@ -378,9 +376,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 		{
 			ScoreInfo info = listScore[i];
 			team.FindChild("ScoreBar").FindChild (info.playRound.ToString()).GetComponent<UILabel> ().text = info.score;
-			if(info.score!=""){
-				Scores += int.Parse(info.score);
-			}
+			Scores += int.Parse(info.score);
 		}
 		GameInfo.transform.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamScore").FindChild ("Label").GetComponent<UILabel> ().text
 			= Scores.ToString ();

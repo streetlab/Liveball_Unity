@@ -21,7 +21,6 @@ public class GameRanking : MonoBehaviour {
 		case "SetPreset":
 			transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild("Top").FindChild("Sub").FindChild ("SetPreset").FindChild ("Bar").gameObject.SetActive (true);
 			transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild("PreSetting").gameObject.SetActive(true);
-			transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild("PreSetting").GetComponent<Presetplaying>().SetList(UserMgr.PresetChooseList);
 				break;
 
 		}

@@ -12,9 +12,8 @@ public class Presetplaying : MonoBehaviour {
 	}
 
 	void PresetUpdate(){
-		Debug.Log ("PresetUpdate Complete");
-		UserMgr.PresetChooseList = GetList();
-	
+//		transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
+//			.FindChild("Position").gameObject;
 	}
 
 	List<int> GetList(){
@@ -88,42 +87,6 @@ public class Presetplaying : MonoBehaviour {
 		}
 	}
 
-	public void SetList(List<int> List){
-		Debug.Log (List.Count);
-		
-		GameObject 
-			G= 
-				transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
-				.FindChild("Position").gameObject;
-		for (int i = 0; i<G.transform.childCount; i++) {
-			
-			if(List[i] !=0&&List[i] !=null){
-				Debug.Log("List[i] : "  + List[i]);
-				Debug.Log("i : "  + i);
-				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
-					FindChild("use").gameObject.SetActive(true);
-				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
-					FindChild("non").gameObject.SetActive(false);
-				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
-					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[List[i]-1];
-			}
-			
-			
-			
-		}
-		for (int i = 0; i<G.transform.childCount; i++) {
-			if(List[i] !=0&&List[i] !=null){
-				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-					FindChild("use").gameObject.SetActive(true);
-				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-					FindChild("non").gameObject.SetActive(false);
-				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[List[i+8]-1];
-			}
-			
-			
-		}
-	}
 
 
 
