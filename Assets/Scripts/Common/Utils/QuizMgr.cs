@@ -145,11 +145,13 @@ public class QuizMgr : MonoBehaviour {
 
 		quiz.quizValue = simpleEvent.Response.data [0].quizValue;
 
-		if(simpleEvent.Response.data[0].isCancel > 0)
+		if(simpleEvent.Response.data[0].isCancel > 0){
 			quiz.resultMsg = simpleEvent.Response.data[0].resultMsg;
-		Debug.Log("simpleEvent.Response.data[0].respStatus > 0");
-		if(simpleEvent.Response.data[0].respStatus > 0){
-			Debug.Log("simpleEvent.Response.data[0].respStatus > 0 On");
+			Debug.Log("simpleEvent.Response.data[0].respStatus : "+simpleEvent.Response.data[0].respStatus);
+
+		}
+		if(simpleEvent.Response.data[0].respStatus > 0
+		   || simpleEvent.Response.data[0].isCancel > 0){
 			quiz.resp = new List<QuizRespInfo> ();
 			QuizRespInfo tmpInfo;
 			if (simpleEvent.Response.data.Count > 1) {
