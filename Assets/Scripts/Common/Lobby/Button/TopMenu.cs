@@ -115,5 +115,6 @@ public class TopMenu : MonoBehaviour {
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem (presetlist);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(true);
+		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("History Contest").gameObject.SetActive(false);
 	}
 }
