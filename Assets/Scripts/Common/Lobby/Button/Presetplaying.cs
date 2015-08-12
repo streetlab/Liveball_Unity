@@ -14,6 +14,10 @@ public class Presetplaying : MonoBehaviour {
 	void PresetUpdate(){
 //		transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
 //			.FindChild("Position").gameObject;
+
+		Debug.Log ("PresetUpdate Complete");
+		UserMgr.PresetChooseList = GetList();
+
 	}
 
 	List<int> GetList(){
@@ -49,10 +53,23 @@ public class Presetplaying : MonoBehaviour {
 		return ChoseList;
 	}
 
+	void SetName(){
+		transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 1").FindChild ("Label").GetComponent<UILabel> ().
+			text = 
+				transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo")
+				.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamName").FindChild ("Label").GetComponent<UILabel> ().text;
+
+		transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 2").FindChild ("Label").GetComponent<UILabel> ().
+			text = 
+				transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo")
+				.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamName").FindChild ("Label").GetComponent<UILabel> ().text;
+
+	}
 
 
 
-	public void SetList(List<string> List){
+	public void SetList(List<int> List){
+		SetName ();
 		Debug.Log (List.Count);
 		
 		GameObject 
@@ -61,26 +78,28 @@ public class Presetplaying : MonoBehaviour {
 				.FindChild("Position").gameObject;
 		for (int i = 0; i<G.transform.childCount; i++) {
 			
-			if(List[i] !="0"&&List[i] !=""){
+			if(List[i] !=0&&List[i] !=null){
+				Debug.Log("List[i] : "  + List[i]);
+				Debug.Log("i : "  + i);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
 					FindChild("use").gameObject.SetActive(true);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
 					FindChild("non").gameObject.SetActive(false);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
-					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[int.Parse(List[i])-1];
+					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[List[i]-1];
 			}
 			
 			
 			
 		}
 		for (int i = 0; i<G.transform.childCount; i++) {
-			if(List[i] !="0"&&List[i] !=""){
+			if(List[i] !=0&&List[i] !=null){
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 					FindChild("use").gameObject.SetActive(true);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 					FindChild("non").gameObject.SetActive(false);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[int.Parse(List[i+8])];
+					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[List[i+8]-1];
 			}
 			
 			

@@ -10,6 +10,8 @@ public class HistoryItem : MonoBehaviour {
 		string Rscore = transform.FindChild ("BG").FindChild ("rewordscore").GetComponent<UILabel> ().text;
 		string Rcount = transform.FindChild ("BG").FindChild ("rewordcount").GetComponent<UILabel> ().text;
 		string gameSeq =  transform.parent.FindChild ("BG").FindChild ("GameSeq").GetComponent<UILabel> ().text;
+		string contestSeq =  transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text;
+		UserMgr.CurrentContestSeq = int.Parse (contestSeq);
 		Debug.Log ("Title : " + Title);
 		Debug.Log ("MyRank : " + MyRank);
 		Debug.Log ("Tpreset : " + Tpreset);

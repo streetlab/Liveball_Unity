@@ -44,8 +44,10 @@ public class PostButton : MonoBehaviour {
 	public void CheckNewMail(){
 		if (UserMgr.UserMailCount > 0) {
 			transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (true);
+			transform.FindChild ("TF_Post").FindChild("Panel2").FindChild ("NonPost").gameObject.SetActive (false);
 		} else {
 			transform.FindChild ("Background").FindChild ("on").gameObject.SetActive (false);
+			transform.FindChild ("TF_Post").FindChild("Panel2").FindChild ("NonPost").gameObject.SetActive (true);
 		}
 	}
 	public void YellowOn(){
@@ -62,7 +64,7 @@ public class PostButton : MonoBehaviour {
 		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
 
 		transform.FindChild ("TF_Post").gameObject.SetActive (true);
-		transform.FindChild ("TF_Post").FindChild ("NonPost").gameObject.SetActive (true);
+		transform.FindChild ("TF_Post").FindChild("Panel2").FindChild ("NonPost").gameObject.SetActive (true);
 
 		Mails = Mail.Response.data;
 		UserMgr.UserMailCount = Mail.Response.data.Count;
@@ -121,7 +123,7 @@ public class PostButton : MonoBehaviour {
 						temp.transform.FindChild("attachseq").GetComponent<UILabel>().text = Mails[i].attach[0].attachSeq.ToString();
 						temp.transform.FindChild("Code").GetComponent<UILabel>().text = Mails[i].attach[0].attachCode.ToString();
 						temp.gameObject.SetActive(true);
-						transform.FindChild ("TF_Post").FindChild ("NonPost").gameObject.SetActive (false);
+
 
 					}
 			}

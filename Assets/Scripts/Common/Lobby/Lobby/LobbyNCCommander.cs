@@ -177,6 +177,7 @@ public class LobbyNCCommander : MonoBehaviour {
 		NetMgr.GetContestData (CDE);
 	}
 	void ResetNCData(){
+		try{
 		GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View").gameObject;
 		for (int a = 0; a < CDE.Response.data.Count; a++) {
 
@@ -205,5 +206,8 @@ public class LobbyNCCommander : MonoBehaviour {
 		}
 		Debug.Log("CDE.Response.data.Count : " + CDE.Response.data.Count);
 		Debug.Log("UserMgr.ContestList.Count : " + UserMgr.ContestList.Count);
+		}catch{
+			Debug.Log("ArgumentOutOfRangeException: Argument is out of range.");
+		}
 	}
 }

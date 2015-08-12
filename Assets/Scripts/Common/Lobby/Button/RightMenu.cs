@@ -41,5 +41,7 @@ public class RightMenu : MonoBehaviour {
 		transform.root.FindChild ("Setting").gameObject.SetActive(false);
 		transform.root.FindChild ("TF_Items").gameObject.SetActive(false);
 		transform.root.FindChild ("Item").gameObject.SetActive(false);
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("BtnPost").FindChild ("TF_Post").gameObject.SetActive (false);
 	}
 }
