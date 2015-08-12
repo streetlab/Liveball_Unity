@@ -282,7 +282,9 @@ public class LandingManager : MonoBehaviour {
 							FindChild("Bot 3").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitHr.ToString()+"%";
 						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
 							FindChild("Bot 4").FindChild("Label").GetComponent<UILabel>().text = "[b]" + N[i].hitBB.ToString()+"%";
-
+						if(N[i].hitAvg =="-"){
+							N[i].hitAvg ="0";
+						}
 						PlayerInfos.transform.FindChild("MidGageBar").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
 						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
 						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("OutLabel").GetComponent<UILabel>().text = (100f-(float.Parse(N[i].hitAvg)*100f)).ToString()+"% 아웃";
@@ -1192,7 +1194,9 @@ public class LandingManager : MonoBehaviour {
 
 
 
-
+						WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit [0].imagePath + mlineupEvent.Response.data.hit [0].imageName);
+				StartCoroutine (GetImage (www, NewH.transform.FindChild("BG")
+				                          .FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo").GetComponent<UITexture>()));
 
 
 
@@ -1233,14 +1237,27 @@ public class LandingManager : MonoBehaviour {
 				MidBar.transform.FindChild ("Gauge").FindChild ("L").GetComponent<UILabel> ().text = "안타 " + (float.Parse (mlineupEvent.Response.data.hit [0].hitAvg) * 100f).ToString () + "%";
 				MidBar.transform.FindChild ("Gauge").FindChild ("R").GetComponent<UILabel> ().text = ((1 - float.Parse (mlineupEvent.Response.data.hit [0].hitAvg)) * 100f).ToString () + "% 아웃";
 
-				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit [0].imagePath + mlineupEvent.Response.data.hit [0].imageName);
-				StartCoroutine (GetImage (www, P_LPlayerImage));
+//				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit [0].imagePath + mlineupEvent.Response.data.hit [0].imageName);
+//				StartCoroutine (GetImage (www, P_LPlayerImage));
 				mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setPitcher"));
 				NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
 			}
 		}
 	}
 	void setPitcher(){
+
+		NewP.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.pit [0].playerName;
+		NewP.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.pit [0].playerNumber;
+		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("ERA").FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.pit [0].ERA;
+		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("FIP").FindChild("Label").GetComponent<UILabel>().text = "[b]" +mlineupEvent.Response.data.pit [0].FIP;
+		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("K").FindChild("Label").GetComponent<UILabel>().text = "[b]"+mlineupEvent.Response.data.pit [0].SO;
+		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +mlineupEvent.Response.data.pit [0].hitBB;
+
+		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit[0].imagePath + mlineupEvent.Response.data.pit[0].imageName);
+		StartCoroutine (GetImage (www, NewP.transform.FindChild("BG")
+		                          .FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo").GetComponent<UITexture>()));
+
+
 		//Lineup2 = mlineupEvent.Response.data.hit [0];
 		P_RPlayersName.text = mlineupEvent.Response.data.pit [0].playerName+"#"+mlineupEvent.Response.data.pit[0].playerNumber;
 		if (mlineupEvent.Response.data.pit [0].ERA ==null||mlineupEvent.Response.data.pit [0].ERA == "") {
@@ -1248,8 +1265,8 @@ public class LandingManager : MonoBehaviour {
 		} else {
 			P_RBatting.text = mlineupEvent.Response.data.pit [0].ERA;
 		}
-		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit[0].imagePath + mlineupEvent.Response.data.pit[0].imageName);
-		StartCoroutine (GetImage (www, P_RPlayerImage));
+//		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit[0].imagePath + mlineupEvent.Response.data.pit[0].imageName);
+//		StartCoroutine (GetImage (www, P_RPlayerImage));
 	}
 //	void OnApplicationPause(bool pause){
 //	}

@@ -29,7 +29,8 @@ public class GameRanking : MonoBehaviour {
 	}
 	void AllOff(){
 		transform.root.FindChild("Scroll").FindChild("Ranking").gameObject.SetActive(false);
-		transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo").gameObject.SetActive (false);
+		//transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo").gameObject.SetActive (false);
+		transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo").transform.localPosition = new Vector3 (-720,0,0);
 		transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("PreSetting").gameObject.SetActive (false);
 		transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild("Top").FindChild("Sub").FindChild ("GameInfo").FindChild ("Bar").gameObject.SetActive (false);
 		transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild("Top").FindChild("Sub").FindChild ("PlayersInfo").FindChild ("Bar").gameObject.SetActive (false);
