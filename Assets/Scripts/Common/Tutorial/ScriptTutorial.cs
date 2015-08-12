@@ -60,6 +60,7 @@ public class ScriptTutorial : MonoBehaviour {
 	}
 	
 	void InitTuto(){
+		PlayerPrefs.SetString (Constants.PrefTutorial, "1");
 		mStateWebview = STATE_WEBVIEW.INVISIBLE;
 		
 		mWebView = GetComponent<UniWebView>();
@@ -103,6 +104,7 @@ public class ScriptTutorial : MonoBehaviour {
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
 		if(loadingUrl.Equals("http://liveball.friize.com/webview/close")){
 			string value = PlayerPrefs.GetString(Constants.PrefNotice);
+			webView.Hide();
 			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
 				AutoFade.LoadLevel("SceneLobby");
 			} else{
