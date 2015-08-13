@@ -29,7 +29,8 @@ public class Sider : MonoBehaviour {
 				}
 				transform.FindChild ("InSlider").GetComponent<Sider> ().List2 = List2;
 		
-//				GetComponent<UISlider> ().onDragFinished += OnDragFinished;
+				GetComponent<UISlider> ().onDragFinished += OnDragFinished;
+				transform.FindChild ("InSlider").GetComponent<UISlider> ().onDragFinished += OnDragFinished;
 
 			}
 
@@ -38,7 +39,7 @@ public class Sider : MonoBehaviour {
 	}
 
 	public void OnDragFinished(){
-		Debug.Log("Step : "+GetComponent<UISlider> ().value*11f);
+		LobbyNCCommander.ResetList();
 	}
 
 	// Use this for initialization
@@ -59,13 +60,21 @@ public class Sider : MonoBehaviour {
 
 		if(L == 0&&R == 0){
 			mLblMenu0.GetComponent<UILabel>().text = "모든 입장료";
+			SubInSub.SelectedFeeLow = 0;
+			SubInSub.SelectedFeeHigh = 1000;
 		}else if(Mathf.Round(L*11f)==Mathf.Round((1f-R)*11f)){					
 			mLblMenu0.GetComponent<UILabel>().text 
 				= "루비"+List2[Mathf.Round(R*11f)];
+			SubInSub.SelectedFeeLow = SubInSub.SelectedFeeHigh = int.Parse(List2[Mathf.Round(R*11f)]);
 		}else{
 				mLblMenu0.GetComponent<UILabel>().text 
 				= "루비" + List1[Mathf.Round(L*11f)]+" - "+List2[Mathf.Round(R*11f)];
+			SubInSub.SelectedFeeLow = int.Parse(List1[Mathf.Round(L*11f)]);
+			SubInSub.SelectedFeeHigh = int.Parse(List2[Mathf.Round(R*11f)]);
 		}
+
+		if(mLblMenu0.GetComponent<UILabel>().text.Equals("루비0"))
+			mLblMenu0.GetComponent<UILabel>().text = "무료";
 
 		mLblLabel.GetComponent<UILabel>().text = mLblMenu0.GetComponent<UILabel>().text;
 	}

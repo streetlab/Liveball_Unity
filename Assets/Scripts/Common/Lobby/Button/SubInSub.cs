@@ -3,24 +3,68 @@ using System.Collections;
 
 public class SubInSub : MonoBehaviour {
 
+	public static string SelectedTeamname;
+	public static int SelectedKind;
+	public static int SelectedFeeLow;
+	public static int SelectedFeeHigh;
+	public static PeopleSorting SelectedPeople;
+	public enum PeopleSorting{
+		PeopleAsc,
+		PeopleDesc,
+		NameAsc,
+		NameDesc,
+		TotalAsc,
+		TotalDesc,
+		FeeAsc,
+		FeeDesc
+	}
+
 	public void Button(){
 
+//		Debug.Log ("MenuStatus " + LobbyMainCommander.MenuStatus + " : " + transform.parent.name + " : " + name);
 
-		Debug.Log ("MenuStatus " + LobbyMainCommander.MenuStatus + " : " + transform.parent.name + " : " + name);
+		if(transform.parent.name.Equals("AllTeamBox")){
+			SelectedTeamname = GetComponent<UILabel>().text;
+			LobbyNCCommander.ResetList();
+		} else if(transform.parent.name.Equals("AllKindBox")){
+			SelectedKind = int.Parse(name.Substring(name.Length-1));
+			LobbyNCCommander.ResetList();
+//		} else if(transform.parent.name.Equals("AllEntranceFeeBox")){
+		} else if(transform.parent.name.Equals("PeopleBox")){
+
+		}
+
 
 		if (transform.FindChild ("Arrow") != null) {
 			if (transform.FindChild ("Arrow").GetComponent<UISprite> ().color == Color.yellow) {
 				if (transform.FindChild ("Arrow").localScale.y == 1) {
 					transform.FindChild ("Arrow").localScale = new Vector3 (1, -1, 1);
 					transform.parent.parent.FindChild ("Arrow").localScale = new Vector3 (1, -1, 1);
+					SelectedPeople = 
+						name.Substring(name.Length-1).Equals("0") ? PeopleSorting.PeopleDesc :
+						name.Substring(name.Length-1).Equals("1") ?PeopleSorting.NameDesc :
+						name.Substring(name.Length-1).Equals("2") ?PeopleSorting.TotalDesc :
+						PeopleSorting.FeeDesc;
 				} else {
 					transform.FindChild ("Arrow").localScale = new Vector3 (1, 1, 1);
 					transform.parent.parent.FindChild ("Arrow").localScale = new Vector3 (1, 1, 1);
+					SelectedPeople = 
+						name.Substring(name.Length-1).Equals("0") ? PeopleSorting.PeopleAsc :
+						name.Substring(name.Length-1).Equals("1") ?PeopleSorting.NameAsc :
+						name.Substring(name.Length-1).Equals("2") ?PeopleSorting.TotalAsc :
+						PeopleSorting.FeeAsc;
 				}
-			} else {
+			} 
+			else {
 				transform.FindChild ("Arrow").localScale = new Vector3 (1, 1, 1);
 				transform.parent.parent.FindChild ("Arrow").localScale = new Vector3 (1, 1, 1);
+				SelectedPeople = 
+					name.Substring(name.Length-1).Equals("0") ? PeopleSorting.PeopleAsc :
+					name.Substring(name.Length-1).Equals("1") ?PeopleSorting.NameAsc :
+					name.Substring(name.Length-1).Equals("2") ?PeopleSorting.TotalAsc :
+					PeopleSorting.FeeAsc;
 			}
+			LobbyNCCommander.ResetList();
 		}
 		
 		bool Check = true;
@@ -45,9 +89,9 @@ public class SubInSub : MonoBehaviour {
 					if(transform.parent.FindChild("Menu " + i.ToString()).FindChild("Arrow")!=null){
 
 						if("Menu " + i.ToString()!=this.name){
-						transform.parent.FindChild("Menu " + i.ToString()).FindChild("Arrow").GetComponent<UISprite>().color = Color.white;
+							transform.parent.FindChild("Menu " + i.ToString()).FindChild("Arrow").GetComponent<UISprite>().color = Color.white;
 							transform.parent.FindChild("Menu " + i.ToString()).FindChild("Arrow").localScale = new Vector3(1,1,1);
-					}
+						}
 					
 					}
 

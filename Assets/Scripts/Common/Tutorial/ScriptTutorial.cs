@@ -105,7 +105,7 @@ public class ScriptTutorial : MonoBehaviour {
 		if(loadingUrl.Equals("http://liveball.friize.com/webview/close")){
 			string value = PlayerPrefs.GetString(Constants.PrefNotice);
 			webView.Stop();
-			webView.Hide();
+//			webView.Hide();
 			if(value != null && value.Equals(UtilMgr.GetDateTime("yyyyMMdd"))){
 				AutoFade.LoadLevel("SceneLobby");
 			} else{

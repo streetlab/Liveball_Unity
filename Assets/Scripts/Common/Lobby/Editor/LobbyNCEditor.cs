@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System;
 
@@ -29,7 +29,7 @@ public class LobbyNCEditor : Editor
 		if (GUILayout.Button ("CreateNCItem")) {
 			
 			
-			_this.CreatCItem();
+			_this.CreateCItem();
 		}
 		if (GUILayout.Button ("CreateNC")) {
 			

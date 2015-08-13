@@ -124,7 +124,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		transform.FindChild ("Gift").gameObject.SetActive (true);
 		transform.FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
 		transform.FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Button ();
-		GetComponent<LobbyNCCommander> ().CreatCItem ();
+		GetComponent<LobbyNCCommander> ().CreateCItem ();
 		transform.FindChild ("Nomal Contest").gameObject.SetActive (true);
 		transform.FindChild ("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem ();
 		transform.FindChild ("PreSet Contest").gameObject.SetActive (false);
