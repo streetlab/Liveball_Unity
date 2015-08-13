@@ -7,6 +7,8 @@ public class Gift : MonoBehaviour {
 		if (Check) {
 			Check = false;
 			transform.localPosition = new Vector2(transform.localPosition.x,12f+55f);
+			GetComponent<UISprite>().spriteName = "btn_gift_03";
+			transform.FindChild("Arrow").gameObject.SetActive(false);
 			transform.FindChild("Arrow").localPosition = new Vector2(0,5);
 			transform.FindChild("Arrow").localScale = new Vector2(1,1);
 			transform.parent.FindChild("Scroll View").gameObject.SetActive(false);
@@ -16,6 +18,8 @@ public class Gift : MonoBehaviour {
 		} else {
 			Check = true;
 			transform.localPosition = new Vector2(transform.localPosition.x,248f+55f);
+			GetComponent<UISprite>().spriteName = "btn_gift_03";
+			transform.FindChild("Arrow").gameObject.SetActive(true);
 			transform.FindChild("Arrow").localPosition = new Vector2(0,0);
 			transform.FindChild("Arrow").localScale = new Vector2(1,-1);
 			//transform.parent.FindChild("Scroll View").GetComponent<UIPanel>().depth = 9;

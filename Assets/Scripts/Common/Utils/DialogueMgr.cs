@@ -168,8 +168,8 @@ public class DialogueMgr : MonoBehaviour {
 			btn1.transform.FindChild ("Label").GetComponent<UILabel> ().text = strBtn1;
 			btnCancel.transform.FindChild ("Label").GetComponent<UILabel> ().text = strCancel;
 
-			btn1.transform.localPosition = new Vector3 (-110f, -100f, 0);
-			btnCancel.transform.localPosition = new Vector3 (110f, -100f, 0);
+			btn1.transform.localPosition = new Vector3 (-145f, -100f, 0);
+			btnCancel.transform.localPosition = new Vector3 (145f, -100f, 0);
 		} else if (type == DIALOGUE_TYPE.Choose) {
 			btn1.SetActive (true);
 			btn2.SetActive (true);

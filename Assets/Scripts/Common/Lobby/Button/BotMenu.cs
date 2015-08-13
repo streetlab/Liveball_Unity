@@ -11,11 +11,13 @@ public class BotMenu : MonoBehaviour {
 		Debug.Log (GetIndex (this.name));
 		switch (GetIndex (this.name)) {
 		case 0:
+			AllOff();
 			Off();
 			Debug.Log("Main On");
 			mScroll.transform.FindChild("Main").gameObject.SetActive(true);
 			break;
 		case 1:
+			AllOff();
 			Off();
 			mScroll.transform.FindChild("GameInfo").gameObject.SetActive(true);
 			mScroll.transform.FindChild("GameInfo").GetComponent<ScriptGameInfo>().Init();

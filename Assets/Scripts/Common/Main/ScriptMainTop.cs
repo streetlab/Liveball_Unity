@@ -517,7 +517,7 @@ public class ScriptMainTop : MonoBehaviour {
 	}
 	
 	void Update(){
-		SetTopInfo ();
+		//SetTopInfo ();
 		Point.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(MyPoint.ToString ()); 
 		//		Debug.Log("delta time is "+Time.deltaTime);
 	}
@@ -527,14 +527,14 @@ public class ScriptMainTop : MonoBehaviour {
 		if(UserMgr.UserInfo == null)
 			return;
 		
-		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
-		//mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
-		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
-		
-		
-		//mLblNewGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
-		mLblNewDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
-		mLblNewRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
+//		mLblDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
+//		//mLblGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
+//		mLblRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
+//		
+//		
+//		//mLblNewGold.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userGoldenBall);
+//		mLblNewDia.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userDiamond);
+//		mLblNewRuby.GetComponent<UILabel> ().text = UtilMgr.AddsThousandsSeparator(UserMgr.UserInfo.userRuby);
 	}
 	
 	//	void OnApplicationFocus(bool focus){
@@ -574,9 +574,9 @@ public class ScriptMainTop : MonoBehaviour {
 	public void PostData(){
 		transform.root.FindChild ("TF_Betting").FindChild ("Scroll View").FindChild ("GameObject").FindChild ("SprBetting")
 			.GetComponent<ScriptBetting> ().SetConfirm ();
-		if (UserMgr.Schedule.myEntryFee!="0") {
+		//if (UserMgr.Schedule.myEntryFee!="0") {
 			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundCloseBet);
-		}
+		//}
 		CheckAndJoinQuiz();
 	}
 	void CheckAndJoinQuiz(){
@@ -729,6 +729,8 @@ public class ScriptMainTop : MonoBehaviour {
 	public void OpenBetting(QuizInfo quizInfo)
 	{
 		if (quizInfo != null) {
+			BattingCommander.ChoseGameObject.transform.parent.parent.localPosition = new Vector3 (0,0,0);
+			transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").gameObject.SetActive(false);
 			if(
 				transform.root.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label")
 				.gameObject.activeSelf){

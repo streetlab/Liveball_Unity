@@ -24,6 +24,18 @@ public class PresetListInfo {
 		}
 	}
 
+
+	int _multiEntry;
+	
+	public int multiEntry {
+		get {
+			return _multiEntry;
+		}
+		set {
+			_multiEntry = value;
+		}
+	}
+
 	int _metaSeq;
 	
 	public int metaSeq {
@@ -177,25 +189,25 @@ public class PresetListInfo {
 		}
 	}
 
-	int _rewordCount;
+	int _rewardCount;
 	// preset game have
-	public int rewordCount {
+	public int rewardCount {
 		get {
-			return _rewordCount;
+			return _rewardCount;
 		}
 		set {
-			_rewordCount = value;
+			_rewardCount = value;
 		}
 	}
 	
-	int _rewordScore;
+	int _rewardScore;
 	// preset game have
-	public int rewordScore {
+	public int rewardScore {
 		get {
-			return _rewordScore;
+			return _rewardScore;
 		}
 		set {
-			_rewordScore = value;
+			_rewardScore = value;
 		}
 	}
 	int _myRank;

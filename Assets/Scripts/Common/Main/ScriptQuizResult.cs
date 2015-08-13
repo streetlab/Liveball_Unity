@@ -68,9 +68,9 @@ public class ScriptQuizResult : MonoBehaviour {
 //			ScriptMainTop.MyPoint+= (float)betPoint;
 //			mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)betPoint) * 0.005f);
 
-			if (UserMgr.Schedule.myEntryFee!="0") {
+			//if (UserMgr.Schedule.myEntryFee!="0") {
 				transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioFail);
-			}
+			//}
 			
 			return false;
 		} else
@@ -89,12 +89,12 @@ public class ScriptQuizResult : MonoBehaviour {
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 0);
 			//mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)rewardPoint) * 0.005f);
 
-			double userDia = double.Parse (UserMgr.UserInfo.userGoldenBall) + rewardPoint;
-			UserMgr.UserInfo.userGoldenBall = ""+ UtilMgr.AddsThousandsSeparator(userDia);
-			if (UserMgr.Schedule.myEntryFee!="0") {
+//			double userDia = double.Parse (UserMgr.UserInfo.userGoldenBall) + rewardPoint;
+//			UserMgr.UserInfo.userGoldenBall = ""+ UtilMgr.AddsThousandsSeparator(userDia);
+		//	if (UserMgr.Schedule.myEntryFee!="0") {
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioSuccess);
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioGold);
-			}
+			//}
 
 			return true;
 		} else{
@@ -111,9 +111,9 @@ public class ScriptQuizResult : MonoBehaviour {
 			mLblBtmRight.GetComponent<UILabel>().color = new Color(1f, 1f, 1f);
 			ScriptMainTop.MyPoint+= (float)betPoint;
 			mLblDia.GetComponent<UILabel>().text = "+"+(int)(((float)betPoint) * 0.005f);
-			if (UserMgr.Schedule.myEntryFee!="0") {
+		//	if (UserMgr.Schedule.myEntryFee!="0") {
 			transform.root.GetComponent<AudioSource>().PlayOneShot(mAudioFail);
-			}
+			//}
 
 			return false;
 		}

@@ -394,18 +394,24 @@ public class ScriptTF_Betting : MonoBehaviour {
 		if(true){
 			Debug.Log("SetHitter 0");
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Top").FindChild("Name").
-				GetComponent<UILabel>().text = QuizMgr.QuizInfo.playerName;
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].playerName;
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Top").FindChild("Number").
-				GetComponent<UILabel>().text = QuizMgr.QuizInfo.playerNumber.ToString();
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].playerNumber.ToString();
 
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").
-				GetComponent<UILabel>().text = QuizMgr.QuizInfo.hitAvg;
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitAvg;
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").
-				GetComponent<UILabel>().text = "0";
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitHr.ToString();
+			//Debug.Log("QuizMgr.NextPlayerInfo.nowPlayer[0].RBI.ToString()" + QuizMgr.NextPlayerInfo.nowPlayer[0].RBI.ToString());
+			if(QuizMgr.NextPlayerInfo.nowPlayer[0].RBI!=null){
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").
-				GetComponent<UILabel>().text = "0";
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].RBI.ToString();
+			}else{
+				mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").
+					GetComponent<UILabel>().text = "0";
+			}
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").
-				GetComponent<UILabel>().text = "0";
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitBB.ToString();
 			Transform tfHitter = mBatting.transform.FindChild ("SprHitter");
 			string playerInfo = QuizMgr.QuizInfo.playerName + "#"+ QuizMgr.QuizInfo.playerNumber;
 	
@@ -632,7 +638,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 				.FindChild("BtnOut"+(i+1).ToString()).GetComponent<UIButton>().isEnabled = true;
 		}
 		transform.FindChild ("Scroll View").FindChild ("GameObject").FindChild("SprBetting").GetComponent<ScriptBetting> ().BtnConfirm ();
-		transform.parent.FindChild ("Top").GetComponent<ScriptMainTop> ().PostData ();
+		if (ScriptBettingItem.ClickCheck) {
+			transform.parent.FindChild ("Top").GetComponent<ScriptMainTop> ().PostData ();
+		}
 		QuizMgr.IsBettingOpended = false;
 		transform.FindChild ("SprBG").gameObject.SetActive (false);
 		shadow.SetActive (false);
@@ -643,6 +651,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 	}
 	public void OpenAnimation(QuizInfo quizInfo)
 	{
+		//QuizMgr.QuizValue = 0;
 		ScriptBettingItem.ClickCheck = false;
 		Mark (quizInfo);
 		//mBatting.transform.FindChild("SprHit")

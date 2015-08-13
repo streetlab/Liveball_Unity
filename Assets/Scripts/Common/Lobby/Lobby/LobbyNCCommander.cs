@@ -176,29 +176,47 @@ public class LobbyNCCommander : MonoBehaviour {
 		SubInSub.SelectedPeople = SubInSub.PeopleSorting.PeopleAsc;
 		mNormalList = transform.FindChild("Nomal Contest").FindChild("Scroll View2").GetComponent<UIDraggablePanel2>();
 		if (UserMgr.ContestList != null) {
+			if(UserMgr.ContestList.Count==0){
+				transform.FindChild("Nomal Contest").FindChild("None").gameObject.SetActive(true);
+			}else{
 			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Contest").FindChild("Num").GetComponent<UILabel>().text
 				= UserMgr.ContestList.Count.ToString();
 			
-			if(UserMgr.PresetList !=null){
-				transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").FindChild("Num").GetComponent<UILabel>().text
-					= UserMgr.PresetList.Count.ToString();
-			}
-			if(UserMgr.HistoryList !=null){
-				transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("History").FindChild("Num").GetComponent<UILabel>().text
-					= UserMgr.HistoryList.Count.ToString();
-			}
+		
 
 			List<ContestListInfo> sortedList = GetSortedList();
 
 			mNormalList.Init(sortedList.Count, delegate(UIListItem item, int index) {
 				InitList(sortedList, item, index);
 			});
+			}
+		}
+		if(UserMgr.PresetList !=null){
+			if(UserMgr.PresetList.Count==0){
+				transform.FindChild("PreSet Contest").FindChild("None").gameObject.SetActive(true);
+			}else{
+
+
+			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").FindChild("Num").GetComponent<UILabel>().text
+				= UserMgr.PresetList.Count.ToString();
+			}
+		}
+
+		if(UserMgr.HistoryList !=null){
+
+			if(UserMgr.HistoryList.Count==0){
+
+				transform.FindChild("History Contest").FindChild("None").gameObject.SetActive(true);
+			}else{
+				transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("History").FindChild("Num").GetComponent<UILabel>().text
+					= UserMgr.HistoryList.Count.ToString();
+			}
 		}
 		//transform.FindChild ("Nomal Contest").FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 	}
 
 	static void InitList(List<ContestListInfo> infoList, UIListItem item, int index){
-		if (index < 3) {
+		if (infoList[index].featured == 1) {
 			for (int a = 0; a<item.Target.gameObject.transform.childCount; a++) {
 				if (item.Target.gameObject.transform.GetChild (a).name != "BG") {
 					item.Target.gameObject.transform.GetChild (a).GetComponent<UISprite> ().color = new Color (1f, 238f / 255f, 253f / 255f, 1f);
@@ -212,12 +230,12 @@ public class LobbyNCCommander : MonoBehaviour {
 			}
 		}
 
-		item.Target.gameObject.transform.FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text = infoList[index].aTeamName;
-		item.Target.gameObject.transform.FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = infoList[index].aTeamScore  +" : " +infoList[index].hTeamScore;
-		item.Target.gameObject.transform.FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text = infoList[index].hTeamName;
-		item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = infoList[index].contestName;
+		item.Target.gameObject.transform.FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamName;
+		item.Target.gameObject.transform.FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamScore  +" : " +infoList[index].hTeamScore;
+		item.Target.gameObject.transform.FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text = "[b]"+infoList[index].hTeamName;
+		item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+infoList[index].contestName;
 		item.Target.gameObject.transform.FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = infoList[index].totalPreset+"/"+infoList[index].totalEntry;
-		item.Target.gameObject.transform.FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = "루비 " + infoList[index].entryFee.ToString();
+		item.Target.gameObject.transform.FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = infoList[index].entryFee.ToString();
 		if(infoList[index].rewardItem < 100){					
 			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = infoList[index].totalReward.ToString();
 			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = infoList[index].itemName;
@@ -237,16 +255,32 @@ public class LobbyNCCommander : MonoBehaviour {
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel>().text = infoList[index].contestSeq.ToString();
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel>().text = infoList[index].gameSeq.ToString();
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel>().text = infoList[index].totalEntry.ToString();
+		item.Target.gameObject.transform.FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel>().text = infoList[index].totalPreset.ToString();
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("status").GetComponent<UILabel>().text = infoList[index].contestStatus.ToString();
+		item.Target.gameObject.transform.FindChild ("BG").FindChild ("MultiEntry").GetComponent<UILabel>().text = infoList[index].multiEntry.ToString();
 		item.Target.gameObject.name = "Contest " + index.ToString ();
-		
+
+
+		if (infoList [index].totalEntry == infoList [index].totalPreset) {
+			item.Target.GetComponent<UIButton>().enabled = false;
+			item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
+				new Color(155f/255f,155f/255f,155f/255f,1);
+		} else {
+			item.Target.GetComponent<UIButton>().enabled = true;
+			item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
+				new Color(146f/255f,39f/255f,143f/255f,1);
+		}
+
 		item.Target.gameObject.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
 		item.Target.gameObject.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
 		if(infoList[index].guaranteed == 1){
 			item.Target.gameObject.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
 		}
-		if(infoList[index].multiEntry > 1){
-			item.Target.gameObject.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+		if (infoList [index].multiEntry > 1) {
+			item.Target.gameObject.transform.FindChild ("Title").FindChild ("M").gameObject.SetActive (true);
+		} else {
+			item.Target.gameObject.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (228.5f,0,0);
 		}
 	}
 	public void NCUpDown(string Value){
@@ -266,22 +300,33 @@ public class LobbyNCCommander : MonoBehaviour {
 	}
 	void ResetNCData(){
 		try{
-		GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View").gameObject;
+		GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View2").gameObject;
 		for (int a = 0; a < CDE.Response.data.Count; a++) {
 
-			for (int i = 0; i<Count.transform.childCount; i++) {
-				if(CDE.Response.data[a].contestSeq == int.Parse(Count.transform.FindChild ("Contest " + i.ToString ()).
+			for (int i = 0; i<Count.transform.childCount-2; i++) {
+					if(CDE.Response.data[a].contestSeq == int.Parse(Count.transform.FindChild ("item index:" + i.ToString ()).
 				                                                FindChild("BG").FindChild("ContestSeq").GetComponent<UILabel>().text)){
 					
-					Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data[a].aTeamScore+" : "+CDE.Response.data[a].hTeamScore;
-					Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = CDE.Response.data[a].totalPreset+" / "+
-						Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
-					//                    if(UserMgr.CurrentContestSeq !=2){
+						Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data[a].aTeamScore+" : "+CDE.Response.data[a].hTeamScore;
+						Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = CDE.Response.data[a].totalPreset+" / "+
+							Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
+						//                    if(UserMgr.CurrentContestSeq !=2){
 					//                    if(CDE.Response.data[a].contestStatus == 2){
 					//                            UserMgr.CurrentContestSeq = CDE.Response.data[a].contestStatus;
 					//                            transform.FindChild("PreSet Contest").GetComponent<PresetContestCommander>().CreatItem();
 					//                    }
 					//                    }
+
+
+						if (Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
+							Count.GetComponent<UIButton>().enabled = false;
+							Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
+								new Color(155f/255f,155f/255f,155f/255f,1);
+						} else {
+							Count.GetComponent<UIButton>().enabled = true;
+							Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
+								new Color(146f/255f,39f/255f,143f/255f,1);
+						}
 					
 				}
 				

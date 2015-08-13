@@ -149,6 +149,7 @@ public class RightMenuCommander : MonoBehaviour {
 			memInfo.PhotoBytes = Setimagebyte;
 			GalleryCheck = false;
 		}
+		Debug.Log ("memInfo.MemberName : " + memInfo.MemberName);
 		event1 = new UpdateMemberInfoEvent (new EventDelegate (this, "Set"));
 		NetMgr.UpdateMemberInfo (memInfo, event1, UtilMgr.IsTestServer (), false);
 	}

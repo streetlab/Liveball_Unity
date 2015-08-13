@@ -15,6 +15,8 @@ public class UserMgr : MonoBehaviour {
 	List<ContestListInfo> _contestListInfo;
 	List<PresetListInfo> _presetListInfo;
 	List<PresetListInfo> _historyListInfo;
+	public static int CurrentContestTotalEntry;
+	public static int CurrentContestMultiEntry;
 	public static int CurrentContestSeq;
 	public static int CurrentPresetSeq;
 	public static int GameSeq;

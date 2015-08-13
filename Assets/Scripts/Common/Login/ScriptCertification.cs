@@ -117,7 +117,7 @@ public class ScriptCertification : MonoBehaviour {
 	}
 	public void OnDialogClicked(DialogueMgr.BTNS type){
 		if (type == DialogueMgr.BTNS.Cancel){ 
-
+			UserMgr.UserInfo.activeAuth+=1;
 				gameObject.transform.parent.gameObject.SetActive (false);
 			transform.root.FindChild("Item").GetComponent<ScriptItemMiddle>().Reset();
 			//	AutoFade.LoadLevel("SceneCards", 0f, 1f);

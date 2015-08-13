@@ -14,6 +14,7 @@ public class ScriptItemMiddle : MonoBehaviour {
 	List<UIListItem> ItemList = new List<UIListItem>();
 	void ActiveCount(){
 		UserMgr.UserInfo = mProfileEvent.Response.data;
+	
 	}
 
 	 public void Starts(){
@@ -21,8 +22,8 @@ public class ScriptItemMiddle : MonoBehaviour {
 			DialogueMgr.ShowDialogue ("사용 성공", "["+name+"]이 사용되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			UseItem = false;
 		}
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
-		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
+//		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
+//		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
 		//		if (Delete) {
 		//			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		//			Delete = false;
@@ -32,8 +33,8 @@ public class ScriptItemMiddle : MonoBehaviour {
 		NetMgr.GetInvenItem (mEvent);
 	}
 	public void Reset(){
-		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
-		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
+//		mProfileEvent = new GetProfileEvent (new EventDelegate (this, "ActiveCount"));
+//		NetMgr.GetProfile (UserMgr.UserInfo.memSeq, mProfileEvent);
 		//		if (Delete) {
 		//			DialogueMgr.ShowDialogue ("삭제 성공", "삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		//			Delete = false;

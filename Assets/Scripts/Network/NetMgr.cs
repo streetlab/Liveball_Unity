@@ -476,14 +476,14 @@ public class NetMgr : MonoBehaviour{
 	}
 	
 	
-	public static void GetUserRankingDailyForecast(int memSeq, BaseEvent baseEvent)
+	public static void GetUserRankingSeasonForecast(int memSeq, BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetUserRankingDailyForecast (memSeq), baseEvent);
+		Instance.webAPIProcessEvent (new GetUserRankingSeasonForecast (memSeq), baseEvent);
 	}
 	
-	public static void GetUserRankingDailyGold(int memSeq,BaseEvent baseEvent)
+	public static void GetUserRankingSeasonPoint(int memSeq,BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetUserRankingDailyGold (memSeq), baseEvent);
+		Instance.webAPIProcessEvent (new GetUserRankingSeasonPoint (memSeq), baseEvent);
 	}
 	
 	public static void GetUserRankingWeeklyForecast(int memSeq,BaseEvent baseEvent)
@@ -491,9 +491,9 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new GetUserRankingWeeklyForecast (memSeq), baseEvent);
 	}
 	
-	public static void GetUserRankingWeeklyGold(int memSeq,BaseEvent baseEvent)
+	public static void GetUserRankingWeeklyPoint(int memSeq,BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new GetUserRankingWeeklyGold (memSeq), baseEvent);
+		Instance.webAPIProcessEvent (new GetUserRankingWeeklyPoint (memSeq), baseEvent);
 	}
 	
 	public static void GetGameParticipantRanking(BaseEvent baseEvent)

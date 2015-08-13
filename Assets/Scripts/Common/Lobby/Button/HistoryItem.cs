@@ -12,6 +12,7 @@ public class HistoryItem : MonoBehaviour {
 		string gameSeq =  transform.parent.FindChild ("BG").FindChild ("GameSeq").GetComponent<UILabel> ().text;
 		string contestSeq =  transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text;
 		UserMgr.CurrentContestSeq = int.Parse (contestSeq);
+	
 		Debug.Log ("Title : " + Title);
 		Debug.Log ("MyRank : " + MyRank);
 		Debug.Log ("Tpreset : " + Tpreset);
@@ -19,6 +20,8 @@ public class HistoryItem : MonoBehaviour {
 		Debug.Log ("Rscore : " + Rscore);
 		Debug.Log ("Rcount : " + Rcount);
 		Debug.Log ("gameSeq : " + gameSeq);
+
+	
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("History Contest").
 			FindChild ("HistoryRanking").GetComponent<HistoryRankingClose> ().RankingOn (
 				Title,MyRank,Tpreset,Tentry,Rscore,Rcount,gameSeq);

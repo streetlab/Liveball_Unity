@@ -15,7 +15,8 @@ public class GiftUse : MonoBehaviour {
 	void D(){
 		ScriptItemMiddle.UseItem = true;
 		ScriptItemMiddle.name = transform.parent.FindChild ("name").GetComponent<UILabel> ().text;
-		AutoFade.LoadLevel("SceneCards", 0f, 1f);
+	
+		transform.root.FindChild ("Item").GetComponent<ScriptItemMiddle> ().Reset ();
 	
 	}
 	public void temp(){
@@ -24,7 +25,7 @@ public class GiftUse : MonoBehaviour {
 		NetMgr.DoneInvenItem (long.Parse(transform.parent.FindChild("itemNo").GetComponent<UILabel>().text)
 		                      ,long.Parse(transform.parent.FindChild("itemid").GetComponent<UILabel>().text),mEvent);
 		}catch{
-			AutoFade.LoadLevel("SceneCards", 0f, 1f);
+			//AutoFade.LoadLevel("SceneCards", 0f, 1f);
 		}
 	}
 

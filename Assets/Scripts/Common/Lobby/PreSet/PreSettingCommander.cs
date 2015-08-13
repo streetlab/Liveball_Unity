@@ -7,6 +7,7 @@ public class PreSettingCommander : MonoBehaviour {
 	public GameObject PreSettingItem;
 	public string cost;
 	public string money;
+	public string item;
 	public void CreatItem(){
 		for(int i = 0 ; i<9;i++){
 		GameObject Temp = (GameObject)Instantiate (PreSettingItem);
@@ -46,13 +47,17 @@ public class PreSettingCommander : MonoBehaviour {
 		transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 2").FindChild ("Label").GetComponent<UILabel> ().text
 			= R; 
 	}
-	public void Ruby(string R,string M){
-		cost = "";
-		for (int i = 3; i<R.Length; i++) {
-			cost+= R[i].ToString();
-		}
-		//cost = R;
+	public void Ruby(string R,string M,string I){
+//		cost = "";
+//		for (int i = 3; i<R.Length; i++) {
+//			cost+= R[i].ToString();
+//		}
+		cost = R;
 		money = M;
+		if (I == "ruby") {
+			I = "루비";
+		}
+		item = I;
 	}
 	public void SetList(List<string> List){
 		Debug.Log (List.Count);

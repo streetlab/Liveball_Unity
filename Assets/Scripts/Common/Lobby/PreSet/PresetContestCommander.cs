@@ -49,10 +49,11 @@ public class PresetContestCommander : MonoBehaviour {
 		if (UserMgr.ContestStatus == 2) {
 
 
+			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").FindChild("Label")
+				.GetComponent<UILabel>().text = "라이브";
 
 
-
-
+			transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").gameObject.SetActive(false);
 			
 			
 			if (List == null) {
@@ -179,22 +180,38 @@ public class PresetContestCommander : MonoBehaviour {
 						Item2.transform.FindChild ("BG").FindChild ("presetList").FindChild ("h7").GetComponent<UILabel> ().text = List [SeqList [i] [a]].h7.ToString ();
 						Item2.transform.FindChild ("BG").FindChild ("presetList").FindChild ("h8").GetComponent<UILabel> ().text = List [SeqList [i] [a]].h8.ToString ();
 						Item2.transform.FindChild ("BG").FindChild ("presetList").FindChild ("h9").GetComponent<UILabel> ().text = List [SeqList [i] [a]].h9.ToString ();
-						Debug.Log((List [SeqList [i] [a]].rewordCount/List [SeqList [i] [a]].totalPreset)*632);
+						Debug.Log((List [SeqList [i] [a]].rewardCount/List [SeqList [i] [a]].totalPreset)*632);
 
-						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2((List [SeqList [i] [a]].rewordCount/List [SeqList [i] [a]].totalPreset)*632,0);
-						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").GetComponent<UILabel>().text = List [SeqList [i] [a]].rewordScore.ToString();
-						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").localPosition = new Vector3(-316+(List [SeqList [i] [a]].rewordCount/List [SeqList [i] [a]].totalPreset)*632,-35);
-						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("Maker").localPosition = new Vector3(-316+(List [SeqList [i] [a]].myRank/List [SeqList [i] [a]].totalPreset)*632,23);
 
-						
+
+
+
+						if(List [SeqList [i] [a]].myRank==0){
+							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").localPosition = new Vector3(-316+((List [SeqList [i] [a]].rewardCount/List [SeqList [i] [a]].totalPreset)*632),-35);
+							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("Maker").localPosition = new Vector3(-316+((List [SeqList [i] [a]].myRank/List [SeqList [i] [a]].totalPreset)*632),23);
+							
+
+						}else{
+							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").localPosition = new Vector3(-316+(((List [SeqList [i] [a]].totalPreset-(List [SeqList [i] [a]].myRank-1))/List [SeqList [i] [a]].totalPreset)*632),-35);
+							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("Maker").localPosition = new Vector3(-316+(((List [SeqList [i] [a]].totalPreset-(List [SeqList [i] [a]].myRank-1))/List [SeqList [i] [a]].totalPreset)*632),23);
+							
+
+						}
+
+
+						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(((List [SeqList [i] [a]].totalPreset-(List [SeqList [i] [a]].rewardCount-1))/List [SeqList [i] [a]].totalPreset)*632,0);
+						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").GetComponent<UILabel>().text = List [SeqList [i] [a]].rewardScore.ToString();
+												
 						Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
 						Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
 						if(List [SeqList [i] [a]].guaranteed == 1){
 							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
 						}
-//						if(List [SeqList [i] [a]].multiEntry > 1){
-//							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
-//						}
+						if(List [SeqList [i] [a]].multiEntry > 1){
+							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+						}else{
+							Item2.transform.FindChild ("Title").FindChild("G").transform.localPosition = new Vector3(325f,0,0);
+						}
 
 
 					}
@@ -393,16 +410,49 @@ return a;
 								.FindChild("Entry").FindChild("entryentry").GetComponent<UILabel>().text = 
 							PDE.Response.data[a].totalPreset + " / " + PDE.Response.data[a].totalEntry;
 						if(UserMgr.ContestStatus == 2){
-							transform.FindChild ("Scroll View").FindChild ("Position").
-								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
-								                                            + " Sub " + s.ToString())
-									.FindChild("Bar").FindChild("BG").FindChild("Maker").localPosition = new Vector3(
-										-316+( PDE.Response.data[a].myRank/ PDE.Response.data[a].totalPreset)*632,23);
-							transform.FindChild ("Scroll View").FindChild ("Position").
-								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
-								                                            + " Sub " + s.ToString())
-									.FindChild("Bar").FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
-										-316+( PDE.Response.data[a].myRank/ PDE.Response.data[a].totalPreset)*632,-35);
+
+
+
+
+
+
+							if(PDE.Response.data[a].myRank==0){
+
+
+
+
+								transform.FindChild ("Scroll View").FindChild ("Position").
+									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
+									                                            + " Sub " + s.ToString())
+										.FindChild("Bar").FindChild("BG").FindChild("Maker").localPosition = new Vector3(
+											-316f+( (float)PDE.Response.data[a].myRank/ (float)PDE.Response.data[a].totalPreset)*632f,23);
+								transform.FindChild ("Scroll View").FindChild ("Position").
+									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
+									                                            + " Sub " + s.ToString())
+										.FindChild("Bar").FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
+											-316f+( (float)PDE.Response.data[a].myRank/ (float)PDE.Response.data[a].totalPreset)*632f,-35);
+
+
+
+
+
+
+							}else{
+								transform.FindChild ("Scroll View").FindChild ("Position").
+									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
+									                                            + " Sub " + s.ToString())
+										.FindChild("Bar").FindChild("BG").FindChild("Maker").localPosition = new Vector3(
+											-316f+(( (float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].myRank-1f)/ (float)PDE.Response.data[a].totalPreset)*632f),23);
+								transform.FindChild ("Scroll View").FindChild ("Position").
+									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
+									                                            + " Sub " + s.ToString())
+										.FindChild("Bar").FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
+											-316f+(( (float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].myRank-1f)/ (float)PDE.Response.data[a].totalPreset)*632f),-35);
+
+							}
+
+
+
 
 							transform.FindChild ("Scroll View").FindChild ("Position").
 								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
@@ -411,7 +461,7 @@ return a;
 							transform.FindChild ("Scroll View").FindChild ("Position").
 								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 								                                            + " Sub " + s.ToString())
-									.FindChild("Bar").FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2((PDE.Response.data[a].rewordCount/PDE.Response.data[a].totalPreset)*632,0);
+									.FindChild("Bar").FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(( (float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].rewordCount-1f)/ (float)PDE.Response.data[a].totalPreset)*632f,0);
 
 
 						}
@@ -433,7 +483,7 @@ return a;
 									transform.FindChild ("Scroll View").FindChild ("Position").
 										FindChild("Item " + i.ToString()).FindChild("Score").FindChild("Label").GetComponent<UILabel>().text = 
 							CDE.Response.data[a].aTeamScore + " : " + CDE.Response.data[a].hTeamScore;
-					Debug.Log(CDE.Response.data[a].contestStatus);
+					//Debug.Log(CDE.Response.data[a].contestStatus);
 					if(UserMgr.ContestStatus!=2){
 					if(CDE.Response.data[a].contestStatus == 2){
 							UserMgr.ContestStatus = CDE.Response.data[a].contestStatus;

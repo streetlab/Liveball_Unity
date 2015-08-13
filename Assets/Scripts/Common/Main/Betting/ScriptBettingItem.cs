@@ -134,6 +134,26 @@ public class ScriptBettingItem : MonoBehaviour {
 	public void OnClicked()
 	{
 		ClickCheck = true;
+		switch (name) {
+		case "BtnHit1":
+			QuizMgr.QuizValue =1;
+			break;
+		case "BtnHit2":
+			QuizMgr.QuizValue =2;
+			break;
+		case "BtnHit3":
+			QuizMgr.QuizValue =3;
+			break;
+		case "BtnOut1":
+			QuizMgr.QuizValue =4;
+			break;
+		case "BtnOut2":
+			QuizMgr.QuizValue =5;
+			break;
+		case "BtnOut3":
+			QuizMgr.QuizValue =6;
+			break;
+		};
 		ClickButton ();
 		GetComponent<UIButton> ().isEnabled = false;
 		OpenBetWindow (this.name);

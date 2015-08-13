@@ -35,9 +35,16 @@ public class RightMenu : MonoBehaviour {
 
 		} else if(name == "burger_menu_004"){
 			Application.OpenURL("https://game.nanoo.so/liveball");
+		}else if(name == "burger_menu_003"){
+			float Y = transform.root.FindChild ("Camera").localPosition.y;
+			transform.root.FindChild("Ranking").gameObject.SetActive(true);
+			transform.root.FindChild("Ranking").GetComponent<RankingCommander>().List01();
+			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
+
 		}
 	}
 	void AllOff(){
+		transform.root.FindChild("Ranking").gameObject.SetActive(false);
 		transform.root.FindChild ("Setting").gameObject.SetActive(false);
 		transform.root.FindChild ("TF_Items").gameObject.SetActive(false);
 		transform.root.FindChild ("Item").gameObject.SetActive(false);
