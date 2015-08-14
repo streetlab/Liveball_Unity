@@ -69,7 +69,7 @@ public class LobbyNCCommander : MonoBehaviour {
 					infoList.Add(cInfo);
 			}
 		}
-
+		
 		if(SubInSub.SelectedKind == 1){//ranking
 			for(int i = 0; i < infoList.Count; i++){
 				ContestListInfo cInfo = infoList[i];
@@ -141,6 +141,11 @@ public class LobbyNCCommander : MonoBehaviour {
 				return y.entryFee.CompareTo(x.entryFee);
 			});
 		}
+
+		//featured
+		infoList.Sort(delegate(ContestListInfo x, ContestListInfo y) {
+			return y.featured.CompareTo(x.featured);
+		});
 
 
 
