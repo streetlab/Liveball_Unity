@@ -735,7 +735,8 @@ public class ScriptTitle : MonoBehaviour {
 		Count++;
 		try{
 
-		LobbyGiftCommander.mGift.Textures.Add (Image,tmpTex);
+			LobbyGiftCommander.mGift.Textures.Add (Image,tmpTex);
+//			Debug.Log("Image name is "+Image);
 		
 		}catch{
 
@@ -769,7 +770,7 @@ public class ScriptTitle : MonoBehaviour {
 		//	Debug.Log("Image Name : "+ImageName);
 			LobbyGiftCommander.mGift.Textures.Add (ImageName,t);
 		
-		//Debug.Log ("ImageName : " + ImageName);
+//		Debug.Log ("ImageName : " + ImageName);
 		byte[] bytes = t.EncodeToPNG();
 
 		
