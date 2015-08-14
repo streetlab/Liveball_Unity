@@ -7,8 +7,8 @@ public class PopUp : MonoBehaviour {
 		Debug.Log (name);
 		if (name == "Button1") {
 			if (Status == "Profile") {
-				transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<RightMenuCommander> ().SetMemberName (transform.parent.FindChild
-			                                                                                                       ("Input").GetComponent<UIInput> ().value);
+				transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<RightMenuCommander> ().
+					SetMemberName (transform.parent.FindChild("Input").GetComponent<UIInput> ().value);
 				transform.parent.parent.gameObject.SetActive(false);
 			}
 		} else {

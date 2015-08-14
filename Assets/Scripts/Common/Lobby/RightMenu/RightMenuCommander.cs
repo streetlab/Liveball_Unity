@@ -286,6 +286,8 @@ public class RightMenuCommander : MonoBehaviour {
 //		UserMgr.UserInfo.memberName = UserName;
 //		UserMgr.UserInfo.memberEmail = UserEmail;
 		UserMgr.UserInfo.Textures = Setimage;
+
+		PlayerPrefs.SetString(Constants.PrefNick, SetName);
 	}
 	void Set2(){
 		UserMgr.UserInfo.memberName = SetName;

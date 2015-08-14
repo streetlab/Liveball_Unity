@@ -4,7 +4,7 @@ using System.Collections;
 public class Sub : MonoBehaviour {
 
 	public void button(){
-		Debug.Log ("MenuStatus " + LobbyMainCommander.MenuStatus +" : " + name);
+//		Debug.Log ("MenuStatus " + LobbyMainCommander.MenuStatus +" : " + name);
 		bool Check = false;
 		if (transform.FindChild (name + "Box").gameObject.activeSelf) {
 			Check = true;
