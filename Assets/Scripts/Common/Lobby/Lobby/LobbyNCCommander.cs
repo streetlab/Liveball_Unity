@@ -298,51 +298,76 @@ public class LobbyNCCommander : MonoBehaviour {
 		CDE = new ContestDataEvent (new EventDelegate (this, "ResetNCData"));
 		NetMgr.GetContestData (CDE);
 	}
-	void ResetNCData(){
-		try{
-		GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View2").gameObject;
-		for (int a = 0; a < CDE.Response.data.Count; a++) {
 
-			for (int i = 0; i<Count.transform.childCount-2; i++) {
-					if(CDE.Response.data[a].contestSeq == int.Parse(Count.transform.FindChild ("item index:" + i.ToString ()).
-				                                                FindChild("BG").FindChild("ContestSeq").GetComponent<UILabel>().text)){
-					
-						Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data[a].aTeamScore+" : "+CDE.Response.data[a].hTeamScore;
-						Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = CDE.Response.data[a].totalPreset+" / "+
-							Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
-						//                    if(UserMgr.CurrentContestSeq !=2){
-					//                    if(CDE.Response.data[a].contestStatus == 2){
-					//                            UserMgr.CurrentContestSeq = CDE.Response.data[a].contestStatus;
-					//                            transform.FindChild("PreSet Contest").GetComponent<PresetContestCommander>().CreatItem();
-					//                    }
-					//                    }
+	void getNCData(){
+		UserMgr.ContestList = CLE.Response.data;
 
 
-						if (Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
-							Count.GetComponent<UIButton>().enabled = false;
-							Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
-								new Color(155f/255f,155f/255f,155f/255f,1);
-						} else {
-							Count.GetComponent<UIButton>().enabled = true;
-							Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
-								new Color(146f/255f,39f/255f,143f/255f,1);
-						}
-					
-				}
-				
-			}
-
-	
-			UserMgr.ContestList[a].aTeamScore = CDE.Response.data[a].aTeamScore;
-			UserMgr.ContestList[a].hTeamScore = CDE.Response.data[a].hTeamScore;
-			UserMgr.ContestList[a].totalPreset = CDE.Response.data[a].totalPreset;
-		}
-		Debug.Log("CDE.Response.data.Count : " + CDE.Response.data.Count);
-		Debug.Log("UserMgr.ContestList.Count : " + UserMgr.ContestList.Count);
-		}catch{
-			Debug.Log("ArgumentOutOfRangeException: Argument is out of range.");
-		}
 
 		ResetList();
+	}
+
+
+	ContestListEvent CLE;
+
+	void ResetNCData(){
+		try {
+			Debug.Log ("CDE.Response.data.Count : " + CDE.Response.data.Count);
+			Debug.Log ("UserMgr.ContestList.Count : " + UserMgr.ContestList.Count);
+			if (UserMgr.ContestList != null) {
+				if (UserMgr.ContestList.Count < CDE.Response.data.Count) {
+					CLE = new ContestListEvent (new EventDelegate (this, "getNCData"));
+					NetMgr.GetContestList (CLE);
+				} else {
+			
+					GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View2").gameObject;
+					for (int a = 0; a < CDE.Response.data.Count; a++) {
+
+						for (int i = 0; i<Count.transform.childCount-2; i++) {
+							if (CDE.Response.data [a].contestSeq == int.Parse (Count.transform.FindChild ("item index:" + i.ToString ()).
+				                                                FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text)) {
+					
+								Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data [a].aTeamScore + " : " + CDE.Response.data [a].hTeamScore;
+								Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = CDE.Response.data [a].totalPreset + " / " +
+									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
+								//                    if(UserMgr.CurrentContestSeq !=2){
+								//                    if(CDE.Response.data[a].contestStatus == 2){
+								//                            UserMgr.CurrentContestSeq = CDE.Response.data[a].contestStatus;
+								//                            transform.FindChild("PreSet Contest").GetComponent<PresetContestCommander>().CreatItem();
+								//                    }
+								//                    }
+
+
+								if (Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
+									Count.GetComponent<UIButton> ().enabled = false;
+									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
+								new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
+								} else {
+									Count.GetComponent<UIButton> ().enabled = true;
+									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
+								new Color (146f / 255f, 39f / 255f, 143f / 255f, 1);
+								}
+					
+							}
+				
+						}
+
+	
+						UserMgr.ContestList [a].aTeamScore = CDE.Response.data [a].aTeamScore;
+						UserMgr.ContestList [a].hTeamScore = CDE.Response.data [a].hTeamScore;
+						UserMgr.ContestList [a].totalPreset = CDE.Response.data [a].totalPreset;
+					}
+				
+					ResetList ();
+				}
+
+
+			}
+			
+		
+		} catch {
+			Debug.Log ("ArgumentOutOfRangeException: Argument is out of range.");
+
+		}
 	}
 }

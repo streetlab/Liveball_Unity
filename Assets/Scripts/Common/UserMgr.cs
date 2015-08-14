@@ -15,6 +15,7 @@ public class UserMgr : MonoBehaviour {
 	List<ContestListInfo> _contestListInfo;
 	List<PresetListInfo> _presetListInfo;
 	List<PresetListInfo> _historyListInfo;
+	Dictionary<string,List<GamePresetLineupInfo>> _LineUpList = new Dictionary<string, List<GamePresetLineupInfo>>();
 	public static int CurrentContestTotalEntry;
 	public static int CurrentContestMultiEntry;
 	public static int CurrentContestSeq;
@@ -105,14 +106,11 @@ public class UserMgr : MonoBehaviour {
 			Instance.userMailCount = value;
 		}
 	}
-
-	
-	public static LineupInfo HomeLineup {
-		get {
-			return Instance._homeLineup;
-		}
-		set {
-			Instance._homeLineup = value;
-		}
+	public static Dictionary<string,List<GamePresetLineupInfo>> LineUpList
+	{
+		get{return Instance._LineUpList;}
+		set{Instance._LineUpList = value;}
 	}
+
+
 }

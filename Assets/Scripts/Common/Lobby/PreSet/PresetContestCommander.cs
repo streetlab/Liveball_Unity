@@ -355,6 +355,16 @@ public class PresetContestCommander : MonoBehaviour {
 						Item2.transform.FindChild ("BG").FindChild ("presetList").FindChild ("h9").GetComponent<UILabel> ().text = List [SeqList [i] [a]].h9.ToString ();
 
 
+						Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
+						Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
+						if(List [SeqList [i] [a]].guaranteed == 1){
+							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+						}
+						if(List [SeqList [i] [a]].multiEntry > 1){
+							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+						}else{
+							Item2.transform.FindChild ("Title").FindChild("G").transform.localPosition = new Vector3(325f,0,0);
+						}
 					}
 				}
 			}

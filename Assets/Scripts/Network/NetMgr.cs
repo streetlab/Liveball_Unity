@@ -443,6 +443,11 @@ public class NetMgr : MonoBehaviour{
 		Instance.webAPIProcessEvent (new ContestPresetChangeRequest (quizSeq,presetValue), baseEvent);
 	}
 
+	public static void GetGamePresetLineup(int gameSeq,BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new GetGamePresetLineupRequset (gameSeq), baseEvent);
+	}
+
 	public static void PresetAdd(int ContestSeq,List<int> ChoseList,BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new PresetAddRequest (ContestSeq,ChoseList), baseEvent);

@@ -248,9 +248,9 @@ public class UtilMgr : MonoBehaviour {
 		}
 		return "ic_liveball";
 	}
-	public static string GetTeamCode(string imgName)
+	public static string GetTeamCode(string teamname)
 	{
-		switch(imgName)
+		switch(teamname)
 		{
 		case "LG":
 			return "LG";
@@ -270,10 +270,11 @@ public class UtilMgr : MonoBehaviour {
 			return "SK";        
 		case "NC":
 			return "NC";
+		case "kt":
 		case "KT":
 			return "kt";
 		}
-		return "ic_liveball";
+		return "none";
 	}
 
 	public static string GetTeamName(string teamCode)
