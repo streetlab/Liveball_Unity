@@ -14,8 +14,8 @@ public class GetDoneMailEvent : BaseEvent {
 	{
 		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetDoneMailResponse>(data);
 
-//		if (checkError ())
-//			return;
+		if (checkError ())
+			return;
 
 		eventDelegate.Execute ();
 	}

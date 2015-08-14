@@ -14,8 +14,8 @@ public class GetCheckMailEvent : BaseEvent {
 	{
 		response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCheckMailResponse>(data);
 
-//		if (checkError ())
-//			return;
+		if (checkError ())
+			return;
 
 		eventDelegate.Execute ();
 	}
