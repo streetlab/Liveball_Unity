@@ -115,13 +115,13 @@ public class Presetplaying : MonoBehaviour {
 			
 		}
 		for (int i = 0; i<G.transform.childCount; i++) {
-			if(List[i] !=0&&List[i] !=null){
+			if(List[i+9] !=0&&List[i+9] !=null){
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 					FindChild("use").gameObject.SetActive(true);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 					FindChild("non").gameObject.SetActive(false);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[List[i+8]-1];
+					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[List[i+9]-1];
 			}
 			
 			

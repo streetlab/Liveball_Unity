@@ -42,8 +42,13 @@ public class PostgetButton : MonoBehaviour {
 		//getprofile
 
 		UserMgr.UserMailCount -= 1;
-		DialogueMgr.ShowDialogue ("지급 완료", transform.parent.FindChild("Name").GetComponent<UILabel>().text+" 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		
+
+		if (transform.parent.FindChild ("Code").GetComponent<UILabel> ().text != "ITEM_GIFT") {
+			DialogueMgr.ShowDialogue ("지급 완료", "["+transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "] 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else {
+
+			DialogueMgr.ShowDialogue ("지급 완료","[" +transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "]이 인벤토리로 지급되었습니다.\n인벤토리를 확인하세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
 
 	
 	}

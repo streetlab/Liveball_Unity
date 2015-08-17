@@ -19,7 +19,7 @@ public class PresetItem : MonoBehaviour {
 
 	}
 	public void Button(){
-
+		ScriptMainTop.OpenBettingCheck = true;
 		UserMgr.GameSeq = int.Parse (transform.parent.FindChild ("BG").FindChild ("GameSeq").GetComponent<UILabel> ().text);
 		transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").GetComponent<PreSettingCommander>
 			().Mode = "Update";
@@ -38,7 +38,7 @@ public class PresetItem : MonoBehaviour {
 //		NetMgr.GetScheduleToday (GSE);
 //		UserMgr.ContestStatus = 1;
 		if (UserMgr.ContestStatus == 2) {
-	
+		
 
 			try{
 				if(UserMgr.LineUpList[transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text]!=null){

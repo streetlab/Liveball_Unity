@@ -16,19 +16,51 @@ public class BotMenu : MonoBehaviour {
 			if(mScroll.transform.FindChild("Main")!=null){
 				AllOff();
 				Off();
+				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
 			mScroll.transform.FindChild("Main").gameObject.SetActive(true);
 			}else{
 				AutoFade.LoadLevel ("SceneLobby", 0f, 1f);
 			}
 			break;
 		case 1:
+			//ScriptMainTop.OpenBettingCheck = false;
 			AllOff();
 			Off();
+			if(Application.loadedLevelName.Equals ("SceneMain 1")){
+			if(mScroll.transform.FindChild("GameInfo").gameObject.activeSelf){
+				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
+				if(Application.loadedLevelName.Equals ("SceneMain 1")){
+					transform.root.FindChild("Scroll").FindChild("ContestIn").localPosition = new Vector3(0,0,0);
+				}
+			}else{
+
+				if(Application.loadedLevelName.Equals ("SceneMain 1")){
+					transform.root.FindChild("Scroll").FindChild("ContestIn").localPosition = new Vector3(-720,0,0);
+				}
 			mScroll.transform.FindChild("GameInfo").gameObject.SetActive(true);
 			mScroll.transform.FindChild("GameInfo").GetComponent<ScriptGameInfo>().Init();
+				}
+			}else{
+				AllOff();
+				Off();
+				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
+				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(true);
+				mScroll.transform.FindChild("GameInfo").GetComponent<ScriptGameInfo>().Init();
+
+			}
+
+			GetComponent<UIButton>().enabled = true;
 			break;
 		case 2:
 			AllOff();
+			//Off();
+
+			mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
+			mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
+			mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;
+			mScroll.transform.FindChild("Bot").FindChild("---").GetComponent<UIButton>().enabled = true;
+			mScroll.transform.FindChild("Bot").FindChild("Post").GetComponent<UIButton>().enabled = true;
+			GetComponent<UIButton>().enabled = false;
 			if(transform.FindChild("Scroll View").gameObject.activeSelf){
 				transform.FindChild("Scroll View").gameObject.SetActive(false);
 			}else{
@@ -66,8 +98,10 @@ public class BotMenu : MonoBehaviour {
 	}
 
 	void Off(){
-		mScroll.transform.FindChild("Main").gameObject.SetActive(false);
-		mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
+		if (mScroll.transform.FindChild ("Main") != null) {
+			mScroll.transform.FindChild ("Main").gameObject.SetActive (false);
+		}
+
 		mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
 		mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
 		mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;

@@ -23,7 +23,7 @@ public class RankingCommander : MonoBehaviour {
 	public void List02(){
 		Alloff ();
 		transform.FindChild ("Scroll View2").gameObject.SetActive (true);
-		if (Rank1) {
+		if (Rank2) {
 			mGetRankEvent = new GetRankEvent (new EventDelegate (this, "SetRank2"));
 			NetMgr.GetUserRankingSeasonForecast (UserMgr.UserInfo.memSeq, mGetRankEvent);
 		}
@@ -90,7 +90,7 @@ public class RankingCommander : MonoBehaviour {
 				
 			
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
-					StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage1 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
 
 			}
 			}
@@ -138,7 +138,7 @@ public class RankingCommander : MonoBehaviour {
 				
 				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
-					StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage2 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
 				}
 			}
 			
@@ -187,7 +187,7 @@ public class RankingCommander : MonoBehaviour {
 				
 				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
-					StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage3 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
 				}
 			}
 			
@@ -237,7 +237,7 @@ public class RankingCommander : MonoBehaviour {
 				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
 				
-					StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage4 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
 				
 					}
 			}
@@ -248,11 +248,11 @@ public class RankingCommander : MonoBehaviour {
 		transform.FindChild ("Scroll View4").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 		Rank4 = false;
 	}
-	IEnumerator GetImage(WWW www, UITexture texture,int index)
+	IEnumerator GetImage1(WWW www, UITexture texture,int index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
-	
+		
 		try{
 			www.LoadImageIntoTexture (tmpTex);
 			List1.Add (index, tmpTex);
@@ -261,6 +261,47 @@ public class RankingCommander : MonoBehaviour {
 		}
 		texture.mainTexture = tmpTex;
 		
-		//Sprite a = Sprite.Create(tmpTex,new Rect(0,0,tmpTex.width,tmpTex.y),new Vector2(0.5f,0.5f));
+	}
+	IEnumerator GetImage2(WWW www, UITexture texture,int index)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (0, 0);
+		
+		try{
+			www.LoadImageIntoTexture (tmpTex);
+			List2.Add (index, tmpTex);
+		}catch{
+			Debug.Log("Same key : " + index.ToString());
+		}
+		texture.mainTexture = tmpTex;
+		
+	}
+	IEnumerator GetImage3(WWW www, UITexture texture,int index)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (0, 0);
+		
+		try{
+			www.LoadImageIntoTexture (tmpTex);
+			List3.Add (index, tmpTex);
+		}catch{
+			Debug.Log("Same key : " + index.ToString());
+		}
+		texture.mainTexture = tmpTex;
+		
+	}
+	IEnumerator GetImage4(WWW www, UITexture texture,int index)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (0, 0);
+		
+		try{
+			www.LoadImageIntoTexture (tmpTex);
+			List4.Add (index, tmpTex);
+		}catch{
+			Debug.Log("Same key : " + index.ToString());
+		}
+		texture.mainTexture = tmpTex;
+		
 	}
 }

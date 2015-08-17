@@ -150,29 +150,31 @@ public class QuizMgr : MonoBehaviour {
 			Debug.Log("simpleEvent.Response.data[0].respStatus : "+simpleEvent.Response.data[0].respStatus);
 
 		}
-		if(simpleEvent.Response.data[0].respStatus > 0
-		   || simpleEvent.Response.data[0].isCancel > 0){
+		if (simpleEvent.Response.data [0].respStatus > 0
+			|| simpleEvent.Response.data [0].isCancel > 0) {
 			quiz.resp = new List<QuizRespInfo> ();
 			QuizRespInfo tmpInfo;
 			if (simpleEvent.Response.data.Count > 1) {
 				//got 2 answers
-				tmpInfo = new QuizRespInfo();
-				tmpInfo.respValue = simpleEvent.Response.data[1].respValue;
-				tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[1].rewardPoint);
-				quiz.resp.Add(tmpInfo);
+				tmpInfo = new QuizRespInfo ();
+				tmpInfo.respValue = simpleEvent.Response.data [1].respValue;
+				tmpInfo.expectRewardPoint = int.Parse (simpleEvent.Response.data [1].rewardPoint);
+				quiz.resp.Add (tmpInfo);
 			} 
 			
-			tmpInfo = new QuizRespInfo();
-			tmpInfo.respValue = simpleEvent.Response.data[0].respValue;
-			tmpInfo.expectRewardPoint = int.Parse(simpleEvent.Response.data[0].rewardPoint);
-			quiz.resp.Insert(0, tmpInfo);
-			Debug.Log ("simpleEvent.Response.data[0].isCancel : " + simpleEvent.Response.data[0].isCancel);
-			if(simpleEvent.Response.data[0].isCancel > 0){
-				ShowQuizResult (quiz, simpleEvent, scriptQuizResult);
-			} else{
+			tmpInfo = new QuizRespInfo ();
+			tmpInfo.respValue = simpleEvent.Response.data [0].respValue;
+			tmpInfo.expectRewardPoint = int.Parse (simpleEvent.Response.data [0].rewardPoint);
+			quiz.resp.Insert (0, tmpInfo);
+			Debug.Log ("simpleEvent.Response.data[0].isCancel : " + simpleEvent.Response.data [0].isCancel);
+			if (ScriptMainTop.OpenBettingCheck) {
+				if (simpleEvent.Response.data [0].isCancel > 0) {
+					ShowQuizResult (quiz, simpleEvent, scriptQuizResult);
+				} else {
 //			if(simpleEvent.Response.data[0].isCancel < 1){
-				if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
-					scriptQuizResult.InitParticle();
+					if (ShowQuizResult (quiz, simpleEvent, scriptQuizResult)) {
+						scriptQuizResult.InitParticle ();
+					}
 				}
 			}
 		}

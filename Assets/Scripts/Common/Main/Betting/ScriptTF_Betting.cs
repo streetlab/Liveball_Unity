@@ -600,17 +600,21 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 	}
 	IEnumerator OpenAnimations(){
-
+		Debug.Log ("OpenAnimations");
 		transform.FindChild ("SprBG").gameObject.SetActive (true);
 
 		shadow.SetActive (true);
 		QuizMgr.IsBettingOpended = true;
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
-		Menu.transform.localPosition=new Vector3(0,-651f,0);
+
+		Menu.transform.localPosition=new Vector3(0,-651f+UtilMgr.GetScaledPositionY (),0);
 		transform.FindChild ("Scroll View").gameObject.SetActive (true);
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition+=new Vector3(0,655f/5f,0);
-			if(Menu.transform.localPosition.y==3){
+			Debug.Log("Menu.transform.localPosition.y : " + Menu.transform.localPosition.y);
+			Debug.Log("3+UtilMgr.GetScaledPositionY () : " + (3+UtilMgr.GetScaledPositionY ()));
+			if(Menu.transform.localPosition.y>=3+UtilMgr.GetScaledPositionY ()){
+				Menu.transform.localPosition=new Vector3(0,3+UtilMgr.GetScaledPositionY (),0);
 				break;
 			}
 			yield return new WaitForSeconds(0.05f);
@@ -620,10 +624,11 @@ public class ScriptTF_Betting : MonoBehaviour {
 	IEnumerator CloseAnimations(){
 
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
-		Menu.transform.localPosition=new Vector3(0,3,0);
+		Menu.transform.localPosition=new Vector3(0,3+UtilMgr.GetScaledPositionY (),0);
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition-=new Vector3(0,651f/5f,0);
-			if(Menu.transform.localPosition.y==-651){
+			if(Menu.transform.localPosition.y<=-651+UtilMgr.GetScaledPositionY ()){
+				Menu.transform.localPosition=new Vector3(0,-651f+UtilMgr.GetScaledPositionY (),0);
 				break;
 			}
 			yield return new WaitForSeconds(0.05f);
@@ -651,6 +656,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 	}
 	public void OpenAnimation(QuizInfo quizInfo)
 	{
+		Debug.Log ("OpenAnimation(QuizInfo quizInfo)");
 		//QuizMgr.QuizValue = 0;
 		ScriptBettingItem.ClickCheck = false;
 		Mark (quizInfo);
@@ -667,6 +673,24 @@ public class ScriptTF_Betting : MonoBehaviour {
 		Debug.Log ("CloseBetting");
 	}
 	void Mark(QuizInfo quizInfo){
+
+		mBatting.transform.FindChild("SprHit").FindChild("BtnHit1").FindChild("LblGP").GetComponent<UILabel>().color
+			= new Color(72f/255f,122f/255f,159f/255f,1);
+		mBatting.transform.FindChild("SprHit").FindChild("BtnHit2").FindChild("LblGP").GetComponent<UILabel>().color
+			= new Color(72f/255f,122f/255f,159f/255f,1);
+		mBatting.transform.FindChild("SprHit").FindChild("BtnHit3").FindChild("LblGP").GetComponent<UILabel>().color
+			= new Color(72f/255f,122f/255f,159f/255f,1);
+		mBatting.transform.FindChild("SprOut").FindChild("BtnOut1").FindChild("LblGP").GetComponent<UILabel>().color
+			= new Color(72f/255f,122f/255f,159f/255f,1);
+		mBatting.transform.FindChild("SprOut").FindChild("BtnOut2").FindChild("LblGP").GetComponent<UILabel>().color
+			= new Color(72f/255f,122f/255f,159f/255f,1);
+		mBatting.transform.FindChild("SprOut").FindChild("BtnOut3").FindChild("LblGP").GetComponent<UILabel>().color
+			= new Color(72f/255f,122f/255f,159f/255f,1);
+		
+		
+		
+
+
 		Debug.Log ("Mark " + UserMgr.PresetChooseList [(quizInfo.lineUp) * (quizInfo.inningType + 1)-1].ToString());
 		Debug.Log ("Mark " + quizInfo.inningType);
 		int num = UserMgr.PresetChooseList [quizInfo.lineUp-1];
@@ -677,31 +701,43 @@ public class ScriptTF_Betting : MonoBehaviour {
 			num) {
 		case 1:
 			mBatting.transform.FindChild("SprHit").FindChild("BtnHit1").GetComponent<UIButton>().isEnabled = false;
+			mBatting.transform.FindChild("SprHit").FindChild("BtnHit1").FindChild("LblGP").GetComponent<UILabel>().color
+				= new Color(1,1,1,1);
 			QuizMgr.QuizValue = 1;
 			break;
 
 		case 2:
 			mBatting.transform.FindChild("SprHit").FindChild("BtnHit2").GetComponent<UIButton>().isEnabled = false;
+			mBatting.transform.FindChild("SprHit").FindChild("BtnHit2").FindChild("LblGP").GetComponent<UILabel>().color
+				= new Color(1,1,1,1);
 			QuizMgr.QuizValue = 2;
 			break;
 
 		case 3:
 			mBatting.transform.FindChild("SprHit").FindChild("BtnHit3").GetComponent<UIButton>().isEnabled = false;
+			mBatting.transform.FindChild("SprHit").FindChild("BtnHit3").FindChild("LblGP").GetComponent<UILabel>().color
+				= new Color(1,1,1,1);
 			QuizMgr.QuizValue = 3;
 			break;
 
 		case 4:
 			mBatting.transform.FindChild("SprOut").FindChild("BtnOut1").GetComponent<UIButton>().isEnabled = false;
+			mBatting.transform.FindChild("SprOut").FindChild("BtnOut1").FindChild("LblGP").GetComponent<UILabel>().color
+				= new Color(1,1,1,1);
 			QuizMgr.QuizValue = 4;
 			break;
 
 		case 5:
 			mBatting.transform.FindChild("SprOut").FindChild("BtnOut2").GetComponent<UIButton>().isEnabled = false;
+			mBatting.transform.FindChild("SprOut").FindChild("BtnOut2").FindChild("LblGP").GetComponent<UILabel>().color
+				= new Color(1,1,1,1);
 			QuizMgr.QuizValue = 5;
 			break;
 
 		case 6:
 			mBatting.transform.FindChild("SprOut").FindChild("BtnOut3").GetComponent<UIButton>().isEnabled = false;
+			mBatting.transform.FindChild("SprOut").FindChild("BtnOut3").FindChild("LblGP").GetComponent<UILabel>().color
+				= new Color(1,1,1,1);
 			QuizMgr.QuizValue = 6;
 			break;
 

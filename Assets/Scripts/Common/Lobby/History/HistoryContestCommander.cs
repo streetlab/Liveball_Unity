@@ -43,7 +43,7 @@ public class HistoryContestCommander : MonoBehaviour {
 				}
 		//	Debug.Log("Seq : " + Seq.Count);
 			for (int i = 0; i<Seq.Count; i++) {
-				Debug.Log("SeqList[i] : " + SeqList[i]+ " i : " + i);
+				//Debug.Log("SeqList[i] : " + SeqList[i]+ " i : " + i);
 				GameObject Item1 = (GameObject)Instantiate (PresetContestItem1);
 				Item1.transform.parent = transform.FindChild ("Scroll View").FindChild ("Position");
 				Item1.transform.localScale = new Vector3 (1, 1, 1);
@@ -56,8 +56,7 @@ public class HistoryContestCommander : MonoBehaviour {
 						+ List [Seq [SeqList[i]][0]].startTime [10] + List [Seq [SeqList[i]][0]].startTime [11] + " " +
 						AMPM (int.Parse ((List [Seq [SeqList[i]][0]].startTime [8]).ToString () + List [Seq [SeqList[i]][0]].startTime [9].ToString ())) + "경기";
 				
-				Debug.Log("text : "
-				          +Item1.transform.FindChild ("Time").FindChild ("Label").GetComponent<UILabel> ().text);
+//				Debug.Log("text : "+Item1.transform.FindChild ("Time").FindChild ("Label").GetComponent<UILabel> ().text);
 				//Debug.Log (List [SeqList [i] [0]].startTime);
 				Item1.transform.FindChild ("LTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][0]].aTeamName;
 				Item1.transform.FindChild ("RTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][0]].hTeamName;
@@ -93,13 +92,13 @@ public class HistoryContestCommander : MonoBehaviour {
 					Item2.transform.FindChild ("BG").FindChild ("presetSeq").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].presetSeq.ToString ();
 					Item2.transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text =List [Seq [SeqList[i]][a]].contestSeq.ToString ();
 					Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].contestName;
-					Debug.Log("List [SeqList [i] [a]].contestName : " + List [Seq [SeqList[i]][a]].contestName);
+					//Debug.Log("List [SeqList [i] [a]].contestName : " + List [Seq [SeqList[i]][a]].contestName);
 					
 					Item2.transform.FindChild ("BG").FindChild ("totalpreset").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].totalPreset.ToString ();
 					Item2.transform.FindChild ("BG").FindChild ("totalentry").GetComponent<UILabel> ().text =List [Seq [SeqList[i]][a]].totalEntry.ToString ();
 					Item2.transform.FindChild ("BG").FindChild ("myrank").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].myRank.ToString ();
 					Item2.transform.FindChild ("BG").FindChild ("rewordscore").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].rewardScore.ToString ();
-					Debug.Log("List [SeqList [i] [a]].rewordCount.ToString () : " + List [Seq [SeqList[i]][a]].rewardCount.ToString ());
+				//	Debug.Log("List [SeqList [i] [a]].rewordCount.ToString () : " + List [Seq [SeqList[i]][a]].rewardCount.ToString ());
 					Item2.transform.FindChild ("BG").FindChild ("rewordcount").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].rewardCount.ToString ();
 					
 					

@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 
 public class ScriptMainTop : MonoBehaviour {
-	
+
+	public static bool OpenBettingCheck =true;
+
 	public GameObject mHighlight;
 	public GameObject mLineup;
 	public GameObject mBingo;
@@ -739,7 +741,14 @@ public class ScriptMainTop : MonoBehaviour {
 					.gameObject.SetActive(false);
 				Debug.Log("Nonstart off");
 			}
-			
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("Challenge").FindChild("Scroll View").gameObject.SetActive(false);
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("BtnPost").FindChild("TF_Post").gameObject.SetActive(false);
+
+			transform.root.FindChild("TF_Items").gameObject.SetActive(false);
+			transform.root.FindChild("Item").gameObject.SetActive(false);
+			transform.root.FindChild("Setting").gameObject.SetActive(false);
+
+
 			Debug.Log ("OpenBetting");
 			#if(UNITY_EDITOR)
 			
@@ -777,21 +786,23 @@ public class ScriptMainTop : MonoBehaviour {
 			QuizMgr.HasQuiz = true;
 			QuizMgr.MoreQuiz = true;
 			mBetting.GetComponent<ScriptTF_Betting> ().Init (quizInfo);
-			
+			Debug.Log("OpenBettingCheck : " + OpenBettingCheck);
+			if(OpenBettingCheck){
 			
 			
 			transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation(quizInfo);
 			transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
-			//if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
-			if(UserMgr.Schedule.myEntryFee!=null){
-				if(
-					int.Parse(UserMgr.Schedule.myEntryFee)>0){
-					
-					//transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
-					transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation(quizInfo);
-					transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
-				}
 			}
+			//if (!transform.parent.FindChild ("TF_Items").gameObject.activeSelf) {
+//			if(UserMgr.Schedule.myEntryFee!=null){
+//				if(
+//					int.Parse(UserMgr.Schedule.myEntryFee)>0){
+//					
+//					//transform.GetComponent<PlayMakerFSM> ().SendEvent ("OpenBetting");
+//					transform.parent.FindChild ("TF_Betting").GetComponent<ScriptTF_Betting>().OpenAnimation(quizInfo);
+//					transform.root.GetComponent<AudioSource> ().PlayOneShot (mSoundOpenBet);
+//				}
+//			}
 			//}
 			
 			transform.FindChild ("TopInfoItem").GetComponent<ScriptTopInfoItem> ().SetGoldInfo ();

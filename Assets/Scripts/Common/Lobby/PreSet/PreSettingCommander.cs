@@ -87,7 +87,7 @@ public class PreSettingCommander : MonoBehaviour {
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 					FindChild("non").gameObject.SetActive(false);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[int.Parse(List[i+8])-1];
+					FindChild("use").FindChild("Label").GetComponent<UILabel>().text = Value[int.Parse(List[i+9])-1];
 			}
 
 			

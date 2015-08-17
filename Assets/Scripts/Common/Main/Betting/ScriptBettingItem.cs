@@ -154,12 +154,20 @@ public class ScriptBettingItem : MonoBehaviour {
 			QuizMgr.QuizValue =6;
 			break;
 		};
+		ButtonReset ();
 		transform.FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (1,1,1,1);
 		ClickButton ();
 		GetComponent<UIButton> ().isEnabled = false;
 		OpenBetWindow (this.name);
 	}
-
+	void ButtonReset(){
+		transform.parent.parent.FindChild("SprHit").FindChild("BtnHit1").FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (72f/255f,122f/255,159f/255f,1);
+		transform.parent.parent.FindChild("SprHit").FindChild("BtnHit2").FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (72f/255f,122f/255,159f/255f,1);
+		transform.parent.parent.FindChild("SprHit").FindChild("BtnHit3").FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (72f/255f,122f/255,159f/255f,1);
+		transform.parent.parent.FindChild("SprOut").FindChild("BtnOut1").FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (72f/255f,122f/255,159f/255f,1);
+		transform.parent.parent.FindChild("SprOut").FindChild("BtnOut2").FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (72f/255f,122f/255,159f/255f,1);
+		transform.parent.parent.FindChild("SprOut").FindChild("BtnOut3").FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (72f/255f,122f/255,159f/255f,1);
+	}
 	void OpenBetWindow(string name)
 	{
 
