@@ -154,6 +154,7 @@ public class ScriptBettingItem : MonoBehaviour {
 			QuizMgr.QuizValue =6;
 			break;
 		};
+		transform.FindChild ("LblGP").GetComponent<UILabel> ().color = new Color (1,1,1,1);
 		ClickButton ();
 		GetComponent<UIButton> ().isEnabled = false;
 		OpenBetWindow (this.name);

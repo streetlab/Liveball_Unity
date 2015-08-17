@@ -76,14 +76,14 @@ public class PresetDataInfo {
 		}
 	}
 
-	int _rewordCount;
+	int _rewardCount;
 	// preset game have
-	public int rewordCount {
+	public int rewardCount {
 		get {
-			return _rewordCount;
+			return _rewardCount;
 		}
 		set {
-			_rewordCount = value;
+			_rewardCount = value;
 		}
 	}
 	

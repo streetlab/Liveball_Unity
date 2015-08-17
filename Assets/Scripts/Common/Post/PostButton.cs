@@ -91,30 +91,30 @@ public class PostButton : MonoBehaviour {
 				temp.transform.localPosition -= po;
 					temp.name = "Mail " + i.ToString();
 				temp.transform.FindChild("Name").GetComponent<UILabel>().text = Mails[i].mailTitle;
-				string limit = Mails[i].attach[0].limitDateTime;
-				char [] limitlist;
-				List<string> result = new List<string>();
-				if(limit.Length>10){
-				limitlist = limit.ToCharArray();
-				for(int q = 0; q<limitlist.Length-2;q++){
-					result.Add(limitlist[q].ToString());
-					if(q==3){
-							result.Add("년");
-						}else if(q==5){
-							result.Add("월");
-						}else if(q==7){
-							result.Add("일");
-						}else if(q==9){
-							result.Add("시");
-						}else if(q==11){
-							result.Add("분");
-						}
-				}
-				limit = string.Join("",result.ToArray());
+//				string limit = Mails[i].attach[0].limitDateTime;
+//				char [] limitlist;
+//				List<string> result = new List<string>();
+//				if(limit.Length>10){
+//				limitlist = limit.ToCharArray();
+//				for(int q = 0; q<limitlist.Length-2;q++){
+//					result.Add(limitlist[q].ToString());
+//					if(q==3){
+//							result.Add("년");
+//						}else if(q==5){
+//							result.Add("월");
+//						}else if(q==7){
+//							result.Add("일");
+//						}else if(q==9){
+//							result.Add("시");
+//						}else if(q==11){
+//							result.Add("분");
+//						}
+//				}
+//				limit = string.Join("",result.ToArray());
+					
 
-
-				temp.transform.FindChild("Lmite").GetComponent<UILabel>().text = limit;
-				}
+						temp.transform.FindChild("Lmite").GetComponent<UILabel>().text = Mails[i].attach[0].attachDesc;
+				//}
 					//+ " " + Mails[i].attach[0].attachValue.ToString();
 				Debug.Log(temp.transform.FindChild("Name").GetComponent<UILabel>().text + " status : " + Mails[i].mailStatus);
 				temp.transform.FindChild("mailseq").GetComponent<UILabel>().text = Mails[i].mailSeq.ToString();

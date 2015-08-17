@@ -64,6 +64,28 @@ public class Presetplaying : MonoBehaviour {
 				transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo")
 				.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamName").FindChild ("Label").GetComponent<UILabel> ().text;
 
+
+		string Ateam = UtilMgr.GetTeamCode (transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 1").FindChild ("Label").GetComponent<UILabel> ().
+		                                    text.Replace("[b]",""));
+		string Hteam = UtilMgr.GetTeamCode (transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 2").FindChild ("Label").GetComponent<UILabel> ().
+		                                    text.Replace("[b]",""));
+
+		List<GamePresetLineupInfo> List= UserMgr.LineUpList[UserMgr.Schedule.gameSeq.ToString()];
+		for (int i = 0; i<List.Count; i++) {
+			if(List[i].team == Ateam){
+				transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Mid")
+					.FindChild("Scroll View").FindChild("Position").FindChild("Item " +List[i].lineup.ToString())
+						.FindChild("L_name "+ List[i].lineup.ToString()).FindChild("Label")
+						.GetComponent<UILabel>().text = List[i].player;
+				
+			}else if(List[i].team == Hteam){
+				transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Mid")
+					.FindChild("Scroll View").FindChild("Position").FindChild("Item " +List[i].lineup.ToString())
+						.FindChild("R_name "+ List[i].lineup.ToString()).FindChild("Label")
+						.GetComponent<UILabel>().text = List[i].player;
+			}
+		}
+
 	}
 
 

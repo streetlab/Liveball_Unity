@@ -207,4 +207,13 @@ public class GamePresetLineupInfo {
 			_lineup = value;
 		}
 	}
+	Texture2D _texture;
+	public Texture2D texture{
+		get{
+			return _texture;
+		}
+		set{
+			_texture = value;
+		}
+	}
 }

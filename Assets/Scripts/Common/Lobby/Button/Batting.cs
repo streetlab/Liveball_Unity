@@ -33,10 +33,10 @@ public class Batting : MonoBehaviour {
 			transform.FindChild("Label").GetComponent<UILabel>().text;
 		BattingCommander.ChoseGameObject.transform.parent.parent.localPosition = new Vector3 (0,0,0);
 		transform.parent.parent.gameObject.SetActive (false);
-		if(CheckPreset()){
-			transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Bot").FindChild("Sumit").
-				gameObject.SetActive(true);
-		}
+//		if(CheckPreset()){
+//			transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Bot").FindChild("Sumit").
+//				gameObject.SetActive(true);
+//		}
 
 	}
 	bool CheckPreset(){

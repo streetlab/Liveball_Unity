@@ -11,10 +11,15 @@ public class BotMenu : MonoBehaviour {
 		Debug.Log (GetIndex (this.name));
 		switch (GetIndex (this.name)) {
 		case 0:
-			AllOff();
-			Off();
+		
 			Debug.Log("Main On");
+			if(mScroll.transform.FindChild("Main")!=null){
+				AllOff();
+				Off();
 			mScroll.transform.FindChild("Main").gameObject.SetActive(true);
+			}else{
+				AutoFade.LoadLevel ("SceneLobby", 0f, 1f);
+			}
 			break;
 		case 1:
 			AllOff();
@@ -68,6 +73,7 @@ public class BotMenu : MonoBehaviour {
 		mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;
 		mScroll.transform.FindChild("Bot").FindChild("---").GetComponent<UIButton>().enabled = true;
 		mScroll.transform.FindChild("Bot").FindChild("Post").GetComponent<UIButton>().enabled = true;
+		transform.root.FindChild ("Ranking").gameObject.SetActive (false);
 		
 		GetComponent<UIButton>().enabled = false;
 	}

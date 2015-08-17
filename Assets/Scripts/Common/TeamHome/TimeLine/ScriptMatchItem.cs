@@ -57,7 +57,7 @@ public class ScriptMatchItem : cUIScrollListBase {
 	public void Clicked()
 	{
 		UserMgr.Schedule = mSchedule;
-		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
+		AutoFade.LoadLevel ("SceneMain 1", 0.5f, 1f);
 	}
 
 	public void Init(ScheduleInfo schedule, int index)

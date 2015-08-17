@@ -224,7 +224,7 @@ public class LobbyNCCommander : MonoBehaviour {
 		if (infoList[index].featured == 1) {
 			for (int a = 0; a<item.Target.gameObject.transform.childCount; a++) {
 				if (item.Target.gameObject.transform.GetChild (a).name != "BG") {
-					item.Target.gameObject.transform.GetChild (a).GetComponent<UISprite> ().color = new Color (1f, 238f / 255f, 253f / 255f, 1f);
+					item.Target.gameObject.transform.GetChild (a).GetComponent<UISprite> ().color = new Color (1f, 1f, 239f / 255f, 1f);
 				}
 			}
 		} else{
@@ -306,6 +306,8 @@ public class LobbyNCCommander : MonoBehaviour {
 
 	void getNCData(){
 		UserMgr.ContestList = CLE.Response.data;
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Contest").FindChild ("Num")
+			.GetComponent<UILabel> ().text = UserMgr.ContestList.Count.ToString();
 
 
 
@@ -320,7 +322,7 @@ public class LobbyNCCommander : MonoBehaviour {
 			Debug.Log ("CDE.Response.data.Count : " + CDE.Response.data.Count);
 			Debug.Log ("UserMgr.ContestList.Count : " + UserMgr.ContestList.Count);
 			if (UserMgr.ContestList != null) {
-				if (UserMgr.ContestList.Count < CDE.Response.data.Count) {
+				if (UserMgr.ContestList.Count != CDE.Response.data.Count) {
 					CLE = new ContestListEvent (new EventDelegate (this, "getNCData"));
 					NetMgr.GetContestList (CLE);
 				} else {
@@ -344,11 +346,11 @@ public class LobbyNCCommander : MonoBehaviour {
 
 
 								if (Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
-									Count.GetComponent<UIButton> ().enabled = false;
+									Count.transform.FindChild ("item index:" + i.ToString ()).GetComponent<UIButton> ().enabled = false;
 									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
 								new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
 								} else {
-									Count.GetComponent<UIButton> ().enabled = true;
+									Count.transform.FindChild ("item index:" + i.ToString ()).GetComponent<UIButton> ().enabled = true;
 									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
 								new Color (146f / 255f, 39f / 255f, 143f / 255f, 1);
 								}

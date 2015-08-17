@@ -68,6 +68,27 @@ public class ContestRankingInfo {
 		}
 	}
 
+	string _itemValue;
+	
+	public string itemValue {
+		get {
+			return _itemValue;
+		}
+		set {
+			_itemValue = value;
+		}
+	}
+	string _rewardItem;
+	
+	public string rewardItem {
+		get {
+			return _rewardItem;
+		}
+		set {
+			_rewardItem = value;
+		}
+	}
+
 //	string _playerNick;
 //
 //	public string playerNick {

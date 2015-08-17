@@ -115,7 +115,7 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 			//            mLblSelect1.SetActive(true);
 			//            mLblSelect1.GetComponent<UILabel> ().text = "X";
 		}
-		
+		try{
 		if (quizInfo.resp == null
 		    || quizInfo.resp.Count == 0) {    
 			Debug.Log("quiz1");
@@ -145,6 +145,10 @@ public class ScriptItemHitterHighlight : cUIScrollListBase {
 			Debug.Log("quizInfo.resp[1].respValue : "+quizInfo.resp[1].respValue);
 			respValue = int.Parse(quizInfo.resp[1].respValue) -1;
 			mLblSelect2_2.GetComponent<UILabel>().text = quizInfo.order[respValue].description;
+		}
+		}
+		catch{
+			Debug.Log("Out of range");
 		}
 	}
 	

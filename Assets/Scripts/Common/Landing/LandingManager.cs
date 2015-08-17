@@ -515,7 +515,14 @@ public class LandingManager : MonoBehaviour {
 		}
 	}
 	string Holdname = "";
-	
+
+
+	void OnApplicationFocus(bool Focus){
+		Debug.Log("Focus is "+Focus);
+		if(Focus){
+			AutoFade.LoadLevel ("SceneMain 1", 0f, 1f);
+		}
+	}
 	void GetStartPleyer(){
 		Debug.Log ("UtilMgr.SelectTeam : " + UtilMgr.SelectTeam);
 		if (UtilMgr.SelectTeam.Length > 0) {
@@ -571,18 +578,20 @@ public class LandingManager : MonoBehaviour {
 
 
 
+		if (PDE.Response.data.Count > 0) {
 
+			if (PDE.Response.data [a].myRank == 0) {
+				RankGage.transform.FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (
+				-316f + ((float)PDE.Response.data [a].myRank / (float)PDE.Response.data [a].totalPreset) * 632f, 23);
+				RankGage.transform.FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (
+				-316f + ((float)PDE.Response.data [a].myRank / (float)PDE.Response.data [a].totalPreset) * 632f, -35);
+			} else {
+				RankGage.transform.FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (
+				-316f + ((((float)PDE.Response.data [a].totalPreset - ((float)PDE.Response.data [a].myRank - 1f)) / (float)PDE.Response.data [a].totalPreset) * 632f), 23);
+				RankGage.transform.FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (
+				-316f + ((((float)PDE.Response.data [a].totalPreset) - ((float)PDE.Response.data [a].rewardCount - 1)) / (float)PDE.Response.data [a].totalPreset) * 632f, -35);
+			}
 
-		if (PDE.Response.data [a].myRank == 0) {
-			RankGage.transform.FindChild("BG").FindChild("Maker").localPosition = new Vector3(
-				-316f+( (float)PDE.Response.data[a].myRank/ (float)PDE.Response.data[a].totalPreset)*632f,23);
-			RankGage.transform.FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
-				-316f+( (float)PDE.Response.data[a].myRank/ (float)PDE.Response.data[a].totalPreset)*632f,-35);
-		} else {
-			RankGage.transform.FindChild("BG").FindChild("Maker").localPosition = new Vector3(
-				-316f+(( ((float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].myRank-1f))/ (float)PDE.Response.data[a].totalPreset)*632f),23);
-			RankGage.transform.FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
-				-316f+(( ((float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].myRank-1f))/ (float)PDE.Response.data[a].totalPreset)*632f),-35);
 		}
 
 
@@ -591,16 +600,15 @@ public class LandingManager : MonoBehaviour {
 
 
 
-
-
-
+		Debug.Log ("PDE.Response.data[a].totalPreset : " + PDE.Response.data[a].totalPreset);
+		Debug.Log ("PDE.Response.data[a].rewordCount : " + PDE.Response.data[a].rewardCount);
 
 
 		
 
 		
-		RankGage.transform.FindChild("BG").FindChild("rewordScore").GetComponent<UILabel>().text = PDE.Response.data[a].rewordScore.ToString();
-		RankGage.transform.FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(((((float)PDE.Response.data[a].totalPreset)-((float)PDE.Response.data[a].rewordCount-1))/(float)PDE.Response.data[a].totalPreset)*632f,0);
+		RankGage.transform.FindChild("BG").FindChild("rewordScore").GetComponent<UILabel>().text = PDE.Response.data[a].rewardCount.ToString();
+		RankGage.transform.FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(((((float)PDE.Response.data[a].totalPreset)-((float)PDE.Response.data[a].rewardCount-1))/(float)PDE.Response.data[a].totalPreset)*632f,0);
 		
 		
 

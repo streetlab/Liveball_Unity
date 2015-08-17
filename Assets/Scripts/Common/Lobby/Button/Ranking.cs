@@ -2,16 +2,16 @@
 using System.Collections;
 
 public class Ranking : MonoBehaviour {
-	int Tstatus=1;
-	int Bstatus=1;
+	static int Tstatus=1;
+	static int Bstatus=1;
 	public void Button(){
 		GameObject Ranking = transform.root.FindChild ("Ranking").gameObject;
 		bool Check = true;
 		switch (name) {
 		case "Sranking":
-			if(Tstatus ==1){
-				Check = false;
-			}
+//			if(Tstatus ==1){
+//				Check = false;
+//			}
 			Tstatus = 1;
 			transform.FindChild("Bar").gameObject.SetActive(true);
 			transform.FindChild("Label").GetComponent<UILabel>().color = new Color(1,1,1,1);
@@ -19,9 +19,9 @@ public class Ranking : MonoBehaviour {
 			transform.parent.FindChild("Wranking").FindChild("Label").GetComponent<UILabel>().color = new Color(1,1,1,0.5f);
 			break;
 		case "Wranking":
-			if(Tstatus ==2){
-				Check = false;
-			}
+//			if(Tstatus ==2){
+//				Check = false;
+//			}
 			Tstatus = 2;
 			transform.FindChild("Bar").gameObject.SetActive(true);
 			transform.FindChild("Label").GetComponent<UILabel>().color = new Color(1,1,1,1);
@@ -39,7 +39,7 @@ public class Ranking : MonoBehaviour {
 			Bstatus = 2;
 			break;
 		}
-		Debug.Log("Check : " + Check);
+	//	Debug.Log("Check : " + Check);
 		if (Check) {
 			if (Tstatus == 1) {
 

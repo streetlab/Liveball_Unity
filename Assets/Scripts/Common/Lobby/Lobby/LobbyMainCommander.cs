@@ -68,7 +68,7 @@ public class LobbyMainCommander : MonoBehaviour {
 				if(dReward.result == 200){
 					DialogueMgr.ShowDialogue("접속보상", dReward.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 					Debug.Log("add");
-					if (Application.loadedLevelName.Equals ("SceneMain")) {
+					if (Application.loadedLevelName.Equals ("SceneMain 1")) {
 						Debug.Log("add Main");
 						transform.root.FindChild("GameObject").FindChild("Top").FindChild("Panel").FindChild("BtnPost").GetComponent<PostButton>().YellowOn();
 					}

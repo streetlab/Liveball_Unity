@@ -75,16 +75,19 @@ public class ScriptItemMiddle : MonoBehaviour {
 				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").gameObject.SetActive(false);
 				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image").GetComponent<UISprite>().spriteName = "gift_p";
 			}else{
-				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").gameObject.SetActive(true);
+
 				try{
+					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").gameObject.SetActive(true);
 					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image2").GetComponent<UITexture>().mainTexture = 
 					LobbyGiftCommander.mGift.Textures[mEvent.Response.data[UseItems[index]].imageName];
+					item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image").gameObject.SetActive(false);
 				}catch{
 					Debug.Log("mEvent.Response.data[UseItems[index]].itemName : " + mEvent.Response.data[UseItems[index]].imageName);
 				}
-				item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("image").gameObject.SetActive(false);
+
 
 			}
+
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemid").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemId.ToString();
 			item.Target.gameObject.transform.FindChild("BG_g").FindChild("BG_w").FindChild("itemNo").GetComponent<UILabel>().text = mEvent.Response.data[UseItems[index]].itemNo.ToString();
 			if(mEvent.Response.data[UseItems[index]].registTime!=null){

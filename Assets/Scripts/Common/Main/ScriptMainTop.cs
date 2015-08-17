@@ -133,7 +133,7 @@ public class ScriptMainTop : MonoBehaviour {
 			NetMgr.GetScheduleAll (mScheduleEvent);
 		}
 		
-		CheckFirst();
+		//CheckFirst();
 	}
 	
 	void CheckFirst(){
@@ -729,8 +729,9 @@ public class ScriptMainTop : MonoBehaviour {
 	public void OpenBetting(QuizInfo quizInfo)
 	{
 		if (quizInfo != null) {
-			BattingCommander.ChoseGameObject.transform.parent.parent.localPosition = new Vector3 (0,0,0);
-			transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").gameObject.SetActive(false);
+		transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
+				.FindChild("Position").localPosition = new Vector3(0,0,0);
+			transform.root.FindChild("Scroll").FindChild("ContestIn").FindChild("PreSetting").FindChild("Bot").FindChild("Batting").gameObject.SetActive(false);
 			if(
 				transform.root.FindChild("TF_Highlight").FindChild("MatchPlaying").FindChild("ListHighlight").FindChild("Label")
 				.gameObject.activeSelf){

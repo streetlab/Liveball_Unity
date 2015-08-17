@@ -6,7 +6,8 @@ public class preSettingItem : MonoBehaviour {
 
 	public void ButtonPlaying(){
 		Debug.Log (name);
-		
+		GameObject Batting =
+			transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Batting").gameObject;
 		//Key is this.name
 		//		if (!CheckPreset ()) {
 		if (int.Parse (transform.parent.name [5].ToString ()) > 4) {
@@ -17,22 +18,73 @@ public class preSettingItem : MonoBehaviour {
 		
 		transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Batting").gameObject.SetActive (true);
 		//	}
+
+		for (int i = 0; i<UserMgr.LineUpList[UserMgr.GameSeq.ToString()].Count; i++) {
+			if(UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].player == transform.FindChild("Label").GetComponent<UILabel>().text){
+				Debug.Log("SetPhoto");
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo")
+					.GetComponent<UITexture>().mainTexture = UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].texture;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].player;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitAvg;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitHr;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitH.ToString();
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitBB;
+				break;
+			}
+		}
 	}
 
 	public void Button(){
 		//Key is this.name
-		if (!CheckPreset ()) {
+		GameObject Batting =
+			transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Batting").gameObject;
+
+	//	if (!CheckPreset ()) {
 			if (int.Parse (transform.parent.name [5].ToString ()) > 4) {
 				transform.parent.parent.transform.localPosition = new Vector3 (0, (int.Parse (transform.parent.name [5].ToString ()) - 4) * 95);
 			}
 
-			transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Batting").GetComponent<BattingCommander> ().SetBatting (this.gameObject);
+			Batting.GetComponent<BattingCommander> ().SetBatting (this.gameObject);
 
-			transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Batting").gameObject.SetActive (true);
-		} else {
-			transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Sumit").gameObject.SetActive (true);
+			Batting.SetActive (true);
+	//	} else {
+	//		transform.parent.parent.parent.parent.parent.FindChild ("Bot").FindChild ("Sumit").gameObject.SetActive (true);
+	//	}
+
+
+		for (int i = 0; i<UserMgr.LineUpList[UserMgr.GameSeq.ToString()].Count; i++) {
+			if(UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].player == transform.FindChild("Label").GetComponent<UILabel>().text){
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Photo").FindChild("PhotoPanel").FindChild("Photo")
+					.GetComponent<UITexture>().mainTexture = UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].texture;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].player;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitAvg;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitHr;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitH.ToString();
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitBB;
+				break;
+			}
 		}
+		
+	
+
 	}
+
+
+
+
+
+
+
 	bool CheckPreset(){
 		bool b = true;
 		GameObject 

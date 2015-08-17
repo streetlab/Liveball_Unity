@@ -31,7 +31,15 @@ public class GameRankingCommander : MonoBehaviour {
 			}
 				item.Target.gameObject.GetComponent<UISprite>().color = new Color(218f/255,220f/255f,222f/255f,1);
 //				item.Target.gameObject.transform.FindChild("Rank").GetComponent<UILabel>().text = mGetRankEvent.Response.data.ranking[index].rank.ToString();
-			item.Target.gameObject.transform.FindChild("Rank").GetComponent<UILabel>().text = CRE.Response.data[index].rank.ToString();
+			item.Target.gameObject.transform.FindChild("Rank").gameObject.SetActive(false);
+			item.Target.gameObject.transform.FindChild("MyRank").gameObject.SetActive(false);
+			if(UserMgr.UserInfo.memSeq == CRE.Response.data[index].memSeq){
+				item.Target.gameObject.transform.FindChild("MyRank").gameObject.SetActive(true);
+				item.Target.gameObject.transform.FindChild("MyRank").FindChild("Label").GetComponent<UILabel>().text = CRE.Response.data[index].rank.ToString();
+			}else{
+				item.Target.gameObject.transform.FindChild("Rank").gameObject.SetActive(true);
+				item.Target.gameObject.transform.FindChild("Rank").GetComponent<UILabel>().text = CRE.Response.data[index].rank.ToString();
+			}
 			item.Target.gameObject.transform.FindChild("Name").GetComponent<UILabel>().text = CRE.Response.data[index].memberName;
 			item.Target.gameObject.transform.FindChild("Reward").GetComponent<UILabel>().text = CRE.Response.data[index].score.ToString();
 				//item.Target.gameObject.transform.FindChild("Reward").GetComponent<UILabel>().text = mGetRankEvent.Response.data.ranking[index].rewardValue.ToString();

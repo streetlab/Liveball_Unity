@@ -6,6 +6,9 @@ public class Contest : MonoBehaviour {
 	GetGamePresetLineupEvent GGPL;
 	List<GamePresetLineupInfo> List ;
 	public void button(){
+
+	//	ex ();
+		UserMgr.GameSeq = int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text);
 		int presetCount = 0;
 		for (int a = 0; a<UserMgr.PresetList.Count; a++) {
 			if (UserMgr.PresetList [a].contestSeq == int.Parse (transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text)) {
@@ -32,17 +35,20 @@ public class Contest : MonoBehaviour {
 
 			}
 	}
-
+	int count= 0;
 	void getlineup(){
+		count = 0;
+		for(int i = 0; i<GGPL.Response.data.Count;i++){
+			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data[i].imagePath + GGPL.Response.data[i].imageName);
+			StartCoroutine(GetImage(www,GGPL.Response.data[i]));
+
+		}
 	
-		try{
-			UserMgr.LineUpList.Add (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text,
-			                        GGPL.Response.data);
-		}	catch{
-				Debug.Log("Same Line Up");
-			}
-		List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
-		SetPresettingSetting ();
+
+
+
+
+
 		}
 
 		void SetPresettingSetting(){
@@ -93,4 +99,57 @@ public class Contest : MonoBehaviour {
 		
 
 		}
+
+	IEnumerator GetImage(WWW www, GamePresetLineupInfo index)
+	{
+		yield return www;
+		Texture2D tmpTex = new Texture2D (0, 0);
+
+		www.LoadImageIntoTexture (tmpTex);
+		index.texture = tmpTex;
+		count += 1;
+		if (count == GGPL.Response.data.Count) {
+			try{
+				UserMgr.LineUpList.Add (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text,
+				                        GGPL.Response.data);
+			}	catch{
+				Debug.Log("Same Line Up");
+			}
+			List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
+			SetPresettingSetting ();
+
+		
+		}
+	
+	}
+
+
+	void ex(){
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Gift").gameObject.SetActive (false);
+		UserMgr.CurrentContestSeq = int.Parse (transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text);
+		UserMgr.CurrentContestMultiEntry = int.Parse (transform.FindChild ("BG").FindChild ("MultiEntry").GetComponent<UILabel> ().text);
+		UserMgr.CurrentContestTotalEntry = int.Parse (transform.FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text);
+		transform.parent.parent.parent.FindChild ("Nomal Contest").gameObject.SetActive (false);
+		transform.parent.parent.parent.FindChild ("PreSetting").gameObject.SetActive (true);
+		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Bot").FindChild ("Batting").gameObject.SetActive (false);
+		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Bot").FindChild ("Sumit").gameObject.SetActive (false);
+		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Mid").FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
+		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Mode = "Add";
+		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().SetTeamName (transform.
+		                                                                                                          FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text,
+		                                                                                                          transform.
+		                                                                                                          FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text, "");
+		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Ruby (transform.
+		                                                                                                   FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text,
+		                                                                                                   transform.
+		                                                                                                   FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text,
+		                                                                                                   transform.
+		                                                                                                   FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text
+		                                                                                                   );
+		transform.parent.parent.parent.FindChild ("Top").FindChild ("Sub").gameObject.SetActive (false);
+		transform.parent.parent.parent.FindChild ("Top").FindChild (transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent
+		                                                            <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = false;
+		
+
+	}
 }

@@ -115,26 +115,34 @@ public class PresettingRC : MonoBehaviour {
 				transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
 				.FindChild("Position").gameObject;
 		for (int i = 0; i<G.transform.childCount; i++) {
+			Debug.Log("L_name + (i+1).ToString() : " + "L_name " + (i+1).ToString());
 			if(G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
 			   FindChild("use").gameObject.activeSelf){
 				ChoseList.Add(
 					getint(	G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
 				       FindChild("use").FindChild("Label").GetComponent<UILabel>().text)
 					);
+				Debug.Log("Add Int : " + getint(	G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
+				                                FindChild("use").FindChild("Label").GetComponent<UILabel>().text).ToString());
 			}else{
 				ChoseList.Add(0);
+				Debug.Log("0" );
 			}
 			
 		}
 		for (int i = 0; i<G.transform.childCount; i++) {
+			Debug.Log("R_name + (i+1).ToString() : " + "R_name " + (i+1).ToString());
 			if(G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 			   FindChild("use").gameObject.activeSelf){
 				ChoseList.Add(
 					getint(	G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 				       FindChild("use").FindChild("Label").GetComponent<UILabel>().text)
 					);
+				Debug.Log("Add Int : " +getint(	G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
+				                               FindChild("use").FindChild("Label").GetComponent<UILabel>().text).ToString() );
 			}else{
 				ChoseList.Add(0);
+				Debug.Log("0" );
 			}
 			
 		}
@@ -290,6 +298,8 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		UserMgr.PresetList = presetListEvent.Response.data;
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Num").GetComponent<UILabel> ().text =
 			presetListEvent.Response.data.Count.ToString ();
+
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSetting").gameObject.SetActive (false);
 
 	}
 

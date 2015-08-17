@@ -24,11 +24,11 @@ public class ScriptTopInfoItem : MonoBehaviour {
 	//		}
 	//	}
 	public void GoToGame(){
-		if(Application.loadedLevelName.Equals("SceneMain"))
+		if(Application.loadedLevelName.Equals("SceneMain 1"))
 			return;
 		
 		UserMgr.Schedule = mSchedule;
-		AutoFade.LoadLevel ("SceneMain", 0.5f, 1f);
+		AutoFade.LoadLevel ("SceneMain 1", 0.5f, 1f);
 	}
 	
 	public void SetGroupInfo(){
