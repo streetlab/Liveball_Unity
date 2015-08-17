@@ -304,6 +304,11 @@ public class LobbyNCCommander : MonoBehaviour {
 		NetMgr.GetContestData (CDE);
 	}
 
+	public void ResetInBackground(){
+		CDE = new ContestDataEvent (new EventDelegate (this, "ResetNCData"));
+		NetMgr.GetContestDataInBackground (CDE);
+	}
+
 	void getNCData(){
 		UserMgr.ContestList = CLE.Response.data;
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Contest").FindChild ("Num")

@@ -84,6 +84,20 @@ public class NetMgr : MonoBehaviour{
 		
 		UtilMgr.DismissLoading ();
 	}
+
+	IEnumerator webAPIProcessInBackground(WWW www, BaseEvent baseEvent)
+	{	
+		yield return www;
+
+		if(www.error == null && www.isDone)
+		{
+			Debug.Log(www.text);
+			if(baseEvent != null){
+				Debug.Log("baseEvent != null");
+				baseEvent.Init(www.text);
+			}
+		}
+	}
 	
 	IEnumerator webAPIProcess(WWW www, BaseEvent baseEvent, bool showLoading, bool isUpload)
 	{
@@ -254,6 +268,19 @@ public class NetMgr : MonoBehaviour{
 		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
+
+	private void webAPIProcessEventInBackground(BaseRequest request, BaseEvent baseEvent)
+	{
+		Debug.Log("webAPIProcessEvent2");
+		string reqParam = "";
+		string httpUrl = "";
+		reqParam = request.ToRequestString();
+		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));		
+		Debug.Log (reqParam);
+		
+		StartCoroutine (webAPIProcessInBackground(www, baseEvent));
+	}
+
 	private void webAPIProcessGetScheduleEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
 	{
 		Debug.Log("webAPIProcessEvent2");
@@ -420,6 +447,11 @@ public class NetMgr : MonoBehaviour{
 	}
 	
 	public static void GetContestData(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new ContestDataRequest (), baseEvent);
+	}
+
+	public static void GetContestDataInBackground(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new ContestDataRequest (), baseEvent);
 	}

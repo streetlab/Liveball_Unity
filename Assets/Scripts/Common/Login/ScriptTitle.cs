@@ -110,9 +110,11 @@ public class ScriptTitle : MonoBehaviour {
 		//            = new Vector3(-220f, -450f, 0);
 		//        transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
 		//            = new Vector3(0, -450f, 0);
-		transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
-		//        }
-		
+		if (Application.platform == RuntimePlatform.Android) {
+			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
+		} else{
+			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
+		}
 		
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
