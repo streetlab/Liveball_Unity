@@ -624,7 +624,9 @@ public class ScriptTF_Betting : MonoBehaviour {
 	IEnumerator CloseAnimations(){
 
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
-		Menu.transform.localPosition=new Vector3(0,3+UtilMgr.GetScaledPositionY (),0);
+//		if (ScriptMainTop.OpenBettingCheck) {
+//			Menu.transform.localPosition = new Vector3 (0, 3 + UtilMgr.GetScaledPositionY (), 0);
+//		}
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition-=new Vector3(0,651f/5f,0);
 			if(Menu.transform.localPosition.y<=-651+UtilMgr.GetScaledPositionY ()){
@@ -644,6 +646,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 		}
 		transform.FindChild ("Scroll View").FindChild ("GameObject").FindChild("SprBetting").GetComponent<ScriptBetting> ().BtnConfirm ();
 		if (ScriptBettingItem.ClickCheck) {
+			Debug.Log("PostData");
 			transform.parent.FindChild ("Top").GetComponent<ScriptMainTop> ().PostData ();
 		}
 		QuizMgr.IsBettingOpended = false;

@@ -285,6 +285,7 @@ public class LandingManager : MonoBehaviour {
 						if(N[i].hitAvg =="-"){
 							N[i].hitAvg ="0";
 						}
+						PlayerInfos.transform.FindChild("MidGageBar").FindChild("Label").GetComponent<UILabel>().text = "시즌 타율 "+N[i].hitAvg;
 						PlayerInfos.transform.FindChild("MidGageBar").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
 						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("HitLabel").GetComponent<UILabel>().text = (float.Parse(N[i].hitAvg)*100f).ToString()+"% 안타";
 						PlayerInfos.transform.FindChild("MidGageBar").FindChild("BG").FindChild("OutLabel").GetComponent<UILabel>().text = (100f-(float.Parse(N[i].hitAvg)*100f)).ToString()+"% 아웃";
@@ -617,6 +618,7 @@ public class LandingManager : MonoBehaviour {
 
 
 	public void Start () {
+		ScriptMainTop.OpenBettingCheck = true;
 		GameInfos.transform.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamName").FindChild ("Label")
 			.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
 		GameInfos.transform.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamName").FindChild ("Label")

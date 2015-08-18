@@ -574,6 +574,7 @@ public class ScriptMainTop : MonoBehaviour {
 		CheckAndJoinQuiz();
 	}
 	public void PostData(){
+		Debug.Log ("PostDataIn");
 		transform.root.FindChild ("TF_Betting").FindChild ("Scroll View").FindChild ("GameObject").FindChild ("SprBetting")
 			.GetComponent<ScriptBetting> ().SetConfirm ();
 		//if (UserMgr.Schedule.myEntryFee!="0") {
@@ -585,7 +586,7 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
 
 		if (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Count > 0) {
-
+			Debug.Log("CPCE");
 			CPCE = new ContestPresetChangeEvent (new EventDelegate(this,"CompleteJoinQuiz"));
 			
 			NetMgr.ContestPresetChange (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin[0].QuizListSeq.ToString(),QuizMgr.QuizValue.ToString(),CPCE);
@@ -604,7 +605,8 @@ public class ScriptMainTop : MonoBehaviour {
 		if (mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.Count > 0) {
 			mBetting.GetComponent<ScriptTF_Betting> ().mListJoin.RemoveAt (0);
 		}
-		CheckAndJoinQuiz ();
+
+	//	CheckAndJoinQuiz ();
 		
 		//UserMgr.UserInfo.userGoldenBall = mJoinQuizEvent.Response.data.userGoldenBall;
 //		UserMgr.UserInfo.userRuby = mJoinQuizEvent.Response.data.userRuby;
@@ -744,9 +746,9 @@ public class ScriptMainTop : MonoBehaviour {
 			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("Challenge").FindChild("Scroll View").gameObject.SetActive(false);
 			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("BtnPost").FindChild("TF_Post").gameObject.SetActive(false);
 
-			transform.root.FindChild("TF_Items").gameObject.SetActive(false);
-			transform.root.FindChild("Item").gameObject.SetActive(false);
-			transform.root.FindChild("Setting").gameObject.SetActive(false);
+		//	transform.root.FindChild("TF_Items").gameObject.SetActive(false);
+		//	transform.root.FindChild("Item").gameObject.SetActive(false);
+		//	transform.root.FindChild("Setting").gameObject.SetActive(false);
 
 
 			Debug.Log ("OpenBetting");
@@ -837,9 +839,12 @@ public class ScriptMainTop : MonoBehaviour {
 	public void GotBoard()
 	{
 		Debug.Log("GotBoard");
+		try{
 		DetailBoard.play = mBoardEvent.Response.data.play;
 		DetailBoard.player = mBoardEvent.Response.data.player;
-		
+		}catch{
+			Debug.Log("GotBoard Error");
+		}
 		
 		SetBoardInfo ();
 		

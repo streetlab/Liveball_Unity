@@ -16,8 +16,13 @@ public class ScriptPPTop : MonoBehaviour {
 
 	void ProfileUpdate(){
 		UserMgr.UserInfo = mProfileEvent.Response.data;
-		
-		AutoFade.LoadLevel("SceneMain");
+//		Debug.Log (Application.loadedLevelName);
+//		if (Application.loadedLevelName.Equals ("SceneLobby")) {
+			AutoFade.LoadLevel("SceneLobby");
+//		}else if(Application.loadedLevelName.Equals ("SceneMain 1")){
+//			AutoFade.LoadLevel("SceneMain 1");
+//		}
+
 		
 		
 	}

@@ -216,6 +216,11 @@ public class QuizMgr : MonoBehaviour {
 			}
 			}
 			Instance.mMainTop.GameEnd();
+
+
+			//Reset Contest,Preset,History List;
+
+
 		} else if(msgInfo.type == ConstantsSocketType.RES.TYPE_STATUS){
 			if(Instance.mMainTop != null){
 //				bool hasQuiz = false;

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 public class PreSettingCommander : MonoBehaviour {
-	string [] Value = {"1루","2,3루","홈런","땅볼","뜬공","삼진"};
+	string [] Value = {"1루타","2,3루타","홈런","땅볼","뜬공","삼진"};
 	public string Mode;
 	public GameObject PreSettingItem;
 	public string cost;

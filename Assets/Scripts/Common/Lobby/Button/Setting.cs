@@ -6,6 +6,7 @@ public class Setting : MonoBehaviour {
 	public void Button(){
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
 		if (transform.root.FindChild ("Setting").gameObject.activeSelf) {
+			ScriptMainTop.OpenBettingCheck = true;
 			transform.root.FindChild ("Setting").gameObject.SetActive (false);
 		
 

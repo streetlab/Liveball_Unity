@@ -76,6 +76,7 @@ public class SetItemSceneTop : MonoBehaviour {
 	}
 
 	public void Close(){
+		ScriptMainTop.OpenBettingCheck = true;
 		transform.parent.parent.gameObject.SetActive (false);
 	}
 }

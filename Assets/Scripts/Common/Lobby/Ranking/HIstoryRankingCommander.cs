@@ -59,10 +59,10 @@ public class HIstoryRankingCommander : MonoBehaviour {
 						= ex;
 				}catch{
 					
-//					if(mGetRankEvent.Response.data.ranking[index].imageName!=""){
-//						WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data.ranking[index].imagePath + mGetRankEvent.Response.data.ranking[index].imageName);
-//						StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
-//					}
+				if(CRE.Response.data[index].imageName!=""){
+					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + CRE.Response.data[index].imagePath + CRE.Response.data[index].imageName);
+						StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					}
 				}
 				
 			//}
