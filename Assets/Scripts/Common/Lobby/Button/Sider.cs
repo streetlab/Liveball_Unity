@@ -73,8 +73,23 @@ public class Sider : MonoBehaviour {
 			SubInSub.SelectedFeeHigh = int.Parse(List2[Mathf.Round(R*11f)]);
 		}
 
-		if(mLblMenu0.GetComponent<UILabel>().text.Equals("루비0"))
+		if(mLblMenu0.GetComponent<UILabel>().text.Equals("루비0")){
 			mLblMenu0.GetComponent<UILabel>().text = "무료";
+			mLblMenu0.transform.parent.FindChild("Menu 1").FindChild("Thumb")
+				.GetComponent<BoxCollider2D>().size	= new Vector2(0, 0);
+			mLblMenu0.transform.parent.FindChild("Menu 1").FindChild("InSlider").FindChild("Thumb")
+				.GetComponent<BoxCollider2D>().size = new Vector2(60f, 60f);
+		} else if(mLblMenu0.GetComponent<UILabel>().text.Equals("루비1000")){
+			mLblMenu0.transform.parent.FindChild("Menu 1").FindChild("Thumb")
+				.GetComponent<BoxCollider2D>().size = new Vector2(60f, 60f);
+			mLblMenu0.transform.parent.FindChild("Menu 1").FindChild("InSlider").FindChild("Thumb")
+				.GetComponent<BoxCollider2D>().size = new Vector2(0, 0);
+		} else{
+			mLblMenu0.transform.parent.FindChild("Menu 1").FindChild("Thumb")
+				.GetComponent<BoxCollider2D>().size = new Vector2(60f, 60f);
+			mLblMenu0.transform.parent.FindChild("Menu 1").FindChild("InSlider").FindChild("Thumb")
+				.GetComponent<BoxCollider2D>().size = new Vector2(60f, 60f);
+		}
 
 		mLblLabel.GetComponent<UILabel>().text = mLblMenu0.GetComponent<UILabel>().text;
 	}
