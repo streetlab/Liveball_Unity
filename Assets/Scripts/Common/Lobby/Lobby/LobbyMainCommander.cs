@@ -50,6 +50,17 @@ public class LobbyMainCommander : MonoBehaviour {
 				_message = value;
 			}
 		}
+
+		string _legend;
+
+		public string legend {
+			get {
+				return _legend;
+			}
+			set {
+				_legend = value;
+			}
+		}
 	}
 	
 	IEnumerator RunAttendance(WWW www){
@@ -60,7 +71,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		if(www.error != null){
 			DialogueMgr.ShowDialogue("attendance error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		} else{
-			Debug.Log("www : " + www.text);
+			Debug.Log("Attendance : " + www.text);
 			if(www.text != null && www.text.Length > 0){
 				//				mWebview.SetActive(true);
 				//				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
@@ -73,6 +84,12 @@ public class LobbyMainCommander : MonoBehaviour {
 						transform.root.FindChild("GameObject").FindChild("Top").FindChild("Panel").FindChild("BtnPost").GetComponent<PostButton>().YellowOn();
 					}
 					
+				}
+
+				if(dReward.legend != null && dReward.legend.Length > 0){
+					//show n link url
+				} else{
+					//unshow
 				}
 			} else{
 				//				Debug.Log("Attendance is already done");
