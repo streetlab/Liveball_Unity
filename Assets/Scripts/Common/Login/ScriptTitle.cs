@@ -148,13 +148,22 @@ public class ScriptTitle : MonoBehaviour {
 	}
 	
 	public void ReceivedVersion(){
-		Debug.Log("Application.version is "+Application.version);
-		Debug.Log("Recent.version is "+mVersionEvent.Response.data.recentVer);
-		Debug.Log("Support.version is "+mVersionEvent.Response.data.supportVer);
-		
 		int aFirst = int.Parse(Application.version.Substring(0, 1));
 		int aSecond = int.Parse(Application.version.Substring(2, 1));
 		int aThird = int.Parse(Application.version.Substring(4, 1));
+
+		if(Application.platform == RuntimePlatform.OSXEditor){
+			Debug.Log("Application.version is "+UnityEditor.PlayerSettings.bundleVersion);
+			aFirst = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Substring(0, 1));
+			aSecond = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Substring(2, 1));
+			aThird = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Substring(4, 1));
+		}  else{
+			Debug.Log("Application.version is "+Application.version);
+		}
+		Debug.Log("Recent.version is "+mVersionEvent.Response.data.recentVer);
+		Debug.Log("Support.version is "+mVersionEvent.Response.data.supportVer);
+		
+
 		
 		int rFirst = int.Parse(mVersionEvent.Response.data.recentVer.Substring(0, 1));
 		int rSecond = int.Parse(mVersionEvent.Response.data.recentVer.Substring(2, 1));
