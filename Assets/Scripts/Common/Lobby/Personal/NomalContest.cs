@@ -13,7 +13,11 @@ public class NomalContest : MonoBehaviour {
 
 	IEnumerator Reset(){
 		while (true) {
-			yield return new WaitForSeconds (60f);
+			yield return new WaitForSeconds (10f);
+			transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().ResetNonData ();
+			yield return new WaitForSeconds (10f);
+			transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().ResetNonData ();
+			yield return new WaitForSeconds (10f);
 			transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().ResetInBackground ();
 		}
 	}

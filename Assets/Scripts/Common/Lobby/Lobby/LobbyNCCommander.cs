@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class LobbyNCCommander : MonoBehaviour {
 	public GameObject NCOrigin;
 	public GameObject CItem;
-	public GameObject HItem;
+	//public GameObject HItem;
 	public float NCHight;
 	public float FCNCGap;
 	public int CCount;
@@ -385,6 +385,9 @@ public class LobbyNCCommander : MonoBehaviour {
 	public void ResetInBackground(){
 		CDE = new ContestDataEvent (new EventDelegate (this, "ResetNCData"));
 		NetMgr.GetContestDataInBackground (CDE);
+	}
+	public void ResetNonData(){
+		StartCoroutine(Rolliing());
 	}
 
 	void getNCData(){

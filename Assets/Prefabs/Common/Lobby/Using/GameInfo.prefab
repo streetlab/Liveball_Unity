@@ -1277,7 +1277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &108972
 GameObject:
   m_ObjectHideFlags: 1
@@ -13012,7 +13012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &181312
 GameObject:
   m_ObjectHideFlags: 1
@@ -13577,7 +13577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &184590
 GameObject:
   m_ObjectHideFlags: 1
@@ -30058,13 +30058,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -30081,7 +30081,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -30221,11 +30221,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3013
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3019
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -30344,11 +30344,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3022
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -31751,13 +31751,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -31768,8 +31768,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11403754
 MonoBehaviour:
@@ -33185,11 +33185,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3014
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3017
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -34392,13 +34392,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -34415,7 +34415,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -34547,15 +34547,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -34566,8 +34566,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11409734
 MonoBehaviour:
@@ -35304,15 +35304,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -35323,8 +35323,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11411038
 MonoBehaviour:
@@ -38035,15 +38035,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -38054,8 +38054,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11415828
 MonoBehaviour:
@@ -38421,11 +38421,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3015
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3018
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -41528,15 +41528,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -41547,8 +41547,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11421652
 MonoBehaviour:
@@ -42454,13 +42454,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -42477,7 +42477,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -42742,13 +42742,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -42765,7 +42765,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -45903,7 +45903,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3017
+  startingRenderQueue: 3036
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -46099,15 +46099,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -46118,8 +46118,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11428724
 MonoBehaviour:
@@ -46634,15 +46634,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 1
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -46653,8 +46653,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11429612
 MonoBehaviour:
@@ -47749,13 +47749,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -47772,7 +47772,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -48477,11 +48477,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3017
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3015
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -49414,11 +49414,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3021
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3023
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -49879,7 +49879,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3003
+  startingRenderQueue: 3004
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3
@@ -50237,15 +50237,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -50256,8 +50256,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11436374
 MonoBehaviour:
@@ -50726,15 +50726,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -50745,8 +50745,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11437234
 MonoBehaviour:
@@ -53133,13 +53133,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -53156,7 +53156,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -55580,13 +55580,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -55603,7 +55603,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -55898,13 +55898,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -55921,7 +55921,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -58120,11 +58120,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3019
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3014
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -60580,13 +60580,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -60603,7 +60603,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -65389,11 +65389,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3018
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3016
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -66872,10 +66872,10 @@ MonoBehaviour:
   softBorderPadding: 1
   renderQueue: 0
   startingRenderQueue: 3022
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -67303,13 +67303,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -67326,7 +67326,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -68181,11 +68181,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3020
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3021
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -68361,15 +68361,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -68380,8 +68380,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11465648
 MonoBehaviour:
@@ -69070,15 +69070,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -69089,8 +69089,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11466712
 MonoBehaviour:
@@ -71337,11 +71337,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3016
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3020
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -71644,7 +71644,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 560
   mHeight: 404
-  mDepth: 3
+  mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -75968,11 +75968,11 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3013
-  mClipTexture: {fileID: 2800000, guid: 51df91cb2b20241e1a3595f971edca27, type: 3}
+  startingRenderQueue: 3019
+  mClipTexture: {fileID: 2800000, guid: 924be01cce5a2400cb3b9677eacd890a, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 76, w: 86}
+  mClipRange: {x: 0, y: 0, z: 90, w: 90}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 2
   mSortingOrder: 0
@@ -79481,15 +79481,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .90196079, g: .90196079, b: .90196079, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
+  mWidth: 90
   mHeight: 90
   mDepth: 2
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .888888896
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -79500,8 +79500,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: e4f35a1578c7b4776a2224b5ce12cd36, type: 2}
-  mSpriteName: bg_member_photo
+  mAtlas: {fileID: 11449798, guid: f3585f307ccdf4028bad52403f6614e6, type: 2}
+  mSpriteName: bg_list_photo
   mFillCenter: 1
 --- !u!114 &11486032
 MonoBehaviour:
@@ -79578,13 +79578,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -79601,7 +79601,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -81611,13 +81611,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 86
+  mWidth: 90
+  mHeight: 90
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: .883720934
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -81634,7 +81634,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: b6ee40fbd50ee447ca74d260dc7309d5, type: 3}
+  mTexture: {fileID: 2800000, guid: 9e5a1840bd760452b84e020cb66201e1, type: 3}
   mMat: {fileID: 0}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
