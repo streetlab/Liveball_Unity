@@ -267,7 +267,7 @@ public class LandingManager : MonoBehaviour {
 						NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + N[i].playerName;
 						NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + N[i].playerNumber;
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitAvg;
-						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitHr;
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].HR;
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].RBI;
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitBB;
 
@@ -568,7 +568,7 @@ public class LandingManager : MonoBehaviour {
 		while (true) {
 			PDE = new PresetDataEvent(new EventDelegate(this,"SetRanking"));
 			NetMgr.GetPresetData(UserMgr.CurrentPresetSeq,PDE);
-			yield return new WaitForSeconds (60f);
+			yield return new WaitForSeconds (30f);
 		}
 	}
 	void SetRanking(){
@@ -585,7 +585,7 @@ public class LandingManager : MonoBehaviour {
 				RankGage.transform.FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (
 				-316f + ((float)PDE.Response.data [a].myRank / (float)PDE.Response.data [a].totalPreset) * 632f, 23);
 				RankGage.transform.FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (
-				-316f + ((float)PDE.Response.data [a].myRank / (float)PDE.Response.data [a].totalPreset) * 632f, -35);
+					-316f + ((((float)PDE.Response.data [a].totalPreset) - ((float)PDE.Response.data [a].rewardCount - 1))/ (float)PDE.Response.data [a].totalPreset) * 632f, -35);
 			} else {
 				RankGage.transform.FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (
 				-316f + ((((float)PDE.Response.data [a].totalPreset - ((float)PDE.Response.data [a].myRank - 1f)) / (float)PDE.Response.data [a].totalPreset) * 632f), 23);
@@ -610,7 +610,11 @@ public class LandingManager : MonoBehaviour {
 		
 		RankGage.transform.FindChild("BG").FindChild("rewordScore").GetComponent<UILabel>().text = PDE.Response.data[a].rewardCount.ToString();
 		RankGage.transform.FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(((((float)PDE.Response.data[a].totalPreset)-((float)PDE.Response.data[a].rewardCount-1))/(float)PDE.Response.data[a].totalPreset)*632f,0);
-		
+		if (PDE.Response.data [a].rewardCount >= PDE.Response.data [a].totalPreset) {
+			RankGage.transform.FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (
+				-316f, -35);
+			RankGage.transform.FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(0,0);
+		}
 		
 
 	}
@@ -1193,8 +1197,9 @@ public class LandingManager : MonoBehaviour {
 	PlayerInfo Lineup;
 	//public PlayerInfo Lineup2;
 	public void GetLineUp(){
+
 		mlineupEvent = new GetLineupEvent (new EventDelegate (this, "sethitter"));
-		NetMgr.GetLineup (UserMgr.Schedule.extend [0].teamCode, mlineupEvent);
+		NetMgr.GetLineup (UtilMgr.GetTeamCode(UserMgr.Schedule.extend [0].teamName), mlineupEvent);
 	}
 	void sethitter(){
 		if (mlineupEvent.Response.data != null) {
@@ -1276,7 +1281,7 @@ public class LandingManager : MonoBehaviour {
 //				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.hit [0].imagePath + mlineupEvent.Response.data.hit [0].imageName);
 //				StartCoroutine (GetImage (www, P_LPlayerImage));
 				mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setPitcher"));
-				NetMgr.GetLineup (UserMgr.Schedule.extend [1].teamCode, mlineupEvent);
+				NetMgr.GetLineup (UtilMgr.GetTeamCode(UserMgr.Schedule.extend [1].teamName), mlineupEvent);
 			}
 		}
 	}

@@ -490,7 +490,7 @@ public class NetMgr : MonoBehaviour{
 	}
 	public static void GetGift(EventDelegate E)
 	{
-		WWW www = new WWW("http://appif.liveball.kr:4002/tuby_file/gift/gift.json");
+		WWW www = new WWW(Constants.IMAGE_SERVER_HOST+"gift/gift.json");
 		Instance.webProcess2 (www,E);
 	}
 	public static void GetScheduleAll(BaseEvent baseEvent)

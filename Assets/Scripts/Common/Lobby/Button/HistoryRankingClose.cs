@@ -18,7 +18,7 @@ public class HistoryRankingClose : MonoBehaviour {
 
 
 
-		GameObject RankGage = transform.FindChild ("RankGage").FindChild("BGIn").gameObject;
+		GameObject RankGage = transform.FindChild("RankGagePanel").FindChild ("RankGage").FindChild("BGIn").gameObject;
 		
 		
 		if (MyRank == "0") {

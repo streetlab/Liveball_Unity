@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 public class RankingCommander : MonoBehaviour {
-	Dictionary<int,Texture2D> List1 = new Dictionary<int, Texture2D> ();
-	Dictionary<int,Texture2D> List2 = new Dictionary<int, Texture2D> ();
-	Dictionary<int,Texture2D> List3 = new Dictionary<int, Texture2D> ();
-	Dictionary<int,Texture2D> List4 = new Dictionary<int, Texture2D> ();
+	Dictionary<string,Texture2D> List1 = new Dictionary<string, Texture2D> ();
+	Dictionary<string,Texture2D> List2 = new Dictionary<string, Texture2D> ();
+	Dictionary<string,Texture2D> List3 = new Dictionary<string, Texture2D> ();
+	Dictionary<string,Texture2D> List4 = new Dictionary<string, Texture2D> ();
 	bool Rank1 = true;
 	bool Rank2 = true;
 	bool Rank3 = true;
@@ -81,19 +81,19 @@ public class RankingCommander : MonoBehaviour {
 			item.Target.gameObject.name = "Player_"+index.ToString();
 			item.Target.gameObject.SetActive(true);
 			item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
-			if(mGetRankEvent.Response.data[index].imageName!=""){
+		
 			try{
-				Texture2D ex = List1[index];
+					Texture2D ex = List1[mGetRankEvent.Response.data[index].imageName];
 				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
 					= ex;
 			}catch{
 				
-			
+				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
-					StartCoroutine (GetImage1 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage1 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),mGetRankEvent.Response.data[index].imageName));
+				}
+			}
 
-			}
-			}
 			//}
 			
 		});
@@ -131,14 +131,14 @@ public class RankingCommander : MonoBehaviour {
 			item.Target.gameObject.SetActive(true);
 			item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
 			try{
-				Texture2D ex = List2[index];
+				Texture2D ex = List2[mGetRankEvent.Response.data[index].imageName];
 				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
 					= ex;
 			}catch{
 				
 				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
-					StartCoroutine (GetImage2 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage2 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),mGetRankEvent.Response.data[index].imageName));
 				}
 			}
 			
@@ -180,14 +180,14 @@ public class RankingCommander : MonoBehaviour {
 			item.Target.gameObject.SetActive(true);
 			item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
 			try{
-				Texture2D ex = List3[index];
+				Texture2D ex = List3[mGetRankEvent.Response.data[index].imageName];
 				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
 					= ex;
 			}catch{
 				
 				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
-					StartCoroutine (GetImage3 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage3 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),mGetRankEvent.Response.data[index].imageName));
 				}
 			}
 			
@@ -229,7 +229,7 @@ public class RankingCommander : MonoBehaviour {
 			item.Target.gameObject.SetActive(true);
 			item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
 			try{
-				Texture2D ex = List4[index];
+				Texture2D ex = List4[mGetRankEvent.Response.data[index].imageName];
 				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
 					= ex;
 			}catch{
@@ -237,7 +237,7 @@ public class RankingCommander : MonoBehaviour {
 				if(mGetRankEvent.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mGetRankEvent.Response.data[index].imagePath + mGetRankEvent.Response.data[index].imageName);
 				
-					StartCoroutine (GetImage4 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage4 (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),mGetRankEvent.Response.data[index].imageName));
 				
 					}
 			}
@@ -248,7 +248,7 @@ public class RankingCommander : MonoBehaviour {
 		transform.FindChild ("Scroll View4").GetComponent<UIDraggablePanel2> ().ResetPosition ();
 		Rank4 = false;
 	}
-	IEnumerator GetImage1(WWW www, UITexture texture,int index)
+	IEnumerator GetImage1(WWW www, UITexture texture,string index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
@@ -262,7 +262,7 @@ public class RankingCommander : MonoBehaviour {
 		texture.mainTexture = tmpTex;
 		
 	}
-	IEnumerator GetImage2(WWW www, UITexture texture,int index)
+	IEnumerator GetImage2(WWW www, UITexture texture,string index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
@@ -276,7 +276,7 @@ public class RankingCommander : MonoBehaviour {
 		texture.mainTexture = tmpTex;
 		
 	}
-	IEnumerator GetImage3(WWW www, UITexture texture,int index)
+	IEnumerator GetImage3(WWW www, UITexture texture,string index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);
@@ -290,7 +290,7 @@ public class RankingCommander : MonoBehaviour {
 		texture.mainTexture = tmpTex;
 		
 	}
-	IEnumerator GetImage4(WWW www, UITexture texture,int index)
+	IEnumerator GetImage4(WWW www, UITexture texture,string index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);

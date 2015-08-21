@@ -5,6 +5,60 @@ using System.Collections.Generic;
 public class Contest : MonoBehaviour {
 	GetGamePresetLineupEvent GGPL;
 	List<GamePresetLineupInfo> List ;
+	float speed = 200;
+	bool One = true;
+	float  X ;
+	void Start(){
+		if (One) {
+			//Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().localSize.x);
+		//	Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().printedSize.x);
+		//	Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().text);
+			//Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().x.x);
+			X = transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().localSize.x+30f;
+			if (X < 650f) {
+				X = 650;
+			}
+			Debug.Log ("X : " + X);
+			transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title1").localPosition = new Vector3 (0,0,0);
+			transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition=new Vector3(0,0,0); 
+			transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title2").localPosition = new Vector3 (X,0,0);
+			transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition=new Vector3(X,0,0); 
+			One =false;
+		}
+		Debug.Log ("ON!");
+		StartCoroutine("RollingTitle");
+	}
+	int EnableCount  = 0;
+	void OnEnable(){
+
+		if (EnableCount != 0) {
+			StartCoroutine("RollingTitle");
+		}
+		EnableCount++;
+	}
+	IEnumerator RollingTitle(){
+
+		//Debug.Log ("RollingTitle");
+
+		//Debug.Log ("X : " + X);
+
+		while (true) {
+			transform.FindChild("NewTop").FindChild("TitlePanel").FindChild("Title1").localPosition+=new Vector3(-X/speed,0,0);
+			transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition+=new Vector3(-X/speed,0,0); 
+			transform.FindChild("NewTop").FindChild("TitlePanel").FindChild("Title2").localPosition+=new Vector3(-X/speed,0,0);
+			transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition+=new Vector3(-X/speed,0,0); 
+			if(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition.x <=-X){
+				transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title1").localPosition = new Vector3 (X,0,0);
+				transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition=new Vector3(X,0,0); 
+			}
+			if(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition.x <=-X){
+				transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title2").localPosition = new Vector3 (X,0,0);
+				transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition=new Vector3(X,0,0); 
+			}
+			yield return new WaitForSeconds(0.04f);
+			//Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().text);
+		}
+	}
 	public void button(){
 
 	//	ex ();
@@ -23,13 +77,13 @@ public class Contest : MonoBehaviour {
 		
 		} else {
 			try{
-		List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
+				List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
 				SetPresettingSetting();
 			
 			}catch{
 
 			GGPL = new GetGamePresetLineupEvent(new EventDelegate(this,"getlineup"));
-			NetMgr.GetGamePresetLineup(int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text),GGPL);
+				NetMgr.GetGamePresetLineup(int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text),GGPL);
 		
 			}
 
@@ -38,12 +92,32 @@ public class Contest : MonoBehaviour {
 	int count= 0;
 	void getlineup(){
 		count = 0;
-		for(int i = 0; i<GGPL.Response.data.Count;i++){
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data[i].imagePath + GGPL.Response.data[i].imageName);
-			StartCoroutine(GetImage(www,GGPL.Response.data[i]));
+		Debug.Log ("GGPL.Response.data.Count : " + GGPL.Response.data.Count);
+
+		if (GGPL.Response.data.Count != 0) {
+			for (int i = 0; i<GGPL.Response.data.Count; i++) {
+				Debug.Log ("i : " + i);
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data [i].imagePath + GGPL.Response.data [i].imageName);
+				StartCoroutine (GetImage (www, GGPL.Response.data [i]));
+
+			}
+		} else {
+		
+
+			try{
+				UserMgr.LineUpList.Add (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text,
+				                        GGPL.Response.data);
+			}	catch{
+				Debug.Log("Same Line Up");
+			}
+			List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
+			SetPresettingSetting ();
+			
+
+
+
 
 		}
-	
 
 
 
@@ -52,8 +126,8 @@ public class Contest : MonoBehaviour {
 		}
 
 		void SetPresettingSetting(){
-		string Ateam = UtilMgr.GetTeamCode (transform.FindChild ("Team").FindChild("LT").GetComponent<UILabel>().text.Replace("[b]",""));
-		string Hteam = UtilMgr.GetTeamCode (transform.FindChild ("Team").FindChild("RT").GetComponent<UILabel>().text.Replace("[b]",""));
+		string Ateam = UtilMgr.GetTeamCode (transform.FindChild ("BG").FindChild("Lteam").GetComponent<UILabel>().text.Replace("[b]",""));
+		string Hteam = UtilMgr.GetTeamCode (transform.FindChild ("BG").FindChild("Rteam").GetComponent<UILabel>().text.Replace("[b]",""));
 		Debug.Log ("List.Count : " + List.Count);
 
 		for (int i = 0; i<List.Count; i++) {
@@ -83,14 +157,14 @@ public class Contest : MonoBehaviour {
 		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Mid").FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Mode = "Add";
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().SetTeamName (transform.
-		                                                                                                          FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text,
+		                                                                                                          FindChild ("BG").FindChild ("Lteam").GetComponent<UILabel> ().text,
 		                                                                                                          transform.
-		                                                                                                          FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text, "");
-		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Ruby (transform.
+		                                                                                                          FindChild ("BG").FindChild ("Rteam").GetComponent<UILabel> ().text, "");
+		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Ruby (transform.FindChild("OldBot").
 		                                                                                                   FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text,
-		                                                                                                   transform.
+		                                                                                                   transform.FindChild("OldBot").
 		                                                                                                   FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text,
-		                                                                                                   transform.
+		                                                                                                   transform.FindChild("OldBot").
 		                                                                                                   FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text
 		                                                                                                   );
 		transform.parent.parent.parent.FindChild ("Top").FindChild ("Sub").gameObject.SetActive (false);
@@ -136,14 +210,14 @@ public class Contest : MonoBehaviour {
 		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Mid").FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Mode = "Add";
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().SetTeamName (transform.
-		                                                                                                          FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text,
+		                                                                                                          FindChild ("BG").FindChild ("Lteam").GetComponent<UILabel> ().text,
 		                                                                                                          transform.
-		                                                                                                          FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text, "");
-		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Ruby (transform.
+		                                                                                                          FindChild ("BG").FindChild ("Rteam").GetComponent<UILabel> ().text, "");
+		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Ruby (transform.FindChild("OldBot").
 		                                                                                                   FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text,
-		                                                                                                   transform.
+		                                                                                                   transform.FindChild("OldBot").
 		                                                                                                   FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text,
-		                                                                                                   transform.
+		                                                                                                   transform.FindChild("OldBot").
 		                                                                                                   FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text
 		                                                                                                   );
 		transform.parent.parent.parent.FindChild ("Top").FindChild ("Sub").gameObject.SetActive (false);

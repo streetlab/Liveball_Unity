@@ -987,4 +987,50 @@ public class ScriptMainTop : MonoBehaviour {
 		transform.root.FindChild ("GameObject").FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (false);
 		transform.root.FindChild ("GameObject").FindChild ("TF_Landing").FindChild("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("END").gameObject.SetActive (true);;
 	}
+	ContestListEvent ContestEvent;
+	public void ResetData()
+	{
+		
+		try{
+			ContestEvent = new ContestListEvent(new EventDelegate(this, "GetContest"));
+			NetMgr.GetContestList(ContestEvent);
+		}catch{
+			HistoryEvent = new HistoryListEvent(new EventDelegate(this, "GetHistory"));
+			NetMgr.GetHistoryList(HistoryEvent);
+		}
+		//    GetContest ();
+		
+		
+	}
+	PresetListEvent PresetEvent;
+	public void GetContest(){
+		for(int i = 0; i<ContestEvent.Response.data.Count;i++){
+			if(ContestEvent.Response.data [i].contestStatus == 2){
+				UserMgr.ContestStatus = ContestEvent.Response.data [i].contestStatus;
+				break;
+			}
+		}
+		
+		PresetEvent = new PresetListEvent(new EventDelegate(this, "GetPreset"));
+		NetMgr.GetPresetList(PresetEvent);
+		
+		
+		
+		
+		
+		UserMgr.ContestList = ContestEvent.Response.data;
+		
+		
+	}
+	HistoryListEvent HistoryEvent;
+	void GetPreset(){
+		UserMgr.PresetList = PresetEvent.Response.data;
+		HistoryEvent = new HistoryListEvent(new EventDelegate(this, "GetHistory"));
+		NetMgr.GetHistoryList(HistoryEvent);
+	}
+	void GetHistory(){
+		UserMgr.HistoryList = HistoryEvent.Response.data;
+		DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+		
+	}
 }

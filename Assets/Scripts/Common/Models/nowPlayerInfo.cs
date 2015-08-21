@@ -46,6 +46,15 @@ public class nowPlayerInfo {
 		}
 	}
 
+	string _HR;
+	public string HR {
+		get {
+			return _HR;
+		}
+		set {
+			_HR = value;
+		}
+	}
 	float _hitHr;
 
 	public float hitHr {

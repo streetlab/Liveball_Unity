@@ -90,6 +90,17 @@ public class ScriptSelectTeam : MonoBehaviour {
 			loginInfo.DeviceID = IOSMgr.GetMsg();
 		else
 			loginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
+		if (Application.platform == RuntimePlatform.Android) {
+			loginInfo.osType = 1;
+			
+		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			loginInfo.osType = 2;
+			
+			
+		} else if(Application.platform == RuntimePlatform.OSXEditor){
+			loginInfo.osType = 1;
+			
+		}
 
 		NetMgr.LoginGuest(loginInfo, mLoginEvent, UtilMgr.IsTestServer(), true);
 	}

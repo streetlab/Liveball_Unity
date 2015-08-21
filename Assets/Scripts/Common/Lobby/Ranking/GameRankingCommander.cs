@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 public class GameRankingCommander : MonoBehaviour {
-	Dictionary<int,Texture2D> List = new Dictionary<int, Texture2D> ();
+	Dictionary<string,Texture2D> List = new Dictionary<string, Texture2D> ();
 	GetRankEvent mGetRankEvent;
 	public Texture2D texures;
 	ContestRankingEvent CRE;
@@ -47,14 +47,14 @@ public class GameRankingCommander : MonoBehaviour {
 				item.Target.gameObject.SetActive(true);
 				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
 				try{
-					Texture2D ex = List[index];
+				Texture2D ex = List[CRE.Response.data[index].imageName];
 					item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
 						= ex;
 				}catch{
 					
 				if(CRE.Response.data[index].imageName!=""){
 					WWW www = new WWW (Constants.IMAGE_SERVER_HOST + CRE.Response.data[index].imagePath + CRE.Response.data[index].imageName);
-						StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),index));
+					StartCoroutine (GetImage (www, item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>(),CRE.Response.data[index].imageName));
 					}
 				}
 				
@@ -65,7 +65,7 @@ public class GameRankingCommander : MonoBehaviour {
 
 		transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo").localPosition = new Vector3 (-720,0,0);
 	}
-	IEnumerator GetImage(WWW www, UITexture texture,int index)
+	IEnumerator GetImage(WWW www, UITexture texture,string index)
 	{
 		yield return www;
 		Texture2D tmpTex = new Texture2D (0, 0);

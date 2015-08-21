@@ -13,6 +13,8 @@ public class LoginGuestRequest : BaseUploadRequest {
 		dic.Add ("memUID", loginInfo.memUID == null ? "" : loginInfo.memUID);
 //		Debug.Log("deviceID is "+loginInfo.DeviceID);
 //		loginInfo.DeviceID = "test9";
+		dic.Add ("osType", loginInfo.osType);
+		dic.Add ("version", Application.version);
 		dic.Add ("deviceID", loginInfo.DeviceID);
 		
 		

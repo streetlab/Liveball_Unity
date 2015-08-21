@@ -189,8 +189,10 @@ public class RightMenuCommander : MonoBehaviour {
 	bool GalleryCheck = false;
 	bool CheckInGallery = false;
 	public void SetNames(){
+
 		transform.root.FindChild("Camera").FindChild ("PopUp").gameObject.SetActive (true);
 		PopUp.Status = "Profile";
+
 	}
 	public void SetPhoto(){
 		

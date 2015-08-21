@@ -95,9 +95,15 @@ public class PresettingRC : MonoBehaviour {
 			transform.root.FindChild("Camera").FindChild("JoinPopUp").gameObject.SetActive(true);
 			transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box1")
 				.FindChild("Value").GetComponent<UILabel>().text = "루비 " + transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost;
+
+			if("[b]마일리지"!=transform.parent.parent.parent.GetComponent<PreSettingCommander>().item){
 			transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box2")
 				.FindChild("Value").GetComponent<UILabel>().text = transform.parent.parent.parent.GetComponent<PreSettingCommander>().money+" "+
 					transform.parent.parent.parent.GetComponent<PreSettingCommander>().item;
+			}else{
+				transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box2")
+					.FindChild("Value").GetComponent<UILabel>().text = transform.parent.parent.parent.GetComponent<PreSettingCommander>().money;
+			}
 
 		}else if(status == CheckStarus.MaxPreset){
 			DialogueMgr.ShowDialogue ("등록취소", "이 컨테스트에 등록가능한 개수를 초과하였습니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);

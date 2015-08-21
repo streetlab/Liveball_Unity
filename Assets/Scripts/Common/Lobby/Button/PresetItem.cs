@@ -11,10 +11,21 @@ public class PresetItem : MonoBehaviour {
 	void GetLineupStart(){
 
 		count = 0;
-		for(int i = 0; i<GGPL.Response.data.Count;i++){
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data[i].imagePath + GGPL.Response.data[i].imageName);
-			StartCoroutine(GetImageStart(www,GGPL.Response.data[i]));
+		if (GGPL.Response.data.Count != 0) {
+			for (int i = 0; i<GGPL.Response.data.Count; i++) {
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data [i].imagePath + GGPL.Response.data [i].imageName);
+				StartCoroutine (GetImageStart (www, GGPL.Response.data [i]));
 			
+			}
+		} else {
+			try{
+				UserMgr.LineUpList.Add (transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text,GGPL.Response.data);
+			}
+			catch{
+				Debug.Log("Same");
+			}
+			GSE = new GetScheduleEvent(new EventDelegate(this,"GET"));
+			NetMgr.GetScheduleToday (GSE);
 		}
 
 	}
@@ -151,13 +162,28 @@ public class PresetItem : MonoBehaviour {
 
 	void GetLineup(){
 		count = 0;
-		for(int i = 0; i<GGPL.Response.data.Count;i++){
-			WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data[i].imagePath + GGPL.Response.data[i].imageName);
-			StartCoroutine(GetImage(www,GGPL.Response.data[i]));
+
+		if (GGPL.Response.data.Count != 0) {
+			for (int i = 0; i<GGPL.Response.data.Count; i++) {
+				WWW www = new WWW (Constants.IMAGE_SERVER_HOST + GGPL.Response.data [i].imagePath + GGPL.Response.data [i].imageName);
+				StartCoroutine (GetImage (www, GGPL.Response.data [i]));
 			
+			}
+
+		} else {
+			
+			Debug.Log ("GetLineup");
+			try{
+				UserMgr.LineUpList.Add (transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text,GGPL.Response.data);
+				
+			}catch{
+				Debug.Log("Same key");
+			}
+			
+			Lists =UserMgr.LineUpList[transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text];
+			PresetChange();
+
 		}
-
-
 
 
 	}

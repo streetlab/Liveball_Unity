@@ -56,6 +56,15 @@ public class nextPlayerInfo {
 			_hitHr = value;
 		}
 	}
+	string _HR;
+	public string HR {
+		get {
+			return _HR;
+		}
+		set {
+			_HR = value;
+		}
+	}
 
 	float _hitBB;
 	

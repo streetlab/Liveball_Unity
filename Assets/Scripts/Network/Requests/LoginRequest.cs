@@ -11,10 +11,10 @@ public class LoginRequest : BaseRequest {
 		Add ("memberEmail", loginInfo.memberEmail);
 		Add ("memberName", loginInfo.memberName);
 		Add ("memUID", loginInfo.memUID);
-//		Add ("osType", loginInfo.osType);
+		Add ("osType", loginInfo.osType);
 		Add ("registType", loginInfo.registType);
 		Add ("memberPwd", loginInfo.memberPwd);
-//		Add ("version", Application.version);
+		Add ("version", Application.version);
 		Add ("deviceID", loginInfo.DeviceID);
 
 //		mParams = JsonFx.Json.JsonWriter.Serialize (this);

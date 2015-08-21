@@ -556,6 +556,7 @@ public class QuizInfo {
 			_hitHr = value;
 		}
 	}
+
 	string _hitBB;
 	public string hitBB {
 		get {

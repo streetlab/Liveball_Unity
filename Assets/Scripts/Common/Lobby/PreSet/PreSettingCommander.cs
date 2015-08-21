@@ -51,6 +51,7 @@ public class PreSettingCommander : MonoBehaviour {
 //		cost = "";
 //		for (int i = 3; i<R.Length; i++) {
 //			cost+= R[i].ToString();
+		R = R.Replace ("[b]","");
 //		}
 		cost = R;
 		money = M;

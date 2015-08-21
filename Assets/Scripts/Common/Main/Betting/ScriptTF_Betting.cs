@@ -401,7 +401,7 @@ public class ScriptTF_Betting : MonoBehaviour {
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").
 				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitAvg;
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").
-				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].hitHr.ToString();
+				GetComponent<UILabel>().text = QuizMgr.NextPlayerInfo.nowPlayer[0].HR;
 			//Debug.Log("QuizMgr.NextPlayerInfo.nowPlayer[0].RBI.ToString()" + QuizMgr.NextPlayerInfo.nowPlayer[0].RBI.ToString());
 			if(QuizMgr.NextPlayerInfo.nowPlayer[0].RBI!=null){
 			mBatting.transform.FindChild("Hitter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").
@@ -605,16 +605,17 @@ public class ScriptTF_Betting : MonoBehaviour {
 
 		shadow.SetActive (true);
 		QuizMgr.IsBettingOpended = true;
+		transform.FindChild ("Scroll View").localPosition = new Vector3 (0, -72f, 0);
 		GameObject Menu = transform.FindChild ("Scroll View").FindChild ("GameObject").gameObject;
 
-		Menu.transform.localPosition=new Vector3(0,-651f+UtilMgr.GetScaledPositionY (),0);
+		Menu.transform.localPosition=new Vector3(0,-651f,0);
 		transform.FindChild ("Scroll View").gameObject.SetActive (true);
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition+=new Vector3(0,655f/5f,0);
 			Debug.Log("Menu.transform.localPosition.y : " + Menu.transform.localPosition.y);
 			Debug.Log("3+UtilMgr.GetScaledPositionY () : " + (3+UtilMgr.GetScaledPositionY ()));
-			if(Menu.transform.localPosition.y>=3+UtilMgr.GetScaledPositionY ()){
-				Menu.transform.localPosition=new Vector3(0,3+UtilMgr.GetScaledPositionY (),0);
+			if(Menu.transform.localPosition.y>=3){
+				Menu.transform.localPosition=new Vector3(0,3,0);
 				break;
 			}
 			yield return new WaitForSeconds(0.05f);
@@ -629,8 +630,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 //		}
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition-=new Vector3(0,651f/5f,0);
-			if(Menu.transform.localPosition.y<=-651+UtilMgr.GetScaledPositionY ()){
-				Menu.transform.localPosition=new Vector3(0,-651f+UtilMgr.GetScaledPositionY (),0);
+			if(Menu.transform.localPosition.y<=-651){
+				Menu.transform.localPosition=new Vector3(0,-651f,0);
 				break;
 			}
 			yield return new WaitForSeconds(0.05f);

@@ -221,40 +221,115 @@ public class LobbyNCCommander : MonoBehaviour {
 	}
 
 	static void InitList(List<ContestListInfo> infoList, UIListItem item, int index){
+
+
+
+
+
+
+
 		if (infoList[index].featured == 1) {
-			for (int a = 0; a<item.Target.gameObject.transform.childCount; a++) {
-				if (item.Target.gameObject.transform.GetChild (a).name != "BG") {
-					item.Target.gameObject.transform.GetChild (a).GetComponent<UISprite> ().color = new Color (1f, 1f, 239f / 255f, 1f);
-				}
+	
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
+			item.Target.gameObject.transform.FindChild("NewTop").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
+			item.Target.gameObject.transform.FindChild("OldBot").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = new Color (16f/255f, 140f/255f, 187f / 255f, 1f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = new Color (16f/255f, 140f/255f, 187f / 255f, 1f);
+
+			if (infoList [index].totalEntry == infoList [index].totalPreset) {
+				item.Target.GetComponent<UIButton>().enabled = false;
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+			} else {
+				item.Target.GetComponent<UIButton>().enabled = true;
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
 			}
+
 		} else{
-			for (int a = 0; a<item.Target.gameObject.transform.childCount; a++) {
-				if (item.Target.gameObject.transform.GetChild (a).name != "BG") {
-					item.Target.gameObject.transform.GetChild (a).GetComponent<UISprite> ().color = new Color (1f, 1f, 1f, 1f);
-				}
+
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").GetComponent<UISprite> ().color = new Color (1f, 1f, 1f, 1f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").GetComponent<UISprite> ().color = new Color (1f, 1f, 1f, 1f);
+			item.Target.gameObject.transform.FindChild("NewTop").GetComponent<UISprite> ().color = new Color (1f, 1f, 1f, 1f);
+			item.Target.gameObject.transform.FindChild("OldBot").GetComponent<UISprite> ().color = new Color (1f, 1f, 1f, 1f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = new Color (146f/255f, 39f/255f, 143f / 255f, 1f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = new Color (146f/255f, 39f/255f, 143f / 255f, 1f);
+
+
+			if (infoList [index].totalEntry == infoList [index].totalPreset) {
+				item.Target.GetComponent<UIButton>().enabled = false;
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(155f/255f,155f/255f,155f/255f,1);
+			} else {
+				item.Target.GetComponent<UIButton>().enabled = true;
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(146f/255f,39f/255f,143f/255f,1);
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(146f/255f,39f/255f,143f/255f,1);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+					new Color(146f/255f,39f/255f,143f/255f,1);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+					new Color(146f/255f,39f/255f,143f/255f,1);
+
+
 			}
+		
 		}
 
-		item.Target.gameObject.transform.FindChild ("Team").FindChild ("LT").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamName;
-		item.Target.gameObject.transform.FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamScore  +" : " +infoList[index].hTeamScore;
-		item.Target.gameObject.transform.FindChild ("Team").FindChild ("RT").GetComponent<UILabel> ().text = "[b]"+infoList[index].hTeamName;
-		item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+infoList[index].contestName;
-		item.Target.gameObject.transform.FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = infoList[index].totalPreset+"/"+infoList[index].totalEntry;
-		item.Target.gameObject.transform.FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = infoList[index].entryFee.ToString();
+
+		item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamName + " : " + infoList[index].hTeamName + "   "+infoList[index].contestName+"";
+		item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamName + " : " + infoList[index].hTeamName + "   "+infoList[index].contestName+"";
+
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamName + " : " + infoList[index].hTeamName + "   "+infoList[index].contestName+"";
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().text = "[b]"+infoList[index].aTeamName + " : " + infoList[index].hTeamName + "   "+infoList[index].contestName+"";
+
+		item.Target.gameObject.transform.FindChild("OldBot").FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+infoList[index].totalPreset+"[/b] / "+infoList[index].totalEntry;
+		item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+infoList[index].entryFee.ToString();
+
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+infoList[index].totalPreset+"[/b] / "+infoList[index].totalEntry;
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+infoList[index].entryFee.ToString();
 		if(infoList[index].rewardItem < 100){					
-			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = infoList[index].totalReward.ToString();
-			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = infoList[index].itemName;
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].totalReward.ToString();
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].totalReward.ToString();
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
 		} else if(infoList[index].rewardItem >= 100){
-			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = infoList[index].itemName;
-			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label1").transform.localPosition = new Vector3(0,0,0);
-			item.Target.gameObject.transform.FindChild ("Mileage").FindChild ("Label2").gameObject.SetActive(false);
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label1").transform.localPosition = new Vector3(0,0,0);
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label2").gameObject.SetActive(false);
+
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label1").transform.localPosition = new Vector3(0,0,0);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label2").gameObject.SetActive(false);
 //			item.Target.gameObject.transform.FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "50 / 50s";
 		}
 
 		if(infoList[index].contestType == 1){
-			item.Target.gameObject.transform.FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "50 / 50s";
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]50 / 50s";
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]50 / 50s";
 		} else{
-			item.Target.gameObject.transform.FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "Ranking";
+			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]Ranking";
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]Ranking";
 		}
 
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel>().text = infoList[index].contestSeq.ToString();
@@ -263,29 +338,32 @@ public class LobbyNCCommander : MonoBehaviour {
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel>().text = infoList[index].totalPreset.ToString();
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("status").GetComponent<UILabel>().text = infoList[index].contestStatus.ToString();
 		item.Target.gameObject.transform.FindChild ("BG").FindChild ("MultiEntry").GetComponent<UILabel>().text = infoList[index].multiEntry.ToString();
+
+		item.Target.gameObject.transform.FindChild ("BG").FindChild ("Lteam").GetComponent<UILabel>().text = infoList[index].aTeamName.ToString();
+		item.Target.gameObject.transform.FindChild ("BG").FindChild ("Rteam").GetComponent<UILabel>().text = infoList[index].hTeamName.ToString();
 		item.Target.gameObject.name = "Contest " + index.ToString ();
 
 
-		if (infoList [index].totalEntry == infoList [index].totalPreset) {
-			item.Target.GetComponent<UIButton>().enabled = false;
-			item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
-				new Color(155f/255f,155f/255f,155f/255f,1);
-		} else {
-			item.Target.GetComponent<UIButton>().enabled = true;
-			item.Target.gameObject.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
-				new Color(146f/255f,39f/255f,143f/255f,1);
-		}
+	
 
-		item.Target.gameObject.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
-		item.Target.gameObject.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
-		item.Target.gameObject.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("M").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
+
+		item.Target.gameObject.transform.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(false);
+		item.Target.gameObject.transform.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("M").gameObject.SetActive(false);
+		item.Target.gameObject.transform.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
+
 		if(infoList[index].guaranteed == 1){
-			item.Target.gameObject.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
+			item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
 		}
 		if (infoList [index].multiEntry > 1) {
-			item.Target.gameObject.transform.FindChild ("Title").FindChild ("M").gameObject.SetActive (true);
+			item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
 		} else {
-			item.Target.gameObject.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (228.5f,0,0);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f,0,0);
+			item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f,0,0);
 		}
 	}
 	public void NCUpDown(string Value){
@@ -294,7 +372,7 @@ public class LobbyNCCommander : MonoBehaviour {
 			transform.FindChild ("Nomal Contest").localPosition = new Vector3 (-360, Y);
 		} else if(Value == "Down"){
 			transform.FindChild ("Nomal Contest").localPosition = new Vector3 (-360, Y - GetComponent<LobbyAddSub> ().SubHight);
-			
+				
 		}
 		
 	}
@@ -336,29 +414,28 @@ public class LobbyNCCommander : MonoBehaviour {
 					for (int a = 0; a < CDE.Response.data.Count; a++) {
 
 						for (int i = 0; i<Count.transform.childCount-2; i++) {
+
+
 							if (CDE.Response.data [a].contestSeq == int.Parse (Count.transform.FindChild ("item index:" + i.ToString ()).
 				                                                FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text)) {
 					
-								Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data [a].aTeamScore + " : " + CDE.Response.data [a].hTeamScore;
-								Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = CDE.Response.data [a].totalPreset + " / " +
-									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
-								//                    if(UserMgr.CurrentContestSeq !=2){
-								//                    if(CDE.Response.data[a].contestStatus == 2){
-								//                            UserMgr.CurrentContestSeq = CDE.Response.data[a].contestStatus;
-								//                            transform.FindChild("PreSet Contest").GetComponent<PresetContestCommander>().CreatItem();
-								//                    }
-								//                    }
-
-
-								if (Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
-									Count.transform.FindChild ("item index:" + i.ToString ()).GetComponent<UIButton> ().enabled = false;
-									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
-								new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
-								} else {
-									Count.transform.FindChild ("item index:" + i.ToString ()).GetComponent<UIButton> ().enabled = true;
-									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = 
-								new Color (146f / 255f, 39f / 255f, 143f / 255f, 1);
-								}
+								//Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("Team").FindChild ("Score").GetComponent<UILabel> ().text = CDE.Response.data [a].aTeamScore + " : " + CDE.Response.data [a].hTeamScore;
+//								Count.transform.FindChild ("Contest " + i.ToString ()).FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+CDE.Response.data [a].totalPreset + "[/b] / " +
+//									Count.transform.FindChild ("Contest "  + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
+//	
+//
+//								if (Count.transform.FindChild ("Contest "  + i.ToString ()).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
+//									Count.transform.FindChild ("Contest "  + i.ToString ()).GetComponent<UIButton> ().enabled = false;
+//									Count.transform.FindChild ("Contest "  + i.ToString ()).FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+//										new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
+//									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+//										new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
+//								} 
+//								else {
+//									Count.transform.FindChild ("item index:" + i.ToString ()).GetComponent<UIButton> ().enabled = true;
+//									Count.transform.FindChild ("item index:" + i.ToString ()).FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+//								new Color (146f / 255f, 39f / 255f, 143f / 255f, 1);
+//								}
 					
 							}
 				
@@ -370,16 +447,61 @@ public class LobbyNCCommander : MonoBehaviour {
 						UserMgr.ContestList [a].totalPreset = CDE.Response.data [a].totalPreset;
 					}
 				
-					ResetList ();
+					//ResetList ();
 				}
 
 
 			}
 			
-		
+			StartCoroutine(Rolliing());
 		} catch {
 			Debug.Log ("ArgumentOutOfRangeException: Argument is out of range.");
 
 		}
 	}
+	//Contest 
+	IEnumerator Rolliing(){
+		Debug.Log ("Rolliing");
+		GameObject Count = transform.FindChild ("Nomal Contest").FindChild ("Scroll View2").gameObject;
+		for (int i = 0; i<Count.transform.childCount-2; i++) {
+			Debug.Log ("i : "+i);
+			Debug.Log((int.Parse(Count.transform.GetChild(i+2).name.Replace("Contest ","").Replace("item index:",""))));
+			Count.transform.GetChild(i+2).FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("RankingValue").FindChild ("Label").GetComponent<UILabel> ().text = "[b]"+UserMgr.ContestList [int.Parse(Count.transform.GetChild(i+2).name.Replace("Contest ","").Replace("item index:",""))].totalPreset + "[/b] / " +
+				Count.transform.GetChild(i+2).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text;
+			if (Count.transform.GetChild(i+2).FindChild ("BG").FindChild ("TotalPreset").GetComponent<UILabel> ().text == Count.transform.GetChild(i+2).FindChild ("BG").FindChild ("TotalEntry").GetComponent<UILabel> ().text) {
+				Count.transform.GetChild(i+2).GetComponent<UIButton> ().enabled = false;
+				Count.transform.GetChild(i+2).FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+													new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
+				Count.transform.GetChild(i+2).FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+													new Color (155f / 255f, 155f / 255f, 155f / 255f, 1);
+
+
+											} 
+			StartCoroutine(ItemRoll(Count.transform.GetChild(i+2).gameObject));
+
+			yield return new WaitForSeconds(0.5f);
+		}
+	}
+	IEnumerator ItemRoll(GameObject G){
+		for (int i = 0; i < 8; i++) {
+
+			if(i >= 3){
+				G.transform.FindChild ("ChangeTopBot").localRotation =  Quaternion.Euler(((float)i+1f)*22.5f, 180f, 180f);
+				G.transform.FindChild ("ChangeTopBot").FindChild("NewBot").gameObject.SetActive(true);
+				G.transform.FindChild ("ChangeTopBot").FindChild("OldTop").gameObject.SetActive(false);
+			}else{
+				G.transform.FindChild ("ChangeTopBot").localRotation =  Quaternion.Euler(((float)i+1f)*22.5f, 0, 0);
+			}
+			yield return new WaitForSeconds (0.02f);
+		}
+		G.transform.FindChild ("ChangeTopBot").localRotation = Quaternion.Euler(0, 0, 0);
+		G.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color =
+G.transform.FindChild ("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color;
+		G.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color =
+			G.transform.FindChild ("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color;
+		G.transform.FindChild ("ChangeTopBot").FindChild("NewBot").gameObject.SetActive(false);
+		G.transform.FindChild ("ChangeTopBot").FindChild("OldTop").gameObject.SetActive(true);
+
+	}
+
 }
