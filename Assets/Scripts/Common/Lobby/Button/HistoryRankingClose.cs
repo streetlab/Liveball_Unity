@@ -42,6 +42,11 @@ public class HistoryRankingClose : MonoBehaviour {
 //			}
 		
 		}
+
+	//	if (float.Parse (Rcount) >= List [Seq [SeqList [i]] [a]].totalPreset) {
+//			item.transform.FindChild ("Bar").FindChild ("BG").FindChild ("R_bar").GetComponent<UIPanel> ().clipOffset = new Vector2 (0, 0);
+//			item.transform.FindChild ("Bar").FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (-316f, -35);
+//		}
 		RankGage.transform.FindChild("BG").FindChild("rewordScore").GetComponent<UILabel>().text = Rcount;
 		Debug.Log ("((float.Parse (Tpreset)-(float.Parse (Rcount)-1)) /float.Parse(Tpreset)*632) : " + ((float.Parse (Tpreset)-(float.Parse (Rcount)-1)) /float.Parse(Tpreset)*632));
 		RankGage.transform.FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(((float.Parse (Tpreset)-(float.Parse (Rcount)-1)) /float.Parse(Tpreset)*632),0);

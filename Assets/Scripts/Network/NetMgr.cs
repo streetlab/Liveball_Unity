@@ -453,7 +453,7 @@ public class NetMgr : MonoBehaviour{
 
 	public static void GetContestDataInBackground(BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new ContestDataRequest (), baseEvent);
+		Instance.webAPIProcessEventInBackground (new ContestDataRequest (), baseEvent);
 	}
 	
 	public static void GetHistoryList(BaseEvent baseEvent)
@@ -467,7 +467,7 @@ public class NetMgr : MonoBehaviour{
 	
 	public static void GetPresetData(int presetSeq,BaseEvent baseEvent)
 	{
-		Instance.webAPIProcessEvent (new PresetDataRequest (presetSeq), baseEvent);
+		Instance.webAPIProcessEventInBackground (new PresetDataRequest (presetSeq), baseEvent);
 	}
 
 	public static void ContestPresetChange(string quizSeq,string presetValue,BaseEvent baseEvent)
