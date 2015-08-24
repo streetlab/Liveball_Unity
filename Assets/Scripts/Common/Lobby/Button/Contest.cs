@@ -15,8 +15,8 @@ public class Contest : MonoBehaviour {
 		//	Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().text);
 			//Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().x.x);
 			X = transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().localSize.x+30f;
-			if (X < 650f) {
-				X = 650;
+			if (X < 480f) {
+				X = 480;
 			}
 			Debug.Log ("X : " + X);
 			transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title1").localPosition = new Vector3 (0,0,0);

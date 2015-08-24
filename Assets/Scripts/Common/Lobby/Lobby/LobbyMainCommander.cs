@@ -34,7 +34,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		while (true) {
 			CRME = new checkRecentMessageEvent (new EventDelegate (this, "checkRecent"));
 			NetMgr.CheckRecentMessage (CRME);
-			yield return new WaitForSeconds(600f);
+			yield return new WaitForSeconds(60f);
 		}
 	}
 	void checkRecent(){
