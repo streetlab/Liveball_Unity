@@ -9,16 +9,66 @@ public class LobbyMainCommander : MonoBehaviour {
 	public float RatioBot;
 	public AudioClip mAudioWelcome;
 	Dictionary<string,float> HightList = new Dictionary<string, float> ();
-
-	void CheckFirst(){
-		if (UserMgr.UserInfo != null) {
-			if (UtilMgr.IsFirstLanding) {
-				UtilMgr.IsFirstLanding = false;
-				transform.root.GetComponent<AudioSource> ().PlayOneShot (mAudioWelcome);
-				
-				CheckAttendance ();
-			}
+	checkRecentMessageEvent CRME;
+	void CheckRecent(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Cancel) {
+		
+			CheckRecentMaessga();
+		
 		}
+	}
+	public void CheckRecentMaessga(){
+	
+			StartCoroutine (CheckingRencet ());
+
+	}
+	int EnableCount  = 0;
+	void OnEnable(){
+		
+		if (EnableCount != 0) {
+			StartCoroutine("CheckingRencet");
+		}
+		EnableCount++;
+	}
+	IEnumerator CheckingRencet(){
+		while (true) {
+			CRME = new checkRecentMessageEvent (new EventDelegate (this, "checkRecent"));
+			NetMgr.CheckRecentMessage (CRME);
+			yield return new WaitForSeconds(600f);
+		}
+	}
+	void checkRecent(){
+
+		UserMgr.cntRewardContest = CRME.Response.data.cntRewardContest;
+		if (UserMgr.cntRewardContest == 1) {
+		
+			DialogueMgr.ShowDialogue ("컨테스트 보상 지급", "진행했던 컨테스트 보상이\n[우편함]으로 지급되었습니다." , DialogueMgr.DIALOGUE_TYPE.YesNo ,"보상 확인","","닫기", gotopost);
+			//popup
+		
+		}
+	}
+
+	void gotopost(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("BtnPost").GetComponent<PostButton>().PowerOn();
+		//go to post
+		}
+		
+	}
+	void CheckFirst(){
+
+			if (UserMgr.UserInfo != null) {
+				if (UtilMgr.IsFirstLanding) {
+					UtilMgr.IsFirstLanding = false;
+					transform.root.GetComponent<AudioSource> ().PlayOneShot (mAudioWelcome);
+					
+					CheckAttendance ();
+				}
+			}
+
+
+	
+
 	}
 	
 	void CheckAttendance(){
@@ -67,7 +117,6 @@ public class LobbyMainCommander : MonoBehaviour {
 		yield return www;
 		
 		UtilMgr.DismissLoading();
-		
 		if(www.error != null){
 			DialogueMgr.ShowDialogue("attendance error", www.error, DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		} else{
@@ -77,19 +126,30 @@ public class LobbyMainCommander : MonoBehaviour {
 				//				mWebview.GetComponent<ScriptGameWebview>().GoTo(www.text);
 				DailyReward dReward = Newtonsoft.Json.JsonConvert.DeserializeObject<DailyReward>(www.text);
 				if(dReward.result == 200){
-					DialogueMgr.ShowDialogue("접속보상", dReward.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+					DialogueMgr.ShowDialogue("접속보상", dReward.message, DialogueMgr.DIALOGUE_TYPE.Alert, CheckRecent);
 					Debug.Log("add");
 					if (Application.loadedLevelName.Equals ("SceneMain 1")) {
 						Debug.Log("add Main");
 						transform.root.FindChild("GameObject").FindChild("Top").FindChild("Panel").FindChild("BtnPost").GetComponent<PostButton>().YellowOn();
 					}
 					
+				}else{
+					CheckRecentMaessga();
 				}
 
 				if(dReward.legend != null && dReward.legend.Length > 0){
 					//show n link url
+					UserMgr.legend = dReward.legend;
 				} else{
 					//unshow
+//					transform.root.FindChild("Scroll").FindChild("Main").FindChild("Nomal Contest")
+//						.FindChild("EventPanel").gameObject.SetActive(false);
+//					transform.root.FindChild("Scroll").FindChild("Main").FindChild("Nomal Contest").FindChild("Scroll View2")
+//						.GetComponent<UIPanel>().SetRect(720f,1038f);
+//					transform.root.FindChild("Scroll").FindChild("Main").FindChild("Nomal Contest").FindChild("Scroll View2")
+//						.localPosition += new Vector3(0,75f,0);
+//					transform.root.FindChild("Scroll").FindChild("Main").FindChild("Nomal Contest").FindChild("Scroll View2")
+//						.GetComponent<UIDraggablePanel2>().ResetPosition();
 				}
 			} else{
 				//				Debug.Log("Attendance is already done");
@@ -149,6 +209,7 @@ public class LobbyMainCommander : MonoBehaviour {
 		transform.parent.FindChild("GameInfo").gameObject.SetActive(false);
 		LobbyBotCommander.mBtnState = LobbyBotCommander.BtmState.Main;
 		CheckFirst ();
+
 	}
 	void CSComplete(){
 		Debug.Log("CSComplete");

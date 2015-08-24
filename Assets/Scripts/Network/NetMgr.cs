@@ -431,7 +431,11 @@ public class NetMgr : MonoBehaviour{
 	//    {
 	//        Instance.webAPIProcessGetScheduleEvent (new GetScheduleAllRequest (), baseEvent,true);
 	//    }
-	
+	public static void CheckRecentMessage(BaseEvent baseEvent)
+	{
+		Instance.webAPIProcessEvent (new checkRecentMessageRequest (), baseEvent);
+	}
+
 	public static void GetContestList(BaseEvent baseEvent)
 	{
 		Instance.webAPIProcessEvent (new ContestListRequest (), baseEvent);

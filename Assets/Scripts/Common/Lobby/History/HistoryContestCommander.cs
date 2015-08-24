@@ -117,8 +117,8 @@ public class HistoryContestCommander : MonoBehaviour {
 					}
 
 
-					if (List [Seq [SeqList[i]][a]].contestType == 1) {
-						Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].totalReward;
+					if (List [Seq [SeqList[i]][a]].itemID < 100) {
+						Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].totalReward + " " +List [Seq [SeqList[i]][a]].itemName ;
 					} else {
 						Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].itemName;
 					}

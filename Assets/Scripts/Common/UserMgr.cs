@@ -23,6 +23,8 @@ public class UserMgr : MonoBehaviour {
 	public static int GameSeq;
 	public static int ContestStatus;
 	public static List<int> PresetChooseList = new List<int>();
+	public static string legend;
+	public static int cntRewardContest=100;
 	static UserMgr Instance
 	{
 		get

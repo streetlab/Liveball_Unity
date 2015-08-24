@@ -42,15 +42,45 @@ public class PostgetButton : MonoBehaviour {
 		//getprofile
 
 		UserMgr.UserMailCount -= 1;
+	//	DialogueMgr.ShowDialogue ("[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "] 지급", "[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "]은\n[인벤토리]로 지급\n인벤토리에서 본인인증 하시면\n일주일내로 상품권이 지급 예정입니다.", DialogueMgr.DIALOGUE_TYPE.YesNo, "인벤토리 이동", "", "확인", GotoInventory);
+		if (transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ATTACH_GIFT" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ATTACH_PPOINT" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ITEM_GIFT" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ITEM_PPOINT") {
+			DialogueMgr.ShowDialogue ("[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "] 지급", "[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "]은\n[인벤토리]로 지급\n인벤토리에서 본인인증 하시면\n일주일내로 상품권이 지급 예정입니다.", DialogueMgr.DIALOGUE_TYPE.YesNo, "인벤토리 이동", "", "확인", GotoInventory);
 
-		if (transform.parent.FindChild ("Code").GetComponent<UILabel> ().text != "ITEM_GIFT") {
-			DialogueMgr.ShowDialogue ("지급 완료", "["+transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "] 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else if (transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ITEM_RUBY" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ATTACH_RUBY" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ITEM_CARD" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ATTACH_CARD") {
+			
+			//check
+			
+			
+			
+			DialogueMgr.ShowDialogue ("지급 완료", "[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "] 지급 완료", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else if (transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ITEM_MILEAGE" ||
+			transform.parent.FindChild ("Code").GetComponent<UILabel> ().text == "ATTACH_DIA") {
+			
+			//check
+			
+			
+			
+			DialogueMgr.ShowDialogue ("마일리지 사용", "마일리지는 경품추첨이 가능하며\n[홈화면하단] - [경품이미지]를 클릭하면\n해당 경품을 추첨할 수 있습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 		} else {
-
-			DialogueMgr.ShowDialogue ("지급 완료","[" +transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "]이\n인벤토리로 지급되었습니다.\n인벤토리를 확인하세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+			DialogueMgr.ShowDialogue ("[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "] 지급", "[" + transform.parent.FindChild ("Name").GetComponent<UILabel> ().text + "]은\n[인벤토리]로 지급\n인벤토리에서 본인인증 하시면\n일주일내로 상품권이 지급 예정입니다.", DialogueMgr.DIALOGUE_TYPE.YesNo, "인벤토리 이동", "", "확인", GotoInventory);
+		
 		}
 
 	
+	}
+	void GotoInventory(DialogueMgr.BTNS btn){
+		Debug.Log (btn);
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			transform.root.FindChild("Scroll").FindChild("RightMenu").FindChild("Bot").FindChild("burger_menu_001")
+				.GetComponent<RightMenu>().OutputInvenOpen();
+		}
+		
 	}
 	public static GameObject anim ;
 	void getcheckdata(){

@@ -44,14 +44,14 @@ public class CoverFlowOndrag : MonoBehaviour {
 							}
 
 					float here = Mathf.Abs(other.transform.parent.position.x / transform.root.localScale.x)/Mark;
-					other.gameObject.transform.parent.localPosition = new Vector3((float.Parse(other.transform.parent.name[5].ToString())*Size.x)-(here*Gaps),other.gameObject.transform.parent.localPosition.y);
+					other.gameObject.transform.parent.localPosition = new Vector3((float.Parse(other.transform.parent.name.Replace("Item ","").ToString())*Size.x)-(here*Gaps),other.gameObject.transform.parent.localPosition.y);
 						if(other.gameObject.name =="Item 2"){
 				
 						}
 					}else{
 						Mark = BenchmarkSize*0.5f*0.5f;
 					float here = ((BenchmarkSize*0.5f)-Mathf.Abs(other.transform.parent.position.x / transform.root.localScale.x))/Mark;
-					other.gameObject.transform.parent.localPosition = new Vector3((float.Parse(other.transform.parent.name[5].ToString())*Size.x)-(here*Gaps),other.gameObject.transform.parent.localPosition.y);
+					other.gameObject.transform.parent.localPosition = new Vector3((float.Parse(other.transform.parent.name.Replace("Item ","").ToString())*Size.x)-(here*Gaps),other.gameObject.transform.parent.localPosition.y);
 
 					}
 
@@ -62,14 +62,19 @@ public class CoverFlowOndrag : MonoBehaviour {
 	}
 	void OnTriggerExit2D(Collider2D other){
 		if (other.tag == "item") {
-			if(other.gameObject.transform.GetComponent<UITexture> ()!=null){
+			if(other.transform.parent.position.x <=0){
+			other.transform.parent.name = "Item " + (int.Parse(other.transform.parent.name.Replace("Item ",""))+UIScrollView._CoverFlowCount).ToString();
+			}else{
+				other.transform.parent.name = "Item " + (int.Parse(other.transform.parent.name.Replace("Item ",""))-UIScrollView._CoverFlowCount).ToString();
+			}
+				if(other.gameObject.transform.GetComponent<UITexture> ()!=null){
 				other.gameObject.transform.GetComponent<UITexture> ().SetRect (DefaultSize.x,
 				                                                    DefaultSize.y);
 				other.gameObject.transform.GetComponent<BoxCollider2D>().size = new Vector2(DefaultSize.x,
 			                                                                  DefaultSize.y);
 				other.gameObject.transform.parent.GetComponent<UIPanel>().SetRect(DefaultSize.x,
 				                                                                  DefaultSize.y);
-				other.gameObject.transform.parent.localPosition = new Vector3(float.Parse(other.transform.parent.name[5].ToString())*Size.x,other.gameObject.transform.parent.localPosition.y);
+				other.gameObject.transform.parent.localPosition = new Vector3(float.Parse(other.transform.parent.name.Replace("Item ","").ToString())*Size.x,other.gameObject.transform.parent.localPosition.y);
 //				other.gameObject.transform.FindChild("shadow").GetComponent<UISprite>().SetRect(DefaultSize.x,
 //				                                                                                DefaultSize.y);
 			}

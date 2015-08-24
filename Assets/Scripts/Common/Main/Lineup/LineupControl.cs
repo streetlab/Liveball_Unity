@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class LineupControl : MonoBehaviour {
 	public GameObject T1,T2,T11,T22;
-	
+	public Texture2D Non;
 	GameObject ScrollView,S,P,H,temp;
 	GetLineupEvent mlineupEvent;
 	bool buttens = true;
@@ -84,6 +84,31 @@ public class LineupControl : MonoBehaviour {
 		Ghit2.Clear ();
 		//Debug.Log ("what teamcode : " + UserMgr.Schedule.extend[0].teamCode);
 //		if (UserMgr.Schedule != null) {
+
+			for(int i = 0; i<transform.FindChild("Scroll View").GetChild(0).GetChild(0).FindChild("S").childCount;i++){
+			transform.FindChild("Scroll View").GetChild(0).GetChild(0).FindChild("S").GetChild(i).FindChild("image").GetChild(0)
+				.GetComponent<UITexture>().mainTexture = Non;
+			transform.FindChild("Scroll View").GetChild(0).GetChild(0).FindChild("S").GetChild(i).FindChild("G").GetChild(0).GetChild(0)
+				.GetComponent<UILabel>().text = "";
+			}
+	
+		transform.FindChild("Scroll View").GetChild(1).GetChild(0).FindChild("bar origin").FindChild("S1").FindChild("image").GetChild(0)
+				.GetComponent<UITexture>().mainTexture = Non;
+
+		transform.FindChild("Scroll View").GetChild(2).GetChild(0).FindChild("bar origin").FindChild("S1").FindChild("image").GetChild(0)
+			.GetComponent<UITexture>().mainTexture = Non;
+
+		for(int i = 0; i<transform.FindChild("Scroll View 1").GetChild(0).GetChild(0).FindChild("S").childCount;i++){
+			transform.FindChild("Scroll View 1").GetChild(0).GetChild(0).FindChild("S").GetChild(i).FindChild("image").GetChild(0)
+				.GetComponent<UITexture>().mainTexture = Non;
+			transform.FindChild("Scroll View 1").GetChild(0).GetChild(0).FindChild("S").GetChild(i).FindChild("G").GetChild(0).GetChild(0)
+				.GetComponent<UILabel>().text = "";
+		}
+		transform.FindChild("Scroll View 1").GetChild(1).GetChild(0).FindChild("bar origin").FindChild("S1").FindChild("image").GetChild(0)
+			.GetComponent<UITexture>().mainTexture = Non;
+		transform.FindChild("Scroll View 1").GetChild(2).GetChild(0).FindChild("bar origin").FindChild("S1").FindChild("image").GetChild(0)
+			.GetComponent<UITexture>().mainTexture = Non;
+
 			mlineupEvent = new GetLineupEvent (new EventDelegate (this, "setarrray"));
 			NetMgr.GetLineup (teamCode, mlineupEvent);
 

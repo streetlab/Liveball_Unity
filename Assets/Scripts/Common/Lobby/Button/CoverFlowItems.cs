@@ -3,6 +3,13 @@ using System.Collections;
 
 public class CoverFlowItems : MonoBehaviour {
 
+
+	void OnDrag (Vector2 delta)
+	{	
+		transform.parent.parent.FindChild ("BG").localPosition = new Vector3 (transform.parent.localPosition.x,transform.parent.parent.FindChild ("BG").localPosition.y,0);
+
+
+	}
 	public void Button(){
 		transform.root.FindChild ("Scroll").FindChild ("Giveaway").gameObject.SetActive (true);
 

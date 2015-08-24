@@ -345,7 +345,15 @@ public class UIScrollView : MonoBehaviour
 					Front.transform.parent = transform;
 					Front.transform.localScale = new Vector3(1,1,1);
 				}
-			
+				BenchmarkSize = 720f;
+				if(CoverFlowCount>4){
+					if(CoverFlowCount == 5){
+						BenchmarkSize = 800f;
+					}else{
+						BenchmarkSize = 800f + (((float)CoverFlowCount-5f)*220f);
+					}
+				}
+				
 				transform.FindChild("BG").localPosition = new Vector3((Size.x*(CoverFlowCount-1))*0.5f,((MaxSize.y-200)*0.5f)+20f);
 				transform.FindChild("BG").GetComponent<BoxCollider2D>().size = new Vector2((Size.x*CoverFlowCount)+((360-(Size.x*0.5f))*2f),MaxSize.y);
 				transform.FindChild("BG").GetComponent<BoxCollider2D>().offset = new Vector2(0,0);
@@ -373,7 +381,17 @@ public class UIScrollView : MonoBehaviour
 					if(Temp.transform.FindChild("CoverFlowItem").GetComponent<BoxCollider2D>()==null){
 						Temp.transform.FindChild("CoverFlowItem").gameObject.AddComponent<BoxCollider2D>();
 					}
-					Temp.transform.FindChild("CoverFlowItem").GetComponent<BoxCollider2D>().size = Size;
+					Temp.transform.FindChild("CoverFlowItem").GetComponent<BoxCollider2D>().size = DefaultSize;
+					Temp.transform.FindChild("CoverFlowItem").GetComponent<UITexture>().SetRect(DefaultSize.x,DefaultSize.y);
+					Temp.transform.GetComponent<UIPanel>().SetRect(DefaultSize.x,DefaultSize.y);
+					Temp.transform.FindChild("CoverFlowItem").FindChild("BG").GetComponent<UISprite>().SetRect(DefaultSize.x,DefaultSize.y);
+					if(i>=CoverFlowCount-(int)Mathf.Round((float)(CoverFlowCount-3)*0.5f)){
+						int num = CoverFlowCount-(int)Mathf.Round((float)(CoverFlowCount-3)*0.5f);
+				
+							Temp.transform.name = "Item " + (num-(i+1)).ToString();
+							Temp.transform.localPosition = new Vector3(Size.x*(num-(i+1)),((MaxSize.y-200)*0.5f)+20f);
+				
+					}
 				}
 			}
 		

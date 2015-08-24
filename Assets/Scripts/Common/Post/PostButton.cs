@@ -30,6 +30,12 @@ public class PostButton : MonoBehaviour {
 
 
 	}
+	public void PowerOn(){
+		transform.FindChild ("TF_Post").gameObject.SetActive (false);
+		UtilMgr.AddBackEvent (new EventDelegate (this, "BackPressed"));
+		Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
+		NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq, Mail);
+	}
 	public void off(){
 	
 //		Mail = new GetMailEvent (new EventDelegate (this, "getdata"));

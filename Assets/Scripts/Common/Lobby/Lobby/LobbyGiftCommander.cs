@@ -22,12 +22,20 @@ public class LobbyGiftCommander : MonoBehaviour {
 		if (mGift != null) {
 
 			for(int i = 0; i<mGift.gift.Count;i++){
-				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
-					mGift.Textures[mGift.gift[i].image];
-				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("openurl").GetComponent<UILabel>().text = 
-					mGift.gift[i].image;
+//				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
+//					mGift.Textures[mGift.gift[i].image];
+//				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("openurl").GetComponent<UILabel>().text = 
+//					mGift.gift[i].image;
+//
+//				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("product").GetComponent<UILabel>().text = 
+//					mGift.gift[i].product;
 
-				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("product").GetComponent<UILabel>().text = 
+				transform.FindChild ("Gift").FindChild ("Scroll View").GetChild(i+1).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
+					mGift.Textures[mGift.gift[i].image];
+				transform.FindChild ("Gift").FindChild ("Scroll View").GetChild(i+1).FindChild("CoverFlowItem").FindChild("openurl").GetComponent<UILabel>().text = 
+					mGift.gift[i].image;
+				
+				transform.FindChild ("Gift").FindChild ("Scroll View").GetChild(i+1).FindChild("CoverFlowItem").FindChild("product").GetComponent<UILabel>().text = 
 					mGift.gift[i].product;
 
 			}

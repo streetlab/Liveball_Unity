@@ -53,9 +53,7 @@ public class HIstoryRankingCommander : MonoBehaviour {
 				item.Target.gameObject.name = "Player_"+index.ToString();
 				item.Target.gameObject.SetActive(true);
 				item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture = texures;
-				
-		
-			try{
+				try{
 				Texture2D ex = List[CRE.Response.data[index].imageName];
 					item.Target.gameObject.transform.FindChild("photo").FindChild("Sprite").FindChild("Texture").GetComponent<UITexture>().mainTexture
 						= ex;

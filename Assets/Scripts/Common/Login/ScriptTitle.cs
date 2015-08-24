@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+
 public class ScriptTitle : MonoBehaviour {
 	
 	LoginEvent mLoginEvent;
@@ -152,14 +153,16 @@ public class ScriptTitle : MonoBehaviour {
 		int aSecond = int.Parse(Application.version.Substring(2, 1));
 		int aThird = int.Parse(Application.version.Substring(4, 1));
 
-		if(Application.platform == RuntimePlatform.OSXEditor){
+		#if(UNITY_EDITOR)
+		//if(Application.platform == RuntimePlatform.OSXEditor){
 			Debug.Log("Application.version is "+UnityEditor.PlayerSettings.bundleVersion);
 			aFirst = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Substring(0, 1));
 			aSecond = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Substring(2, 1));
 			aThird = int.Parse(UnityEditor.PlayerSettings.bundleVersion.Substring(4, 1));
-		}  else{
-			Debug.Log("Application.version is "+Application.version);
-		}
+		
+		#else
+		Debug.Log("Application.version is "+Application.version);
+		#endif
 		Debug.Log("Recent.version is "+mVersionEvent.Response.data.recentVer);
 		Debug.Log("Support.version is "+mVersionEvent.Response.data.supportVer);
 		
@@ -634,6 +637,7 @@ public class ScriptTitle : MonoBehaviour {
 	bool TwoCheck = true;
 	void Getdata(){
 		try{
+			UIScrollView._CoverFlowCount = LobbyGiftCommander.mGift.gift.Count;
 			count = LobbyGiftCommander.mGift.gift.Count;
 			for (int i = 0; i<LobbyGiftCommander.mGift.gift.Count; i++) {
 				count += LobbyGiftCommander.mGift.gift [i].detail.Count;
@@ -981,6 +985,8 @@ public class ScriptTitle : MonoBehaviour {
 			AutoFade.LoadLevel("SceneTutorial");
 		}
 	}
+
+
 	public void OpenCert(){
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
 		transform.FindChild ("WindowEmail").gameObject.SetActive (false);
