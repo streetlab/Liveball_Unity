@@ -904,13 +904,17 @@ public class ScriptMainTop : MonoBehaviour {
 	
 	public void SetBoardInfo()
 	{
-		//		Debug.Log("SetBoardInfo");
+		Debug.Log("SetBoardInfo");
+		//Debug.Log("mBoardEvent.Response.data.awayScore : " + mBoardEvent.Response.data.awayScore);
 		mMatchInfoTop.GetComponent<ScriptMatchInfo> ().SetBoard ();
-		if(mBoardEvent != null
-		   && mBoardEvent.Response.data.awayScore != null
-		   && mBoardEvent.Response.data.awayScore.Count > 0){
+		if (mBoardEvent != null
+			&& mBoardEvent.Response.data.awayScore != null
+			&& mBoardEvent.Response.data.awayScore.Count > 0) {
 			//			Debug.Log("NeedsDetailInfo!!!!");
-			mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard(mBoardEvent);
+			mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard (mBoardEvent);
+		} else if(mBoardEvent.Response.data.play !=null  ) {
+
+			mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard (mBoardEvent);
 		}
 	}
 	ContestPresetChangeEvent CPCE;

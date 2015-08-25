@@ -612,8 +612,8 @@ public class ScriptTF_Betting : MonoBehaviour {
 		transform.FindChild ("Scroll View").gameObject.SetActive (true);
 		for (int i = 0; i<5; i++) {
 			Menu.transform.localPosition+=new Vector3(0,655f/5f,0);
-			Debug.Log("Menu.transform.localPosition.y : " + Menu.transform.localPosition.y);
-			Debug.Log("3+UtilMgr.GetScaledPositionY () : " + (3+UtilMgr.GetScaledPositionY ()));
+//			Debug.Log("Menu.transform.localPosition.y : " + Menu.transform.localPosition.y);
+//			Debug.Log("3+UtilMgr.GetScaledPositionY () : " + (3+UtilMgr.GetScaledPositionY ()));
 			if(Menu.transform.localPosition.y>=3){
 				Menu.transform.localPosition=new Vector3(0,3,0);
 				break;

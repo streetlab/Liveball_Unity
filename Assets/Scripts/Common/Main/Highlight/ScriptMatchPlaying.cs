@@ -96,6 +96,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	void SetScoreBoard()
 	{
+		Debug.Log("SetScoreBoard");
 		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (false);
 		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (false);
 		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (false);
@@ -113,6 +114,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	public void GotDetailBoard()
 	{
+		Debug.Log("GotDetailBoard");
 		InitScoreBoard (mEventDetail);
 		
 		if (mFirstLoading) {
@@ -125,6 +127,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	public void InitScoreBoard(GetGameSposDetailBoardEvent eventDetail)
 	{
+		Debug.Log ("InitScoreBoard");
 		mScoreBoard.transform.FindChild ("Const").gameObject.SetActive (true);
 		mScoreBoard.transform.FindChild ("TeamTop").gameObject.SetActive (true);
 		mScoreBoard.transform.FindChild ("TeamBottom").gameObject.SetActive (true);
@@ -144,12 +147,20 @@ public class ScriptMatchPlaying : MonoBehaviour {
 
 			}
 		}
-
-		SetAwayScore (ScriptMainTop.DetailBoard.awayScore);
-		SetHomeScore (ScriptMainTop.DetailBoard.homeScore);
-		SetAwayRHEB (ScriptMainTop.DetailBoard.infoBoard[0]);
-		SetHomeRHEB (ScriptMainTop.DetailBoard.infoBoard[1]);
+		if (ScriptMainTop.DetailBoard.awayScore != null) {
+			SetAwayScore (ScriptMainTop.DetailBoard.awayScore);
+			SetHomeScore (ScriptMainTop.DetailBoard.homeScore);
+			SetAwayRHEB (ScriptMainTop.DetailBoard.infoBoard [0]);
+			SetHomeRHEB (ScriptMainTop.DetailBoard.infoBoard [1]);
+		} else {
 		
+
+			GameInfo.transform.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamScore").FindChild ("Label").GetComponent<UILabel> ().text
+				= ScriptMainTop.DetailBoard.play.awayScore.ToString ();
+			GameInfo.transform.FindChild ("Mid").FindChild ("Info").FindChild ("R_TeamScore").FindChild ("Label").GetComponent<UILabel> ().text
+				= ScriptMainTop.DetailBoard.play.homeScore.ToString ();
+		
+		}
 		mTop.transform.FindChild("TopInfoItem").GetComponent<ScriptTopInfoItem>().SetVSInfo(UserMgr.Schedule);
 	}
 	
@@ -329,6 +340,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	void SetAwayScore(List<ScoreInfo> listScore)
 	{
+		Debug.Log ("SetAwayScore");
 		Transform team = mScoreBoard.transform.FindChild ("TeamTop");
 		team.FindChild ("LblName").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
 		
@@ -360,6 +372,7 @@ public class ScriptMatchPlaying : MonoBehaviour {
 	
 	void SetHomeScore(List<ScoreInfo> listScore)
 	{
+		Debug.Log ("SetHomeScore");
 		Transform team = mScoreBoard.transform.FindChild ("TeamBottom");
 		team.FindChild ("LblName").GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
 		
