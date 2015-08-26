@@ -907,14 +907,19 @@ public class ScriptMainTop : MonoBehaviour {
 		Debug.Log("SetBoardInfo");
 		//Debug.Log("mBoardEvent.Response.data.awayScore : " + mBoardEvent.Response.data.awayScore);
 		mMatchInfoTop.GetComponent<ScriptMatchInfo> ().SetBoard ();
-		if (mBoardEvent != null
-			&& mBoardEvent.Response.data.awayScore != null
-			&& mBoardEvent.Response.data.awayScore.Count > 0) {
-			//			Debug.Log("NeedsDetailInfo!!!!");
-			mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard (mBoardEvent);
-		} else if(mBoardEvent.Response.data.play !=null  ) {
+		try{
+			if (mBoardEvent != null
+				&& mBoardEvent.Response.data.awayScore != null
+				&& mBoardEvent.Response.data.awayScore.Count > 0) {
+				//			Debug.Log("NeedsDetailInfo!!!!");
+				mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard (mBoardEvent);
+			} else if (mBoardEvent.Response.data.play != null) {
 
-			mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard (mBoardEvent);
+				mHighlight.transform.FindChild ("MatchPlaying").GetComponent<ScriptMatchPlaying> ().InitScoreBoard (mBoardEvent);
+			}
+		}
+		catch{
+			Debug.Log("mBoardEvent.Response.data.play is null");
 		}
 	}
 	ContestPresetChangeEvent CPCE;
@@ -988,8 +993,8 @@ public class ScriptMainTop : MonoBehaviour {
 		
 	}
 	public void GameEnd(){
-		transform.root.FindChild ("GameObject").FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (false);
-		transform.root.FindChild ("GameObject").FindChild ("TF_Landing").FindChild("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("END").gameObject.SetActive (true);;
+		//transform.root.FindChild ("GameObject").FindChild ("Top").FindChild ("Panel").FindChild ("RankBG").gameObject.SetActive (false);
+	//	transform.root.FindChild ("GameObject").FindChild ("TF_Landing").FindChild("Scroll View").FindChild ("Playing").FindChild ("Ground").FindChild("END").gameObject.SetActive (true);;
 	}
 	ContestListEvent ContestEvent;
 	public void ResetData()

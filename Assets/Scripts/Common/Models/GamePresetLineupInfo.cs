@@ -80,8 +80,18 @@ public class GamePresetLineupInfo {
 		}
 	}
 
+	string _HHR;
+	
+	public string HHR {
+		get {
+			return _HHR;
+		}
+		set {
+			_HHR = value;
+		}
+	}
 	string _HR;
-
+	
 	public string HR {
 		get {
 			return _HR;
@@ -145,6 +155,26 @@ public class GamePresetLineupInfo {
 			_ERA = value;
 		}
 	}
+	string _BB;
+	
+	public string BB {
+		get {
+			return _BB;
+		}
+		set {
+			_BB = value;
+		}
+	}
+	string _RBI;
+	
+	public string RBI {
+		get {
+			return _RBI;
+		}
+		set {
+			_RBI = value;
+		}
+	}
 
 	int _hit2B;
 
@@ -157,24 +187,34 @@ public class GamePresetLineupInfo {
 		}
 	}
 
-	string _K;
+	string _PK;
 	
-	public string K {
+	public string PK {
 		get {
-			return _K;
+			return _PK;
 		}
 		set {
-			_K = value;
+			_PK = value;
 		}
 	}
-	string _FO;
+	string _PFO;
 	
-	public string FO {
+	public string PFO {
 		get {
-			return _FO;
+			return _PFO;
 		}
 		set {
-			_FO = value;
+			_PFO = value;
+		}
+	}
+	string _PGO;
+	
+	public string PGO {
+		get {
+			return _PGO;
+		}
+		set {
+			_PGO = value;
 		}
 	}
 	string _hitHr;

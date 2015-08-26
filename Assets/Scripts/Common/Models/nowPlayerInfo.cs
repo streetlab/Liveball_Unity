@@ -34,6 +34,16 @@ public class nowPlayerInfo {
 			_RBI = value;
 		}
 	}
+	string _BB;
+	
+	public string BB {
+		get {
+			return _BB;
+		}
+		set {
+			_BB = value;
+		}
+	}
 
 	string _hitAvg;
 

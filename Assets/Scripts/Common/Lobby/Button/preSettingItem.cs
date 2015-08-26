@@ -29,11 +29,45 @@ public class preSettingItem : MonoBehaviour {
 				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
 					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitAvg;
 				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text
-					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitHr;
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].HR;
 				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text
-					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitH.ToString();
-				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
-					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitBB;
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].RBI;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].BB;
+
+
+
+
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit3").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut3").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+
+
+
+
+
+
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" + UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].H1B + "］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].H2B+ "］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit3").FindChild("LblGP").GetComponent<UILabel>().text
+					="［" + UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].HHR+ "］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].PGO+ "］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].PFO+ "］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut3").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].PK+ "］";
 				break;
 			}
 		}
@@ -66,11 +100,44 @@ public class preSettingItem : MonoBehaviour {
 				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
 					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitAvg;
 				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text
-					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitHr;
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].HR;
 				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text
-					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitH.ToString();
-				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text
-					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].hitBB;
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].RBI;
+				Batting.transform.FindChild("Hiter").FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text
+					= UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].BB;
+
+
+
+
+
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit3").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut3").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［0］";
+
+
+
+
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" + UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].H1B + "］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].H2B+ "］";
+				Batting.transform.FindChild("SprHit").FindChild("BtnHit3").FindChild("LblGP").GetComponent<UILabel>().text
+					="［" + UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].HHR+ "］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut1").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].PGO+ "］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut2").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].PFO+ "］";
+				Batting.transform.FindChild("SprOut").FindChild("BtnOut3").FindChild("LblGP").GetComponent<UILabel>().text
+					= "［" +UserMgr.LineUpList[UserMgr.GameSeq.ToString()][i].PK+ "］";
 				break;
 			}
 		}

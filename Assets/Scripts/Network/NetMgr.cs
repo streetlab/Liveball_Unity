@@ -13,7 +13,9 @@ public class NetMgr : MonoBehaviour{
 	BaseEvent mBaseEvent;
 	bool mIsUpload;
 	bool mIsLoading;
-	
+	byte[] mReqParam;
+	string mUrl;
+	WWWForm mForm;
 	private static Socket mSocket;// = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 	private static AsyncCallback mConnectionCallback = new AsyncCallback(Instance.HandleConnect);
 	private static AsyncCallback mSendingCallback = new AsyncCallback(Instance.HandleDataSend);
@@ -88,6 +90,9 @@ public class NetMgr : MonoBehaviour{
 	IEnumerator webAPIProcessInBackground(WWW www, BaseEvent baseEvent)
 	{	
 		yield return www;
+		if (www.error != null) {
+			Debug.Log("www.error InBackground : " +www.error.ToString());
+		}
 
 		if(www.error == null && www.isDone)
 		{
@@ -104,6 +109,9 @@ public class NetMgr : MonoBehaviour{
 		if(www == null){
 			Debug.Log("www is null");
 			yield break;
+		}
+		if (www.error != null) {
+			Debug.Log("www.error : " +www.error.ToString());
 		}
 		
 		float timeSum = 0f;
@@ -123,7 +131,8 @@ public class NetMgr : MonoBehaviour{
 				yield return 0; 
 			} 
 		}
-		//Debug.Log ();
+		//Debug.Log("www.text : " + www.url);
+;
 		if(www.error == null && www.isDone)
 		{
 			Debug.Log(www.text);
@@ -139,6 +148,8 @@ public class NetMgr : MonoBehaviour{
 			//            DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
 			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
 			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "타이틀로 가기", ConnectHandlerForHttp);
+
+			Debug.Log(www.text);
 			mWWW = www;
 			mBaseEvent = baseEvent;
 			mIsUpload = isUpload;
@@ -150,7 +161,17 @@ public class NetMgr : MonoBehaviour{
 	
 	void ConnectHandlerForHttp(DialogueMgr.BTNS btn){
 		if(btn == DialogueMgr.BTNS.Btn1){
-			StartCoroutine(webAPIProcess(mWWW, mBaseEvent, mIsLoading, mIsUpload));
+		Debug.Log("ReTry");
+		
+			WWW www;
+			if(mReqParam !=null){
+			 www = new WWW(mUrl,mReqParam);
+			}else if(mForm != null){
+				www = new WWW(mUrl,mForm);
+			}else{
+				www = new WWW(mUrl);
+			}
+			StartCoroutine(webAPIProcess(www, mBaseEvent, mIsLoading, mIsUpload));
 			//            mWWW = null;
 			//            mBaseEvent = null;
 		} else{
@@ -173,7 +194,10 @@ public class NetMgr : MonoBehaviour{
 		//        }
 		//        host = Constants.UPLOAD_TEST_SERVER_HOST;
 		WWW www = new WWW (host, form);
-		
+		mReqParam = null;
+		mUrl = "";
+		mUrl = host;
+		mForm = form;
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
 			//            return;
@@ -189,9 +213,15 @@ public class NetMgr : MonoBehaviour{
 	void webAPIProcessEventForCS(BaseCSRequest request, BaseCSEvent baseEvent, bool showLoading){
 		WWW www = new WWW (Constants.CS_SERVER_HOST+request.GetQueryId(),
 		                   System.Text.Encoding.UTF8.GetBytes(request.ToRequestString()));
-		
+
+
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		mReqParam = System.Text.Encoding.UTF8.GetBytes(request.ToRequestString());
+		mUrl = Constants.CS_SERVER_HOST+request.GetQueryId();
 		Debug.Log (request.ToRequestString());
-		
+
 		StartCoroutine (webCSAPIProcess(www, baseEvent, showLoading));
 	}
 	
@@ -214,7 +244,12 @@ public class NetMgr : MonoBehaviour{
 		//        host = Constants.CHECK_TEST_SERVER_HOST;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
-		
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = host;
+	
 		Debug.Log (reqParam);
 		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
@@ -239,12 +274,16 @@ public class NetMgr : MonoBehaviour{
 		//        host = Constants.CHECK_TEST_SERVER_HOST;
 		
 		WWW www = new WWW (host , System.Text.Encoding.UTF8.GetBytes(reqParam));
-		
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = host;
 		Debug.Log (reqParam);
 		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
-	
+
 	private void webAPIProcessEvent(BaseRequest request, BaseEvent baseEvent, bool showLoading)
 	{
 		Debug.Log("webAPIProcessEvent2");
@@ -259,12 +298,17 @@ public class NetMgr : MonoBehaviour{
 		}
 		//AUTH_SERVER_HOST
 		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
-		
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = Constants.QUERY_SERVER_HOST;
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
 			//            return;
 		}
+
 		
 		StartCoroutine (webAPIProcess(www, baseEvent, showLoading, false));
 	}
@@ -275,7 +319,12 @@ public class NetMgr : MonoBehaviour{
 		string reqParam = "";
 		string httpUrl = "";
 		reqParam = request.ToRequestString();
-		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));		
+		WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));	
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = Constants.QUERY_SERVER_HOST;
 		Debug.Log (reqParam);
 		
 		StartCoroutine (webAPIProcessInBackground(www, baseEvent));
@@ -295,6 +344,11 @@ public class NetMgr : MonoBehaviour{
 		}
 		//AUTH_SERVER_HOST
 		WWW www = new WWW (Constants.AUTH_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = Constants.AUTH_SERVER_HOST;
 		
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
@@ -318,7 +372,12 @@ public class NetMgr : MonoBehaviour{
 		
 		//        WWW www = new WWW (request.GetParam(), System.Text.Encoding.UTF8.GetBytes(reqParam));
 		WWW www = new WWW(reqParam);
-		
+
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		//mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = reqParam;
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");
@@ -343,10 +402,14 @@ public class NetMgr : MonoBehaviour{
 		} else {
 			
 		}
-		
+
 		//        WWW www = new WWW (Constants.QUERY_SERVER_HOST , System.Text.Encoding.UTF8.GetBytes(reqParam));
 		WWW www = new WWW(reqParam);
-		
+		mReqParam = null;
+		mUrl = "";
+		mForm = null;
+		//mReqParam = System.Text.Encoding.UTF8.GetBytes(reqParam);
+		mUrl = reqParam;
 		Debug.Log (reqParam);
 		if(UtilMgr.OnPause){
 			Debug.Log("Request is Canceled cause OnPause");

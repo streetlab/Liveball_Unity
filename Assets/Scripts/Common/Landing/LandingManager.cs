@@ -138,7 +138,7 @@ public class LandingManager : MonoBehaviour {
 					if(UserMgr.Schedule.doneGame=="0"){
 						DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
 					}else{
-						transform.root.FindChild("Ranking Reward").gameObject.SetActive(true);
+						//transform.root.FindChild("Ranking Reward").gameObject.SetActive(true);
 					}
 				}else{
 					DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
@@ -188,7 +188,7 @@ public class LandingManager : MonoBehaviour {
 				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("ERA").FindChild("Label").GetComponent<UILabel>().text = "[b]" + ScriptMainTop.DetailBoard.player [num].ERA;
 				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("FIP").FindChild("Label").GetComponent<UILabel>().text = "[b]" +ScriptMainTop.DetailBoard.player [num].FIP;
 				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("K").FindChild("Label").GetComponent<UILabel>().text = "[b]"+ScriptMainTop.DetailBoard.player [num].SO;
-				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +ScriptMainTop.DetailBoard.player [num].hitBB;
+				NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +ScriptMainTop.DetailBoard.player [num].BB;
 
 				string playerInfo = ScriptMainTop.DetailBoard.player [num].playerName + "#" + ScriptMainTop.DetailBoard.player [num].playerNumber;
 				P_RPlayersName.text = playerInfo;
@@ -269,7 +269,7 @@ public class LandingManager : MonoBehaviour {
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitAvg;
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].HR;
 						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].RBI;
-						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].hitBB;
+						NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + N[i].BB;
 
 
 						PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
@@ -622,6 +622,9 @@ public class LandingManager : MonoBehaviour {
 
 
 	public void Start () {
+
+		//DialogueMgr.ShowDialogue ("정산중", "경기가 모두 종료되면 정산 됩니다.\n랭킹에 따른 상품은 익일 지급 됩니다.", DialogueMgr.DIALOGUE_TYPE.Alert , null);
+
 		ScriptMainTop.OpenBettingCheck = true;
 		GameInfos.transform.FindChild ("Mid").FindChild ("Info").FindChild ("L_TeamName").FindChild ("Label")
 			.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
@@ -1211,9 +1214,9 @@ public class LandingManager : MonoBehaviour {
 				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Name").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].playerName;
 				NewH.transform.FindChild("BG").FindChild("Top").FindChild("Number").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].playerNumber;
 				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("AVG").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].hitAvg;
-				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" +mlineupEvent.Response.data.hit [0].hitHr;
+				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("HR").FindChild("Label").GetComponent<UILabel>().text ="[b]" +mlineupEvent.Response.data.hit [0].HR;
 				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("RBI").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].RBI;
-				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].hitBB;
+				NewH.transform.FindChild("BG").FindChild("Mid").FindChild("OB").FindChild("Label").GetComponent<UILabel>().text ="[b]" + mlineupEvent.Response.data.hit [0].BB;
 				
 				
 				PlayerInfos.transform.FindChild("Info").FindChild("BG1").FindChild("Bot").
@@ -1292,7 +1295,7 @@ public class LandingManager : MonoBehaviour {
 		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("ERA").FindChild("Label").GetComponent<UILabel>().text = "[b]" + mlineupEvent.Response.data.pit [0].ERA;
 		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("FIP").FindChild("Label").GetComponent<UILabel>().text = "[b]" +mlineupEvent.Response.data.pit [0].FIP;
 		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("K").FindChild("Label").GetComponent<UILabel>().text = "[b]"+mlineupEvent.Response.data.pit [0].SO;
-		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +mlineupEvent.Response.data.pit [0].hitBB;
+		NewP.transform.FindChild("BG").FindChild("Mid").FindChild("BB").FindChild("Label").GetComponent<UILabel>().text = "[b]" +mlineupEvent.Response.data.pit [0].BB;
 
 		WWW www = new WWW (Constants.IMAGE_SERVER_HOST + mlineupEvent.Response.data.pit[0].imagePath + mlineupEvent.Response.data.pit[0].imageName);
 		StartCoroutine (GetImage (www, NewP.transform.FindChild("BG")
