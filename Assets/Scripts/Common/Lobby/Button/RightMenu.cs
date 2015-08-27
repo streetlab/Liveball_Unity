@@ -4,6 +4,13 @@ using System.Collections;
 public class RightMenu : MonoBehaviour {
 	public GameObject mPincode;
 
+	void Start(){
+		if(Application.platform == RuntimePlatform.IPhonePlayer
+		   && name.Equals("burger_menu_004")){
+			gameObject.SetActive(false);
+		}
+	}
+
 	// Use this for initialization
 	public void Button(){
 		string names = name;
