@@ -182,20 +182,20 @@ public class PresetContestCommander : MonoBehaviour {
 
 						if (List [Seq [SeqList [i]] [a]].myRank == 0) {
 //							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").localPosition = new Vector3(-316+((List [SeqList [i] [a]].rewardCount/List [SeqList [i] [a]].totalPreset)*632),-35);
-							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (-316 + (((float)List [Seq [SeqList [i]] [a]].myRank / (float)List [Seq [SeqList [i]] [a]].totalPreset) * 632), 23);
+							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (-316 + (((float)List [Seq [SeqList [i]] [a]].myRank / (float)List [Seq [SeqList [i]] [a]].totalEntry) * 632), 23);
 							
 
 						} else {
 //							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild("rewordScore").localPosition = new Vector3(-316f+((List [SeqList [i] [a]].totalPreset-(List [SeqList [i] [a]].rewardCount-1))/List [SeqList [i] [a]].totalPreset)*632,-35);
-							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (-316 + ((((float)List [Seq [SeqList [i]] [a]].totalPreset - ((float)List [Seq [SeqList [i]] [a]].myRank - 1)) / (float)List [Seq [SeqList [i]] [a]].totalPreset) * 632), 23);
+							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (-316 + ((((float)List [Seq [SeqList [i]] [a]].totalEntry - ((float)List [Seq [SeqList [i]] [a]].myRank - 1)) / (float)List [Seq [SeqList [i]] [a]].totalEntry) * 632), 23);
 							
 
 						}
 						Debug.Log ("List [SeqList [i] [a]].rewardCount : " + List [Seq [SeqList [i]] [a]].rewardCount);
 						Debug.Log ("List [SeqList [i] [a]].totalPreset : " + List [Seq [SeqList [i]] [a]].totalPreset);
-						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (-316f + (((float)List [Seq [SeqList [i]] [a]].totalPreset - ((float)List [Seq [SeqList [i]] [a]].rewardCount - 1)) / (float)List [Seq [SeqList [i]] [a]].totalPreset) * 632, -35);
+						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (-316f + (((float)List [Seq [SeqList [i]] [a]].totalEntry - ((float)List [Seq [SeqList [i]] [a]].rewardCount - 1)) / (float)List [Seq [SeqList [i]] [a]].totalEntry) * 632, -35);
 
-						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("R_bar").GetComponent<UIPanel> ().clipOffset = new Vector2 ((((float)List [Seq [SeqList [i]] [a]].totalPreset - ((float)List [Seq [SeqList [i]] [a]].rewardCount - 1)) / (float)List [Seq [SeqList [i]] [a]].totalPreset) * 632, 0);
+						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("R_bar").GetComponent<UIPanel> ().clipOffset = new Vector2 ((((float)List [Seq [SeqList [i]] [a]].totalEntry - ((float)List [Seq [SeqList [i]] [a]].rewardCount - 1)) / (float)List [Seq [SeqList [i]] [a]].totalEntry) * 632, 0);
 						Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("rewordScore").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [a]].rewardCount.ToString ();
 												
 						Item2.transform.FindChild ("Title").FindChild ("G").gameObject.SetActive (false);
@@ -208,10 +208,10 @@ public class PresetContestCommander : MonoBehaviour {
 						} else {
 							Item2.transform.FindChild ("Title").FindChild ("G").transform.localPosition = new Vector3 (325f, 0, 0);
 						}
-						if (List [Seq [SeqList [i]] [a]].rewardCount >= List [Seq [SeqList [i]] [a]].totalPreset) {
-							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("R_bar").GetComponent<UIPanel> ().clipOffset = new Vector2 (0, 0);
-							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (-316f, -35);
-						}
+//						if (List [Seq [SeqList [i]] [a]].rewardCount >= List [Seq [SeqList [i]] [a]].totalPreset) {
+//							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("R_bar").GetComponent<UIPanel> ().clipOffset = new Vector2 (0, 0);
+//							Item2.transform.FindChild ("Bar").FindChild ("BG").FindChild ("rewordScore").localPosition = new Vector3 (-316f, -35);
+//						}
 
 					}
 				}
@@ -451,7 +451,7 @@ return a;
 									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 									                                            + " Sub " + s.ToString())
 										.FindChild("Bar").FindChild("BG").FindChild("Maker").localPosition = new Vector3(
-											-316f+(( (float)PDE.Response.data[a].myRank/ (float)PDE.Response.data[a].totalPreset))*632f,23);
+											-316f+(( (float)PDE.Response.data[a].myRank/ (float)PDE.Response.data[a].totalEntry))*632f,23);
 //								transform.FindChild ("Scroll View").FindChild ("Position").
 //									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 //									                                            + " Sub " + s.ToString())
@@ -468,7 +468,7 @@ return a;
 									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 									                                            + " Sub " + s.ToString())
 										.FindChild("Bar").FindChild("BG").FindChild("Maker").localPosition = new Vector3(
-											-316f+((( (float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].myRank-1f))/ (float)PDE.Response.data[a].totalPreset)*632f),23);
+											-316f+((( (float)PDE.Response.data[a].totalEntry-((float)PDE.Response.data[a].myRank-1f))/ (float)PDE.Response.data[a].totalEntry)*632f),23);
 //								transform.FindChild ("Scroll View").FindChild ("Position").
 //									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 //									                                            + " Sub " + s.ToString())
@@ -483,7 +483,7 @@ return a;
 								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 								                                            + " Sub " + s.ToString())
 									.FindChild("Bar").FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(
-										-316f+( ((float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].rewardCount-1f))/ (float)PDE.Response.data[a].totalPreset)*632f,-35);
+										-316f+( ((float)PDE.Response.data[a].totalEntry-((float)PDE.Response.data[a].rewardCount-1f))/ (float)PDE.Response.data[a].totalEntry)*632f,-35);
 
 							transform.FindChild ("Scroll View").FindChild ("Position").
 								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
@@ -492,20 +492,20 @@ return a;
 							transform.FindChild ("Scroll View").FindChild ("Position").
 								FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
 								                                            + " Sub " + s.ToString())
-									.FindChild("Bar").FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2((( (float)PDE.Response.data[a].totalPreset-((float)PDE.Response.data[a].rewardCount-1f))/ (float)PDE.Response.data[a].totalPreset)*632f,0);
+									.FindChild("Bar").FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2((( (float)PDE.Response.data[a].totalEntry-((float)PDE.Response.data[a].rewardCount-1f))/ (float)PDE.Response.data[a].totalEntry)*632f,0);
 
 
 
-							if(PDE.Response.data[a].rewardCount>=PDE.Response.data[a].totalPreset){
-								transform.FindChild ("Scroll View").FindChild ("Position").
-									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
-									                                            + " Sub " + s.ToString())
-										.FindChild("Bar").FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(0,0);
-								transform.FindChild ("Scroll View").FindChild ("Position").
-									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
-									                                            + " Sub " + s.ToString())
-										.FindChild("Bar").FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(-316f,-35);
-							}
+//							if(PDE.Response.data[a].rewardCount>=PDE.Response.data[a].totalPreset){
+//								transform.FindChild ("Scroll View").FindChild ("Position").
+//									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
+//									                                            + " Sub " + s.ToString())
+//										.FindChild("Bar").FindChild("BG").FindChild("R_bar").GetComponent<UIPanel>().clipOffset = new Vector2(0,0);
+//								transform.FindChild ("Scroll View").FindChild ("Position").
+//									FindChild("Item " + i.ToString()).FindChild("Item " + i.ToString()
+//									                                            + " Sub " + s.ToString())
+//										.FindChild("Bar").FindChild("BG").FindChild("rewordScore").localPosition = new Vector3(-316f,-35);
+//							}
 
 						}
 					
