@@ -46,12 +46,14 @@ public class PresetContestCommander : MonoBehaviour {
 	public void CreatItem(List<PresetListInfo> List){
 
 		Debug.Log ("UserMgr.ContestStatus : " + UserMgr.ContestStatus);
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
+			.GetComponent<UILabel> ().text = List.Count.ToString();
 		if (UserMgr.ContestStatus == 2) {
 
 
 			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
 				.GetComponent<UILabel> ().text = "라이브";
-
+	
 
 			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSetting").gameObject.SetActive (false);
 			
@@ -530,14 +532,18 @@ return a;
 					if(UserMgr.ContestStatus!=2){
 					if(CDE.Response.data[a].contestStatus == 2){
 							UserMgr.ContestStatus = CDE.Response.data[a].contestStatus;
-					 presetListEvent = new PresetListEvent(new EventDelegate(this, "GetPresetList"));
-						NetMgr.GetPresetList(presetListEvent);
+							ReCreat();
+				
 					}
 				
 					}
 								}
 			}
 		}
+	}
+	public void ReCreat(){
+		presetListEvent = new PresetListEvent(new EventDelegate(this, "GetPresetList"));
+		NetMgr.GetPresetList(presetListEvent);
 	}
 	void GetPresetList(){
 		CreatItem (presetListEvent.Response.data);

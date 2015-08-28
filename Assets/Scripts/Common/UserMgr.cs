@@ -25,6 +25,7 @@ public class UserMgr : MonoBehaviour {
 	public static List<int> PresetChooseList = new List<int>();
 	public static string legend;
 	public static int cntRewardContest=100;
+	public static int UsingRuby = 0;
 	static UserMgr Instance
 	{
 		get

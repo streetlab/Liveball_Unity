@@ -30,6 +30,7 @@ public class PresetItem : MonoBehaviour {
 
 	}
 	public void Button(){
+		UserMgr.UsingRuby = int.Parse(transform.FindChild ("Cost").FindChild ("value").GetComponent<UILabel> ().text.Replace ("[b]", ""));
 		ScriptMainTop.OpenBettingCheck = true;
 		UserMgr.GameSeq = int.Parse (transform.parent.FindChild ("BG").FindChild ("GameSeq").GetComponent<UILabel> ().text);
 		transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").GetComponent<PreSettingCommander>

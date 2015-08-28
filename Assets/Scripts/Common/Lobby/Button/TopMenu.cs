@@ -132,6 +132,7 @@ public class TopMenu : MonoBehaviour {
 				break;
 			}
 		}
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Num").GetComponent<UILabel> ().text = presetlist.Count.ToString ();
 		if (presetlist.Count != 0) {
 			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSet Contest").FindChild ("None").gameObject.SetActive (false);
 		}		//UserMgr.ContestStatus = presetlist [0].contestStatus;

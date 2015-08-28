@@ -6,6 +6,7 @@ public class PresettingRC : MonoBehaviour {
 	string [] Value = {"1루타","2,3루타","홈런","땅볼","뜬공","삼진"};
 	PresetAddEvent presetaddevent;
 	ContestDataEvent CDE;
+	RemoveContestPresetEvent RCPE;
 	public void Button(){
 		if (this.name == "Close") {
 			DialogueMgr.ShowDialogue ("등록 취소", "기존 등록된 내용을 잃을 수 있습니다." , DialogueMgr.DIALOGUE_TYPE.YesNo ,"등록 취소","계속 등록","", DialogueHandler);
@@ -14,6 +15,9 @@ public class PresettingRC : MonoBehaviour {
 		}else if(this.name == "Menu 1"){
 			RandomPreset();
 		}else if(this.name == "Menu 2"){
+
+		}else if(this.name == "Remove"){
+			DialogueMgr.ShowDialogue ("프리셋 삭제", "기존 등록된 프리셋이 삭제됩니다." , DialogueMgr.DIALOGUE_TYPE.YesNo ,"프리셋 삭제","삭제 취소","", RemovePreset);
 
 		} else {
 
@@ -41,6 +45,18 @@ public class PresettingRC : MonoBehaviour {
 		
 		}
 	}
+
+	void Remove(){
+		if (UserMgr.UsingRuby > 0) {
+			UserMgr.UserInfo.userRuby = (int.Parse(UserMgr.UserInfo.userRuby)+UserMgr.UsingRuby).ToString();
+			DialogueMgr.ShowDialogue ("프리셋 삭제", UserMgr.UsingRuby.ToString() + " 루비가 환불 되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert,null);
+		} else {
+			DialogueMgr.ShowDialogue ("프리셋 삭제", "해당 프리셋이 삭제되었습니다.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
+		transform.parent.parent.parent.parent.FindChild ("PreSetting").gameObject.SetActive (false);
+		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSet Contest").GetComponent<PresetContestCommander> ().ReCreat ();
+	}
+
 	void register(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Cancel) {
 			presetupdate = new PresetUpdateEvent (new EventDelegate (this, "PresetUpdate"));
@@ -206,7 +222,14 @@ public class PresettingRC : MonoBehaviour {
 		}
 	}
 
-
+	void RemovePreset(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			
+			RCPE = new RemoveContestPresetEvent (new EventDelegate (this, "Remove"));
+			NetMgr.RemoveContestPreset(UserMgr.CurrentPresetSeq,RCPE);
+		}
+		
+	}
 void DialogueHandler(DialogueMgr.BTNS btn){
 	if (btn == DialogueMgr.BTNS.Btn1) {
 
