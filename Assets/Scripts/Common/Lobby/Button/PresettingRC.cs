@@ -110,7 +110,30 @@ public class PresettingRC : MonoBehaviour {
 
 		//프리셋등록 가능 여부체크
 		if (status == CheckStarus.OK) {
-		
+			bool SettingCheck = true;
+			GameObject Position = transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
+				.FindChild("Position").gameObject;
+			for(int i = 0; i<(Position.transform.childCount);i++){
+				if(Position.transform.FindChild("Item " + (i+1).ToString())!=null){
+					if(
+						Position.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name "+(i+1).ToString()).FindChild("L_name "+(i+1).ToString()+"_pre")
+						.FindChild("non").gameObject.activeSelf){
+						SettingCheck = false;
+					}
+
+					if(
+						Position.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name "+(i+1).ToString()).FindChild("R_name "+(i+1).ToString()+"_pre")
+						.FindChild("non").gameObject.activeSelf){
+						SettingCheck = false;
+					}
+				}
+				if(!SettingCheck){
+					break;
+				}
+			}
+
+			if(SettingCheck){
+
 			transform.root.FindChild("Camera").FindChild("JoinPopUp").gameObject.SetActive(true);
 			transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box1")
 				.FindChild("Value").GetComponent<UILabel>().text = "루비 " + transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost;
@@ -124,6 +147,13 @@ public class PresettingRC : MonoBehaviour {
 					.FindChild("Value").GetComponent<UILabel>().text = transform.parent.parent.parent.GetComponent<PreSettingCommander>().money;
 			}
 
+			}else{
+
+				DialogueMgr.ShowDialogue ("등록취소", "등록된 정답지가 현재 없습니다.\n이대로 컨테스트를 진행하시겠습니까?\n(컨테스트 참여시 루비가 "+UserMgr.UsingRuby.ToString()+"개 소모됩니다)" , DialogueMgr.DIALOGUE_TYPE.YesNo ,Nonpreset);
+
+
+			}
+
 		}else if(status == CheckStarus.MaxPreset){
 			DialogueMgr.ShowDialogue ("등록취소", "이 컨테스트에 등록가능한 개수를 초과하였습니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
 
@@ -132,7 +162,23 @@ public class PresettingRC : MonoBehaviour {
 
 		}
 	}
-
+	void Nonpreset(DialogueMgr.BTNS btn){
+		if (btn == DialogueMgr.BTNS.Btn1) {
+			transform.root.FindChild("Camera").FindChild("JoinPopUp").gameObject.SetActive(true);
+			transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box1")
+				.FindChild("Value").GetComponent<UILabel>().text = "루비 " + transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost;
+			
+			if("[b]마일리지"!=transform.parent.parent.parent.GetComponent<PreSettingCommander>().item){
+				transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box2")
+					.FindChild("Value").GetComponent<UILabel>().text = transform.parent.parent.parent.GetComponent<PreSettingCommander>().money+" "+
+						transform.parent.parent.parent.GetComponent<PreSettingCommander>().item;
+			}else{
+				transform.root.FindChild("Camera").FindChild("JoinPopUp").FindChild("Pop").FindChild("Mid").FindChild("Box2")
+					.FindChild("Value").GetComponent<UILabel>().text = transform.parent.parent.parent.GetComponent<PreSettingCommander>().money;
+			}
+		}
+		
+	}
 	List<int> GetList(){
 		List<int> ChoseList = new List<int> ();
 		GameObject 

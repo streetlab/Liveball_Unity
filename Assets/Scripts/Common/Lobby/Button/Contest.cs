@@ -77,6 +77,7 @@ public class Contest : MonoBehaviour {
 		//컨테스트 클릭시 
 	//	ex ();
 		UserMgr.GameSeq = int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text);
+		UserMgr.UsingRuby = int.Parse((transform.FindChild ("OldBot").FindChild ("Ruby").FindChild ("Label").GetComponent<UILabel> ().text).Replace("[b]",""));
 		int presetCount = 0;
 		for (int a = 0; a<UserMgr.PresetList.Count; a++) {
 			if (UserMgr.PresetList [a].contestSeq == int.Parse (transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text)) {
