@@ -14,7 +14,13 @@ public class LoginGuestRequest : BaseUploadRequest {
 //		Debug.Log("deviceID is "+loginInfo.DeviceID);
 //		loginInfo.DeviceID = "test9";
 		dic.Add ("osType", loginInfo.osType);
-		dic.Add ("version", Application.version);
+		#if(UNITY_EDITOR)
+		dic.Add("version", UnityEditor.PlayerSettings.bundleVersion);
+		#elif(UNITY_ANDROID)
+		dic.Add("version", Application.version);
+		#else
+		dic.Add("version", Application.version);
+		#endif
 		dic.Add ("deviceID", loginInfo.DeviceID);
 		
 		

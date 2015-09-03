@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class infobutten : MonoBehaviour {
+	WithdrawEvent mEvent;
 
 	char[] strings;
 	public void onhit(){
@@ -20,6 +21,9 @@ public class infobutten : MonoBehaviour {
 			transform.parent.parent.parent.FindChild("bg_leave").gameObject.SetActive(true);
 			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("Label").GetComponent<UILabel>().text = "회원 탈퇴";
 			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("BtnClose").GetComponent<Setting>().IsLeaving = true;
+		} else if((strings [3] == '9')) {
+			mEvent = new WithdrawEvent(new EventDelegate(this, "WithdrawComplete"));
+			NetMgr.Withdraw(mEvent);
 		}
 		else  if(gameObject.name == "Change"){
 
@@ -28,5 +32,19 @@ public class infobutten : MonoBehaviour {
 			transform.parent.parent.parent.gameObject.SetActive(false);
 			transform.parent.parent.parent.parent.FindChild("Change Member").gameObject.SetActive(true);
 		}
+	}
+
+	void WithdrawComplete(){
+		if(mEvent.Response.code < 1){
+			PlayerPrefs.DeleteAll();
+			DialogueMgr.ShowDialogue("회원 탈퇴", "회원 탈퇴에 성공하였습니다.\n타이틀 화면으로 돌아갑니다.",
+				DialogueMgr.DIALOGUE_TYPE.Alert, GotoTitle);
+		} else{
+			DialogueMgr.ShowDialogue("회원 탈퇴", mEvent.Response.message, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
+	}
+
+	void GotoTitle(DialogueMgr.BTNS BtnType){
+		AutoFade.LoadLevel("SceneLogin");
 	}
 }

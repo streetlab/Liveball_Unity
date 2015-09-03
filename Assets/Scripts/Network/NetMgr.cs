@@ -838,8 +838,10 @@ public class NetMgr : MonoBehaviour{
 	public static void MergeMembership(string pincode, BaseEvent baseEvent){
 		Instance.webAPIProcessEventToAuth(new MergeMembershipRequest(pincode), baseEvent, false, true);
 	}
-	
 
+	public static void Withdraw( BaseEvent baseEvent){
+		Instance.webAPIProcessEventToAuth(new WithdrawRequest(), baseEvent, false, true);
+	}
 
 	public static void SendSocketMsg(String msg) {
 		mSendBuffer = Encoding.UTF8.GetBytes(msg);
