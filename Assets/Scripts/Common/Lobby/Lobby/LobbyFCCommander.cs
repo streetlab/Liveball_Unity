@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+//피쳐드 생성,관리(현재 사용되지않음)
 public class LobbyFCCommander : MonoBehaviour {
 	public GameObject FCOrigin;
 	public float FCHight;

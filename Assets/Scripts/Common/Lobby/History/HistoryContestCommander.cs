@@ -144,19 +144,68 @@ public class HistoryContestCommander : MonoBehaviour {
 					Item2.transform.FindChild ("BG").FindChild ("presetList").FindChild ("h8").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].h8.ToString ();
 					Item2.transform.FindChild ("BG").FindChild ("presetList").FindChild ("h9").GetComponent<UILabel> ().text = List [Seq [SeqList[i]][a]].h9.ToString ();
 					
-					
+			
+				
+				    Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
 					Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
-					Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
-
-					if(List [Seq [SeqList[i]][a]].guaranteed == 1){
-						Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
-					}
-					if(List [Seq [SeqList[i]][a]].multiEntry > 1){
-						Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
-					}else{
-						Item2.transform.FindChild ("Title").FindChild("G").transform.localPosition = new Vector3(325f,0,0);
-					}
+					Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(false);
+					Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (285f,0,0);
 					
+
+
+
+
+					if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed == 1) {
+						Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+						Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+
+						
+						if (List [Seq [SeqList[i]][a]].contestType == 5) {
+							Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+						}
+					} else if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed != 1) {
+						
+						Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+						if (List [Seq [SeqList[i]][a]].contestType == 5) {
+							Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+							Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
+						}
+					} else {
+						//Debug.Log(infoList [index].contestType + " : " +infoList [index].guaranteed );
+						if (List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed == 1) {
+							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+							Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
+
+							Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+							Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
+						}else if(List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed != 1){
+							Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+							Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (325f,0,0);
+						}else{
+							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+							Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
+						}
+					}
+
+
+					int num = 0;
+					for(int m = 1; m<Item2.transform.FindChild ("Title").childCount;m++){
+						if(!Item2.transform.FindChild ("Title").GetChild(m).gameObject.activeSelf)
+						{num++;}
+					}
+
+					Item2.transform.FindChild ("Title").FindChild("Label").GetComponent<UILabel>().SetRect(560f+((float)num*40f),30);
+
+
+
+
+
+
+
+
+
+
+
 				}
 			}
 			}

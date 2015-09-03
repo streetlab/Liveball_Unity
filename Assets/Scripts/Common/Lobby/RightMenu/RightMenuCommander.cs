@@ -9,7 +9,7 @@ public class RightMenuCommander : MonoBehaviour {
 	public string[] MenuName;
 	public string[] MenuValue;
 	void Awake(){
-		GetComponent<BoxCollider2D> ().enabled = false;
+		transform.FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 		Proflie ();
 
 	}

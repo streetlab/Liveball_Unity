@@ -3,7 +3,7 @@ using System.Collections;
 
 public class preSettingItem : MonoBehaviour {
 
-
+	//게임중 프리셋 수정 클릭시 나오는 팝업데이터
 	public void ButtonPlaying(){
 		Debug.Log (name);
 		GameObject Batting =
@@ -72,7 +72,7 @@ public class preSettingItem : MonoBehaviour {
 			}
 		}
 	}
-
+	//게임 시작 전 프리셋 수정 클릭시 나오는 팝업데이터
 	public void Button(){
 		//Key is this.name
 		GameObject Batting =

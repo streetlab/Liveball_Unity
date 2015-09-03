@@ -4,6 +4,7 @@ using System.Collections;
 public class Batting : MonoBehaviour {
 
 	public void PlayingButton(){
+		//BattingCommander에 저장된 라인업을 사용중으로 전환 sceneMain 1 에서 사용
 		//	BattingCommander.ChoseGameObject.transform.FindChild("Label").GetComponent<UILabel>().text = "Non";
 		//BattingCommander.ChoseGameObject.transform.FindChild("")FindChild("Label").GetComponent<UILabel>().text = "Non";
 		BattingCommander.ChoseGameObject.transform.FindChild (BattingCommander.ChoseGameObject.name
@@ -22,6 +23,7 @@ public class Batting : MonoBehaviour {
 
 
 	public void Button(){
+		//BattingCommander에 저장된 라인업을 사용중으로 전환 sceneLobby 에서 사용
 	//	BattingCommander.ChoseGameObject.transform.FindChild("Label").GetComponent<UILabel>().text = "Non";
 		//BattingCommander.ChoseGameObject.transform.FindChild("")FindChild("Label").GetComponent<UILabel>().text = "Non";
 		BattingCommander.ChoseGameObject.transform.FindChild (BattingCommander.ChoseGameObject.name
@@ -39,27 +41,27 @@ public class Batting : MonoBehaviour {
 //		}
 
 	}
-	bool CheckPreset(){
-		bool b = true;
-		GameObject 
-			G= 
-				transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
-				.FindChild("Position").gameObject;
-		for (int i = 0; i<G.transform.childCount; i++) {
-			if(!
-			   G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
-			   FindChild("use").gameObject.activeSelf){
-				b = false;
-				break;
-			}
-			if(!
-			   G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
-			   FindChild("use").gameObject.activeSelf){
-				b = false;
-				break;
-			}
-			
-		}
-		return b;
-	}
+//	bool CheckPreset(){
+//		bool b = true;
+//		GameObject 
+//			G= 
+//				transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
+//				.FindChild("Position").gameObject;
+//		for (int i = 0; i<G.transform.childCount; i++) {
+//			if(!
+//			   G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
+//			   FindChild("use").gameObject.activeSelf){
+//				b = false;
+//				break;
+//			}
+//			if(!
+//			   G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
+//			   FindChild("use").gameObject.activeSelf){
+//				b = false;
+//				break;
+//			}
+//			
+//		}
+//		return b;
+//	}
 }

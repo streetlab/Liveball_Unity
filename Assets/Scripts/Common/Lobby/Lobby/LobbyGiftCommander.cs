@@ -3,32 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 public class LobbyGiftCommander : MonoBehaviour {
-	//static GiftListResponse _mGift;
 
+	//ScriptTitle에서 mGift에 데이터 저장.
 	public static GiftListResponse mGift ;
-	//public static List<GiftListResponse> mGifts ;
-//	void Awake(){
-//		if (mGift != null) {
-//			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount =
-//				mGift.gift.Count;
-//			Debug.Log(mGift.gift.Count);
-//		} else {
-//			transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ().CoverFlowCount = 7;
-//		}
-//	}
+
 	void Start(){
 
-		//	Debug.Log (transform.FindChild ("Gift").FindChild ("Scroll View").GetComponent<UIScrollView> ()==null);
+		//시작시 저장된 데이터를 집어넣음
+		//아이템 생성은 UIScrollView.cs에서 관리함
 		if (mGift != null) {
 
 			for(int i = 0; i<mGift.gift.Count;i++){
-//				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
-//					mGift.Textures[mGift.gift[i].image];
-//				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("openurl").GetComponent<UILabel>().text = 
-//					mGift.gift[i].image;
-//
-//				transform.FindChild ("Gift").FindChild ("Scroll View").FindChild("Item " + i.ToString()).FindChild("CoverFlowItem").FindChild("product").GetComponent<UILabel>().text = 
-//					mGift.gift[i].product;
 
 				transform.FindChild ("Gift").FindChild ("Scroll View").GetChild(i+1).FindChild("CoverFlowItem").GetComponent<UITexture>().mainTexture = 
 					mGift.Textures[mGift.gift[i].image];

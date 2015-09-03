@@ -10,7 +10,7 @@ public class RightMenuDesktop : MonoBehaviour {
 	float WatiTime = 0.02f;
 	IEnumerator LeftMoveCamera(){ 
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
-		GetComponent<BoxCollider2D> ().enabled = false;
+		transform.FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 		for (int i = 0; i<num; i++) {
 			transform.root.FindChild("Camera").localPosition-= new Vector3(550f/num,0);
 			yield return new WaitForSeconds(WatiTime);

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class joinPopUp : MonoBehaviour {
 	public GameObject Register;
+
+	//컨테스트 참여버튼
 	public void Button(){
 		Debug.Log (name);
 		if (name == "Button1") {

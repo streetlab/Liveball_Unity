@@ -6,11 +6,14 @@ public class CoverFlowItems : MonoBehaviour {
 
 	void OnDrag (Vector2 delta)
 	{	
+		//드래그 범위가 지정된 컬라이더 위치 재설정
 		transform.parent.parent.FindChild ("BG").localPosition = new Vector3 (transform.parent.localPosition.x,transform.parent.parent.FindChild ("BG").localPosition.y,0);
 
 
 	}
 	public void Button(){
+
+		//아이템 클릭시 경품페이지를 띄우고 데이터 입력
 		transform.root.FindChild ("Scroll").FindChild ("Giveaway").gameObject.SetActive (true);
 
 

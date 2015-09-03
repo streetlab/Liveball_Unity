@@ -1216,6 +1216,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 421284}
   - 114: {fileID: 11485962}
+  - 61: {fileID: 6165400}
+  - 114: {fileID: 11410406}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -2515,6 +2517,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 550, y: 104}
+--- !u!61 &6165400
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195262}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 110}
+  serializedVersion: 2
+  m_Size: {x: 1280, y: 220}
 --- !u!61 &6172238
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2573,7 +2588,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
@@ -3057,13 +3072,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3040
+  startingRenderQueue: 3015
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 45
+  mDepth: 77
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11404340
@@ -3411,6 +3426,35 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11410406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 195262}
+  hover: {r: 1, g: 1, b: 1, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
+  disabledColor: {r: 1, g: 1, b: 1, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 11481472}
+    mMethodName: Button
+    mParameters: []
+    oneShot: 0
 --- !u!114 &11410658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6137,13 +6181,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3039
+  startingRenderQueue: 3014
   mClipTexture: {fileID: 2800000, guid: 6b42393976dba443380b83a88e507d1b, type: 3}
   mAlpha: 1
   mClipping: 1
   mClipRange: {x: 0, y: 0, z: 175, w: 175}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 42
+  mDepth: 76
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11466562
@@ -6297,13 +6341,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3033
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 4
   mClipRange: {x: 0, y: 0, z: 550, w: 1280}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 41
+  mDepth: 75
   mSortingOrder: 0
   mClipOffset: {x: 0, y: 0}
 --- !u!114 &11469558

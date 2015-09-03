@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 [System.Serializable]
+
+//탑 메뉴의 서브메뉴의 서브메뉴 생성(현재 사용되지않음)
 public class SubItem{
  List<string> _SubItemName;
 	public List<string> SubItemName =  new List<string>();// {

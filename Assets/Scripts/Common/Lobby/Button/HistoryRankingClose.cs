@@ -5,19 +5,21 @@ public class HistoryRankingClose : MonoBehaviour {
 	public void Button(){
 		gameObject.SetActive (false);
 	}
+
+
 	public void RankingOn(string Title,string MyRank,string Tpreset,string Tentry,string Rscore,string Rcount,string gameSeq){
 		transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text = Title;
 
 
 
 
-
+		//히스토리 랭킹 관련
 		transform.FindChild ("Ranking").GetComponent<HIstoryRankingCommander> ().Button (int.Parse(gameSeq));
 
 
 
 
-
+		//히스토리 게이지 관련
 		GameObject RankGage = transform.FindChild("RankGagePanel").FindChild ("RankGage").FindChild("BGIn").gameObject;
 		
 		

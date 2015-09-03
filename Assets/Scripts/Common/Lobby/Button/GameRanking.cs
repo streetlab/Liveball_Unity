@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class GameRanking : MonoBehaviour {
-
+	//SceneMain 1 메뉴 3개
 	public void Button(){
 		AllOff ();
 		switch (name) {

@@ -12,7 +12,7 @@ public class LobbyMainCommander : MonoBehaviour {
 	checkRecentMessageEvent CRME;
 	void CheckRecent(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Cancel) {
-		
+			//접속 보상을 받았을시 , 접속 보상을 받아야 할 경우 컨테스트 보상보다 접속보상 팝업이 먼저뜸
 			CheckRecentMaessga();
 		
 		}
@@ -24,7 +24,7 @@ public class LobbyMainCommander : MonoBehaviour {
 	}
 	int EnableCount  = 0;
 	void OnEnable(){
-		
+		//최초 실행 이후 재실행관련
 		if (EnableCount != 0) {
 			StartCoroutine("CheckingRencet");
 		}
@@ -165,6 +165,7 @@ public class LobbyMainCommander : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake(){
+		//최초 실행시 초기화 관련
 		if (UserMgr.ContestStatus == 2) {
 			transform.FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";
 		}
@@ -208,12 +209,15 @@ public class LobbyMainCommander : MonoBehaviour {
 
 		transform.parent.FindChild("GameInfo").gameObject.SetActive(false);
 		LobbyBotCommander.mBtnState = LobbyBotCommander.BtmState.Main;
+
+		//접속 보상 , 컨테스트 보상 체크
 		CheckFirst ();
 
 	}
 	void CSComplete(){
 		Debug.Log("CSComplete");
 	}
+	//메뉴 생성,관리부분(현재 사용되지않음)
 	public void Ratio () {
 		try{
 			HightList.Add ("Top",GetComponent<LobbyTopCommander>().TopHight);

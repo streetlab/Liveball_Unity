@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Gift : MonoBehaviour {
+	//메인 상품 OnOff버튼
 	bool Check = false;
 	public void Button(){
 		if (Check) {

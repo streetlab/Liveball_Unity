@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Presetplaying : MonoBehaviour {
 	PresetUpdateEvent presetupdate;
 	string [] Value = {"1루타","2,3루타","홈런","땅볼","뜬공","삼진"};
+	//게임중 프리셋 수정
 	public void Button(){
 
 		presetupdate = new PresetUpdateEvent (new EventDelegate (this, "PresetUpdate"));

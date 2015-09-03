@@ -11,7 +11,7 @@ public class LobbyNCCommander : MonoBehaviour {
 	public float CGap;
 
 	public static UIDraggablePanel2 mNormalList;
-	
+	//노말 컨테스트 생성,관리부분(현재 사용되지않음)
 	public void SetNCPosition(){
 		if (transform.FindChild ("Nomal Contest") != null) {
 			transform.FindChild ("Nomal Contest").localPosition = new Vector3 (-360f, (1280f / 2f) - GetComponent<LobbyTopCommander> ().TopHight-GetComponent<LobbyFCCommander>().FCHight);
@@ -330,7 +330,7 @@ public class LobbyNCCommander : MonoBehaviour {
 		if(infoList[index].contestType == 1){
 			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]50 / 50s";
 			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]50 / 50s";
-		} else{
+		}else{
 			item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]Ranking";
 			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "[b]Ranking";
 		}
@@ -351,23 +351,60 @@ public class LobbyNCCommander : MonoBehaviour {
 
 		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(false);
 		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("M").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (false);
 		item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
 
-		item.Target.gameObject.transform.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(false);
-		item.Target.gameObject.transform.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("M").gameObject.SetActive(false);
-		item.Target.gameObject.transform.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
+		item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("M").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("L").gameObject.SetActive(false);
+		item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (188.5f,0,0);
 
-		if(infoList[index].guaranteed == 1){
+
+		if (infoList [index].multiEntry > 1 && infoList [index].guaranteed == 1) {
 			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
 			item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
-		}
-		if (infoList [index].multiEntry > 1) {
-			item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
-			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
+			item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
+			item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
+
+			if (infoList [index].contestType == 5) {
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+			}
+		} else if (infoList [index].multiEntry > 1 && infoList [index].guaranteed != 1) {
+
+			item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
+			item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("M").gameObject.SetActive (true);
+			if (infoList [index].contestType == 5) {
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").localPosition = new Vector3 (188.5f, 0, 0);
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").localPosition = new Vector3 (188.5f, 0, 0);
+			}
 		} else {
-			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f,0,0);
-			item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f,0,0);
+			//Debug.Log(infoList [index].contestType + " : " +infoList [index].guaranteed );
+			if (infoList [index].contestType == 5&& infoList [index].guaranteed == 1) {
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f, 0, 0);
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f, 0, 0);
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").localPosition = new Vector3 (188.5f, 0, 0);
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").localPosition = new Vector3 (188.5f, 0, 0);
+			}else if(infoList [index].contestType == 5&& infoList [index].guaranteed != 1){
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").gameObject.SetActive (true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("L").localPosition = new Vector3 (228.5f, 0, 0);
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("L").localPosition = new Vector3 (228.5f, 0, 0);
+			}else{
+				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
+				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitleIcon").FindChild("G").gameObject.SetActive(true);
+				item.Target.gameObject.transform.FindChild ("ChangeTopBot").FindChild ("OldTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f, 0, 0);
+				item.Target.gameObject.transform.FindChild ("NewTop").FindChild ("TitleIcon").FindChild ("G").localPosition = new Vector3 (228.5f, 0, 0);
+			}
 		}
+
+
 	}
 	public void NCUpDown(string Value){
 		float Y =  (1280f / 2f) - GetComponent<LobbyTopCommander> ().TopHight-GetComponent<LobbyFCCommander>().FCHight;
@@ -386,6 +423,8 @@ public class LobbyNCCommander : MonoBehaviour {
 	}
 
 	public void ResetInBackground(){
+		//데이터 새로고침
+		//NomalContest.cs에서 사용
 		CDE = new ContestDataEvent (new EventDelegate (this, "ResetNCData"));
 		NetMgr.GetContestDataInBackground (CDE);
 	}
@@ -407,6 +446,7 @@ public class LobbyNCCommander : MonoBehaviour {
 	ContestListEvent CLE;
 
 	void ResetNCData(){
+		//기존 UserMgr.ContestList 새로고침
 		try {
 			Debug.Log ("CDE.Response.data.Count : " + CDE.Response.data.Count);
 			Debug.Log ("UserMgr.ContestList.Count : " + UserMgr.ContestList.Count);

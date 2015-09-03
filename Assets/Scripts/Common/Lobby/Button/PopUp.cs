@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PopUp : MonoBehaviour {
 	public static string Status;
+	//닉네임 변경
 	public void Button(){
 		Debug.Log (name);
 		if (name == "Button1") {
@@ -40,6 +41,7 @@ public class PopUp : MonoBehaviour {
 
 
 	CheckNickEvent mNickEvent;
+
 	public void CheckDuplication(){
 		string value = CheckValidation ();
 		if (value == null) {

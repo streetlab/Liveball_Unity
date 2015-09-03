@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+//탑 메뉴 생성,관리(지금은 사용되지않음)
 public class LobbyTopCommander : MonoBehaviour {
 
 	public GameObject mTopTemp;

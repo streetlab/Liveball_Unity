@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+//탑 메뉴의 서브메뉴 생성(현재 사용되지않음)
 public class LobbyAddSub : MonoBehaviour {
 	public GameObject SubMenu;
 	public GameObject Arrow;

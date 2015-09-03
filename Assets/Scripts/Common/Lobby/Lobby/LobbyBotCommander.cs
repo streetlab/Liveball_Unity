@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
+//하단 메뉴 생성,관리(현재 사용되지않음)
 public class LobbyBotCommander : MonoBehaviour {
 	public enum BtmState{
 		Main,

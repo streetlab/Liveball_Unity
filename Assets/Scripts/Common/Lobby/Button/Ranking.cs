@@ -4,6 +4,8 @@ using System.Collections;
 public class Ranking : MonoBehaviour {
 	static int Tstatus=1;
 	static int Bstatus=1;
+
+	//랭킹페이지 
 	public void Button(){
 		GameObject Ranking = transform.root.FindChild ("Ranking").gameObject;
 		bool Check = true;

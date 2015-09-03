@@ -21,7 +21,7 @@ public class HistoryItem : MonoBehaviour {
 		Debug.Log ("Rcount : " + Rcount);
 		Debug.Log ("gameSeq : " + gameSeq);
 
-	
+	//히스토리 정보 전달
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("History Contest").
 			FindChild ("HistoryRanking").GetComponent<HistoryRankingClose> ().RankingOn (
 				Title,MyRank,Tpreset,Tentry,Rscore,Rcount,gameSeq);

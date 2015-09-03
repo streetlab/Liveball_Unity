@@ -8,6 +8,7 @@ public class PresetItem : MonoBehaviour {
 	List<int> List = new List<int>();
 
 	int count= 0;
+	//해당 경기의 라인업이 없을시 라인업을 가저옴
 	void GetLineupStart(){
 
 		count = 0;
@@ -49,7 +50,11 @@ public class PresetItem : MonoBehaviour {
 //		GSE = new GetScheduleEvent(new EventDelegate(this,"GET"));
 //		NetMgr.GetScheduleToday (GSE);
 //		UserMgr.ContestStatus = 1;
+
+
+
 		if (UserMgr.ContestStatus == 2) {
+			//게임이 진행 중 일때
 		
 
 			try{
@@ -80,7 +85,7 @@ public class PresetItem : MonoBehaviour {
 
 
 		} else {
-
+			//게임이 시작되지 않았을 때
 	
 			try{
 			if(UserMgr.LineUpList[transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text]!=null){
@@ -174,6 +179,7 @@ public class PresetItem : MonoBehaviour {
 		} else {
 			
 			Debug.Log ("GetLineup");
+
 			try{
 				UserMgr.LineUpList.Add (transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text,GGPL.Response.data);
 				

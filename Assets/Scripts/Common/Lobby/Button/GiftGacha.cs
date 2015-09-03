@@ -5,15 +5,9 @@ public class GiftGacha : MonoBehaviour {
 	public GameObject GachaAnim;
 	procStoreGachaEvent PSGE;
 	GetItemShopRubyEvent getruby;
-
+	//경품 가챠
 	public void GachaButton(){
-//		GameObject Temp = (GameObject)Instantiate (GachaAnim);
-//		Temp.transform.parent = transform.root;
-//		Temp.transform.localScale = new Vector3 (1,1,1);
-//		Temp.transform.localPosition = new Vector3 (25f, 0, 0);
-//		Temp.transform.localScale = new Vector3 (100f,100f,1f);
-//		Temp.gameObject.SetActive (true);
-//		
+
 		string S = transform.FindChild("Label").GetComponent<UILabel>().text;
 		S = S.Replace(" 참여하기 ","");
 

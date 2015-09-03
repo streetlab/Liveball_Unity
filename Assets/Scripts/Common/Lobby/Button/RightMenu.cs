@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RightMenu : MonoBehaviour {
 	public GameObject mPincode;
-
+	//오른쪽 메뉴 버튼들
 	void Start(){
 		if(Application.platform == RuntimePlatform.IPhonePlayer
 		   && name.Equals("burger_menu_004")){

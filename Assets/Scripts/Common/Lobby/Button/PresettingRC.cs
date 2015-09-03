@@ -7,6 +7,8 @@ public class PresettingRC : MonoBehaviour {
 	PresetAddEvent presetaddevent;
 	ContestDataEvent CDE;
 	RemoveContestPresetEvent RCPE;
+
+	//프리셋 등록,삭제
 	public void Button(){
 		if (this.name == "Close") {
 			DialogueMgr.ShowDialogue ("등록 취소", "기존 등록된 내용을 잃을 수 있습니다." , DialogueMgr.DIALOGUE_TYPE.YesNo ,"등록 취소","계속 등록","", DialogueHandler);
@@ -106,6 +108,7 @@ public class PresettingRC : MonoBehaviour {
 		}
 
 
+		//프리셋등록 가능 여부체크
 		if (status == CheckStarus.OK) {
 		
 			transform.root.FindChild("Camera").FindChild("JoinPopUp").gameObject.SetActive(true);

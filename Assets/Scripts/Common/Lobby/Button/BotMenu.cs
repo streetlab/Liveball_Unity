@@ -5,6 +5,7 @@ public class BotMenu : MonoBehaviour {
 	string[] S = {"Home","Ball","Challenge","Post","---"};
 	public GameObject mScroll;
 	// Use this for initialization
+	//하단메뉴 버튼
 	public void Button(){
 
 
@@ -86,6 +87,7 @@ public class BotMenu : MonoBehaviour {
 	public void ChallengeClose(){
 		transform.FindChild("Scroll View").gameObject.SetActive(false);
 	}
+	//오브젝트 이름을 인티저로 변환
 	int GetIndex(string name){
 		int i;
 		for (i = 0; i<S.Length; i++) {
@@ -115,6 +117,7 @@ public class BotMenu : MonoBehaviour {
 		//transform.root.FindChild("Main").FindChild("Gift").FindChild("Scroll View").gameObject.SetActive(false);
 	}
 
+	//카메라 애니메이션 관련
     void PositionCheck(){
 		ScrollViewOff ();
 		if (transform.root.FindChild ("Camera").localPosition.x == 0) {
@@ -127,7 +130,7 @@ public class BotMenu : MonoBehaviour {
 	float WatiTime = 0.02f;
 	IEnumerator RightMoveCamera(){
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
-		transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = true;
+		transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = true;
 		for (int i = 0; i<num; i++) {
 			transform.root.FindChild("Camera").localPosition+= new Vector3(550f/num,0);
 			yield return new WaitForSeconds(WatiTime);
@@ -141,7 +144,7 @@ public class BotMenu : MonoBehaviour {
 	}
 	IEnumerator LeftMoveCamera(){ 
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
-		transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+		transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 		for (int i = 0; i<num; i++) {
 			transform.root.FindChild("Camera").localPosition-= new Vector3(550f/num,0);
 			yield return new WaitForSeconds(WatiTime);
