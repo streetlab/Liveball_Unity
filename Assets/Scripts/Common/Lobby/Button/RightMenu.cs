@@ -29,7 +29,7 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild ("Setting").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
-			
+			transform.root.FindChild ("Setting").GetComponent<ScriptSettings>().Init();
 			
 		}else if(names == "burger_menu_002"){
 			AllOff();
