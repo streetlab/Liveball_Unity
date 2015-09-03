@@ -29,6 +29,7 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild ("Setting").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 			transform.root.FindChild ("Setting").GetComponent<ScriptSettings>().Init();
 			
 		}else if(names == "burger_menu_002"){
@@ -38,6 +39,7 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild ("TF_Items").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 		}else if(names == "burger_menu_005"){
 			AllOff();
 			transform.root.FindChild("Item").GetComponent<ScriptItemMiddle>().Starts();
@@ -46,6 +48,7 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild ("Item").gameObject.SetActive(true);
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 
 		} else if(names == "burger_menu_004"){
 			ScriptMainTop.OpenBettingCheck = true;
@@ -56,6 +59,7 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild("Ranking").GetComponent<RankingCommander>().List01();
 			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 
 		}
 	}
@@ -68,6 +72,7 @@ public class RightMenu : MonoBehaviour {
 		transform.root.FindChild ("Item").gameObject.SetActive(true);
 		transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
 		transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+		transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 	}
 	void AllOff(){
 		transform.root.FindChild("Ranking").gameObject.SetActive(false);
