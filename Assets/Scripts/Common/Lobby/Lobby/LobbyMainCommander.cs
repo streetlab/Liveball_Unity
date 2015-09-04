@@ -165,6 +165,7 @@ public class LobbyMainCommander : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake(){
+		transform.root.FindChild ("Camera").localPosition = new Vector3 (0, UtilMgr.GetScaledPositionY (), 0);
 		//최초 실행시 초기화 관련
 		if (UserMgr.ContestStatus == 2) {
 			transform.FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";
