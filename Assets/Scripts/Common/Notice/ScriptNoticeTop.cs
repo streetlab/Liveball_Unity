@@ -28,6 +28,6 @@ public class ScriptNoticeTop : MonoBehaviour {
 	}
 
 	void DialogHandler(DialogueMgr.BTNS btn){
-		AutoFade.LoadLevel("SceneMain");
+		AutoFade.LoadLevel("SceneLobby");
 	}
 }

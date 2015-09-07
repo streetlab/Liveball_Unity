@@ -113,10 +113,10 @@ public class ScriptTitle : MonoBehaviour {
 		//            = new Vector3(0, -450f, 0);
 		if (Application.platform == RuntimePlatform.Android) {
 			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
-			transform.FindChild ("ContainerBtns").FindChild("Label").gameObject.SetActive(false);
+			//transform.FindChild ("ContainerBtns").FindChild("Label").gameObject.SetActive(false);
 		} else{
 			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
-			transform.FindChild ("ContainerBtns").FindChild("Label").gameObject.SetActive(true);
+			//transform.FindChild ("ContainerBtns").FindChild("Label").gameObject.SetActive(true);
 		}
 		
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
@@ -436,6 +436,7 @@ public class ScriptTitle : MonoBehaviour {
 	
 	
 	public void MemberClicked(){
+		transform.root.FindChild("Title").FindChild("Label").gameObject.SetActive(false);
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			EventDelegate eventd = new EventDelegate(this, "GotUidWithMember");
 			IOSMgr.GetUID("", eventd);

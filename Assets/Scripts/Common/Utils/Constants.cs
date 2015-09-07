@@ -72,7 +72,13 @@ public class Constants {
 
 	public static string WITHDRAW_URL 					= 	"http://auth.liveball.kr/m/withdraw.php";
 	public static string TEST_EVENT_URL 				= 	"http://test.streetlab.co.kr/events";
+	#if UNITY_EDITOR
 	public static string EVENT_URL 						= 	"http://tuby10.friize.com/events";
+#elif UNITY_IOS
+	public static string EVENT_URL 						= 	"http://tuby10.friize.com/events/ios";
+#else
+	public static string EVENT_URL 						= 	"http://tuby10.friize.com/events";
+#endif
 	public static string TEST_NOTICE_URL 				= 	"http://test.streetlab.co.kr/notice";
 	public static string NOTICE_URL 						= 	"http://tuby10.friize.com/notice";
 	public static string EVENT_ATTENDANCE_URL 			= 	"http://test.streetlab.co.kr/events/attendance/";
