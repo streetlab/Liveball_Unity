@@ -27,7 +27,8 @@ public class ScriptTitle : MonoBehaviour {
 	public string mStrBtnExit;
 	public string mStrBtnContinue;
 	public Texture2D Default;
-	
+
+	public GameObject mLbliOS;
 	
 	void Start()
 	{
@@ -111,12 +112,12 @@ public class ScriptTitle : MonoBehaviour {
 		//            = new Vector3(-220f, -450f, 0);
 		//        transform.FindChild ("ContainerBtns").FindChild("BtnJoin").localPosition
 		//            = new Vector3(0, -450f, 0);
-		if (Application.platform == RuntimePlatform.Android) {
-			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
-			//transform.FindChild ("ContainerBtns").FindChild("Label").gameObject.SetActive(false);
-		} else{
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
 			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(true);
-			//transform.FindChild ("ContainerBtns").FindChild("Label").gameObject.SetActive(true);
+			mLbliOS.SetActive(true);
+		} else{
+			transform.FindChild ("ContainerBtns").FindChild("BtnGuest").gameObject.SetActive(false);
+			mLbliOS.SetActive(false);
 		}
 		
 		transform.FindChild ("ContainerBtns").gameObject.SetActive (false);
