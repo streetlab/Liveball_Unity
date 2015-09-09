@@ -6,6 +6,7 @@ public class Gift : MonoBehaviour {
 	bool Check = false;
 	public void Button(){
 		if (Check) {
+			//최초 클릭시 경품이 닫힘
 			Check = false;
 			transform.localPosition = new Vector2(transform.localPosition.x,12f+55f);
 			GetComponent<UISprite>().spriteName = "btn_gift_03";
@@ -17,6 +18,7 @@ public class Gift : MonoBehaviour {
 			SubOnoff(true);
 			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
 		} else {
+			//경품이 열림
 			Check = true;
 			transform.localPosition = new Vector2(transform.localPosition.x,248f+55f);
 			GetComponent<UISprite>().spriteName = "btn_gift_03";
@@ -31,13 +33,7 @@ public class Gift : MonoBehaviour {
 				}
 	}
 	public void Off(){
-//		Check = false;
-//		transform.localPosition = new Vector2(transform.localPosition.x,12f+55f);
-//		transform.FindChild("Arrow").localPosition = new Vector2(0,5);
-//		transform.FindChild("Arrow").localScale = new Vector2(1,1);
-//		//transform.parent.FindChild("Scroll View").GetComponent<UIPanel>().depth = -1;
-//		transform.parent.FindChild("Scroll View").gameObject.SetActive(false);
-//		transform.parent.FindChild("Shadow").gameObject.SetActive(false);
+		//선물상자 이미지 관련
 		Check = false;
 		transform.localPosition = new Vector2(transform.localPosition.x,12f+55f);
 		GetComponent<UISprite>().spriteName = "btn_gift_03";

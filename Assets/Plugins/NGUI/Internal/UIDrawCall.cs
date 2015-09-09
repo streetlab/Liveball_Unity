@@ -609,7 +609,7 @@ public class UIDrawCall : MonoBehaviour
 						diff.z = NGUIMath.WrapAngle(diff.z);
 
 						if (Mathf.Abs(diff.x) > 0.001f || Mathf.Abs(diff.y) > 0.001f)
-							Debug.LogWarning("Panel can only be clipped properly if X and Y rotation is left at 0", panel);
+//							Debug.LogWarning("Panel can only be clipped properly if X and Y rotation is left at 0", panel);
 
 						angle = diff.z;
 					}

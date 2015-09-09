@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RightMenuDesktop : MonoBehaviour {
-
+	//오른쪽 메뉴 그림자 클릭시 닫힘
 	public void Button(){
 		StartCoroutine (LeftMoveCamera());
 	}

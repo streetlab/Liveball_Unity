@@ -23,7 +23,7 @@ public class ScriptCertification : MonoBehaviour {
 			mWebView.SetShowSpinnerWhenLoading(false);
 			mWebView.autoShowWhenLoadComplete = true;
 			mWebView.OnLoadBegin += OnLoadBegin;
-//			mWebView.OnReceivedMessage += OnReceivedMessage;
+			//mWebView.OnReceivedMessage += OnReceivedMessage;
 			mWebView.OnLoadComplete += OnLoadComplete;
 			mWebView.OnWebViewShouldClose += OnWebViewShouldClose;
 //			mWebView.OnEvalJavaScriptFinished += OnEvalJavaScriptFinished;			
@@ -38,6 +38,20 @@ public class ScriptCertification : MonoBehaviour {
 		
 		mWebView.Load ();
 	}
+
+//	void OnReceivedMessage(UniWebView webView, UniWebViewMessage message) {
+//		Debug.Log("rawMessage : " + message.rawMessage);
+//		Debug.Log("path : " + message.path);
+//	
+//		if (string.Equals(message.path, "http://auth.friize.com/m/user_auth_fail.php")) {
+//			// It is time to move!
+//			
+//			// In this example:
+//			Debug.Log(message.args["message"]);
+//			Debug.Log("message : " + ConvertHexToString(message.args["message"]));
+//			// message.args["distance"] = "1"
+//		}
+//	}
 	UniWebViewEdgeInsets InsetsForScreenOreitation(UniWebView webView, UniWebViewOrientation orientation) {
 		Debug.Log ("InsetsForScreenOreitation");
 		
@@ -49,6 +63,10 @@ public class ScriptCertification : MonoBehaviour {
 		//			return new UniWebViewEdgeInsets((int)(125*myRatio)+Constants.HEIGHT_STATUS_BAR,0,0,0);
 		//		}
 	}
+	public string Base64Decode(string base64EncodedData) {
+		var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+		return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+	}
 
 	void OnLoadBegin(UniWebView webView, string loadingUrl){
 		Debug.Log("OnLoadBegin to "+loadingUrl);
@@ -57,7 +75,12 @@ public class ScriptCertification : MonoBehaviour {
 			CompleteCert();
 		} else if(loadingUrl.Contains("user_auth_fail")){
 			Debug.Log("Failed");
-			FailedCert();
+
+	
+				string replace = loadingUrl.Replace(Constants.URL_CERT.Replace("user_auth.php","")+"user_auth_fail.php","");
+			Debug.Log("replace : " + replace);
+			replace =replace.Replace("?message=","");
+			FailedCert(replace);
 		} 
 //		else if(loadingUrl.Equals("http://auth.friize.com/m/user_auth_success.php")){
 //			Debug.Log("Equals");
@@ -92,17 +115,22 @@ public class ScriptCertification : MonoBehaviour {
 		UniWebViewObject.SetActive(false);
 		DialogueMgr.ShowDialogue(mSucceedTitle, mSucceedBody, DialogueMgr.DIALOGUE_TYPE.EventAlert, OnDialogClicked);
 
-	
+		transform.parent.gameObject.SetActive (false);
 
 	}
 
-	public void FailedCert(){
+	public void FailedCert(string message){
 		mWebView.Stop ();
 		mWebView.Hide();
 		mWebView = null;
 		UniWebViewObject.SetActive(false);
-		DialogueMgr.ShowDialogue(mFailedTitle, mFailedBody, DialogueMgr.DIALOGUE_TYPE.Alert, null);
-		//gameObject.SetActive (false);
+	
+		if (message != "") {
+			DialogueMgr.ShowDialogue (mFailedTitle, Base64Decode(message), DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		} else {
+			DialogueMgr.ShowDialogue (mFailedTitle, mFailedBody, DialogueMgr.DIALOGUE_TYPE.Alert, null);
+		}
+		transform.parent.gameObject.SetActive (false);
 	
 //		DialogueMgr.SetEvent(OnClicked);
 	}
@@ -111,7 +139,7 @@ public class ScriptCertification : MonoBehaviour {
 	}
 	public void OffActive(){
 		if (mWebView != null) {
-			FailedCert ();
+			FailedCert ("");
 		}
 		gameObject.transform.parent.gameObject.SetActive (false);
 	}

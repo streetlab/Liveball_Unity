@@ -29,6 +29,7 @@ public class GiftGacha : MonoBehaviour {
 	S =	S.Replace(",","");
 			S = S.Replace(" M 참여하기 ","");
 			Debug.Log("S : "  + S);
+			//마일리지 체크
 			if(long.Parse(S)>long.Parse(UserMgr.UserInfo.userDiamond)){
 				DialogueMgr.ShowDialogue ("마일리지 부족", "마일리지가 부족합니다.\n마일리지를 얻기위해 게임에 참여하시겠습니까?", DialogueMgr.DIALOGUE_TYPE.YesNo, NoneM);
 			}else{
@@ -52,6 +53,7 @@ public class GiftGacha : MonoBehaviour {
 	}
 
 	void Gachas(){
+		//가챠 애니메이션 생성
 		if (transform.root.FindChild ("Gacha") != null) {
 			Destroy(transform.root.FindChild ("Gacha").gameObject);
 		}

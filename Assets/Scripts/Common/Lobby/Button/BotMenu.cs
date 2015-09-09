@@ -12,7 +12,7 @@ public class BotMenu : MonoBehaviour {
 		Debug.Log (GetIndex (this.name));
 		switch (GetIndex (this.name)) {
 		case 0:
-		
+			//홈
 			Debug.Log("Main On");
 			if(mScroll.transform.FindChild("Main")!=null){
 				AllOff();
@@ -24,7 +24,8 @@ public class BotMenu : MonoBehaviour {
 			}
 			break;
 		case 1:
-			//ScriptMainTop.OpenBettingCheck = false;
+
+			//경기경보
 			AllOff();
 			Off();
 			if(Application.loadedLevelName.Equals ("SceneMain 1")){
@@ -53,8 +54,9 @@ public class BotMenu : MonoBehaviour {
 			GetComponent<UIButton>().enabled = true;
 			break;
 		case 2:
+			//도전과제
 			AllOff();
-			//Off();
+		
 
 			mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
 			mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
@@ -72,7 +74,7 @@ public class BotMenu : MonoBehaviour {
 		case 3:
 			break;
 		case 4:
-
+			//우측메뉴
 			//Debug.Log("4");
 			PositionCheck();
 			GetComponent<UIButton>().enabled = true;
@@ -84,9 +86,7 @@ public class BotMenu : MonoBehaviour {
 			break;
 		}
 	}
-	public void ChallengeClose(){
-		transform.FindChild("Scroll View").gameObject.SetActive(false);
-	}
+
 	//오브젝트 이름을 인티저로 변환
 	int GetIndex(string name){
 		int i;
@@ -128,6 +128,7 @@ public class BotMenu : MonoBehaviour {
 	}
 	int num = 5;
 	float WatiTime = 0.02f;
+	//카메라 우측으로 이동
 	IEnumerator RightMoveCamera(){
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
 		transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = true;
@@ -142,6 +143,7 @@ public class BotMenu : MonoBehaviour {
 		}
 		transform.root.FindChild("Camera").localPosition = new Vector3(550,Y);
 	}
+	//카메라 좌측으로 이동
 	IEnumerator LeftMoveCamera(){ 
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
 		transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;

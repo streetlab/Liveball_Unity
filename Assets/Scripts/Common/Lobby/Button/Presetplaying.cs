@@ -55,6 +55,7 @@ public class Presetplaying : MonoBehaviour {
 	}
 
 	void SetName(){
+		//팀 이름 설정
 		transform.FindChild ("Mid").FindChild ("BG").FindChild ("Team 1").FindChild ("Label").GetComponent<UILabel> ().
 			text = 
 				transform.root.FindChild ("Scroll").FindChild ("ContestIn").FindChild ("GameInfo")
@@ -90,7 +91,7 @@ public class Presetplaying : MonoBehaviour {
 	}
 
 
-
+	//리스트 설정
 	public void SetList(List<int> List){
 		SetName ();
 		Debug.Log (List.Count);

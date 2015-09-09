@@ -10,7 +10,7 @@ public class NomalContest : MonoBehaviour {
 	void OnDisable (){
 		StopCoroutine ("Reset");
 	}
-
+	//30초마다 리스트 갱신
 	IEnumerator Reset(){
 		while (true) {
 			yield return new WaitForSeconds (10f);

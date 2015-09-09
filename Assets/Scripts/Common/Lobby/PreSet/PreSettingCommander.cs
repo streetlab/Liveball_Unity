@@ -35,9 +35,11 @@ public class PreSettingCommander : MonoBehaviour {
 	public void SetTeamName(string L,string R,string Title){
 
 		if (Mode == "Add") {
+			//프리셋을 추가 하는 경우
 			transform.FindChild("Top").FindChild("Top Menu").gameObject.SetActive(true);
 			transform.FindChild("Top").FindChild("Top Menu2").gameObject.SetActive(false);
 		} else {
+			//프리셋을 업데이트 하는 경우
 			transform.FindChild("Top").FindChild("Top Menu2").gameObject.SetActive(true);
 			transform.FindChild("Top").FindChild("Top Menu").gameObject.SetActive(false);
 			transform.FindChild("Top").FindChild("Top Menu2").FindChild("Label").GetComponent<UILabel>().text = Title;
@@ -48,11 +50,9 @@ public class PreSettingCommander : MonoBehaviour {
 			= R; 
 	}
 	public void Ruby(string R,string M,string I){
-//		cost = "";
-//		for (int i = 3; i<R.Length; i++) {
-//			cost+= R[i].ToString();
+
 		R = R.Replace ("[b]","");
-//		}
+
 		cost = R;
 		money = M;
 		if (I == "ruby") {
@@ -61,6 +61,7 @@ public class PreSettingCommander : MonoBehaviour {
 		item = I;
 	}
 	public void SetList(List<string> List){
+		//프리셋 세팅 페이지에 라인업 데이터 추가
 		Debug.Log (List.Count);
 	
 		GameObject 

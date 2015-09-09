@@ -22,7 +22,7 @@ public class HistoryRankingClose : MonoBehaviour {
 		//히스토리 게이지 관련
 		GameObject RankGage = transform.FindChild("RankGagePanel").FindChild ("RankGage").FindChild("BGIn").gameObject;
 		
-		
+	//	632는 게이지바의 최대 길이
 		if (MyRank == "0") {
 			RankGage.transform.FindChild ("BG").FindChild ("Maker").localPosition = new Vector3 (
 				-316 + ((float.Parse (MyRank) / float.Parse (Tentry)) * 632), 23);

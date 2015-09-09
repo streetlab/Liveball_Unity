@@ -5,7 +5,7 @@ public class positionsetting : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		//기기별 사이즈 대응
 	//	Debug.Log(UtilMgr.GetScaledPositionY ());
 		transform.localPosition += new Vector3 (0, (UtilMgr.GetScaledPositionY ()) * 2);
 		if (name == "Batting") {

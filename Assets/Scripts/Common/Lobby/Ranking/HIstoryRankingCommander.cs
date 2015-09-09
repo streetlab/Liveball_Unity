@@ -6,11 +6,7 @@ public class HIstoryRankingCommander : MonoBehaviour {
 	GetRankEvent mGetRankEvent;
 	public Texture2D texures;
 	ContestRankingEvent CRE;
-	void Awake(){
-		//SetRank ();
-	//	mGetRankEvent = new GetRankEvent (new EventDelegate (this, "SetRank1"));
-		//NetMgr.GetUserRankingWeeklyGold (UserMgr.UserInfo.memSeq,mGetRankEvent);
-	}
+
 	public void Button(int gameSeq){
 		//Debug.Log ("gameSeq : " + gameSeq);
 		transform.FindChild("Scroll View"). GetComponent<UIDraggablePanel2>().RemoveAll();

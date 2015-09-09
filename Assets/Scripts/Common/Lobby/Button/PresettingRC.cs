@@ -108,7 +108,7 @@ public class PresettingRC : MonoBehaviour {
 		}
 
 
-		//프리셋등록 가능 여부체크
+		//정답지 등록 여부체크
 		if (status == CheckStarus.OK) {
 			bool SettingCheck = true;
 			GameObject Position = transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
@@ -229,7 +229,7 @@ public class PresettingRC : MonoBehaviour {
 		}
 		return a;
 	}
-
+	//프리셋 랜덤 설정 기능
 	void RandomPreset(){
 		GameObject 
 		G= 
@@ -270,7 +270,7 @@ public class PresettingRC : MonoBehaviour {
 				FindChild("non").gameObject.SetActive(true);
 		}
 	}
-
+	//프리셋 삭제
 	void RemovePreset(DialogueMgr.BTNS btn){
 		if (btn == DialogueMgr.BTNS.Btn1) {
 			
@@ -303,7 +303,7 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		}
 	
 }
-
+	//프리셋 등록
 	public void JoinButton(){
 		
 		if(int.Parse(UserMgr.UserInfo.userRuby)>=int.Parse(transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost))

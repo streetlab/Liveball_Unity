@@ -44,12 +44,12 @@ public class PresetContestCommander : MonoBehaviour {
 		}
 	}
 	public void CreatItem(List<PresetListInfo> List){
-
+		//프리셋(라이브) 리스트 생성
 		Debug.Log ("UserMgr.ContestStatus : " + UserMgr.ContestStatus);
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
 			.GetComponent<UILabel> ().text = List.Count.ToString();
 		if (UserMgr.ContestStatus == 2) {
-
+			//라이브
 
 			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
 				.GetComponent<UILabel> ().text = "라이브";
@@ -88,6 +88,8 @@ public class PresetContestCommander : MonoBehaviour {
 					DestroyImmediate (transform.FindChild ("Scroll View").FindChild ("Position").GetChild (0).gameObject);
 				}
 				for (int i = 0; i<SeqList.Count; i++) {
+
+					//게임 패널
 					GameObject Item1 = (GameObject)Instantiate (PresetContestItem1);
 					Item1.transform.parent = transform.FindChild ("Scroll View").FindChild ("Position");
 					Item1.transform.localScale = new Vector3 (1, 1, 1);
@@ -126,7 +128,7 @@ public class PresetContestCommander : MonoBehaviour {
 						
 						
 						
-						
+						//라이브(프리셋) 패널
 						GameObject Item2 = (GameObject)Instantiate (LiveContestItem);
 						Item2.transform.parent = Item1.transform;
 						Item2.transform.localScale = new Vector3 (1, 1, 1);
@@ -271,7 +273,7 @@ public class PresetContestCommander : MonoBehaviour {
 
 
 		} else {
-
+			//프리셋
 			if (List == null) {
 				CreatItem ();
 			} else {
@@ -313,6 +315,7 @@ public class PresetContestCommander : MonoBehaviour {
 						DestroyImmediate (transform.FindChild ("Scroll View").FindChild ("Position").GetChild (0).gameObject);
 					}
 					for (int i = 0; i<SeqList.Count; i++) {
+						//게임 패널
 						GameObject Item1 = (GameObject)Instantiate (PresetContestItem1);
 						Item1.transform.parent = transform.FindChild ("Scroll View").FindChild ("Position");
 						Item1.transform.localScale = new Vector3 (1, 1, 1);
@@ -349,7 +352,7 @@ public class PresetContestCommander : MonoBehaviour {
 						
 						for (int a = 0; a<Seq [SeqList[i]].Count; a++) {
 							
-							
+							//프리셋(라이브) 패널
 							
 							
 							GameObject Item2 = (GameObject)Instantiate (PresetContestItem2);
@@ -490,6 +493,7 @@ return a;
 			NetMgr.GetContestData (CDE);
 
 	}
+	//데이터 갱신
 	void ResetPreset(){
 		for (int i = 0; i<transform.FindChild ("Scroll View").FindChild ("Position").childCount; i++) {
 			for(int a = 0; a<PDE.Response.data.Count; a++){

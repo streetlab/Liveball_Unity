@@ -6,11 +6,7 @@ public class GameRankingCommander : MonoBehaviour {
 	GetRankEvent mGetRankEvent;
 	public Texture2D texures;
 	ContestRankingEvent CRE;
-	void Awake(){
-		//SetRank ();
-	//	mGetRankEvent = new GetRankEvent (new EventDelegate (this, "SetRank1"));
-		//NetMgr.GetUserRankingWeeklyGold (UserMgr.UserInfo.memSeq,mGetRankEvent);
-	}
+
 	public void Button(){
 		transform.FindChild("Scroll View"). GetComponent<UIDraggablePanel2>().RemoveAll();
 		CRE = new ContestRankingEvent (new EventDelegate (this,"SetRank"));

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;  
 public class LobbyMainCommander : MonoBehaviour {
 	public static int MenuStatus = 1; 
 	public float RatioTop;
@@ -157,15 +158,14 @@ public class LobbyMainCommander : MonoBehaviour {
 		}
 	}
 
-
-
-
-
-
+//	public string Base64Decode(string base64EncodedData) {
+//		var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+//		return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+//	}
 
 	// Use this for initialization
 	void Awake(){
-		transform.root.FindChild ("Camera").localPosition = new Vector3 (0, UtilMgr.GetScaledPositionY (), 0);
+		//Debug.Log ("Base64Decode : " + Base64Decode("64+Z7J287ZWcIO2ctOuMgO2PsOuyiO2YuOuhnCDrs7jsnbjsnbjspp3smpTssq0="));
 		//최초 실행시 초기화 관련
 		if (UserMgr.ContestStatus == 2) {
 			transform.FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";

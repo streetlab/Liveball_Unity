@@ -639,6 +639,7 @@ public class ScriptTitle : MonoBehaviour {
 	int Count = 0;
 	int count = 0;
 	bool TwoCheck = true;
+	//경품 이미지 체크
 	void Getdata(){
 		try{
 			UIScrollView._CoverFlowCount = LobbyGiftCommander.mGift.gift.Count;
