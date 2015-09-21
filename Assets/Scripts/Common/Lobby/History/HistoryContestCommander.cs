@@ -54,7 +54,8 @@ public class HistoryContestCommander : MonoBehaviour {
 						+ "월" + List [Seq [SeqList[i]][0]].startTime [6].ToString () + List [Seq [SeqList[i]][0]].startTime [7].ToString () + "일"
 						+ List [Seq [SeqList[i]][0]].startTime [8].ToString () + List [Seq [SeqList[i]][0]].startTime [9].ToString () + ":"
 						+ List [Seq [SeqList[i]][0]].startTime [10] + List [Seq [SeqList[i]][0]].startTime [11] + " " +
-						AMPM (int.Parse ((List [Seq [SeqList[i]][0]].startTime [8]).ToString () + List [Seq [SeqList[i]][0]].startTime [9].ToString ())) + "경기";
+//						AMPM (int.Parse ((List [Seq [SeqList[i]][0]].startTime [8]).ToString () + List [Seq [SeqList[i]][0]].startTime [9].ToString ())) + 
+						"경기";
 				
 //				Debug.Log("text : "+Item1.transform.FindChild ("Time").FindChild ("Label").GetComponent<UILabel> ().text);
 				//Debug.Log (List [SeqList [i] [0]].startTime);

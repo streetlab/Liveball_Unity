@@ -5,6 +5,11 @@ public class TopMenu : MonoBehaviour {
 	public GameObject BlackBuleBar;
 	PresetListEvent presetListEvent;
 	HistoryListEvent HistoryEvent;
+
+	void Start(){
+
+	}
+
 	public void Button(){
 		int MenuStatus = LobbyMainCommander.MenuStatus;
 		AllBarDisable ();
@@ -35,12 +40,12 @@ public class TopMenu : MonoBehaviour {
 			transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").FindChild ("GiftButton").GetComponent<Gift> ().Off ();
 			transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Gift").gameObject.SetActive (false);
 
-			transform.parent.FindChild ("Sub").gameObject.SetActive (true);
+			transform.parent.FindChild ("Sub").gameObject.SetActive (false);
 			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSubInSub> ().DisableSub ();
 			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSub> ().ResetAddSub ();
 			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyAddSubInSub> ().ResetSubInSub ();
 			transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Top").FindChild("Sub").FindChild("BG_B").gameObject.SetActive(false);
-			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 		}
 		if (LobbyMainCommander.MenuStatus > 1) {
 			transform.parent.FindChild ("Sub").gameObject.SetActive (false);

@@ -38,7 +38,7 @@ public class IOSMgr : MonoBehaviour
 	#else
 	public void NotiReceived()
 	{
-		//		Debug.Log("AlertBody : "+UnityEngine.iOS.NotificationServices.remoteNotifications[0].alertBody);
+		Debug.Log("AlertBody : "+UnityEngine.iOS.NotificationServices.remoteNotifications[0].alertBody);
 		ICollection col = UnityEngine.iOS.NotificationServices.remoteNotifications[0].userInfo.Keys;
 		IEnumerator enu = col.GetEnumerator();
 		while(enu.MoveNext()){
@@ -58,9 +58,9 @@ public class IOSMgr : MonoBehaviour
 		//		dic.Add("type", type);
 		//		dic.Add("info", quizInfo);
 		
-		Debug.Log("NotiReceived : "+UtilMgr.OnPause);
-		if(!UtilMgr.OnPause)
-			QuizMgr.NotiReceived (notiInfo);
+//		Debug.Log("NotiReceived : "+UtilMgr.OnPause);
+//		if(!UtilMgr.OnPause)
+//			QuizMgr.NotiReceived (notiInfo);
 		
 		UnityEngine.iOS.NotificationServices.ClearRemoteNotifications();
 	}
@@ -83,6 +83,13 @@ public class IOSMgr : MonoBehaviour
 
 		if(gotToken)
 			return;
+
+		if(UnityEngine.iOS.NotificationServices.registrationError != null){
+			mMsg = "";
+			Debug.Log("token is "+mMsg);
+			gotToken = true;
+			mEventDelegate.Execute();
+		}
 		
 		if(UnityEngine.iOS.NotificationServices.deviceToken != null){
 //			string token = System.Text.Encoding.UTF8.GetString(UnityEngine.iOS.NotificationServices.deviceToken);
@@ -196,6 +203,12 @@ public class IOSMgr : MonoBehaviour
 			);
 		#endif
 
+	}
+
+	public static void SkipToken(){
+		Instance.mMsg = "";
+		Instance.gotToken = true;
+		Instance.mEventDelegate.Execute();
 	}
 
 	public static void InAppInit(string prodList, EventDelegate eventDelegate){

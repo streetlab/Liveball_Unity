@@ -395,6 +395,10 @@ public class UtilMgr : MonoBehaviour {
 		IsShowLoading = true;
 	}
 
+	public static void ShowLoading(){
+		ShowLoading(true);
+	}
+
 	public static void ShowLoading(bool unTouchable)
 	{
 		ShowLoading(unTouchable, null);

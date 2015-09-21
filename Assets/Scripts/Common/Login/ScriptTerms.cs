@@ -112,6 +112,8 @@ public class ScriptTerms : MonoBehaviour {
 			mBtnNext.GetComponent<UIButton>().SetState(UIButtonColor.State.Normal, true);
 			mBtnNext.transform.FindChild("Label").GetComponent<UILabel>().text = "다음";
 			mTglAll.GetComponent<UIToggle>().value = true;
+
+			NextClicked();
 		} else{
 			mBtnNext.GetComponent<UIButton>().SetState(UIButtonColor.State.Disabled, true);
 			mBtnNext.transform.FindChild("Label").GetComponent<UILabel>().text = "모든 약관에 동의해주세요";

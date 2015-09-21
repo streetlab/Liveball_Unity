@@ -15,8 +15,8 @@ public class Gift : MonoBehaviour {
 			transform.FindChild("Arrow").localScale = new Vector2(1,1);
 			transform.parent.FindChild("Scroll View").gameObject.SetActive(false);
 			transform.parent.FindChild("Shadow").gameObject.SetActive(false);
-			SubOnoff(true);
-			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Down");
+			SubOnoff(false);
+			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
 		} else {
 			//경품이 열림
 			Check = true;

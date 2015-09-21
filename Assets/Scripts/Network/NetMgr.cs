@@ -146,7 +146,12 @@ public class NetMgr : MonoBehaviour{
 		{
 			Debug.Log(www.error);
 			//            DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.", DialogueMgr.DIALOGUE_TYPE.Alert, null);
-			DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
+
+			if (Application.loadedLevelName.Equals ("SceneLogin")) {
+				DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
+				                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "게임 종료", ConnectHandlerForHttp);
+			} else
+				DialogueMgr.ShowDialogue("네트워크오류", "네트워크 연결이 불안정합니다.\n인터넷 연결을 확인 후 다시 시도해주세요.",
 			                         DialogueMgr.DIALOGUE_TYPE.YesNo, "재시도", "", "타이틀로 가기", ConnectHandlerForHttp);
 
 			Debug.Log(www.text);
@@ -161,7 +166,7 @@ public class NetMgr : MonoBehaviour{
 	
 	void ConnectHandlerForHttp(DialogueMgr.BTNS btn){
 		if(btn == DialogueMgr.BTNS.Btn1){
-		Debug.Log("ReTry");
+			Debug.Log("ReTry");
 		
 			WWW www;
 			if(mReqParam !=null){
@@ -175,8 +180,10 @@ public class NetMgr : MonoBehaviour{
 			//            mWWW = null;
 			//            mBaseEvent = null;
 		} else{
-			//            Application.Quit();
-			AutoFade.LoadLevel("SceneLogin");
+			if (Application.loadedLevelName.Equals ("SceneLogin")) {
+				Application.Quit();
+			} else
+				AutoFade.LoadLevel("SceneLogin");
 		}
 		
 	}

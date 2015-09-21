@@ -108,12 +108,13 @@ public class ScriptGameInfo : MonoBehaviour {
 		mTopState = TopState.Match;
 		mBtnMatchTop.transform.FindChild("Label").GetComponent<UILabel>().color = Color.white;
 		mBtnMatchTop.transform.FindChild("Bar").gameObject.SetActive(true);
-		mSub1.SetActive(true);
+//		mSub1.SetActive(true);
+		mSub1.SetActive(false);
 
-		if(mSub1State == Sub1State.InfoMatch)
+//		if(mSub1State == Sub1State.InfoMatch)
 			InfoMatchClicked();
-		else 
-			RankTeamClicked();
+//		else 
+//			RankTeamClicked();
 
 		foreach(UIToggle toggle in mToggles.GetComponentsInChildren<UIToggle>()){
 			if(toggle.name.Equals(mInfoMatchTeamCode)){
@@ -132,11 +133,12 @@ public class ScriptGameInfo : MonoBehaviour {
 		mTopState = TopState.Player;
 		mBtnPlayerTop.transform.FindChild("Label").GetComponent<UILabel>().color = Color.white;
 		mBtnPlayerTop.transform.FindChild("Bar").gameObject.SetActive(true);
-		mSub2.SetActive(true);
+//		mSub2.SetActive(true);
+		mSub2.SetActive(false);
 
-		if(mSub2State == Sub2State.History)
-			HistoryClicked();
-		else
+//		if(mSub2State == Sub2State.History)
+//			HistoryClicked();
+//		else
 			LineupClicked();
 
 		foreach(UIToggle toggle in mToggles.GetComponentsInChildren<UIToggle>()){

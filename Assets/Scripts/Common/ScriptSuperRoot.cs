@@ -21,16 +21,16 @@ public class ScriptSuperRoot : MonoBehaviour {
 
 	void Awake(){
 //		DontDestroyOnLoad(this);
-		if (Application.loadedLevelName.Equals ("SceneMain")) {
-			if(ScriptMainTop.LandingState==4){
-				if(UserMgr.UserInfo!=null){
-				string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
-				TeamColor = TeamColor.Replace("#","");
-				transform.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().SetTeamColor(TeamColor);
-				Debug.Log("SetTeamColor!");
-				}
-			}
-		}
+//		if (Application.loadedLevelName.Equals ("SceneMain")) {
+//			if(ScriptMainTop.LandingState==4){
+//				if(UserMgr.UserInfo!=null){
+//				string TeamColor = UserMgr.UserInfo.favoBB.teamColor;
+//				TeamColor = TeamColor.Replace("#","");
+//				transform.FindChild("GameObject").FindChild("TF_Landing").GetComponent<LandingManager>().SetTeamColor(TeamColor);
+//				Debug.Log("SetTeamColor!");
+//				}
+//			}
+//		}
 	
 		if(GetComponent<AudioSource>() == null){
 			gameObject.AddComponent<AudioSource>();

@@ -22,14 +22,15 @@ public class LobbyTopCommander : MonoBehaviour {
 	}
 
 	public void CreateTop(){
-
+		Debug.Log("CreateTop");
 
 		if (transform.FindChild("Top")==null) {
 			GameObject Top = new GameObject ("Top");
 			Top.transform.parent = transform;
 			Top.transform.localScale = new Vector3 (1, 1, 1);
 			Top.transform.localPosition = new Vector2 (-360, 640);
-			Top.AddComponent<UIPanel>().depth = 4;
+			Debug.Log("depth 4 - 1 safasfasfasdfsfsdfsafsdfsafsadfsfsfsfasfsfsfsf");
+			Top.AddComponent<UIPanel>().depth = 6;
 			for (int i = 0; i<mTopMenuName.Length; i++) {
 				GameObject Temp = (GameObject)Instantiate (mTopTemp, new Vector3 (0, 0, 0), new Quaternion (0, 0, 0, 0));
 				Temp.transform.parent = Top.transform;
@@ -111,6 +112,7 @@ public class LobbyTopCommander : MonoBehaviour {
 	}
 
 	public void CreateTop2(){
+		Debug.Log("CreateTop2");
 		
 		for (int a = 0; a < Mathf.Infinity; a++) {
 			if (transform.FindChild ("Top " + a.ToString()) == null) {
@@ -118,7 +120,8 @@ public class LobbyTopCommander : MonoBehaviour {
 				Top.transform.parent = transform;
 				Top.transform.localScale = new Vector3 (1, 1, 1);
 				Top.transform.localPosition = new Vector2 (-360, 640);
-				Top.AddComponent<UIPanel> ().depth = 4;
+				Debug.Log("depth 4 - 2safsfsfsfsfsafdfasdfasfsdfsadfsdfsdfsdfsfsdfsfsfsdfsdfsf");
+				Top.AddComponent<UIPanel> ().depth = 6;
 				for (int i = 0; i<mTopMenuName.Length; i++) {
 					GameObject Temp = (GameObject)Instantiate (mTopTemp, new Vector3 (0, 0, 0), new Quaternion (0, 0, 0, 0));
 					Temp.transform.parent = Top.transform;

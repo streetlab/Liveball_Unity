@@ -295,19 +295,29 @@ public class ScriptTitle : MonoBehaviour {
 			AndroidMgr.RegistGCM(new EventDelegate(this, "SetGCMId"));
 		} else if (Application.platform == RuntimePlatform.IPhonePlayer) {
 			mLoginInfo.osType = 2;
-			if(CheckPushAgree()){
-				mLoginInfo.memUID = "";
-				//                NetMgr.DoLogin (mLoginInfo, mLoginEvent);
-				SetGCMId();
-			} else{
-				IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
-			}
+//			if(CheckPushAgree()){
+//				mLoginInfo.memUID = "";
+//				//                NetMgr.DoLogin (mLoginInfo, mLoginEvent);
+//				SetGCMId();
+//			} else{
+			IOSMgr.RegistAPNS(new EventDelegate(this, "SetGCMId"));
+			//waiting 4 secs
+			StartCoroutine(WaitingToken());
+//			}
 		} else if(Application.platform == RuntimePlatform.OSXEditor){
 			mLoginInfo.osType = 1;
 			mLoginInfo.memUID = "";
 			//            NetMgr.DoLogin (mLoginInfo, mLoginEvent);
 			SetGCMId();
 		}
+	}
+
+	IEnumerator WaitingToken(){
+		UtilMgr.ShowLoading(true);
+		yield return new WaitForSeconds(3f);
+		Debug.Log("Skip Token");
+		IOSMgr.SkipToken();
+
 	}
 	
 	public void DialogueExitHandler(DialogueMgr.BTNS btn){
@@ -441,7 +451,6 @@ public class ScriptTitle : MonoBehaviour {
 		if(Application.platform == RuntimePlatform.IPhonePlayer){
 			EventDelegate eventd = new EventDelegate(this, "GotUidWithMember");
 			IOSMgr.GetUID("", eventd);
-			Init();
 		} else{
 			GotUidWithMember();
 		}
@@ -453,7 +462,7 @@ public class ScriptTitle : MonoBehaviour {
 			deviceID = IOSMgr.GetMsg();
 		} else{
 			deviceID = SystemInfo.deviceUniqueIdentifier;
-					//	deviceID = "test10";
+//						deviceID = "test12";
 
 		}
 		mDeviceEvent = new CheckMemberDeviceEvent(new EventDelegate(this, "MemberClicked2"));
@@ -578,6 +587,7 @@ public class ScriptTitle : MonoBehaviour {
 	
 	public void SetGCMId()
 	{
+		UtilMgr.DismissLoading();
 		#if(UNITY_EDITOR)
 		mLoginInfo.memUID = AndroidMgr.GetMsg();
 		mLoginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
@@ -587,6 +597,7 @@ public class ScriptTitle : MonoBehaviour {
 		mLoginInfo.DeviceID = SystemInfo.deviceUniqueIdentifier;
 		DoLogin();
 		#else
+		StopCoroutine(WaitingToken());
 		mLoginInfo.memUID = IOSMgr.GetMsg();
 		EventDelegate eventd = new EventDelegate(this, "DoLogin");
 		IOSMgr.GetUID("", eventd);
@@ -639,7 +650,6 @@ public class ScriptTitle : MonoBehaviour {
 	int Count = 0;
 	int count = 0;
 	bool TwoCheck = true;
-	//경품 이미지 체크
 	void Getdata(){
 		try{
 			UIScrollView._CoverFlowCount = LobbyGiftCommander.mGift.gift.Count;
