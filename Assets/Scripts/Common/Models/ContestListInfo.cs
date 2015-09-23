@@ -283,5 +283,26 @@ public class ContestListInfo {
 			_hTeamName = value;
 		}
 	}
+
+	List<RankRewardInfo> _rankReward;
 	
+	public List<RankRewardInfo> rankReward {
+		get {
+			return _rankReward;
+		}
+		set {
+			_rankReward = value;
+		}
+	}
+
+	public string GetRewardText(){
+		string value = "";
+		if(rankReward == null)
+			return value;
+
+		foreach(RankRewardInfo info in rankReward){
+			value += info.rankDesc + " : " + info.rewardDesc + "\n";
+		}
+		return value;
+	}
 }

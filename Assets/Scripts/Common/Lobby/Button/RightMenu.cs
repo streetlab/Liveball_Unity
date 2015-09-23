@@ -31,15 +31,17 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 			transform.root.FindChild ("Setting").GetComponent<ScriptSettings>().Init();
-			
-		}else if(names == "burger_menu_002"){
-			AllOff();
-			float Y = transform.root.FindChild ("Camera").localPosition.y;
-			
-			transform.root.FindChild ("TF_Items").gameObject.SetActive(true);
-			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
-			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
-			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
+
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("Home").GetComponent<BotMenu>()
+				.SetHighlight(BotMenu.ActivityName.Setting);
+//		}else if(names == "burger_menu_002"){
+//			AllOff();
+//			float Y = transform.root.FindChild ("Camera").localPosition.y;
+//			
+//			transform.root.FindChild ("TF_Items").gameObject.SetActive(true);
+//			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
+//			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+//			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 		}else if(names == "burger_menu_005"){
 			AllOff();
 			transform.root.FindChild("Item").GetComponent<ScriptItemMiddle>().Starts();
@@ -50,10 +52,13 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("Home").GetComponent<BotMenu>()
+				.SetHighlight(BotMenu.ActivityName.Inventory);
 		} else if(names == "burger_menu_004"){
 			ScriptMainTop.OpenBettingCheck = true;
 			Application.OpenURL("https://game.nanoo.so/liveball");
 		}else if(names == "burger_menu_003"){
+			AllOff();
 			float Y = transform.root.FindChild ("Camera").localPosition.y;
 			transform.root.FindChild("Ranking").gameObject.SetActive(true);
 			transform.root.FindChild("Ranking").GetComponent<RankingCommander>().List01();
@@ -61,6 +66,8 @@ public class RightMenu : MonoBehaviour {
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
 			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 
+			transform.root.FindChild("Scroll").FindChild("Bot").FindChild("Home").GetComponent<BotMenu>()
+				.SetHighlight(BotMenu.ActivityName.Ranking);
 		}
 	}
 	public void OutputInvenOpen(){
@@ -75,11 +82,13 @@ public class RightMenu : MonoBehaviour {
 		transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
 	}
 	void AllOff(){
-		transform.root.FindChild("Ranking").gameObject.SetActive(false);
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
+		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("BtnPost").FindChild ("TF_Post").gameObject.SetActive (false);
+
+		transform.root.FindChild ("Ranking").gameObject.SetActive(false);
 		transform.root.FindChild ("Setting").gameObject.SetActive(false);
 		transform.root.FindChild ("TF_Items").gameObject.SetActive(false);
 		transform.root.FindChild ("Item").gameObject.SetActive(false);
-		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
-		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("BtnPost").FindChild ("TF_Post").gameObject.SetActive (false);
+		transform.root.FindChild ("RankReward").gameObject.SetActive(false);
 	}
 }

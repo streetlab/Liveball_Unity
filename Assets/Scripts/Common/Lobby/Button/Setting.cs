@@ -5,6 +5,8 @@ public class Setting : MonoBehaviour {
 	public bool IsLeaving = false;
 
 	public void Button(){
+		gameObject.SetActive(false);
+
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
 
 		if(IsLeaving){

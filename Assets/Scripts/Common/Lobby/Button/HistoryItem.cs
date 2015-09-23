@@ -2,8 +2,13 @@
 using System.Collections;
 
 public class HistoryItem : MonoBehaviour {
+
+	public void Delete(){
+
+	}
+
 	public void Button(){
-		string Title = transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text;
+		string Title = transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().text;
 		string MyRank = transform.FindChild ("BG").FindChild ("myrank").GetComponent<UILabel> ().text;
 		string Tpreset = transform.FindChild ("BG").FindChild ("totalpreset").GetComponent<UILabel> ().text;
 		string Tentry = transform.FindChild ("BG").FindChild ("totalentry").GetComponent<UILabel> ().text;

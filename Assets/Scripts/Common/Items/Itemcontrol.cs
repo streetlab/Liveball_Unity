@@ -385,10 +385,12 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIAB.purchaseProduct(itemcode);//, RequestIAP.Response.data.purchaseKey );
 			//}
 		//}
+		UtilMgr.ShowLoading();
 		#else
 //		orderNo = RequestIAP.Response.data.orderNo;
 		IOSMgr.BuyItem(itemcode);
 		#endif
+
 	}
 
 	void addruby(){

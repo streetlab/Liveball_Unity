@@ -11,6 +11,7 @@ public class ScriptLobbyRoot : ScriptSuperRoot {
 		transform.FindChild("Item").gameObject.SetActive(false);
 		transform.FindChild("Ranking").gameObject.SetActive(false);
 		transform.FindChild("TF_Items").gameObject.SetActive(false);
+		transform.FindChild("RankReward").gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame

@@ -2,88 +2,123 @@
 using System.Collections;
 
 public class BotMenu : MonoBehaviour {
+	public enum ActivityName{
+		Home,
+		MatchInfo,
+		Store,
+		Post,
+		Setting,
+		Ranking,
+		Inventory,
+		Menu,
+		etc
+	}
+
+	public static ActivityName mActName = ActivityName.Home;
+	static Color COLOR_UNSELECTED = new Color(114f/255f, 107f/255f, 113f/255f);
+	static Color COLOR_SELECTED = new Color(1f, 1f, 1f);
+
+	void Start(){
+		SetHighlight(ActivityName.Home);
+	}
+
 	string[] S = {"Home","Ball","Challenge","Post","---"};
 	public GameObject mScroll;
 	// Use this for initialization
 	//하단메뉴 버튼
 	public void Button(){
+		Debug.Log (this.name);
+		switch (this.name) {
+		case "Home": //홈
+			if(mActName.Equals(ActivityName.Home))
+				return;
 
-
-		Debug.Log (GetIndex (this.name));
-		switch (GetIndex (this.name)) {
-		case 0:
-			//홈
-			Debug.Log("Main On");
 			if(mScroll.transform.FindChild("Main")!=null){
 				AllOff();
 				Off();
 				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
-			mScroll.transform.FindChild("Main").gameObject.SetActive(true);
+				mScroll.transform.FindChild("Main").gameObject.SetActive(true);
 			}else{
 				AutoFade.LoadLevel ("SceneLobby", 0f, 1f);
 			}
-			break;
-		case 1:
 
-			//경기경보
+			SetHighlight(ActivityName.Home);
+			break;
+		case "Ball": //경기경보
+			if(mActName.Equals(ActivityName.MatchInfo))
+				return;
+
 			AllOff();
 			Off();
 			if(Application.loadedLevelName.Equals ("SceneMain 1")){
-			if(mScroll.transform.FindChild("GameInfo").gameObject.activeSelf){
-				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
-				if(Application.loadedLevelName.Equals ("SceneMain 1")){
-					transform.root.FindChild("Scroll").FindChild("ContestIn").localPosition = new Vector3(0,0,0);
+				if(mScroll.transform.FindChild("GameInfo").gameObject.activeSelf){
+					mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
+					if(Application.loadedLevelName.Equals ("SceneMain 1")){
+						transform.root.FindChild("Scroll").FindChild("ContestIn").localPosition = new Vector3(0,0,0);
+					}
+				}else{
+					if(Application.loadedLevelName.Equals ("SceneMain 1")){
+						transform.root.FindChild("Scroll").FindChild("ContestIn").localPosition = new Vector3(-720,0,0);
+					}
+					mScroll.transform.FindChild("GameInfo").gameObject.SetActive(true);
+					mScroll.transform.FindChild("GameInfo").GetComponent<ScriptGameInfo>().Init();
 				}
 			}else{
-
-				if(Application.loadedLevelName.Equals ("SceneMain 1")){
-					transform.root.FindChild("Scroll").FindChild("ContestIn").localPosition = new Vector3(-720,0,0);
-				}
-			mScroll.transform.FindChild("GameInfo").gameObject.SetActive(true);
-			mScroll.transform.FindChild("GameInfo").GetComponent<ScriptGameInfo>().Init();
-				}
-			}else{
-				AllOff();
-				Off();
+//				AllOff();
+//				Off();
 				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(false);
 				mScroll.transform.FindChild("GameInfo").gameObject.SetActive(true);
 				mScroll.transform.FindChild("GameInfo").GetComponent<ScriptGameInfo>().Init();
 
 			}
 
-			GetComponent<UIButton>().enabled = true;
+			SetHighlight(ActivityName.MatchInfo);
 			break;
-		case 2:
-			//도전과제
+		case "Challenge": //Store
+			if(mActName.Equals(ActivityName.Store))
+				return;
+
 			AllOff();
-		
+			
+			transform.root.FindChild ("TF_Items").gameObject.SetActive(true);
+//			transform.root.FindChild ("Camera").localPosition = new Vector3(0,Y);
+//			transform.root.FindChild("Scroll").FindChild ("RightMenu").GetComponent<BoxCollider2D> ().enabled = false;
+//			transform.root.FindChild("Scroll").FindChild ("RightMenu").FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;
+//			mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
+//			mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
+//			mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;
+//			mScroll.transform.FindChild("Bot").FindChild("---").GetComponent<UIButton>().enabled = true;
+//			mScroll.transform.FindChild("Bot").FindChild("Post").GetComponent<UIButton>().enabled = true;
+//			GetComponent<UIButton>().enabled = false;
+//			if(transform.FindChild("Scroll View").gameObject.activeSelf){
+//				transform.FindChild("Scroll View").gameObject.SetActive(false);
+//			}else{
+//				transform.FindChild("Scroll View").gameObject.SetActive(true);
+//			}
 
-			mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
-			mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
-			mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;
-			mScroll.transform.FindChild("Bot").FindChild("---").GetComponent<UIButton>().enabled = true;
-			mScroll.transform.FindChild("Bot").FindChild("Post").GetComponent<UIButton>().enabled = true;
-			GetComponent<UIButton>().enabled = false;
-			if(transform.FindChild("Scroll View").gameObject.activeSelf){
-				transform.FindChild("Scroll View").gameObject.SetActive(false);
-			}else{
-				transform.FindChild("Scroll View").gameObject.SetActive(true);
-			}
+			SetHighlight(ActivityName.Store);
+			break;
+		case "BtnPost": //Post
+			if(mActName.Equals(ActivityName.Post))
+				return;
+
+			AllOff();
+			GetComponent<PostButton>().on();
+
+			SetHighlight(ActivityName.Post);
 
 			break;
-		case 3:
-			break;
-		case 4:
-			//우측메뉴
+		case "---": //우측메뉴
 			//Debug.Log("4");
 			PositionCheck();
-			GetComponent<UIButton>().enabled = true;
+//			GetComponent<UIButton>().enabled = true;
+//			SetHighlight(ActivityName.Menu);
 			break;
-		case 5:
-		//	Debug.Log("NON");
-			ScrollViewOff();
-
-			break;
+//		case 5:
+//		//	Debug.Log("NON");
+//			ScrollViewOff();
+//
+//			break;
 		}
 	}
 
@@ -104,14 +139,14 @@ public class BotMenu : MonoBehaviour {
 			mScroll.transform.FindChild ("Main").gameObject.SetActive (false);
 		}
 
-		mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
-		mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
-		mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;
-		mScroll.transform.FindChild("Bot").FindChild("---").GetComponent<UIButton>().enabled = true;
-		mScroll.transform.FindChild("Bot").FindChild("Post").GetComponent<UIButton>().enabled = true;
-		transform.root.FindChild ("Ranking").gameObject.SetActive (false);
-		
-		GetComponent<UIButton>().enabled = false;
+//		mScroll.transform.FindChild("Bot").FindChild("Home").GetComponent<UIButton>().enabled = true;
+//		mScroll.transform.FindChild("Bot").FindChild("Ball").GetComponent<UIButton>().enabled = true;
+//		mScroll.transform.FindChild("Bot").FindChild("Challenge").GetComponent<UIButton>().enabled = true;
+//		mScroll.transform.FindChild("Bot").FindChild("---").GetComponent<UIButton>().enabled = true;
+//		mScroll.transform.FindChild("Bot").FindChild("Post").GetComponent<UIButton>().enabled = true;
+//		transform.root.FindChild ("Ranking").gameObject.SetActive (false);
+//		
+//		GetComponent<UIButton>().enabled = false;
 	}
 	void ScrollViewOff(){
 		//transform.root.FindChild("Main").FindChild("Gift").FindChild("Scroll View").gameObject.SetActive(false);
@@ -157,8 +192,52 @@ public class BotMenu : MonoBehaviour {
 		}
 		transform.root.FindChild("Camera").localPosition = new Vector3(0,Y);
 	}
+
 	void AllOff(){
 		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("Challenge").FindChild ("Scroll View").gameObject.SetActive (false);
 		transform.root.FindChild ("Scroll").FindChild ("Bot").FindChild ("BtnPost").FindChild ("TF_Post").gameObject.SetActive (false);
+
+		transform.root.FindChild("TF_Items").gameObject.SetActive(false);
+		transform.root.FindChild("Setting").gameObject.SetActive(false);
+		transform.root.FindChild("Item").gameObject.SetActive(false);
+		transform.root.FindChild("Ranking").gameObject.SetActive(false);
+		transform.root.FindChild("RankReward").gameObject.SetActive(false);
+	}
+
+	public void SetHighlight(ActivityName name){
+		mActName = name;
+		transform.parent.FindChild("Home").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("Home").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("Ball").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("Ball").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("Challenge").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("Challenge").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("BtnPost").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("BtnPost").FindChild("Background").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("---").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+		transform.parent.FindChild("---").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+
+		switch(mActName){
+		case ActivityName.Home:
+			transform.parent.FindChild("Home").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("Home").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.MatchInfo:
+			transform.parent.FindChild("Ball").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("Ball").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.Store:
+			transform.parent.FindChild("Challenge").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("Challenge").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.Post:
+			transform.parent.FindChild("BtnPost").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("BtnPost").FindChild("Background").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+//		case ActivityName.Menu:
+//			transform.parent.FindChild("---").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+//			transform.parent.FindChild("---").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+//			break;
+		}
 	}
 }

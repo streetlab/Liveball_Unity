@@ -248,7 +248,7 @@ public class QuizMgr : MonoBehaviour {
 					Debug.Log("result");
 					if(Instance.mMainTop != null){
 						Debug.Log("GetSimpleResult");
-						Instance.mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(int.Parse(msgInfo.data.quizListSeq));
+						Instance.GetSimpleResult(msgInfo);
 					}
 				} else{
 					NeedsDetailInfo = false;
@@ -327,5 +327,20 @@ public class QuizMgr : MonoBehaviour {
 		NotiReceived(msgInfo);		 
 	}
 
+	void GetSimpleResult(SocketMsgInfo msgInfo){
+		int quizListSeq = int.Parse(msgInfo.data.quizListSeq);
+		StartCoroutine(RoutineSimpleResult(quizListSeq));
 
+	}
+
+	IEnumerator RoutineSimpleResult(int quizListSeq){
+		float waitingSeconds = 0f;
+		string watching = PlayerPrefs.GetString(Constants.PrefSetting_watching_method);
+		if(watching != null
+		   && watching.Equals("INTERNET"))
+			waitingSeconds = 15f;
+
+		yield return new WaitForSeconds(waitingSeconds);
+		mMainTop.GetComponent<ScriptMainTop>().GetSimpleResult(quizListSeq);
+	}
 }

@@ -117,7 +117,8 @@ public class LineupControl : MonoBehaviour {
 //			T11.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [0].teamName;
 //			T22.GetComponent<UILabel> ().text = UserMgr.Schedule.extend [1].teamName;
 //		}
-		
+
+		transform.FindChild ("Scroll View").GetComponent<UIScrollView>().ResetPosition();
 	}
 	
 	void setarrray(){

@@ -19,16 +19,16 @@ public class PostButton : MonoBehaviour {
 	}
 
 	public void on(){
-		if (transform.FindChild ("TF_Post").gameObject.activeSelf) {
-			transform.FindChild ("TF_Post").gameObject.SetActive (false);
-		} else {
+//		if (transform.FindChild ("TF_Post").gameObject.activeSelf) {
+//			transform.FindChild ("TF_Post").gameObject.SetActive (false);
+//		} else {
 			UtilMgr.AddBackEvent (new EventDelegate (this, "BackPressed"));
 			Mail = new GetMailEvent (new EventDelegate (this, "Setdata"));
 			NetMgr.GetUserMailBox (UserMgr.UserInfo.memSeq, Mail);
-		}
-	
-
-
+//		}
+//	
+//
+//
 	}
 	public void PowerOn(){
 		transform.FindChild ("TF_Post").gameObject.SetActive (false);

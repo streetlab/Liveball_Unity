@@ -73,6 +73,10 @@ public class Contest : MonoBehaviour {
 		}
 	}
 
+	public void SetPreset(){
+		GGPL = new GetGamePresetLineupEvent(new EventDelegate(this,"getlineup"));
+		NetMgr.GetGamePresetLineup(int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text),GGPL);
+	}
 
 	public void button(){
 		//컨테스트 클릭시 
@@ -84,29 +88,50 @@ public class Contest : MonoBehaviour {
 			if (UserMgr.PresetList [a].contestSeq == int.Parse (transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text)) {
 				Debug.Log ("UserMgr.PresetList[a].contestSeq : " + UserMgr.PresetList [a].contestSeq);
 				presetCount += 1;
-				
 			}
 		}
+
+		int totalPreset = 0;
+		int totalEntry = 0;
+		foreach(ContestListInfo contest in UserMgr.ContestList){
+			if (contest.contestSeq == int.Parse (transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text)) {
+				totalPreset = contest.totalPreset;
+				totalEntry = contest.totalEntry;
+				break;
+			}
+		}
+
 		if (int.Parse (transform.FindChild ("BG").FindChild ("MultiEntry").GetComponent<UILabel> ().text) == presetCount) {
-			DialogueMgr.ShowDialogue ("멀티 엔트리 등록취소", "멀티 엔트리 최대 가능 개수 :"+transform.FindChild ("BG").FindChild ("MultiEntry").GetComponent<UILabel> ().text+" 개\n이 컨테스트에 등록가능한 \n멀티엔트리 개수를 초과하였습니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
-		
-		
+//			DialogueMgr.ShowDialogue ("멀티 엔트리 등록취소", "멀티 엔트리 최대 가능 개수 :"+transform.FindChild ("BG").FindChild ("MultiEntry").GetComponent<UILabel> ().text+" 개\n이 컨테스트에 등록가능한 \n멀티엔트리 개수를 초과하였습니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
+			DialogueMgr.ShowDialogue ("참여 확인", "이미 참여하셨습니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
+		} else if(totalPreset >= totalEntry){
+			DialogueMgr.ShowDialogue ("참여 확인", "참여인원이 가득 찼습니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
 		} else {
 			//컨테스트 등록이 가능할 시 
-			try{
-				//기존에 해당 게임의 라인업을 불러온다
-				List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
-				SetPresettingSetting();
-			
-			}catch{
+//			try{
+//				//기존에 해당 게임의 라인업을 불러온다
+//				List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
+//				SetPresettingSetting();
+//			
+//			}catch{
 				//기존에 해당 게임의 라인업이 없으면 새로 등록
-			GGPL = new GetGamePresetLineupEvent(new EventDelegate(this,"getlineup"));
-				NetMgr.GetGamePresetLineup(int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text),GGPL);
+				int contestSeq = int.Parse (transform.FindChild ("BG").FindChild ("ContestSeq").GetComponent<UILabel> ().text);
+				foreach(ContestListInfo contest in UserMgr.ContestList){
+					if(contest.contestSeq == contestSeq){
+						transform.root.FindChild("RankReward").gameObject.SetActive(true);
+						transform.root.FindChild("RankReward").GetComponent<ScriptRankReward>().Init (contest, GetComponent<Contest>());
+						return;
+					}
+				}
+				DialogueMgr.ShowDialogue("error", "cannot find a correct sequence", DialogueMgr.DIALOGUE_TYPE.Alert, null);
+//				GGPL = new GetGamePresetLineupEvent(new EventDelegate(this,"getlineup"));
+//				NetMgr.GetGamePresetLineup(int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text),GGPL);
 		
-			}
+//			}
 
-			}
+		}
 	}
+
 	int count= 0;
 	void getlineup(){
 		count = 0;
@@ -120,8 +145,6 @@ public class Contest : MonoBehaviour {
 
 			}
 		} else {
-		
-
 			try{
 				UserMgr.LineUpList.Add (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text,
 				                        GGPL.Response.data);
@@ -129,21 +152,23 @@ public class Contest : MonoBehaviour {
 				Debug.Log("Same Line Up");
 			}
 			List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
-			SetPresettingSetting ();
-			
-
-
-
-
+			SetPresettingSetting ();		
 		}
+	}
 
-
-
-
-
+	public void SetPresettingSetting2(){
+		try{
+			//기존에 해당 게임의 라인업을 불러온다
+			List= UserMgr.LineUpList[transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text];
+			SetPresettingSetting();		
+		}catch{
+			//기존에 해당 게임의 라인업이 없으면 새로 등록
+			GGPL = new GetGamePresetLineupEvent(new EventDelegate(this,"getlineup"));
+			NetMgr.GetGamePresetLineup(int.Parse (transform.FindChild ("BG").FindChild ("gameSeq").GetComponent<UILabel> ().text),GGPL);
 		}
+	}
 
-		void SetPresettingSetting(){
+	void SetPresettingSetting(){
 		//프리셋 등록 관련 설정 부
 		string Ateam = UtilMgr.GetTeamCode (transform.FindChild ("BG").FindChild("Lteam").GetComponent<UILabel>().text.Replace("[b]",""));
 		string Hteam = UtilMgr.GetTeamCode (transform.FindChild ("BG").FindChild("Rteam").GetComponent<UILabel>().text.Replace("[b]",""));
@@ -174,6 +199,7 @@ public class Contest : MonoBehaviour {
 		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Bot").FindChild ("Batting").gameObject.SetActive (false);
 		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Bot").FindChild ("Sumit").gameObject.SetActive (false);
 		transform.parent.parent.parent.FindChild ("PreSetting").FindChild ("Mid").FindChild ("Scroll View").GetComponent<UIScrollView> ().ResetPosition ();
+
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Mode = "Add";
 		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().SetTeamName (transform.
 		                                                                                                          FindChild ("BG").FindChild ("Lteam").GetComponent<UILabel> ().text,
@@ -189,9 +215,10 @@ public class Contest : MonoBehaviour {
 		transform.parent.parent.parent.FindChild ("Top").FindChild ("Sub").gameObject.SetActive (false);
 		transform.parent.parent.parent.FindChild ("Top").FindChild (transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent
 		                                                            <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = false;
-		
 
-		}
+//		transform.parent.parent.parent.FindChild ("PreSetting").GetComponent<PreSettingCommander> ().Mode = "Update";
+
+	}
 
 	IEnumerator GetImage(WWW www, GamePresetLineupInfo index)
 	{

@@ -46,13 +46,13 @@ public class PresetContestCommander : MonoBehaviour {
 	public void CreatItem(List<PresetListInfo> List){
 		//프리셋(라이브) 리스트 생성
 		Debug.Log ("UserMgr.ContestStatus : " + UserMgr.ContestStatus);
-		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
-			.GetComponent<UILabel> ().text = List.Count.ToString();
+//		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
+//			.GetComponent<UILabel> ().text = List.Count.ToString();
 		if (UserMgr.ContestStatus == 2) {
 			//라이브
 
-			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
-				.GetComponent<UILabel> ().text = "라이브";
+//			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
+//				.GetComponent<UILabel> ().text = "라이브";
 	
 
 			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSetting").gameObject.SetActive (false);
@@ -98,10 +98,31 @@ public class PresetContestCommander : MonoBehaviour {
 						List [Seq [SeqList [i]] [0]].startTime [4].ToString () + List [Seq [SeqList [i]] [0]].startTime [5].ToString ()
 						+ "월" + List [Seq [SeqList [i]] [0]].startTime [6].ToString () + List [Seq [SeqList [i]] [0]].startTime [7].ToString () + "일"
 						+ List [Seq [SeqList [i]] [0]].startTime [8].ToString () + List [Seq [SeqList [i]] [0]].startTime [9].ToString () + ":"
-						+ List [Seq [SeqList [i]] [0]].startTime [10] + List [Seq [SeqList [i]] [0]].startTime [11] + " " +
+						+ List [Seq [SeqList [i]] [0]].startTime [10] + List [Seq [SeqList [i]] [0]].startTime [11];
 //						AMPM (int.Parse ((List [Seq [SeqList [i]] [0]].startTime [8]).ToString () + List [Seq [SeqList [i]] [0]].startTime [9].ToString ())) + 
-							"경기";
-				
+//							"경기";
+
+					UILabel lblStatus = Item1.transform.FindChild("Status").FindChild("Label").GetComponent<UILabel>();
+					UILabel lblGuide = Item1.transform.FindChild("Guide").FindChild("Label").GetComponent<UILabel>();
+					UISprite sprGuide = Item1.transform.FindChild("Guide").FindChild("Sprite").GetComponent<UISprite>();
+					if(List [Seq [SeqList [i]] [0]].contestStatus == 1){
+						lblStatus.text = "[경기 시작 전]";
+						lblStatus.color = Color.white;
+						lblGuide.text = "경기 예측";
+						lblGuide.color = new Color(149f/ 255f, 131f/ 255f, 147f/255f);
+						sprGuide.color = Color.white;
+					} else if(List [Seq [SeqList [i]] [0]].contestStatus == 2){
+						lblStatus.text = "[경기 진행 중]";
+						lblStatus.color = Color.yellow;
+						lblGuide.text = "경기 입장";
+						lblGuide.color = new Color(66f/255f, 51f/255f, 64f/255f);
+						sprGuide.color = Color.yellow;
+					} else{
+						lblStatus.text = "[경기 종료]";
+						lblStatus.color = Color.white;
+						Item1.transform.FindChild("Guide").gameObject.SetActive(false);
+					}
+
 
 					Item1.transform.FindChild ("LTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [0]].aTeamName;
 					Item1.transform.FindChild ("RTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [0]].hTeamName;
@@ -126,9 +147,6 @@ public class PresetContestCommander : MonoBehaviour {
 					Item1.name = "Item " + i.ToString ();
 					
 					for (int a = 0; a<Seq [SeqList[i]].Count; a++) {
-						
-						
-						
 						//라이브(프리셋) 패널
 						GameObject Item2 = (GameObject)Instantiate (LiveContestItem);
 						Item2.transform.parent = Item1.transform;
@@ -137,26 +155,50 @@ public class PresetContestCommander : MonoBehaviour {
 						Item2.transform.localPosition = new Vector3 (0, Y, 0);
 						Item2.transform.FindChild ("BG").FindChild ("presetSeq").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [a]].presetSeq.ToString ();
 						Item2.transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [a]].contestSeq.ToString ();
-						Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].contestName;
-						//					Debug.Log(Item2.transform.FindChild ("Entry").GetChild(0).name);
-						//					Debug.Log(Item2.transform.FindChild ("Entry").GetChild(1).name);
-						//					Debug.Log(List [SeqList [i] [a]].totalPreset.ToString ());
-						//					Debug.Log(List [SeqList [i] [a]].totalEntry.ToString ());
+						Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].contestName;
+
 						Item2.transform.FindChild ("Entry").FindChild ("entryentry").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].totalPreset.ToString () + " / " + List [Seq [SeqList [i]] [a]].totalEntry.ToString ();
-						Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].contestName;
+//						Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].contestName;
 						Item2.transform.FindChild ("Cost").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].entryFee.ToString ();
+
+						if (List [Seq [SeqList [i]] [a]].contestType == 1) {
+							Item2.transform.FindChild("Ranking").FindChild("value").GetComponent<UILabel>().text
+								= "[b]50 / 50s";
+						} else {
+							Item2.transform.FindChild("Ranking").FindChild("value").GetComponent<UILabel>().text
+								= "[b]Ranking";
+						}
+						
+						if (List [Seq [SeqList [i]] [a]].rewardItem < 100) {
+							Item2.transform.FindChild("Product").FindChild("product").GetComponent<UILabel>().text
+								= "[b]" + List[Seq[SeqList[i]][a]].itemName;
+							Item2.transform.FindChild("Product").FindChild("value").GetComponent<UILabel>().text
+								= "[b]" + List[Seq[SeqList[i]][a]].totalReward;
+						} else{
+							Item2.transform.FindChild("Product").FindChild("product").gameObject.SetActive(false);
+							Item2.transform.FindChild("Product").FindChild("value").GetComponent<UILabel>().text
+								= "[b]" + List[Seq[SeqList[i]][a]].itemName;
+							Item2.transform.FindChild("Product").FindChild("value").localPosition = new Vector3(0, 0, 0);
+						}
 
 						if(List [Seq [SeqList [i]] [a]].featured == 1){
 							Item2.transform.FindChild ("BGW").GetComponent<UISprite>().color = new Color (1f, 1f, 240f / 255f, 1f);
-							Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+							Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().color = new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+
+							Item2.transform.FindChild ("Title").FindChild("G").FindChild("Sprite").GetComponent<UISprite>()
+								.color = new Color (1f, 1f, 240f / 255f, 1f);
+							Item2.transform.FindChild ("Title").FindChild("M").FindChild("Sprite").GetComponent<UISprite>()
+								.color = new Color (1f, 1f, 240f / 255f, 1f);
+							Item2.transform.FindChild ("Title").FindChild("L").FindChild("Sprite").GetComponent<UISprite>()
+								.color = new Color (1f, 1f, 240f / 255f, 1f);
 						}
 
 
-						if (List [Seq [SeqList[i]][a]].itemID < 100) {
-							Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].totalReward + " " +List [Seq [SeqList[i]][a]].itemName ;
-						} else {
-							Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].itemName;
-						}
+//						if (List [Seq [SeqList[i]][a]].itemID < 100) {
+//							Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].totalReward + " " +List [Seq [SeqList[i]][a]].itemName ;
+//						} else {
+//							Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList[i]][a]].itemName;
+//						}
 						Item2.name = "Item " + i.ToString () + " Sub " + a.ToString ();
 						
 						
@@ -212,22 +254,27 @@ public class PresetContestCommander : MonoBehaviour {
 						
 						
 						
-						
+						float width = 680f;
 						
 						if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed == 1) {
 							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
 							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
 							
-							
+							width = 588f;
 							if (List [Seq [SeqList[i]][a]].contestType == 5) {
 								Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+								width = 552f;
 							}
 						} else if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed != 1) {
 							
 							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+
+							width = 634f;
 							if (List [Seq [SeqList[i]][a]].contestType == 5) {
 								Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
 								Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
+
+								width = 588f;
 							}
 						} else {
 							//Debug.Log(infoList [index].contestType + " : " +infoList [index].guaranteed );
@@ -237,21 +284,34 @@ public class PresetContestCommander : MonoBehaviour {
 								
 								Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
 								Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
+
+								width = 588f;
 							}else if(List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed != 1){
 								Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
 								Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (325f,0,0);
+
+								width = 634f;
 							}else{
 								Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
 								Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
+
+								width = 634f;
 							}
 						}
+
+						if(Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().localSize.x > width){
+							float diff = Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().localSize.x - width;
+							Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<TweenPosition>().to
+								= new Vector2(-(332f+diff), -4f);
+						}
+
 						int num = 0;
 						for(int m = 1; m<Item2.transform.FindChild ("Title").childCount;m++){
 							if(!Item2.transform.FindChild ("Title").GetChild(m).gameObject.activeSelf)
 							{num++;}
 						}
 						
-						Item2.transform.FindChild ("Title").FindChild("Label").GetComponent<UILabel>().SetRect(560f+((float)num*40f),30);
+//						Item2.transform.FindChild ("Title").FindChild("Label").GetComponent<UILabel>().SetRect(560f+((float)num*40f),30);
 						
 						
 
@@ -279,8 +339,8 @@ public class PresetContestCommander : MonoBehaviour {
 				CreatItem ();
 			} else {
 				
-				transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
-					.GetComponent<UILabel> ().text = "프리셋";
+//				transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Preset").FindChild ("Label")
+//					.GetComponent<UILabel> ().text = "프리셋";
 				
 				
 				transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSetting").gameObject.SetActive (false);
@@ -316,6 +376,9 @@ public class PresetContestCommander : MonoBehaviour {
 						DestroyImmediate (transform.FindChild ("Scroll View").FindChild ("Position").GetChild (0).gameObject);
 					}
 					for (int i = 0; i<SeqList.Count; i++) {
+						//add up
+//						List [Seq [SeqList [i]] [a]].ContestStatus
+
 						//게임 패널
 						GameObject Item1 = (GameObject)Instantiate (PresetContestItem1);
 						Item1.transform.parent = transform.FindChild ("Scroll View").FindChild ("Position");
@@ -325,10 +388,29 @@ public class PresetContestCommander : MonoBehaviour {
 							List [Seq [SeqList [i]] [0]].startTime [4].ToString () + List [Seq [SeqList [i]] [0]].startTime [5].ToString ()
 							+ "월" + List [Seq [SeqList [i]] [0]].startTime [6].ToString () + List [Seq [SeqList [i]] [0]].startTime [7].ToString () + "일"
 							+ List [Seq [SeqList [i]] [0]].startTime [8].ToString () + List [Seq [SeqList [i]] [0]].startTime [9].ToString () + ":"
-							+ List [Seq [SeqList [i]] [0]].startTime [10] + List [Seq [SeqList [i]] [0]].startTime [11] + " " +
+							+ List [Seq [SeqList [i]] [0]].startTime [10] + List [Seq [SeqList [i]] [0]].startTime [11];
 //							AMPM (int.Parse ((List [Seq [SeqList [i]] [0]].startTime [8]).ToString () + List [Seq [SeqList [i]] [0]].startTime [9].ToString ())) + 
-								"경기";
-
+//								"경기";
+						UILabel lblStatus = Item1.transform.FindChild("Status").FindChild("Label").GetComponent<UILabel>();
+						UILabel lblGuide = Item1.transform.FindChild("Guide").FindChild("Label").GetComponent<UILabel>();
+						UISprite sprGuide = Item1.transform.FindChild("Guide").FindChild("Sprite").GetComponent<UISprite>();
+						if(List [Seq [SeqList [i]] [0]].contestStatus == 1){
+							lblStatus.text = "[경기 시작 전]";
+							lblStatus.color = Color.white;
+							lblGuide.text = "경기 예측";
+							lblGuide.color = new Color(149f/ 255f, 131f/ 255f, 147f/255f);
+							sprGuide.color = Color.white;
+						} else if(List [Seq [SeqList [i]] [0]].contestStatus == 2){
+							lblStatus.text = "[경기 진행 중]";
+							lblStatus.color = Color.yellow;
+							lblGuide.text = "경기 입장";
+							lblGuide.color = new Color(66f/255f, 51f/255f, 64f/255f);
+							sprGuide.color = Color.yellow;
+						} else{
+							lblStatus.text = "[경기 종료]";
+							lblStatus.color = Color.white;
+							Item1.transform.FindChild("Guide").gameObject.SetActive(false);
+						}
 						
 						Item1.transform.FindChild ("LTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [0]].aTeamName;
 						Item1.transform.FindChild ("RTeam").FindChild ("Label").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [0]].hTeamName;
@@ -362,27 +444,80 @@ public class PresetContestCommander : MonoBehaviour {
 							Item2.transform.localScale = new Vector3 (1, 1, 1);
 							Y = -(PCGap * 1f) - (a * 150);
 							Item2.transform.localPosition = new Vector3 (0, Y, 0);
-							Item2.transform.FindChild ("BG").FindChild ("presetSeq").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [a]].presetSeq.ToString ();
-							Item2.transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text = List [Seq [SeqList [i]] [a]].contestSeq.ToString ();
-							Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].contestName;
+							Item2.transform.FindChild ("BG").FindChild ("presetSeq").GetComponent<UILabel> ().text
+								= List [Seq [SeqList [i]] [a]].presetSeq.ToString ();
+							Item2.transform.FindChild ("BG").FindChild ("contestSeq").GetComponent<UILabel> ().text
+								= List [Seq [SeqList [i]] [a]].contestSeq.ToString ();
+							Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().text
+								="[b]" + List [Seq [SeqList [i]] [a]].contestName;
+							Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").localPosition = new Vector3(-332f, -4f, 0);
+
 							//					Debug.Log(Item2.transform.FindChild ("Entry").GetChild(0).name);
 							//					Debug.Log(Item2.transform.FindChild ("Entry").GetChild(1).name);
 							//					Debug.Log(List [SeqList [i] [a]].totalPreset.ToString ());
 							//					Debug.Log(List [SeqList [i] [a]].totalEntry.ToString ());
-							Item2.transform.FindChild ("Entry").FindChild ("entryentry").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].totalPreset.ToString () + " / " + List [Seq [SeqList [i]] [a]].totalEntry.ToString ();
-							Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].contestName;
-							Item2.transform.FindChild ("Cost").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].entryFee.ToString ();
+							Item2.transform.FindChild ("Entry").FindChild ("entryentry").GetComponent<UILabel> ().text
+								= "[b]" + List [Seq [SeqList [i]] [a]].totalPreset.ToString () + " / " + List [Seq [SeqList [i]] [a]].totalEntry.ToString ();
+//							Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().text
+//								= "[b]" + List [Seq [SeqList [i]] [a]].contestName;
+							Item2.transform.FindChild ("Cost").FindChild ("value").GetComponent<UILabel> ().text
+								= "[b]" + List [Seq [SeqList [i]] [a]].entryFee.ToString ();
 
 							if(List [Seq [SeqList [i]] [a]].featured == 1){
 								Item2.transform.FindChild ("BGW").GetComponent<UISprite>().color = new Color (1f, 1f, 240f / 255f, 1f);
-								Item2.transform.FindChild ("Title").FindChild ("Label").GetComponent<UILabel> ().color = new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+								Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().color = new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+
+								Item2.transform.FindChild ("Title").FindChild("G").FindChild("Sprite").GetComponent<UISprite>()
+									.color = new Color (1f, 1f, 240f / 255f, 1f);
+								Item2.transform.FindChild ("Title").FindChild("M").FindChild("Sprite").GetComponent<UISprite>()
+									.color = new Color (1f, 1f, 240f / 255f, 1f);
+								Item2.transform.FindChild ("Title").FindChild("L").FindChild("Sprite").GetComponent<UISprite>()
+									.color = new Color (1f, 1f, 240f / 255f, 1f);
 							}
 
 							if (List [Seq [SeqList [i]] [a]].contestType == 1) {
-								Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].totalReward;
+								Item2.transform.FindChild("Ranking").FindChild("value").GetComponent<UILabel>().text
+									= "[b]50 / 50s";
+
+//								Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text
+//										= "[b]" + List [Seq [SeqList [i]] [a]].totalReward;
 							} else {
-								Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text ="[b]" + List [Seq [SeqList [i]] [a]].itemName;
+								Item2.transform.FindChild("Ranking").FindChild("value").GetComponent<UILabel>().text
+									= "[b]Ranking";
+
+//								Item2.transform.FindChild ("Product").FindChild ("value").GetComponent<UILabel> ().text
+//									= "[b]" + List [Seq [SeqList [i]] [a]].itemName;
 							}
+
+							if (List [Seq [SeqList [i]] [a]].rewardItem < 100) {
+								Item2.transform.FindChild("Product").FindChild("product").GetComponent<UILabel>().text
+									= "[b]" + List[Seq[SeqList[i]][a]].itemName;
+								Item2.transform.FindChild("Product").FindChild("value").GetComponent<UILabel>().text
+									= "[b]" + List[Seq[SeqList[i]][a]].totalReward;
+							} else{
+								Item2.transform.FindChild("Product").FindChild("product").gameObject.SetActive(false);
+								Item2.transform.FindChild("Product").FindChild("value").GetComponent<UILabel>().text
+									= "[b]" + List[Seq[SeqList[i]][a]].itemName;
+								Item2.transform.FindChild("Product").FindChild("value").localPosition = new Vector3(0, 0, 0);
+							}
+
+//							if(infoList[index].rewardItem < 100){					
+//								item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].totalReward.ToString();
+//								item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+//								
+//								item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].totalReward.ToString();
+//								item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label2").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+//							} else if(infoList[index].rewardItem >= 100){
+//								item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+//								item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label1").transform.localPosition = new Vector3(0,0,0);
+//								item.Target.gameObject.transform.FindChild("OldBot").FindChild ("Mileage").FindChild ("Label2").gameObject.SetActive(false);
+//								
+//								item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label1").GetComponent<UILabel> ().text = "[b]"+infoList[index].itemName;
+//								item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label1").transform.localPosition = new Vector3(0,0,0);
+//								item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").FindChild ("Mileage").FindChild ("Label2").gameObject.SetActive(false);
+//								//			item.Target.gameObject.transform.FindChild ("Ranking").FindChild("Label").GetComponent<UILabel>().text = "50 / 50s";
+//							}
+
 							Item2.name = "Item " + i.ToString () + " Sub " + a.ToString ();
 							
 							
@@ -412,53 +547,69 @@ public class PresetContestCommander : MonoBehaviour {
 							
 							
 						
-								Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
-								Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
-								Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(false);
-								Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (285f,0,0);
+							Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(false);
+							Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(false);
+							Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(false);
+							Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (285f,0,0);
+							
+							
+							float width = 680f;
+							
+							if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed == 1) {
+								Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+								Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+
+								width = 588f;
 								
+								if (List [Seq [SeqList[i]][a]].contestType == 5) {
+									Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+									width = 552f;
+								}
+							} else if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed != 1) {
 								
-								
-								
-								
-								if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed == 1) {
+								Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+								width = 634f;
+								if (List [Seq [SeqList[i]][a]].contestType == 5) {
+									Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+									Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
+									width = 588f;
+								}
+							} else {
+								//Debug.Log(infoList [index].contestType + " : " +infoList [index].guaranteed );
+								if (List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed == 1) {
 									Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
-									Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
+									Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
 									
-									
-									if (List [Seq [SeqList[i]][a]].contestType == 5) {
-										Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
-									}
-								} else if (List [Seq [SeqList[i]][a]].multiEntry > 1 && List [Seq [SeqList[i]][a]].guaranteed != 1) {
-									
-									Item2.transform.FindChild ("Title").FindChild("M").gameObject.SetActive(true);
-									if (List [Seq [SeqList[i]][a]].contestType == 5) {
-										Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
-										Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
-									}
-								} else {
-									//Debug.Log(infoList [index].contestType + " : " +infoList [index].guaranteed );
-									if (List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed == 1) {
-										Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
-										Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
-										
-										Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
-										Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
-									}else if(List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed != 1){
-										Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
-										Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (325f,0,0);
-									}else{
-										Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
-										Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
-									}
+									Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+									Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (285f,0,0);
+
+									width = 588f;
+								}else if(List [Seq [SeqList[i]][a]].contestType == 5&& List [Seq [SeqList[i]][a]].guaranteed != 1){
+									Item2.transform.FindChild ("Title").FindChild("L").gameObject.SetActive(true);
+									Item2.transform.FindChild ("Title").FindChild ("L").localPosition = new Vector3 (325f,0,0);
+
+									width = 634f;
+								}else{
+									Item2.transform.FindChild ("Title").FindChild("G").gameObject.SetActive(true);
+									Item2.transform.FindChild ("Title").FindChild ("G").localPosition = new Vector3 (325f,0,0);
+
+									width = 634f;
+								}
 							}
+
+							if(Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().localSize.x > width){
+								float diff = Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().localSize.x - width;
+								Item2.transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<TweenPosition>().to
+									= new Vector2(-(332f+diff), -4f);
+							}
+
 							int num = 0;
 							for(int m = 1; m<Item2.transform.FindChild ("Title").childCount;m++){
 								if(!Item2.transform.FindChild ("Title").GetChild(m).gameObject.activeSelf)
 								{num++;}
 							}
 							
-							Item2.transform.FindChild ("Title").FindChild("Label").GetComponent<UILabel>().SetRect(560f+((float)num*40f),30);
+//							Item2.transform.FindChild ("Title").FindChild("Panel").FindChild("Label").GetComponent<UILabel>().SetRect(560f+((float)num*40f),30);
 							
 							
 
@@ -474,16 +625,16 @@ public class PresetContestCommander : MonoBehaviour {
 			}
 		}
 	}
-	string AMPM(int num){
-		Debug.Log (num);
-string a;
-if(num >12){
-a ="PM";
-}else{
-			a = "AM";
-}
-return a;
-	}
+//	string AMPM(int num){
+//		Debug.Log (num);
+//string a;
+//if(num >12){
+//a ="PM";
+//}else{
+//			a = "AM";
+//}
+//return a;
+//	}
 	PresetDataEvent PDE;
 	ContestDataEvent CDE;
 	public void Reset(){

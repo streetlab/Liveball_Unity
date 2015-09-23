@@ -441,4 +441,15 @@ public class PresetListInfo {
 			_h9 = value;
 		}
 	}
+
+	int _rewardItem;
+
+	public int rewardItem {
+		get {
+			return _rewardItem;
+		}
+		set {
+			_rewardItem = value;
+		}
+	}
 }

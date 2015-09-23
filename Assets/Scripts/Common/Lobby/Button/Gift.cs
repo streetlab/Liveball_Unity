@@ -17,6 +17,8 @@ public class Gift : MonoBehaviour {
 			transform.parent.FindChild("Shadow").gameObject.SetActive(false);
 			SubOnoff(false);
 			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
+			GetComponent<Animator>().Rebind();
+			GetComponent<Animator>().enabled = true;
 		} else {
 			//경품이 열림
 			Check = true;
@@ -30,7 +32,9 @@ public class Gift : MonoBehaviour {
 			transform.parent.FindChild("Shadow").gameObject.SetActive(true);
 			SubOnoff(false);
 			transform.root.FindChild("Scroll").FindChild ("Main").GetComponent<LobbyNCCommander> ().NCUpDown ("Up");
-				}
+			GetComponent<Animator>().enabled = false;
+			transform.localScale = new Vector3(1f, 1f, 1f);
+		}
 	}
 	public void Off(){
 		//선물상자 이미지 관련
@@ -42,6 +46,8 @@ public class Gift : MonoBehaviour {
 		transform.FindChild("Arrow").localScale = new Vector2(1,1);
 		transform.parent.FindChild("Scroll View").gameObject.SetActive(false);
 		transform.parent.FindChild("Shadow").gameObject.SetActive(false);
+		GetComponent<Animator>().Rebind();
+		GetComponent<Animator>().enabled = true;
 	}
 	public void SubOnoff(bool b){
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild ("Top").FindChild ("Sub").gameObject.SetActive (b);

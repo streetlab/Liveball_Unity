@@ -67,6 +67,8 @@ public class ScriptSuperRoot : MonoBehaviour {
 	void OnApplicationPause(bool pause){
 		UtilMgr.OnPause = pause;
 //		Debug.Log("Application pause : "+pause);
+		if(!pause)
+			UtilMgr.DismissLoading();
 	}
 
 	public void OnBackPressed()

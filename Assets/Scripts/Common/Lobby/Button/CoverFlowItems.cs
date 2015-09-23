@@ -48,16 +48,19 @@ public class CoverFlowItems : MonoBehaviour {
 					
 
 					}
+
+					string mileage = LobbyGiftCommander.mGift.gift[i].mileage.Replace(" M", "");
 					transform.root.FindChild ("Scroll").FindChild ("Giveaway").FindChild("Bots").FindChild("Sprite").FindChild("Gacha").FindChild("product").
 						GetComponent<UILabel>().text = LobbyGiftCommander.mGift.gift[i].product;
 					
 					
 					transform.root.FindChild ("Scroll").FindChild ("Giveaway").FindChild("Scroll View").FindChild("Info").FindChild("Label")
-						.GetComponent<UILabel>().text = "-참여방법 : "+LobbyGiftCommander.mGift.gift[i].mileage+" 사용하여 참여\n-참여하신 마일리지는 환불되지 않습니다.\n-해당 경품은 당사 사정에 따라 사전 공지없이 변경 가능합니다.";
+						.GetComponent<UILabel>().text = "-참여방법 : "+
+							mileage	+" 마일리지를 사용하여 참여\n-참여하신 마일리지는 환불되지 않습니다.\n-해당 경품은 당사 사정에 따라 사전 공지없이 변경 가능합니다.";
 
 
 					transform.root.FindChild ("Scroll").FindChild ("Giveaway").FindChild("Bots").FindChild("Sprite").FindChild("Gacha")
-						.FindChild("Label").GetComponent<UILabel>().text = LobbyGiftCommander.mGift.gift[i].mileage + " 참여하기 ";
+						.FindChild("Label").GetComponent<UILabel>().text = mileage + " 마일리지로 참여하기 ";
 
 				
 				}

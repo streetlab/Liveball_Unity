@@ -8,6 +8,36 @@ public class PresetItem : MonoBehaviour {
 	List<int> List = new List<int>();
 
 	int count= 0;
+
+	void Start(){
+//		StartCoroutine("RollingTitle");
+	}
+
+	IEnumerator RollingTitle(){
+		
+		//Debug.Log ("RollingTitle");
+		
+		//Debug.Log ("X : " + X);
+		
+//		while (true) {
+//			transform.FindChild("NewTop").FindChild("TitlePanel").FindChild("Title1").localPosition+=new Vector3(-X/speed,0,0);
+//			transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition+=new Vector3(-X/speed,0,0); 
+//			transform.FindChild("NewTop").FindChild("TitlePanel").FindChild("Title2").localPosition+=new Vector3(-X/speed,0,0);
+//			transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition+=new Vector3(-X/speed,0,0); 
+//			if(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition.x <=-X){
+//				transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title1").localPosition = new Vector3 (X,0,0);
+//				transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").localPosition=new Vector3(X,0,0); 
+//			}
+//			if(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition.x <=-X){
+//				transform.FindChild ("NewTop").FindChild("TitlePanel").FindChild ("Title2").localPosition = new Vector3 (X,0,0);
+//				transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title2").localPosition=new Vector3(X,0,0); 
+//			}
+//			yield return new WaitForSeconds(0.04f);
+//			//Debug.Log(transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild("TitlePanel").FindChild("Title1").GetComponent<UILabel>().text);
+//		}
+		yield return null;
+	}
+
 	//해당 경기의 라인업이 없을시 라인업을 가저옴
 	void GetLineupStart(){
 
@@ -221,23 +251,12 @@ public class PresetItem : MonoBehaviour {
 			}
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
 		transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").gameObject.SetActive(true);
 		transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").GetComponent<PreSettingCommander>()
 			.SetTeamName(transform.parent.FindChild("LTeam").FindChild("Label").GetComponent<UILabel>().text,
 			             transform.parent.FindChild("RTeam").FindChild("Label").GetComponent<UILabel>().text,
-			             transform.FindChild("Title").FindChild("Label").GetComponent<UILabel>().text);
+			             transform.FindChild("Title").FindChild("Panel").FindChild("Label").GetComponent<UILabel>().text);
+
 		
 		List<string> presetList = new List<string>();
 		for(int i = 0;i<transform.FindChild("BG").FindChild("presetList").childCount;i++){
@@ -260,7 +279,7 @@ public class PresetItem : MonoBehaviour {
 		UserMgr.PresetChooseList = List;
 		for (int i = 0; i<GSE.Response.data.Count; i++) {
 			Debug.Log("GSE.Response.data [i].gameSeq : " +GSE.Response.data [i].gameSeq);
-		if(int.Parse(transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text)==
+			if(int.Parse(transform.parent.FindChild("BG").FindChild("GameSeq").GetComponent<UILabel>().text)==
 			   GSE.Response.data [i].gameSeq){
 				UserMgr.Schedule = GSE.Response.data [i];
 				UtilMgr.SelectTeam = UserMgr.Schedule.extend[0].teamName;

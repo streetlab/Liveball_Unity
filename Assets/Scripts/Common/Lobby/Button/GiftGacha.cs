@@ -12,10 +12,10 @@ public class GiftGacha : MonoBehaviour {
 		S = S.Replace(" 참여하기 ","");
 
 	
-		DialogueMgr.ShowDialogue ("참여하기", S+"로 이벤트에 응모하시겠습니까?\n이벤트 참여 시 차감된 마일리지는 환불되지 않습니다.", DialogueMgr.DIALOGUE_TYPE.YesNo, JoinGacha);
+		DialogueMgr.ShowDialogue ("참여하기", S+" 이벤트에 응모하시겠습니까?\n이벤트 참여 시 차감된 마일리지는 환불되지 않습니다.", DialogueMgr.DIALOGUE_TYPE.YesNo, JoinGacha);
 
 	
-		Debug.Log ("BUtton");
+//		Debug.Log ("BUtton");
 
 //	
 	
@@ -27,7 +27,7 @@ public class GiftGacha : MonoBehaviour {
 			//S.Replace(" ","");
 		
 	S =	S.Replace(",","");
-			S = S.Replace(" M 참여하기 ","");
+			S = S.Replace(" 마일리지로 참여하기 ","");
 			Debug.Log("S : "  + S);
 			//마일리지 체크
 			if(long.Parse(S)>long.Parse(UserMgr.UserInfo.userDiamond)){

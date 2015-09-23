@@ -64,12 +64,11 @@ public class PreSettingCommander : MonoBehaviour {
 		//프리셋 세팅 페이지에 라인업 데이터 추가
 		Debug.Log (List.Count);
 	
-		GameObject 
-			G= 
+		GameObject G = 
 				transform.root.FindChild("Scroll").FindChild("Main").FindChild("PreSetting").FindChild("Mid").FindChild("Scroll View")
 				.FindChild("Position").gameObject;
-		for (int i = 0; i<G.transform.childCount; i++) {
 
+		for (int i = 0; i<G.transform.childCount; i++) {
 			if(List[i] !="0"&&List[i] !=""){
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()).FindChild("L_name " + (i+1).ToString()+"_pre").
 					FindChild("use").gameObject.SetActive(true);
@@ -83,7 +82,10 @@ public class PreSettingCommander : MonoBehaviour {
 			
 		}
 		for (int i = 0; i<G.transform.childCount; i++) {
-			if(List[i] !="0"&&List[i] !=""){
+			if(List[i+9] !="0"&&List[i+9] !=""){
+//				Debug.Log("Index is "+(int.Parse(List[i+9])-1));
+//				Debug.Log("Value is "+Value[int.Parse(List[i+9])-1]);
+
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").
 					FindChild("use").gameObject.SetActive(true);
 				G.transform.FindChild("Item " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()).FindChild("R_name " + (i+1).ToString()+"_pre").

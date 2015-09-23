@@ -21,6 +21,7 @@ public class infobutten : MonoBehaviour {
 			transform.parent.parent.parent.FindChild("bg_leave").gameObject.SetActive(true);
 			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("Label").GetComponent<UILabel>().text = "회원 탈퇴";
 			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("BtnClose").GetComponent<Setting>().IsLeaving = true;
+			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("BtnClose").gameObject.SetActive(true);
 		} else if((strings [3] == '9')) {
 			mEvent = new WithdrawEvent(new EventDelegate(this, "WithdrawComplete"));
 			NetMgr.Withdraw(mEvent);

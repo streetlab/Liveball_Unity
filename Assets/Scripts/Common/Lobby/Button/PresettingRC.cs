@@ -7,6 +7,7 @@ public class PresettingRC : MonoBehaviour {
 	PresetAddEvent presetaddevent;
 	ContestDataEvent CDE;
 	RemoveContestPresetEvent RCPE;
+	bool mNeedMove = false;
 
 	//프리셋 등록,삭제
 	public void Button(){
@@ -22,29 +23,14 @@ public class PresettingRC : MonoBehaviour {
 			DialogueMgr.ShowDialogue ("프리셋 삭제", "기존 등록된 프리셋이 삭제됩니다." , DialogueMgr.DIALOGUE_TYPE.YesNo ,"프리셋 삭제","삭제 취소","", RemovePreset);
 
 		} else {
-
-
 			if(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode == "Update"){
 			//	Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
-
-				DialogueMgr.ShowDialogue ("정답지 등록", "정답지 등록." , DialogueMgr.DIALOGUE_TYPE.Alert ,"","","등록",register);
-			
-
-
+				DialogueMgr.ShowDialogue ("정답지 등록", "정답지 등록." , DialogueMgr.DIALOGUE_TYPE.Alert ,"","","등록",register);			
+				mNeedMove = true;
 			}else{
-			CDE = new ContestDataEvent (new EventDelegate (this, "MaxCheck"));
-			NetMgr.GetContestData (CDE);
+				CDE = new ContestDataEvent (new EventDelegate (this, "MaxCheck"));
+				NetMgr.GetContestData (CDE);
 			}
-
-
-//			DialogueMgr.ShowDialogue ("정답지 등록", "참가비 : " + 
-//			                          transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost+
-//			                          "\n총 상금 : " +
-//			                          transform.parent.parent.parent.GetComponent<PreSettingCommander>().money, DialogueMgr.DIALOGUE_TYPE.YesNo ,DialogueHandler2);
-	
-		
-		
-		
 		}
 	}
 
@@ -279,17 +265,19 @@ public class PresettingRC : MonoBehaviour {
 		}
 		
 	}
-void DialogueHandler(DialogueMgr.BTNS btn){
-	if (btn == DialogueMgr.BTNS.Btn1) {
 
+	void DialogueHandler(DialogueMgr.BTNS btn){
+//		transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").GetComponent<TopMenu>().Button();
+		if (btn == DialogueMgr.BTNS.Btn1) {
 			if(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode != "Update"){
-			ResetPreset();
-			transform.parent.parent.parent.parent.FindChild ("Nomal Contest").gameObject.SetActive (true);
-			transform.parent.parent.parent.parent.FindChild ("PreSetting").gameObject.SetActive (false);
-			transform.parent.parent.parent.parent.FindChild ("Top").FindChild("Sub").gameObject.SetActive (true);
-			transform.parent.parent.parent.parent.FindChild ("Top").FindChild (transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent
-			                                                            <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = true;
-			Debug.Log("Reset Preset");
+				ResetPreset();
+				transform.parent.parent.parent.parent.FindChild ("Nomal Contest").gameObject.SetActive (true);
+				transform.parent.parent.parent.parent.FindChild ("PreSetting").gameObject.SetActive (false);
+				transform.parent.parent.parent.parent.FindChild ("Top").FindChild("Sub").gameObject.SetActive (true);
+				transform.parent.parent.parent.parent.FindChild ("Top").FindChild (transform.root.FindChild ("Scroll").FindChild ("Main").GetComponent
+				                                                            <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = true;
+				Debug.Log("Reset Preset");
+				transform.root.FindChild ("Scroll").FindChild("Main").FindChild ("Gift").gameObject.SetActive (true);
 			}else{
 				ResetPreset();
 				transform.parent.parent.parent.parent.FindChild ("PreSet Contest").gameObject.SetActive (true);
@@ -299,10 +287,8 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 				                                                                   <LobbyTopCommander> ().mTopMenuName [0]).gameObject.GetComponent<BoxCollider2D> ().enabled = true;
 
 			}
-			transform.root.FindChild ("Scroll").FindChild("Main").FindChild ("Gift").gameObject.SetActive (true);
 		}
-	
-}
+	}
 	//프리셋 등록
 	public void JoinButton(){
 		
@@ -327,19 +313,17 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 		Debug.Log (btn);
 		if (btn == DialogueMgr.BTNS.Btn1) {
 			if(int.Parse(UserMgr.UserInfo.userRuby)>=int.Parse(transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost))
-			{
-			
-			Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
-			if(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode == "Update"){
+			{			
 				Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
-				presetupdate = new PresetUpdateEvent (new EventDelegate (this, "PresetUpdate"));
-				NetMgr.PresetUpdate (UserMgr.CurrentContestSeq,UserMgr.CurrentPresetSeq,GetList(),presetupdate);
-			}else{
+				if(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode == "Update"){
+					Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
+					presetupdate = new PresetUpdateEvent (new EventDelegate (this, "PresetUpdate"));
+					NetMgr.PresetUpdate (UserMgr.CurrentContestSeq,UserMgr.CurrentPresetSeq,GetList(),presetupdate);
+				}else{
 					UserMgr.UserInfo.userRuby = (int.Parse(UserMgr.UserInfo.userRuby) - int.Parse(transform.parent.parent.parent.GetComponent<PreSettingCommander>().cost)).ToString();
-			presetaddevent = new PresetAddEvent (new EventDelegate (this, "Preset"));
-			NetMgr.PresetAdd (UserMgr.CurrentContestSeq,GetList(),presetaddevent);
-			}
-
+					presetaddevent = new PresetAddEvent (new EventDelegate (this, "Preset"));
+					NetMgr.PresetAdd (UserMgr.CurrentContestSeq,GetList(),presetaddevent);
+				}
 			}else{
 				DialogueMgr.ShowDialogue ("등록 취소", "루비가 부족합니다." , DialogueMgr.DIALOGUE_TYPE.Alert ,null);
 			}
@@ -363,10 +347,8 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 
 	}
 	PresetListEvent presetListEvent;
-	void PresetUpdate(){
+	public void PresetUpdate(){
 		//Debug.Log ("PresetUpdate");
-
-
 		presetListEvent = new PresetListEvent(new EventDelegate(this, "GetPresetList"));
 		NetMgr.GetPresetList(presetListEvent);
 
@@ -379,6 +361,10 @@ void DialogueHandler(DialogueMgr.BTNS btn){
 
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSetting").gameObject.SetActive (false);
 
+		if(mNeedMove){
+//			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").GetComponent<TopMenu>().Button();
+			mNeedMove = false;
+		}
 	}
 
 	bool CheckPreset(){
