@@ -324,15 +324,6 @@ public class PresetContestCommander : MonoBehaviour {
 					}
 				}
 			}
-
-
-
-
-
-
-
-
-
 		} else {
 			//프리셋
 			if (List == null) {

@@ -2,12 +2,17 @@
 using System.Collections;
 
 public class RightMenuDesktop : MonoBehaviour {
+
+	int num = 5;
+	float WatiTime = 0.02f;
+
 	//오른쪽 메뉴 그림자 클릭시 닫힘
 	public void Button(){
 		StartCoroutine (LeftMoveCamera());
+		transform.root.FindChild("Scroll").FindChild("Bot").FindChild("Home").GetComponent<BotMenu>()
+			.UnsetHighlight(BotMenu.ActivityName.Menu);
 	}
-	int num = 5;
-	float WatiTime = 0.02f;
+
 	IEnumerator LeftMoveCamera(){ 
 		float Y = transform.root.FindChild ("Camera").localPosition.y;
 		transform.FindChild("Shadow").GetComponent<BoxCollider2D> ().enabled = false;

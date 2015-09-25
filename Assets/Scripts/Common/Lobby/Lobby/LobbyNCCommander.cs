@@ -221,34 +221,44 @@ public class LobbyNCCommander : MonoBehaviour {
 	}
 
 	static void InitList(List<ContestListInfo> infoList, UIListItem item, int index){
-
-
-
-
-
-
-
 		if (infoList[index].featured == 1) {
 	
-			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
-			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
-			item.Target.gameObject.transform.FindChild("NewTop").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
-			item.Target.gameObject.transform.FindChild("OldBot").GetComponent<UISprite> ().color = new Color (1f, 1f, 240f / 255f, 1f);
-			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = new Color (16f/255f, 140f/255f, 187f / 255f, 1f);
-			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = new Color (16f/255f, 140f/255f, 187f / 255f, 1f);
-			item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = new Color (16f/255f, 140f/255f, 187f / 255f, 1f);
-			if (infoList [index].totalEntry == infoList [index].totalPreset) {
-//				item.Target.GetComponent<UIButton>().enabled = false;
-				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = new Color(155f/255f,155f/255f,155f/255f,1);
-			} else {
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("NewBot").GetComponent<UISprite> ().color = new Color (56f/255f, 43f/255f, 55f/255f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").GetComponent<UISprite> ().color = new Color (56f/255f, 43f/255f, 55f/255f);
+			item.Target.gameObject.transform.FindChild("NewTop").GetComponent<UISprite> ().color = new Color (56f/255f, 43f/255f, 55f/255f);
+			item.Target.gameObject.transform.FindChild("OldBot").GetComponent<UISprite> ().color = new Color (56f/255f, 43f/255f, 55f/255f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = new Color (255f/255f, 247f/255f, 153f/255f);
+			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = new Color (255f/255f, 247f/255f, 153f/255f);
+			item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = new Color (255f/255f, 247f/255f, 153f/255f);
+
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("Ranking").FindChild("Label (1)")
+				.GetComponent<UILabel> ().color = new Color (114f/255f, 107f/255f, 113f/255f);
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("RankingValue").FindChild("Label (1)")
+				.GetComponent<UILabel> ().color = new Color (114f/255f, 107f/255f, 113f/255f);
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("Ruby").FindChild("Label (1)")
+				.GetComponent<UILabel> ().color = new Color (114f/255f, 107f/255f, 113f/255f);
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("Mileage").FindChild("Label2")
+				.GetComponent<UILabel> ().color = new Color (114f/255f, 107f/255f, 113f/255f);
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("Ranking").FindChild("Label")
+				.GetComponent<UILabel> ().color = Color.white;
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("RankingValue").FindChild("Label")
+				.GetComponent<UILabel> ().color = Color.white;
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("Ruby").FindChild("Label")
+				.GetComponent<UILabel> ().color = Color.white;
+			item.Target.gameObject.transform.FindChild ("OldBot").FindChild ("Mileage").FindChild("Label1")
+				.GetComponent<UILabel> ().color = Color.white;
+//			if (infoList [index].totalEntry == infoList [index].totalPreset) {
+////				item.Target.GetComponent<UIButton>().enabled = false;
+//				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = new Color(155f/255f,155f/255f,155f/255f,1);
+//			} else {
 				item.Target.GetComponent<UIButton>().enabled = true;
 				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
 					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
@@ -259,7 +269,7 @@ public class LobbyNCCommander : MonoBehaviour {
 				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
 					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
 				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
-			}
+//			}
 
 		} else{
 
@@ -271,18 +281,18 @@ public class LobbyNCCommander : MonoBehaviour {
 			item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = new Color (146f/255f, 39f/255f, 143f / 255f, 1f);
 			item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color =  new Color (146f/255f, 39f/255f, 143f / 255f, 1f);
 
-			if (infoList [index].totalEntry == infoList [index].totalPreset) {
+//			if (infoList [index].totalEntry == infoList [index].totalPreset) {
 //				item.Target.GetComponent<UIButton>().enabled = false;
-				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
-					new Color(155f/255f,155f/255f,155f/255f,1);
-				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = 	new Color(155f/255f,155f/255f,155f/255f,1);
-			} else {
+//				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
+//					new Color(155f/255f,155f/255f,155f/255f,1);
+//				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = 	new Color(155f/255f,155f/255f,155f/255f,1);
+//			} else {
 				item.Target.GetComponent<UIButton>().enabled = true;
 				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
 					new Color(146f/255f,39f/255f,143f/255f,1);
@@ -294,7 +304,7 @@ public class LobbyNCCommander : MonoBehaviour {
 					new Color(146f/255f,39f/255f,143f/255f,1);
 				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = 	new Color(146f/255f,39f/255f,143f/255f,1);
 
-			}
+//			}
 		
 		}
 

@@ -122,6 +122,8 @@ public class TopMenu : MonoBehaviour {
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("PreSet Contest").gameObject.SetActive(false);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("History Contest").gameObject.SetActive(true);
+		transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("History")
+			.FindChild("Num").GetComponent<UILabel>().text = historylist.Count.ToString();
 	}
 
 
@@ -141,9 +143,9 @@ public class TopMenu : MonoBehaviour {
 		if (presetlist.Count != 0) {
 			transform.root.FindChild ("Scroll").FindChild ("Main").FindChild ("PreSet Contest").FindChild ("None").gameObject.SetActive (false);
 		}		//UserMgr.ContestStatus = presetlist [0].contestStatus;
-		if (UserMgr.ContestStatus == 2) {
-			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";
-		}
+//		if (UserMgr.ContestStatus == 2) {
+//			transform.root.FindChild("Scroll").FindChild("Main").FindChild("Top").FindChild("Preset").FindChild("Label").GetComponent<UILabel>().text = "라이브";
+//		}
 		//Load PresetList
 		transform.root.FindChild ("Scroll").FindChild ("Main").FindChild("PreSet Contest").GetComponent<PresetContestCommander> ().CreatItem (presetlist);
 		transform.root.FindChild("Scroll").FindChild ("Main").FindChild("Nomal Contest").gameObject.SetActive(false);

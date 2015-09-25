@@ -128,7 +128,7 @@ GameObject:
   - 61: {fileID: 6178306}
   - 114: {fileID: 11495758}
   - 114: {fileID: 11423994}
-  - 114: {fileID: 11455404}
+  - 114: {fileID: 11400150}
   m_Layer: 0
   m_Name: HistoryContestItem1
   m_TagString: Untagged
@@ -481,6 +481,17 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 140, y: 50}
+--- !u!114 &11400150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac42f3aa387f54d0f9fab40ad49d8189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11408382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -621,7 +632,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick:
-  - mTarget: {fileID: 11455404}
+  - mTarget: {fileID: 11400150}
     mMethodName: Delete
     mParameters: []
     oneShot: 0
@@ -1063,17 +1074,6 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!114 &11455404
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c7529f500a24944bf68a00b23e315e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11458170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1391,7 +1391,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 11400150}
+    mMethodName: BtnTop
+    mParameters: []
+    oneShot: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

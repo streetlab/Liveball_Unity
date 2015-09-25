@@ -3,10 +3,6 @@ using System.Collections;
 
 public class HistoryItem : MonoBehaviour {
 
-	public void Delete(){
-
-	}
-
 	public void Button(){
 		string Title = transform.FindChild ("Title").FindChild("Panel").FindChild ("Label").GetComponent<UILabel> ().text;
 		string MyRank = transform.FindChild ("BG").FindChild ("myrank").GetComponent<UILabel> ().text;

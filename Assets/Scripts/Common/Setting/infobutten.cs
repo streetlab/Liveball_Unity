@@ -23,8 +23,9 @@ public class infobutten : MonoBehaviour {
 			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("BtnClose").GetComponent<Setting>().IsLeaving = true;
 			transform.parent.parent.parent.parent.FindChild("Panel").FindChild("BtnClose").gameObject.SetActive(true);
 		} else if((strings [3] == '9')) {
-			mEvent = new WithdrawEvent(new EventDelegate(this, "WithdrawComplete"));
-			NetMgr.Withdraw(mEvent);
+			DialogueMgr.ShowDialogue("회원 탈퇴", "정말 회원 탈퇴를 하시겠습니까?", DialogueMgr.DIALOGUE_TYPE.YesNo, WithdrawHandler);
+//			mEvent = new WithdrawEvent(new EventDelegate(this, "WithdrawComplete"));
+//			NetMgr.Withdraw(mEvent);
 		}
 		else  if(gameObject.name == "Change"){
 
@@ -32,6 +33,13 @@ public class infobutten : MonoBehaviour {
 			transform.parent.parent.parent.parent.FindChild("Top").FindChild("Panel").FindChild("BtnBack").gameObject.SetActive(true);
 			transform.parent.parent.parent.gameObject.SetActive(false);
 			transform.parent.parent.parent.parent.FindChild("Change Member").gameObject.SetActive(true);
+		}
+	}
+
+	void WithdrawHandler(DialogueMgr.BTNS btn){
+		if(btn == DialogueMgr.BTNS.Btn1){
+			mEvent = new WithdrawEvent(new EventDelegate(this, "WithdrawComplete"));
+			NetMgr.Withdraw(mEvent);
 		}
 	}
 

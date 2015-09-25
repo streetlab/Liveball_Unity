@@ -140,6 +140,7 @@ GameObject:
   - 61: {fileID: 6178306}
   - 114: {fileID: 11495758}
   - 114: {fileID: 11423994}
+  - 114: {fileID: 11476850}
   m_Layer: 0
   m_Name: PresetContestItem 1
   m_TagString: Untagged
@@ -1398,6 +1399,17 @@ MonoBehaviour:
   mAtlas: {fileID: 11414182, guid: 71ef728c0969e4a3d94442adbb73eaf5, type: 2}
   mSpriteName: BG_W
   mFillCenter: 1
+--- !u!114 &11476850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96668b968d97641c1a32a7cea9587c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11479224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1535,7 +1547,11 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick: []
+  onClick:
+  - mTarget: {fileID: 11476850}
+    mMethodName: BtnTop
+    mParameters: []
+    oneShot: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

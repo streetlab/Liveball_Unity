@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BotMenu : MonoBehaviour {
 	public enum ActivityName{
+		None,
 		Home,
 		MatchInfo,
 		Store,
@@ -14,12 +15,30 @@ public class BotMenu : MonoBehaviour {
 		etc
 	}
 
+//	string mPreSelectedName = "";
+//	static string mReservedName = null;
 	public static ActivityName mActName = ActivityName.Home;
 	static Color COLOR_UNSELECTED = new Color(114f/255f, 107f/255f, 113f/255f);
 	static Color COLOR_SELECTED = new Color(1f, 1f, 1f);
 
 	void Start(){
-		SetHighlight(ActivityName.Home);
+//		if(mReservedName == null){
+//			Debug.Log("Launched");
+//			mReservedName = "";
+//			SetHighlight(ActivityName.Home);
+//		} else if(mReservedName.Equals(this.name)){
+//			Debug.Log("name is "+this.name);
+//			Debug.Log("ActName is "+mActName);
+//			mReservedName = "";
+//			if(this.name.Equals("Home"))
+//				SetHighlight(ActivityName.Home);
+//			else
+//				Button();
+//		}
+		if(Application.loadedLevelName.Equals("SceneLobby"))
+			SetHighlight(ActivityName.Home);
+		else if(Application.loadedLevelName.Equals("SceneMain 1"))
+			SetHighlight(ActivityName.None);
 	}
 
 	string[] S = {"Home","Ball","Challenge","Post","---"};
@@ -28,6 +47,12 @@ public class BotMenu : MonoBehaviour {
 	//하단메뉴 버튼
 	public void Button(){
 		Debug.Log (this.name);
+//		if(Application.loadedLevelName.Equals("SceneMain 1")){
+//			mReservedName = this.name;
+//			AutoFade.LoadLevel ("SceneLobby", 0f, 1f);
+//			return;
+//		}
+
 		switch (this.name) {
 		case "Home": //홈
 			if(mActName.Equals(ActivityName.Home))
@@ -112,7 +137,6 @@ public class BotMenu : MonoBehaviour {
 			//Debug.Log("4");
 			PositionCheck();
 //			GetComponent<UIButton>().enabled = true;
-//			SetHighlight(ActivityName.Menu);
 			break;
 //		case 5:
 //		//	Debug.Log("NON");
@@ -156,8 +180,10 @@ public class BotMenu : MonoBehaviour {
     void PositionCheck(){
 		ScrollViewOff ();
 		if (transform.root.FindChild ("Camera").localPosition.x == 0) {
+			SetHighlightWith(ActivityName.Menu);
 			StartCoroutine(RightMoveCamera());
 		} else if (transform.root.FindChild ("Camera").localPosition.x == 550) {
+			UnsetHighlight(ActivityName.Menu);
 			StartCoroutine(LeftMoveCamera());
 		}
 	}
@@ -204,6 +230,56 @@ public class BotMenu : MonoBehaviour {
 		transform.root.FindChild("RankReward").gameObject.SetActive(false);
 	}
 
+	public void UnsetHighlight(ActivityName name){
+		switch(name){
+		case ActivityName.Home:
+			transform.parent.FindChild("Home").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+			transform.parent.FindChild("Home").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+			break;
+		case ActivityName.MatchInfo:
+			transform.parent.FindChild("Ball").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+			transform.parent.FindChild("Ball").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+			break;
+		case ActivityName.Store:
+			transform.parent.FindChild("Challenge").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+			transform.parent.FindChild("Challenge").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+			break;
+		case ActivityName.Post:
+			transform.parent.FindChild("BtnPost").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+			transform.parent.FindChild("BtnPost").FindChild("Background").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+			break;
+		case ActivityName.Menu:
+			transform.parent.FindChild("---").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
+			transform.parent.FindChild("---").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_UNSELECTED;
+			break;
+		}
+	}
+
+	public void SetHighlightWith(ActivityName name){		
+		switch(name){
+		case ActivityName.Home:
+			transform.parent.FindChild("Home").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("Home").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.MatchInfo:
+			transform.parent.FindChild("Ball").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("Ball").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.Store:
+			transform.parent.FindChild("Challenge").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("Challenge").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.Post:
+			transform.parent.FindChild("BtnPost").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("BtnPost").FindChild("Background").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		case ActivityName.Menu:
+			transform.parent.FindChild("---").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("---").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
+		}
+	}
+
 	public void SetHighlight(ActivityName name){
 		mActName = name;
 		transform.parent.FindChild("Home").FindChild("Label").GetComponent<UILabel>().color = COLOR_UNSELECTED;
@@ -234,10 +310,10 @@ public class BotMenu : MonoBehaviour {
 			transform.parent.FindChild("BtnPost").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
 			transform.parent.FindChild("BtnPost").FindChild("Background").GetComponent<UISprite>().color = COLOR_SELECTED;
 			break;
-//		case ActivityName.Menu:
-//			transform.parent.FindChild("---").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
-//			transform.parent.FindChild("---").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
-//			break;
+		case ActivityName.Menu:
+			transform.parent.FindChild("---").FindChild("Label").GetComponent<UILabel>().color = COLOR_SELECTED;
+			transform.parent.FindChild("---").FindChild("Sprite").GetComponent<UISprite>().color = COLOR_SELECTED;
+			break;
 		}
 	}
 }

@@ -377,6 +377,7 @@ public class Itemcontrol : MonoBehaviour {
 
 	void mRequestIAP(){
 		#if(UNITY_ANDROID)
+		UtilMgr.ShowLoading();
 		//if (RequestIAP.Response.data != null) {
 			//if(RequestIAP.Response.data.productId==itemid&&RequestIAP.Response.data.productCode==itemcode){
 //				orderNo = RequestIAP.Response.data.orderNo;
@@ -385,7 +386,6 @@ public class Itemcontrol : MonoBehaviour {
 		GoogleIAB.purchaseProduct(itemcode);//, RequestIAP.Response.data.purchaseKey );
 			//}
 		//}
-		UtilMgr.ShowLoading();
 		#else
 //		orderNo = RequestIAP.Response.data.orderNo;
 		IOSMgr.BuyItem(itemcode);
