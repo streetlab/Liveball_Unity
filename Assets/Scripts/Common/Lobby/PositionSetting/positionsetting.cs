@@ -21,6 +21,8 @@ public class positionsetting : MonoBehaviour {
 			transform.localPosition += new Vector3 (0, (UtilMgr.GetScaledPositionY ()));
 		} else if(name == "Gift"){
 			transform.localPosition += new Vector3 (0, (UtilMgr.GetScaledPositionY ()) * 2f);
+		} else{
+			transform.localPosition += new Vector3 (0, (UtilMgr.GetScaledPositionY ()) * 2f);
 		}
 	}
 

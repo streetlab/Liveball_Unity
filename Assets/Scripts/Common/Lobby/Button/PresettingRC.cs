@@ -25,7 +25,7 @@ public class PresettingRC : MonoBehaviour {
 		} else {
 			if(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode == "Update"){
 			//	Debug.Log(transform.parent.parent.parent.GetComponent<PreSettingCommander>().Mode);
-				DialogueMgr.ShowDialogue ("정답지 등록", "정답지 등록." , DialogueMgr.DIALOGUE_TYPE.Alert ,"","","등록",register);			
+				DialogueMgr.ShowDialogue ("예측 완료", "사전 경기 예측 완료!" , DialogueMgr.DIALOGUE_TYPE.Alert ,"","","등록",register);			
 				mNeedMove = true;
 			}else{
 				CDE = new ContestDataEvent (new EventDelegate (this, "MaxCheck"));

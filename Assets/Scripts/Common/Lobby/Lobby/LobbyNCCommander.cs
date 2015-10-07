@@ -261,14 +261,15 @@ public class LobbyNCCommander : MonoBehaviour {
 //			} else {
 				item.Target.GetComponent<UIButton>().enabled = true;
 				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
-					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+					new Color(255f/255f, 247f/255f, 153f/ 255f, 1f);
 				item.Target.gameObject.transform.FindChild("ChangeTopBot").FindChild("OldTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
-					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+					new Color(255f/255f, 247f/255f, 153f/ 255f, 1f);
 				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title1").GetComponent<UILabel> ().color = 
-					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+					new Color(255f/255f, 247f/255f, 153f/ 255f, 1f);
 				item.Target.gameObject.transform.FindChild("NewTop").FindChild ("TitlePanel").FindChild ("Title2").GetComponent<UILabel> ().color = 
-					new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
-				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color = new Color(16f/255f, 140f/255f, 187f / 255f, 1f);
+					new Color(255f/255f, 247f/255f, 153f/ 255f, 1f);
+				item.Target.gameObject.transform.FindChild ("Team").FindChild ("Label").GetComponent<UILabel> ().color =
+					new Color(255f/255f, 247f/255f, 153f/ 255f, 1f);
 //			}
 
 		} else{
